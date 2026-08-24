@@ -2163,9 +2163,14 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
             console.warn('PWA Service Worker registration:', err);
         });
 
-        // When new version takes control, update clients smoothly without breaking state
+        // When new version takes control, auto-refresh smoothly so user never needs Ctrl+Shift+R
+        let isRefreshing = false;
         navigator.serviceWorker.addEventListener('controllerchange', () => {
-            console.log('[PWA] Service Worker updated to latest version in background.');
+            if (!isRefreshing) {
+                isRefreshing = true;
+                console.log('[PWA] Service Worker controller changed, reloading fresh content...');
+                window.location.reload();
+            }
         });
     });
 }
