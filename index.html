@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>University Mastery Reviewer Portal</title>
+    <title>Course Mastery Reviewer &amp; Quiz Portal</title>
     <link rel="stylesheet" href="global.css">
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#0d9488">
+    <meta name="theme-color" content="#09090b">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -14,368 +14,553 @@
 </head>
 <body>
 
-    <header class="app-header">
-        <h1>Course Reviewer</h1>
-        <p>Structured study guides, key references, and interactive practice quizzes built for deep subject understanding and complete exam readiness.</p>
-        <div style="margin-top: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(13, 148, 136, 0.12); border: 1px solid var(--primary-color); padding: 0.35rem 0.95rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">
-            <span>✨ Created by <strong>Christian Ezekiel</strong></span>
+    <!-- TOP GLASS NAVIGATION BAR -->
+    <header class="app-topbar">
+        <div class="topbar-container">
+            <div class="topbar-brand">
+                <span class="brand-icon">🎓</span>
+                <div class="brand-text">
+                    <h1 class="brand-title">Course Reviewer</h1>
+                    <span class="brand-badge">14 Modules • 1,140 Qs</span>
+                </div>
+            </div>
+
+            <div class="topbar-actions">
+                <a href="/whiteboard.html" target="_blank" class="topbar-action-pill whiteboard-pill" title="Open Interactive Canvas Whiteboard">
+                    <span class="pill-icon">📝</span>
+                    <span class="pill-label">Whiteboard</span>
+                </a>
+
+                <button class="topbar-action-pill auth-pill auth-nav-pill" onclick="window.openAuthModal('signin')" title="Student Cloud Sync & Account">
+                    <span class="pill-icon" id="topbar-auth-icon">👤</span>
+                    <span class="pill-label" id="topbar-auth-label">Sign In / Sync</span>
+                </button>
+
+                <button id="pwa-install-btn" class="topbar-action-pill install-pill" onclick="window.installPWA()" style="display:none;" title="Install Offline PWA App">
+                    <span class="pill-icon">📱</span>
+                    <span class="pill-label">Install App</span>
+                </button>
+
+                <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Mode" title="Toggle Theme"></button>
+            </div>
         </div>
     </header>
 
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--primary-color);">Portal</span>
-        </div>
-        <div style="display:flex; align-items:center; gap:0.5rem;">
-            <button class="auth-nav-pill" onclick="window.openAuthModal('signin')" aria-label="Student Cloud Sync">👤 Sign In / Create Account</button>
-            <button id="pwa-install-btn" class="btn btn-secondary" onclick="window.installPWA()" style="display:none; padding:0.35rem 0.75rem; font-size:0.85rem; border-radius:20px; align-items:center; gap:0.3rem;">📱 Install App</button>
-            <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-        </div>
-    </nav>
-
-    <div class="container">
+    <!-- MAIN DASHBOARD CONTAINER -->
+    <div class="container portal-container">
         
-        <!-- Portal Hero / Course Header -->
-        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
-            <div>
-                <h2 style="border-bottom: none; margin-bottom: 0.5rem; font-size: 1.8rem;">Personal Study & Mastery Hub</h2>
-                <p style="color: var(--text-muted-color); font-size: 1rem; margin-bottom: 0;">Select a subject below to view study guides, practice full shuffle quizzes with in-depth breakdowns, and track study sessions.</p>
-            </div>
-            <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted-color); background: var(--card-bg-color); border: 1px solid var(--border-color); padding: 0.4rem 0.85rem; border-radius: 20px;">
-                Made by: <strong>Christian Ezekiel</strong>
-            </div>
-        </div>
-
-        
-        <!-- Prominent Student Account & Cloud Sync Banner -->
-        <div class="card" id="portal-hero-auth-card" style="margin-bottom: 1.75rem; border-left: 4px solid var(--primary-color); background: linear-gradient(to right, rgba(13, 148, 136, 0.05), var(--card-bg-color));">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-                <div style="flex:1; min-width:280px;">
-                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
-                        <span style="font-size:1.4rem;" id="hero-auth-icon">☁️</span>
-                        <h3 style="margin:0; font-size:1.15rem; border:none; padding:0;" id="hero-auth-title">Multi-Device Cloud Sync &amp; Student Account</h3>
+        <!-- DASHBOARD HERO CARD -->
+        <section class="dashboard-hero-card" id="portal-hero-auth-card">
+            <div class="hero-content">
+                <div class="hero-header-row">
+                    <div class="hero-greeting">
+                        <span class="hero-status-dot"></span>
+                        <span class="hero-status-text" id="hero-auth-status">Ready to study • 1,140 Questions Indexed</span>
                     </div>
-                    <p style="font-size:0.88rem; color:var(--text-muted-color); margin:0;" id="hero-auth-desc">
-                        Create an account or sign in to save your quiz answers, scores, and mastery percentages across your phone, tablet, and laptop.
-                    </p>
-                </div>
-                <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;" id="hero-auth-actions">
-                    <button class="btn btn-primary" onclick="window.openAuthModal('register')" style="font-size:0.85rem; padding:0.45rem 1rem;">✨ Create Account</button>
-                    <button class="btn btn-secondary" onclick="window.openAuthModal('signin')" style="font-size:0.85rem; padding:0.45rem 1rem;">🔑 Sign In</button>
-                    <button class="btn btn-secondary" onclick="window.openAuthModal('forgot')" style="font-size:0.85rem; padding:0.45rem 0.85rem;" title="Forgot password?">❓ Recover</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Study Whiteboard Tool -->
-        <div class="card" style="margin-bottom: 1.75rem; border-left: 4px solid #7c3aed; background: linear-gradient(to right, rgba(124, 58, 237, 0.05), var(--card-bg-color));">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-                <div style="flex:1; min-width:240px;">
-                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
-                        <span style="font-size:1.4rem;">📝</span>
-                        <h3 style="margin:0; font-size:1.15rem; border:none; padding:0;">Study Whiteboard</h3>
+                    <div class="hero-creator-badge">
+                        ✨ Created by <strong>Christian Ezekiel</strong>
                     </div>
-                    <p style="font-size:0.88rem; color:var(--text-muted-color); margin:0;">
-                        Open a full-screen whiteboard in a new tab to sketch equations, diagrams, and notes while studying. Supports pen, eraser, multiple colors, board backgrounds, undo/redo, and save to PNG.
-                    </p>
                 </div>
-                <div>
-                    <button class="btn btn-primary" onclick="window.open('/whiteboard.html', '_blank')" style="font-size:0.85rem; padding:0.45rem 1rem; background:#7c3aed; border-color:#7c3aed;">📝 Open Whiteboard</button>
+
+                <h2 class="hero-title" id="hero-auth-title">Personal Study &amp; Mastery Dashboard</h2>
+                <p class="hero-subtitle" id="hero-auth-desc">
+                    Comprehensive study guides, active distractor-balanced practice quizzes, high-definition display math worked examples, and multi-device cloud synchronization.
+                </p>
+
+                <div class="hero-actions-row" id="hero-auth-actions">
+                    <button class="btn btn-primary" onclick="window.openAuthModal('register')">✨ Create Account</button>
+                    <button class="btn btn-secondary" onclick="window.openAuthModal('signin')">🔑 Sign In</button>
+                    <a href="/whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
                 </div>
+            </div>
+        </section>
+
+        <!-- FAST TERM SELECTOR PILLS -->
+        <div class="term-switcher-container">
+            <div class="term-switcher-pills">
+                <button class="term-pill-btn active" onclick="switchPortalTerm('prelim')">
+                    <span class="term-pill-dot"></span>
+                    <span class="term-pill-text">Prelim Term</span>
+                    <span class="term-pill-count">14 Modules</span>
+                </button>
+                <button class="term-pill-btn" onclick="switchPortalTerm('midterm')">
+                    <span class="term-pill-lock">🔒</span>
+                    <span class="term-pill-text">Midterm Term</span>
+                </button>
+                <button class="term-pill-btn" onclick="switchPortalTerm('finals')">
+                    <span class="term-pill-lock">🔒</span>
+                    <span class="term-pill-text">Finals Term</span>
+                </button>
             </div>
         </div>
 
-        <!-- Term Tab Navigation -->
-        <div class="portal-tabs-nav">
-            <button class="portal-tab-btn active" onclick="switchPortalTerm('prelim')">Prelim Term</button>
-            <button class="portal-tab-btn" onclick="switchPortalTerm('midterm')">Midterm Term</button>
-            <button class="portal-tab-btn" onclick="switchPortalTerm('finals')">Finals Term</button>
-        </div>
-
-        <div class="portal-grid">
-            <!-- Left Panel: Content -->
-            <div>
+        <!-- MAIN 2-COLUMN DASHBOARD GRID (Desktop >= 1024px) -->
+        <div class="portal-dashboard-grid">
+            
+            <!-- LEFT MAIN STAGE (Subjects & Modules Bento Grid) -->
+            <main class="dashboard-main-stage">
+                
                 <!-- PRELIM TERM CONTENT -->
                 <div id="term-prelim" class="portal-term-content active">
                     
-                    <!-- Subject 1: IAS -->
-                    <div class="subject-section">
-                        <h3 class="subject-title">Information Assurance & Security</h3>
-                        <div class="topic-cards-grid">
-                                                        <a href="subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Access Control Models & Principles</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">IAS</span>
-                                        <span>71 Questions</span>
-                                        <span>IAAA, 5 Auth Factors, DAC, MAC, RBAC & ABAC</span>
-                                    </div>
+                    <!-- SUBJECT 1: Information Assurance & Security -->
+                    <section class="bento-subject-card" data-subject="ias">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box ias-icon">🛡️</div>
+                                <div>
+                                    <h3 class="subject-title">Information Assurance &amp; Security</h3>
+                                    <p class="subject-subtitle">CIA triad, threat vectors, risk frameworks, and access control models</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">3 Modules • 225 Qs</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill ias-tag">IAS Module 1</span>
+                                        <span class="topic-qcount-pill">71 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Access Control Models &amp; Principles</h4>
+                                    <p class="topic-bento-desc">IAAA framework, 5 authentication factors, DAC, MAC, RBAC, and ABAC rules.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
                             </a>
 
-                            <a href="subject/informationAssuranceandSecurtiy/Prelim/week1-2.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Foundations & Threat Landscape</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">IAS</span>
-                                        <span>75 Questions</span>
-                                        <span>CIA Triad, Threats & Attack Vectors</span>
+                            <!-- Topic 2 -->
+                            <a href="subject/informationAssuranceandSecurtiy/Prelim/week1-2.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill ias-tag">IAS Module 2</span>
+                                        <span class="topic-qcount-pill">75 Qs</span>
                                     </div>
+                                    <h4 class="topic-bento-title">Foundations &amp; Threat Landscape</h4>
+                                    <p class="topic-bento-desc">Core security pillars, threat vectors, malware taxonomy, and social engineering.</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
+                                <div class="topic-bento-arrow">→</div>
                             </a>
 
-                            <a href="subject/informationAssuranceandSecurtiy/Prelim/week3-4.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Governance & Risk Management</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">IAS</span>
-                                        <span>79 Questions</span>
-                                        <span>Policies, ISO 27001 & Risk Management</span>
+                            <!-- Topic 3 -->
+                            <a href="subject/informationAssuranceandSecurtiy/Prelim/week3-4.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill ias-tag">IAS Module 3</span>
+                                        <span class="topic-qcount-pill">79 Qs</span>
                                     </div>
+                                    <h4 class="topic-bento-title">Governance &amp; Risk Management</h4>
+                                    <p class="topic-bento-desc">NIST CSF, ISO 27001, security policies, risk assessment formulas, and compliance.</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
+                                <div class="topic-bento-arrow">→</div>
                             </a>
                         </div>
-                    </div>
+                    </section>
 
-                    
-                    <!-- Subject 3: Operating System Configuration -->
-                    <div class="subject-section">
-                        <h3 class="subject-title">Operating System Configuration</h3>
-                        <div class="topic-cards-grid">
-                            
-                            <a href="subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Introduction to Operating Systems</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">OS Config</span>
-                                        <span>88 Questions</span>
-                                        <span>Evolution, Functions & Typology</span>
-                                    </div>
+                    <!-- SUBJECT 2: Operating System Configuration -->
+                    <section class="bento-subject-card" data-subject="os">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box os-icon">💻</div>
+                                <div>
+                                    <h3 class="subject-title">Operating System Configuration</h3>
+                                    <p class="subject-subtitle">Process scheduling, memory virtualization, TCP/IP networking, and kernel structures</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
-                            <a href="subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Network Configuration in Windows OS</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">OS Config</span>
-                                        <span>90 Questions</span>
-                                        <span>TCP/IP, DHCP, Subnetting & CLI</span>
-                                    </div>
-                                </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
-                            <a href="subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">OS Structures & System Calls</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">OS Config</span>
-                                        <span>91 Questions</span>
-                                        <span>Monolithic vs Microkernel & POSIX</span>
-                                    </div>
-                                </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">3 Modules • 269 Qs</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
                         </div>
-                    </div>
 
-                                        <!-- Subject 4: Automata Theory & Formal Languages -->
-                    <div class="subject-section">
-                        <h3 class="subject-title">Automata Theory & Formal Languages</h3>
-                        <div class="topic-cards-grid">
-                            
-                            <a href="subject/automataTheory/Prelim/automataComputabilityAndComplexity.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Automata, Computability & Complexity</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Automata Theory</span>
-                                        <span>73 Questions</span>
-                                        <span>Turing Machines, P vs NP & Halting</span>
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill os-tag">OS Config 1</span>
+                                        <span class="topic-qcount-pill">88 Qs</span>
                                     </div>
+                                    <h4 class="topic-bento-title">Introduction to Operating Systems</h4>
+                                    <p class="topic-bento-desc">OS evolution, 5 core management functions, and 7 modern OS typologies.</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
+                                <div class="topic-bento-arrow">→</div>
                             </a>
 
-                            <a href="subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Intro to Automata & Formal Languages</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Automata Theory</span>
-                                        <span>75 Questions</span>
-                                        <span>Chomsky Hierarchy & Pioneers</span>
+                            <!-- Topic 2 -->
+                            <a href="subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill os-tag">OS Config 2</span>
+                                        <span class="topic-qcount-pill">90 Qs</span>
                                     </div>
+                                    <h4 class="topic-bento-title">Network Configuration in Windows OS</h4>
+                                    <p class="topic-bento-desc">TCP/IP stacks, DHCP DORA process, IPv4 subnetting, and CLI diagnostics (ipconfig, ping).</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
+                                <div class="topic-bento-arrow">→</div>
                             </a>
 
-                            <a href="subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">The Central Concepts of Automata</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Automata Theory</span>
-                                        <span>80 Questions</span>
-                                        <span>Alphabets, Strings, Powers & DFA</span>
+                            <!-- Topic 3 -->
+                            <a href="subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill os-tag">OS Config 3</span>
+                                        <span class="topic-qcount-pill">91 Qs</span>
                                     </div>
+                                    <h4 class="topic-bento-title">OS Structures &amp; System Calls</h4>
+                                    <p class="topic-bento-desc">Monolithic vs microkernels, system call execution paths, PCB, and POSIX standards.</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
+                                <div class="topic-bento-arrow">→</div>
                             </a>
-
                         </div>
-                    </div>
+                    </section>
 
-                    <!-- Subject 2: Data Mining -->
-                    <div class="subject-section">
-                        <h3 class="subject-title">Data Mining</h3>
-                        <div class="topic-cards-grid">
-                            
-                            <a href="subject/dataMining/Prelim/introductionToDataScience.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Introduction to Data Science</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Data Mining</span>
-                                        <span>81 Questions</span>
-                                        <span>Foundations, AI & Roles</span>
-                                    </div>
+                    <!-- SUBJECT 3: Automata Theory & Formal Languages -->
+                    <section class="bento-subject-card" data-subject="automata">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box automata-icon">🤖</div>
+                                <div>
+                                    <h3 class="subject-title">Automata Theory &amp; Formal Languages</h3>
+                                    <p class="subject-subtitle">Computation models, formal grammars, DFA/NFA machines, and Turing decidability</p>
                                 </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
-                            <a href="subject/dataMining/Prelim/probabilities.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Probabilities</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Data Mining</span>
-                                        <span>94 Questions</span>
-                                        <span>Theory, Empirical & Intervals</span>
-                                    </div>
-                                    <div class="topic-card-actions">
-                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openProbabilityExamplesModal();" title="View Step-by-Step Probability Worked Examples (Display Math)">💡 Examples</button>
-                                    </div>
-                                </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
-                            <a href="subject/dataMining/Prelim/probabilitydistribution.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Probability Distributions</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Data Mining</span>
-                                        <span>76 Questions</span>
-                                        <span>Discrete &amp; Continuous</span>
-                                    </div>
-                                    <div class="topic-card-actions">
-                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openDistributionsExamplesModal();" title="View Step-by-Step Probability Distributions Worked Examples (Display Math)">💡 Examples</button>
-                                    </div>
-                                </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
-                            <a href="subject/dataMining/Prelim/sets-events-bayesianinference.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Sets, Events &amp; Bayesian Inference</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Data Mining</span>
-                                        <span>75 Questions</span>
-                                        <span>Conditional &amp; Bayesian</span>
-                                    </div>
-                                    <div class="topic-card-actions">
-                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openBayesianExamplesModal();" title="View Step-by-Step Sets & Bayesian Worked Examples (Display Math)">💡 Examples</button>
-                                    </div>
-                                </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
-                            <a href="subject/dataMining/Prelim/traditionalDataTechniques.html" class="topic-card">
-                                <div class="topic-card-info">
-                                    <div class="topic-title">Traditional Data Techniques</div>
-                                    <div class="topic-meta">
-                                        <span class="topic-badge">Data Mining</span>
-                                        <span>91 Questions</span>
-                                        <span>Mining, Masking &amp; Metrics</span>
-                                    </div>
-                                    <div class="topic-card-actions">
-                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openTraditionalExamplesModal();" title="View Step-by-Step Traditional Data Techniques Worked Examples (Display Math)">💡 Examples</button>
-                                    </div>
-                                </div>
-                                <div class="topic-link-arrow">→</div>
-                            </a>
-
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">3 Modules • 228 Qs</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/automataTheory/Prelim/automataComputabilityAndComplexity.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill automata-tag">Automata 1</span>
+                                        <span class="topic-qcount-pill">73 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Automata, Computability &amp; Complexity</h4>
+                                    <p class="topic-bento-desc">Turing Machines, Church-Turing thesis, Halting Problem proof, and Class P vs NP.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 2 -->
+                            <a href="subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill automata-tag">Automata 2</span>
+                                        <span class="topic-qcount-pill">75 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Intro to Automata &amp; Formal Languages</h4>
+                                    <p class="topic-bento-desc">Computation pioneers, Chomsky hierarchy, and formal language definition rules.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 3 -->
+                            <a href="subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill automata-tag">Automata 3</span>
+                                        <span class="topic-qcount-pill">80 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">The Central Concepts of Automata</h4>
+                                    <p class="topic-bento-desc">Alphabets, string operations, Kleene star, DFA 5-tuples, and state transition diagrams.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- SUBJECT 4: Data Mining & Data Science -->
+                    <section class="bento-subject-card" data-subject="datamining">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box datamining-icon">📊</div>
+                                <div>
+                                    <h3 class="subject-title">Data Mining &amp; Data Science</h3>
+                                    <p class="subject-subtitle">Data pipelines, probability laws, distributions, Bayesian inference, and ML models</p>
+                                </div>
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">5 Modules • 418 Qs</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/dataMining/Prelim/introductionToDataScience.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining 1</span>
+                                        <span class="topic-qcount-pill">81 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Introduction to Data Science</h4>
+                                    <p class="topic-bento-desc">Data lifecycle, exploratory analysis, normalization, and correlation vs causation.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 2 -->
+                            <a href="subject/dataMining/Prelim/probabilities.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining 2</span>
+                                        <span class="topic-qcount-pill">94 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Probabilities</h4>
+                                    <p class="topic-bento-desc">Range axioms, addition/multiplication rules, permutations, variations, and combinations.</p>
+                                    <div class="topic-actions-row">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openProbabilityExamplesModal();" title="View Step-by-Step Probability Worked Examples">💡 14 Worked Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 3 -->
+                            <a href="subject/dataMining/Prelim/probabilitydistribution.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining 3</span>
+                                        <span class="topic-qcount-pill">76 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Probability Distributions</h4>
+                                    <p class="topic-bento-desc">Bernoulli, Binomial, Poisson, Normal, Student's t, Chi-Squared, and Empirical 68-95-99.7.</p>
+                                    <div class="topic-actions-row">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openDistributionsExamplesModal();" title="View Step-by-Step Probability Distributions Worked Examples">💡 16 Worked Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 4 -->
+                            <a href="subject/dataMining/Prelim/sets-events-bayesianinference.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining 4</span>
+                                        <span class="topic-qcount-pill">75 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Sets, Events &amp; Bayesian Inference</h4>
+                                    <p class="topic-bento-desc">Set notation, Venn operations, conditional probability, Bayes' Rule, and posterior odds.</p>
+                                    <div class="topic-actions-row">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openBayesianExamplesModal();" title="View Step-by-Step Sets &amp; Bayes Worked Examples">💡 20 Worked Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 5 -->
+                            <a href="subject/dataMining/Prelim/traditionalDataTechniques.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining 5</span>
+                                        <span class="topic-qcount-pill">91 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Traditional Data Techniques</h4>
+                                    <p class="topic-bento-desc">Data pipeline, imputation, balancing, BI hierarchy, regression, and LLM pre-training.</p>
+                                    <div class="topic-actions-row">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openTraditionalExamplesModal();" title="View Step-by-Step Traditional Data Techniques Worked Examples">💡 14 Worked Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+                        </div>
+                    </section>
 
                 </div>
 
-                <!-- MIDTERM TERM CONTENT (LOCKED) -->
+                <!-- MIDTERM TERM PLACEHOLDER -->
                 <div id="term-midterm" class="portal-term-content" style="display: none;">
                     <div class="cute-placeholder">
                         <span class="cute-placeholder-icon">📚✨</span>
-                        <div class="cute-placeholder-text">No subjects available yet!</div>
-                        <div class="cute-placeholder-sub">Focus on your Prelim reviewer for now. Keep up the great work! ✨</div>
+                        <div class="cute-placeholder-text">Midterm modules coming soon!</div>
+                        <div class="cute-placeholder-sub">Master your 14 Prelim modules first. Keep up the high focus! ✨</div>
                     </div>
                 </div>
 
-                <!-- FINALS TERM CONTENT (LOCKED) -->
+                <!-- FINALS TERM PLACEHOLDER -->
                 <div id="term-finals" class="portal-term-content" style="display: none;">
                     <div class="cute-placeholder">
                         <span class="cute-placeholder-icon">🎓💤</span>
-                        <div class="cute-placeholder-text">No subjects available yet!</div>
-                        <div class="cute-placeholder-sub">Focus on your Prelim reviewer for now. Keep up the great work! ✨</div>
+                        <div class="cute-placeholder-text">Finals modules coming soon!</div>
+                        <div class="cute-placeholder-sub">Stay consistent on your Prelim reviewer. You got this! ✨</div>
                     </div>
                 </div>
 
-            </div>
+            </main>
 
-            <!-- Right Panel: Sidebar Widgets -->
-            <div class="portal-sidebar">
+            <!-- RIGHT STICKY CONTROL RAIL (Desktop >= 1024px) -->
+            <aside class="dashboard-control-rail">
                 
-                <!-- Quick Jump Search -->
-                <div class="widget-card">
-                    <h3>Quick Jump Index</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted-color); margin-bottom: 0.75rem;">Search and jump directly to any topic or definition in the study guides:</p>
-                    <div class="search-container">
-                        <input type="text" class="search-input" id="portal-search" placeholder="Type key term... (e.g. ABAC, Poisson)">
-                        <div class="search-results" id="search-results-box"></div>
+                <!-- WIDGET 1: Mastery Ring & Overall Progress -->
+                <div class="rail-widget-card" id="rail-mastery-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Mastery Overview</h3>
+                        <span class="widget-badge" id="rail-mastery-badge">14 Modules</span>
                     </div>
-                </div>
 
-                <!-- Study Focus Timer Toggle Widget -->
-                <div class="widget-card">
-                    <h3>Study Focus Timer</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted-color); margin-bottom: 0.75rem;">Manage study sessions via the floating control panel in the bottom right corner of your screen.</p>
-                    <button class="btn btn-primary" onclick="if (window.focusTimer) window.focusTimer.toggleHide();" style="width:100%; font-size:0.85rem; padding: 0.55rem 1rem; border-radius: var(--border-radius-sm);">⏱️ Toggle Focus Timer Panel</button>
-                </div>
+                    <!-- Circular Progress Display -->
+                    <div class="mastery-ring-container">
+                        <svg class="mastery-ring-svg" viewBox="0 0 120 120">
+                            <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                            <circle class="ring-progress" id="rail-ring-progress" cx="60" cy="60" r="50"></circle>
+                        </svg>
+                        <div class="mastery-ring-center">
+                            <span class="ring-pct-val" id="rail-ring-pct">0%</span>
+                            <span class="ring-pct-label">Mastery</span>
+                        </div>
+                    </div>
 
-                <!-- Progress Tracker Widget -->
-                <div class="widget-card">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-                        <h3 style="margin: 0;">Mastery Progress</h3>
+                    <div class="mastery-stats-row">
+                        <div class="mastery-stat-item">
+                            <span class="stat-num" id="rail-answered-count">0</span>
+                            <span class="stat-lbl">Answered</span>
+                        </div>
+                        <div class="mastery-stat-item">
+                            <span class="stat-num" id="rail-total-count">1,140</span>
+                            <span class="stat-lbl">Total Qs</span>
+                        </div>
+                        <div class="mastery-stat-item">
+                            <span class="stat-num" id="rail-completed-count">0/14</span>
+                            <span class="stat-lbl">Finished</span>
+                        </div>
                     </div>
-                    <div class="progress-list" id="progress-list-container">
-                        <!-- Progress items populated dynamically -->
-                    </div>
-                    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
-                        <button class="btn btn-danger" onclick="resetAllCourseProgress()" style="width: 100%; font-size: 0.82rem; padding: 0.55rem 0.85rem; border-radius: var(--border-radius-sm); display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: var(--incorrect-bg-color); color: var(--incorrect-color); border: 1px solid var(--incorrect-color); font-weight: 600;">
-                            <span>🗑️</span> Reset All Progress
+
+                    <!-- Progress List Items Container -->
+                    <div class="progress-list" id="progress-list-container"></div>
+
+                    <div class="widget-footer-actions">
+                        <button class="btn-rail-reset" onclick="resetAllCourseProgress()">
+                            <span>🗑️</span> Reset Progress
                         </button>
                     </div>
                 </div>
 
-                <!-- Mistake Vault Widget -->
-                <div class="mistake-vault-card" id="mistake-vault-widget">
-                    <!-- Populated dynamically by MistakeVaultManager -->
+                <!-- WIDGET 2: Quick Jump Search Index -->
+                <div class="rail-widget-card" id="rail-search-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Quick Jump Index</h3>
+                        <span class="kbd-shortcut">⌘K / Ctrl+K</span>
+                    </div>
+                    <p class="widget-desc">Jump straight to any topic, formula, or definition in the study guides:</p>
+                    
+                    <div class="search-container">
+                        <div class="search-input-wrap">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="search-input" id="portal-search" placeholder="Search topic or keyword... (e.g. ABAC, Bayes)">
+                        </div>
+                        <div class="search-results" id="search-results-box"></div>
+                    </div>
                 </div>
 
-            </div>
-        </div>
+                <!-- WIDGET 3: Study Focus Timer Panel -->
+                <div class="rail-widget-card" id="rail-timer-widget">
+                    <div class="widget-header">
+                        <h3 class="widget-title">Study Focus Timer</h3>
+                        <span class="widget-status-pill" id="rail-timer-status">Active</span>
+                    </div>
+                    <p class="widget-desc">Track and log your active study focus seconds with real-time subject logging.</p>
+                    <button class="btn btn-primary btn-rail-timer" onclick="if (window.focusTimer) window.focusTimer.toggleHide();">
+                        ⏱️ Toggle Floating Focus Timer
+                    </button>
+                </div>
 
+                <!-- WIDGET 4: Mistake Vault Quick Access -->
+                <div class="rail-widget-card mistake-vault-card" id="mistake-vault-widget"></div>
+
+            </aside>
+        </div>
     </div>
 
+    <!-- FIXED MOBILE BOTTOM NAVIGATION BAR (Screens < 1024px) -->
+    <nav class="mobile-bottom-nav">
+        <button class="mob-nav-item active" id="mob-nav-subjects" onclick="mobileSwitchTab('subjects')">
+            <span class="mob-nav-icon">📚</span>
+            <span class="mob-nav-label">Subjects</span>
+        </button>
+        <button class="mob-nav-item" id="mob-nav-search" onclick="mobileOpenDrawer('search')">
+            <span class="mob-nav-icon">🔍</span>
+            <span class="mob-nav-label">Search</span>
+        </button>
+        <button class="mob-nav-item" id="mob-nav-timer" onclick="mobileOpenDrawer('timer')">
+            <span class="mob-nav-icon">⏱️</span>
+            <span class="mob-nav-label">Timer</span>
+        </button>
+        <button class="mob-nav-item" id="mob-nav-mastery" onclick="mobileOpenDrawer('mastery')">
+            <span class="mob-nav-icon">📊</span>
+            <span class="mob-nav-label">Mastery</span>
+        </button>
+    </nav>
+
+    <!-- MOBILE BOTTOM DRAWER: SEARCH -->
+    <div class="mobile-drawer-overlay" id="mob-drawer-search" onclick="mobileCloseDrawers(event)">
+        <div class="mobile-drawer-sheet" onclick="event.stopPropagation()">
+            <div class="drawer-handle-bar"></div>
+            <div class="drawer-header">
+                <h3 class="drawer-title">🔍 Quick Jump Search</h3>
+                <button class="drawer-close-btn" onclick="mobileCloseDrawers()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="search-input-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="mob-search-input" placeholder="Type key term... (e.g. ABAC, Turing, Bayes)">
+                </div>
+                <div class="search-results-mob" id="mob-search-results-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE BOTTOM DRAWER: TIMER -->
+    <div class="mobile-drawer-overlay" id="mob-drawer-timer" onclick="mobileCloseDrawers(event)">
+        <div class="mobile-drawer-sheet" onclick="event.stopPropagation()">
+            <div class="drawer-handle-bar"></div>
+            <div class="drawer-header">
+                <h3 class="drawer-title">⏱️ Study Focus Timer</h3>
+                <button class="drawer-close-btn" onclick="mobileCloseDrawers()">&times;</button>
+            </div>
+            <div class="drawer-body" style="text-align: center;">
+                <p style="color:var(--text-muted-color); font-size:0.9rem; margin-bottom:1rem;">
+                    Manage active study session logs and track your focused learning time:
+                </p>
+                <button class="btn btn-primary" onclick="if (window.focusTimer) { window.focusTimer.toggleHide(); mobileCloseDrawers(); }" style="width:100%; padding:0.8rem; font-size:0.95rem;">
+                    ⏱️ Launch Floating Timer Widget
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE BOTTOM DRAWER: MASTERY -->
+    <div class="mobile-drawer-overlay" id="mob-drawer-mastery" onclick="mobileCloseDrawers(event)">
+        <div class="mobile-drawer-sheet" onclick="event.stopPropagation()">
+            <div class="drawer-handle-bar"></div>
+            <div class="drawer-header">
+                <h3 class="drawer-title">📊 Mastery &amp; Progress</h3>
+                <button class="drawer-close-btn" onclick="mobileCloseDrawers()">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div id="mob-mastery-list-clone"></div>
+                <button class="btn-rail-reset" onclick="resetAllCourseProgress()" style="margin-top:1.5rem;">
+                    <span>🗑️</span> Reset Progress
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="portal-footer">
+        <div class="footer-container">
+            <p class="footer-copy">Personal Course Reviewer • Handcrafted by <strong>Christian Ezekiel</strong></p>
+            <p class="footer-sub">100% Offline Progressive Web App • Powered by Vanilla Web Standards &amp; Supabase</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
     <script src="supabaseClient.js"></script>
     <script src="global.js"></script>
@@ -384,15 +569,13 @@
         // 1. Portal Term Switching
         // ==========================================
         function switchPortalTerm(term) {
-            // Remove active classes
-            document.querySelectorAll('.portal-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.term-pill-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.portal-term-content').forEach(content => {
                 content.style.display = 'none';
                 content.classList.remove('active');
             });
 
-            // Find target elements
-            const btn = Array.from(document.querySelectorAll('.portal-tab-btn')).find(b => b.innerText.toLowerCase().includes(term));
+            const btn = Array.from(document.querySelectorAll('.term-pill-btn')).find(b => b.innerText.toLowerCase().includes(term));
             if (btn) btn.classList.add('active');
 
             const content = document.getElementById(`term-${term}`);
@@ -402,13 +585,78 @@
             }
         }
 
-        // Note: Focus Timer is now globally managed by global.js
+        // ==========================================
+        // 2. Mobile Accordion Toggle for Subjects
+        // ==========================================
+        function toggleSubjectAccordion(headerEl) {
+            if (window.innerWidth >= 1024) return; // Only accordion on mobile / small screens
+            const card = headerEl.closest('.bento-subject-card');
+            if (card) {
+                card.classList.toggle('collapsed');
+            }
+        }
 
         // ==========================================
-        // 3. Search Indexing & Quick Jump
+        // 3. Mobile Bottom Navigation & Drawers
+        // ==========================================
+        function mobileSwitchTab(tab) {
+            document.querySelectorAll('.mob-nav-item').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById(`mob-nav-${tab}`);
+            if (activeBtn) activeBtn.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function mobileOpenDrawer(drawerType) {
+            mobileCloseDrawers();
+            const drawer = document.getElementById(`mob-drawer-${drawerType}`);
+            if (drawer) {
+                drawer.classList.add('open');
+                document.body.style.overflow = 'hidden';
+
+                if (drawerType === 'search') {
+                    setTimeout(() => {
+                        const input = document.getElementById('mob-search-input');
+                        if (input) input.focus();
+                    }, 120);
+                } else if (drawerType === 'mastery') {
+                    const cloneTarget = document.getElementById('mob-mastery-list-clone');
+                    const source = document.getElementById('progress-list-container');
+                    if (cloneTarget && source) {
+                        cloneTarget.innerHTML = source.innerHTML;
+                    }
+                }
+            }
+        }
+
+        function mobileCloseDrawers(e) {
+            if (e && e.target && !e.target.classList.contains('mobile-drawer-overlay')) {
+                return;
+            }
+            document.querySelectorAll('.mobile-drawer-overlay').forEach(d => d.classList.remove('open'));
+            document.body.style.overflow = '';
+        }
+
+        // Global Keyboard Shortcut (Cmd/Ctrl + K for Search)
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                if (window.innerWidth < 1024) {
+                    mobileOpenDrawer('search');
+                } else {
+                    const searchInput = document.getElementById('portal-search');
+                    if (searchInput) {
+                        searchInput.focus();
+                        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            }
+        });
+
+        // ==========================================
+        // 4. Search Indexing & Quick Jump
         // ==========================================
         const searchIndex = [
-                                                // Computability & Complexity
+            // Computability & Complexity
             { topic: "Computability & Complexity", title: "Limitations of Computer Science & Unsolvable Problems", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "limitations-of-cs" },
             { topic: "Computability & Complexity", title: "Decision Problems & Problem Reduction Paths", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "decision-problems" },
             { topic: "Computability & Complexity", title: "Functions & Computability (Total vs Partial)", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "functions-computability" },
@@ -449,180 +697,199 @@
             { topic: "Network Configuration (Windows)", title: "IPv4 Subnetting, Default Gateways & DNS Settings", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-9-configure-ipv4" },
             { topic: "Network Configuration (Windows)", title: "Common Network Problems & Troubleshooting Decision Tree", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-10-troubleshooting" },
 
-            // Operating System Configuration: OS Structures & System Calls
-            { topic: "OS Structures & System Calls", title: "What is an OS Structure & Architectural Paradigms", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-2-what-is-os-structure" },
-            { topic: "OS Structures & System Calls", title: "5 Main OS Structures (Simple, Layered, Microkernel, Modular, Hybrid)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-3-main-structures" },
-            { topic: "OS Structures & System Calls", title: "OS Components & Layer Hierarchy (Apps, System Calls, Kernel, Hardware)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-4-components-layers" },
-            { topic: "OS Structures & System Calls", title: "Monolithic Architecture In-Depth & Crash Propagation", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-5-major-structures" },
-            { topic: "OS Structures & System Calls", title: "Monolithic Kernel vs Microkernel Comparison Matrix", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-6-monolithic-vs-microkernel" },
-            { topic: "OS Structures & System Calls", title: "Dual-Mode Execution (User Mode 1 vs Kernel Mode 0) & Traps", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "formulas" },
-            { topic: "OS Structures & System Calls", title: "POSIX System Calls (open, read, write, fork, exit) Flow", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "formulas" },
+            // Operating System Configuration: OS Structures
+            { topic: "OS Structures & System Calls", title: "Overview of Operating System Services & Interfaces", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-2-os-services" },
+            { topic: "OS Structures & System Calls", title: "User Interfaces: CLI Shells vs GUI Graphical Desktops", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-3-user-interfaces" },
+            { topic: "OS Structures & System Calls", title: "System Calls & The Kernel Mode-Switching Mechanism", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-4-system-calls" },
+            { topic: "OS Structures & System Calls", title: "Six Types of System Calls (Process, File, Device, Info, Comm, Security)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-5-syscall-types" },
+            { topic: "OS Structures & System Calls", title: "System Programs & System Daemons (Win32 & POSIX)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-6-system-programs" },
+            { topic: "OS Structures & System Calls", title: "OS Structures: Simple, Layered, Microkernel & Modules", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-7-os-structures" },
+            { topic: "OS Structures & System Calls", title: "OS Bootstrapping, BIOS/UEFI & The Master Boot Record (MBR)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-8-boot-process" },
 
-            // Access Control
-            { topic: "Access Control Models", title: "Why Access Control Matters", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "why-access-control-matters" },
-            { topic: "Access Control Models", title: "Identification, Authentication, Authorization", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "identification-authentication-authorization" },
-            { topic: "Access Control Models", title: "Authentication Factors (Know, Have, Are...)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "authentication-factors" },
-            { topic: "Access Control Models", title: "The Principle of Least Privilege", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "principle-of-least-privilege" },
-            { topic: "Access Control Models", title: "Discretionary Access Control (DAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "dac" },
-            { topic: "Access Control Models", title: "Mandatory Access Control (MAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "mac" },
-            { topic: "Access Control Models", title: "Role-Based Access Control (RBAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "rbac" },
-            { topic: "Access Control Models", title: "Attribute-Based Access Control (ABAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "abac" },
-            { topic: "Access Control Models", title: "Worked Example: Academic vs Military", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "worked-example" },
-            { topic: "Access Control Models", title: "Comparison Matrix & Key Terms", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "matrix-and-comparison" },
+            // IAS: Access Control
+            { topic: "Access Control", title: "Core Definitions: Subject, Object & Operation", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "core-definitions" },
+            { topic: "Access Control", title: "The 4-Step IAAA Framework", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "iaaa-framework" },
+            { topic: "Access Control", title: "Authentication: The 5 Authentication Factors", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "auth-factors" },
+            { topic: "Access Control", title: "Authorization vs Authentication", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "auth-vs-auth" },
+            { topic: "Access Control", title: "Discretionary Access Control (DAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "dac-model" },
+            { topic: "Access Control", title: "Mandatory Access Control (MAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "mac-model" },
+            { topic: "Access Control", title: "Role-Based Access Control (RBAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "rbac-model" },
+            { topic: "Access Control", title: "Attribute-Based Access Control (ABAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "abac-model" },
+            { topic: "Access Control", title: "Core Security Principles (Least Privilege, Separation of Duties)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "security-principles" },
 
-            // Foundations & Threat Landscape
-            { topic: "Foundations & Threat Landscape", title: "InfoSec Definition & CIA Triad", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "reviewer" },
-            { topic: "Foundations & Threat Landscape", title: "Threat Landscape & Attack Vectors", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "reviewer" },
+            // IAS: Foundations (Week 1-2)
+            { topic: "Foundations & Threats", title: "The CIA Triad (Confidentiality, Integrity, Availability)", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "cia-triad" },
+            { topic: "Foundations & Threats", title: "Information Assurance vs Cybersecurity", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "ia-vs-cybersecurity" },
+            { topic: "Foundations & Threats", title: "Common Threat Vectors & Attack Types", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "threat-vectors" },
+            { topic: "Foundations & Threats", title: "Malware Taxonomy: Viruses, Worms, Trojans & Ransomware", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "malware-taxonomy" },
+            { topic: "Foundations & Threats", title: "Social Engineering & Phishing Techniques", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "social-engineering" },
 
-            // Governance & Risk Management
-            { topic: "Governance & Risk Management", title: "Security Governance & ISO 27001", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "reviewer" },
-            { topic: "Governance & Risk Management", title: "Risk Management & Treatment Options", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "reviewer" },
-            
-            // Intro to Data Science
-            { topic: "Intro to Data Science", title: "Evolution of Data Science & Big Three", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "reviewer" },
-            { topic: "Intro to Data Science", title: "Data Analysis vs Data Analytics", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "reviewer" },
-            { topic: "Intro to Data Science", title: "Machine Learning & AI Overview", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "reviewer" },
+            // IAS: Governance (Week 3-4)
+            { topic: "Governance & Risk", title: "Security Governance & Policy Hierarchy", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "security-governance" },
+            { topic: "Governance & Risk", title: "NIST Cybersecurity Framework (CSF) Core Functions", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "nist-csf" },
+            { topic: "Governance & Risk", title: "ISO/IEC 27001 Standard & ISMS Overview", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "iso-27001" },
+            { topic: "Governance & Risk", title: "Risk Assessment Methodologies & Formulas", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "risk-assessment" },
+            { topic: "Governance & Risk", title: "Incident Response Lifecycle & Business Continuity", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "incident-response" },
+
+            // Data Mining: Intro
+            { topic: "Intro to Data Science", title: "Data Science Lifecycle & Cross-Industry Standard Process (CRISP-DM)", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "ds-lifecycle" },
+            { topic: "Intro to Data Science", title: "Data Types, Scales of Measurement & Feature Categorization", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "data-types" },
+            { topic: "Intro to Data Science", title: "Exploratory Data Analysis (EDA) & Summary Statistics", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "eda-stats" },
+            { topic: "Intro to Data Science", title: "Correlation vs Causation & Confounding Variables", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "correlation-causation" },
+            { topic: "Intro to Data Science", title: "Data Cleaning, Imputation & Normalization (Min-Max vs Z-Score)", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "cleaning-normalization" },
 
             // Data Mining: Probabilities
-            { topic: "Probabilities & Fundamentals", title: "Basic Probabilities & Fundamentals", file: "subject/dataMining/Prelim/probabilities.html", hash: "reviewer" },
-            { topic: "Probabilities & Fundamentals", title: "Expected Values & Experimental Probability", file: "subject/dataMining/Prelim/probabilities.html", hash: "reviewer" },
+            { topic: "Probabilities", title: "Axioms of Probability & Classical vs Empirical Definitions", file: "subject/dataMining/Prelim/probabilities.html", hash: "probability-axioms" },
+            { topic: "Probabilities", title: "Complement Rule & Addition Rule for Overlapping Events", file: "subject/dataMining/Prelim/probabilities.html", hash: "addition-complement" },
+            { topic: "Probabilities", title: "Multiplication Rule & Independent vs Dependent Events", file: "subject/dataMining/Prelim/probabilities.html", hash: "multiplication-independence" },
+            { topic: "Probabilities", title: "Permutations, Variations & Combinations Without Repetition", file: "subject/dataMining/Prelim/probabilities.html", hash: "combinatorics-rules" },
+            { topic: "Probabilities", title: "Expected Value (EV), Variance & Standard Deviation", file: "subject/dataMining/Prelim/probabilities.html", hash: "expected-value-variance" },
 
-            // Probability Distributions
-            { topic: "Probability Distributions", title: "What is a Probability Distribution?", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "what-is-distribution" },
-            { topic: "Probability Distributions", title: "Mean and Variance Definitions", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "mean-and-variance" },
-            { topic: "Probability Distributions", title: "Discrete vs Continuous Split", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "discrete-vs-continuous" },
-            { topic: "Probability Distributions", title: "Uniform Distribution (Discrete)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "uniform-distribution" },
-            { topic: "Probability Distributions", title: "Bernoulli Distribution", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "bernoulli-distribution" },
-            { topic: "Probability Distributions", title: "Binomial Distribution & Combos", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "binomial-distribution" },
-            { topic: "Probability Distributions", title: "Poisson Distribution (Intervals)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "poisson-distribution" },
-            { topic: "Probability Distributions", title: "Normal Distribution & SD limits", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "normal-distribution" },
-            { topic: "Probability Distributions", title: "Student's T Distribution (Small Samples)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "students-t-distribution" },
-            { topic: "Probability Distributions", title: "Chi-Squared Distribution", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "chi-squared-distribution" },
-            { topic: "Probability Distributions", title: "Exponential Distribution (Half-lives)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "exponential-distribution" },
-            { topic: "Probability Distributions", title: "Logistic Distribution (CDF Sigmoid)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "logistic-distribution" },
-            { topic: "Probability Distributions", title: "FIFA 19 Case Study & Histograms", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "fifa-19-case-study" },
-            
-            // Sets & Bayesian
-            { topic: "Sets, Events & Bayes", title: "Events as Sets & Venn Circles", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "events-as-sets" },
-            { topic: "Sets, Events & Bayes", title: "Set Notation Reference Table", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "set-notation" },
-            { topic: "Sets, Events & Bayes", title: "Intersections & Unions (Venn)", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "intersections" },
-            { topic: "Sets, Events & Bayes", title: "Independent and Dependent Events", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "independent-dependent-events" },
-            { topic: "Sets, Events & Bayes", title: "Conditional Probability Formula", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "conditional-probability" },
-            { topic: "Sets, Events & Bayes", title: "Law of Total Probability Formula", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "total-probability" },
-            { topic: "Sets, Events & Bayes", title: "Bayes' Theorem Core Equation", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "bayes-theorem" },
-            { topic: "Sets, Events & Bayes", title: "Worked Example: Medical Test Prior", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "medical-test-example" },
-            { topic: "Sets, Events & Bayes", title: "Spam Filter & Sequential Updates", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "spam-filter" },
-            { topic: "Sets, Events & Bayes", title: "Odds Form of Bayes' Rule", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "odds-form" },
-            { topic: "Sets, Events & Bayes", title: "Three Mistakes (Prosecutor's Fallacy)", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "three-mistakes" },
+            // Data Mining: Distributions
+            { topic: "Probability Distributions", title: "Bernoulli & Binomial Discrete Probability Distributions", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "bernoulli-binomial" },
+            { topic: "Probability Distributions", title: "Poisson Distribution & Rare Event Arrival Modeling", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "poisson-distribution" },
+            { topic: "Probability Distributions", title: "Uniform Continuous Distribution & Properties", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "uniform-distribution" },
+            { topic: "Probability Distributions", title: "Normal (Gaussian) Distribution & The Empirical 68-95-99.7 Rule", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "normal-distribution" },
+            { topic: "Probability Distributions", title: "Student's t, Chi-Squared & Logistic Probability Distributions", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "t-chisq-logistic" },
 
-            // Traditional Data Techniques
-            { topic: "Traditional Data Techniques", title: "Pre-processing, Big Data & BI", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "reviewer" }
+            // Data Mining: Sets & Bayes
+            { topic: "Sets & Bayesian Inference", title: "Set Theory Notation, Universal Set & Element Membership", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "set-theory-notation" },
+            { topic: "Sets & Bayesian Inference", title: "Venn Diagrams, Set Unions, Intersections & Complements", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "venn-diagrams-operations" },
+            { topic: "Sets & Bayesian Inference", title: "Conditional Probability Formula P(A|B) & Sample Space Reduction", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "conditional-probability" },
+            { topic: "Sets & Bayesian Inference", title: "Law of Total Probability & Exhaustive Partitions", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "total-probability-law" },
+            { topic: "Sets & Bayesian Inference", title: "Bayes' Rule, Prior Probability, Evidence & Posterior Odds", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "bayes-theorem-rule" },
+
+            // Data Mining: Traditional Techniques
+            { topic: "Traditional Data Techniques", title: "The 4-Step Data Pipeline: Raw Data to Actionable Information", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "data-pipeline-steps" },
+            { topic: "Traditional Data Techniques", title: "Class Labeling: The Arithmetic Test for Numerical vs Categorical", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "class-labeling-test" },
+            { topic: "Traditional Data Techniques", title: "Missing Value Imputation: Mean, Median, Mode & Row Deletion", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "missing-data-imputation" },
+            { topic: "Traditional Data Techniques", title: "Class Balancing Resampling & Row Shuffling for Neural Stability", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "balancing-shuffling" },
+            { topic: "Traditional Data Techniques", title: "Structured vs Unstructured Big Data, NLP Sentiment & PII Masking", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "big-data-nlp-masking" },
+            { topic: "Traditional Data Techniques", title: "Business Intelligence (BI) 4-Tier Hierarchy: Observation to KPI", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "bi-hierarchy-kpi" },
+            { topic: "Traditional Data Techniques", title: "Linear Regression vs Logistic Regression & Classification Cutoffs", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "linear-logistic-regression" },
+            { topic: "Traditional Data Techniques", title: "Clustering (Rows) vs Factor Analysis (Columns) & Time Series Rule", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "clustering-factor-timeseries" },
+            { topic: "Traditional Data Techniques", title: "Machine Learning 4 Core Ingredients: Data, Model, Loss & Optimizer", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "ml-four-ingredients" },
+            { topic: "Traditional Data Techniques", title: "Supervised vs Unsupervised vs Reinforcement Learning Paradigms", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "three-ml-paradigms" },
+            { topic: "Traditional Data Techniques", title: "Self-Supervised Learning, Masked Language Modeling & GPT Transformers", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "llm-self-supervised" }
         ];
 
-        const searchInput = document.getElementById('portal-search');
-        const resultsBox = document.getElementById('search-results-box');
+        function handleSearchBinding(inputId, resultsBoxId) {
+            const input = document.getElementById(inputId);
+            const box = document.getElementById(resultsBoxId);
+            if (!input || !box) return;
 
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            if (!query) {
-                resultsBox.style.display = 'none';
-                return;
-            }
+            input.addEventListener('input', () => {
+                const query = input.value.toLowerCase().trim();
+                if (!query) {
+                    box.innerHTML = '';
+                    box.style.display = 'none';
+                    return;
+                }
 
-            // Find matching terms
-            const matches = searchIndex.filter(item => 
-                item.title.toLowerCase().includes(query) || 
-                item.topic.toLowerCase().includes(query)
-            );
+                const matches = searchIndex.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.topic.toLowerCase().includes(query) ||
+                    item.hash.toLowerCase().includes(query)
+                ).slice(0, 8);
 
-            if (matches.length === 0) {
-                resultsBox.innerHTML = '<div style="padding:0.75rem 1rem; font-size:0.9rem; color:var(--text-muted-color);">No matching sections found.</div>';
-            } else {
-                resultsBox.innerHTML = matches.map(item => `
-                    <a class="search-result-item" href="/${item.file.replace(/^\//, '')}#${item.hash}" style="text-decoration:none; display:block;">
-                        <span class="result-topic">${item.topic}</span>
-                        <span class="result-heading">${item.title}</span>
+                if (matches.length === 0) {
+                    box.innerHTML = '<div class="search-result-item"><span style="color:var(--text-muted-color);">No matching topics found</span></div>';
+                    box.style.display = 'block';
+                    return;
+                }
+
+                box.innerHTML = matches.map(m => `
+                    <a href="${m.file}#${m.hash}" class="search-result-item" onclick="mobileCloseDrawers()">
+                        <span class="search-res-topic">${m.topic}</span>
+                        <div class="search-res-title">${m.title}</div>
                     </a>
                 `).join('');
-            }
-            resultsBox.style.display = 'block';
-        });
+                box.style.display = 'block';
+            });
 
-        // Close search results when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.search-container')) {
-                resultsBox.style.display = 'none';
-            }
-        });
+            document.addEventListener('click', (e) => {
+                if (!input.contains(e.target) && !box.contains(e.target)) {
+                    box.style.display = 'none';
+                }
+            });
+        }
+
+        handleSearchBinding('portal-search', 'search-results-box');
+        handleSearchBinding('mob-search-input', 'mob-search-results-box');
 
         // ==========================================
-        // 4. Progress Tracker Dashboard
+        // 5. Dynamic Progress & Mastery Tracker
         // ==========================================
-                const topics = [
-                        { key: 'automataComputabilityAndComplexity', title: 'Computability & Complexity', total: 73 },
-            { key: 'introductiontoAutomataTheoryFormalLanguages', title: 'Intro to Automata Theory', total: 75 },
-            { key: 'theCentralConceptsOfAutomata', title: 'Central Concepts of Automata', total: 80 },
-            { key: 'introductionToOperatingSystems', title: 'Intro to Operating Systems', total: 88 },
-            { key: 'networkConfigurationInWindowsOS', title: 'Network Configuration (Windows)', total: 90 },
-            { key: 'osStructuresAndSystemCalls', title: 'OS Structures & System Calls', total: 91 },
-
-            { key: 'accesscontrol', title: 'Access Control Models', total: 71 },
-            { key: 'week1-2', title: 'Foundations & Threat Landscape', total: 77 },
+        const topics = [
+            { key: 'accesscontrol', title: 'Access Control Models & Principles', total: 71 },
+            { key: 'week1-2', title: 'Foundations & Threat Landscape', total: 75 },
             { key: 'week3-4', title: 'Governance & Risk Management', total: 79 },
+            { key: 'introductionToOperatingSystems', title: 'Introduction to Operating Systems', total: 88 },
+            { key: 'networkConfigurationInWindowsOS', title: 'Network Configuration in Windows OS', total: 90 },
+            { key: 'osStructuresAndSystemCalls', title: 'OS Structures & System Calls', total: 91 },
+            { key: 'automataComputabilityAndComplexity', title: 'Automata, Computability & Complexity', total: 73 },
+            { key: 'introductiontoAutomataTheoryFormalLanguages', title: 'Intro to Automata & Formal Languages', total: 75 },
+            { key: 'theCentralConceptsOfAutomata', title: 'The Central Concepts of Automata', total: 80 },
             { key: 'introductionToDataScience', title: 'Introduction to Data Science', total: 81 },
             { key: 'probabilities', title: 'Probabilities', total: 94 },
             { key: 'probabilitydistribution', title: 'Probability Distributions', total: 76 },
-            { key: 'sets-events-bayesianinference', title: 'Sets, Events & Bayes', total: 75 },
+            { key: 'sets-events-bayesianinference', title: 'Sets, Events & Bayesian Inference', total: 75 },
             { key: 'traditionalDataTechniques', title: 'Traditional Data Techniques', total: 91 }
         ];
 
-        function formatStudyTime(sec) {
-            if (!sec || sec <= 0) return '0s';
-            const hrs = Math.floor(sec / 3600);
-            const mins = Math.floor((sec % 3600) / 60);
-            const secs = sec % 60;
-            if (hrs > 0) {
-                return `${hrs}h ${mins}m`;
-            }
-            if (mins > 0) {
-                return `${mins}m ${secs}s`;
-            }
-            return `${secs}s`;
+        function getTopicProgress(topicKey) {
+            try {
+                const raw = localStorage.getItem('quiz_progress_' + topicKey);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    const answered = parsed.filter(x => x !== null && x !== undefined).length;
+                    return { answered, raw: parsed };
+                }
+            } catch (e) {}
+            return { answered: 0, raw: [] };
+        }
+
+        function getTopicBestScore(topicKey) {
+            try {
+                const best = localStorage.getItem('quiz_best_score_' + topicKey);
+                return best !== null ? parseInt(best, 10) : 0;
+            } catch (e) {}
+            return 0;
+        }
+
+        function resetAllCourseProgress() {
+            if (!confirm('Are you sure you want to reset all quiz progress and scores? This action cannot be undone.')) return;
+            
+            topics.forEach(t => {
+                localStorage.removeItem('quiz_progress_' + t.key);
+                localStorage.removeItem('quiz_best_score_' + t.key);
+                localStorage.removeItem('quiz_session_state_' + t.key);
+            });
+            localStorage.removeItem('active_mistake_vault');
+            
+            renderProgressTracker();
+            window.location.reload();
         }
 
         function renderProgressTracker() {
             const container = document.getElementById('progress-list-container');
             if (!container) return;
-            
+
             container.innerHTML = '';
 
-            // Compute topic stats for dynamic hierarchy sorting
-            const topicStats = topics.map((t, originalIndex) => {
-                const rawProgress = safeGetStorage(`quiz_progress_${t.key}`);
-                const highscore = parseInt(safeGetStorage(`quiz_highscore_${t.key}`) || '0', 10);
-                
-                let progress = { answered: 0, correct: 0, completed: false };
-                if (rawProgress) {
-                    try {
-                        progress = JSON.parse(rawProgress);
-                    } catch (e) {}
-                } else {
-                    const rawSession = safeGetStorage(`quiz_session_state_${t.key}`);
-                    if (rawSession) {
-                        try {
-                            const sess = JSON.parse(rawSession);
-                            progress = {
-                                answered: sess.answeredCount || 0,
-                                correct: sess.correctCount || 0,
-                                completed: (sess.answeredCount || 0) === t.total
-                            };
-                        } catch (e) {}
-                    }
-                }
+            let totalGlobalQuestions = 0;
+            let totalGlobalAnswered = 0;
+            let totalModulesCompleted = 0;
 
-                const bestScore = Math.max(highscore, progress.correct || 0);
+            const topicStats = topics.map((t, originalIndex) => {
+                const progress = getTopicProgress(t.key);
+                const bestScore = getTopicBestScore(t.key);
                 const pct = Math.round((progress.answered / t.total) * 100);
-                const isCompleted = Boolean(progress.completed || progress.answered === t.total);
+                const isCompleted = progress.answered === t.total && t.total > 0;
+
+                totalGlobalQuestions += t.total;
+                totalGlobalAnswered += progress.answered;
+                if (isCompleted) totalModulesCompleted++;
 
                 return {
                     topic: t,
@@ -634,21 +901,29 @@
                 };
             });
 
-            // Dynamic Hierarchy Sorting:
-            // 1. Completed modules first
-            // 2. Highest completion rate (e.g. 100% -> 50% -> 1% -> 0%)
-            // 3. Highest best score
-            // 4. Original order
+            // Update Mastery Ring & Overview Numbers
+            const globalPct = totalGlobalQuestions > 0 ? Math.round((totalGlobalAnswered / totalGlobalQuestions) * 100) : 0;
+            const ringEl = document.getElementById('rail-ring-progress');
+            const pctLabel = document.getElementById('rail-ring-pct');
+            const ansCountEl = document.getElementById('rail-answered-count');
+            const totalCountEl = document.getElementById('rail-total-count');
+            const compCountEl = document.getElementById('rail-completed-count');
+
+            if (ringEl) {
+                const circumference = 2 * Math.PI * 50; // r=50
+                const offset = circumference - (globalPct / 100) * circumference;
+                ringEl.style.strokeDasharray = `${circumference} ${circumference}`;
+                ringEl.style.strokeDashoffset = offset;
+            }
+            if (pctLabel) pctLabel.innerText = `${globalPct}%`;
+            if (ansCountEl) ansCountEl.innerText = totalGlobalAnswered;
+            if (totalCountEl) totalCountEl.innerText = totalGlobalQuestions;
+            if (compCountEl) compCountEl.innerText = `${totalModulesCompleted}/14`;
+
+            // Sort topic stats: completed first, then highest %, then original order
             topicStats.sort((a, b) => {
-                if (a.isCompleted !== b.isCompleted) {
-                    return a.isCompleted ? -1 : 1;
-                }
-                if (b.pct !== a.pct) {
-                    return b.pct - a.pct;
-                }
-                if (b.bestScore !== a.bestScore) {
-                    return b.bestScore - a.bestScore;
-                }
+                if (a.isCompleted !== b.isCompleted) return a.isCompleted ? -1 : 1;
+                if (b.pct !== a.pct) return b.pct - a.pct;
                 return a.originalIndex - b.originalIndex;
             });
 
@@ -676,8 +951,9 @@
             });
         }
 
-        
-        // Update Hero Auth Banner on Portal based on auth state
+        // ==========================================
+        // 6. User Auth & Sync Banner Updates
+        // ==========================================
         window.updateHeroAuthBanner = function() {
             let user = null;
             if (window.SupabaseSync && typeof window.SupabaseSync.getCurrentStudent === 'function') {
@@ -689,35 +965,43 @@
                 } catch (e) {}
             }
 
-            const icon = document.getElementById('hero-auth-icon');
             const title = document.getElementById('hero-auth-title');
             const desc = document.getElementById('hero-auth-desc');
+            const statusEl = document.getElementById('hero-auth-status');
             const actions = document.getElementById('hero-auth-actions');
-
-            if (!icon || !title || !desc || !actions) return;
+            const topbarIcon = document.getElementById('topbar-auth-icon');
+            const topbarLabel = document.getElementById('topbar-auth-label');
 
             if (user && user.username) {
-                icon.innerText = '🎓';
-                title.innerHTML = `Welcome back, <strong>${user.username}</strong>! <span style="font-size:0.75rem; color:#10b981; font-weight:700; background:rgba(16,185,129,0.12); padding:0.2rem 0.5rem; border-radius:12px;">🟢 Cloud Sync Active</span>`;
-                desc.innerText = 'Your quiz progress, mistake vault, and study mastery are synchronizing in real-time across your devices.';
-                actions.innerHTML = `
-                    <button class="btn btn-primary" onclick="window.openAuthModal('profile')" style="font-size:0.85rem; padding:0.45rem 1rem;">⚙️ Profile &amp; Sync</button>
-                    <button class="btn btn-secondary" onclick="window.handleForceCloudPull()" style="font-size:0.85rem; padding:0.45rem 0.85rem;">🔄 Pull Cloud</button>
-                    <button class="btn btn-secondary" onclick="window.handleSignOut()" style="font-size:0.85rem; padding:0.45rem 0.85rem;">🚪 Sign Out</button>
-                `;
+                if (statusEl) statusEl.innerHTML = `<span style="color:#10b981;">🟢 Logged in as <strong>${user.username}</strong> • Cloud Sync Active</span>`;
+                if (title) title.innerHTML = `Welcome back, <strong>${user.username}</strong>!`;
+                if (desc) desc.innerText = 'Your 14 course modules, quiz scores, mistake vault records, and focus study hours are synchronizing seamlessly in real-time across your devices.';
+                if (actions) {
+                    actions.innerHTML = `
+                        <button class="btn btn-primary" onclick="window.openAuthModal('profile')">⚙️ Account &amp; Sync Settings</button>
+                        <button class="btn btn-secondary" onclick="window.handleForceCloudPull()">🔄 Pull Latest Cloud Data</button>
+                        <a href="/whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                    `;
+                }
+                if (topbarIcon) topbarIcon.innerText = '🟢';
+                if (topbarLabel) topbarLabel.innerText = user.username;
             } else {
-                icon.innerText = '☁️';
-                title.innerText = 'Multi-Device Cloud Sync & Student Account';
-                desc.innerText = 'Create an account or sign in to save your quiz answers, scores, and mastery percentages across your phone, tablet, and laptop.';
-                actions.innerHTML = `
-                    <button class="btn btn-primary" onclick="window.openAuthModal('register')" style="font-size:0.85rem; padding:0.45rem 1rem;">✨ Create Account</button>
-                    <button class="btn btn-secondary" onclick="window.openAuthModal('signin')" style="font-size:0.85rem; padding:0.45rem 1rem;">🔑 Sign In</button>
-                    <button class="btn btn-secondary" onclick="window.openAuthModal('forgot')" style="font-size:0.85rem; padding:0.45rem 0.85rem;" title="Forgot password?">❓ Recover</button>
-                `;
+                if (statusEl) statusEl.innerHTML = `Ready to study • 1,140 Questions Indexed across 4 Subjects`;
+                if (title) title.innerText = 'Personal Study & Mastery Dashboard';
+                if (desc) desc.innerText = 'Comprehensive study guides, active distractor-balanced practice quizzes, high-definition display math worked examples, and multi-device cloud synchronization.';
+                if (actions) {
+                    actions.innerHTML = `
+                        <button class="btn btn-primary" onclick="window.openAuthModal('register')">✨ Create Account</button>
+                        <button class="btn btn-secondary" onclick="window.openAuthModal('signin')">🔑 Sign In</button>
+                        <a href="/whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                    `;
+                }
+                if (topbarIcon) topbarIcon.innerText = '👤';
+                if (topbarLabel) topbarLabel.innerText = 'Sign In / Sync';
             }
         };
 
-        // Run immediately and register all lifecycle hooks
+        // Lifecycle Listeners
         window.updateHeroAuthBanner();
         document.addEventListener('DOMContentLoaded', window.updateHeroAuthBanner);
         window.addEventListener('pageshow', window.updateHeroAuthBanner);
@@ -729,22 +1013,18 @@
             }
         });
 
-        // Render progress on load and listen for real-time updates across tabs, focus, and page restores
+        // Realtime Progress Updates
         renderProgressTracker();
-
-        // 1. Cross-tab real-time storage event (updates instantly when answering in another tab/window)
         window.addEventListener('storage', (e) => {
             if (e.key && (e.key.startsWith('quiz_progress_') || e.key.startsWith('quiz_session_state_') || e.key.startsWith('study_time_'))) {
                 renderProgressTracker();
             }
         });
 
-        // 2. Internal custom events
         window.addEventListener('quizProgressUpdated', renderProgressTracker);
         window.addEventListener('mistakeVaultUpdated', renderProgressTracker);
         window.addEventListener('studyTimeUpdated', renderProgressTracker);
 
-        // 3. Page restoration, focus & visibility events (updates instantly when returning to portal without reload)
         async function silentCloudSyncAndUpdate() {
             renderProgressTracker();
             if (window.SupabaseSync && typeof window.SupabaseSync.getCurrentStudent === 'function' && window.SupabaseSync.getCurrentStudent()) {
@@ -764,11 +1044,7 @@
             }
         });
 
-        // Trigger on initial startup
         setTimeout(silentCloudSyncAndUpdate, 150);
     </script>
-    <footer style="text-align: center; padding: 2rem 1rem 1.5rem; color: var(--text-muted-color); font-size: 0.85rem; border-top: 1px solid var(--border-color); margin-top: 3rem;">
-        <p style="margin-bottom: 0;">Personal Course Reviewer • Made by <strong>Christian Ezekiel</strong></p>
-    </footer>
 </body>
 </html>

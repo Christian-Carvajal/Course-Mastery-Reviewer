@@ -107,6 +107,17 @@ window.tabScrollPositions = {};
 window.lastActiveTabId = 'reviewer';
 
 function initGlobalNavigation() {
+    // Auto-inject Whiteboard quick link into study page navbars if not already present
+    const navRight = document.querySelector('nav.sticky-nav > div:last-child');
+    if (navRight && !navRight.querySelector('.nav-wb-btn') && !window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && !window.location.pathname.endsWith('whiteboard.html')) {
+        const wbLink = document.createElement('a');
+        wbLink.href = '/whiteboard.html';
+        wbLink.target = '_blank';
+        wbLink.className = 'topbar-action-pill whiteboard-pill nav-wb-btn';
+        wbLink.innerHTML = '<span class="pill-icon">📝</span><span class="pill-label">Whiteboard</span>';
+        wbLink.style.marginRight = '0.35rem';
+        navRight.insertBefore(wbLink, navRight.firstChild);
+    }
     const pageKey = getPageTopicKey();
 
     // 1. Continuous real-time scroll recording for the active tab
