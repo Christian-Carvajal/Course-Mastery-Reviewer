@@ -1,10 +1,9 @@
 {
   "name": "course-mastery-reviewer",
-  "version": "1.0.148",
+  "version": "1.0.149",
   "private": true,
   "scripts": {
-    "prebuild": "node -e \"const fs=require('fs'); const p='version.json'; let d={}; try{d=JSON.parse(fs.readFileSync(p,'utf8'))}catch(e){} fs.writeFileSync(p, JSON.stringify({version:d.version||'1.0.148',buildTime:Date.now()},null,2))\"",
-    "build": "npm run prebuild",
-    "deploy": "npm run prebuild && npx netlify deploy --prod"
+    "build": "node -e \"const fs=require('fs'); let d={}; try{d=JSON.parse(fs.readFileSync('version.json','utf8'))}catch(e){} fs.writeFileSync('version.json', JSON.stringify({version:d.version||'1.0.149',buildTime:Date.now()},null,2)); console.log('[Build] Auto-generated fresh buildTime:', Date.now())\"",
+    "deploy": "npm run build && npx netlify deploy --prod"
   }
 }

@@ -2183,57 +2183,85 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 // PWA GRACEFUL AUTO-UPDATE CONTROLLER (Zero Cache Wiping)
 // ==========================================
 // ==========================================
-// 3-LAYER AUTO-UPDATE & SMART REFRESH SYSTEM
+// 3-LAYER AUTO-UPDATE & SMART REFRESH SYSTEM (VANILLA JS)
 // ==========================================
-let initialBuildTimeRef = null;
-let hasDispatchedUpdateToast = false;
-
-function initAutoUpdateChecker() {
+(function() {
     if (window.location.protocol === 'file:') return;
 
-    // 1. Poll /version.json with cache-busting query param
-    const checkForUpdate = async () => {
+    var initialBuildTime = null;
+
+    async function checkVersion() {
         if (!navigator.onLine) return;
         try {
-            const response = await fetch(`/version.json?t=${Date.now()}`, { cache: 'no-store' });
-            if (!response.ok) return;
-            const data = await response.json();
-            const fetchedTime = Number(data.buildTime || 0);
+            // Fetch version.json with cache-busting query parameter
+            var res = await fetch('/version.json?t=' + Date.now(), { cache: 'no-store' });
+            if (!res.ok) return;
 
-            // On first load, store initial build timestamp
-            if (!initialBuildTimeRef) {
-                initialBuildTimeRef = fetchedTime;
-                safeSetStorage('app_release_version', data.version);
+            var data = await res.json();
+            var serverTime = Number(data.buildTime || 0);
+
+            // On initial page load, save server timestamp
+            if (!initialBuildTime) {
+                initialBuildTime = serverTime;
                 return;
             }
 
-            // If new deployment timestamp > initial load timestamp (or version differs), pop update toast!
-            if ((fetchedTime && fetchedTime > initialBuildTimeRef) || (data.version && data.version !== safeGetStorage('app_release_version'))) {
-                console.log(`[Auto-Updater] New deployment detected: ${data.version} (build: ${fetchedTime}). Triggering smart update toast...`);
-                showAppUpdateToast(data.version);
+            // If server timestamp is newer than when page loaded -> show Toast!
+            if (serverTime > initialBuildTime) {
+                console.log('[Auto-Updater] New deployment detected on server. Showing update toast...');
+                showUpdateToast(data.version);
             }
         } catch (err) {
-            // Ignore offline/network errors
+            // Ignore network errors
         }
-    };
+    }
 
-    // Check on initial load
-    setTimeout(checkForUpdate, 1500);
+    function showUpdateToast(version) {
+        if (document.getElementById('update-toast-banner')) return; // already showing
 
-    // Poll every 60 seconds (60,000 ms) for rapid zero-friction updates
-    setInterval(checkForUpdate, 60000);
+        // Create toast container dynamically with Elite dark styling
+        var toast = document.createElement('div');
+        toast.id = 'update-toast-banner';
+        toast.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:99999;background:#121215;color:#fff;padding:14px 18px;border-radius:14px;box-shadow:0 14px 35px rgba(0,0,0,0.55),0 0 15px rgba(20,184,166,0.25);font-family:Outfit,sans-serif;display:flex;align-items:center;gap:14px;border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);animation:slideUpToast 0.3s cubic-bezier(0.16,1,0.3,1);';
+        
+        toast.innerHTML = '<div style="display:flex;align-items:center;gap:10px;"><span style="font-size:22px;line-height:1;">✨</span><div><strong style="display:block;font-size:13px;font-weight:800;letter-spacing:-0.01em;">New Update Live</strong><span style="font-size:11px;color:#94a3b8;">A new version (' + (version || 'Latest') + ') was deployed.</span></div></div><button id="update-toast-btn" style="background:linear-gradient(135deg, #0d9488 0%, #0284c7 100%);color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;box-shadow:0 4px 12px rgba(13,148,136,0.35);transition:transform 0.15s ease;">Update Now</button>';
+        
+        document.body.appendChild(toast);
 
-    // Check immediately when user switches back to this browser tab
-    window.addEventListener('focus', checkForUpdate);
-    document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-            checkForUpdate();
+        var btn = document.getElementById('update-toast-btn');
+        if (btn) {
+            btn.addEventListener('click', async function() {
+                btn.textContent = 'Updating...';
+                btn.disabled = true;
+
+                // Clear all Service Worker caches
+                if ('caches' in window) {
+                    try {
+                        var keys = await caches.keys();
+                        await Promise.all(keys.map(function(k) { return caches.delete(k); }));
+                    } catch(e) {}
+                }
+
+                // Notify Service Worker to skip waiting
+                if ('serviceWorker' in navigator) {
+                    try {
+                        var regs = await navigator.serviceWorker.getRegistrations();
+                        for (var i = 0; i < regs.length; i++) {
+                            if (regs[i].waiting) regs[i].waiting.postMessage({ type: 'SKIP_WAITING' });
+                            await regs[i].update();
+                        }
+                    } catch(e) {}
+                }
+
+                // Force hard reload with fresh server files
+                window.location.reload(true);
+            });
         }
-    });
+    }
 
-    // 2. Chunk / Script Error Auto-Recovery Listener
-    const handleChunkError = (event) => {
-        const errorMsg = String(event?.reason || event?.message || '');
+    // Chunk / Script Load Error Auto-Recovery Listener
+    var handleChunkError = function(event) {
+        var errorMsg = String(event?.reason || event?.message || '');
         if (
             errorMsg.includes('ChunkLoadError') ||
             errorMsg.includes('Failed to fetch dynamically imported module') ||
@@ -2242,85 +2270,24 @@ function initAutoUpdateChecker() {
         ) {
             event?.preventDefault?.();
             console.warn('[Auto-Recovery] Missing chunk or stale module detected. Performing instant reload...');
-            window.location.reload();
+            window.location.reload(true);
         }
     };
     window.addEventListener('unhandledrejection', handleChunkError);
     window.addEventListener('error', handleChunkError);
-}
 
-// Floating UI Update Toast
-window.showAppUpdateToast = function(version) {
-    if (hasDispatchedUpdateToast) return;
-    hasDispatchedUpdateToast = true;
+    // Poll every 60 seconds (60,000 ms)
+    setInterval(checkVersion, 60000);
 
-    // Remove existing toast if present
-    const existing = document.getElementById('app-update-toast');
-    if (existing) existing.remove();
-
-    const toast = document.createElement('div');
-    toast.id = 'app-update-toast';
-    toast.className = 'app-update-toast-banner';
-    toast.setAttribute('role', 'alert');
-    toast.innerHTML = `
-        <div class="update-toast-content">
-            <div class="update-toast-icon">✨</div>
-            <div class="update-toast-info">
-                <div class="update-toast-title">New Update Available</div>
-                <div class="update-toast-desc">A new version was just deployed (${version || 'Latest'}).</div>
-            </div>
-        </div>
-        <div class="update-toast-actions">
-            <button class="update-toast-btn" onclick="window.applyAppUpdate()">Update Now</button>
-            <button class="update-toast-close" onclick="window.dismissUpdateToast()" title="Dismiss">&times;</button>
-        </div>
-    `;
-    document.body.appendChild(toast);
-    
-    // Animate in
-    requestAnimationFrame(() => {
-        toast.classList.add('visible');
+    // Check immediately when user switches back to this browser tab
+    window.addEventListener('focus', checkVersion);
+    document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible') checkVersion();
     });
-};
 
-window.dismissUpdateToast = function() {
-    const toast = document.getElementById('app-update-toast');
-    if (toast) {
-        toast.classList.remove('visible');
-        setTimeout(() => toast.remove(), 300);
-    }
-};
-
-window.applyAppUpdate = async function() {
-    const toast = document.getElementById('app-update-toast');
-    if (toast) {
-        const btn = toast.querySelector('.update-toast-btn');
-        if (btn) {
-            btn.textContent = 'Updating...';
-            btn.disabled = true;
-        }
-    }
-
-    try {
-        // Clear all Service Worker caches
-        if ('caches' in window) {
-            const keys = await caches.keys();
-            await Promise.all(keys.map(k => caches.delete(k)));
-        }
-
-        // Notify Service Worker to skip waiting
-        if ('serviceWorker' in navigator) {
-            const regs = await navigator.serviceWorker.getRegistrations();
-            for (const reg of regs) {
-                if (reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-                await reg.update();
-            }
-        }
-    } catch (e) {}
-
-    // Force reload with fresh assets
-    window.location.reload();
-};
+    // Initial check on load
+    checkVersion();
+})();
 
 
 // ==========================================
