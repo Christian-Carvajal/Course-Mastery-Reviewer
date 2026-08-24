@@ -4316,7 +4316,7 @@ button, a, input, select, textarea, label,
 
 
 /* ==========================================================================
-   PROBABILITY & DATA MINING WORKED EXAMPLES DISPLAY MATH MODAL (ULTRA-WIDE HD)
+   WORKED EXAMPLES DISPLAY MATH MODAL (MOBILE-FIRST & UNIVERSAL DEVICE RESPONSIVE)
    ========================================================================== */
 
 /* Quick Action Button on Topic Card */
@@ -4325,46 +4325,51 @@ button, a, input, select, textarea, label,
     align-items: center;
     gap: 8px;
     margin-top: 8px;
+    flex-wrap: wrap;
 }
 
 .btn-topic-examples {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     background: rgba(13, 148, 136, 0.15);
     color: var(--primary-color);
     border: 1.5px solid var(--primary-color);
     border-radius: 9999px;
-    padding: 5px 14px;
+    padding: 6px 14px;
     font-size: 0.82rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     touch-action: manipulation;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.btn-topic-examples:hover {
+.btn-topic-examples:hover,
+.btn-topic-examples:focus-visible {
     background: var(--primary-color);
     color: #ffffff;
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(13, 148, 136, 0.35);
 }
 
-/* Modal Overlay */
+/* Modal Overlay (Mobile-First 100dvh Base) */
 .prob-modal-overlay {
     position: fixed;
     inset: 0;
     z-index: 99998;
     background: rgba(10, 15, 30, 0.88);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
     display: none;
     align-items: center;
     justify-content: center;
-    padding: 8px;
+    padding: 0;
     opacity: 0;
-    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    overscroll-behavior: contain;
 }
 
 .prob-modal-overlay.active {
@@ -4372,56 +4377,43 @@ button, a, input, select, textarea, label,
     opacity: 1;
 }
 
-/* ULTRA-WIDE HD MODAL CONTAINER (MAXIMUM VISIBILITY & SCREEN REAL ESTATE) */
+/* MODAL CONTAINER: Mobile-First Full Viewport, scaling up on tablets & desktops */
 .prob-modal-box {
     background: var(--card-bg-color);
     color: var(--text-color);
-    border: 1.5px solid var(--border-color);
-    border-radius: 26px;
-    width: 98vw;
-    max-width: 1480px;
-    height: 96vh;
-    max-height: 98vh;
-    min-height: 580px;
+    border: none;
+    border-radius: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 40px 100px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.14);
+    box-shadow: none;
     overflow: hidden;
-    animation: probModalSlideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: probModalSlideUpMobile 0.24s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateZ(0);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Fullscreen Toggle State */
-.prob-modal-box.is-fullscreen {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    height: 100vh !important;
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-    border: none !important;
-}
-
-@keyframes probModalSlideUp {
-    from { opacity: 0; transform: translateY(20px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+@keyframes probModalSlideUpMobile {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 body.dark .prob-modal-box {
-    background: #0b1120;
-    border-color: rgba(255, 255, 255, 0.18);
-    box-shadow: 0 45px 120px -15px rgba(0, 0, 0, 0.95), 0 0 0 1px rgba(255, 255, 255, 0.12);
+    background: #090e1a;
 }
 
-/* Header */
+/* Header (Clean, responsive flex column/row with safe-area spacing) */
 .prob-modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 22px 36px 18px 36px;
+    padding: calc(12px + env(safe-area-inset-top, 0px)) 16px 12px 16px;
     border-bottom: 1px solid var(--border-color);
     background: linear-gradient(135deg, rgba(13, 148, 136, 0.16) 0%, rgba(2, 132, 199, 0.12) 100%);
-    gap: 20px;
+    gap: 12px;
     flex-shrink: 0;
 }
 
@@ -4430,16 +4422,21 @@ body.dark .prob-modal-header {
     background: linear-gradient(135deg, rgba(13, 148, 136, 0.28) 0%, rgba(2, 132, 199, 0.18) 100%);
 }
 
+.prob-modal-header-info {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+
 .prob-modal-badge {
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     color: var(--primary-color);
-    margin-bottom: 4px;
-    display: flex;
+    margin-bottom: 2px;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
 }
 
 body.dark .prob-modal-badge {
@@ -4448,11 +4445,14 @@ body.dark .prob-modal-badge {
 
 .prob-modal-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.75rem;
+    font-size: clamp(1.1rem, 4vw, 1.65rem);
     font-weight: 800;
     color: var(--text-dark-color);
     margin: 0;
-    line-height: 1.25;
+    line-height: 1.22;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 body.dark .prob-modal-title {
@@ -4460,10 +4460,13 @@ body.dark .prob-modal-title {
 }
 
 .prob-modal-subtitle {
-    font-size: 1.02rem;
+    font-size: clamp(0.78rem, 2.8vw, 0.96rem);
     color: var(--text-muted-color);
-    margin: 4px 0 0 0;
-    line-height: 1.5;
+    margin: 2px 0 0 0;
+    line-height: 1.35;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 body.dark .prob-modal-subtitle {
@@ -4473,7 +4476,7 @@ body.dark .prob-modal-subtitle {
 .prob-modal-actions-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-shrink: 0;
 }
 
@@ -4481,50 +4484,54 @@ body.dark .prob-modal-subtitle {
     background: rgba(0, 0, 0, 0.06);
     border: 1px solid var(--border-color);
     color: var(--text-muted-color);
-    border-radius: 12px;
-    width: 44px;
-    height: 44px;
+    border-radius: 10px;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     cursor: pointer;
-    transition: all 0.18s ease;
+    transition: all 0.16s ease;
     flex-shrink: 0;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body.dark .prob-modal-btn-icon {
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.14);
     color: #cbd5e1;
 }
 
-.prob-modal-btn-icon:hover {
+.prob-modal-btn-icon:hover,
+.prob-modal-btn-icon:active {
     background: rgba(56, 189, 248, 0.2);
     color: #38bdf8;
     border-color: rgba(56, 189, 248, 0.4);
-    transform: scale(1.06);
+    transform: scale(1.04);
 }
 
-.prob-modal-btn-icon.close-btn:hover {
+.prob-modal-btn-icon.close-btn:hover,
+.prob-modal-btn-icon.close-btn:active {
     background: rgba(239, 68, 68, 0.25);
     color: #f87171;
     border-color: rgba(239, 68, 68, 0.4);
 }
 
-/* Toolbar: Search & Category Chips */
+/* Toolbar: Search & Fast Filter Chips */
 .prob-modal-toolbar {
-    padding: 16px 36px;
+    padding: 10px 16px;
     background: var(--bg-color);
     border-bottom: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
     flex-shrink: 0;
 }
 
 body.dark .prob-modal-toolbar {
-    background: #080d1a;
+    background: #0b1120;
     border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -4535,52 +4542,53 @@ body.dark .prob-modal-toolbar {
 
 .prob-search-icon {
     position: absolute;
-    left: 18px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: var(--text-muted-color);
     pointer-events: none;
 }
 
 .prob-search-input {
     width: 100%;
-    padding: 14px 20px 14px 50px;
+    padding: 11px 16px 11px 42px;
     background: var(--card-bg-color);
     color: var(--text-dark-color);
     border: 1.5px solid var(--border-color);
-    border-radius: 14px;
+    border-radius: 12px;
     font-family: inherit;
-    font-size: 1.05rem;
+    font-size: 0.95rem;
     outline: none;
     transition: all 0.2s ease;
     box-sizing: border-box;
+    -webkit-appearance: none;
 }
 
 body.dark .prob-search-input {
-    background: #101828;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: #111a2e;
+    border-color: rgba(255, 255, 255, 0.14);
     color: #ffffff;
 }
 
 .prob-search-input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.28);
-    background: var(--card-bg-color);
+    box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.28);
 }
 
 body.dark .prob-search-input:focus {
-    background: #142036;
+    background: #15223c;
     border-color: #2dd4bf;
-    box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.25);
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.25);
 }
 
 .prob-category-chips {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     overflow-x: auto;
     scrollbar-width: none;
     padding-bottom: 2px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .prob-category-chips::-webkit-scrollbar {
@@ -4593,29 +4601,20 @@ body.dark .prob-search-input:focus {
     color: var(--text-muted-color);
     border: 1.5px solid var(--border-color);
     border-radius: 9999px;
-    padding: 8px 18px;
-    font-size: 0.9rem;
+    padding: 6px 14px;
+    font-size: 0.82rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.18s ease;
+    transition: all 0.16s ease;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    flex-shrink: 0;
 }
 
 body.dark .prob-chip {
-    background: #101828;
+    background: #111a2e;
     border-color: rgba(255, 255, 255, 0.12);
     color: #94a3b8;
-}
-
-.prob-chip:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color);
-    transform: translateY(-1px);
-}
-
-body.dark .prob-chip:hover {
-    border-color: #2dd4bf;
-    color: #2dd4bf;
 }
 
 .prob-chip.active {
@@ -4623,94 +4622,72 @@ body.dark .prob-chip:hover {
     color: #ffffff !important;
     border-color: transparent !important;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.4);
+    box-shadow: 0 3px 10px rgba(13, 148, 136, 0.35);
 }
 
-/* SCROLLABLE MAIN CONTENT AREA (ULTRA-SPACIOUS HD CARDS) */
+/* SCROLLABLE MAIN CONTENT AREA */
 .prob-modal-content {
     flex: 1 1 auto;
     min-height: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 30px 42px 48px 42px;
+    padding: 16px 14px calc(28px + env(safe-area-inset-bottom, 0px)) 14px;
     display: flex;
     flex-direction: column;
-    gap: 26px;
+    gap: 16px;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
 }
 
 .prob-modal-content::-webkit-scrollbar {
-    width: 10px;
-}
-
-.prob-modal-content::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-body.dark .prob-modal-content::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.5);
+    width: 6px;
 }
 
 .prob-modal-content::-webkit-scrollbar-thumb {
-    background: rgba(13, 148, 136, 0.45);
+    background: rgba(13, 148, 136, 0.35);
     border-radius: 9999px;
 }
 
-.prob-modal-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(13, 148, 136, 0.7);
-}
-
-/* Individual Example Card */
+/* Individual Example Card (Mobile-First Streamlined) */
 .prob-card {
     background: var(--card-bg-color);
     border: 1.5px solid var(--border-color);
-    border-radius: 22px;
-    padding: 28px 32px;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
     flex-shrink: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 body.dark .prob-card {
-    background: #0f172a;
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow: 0 6px 28px rgba(0, 0, 0, 0.45);
+    background: #0e1526;
+    border-color: rgba(255, 255, 255, 0.11);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
-.prob-card:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 14px 36px -6px rgba(13, 148, 136, 0.32);
-    transform: translateY(-2px);
-}
-
-body.dark .prob-card:hover {
-    border-color: #2dd4bf;
-    box-shadow: 0 14px 40px -6px rgba(45, 212, 191, 0.26);
-}
-
+/* Card Header: Organized 2-level on mobile to eliminate clutter */
 .prob-card-hdr {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 14px;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .prob-card-title-group {
     display: flex;
-    align-items: center;
-    gap: 16px;
+    align-items: flex-start;
+    gap: 10px;
+    min-width: 0;
 }
 
 .prob-num-pill {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
     background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
     color: #ffffff;
     display: flex;
@@ -4718,55 +4695,72 @@ body.dark .prob-card:hover {
     justify-content: center;
     font-family: 'Outfit', sans-serif;
     font-weight: 800;
-    font-size: 1.15rem;
-    box-shadow: 0 4px 12px rgba(13, 148, 136, 0.4);
+    font-size: 0.95rem;
+    box-shadow: 0 3px 8px rgba(13, 148, 136, 0.35);
     flex-shrink: 0;
+    margin-top: 1px;
 }
 
 .prob-card-title {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.38rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: var(--text-dark-color);
     margin: 0;
+    line-height: 1.3;
+    word-break: break-word;
+    flex: 1 1 auto;
 }
 
 body.dark .prob-card-title {
     color: #f8fafc;
 }
 
+.prob-card-hdr > div:not(.prob-card-title-group),
+.prob-card-meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-left: 42px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .prob-tag-badge {
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    padding: 5px 14px;
-    border-radius: 9px;
-    background: rgba(13, 148, 136, 0.14);
+    padding: 3px 10px;
+    border-radius: 7px;
+    background: rgba(13, 148, 136, 0.12);
     color: var(--primary-color);
-    border: 1px solid rgba(13, 148, 136, 0.32);
+    border: 1px solid rgba(13, 148, 136, 0.3);
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
 
 body.dark .prob-tag-badge {
     color: #2dd4bf;
-    background: rgba(45, 212, 191, 0.14);
-    border-color: rgba(45, 212, 191, 0.32);
+    background: rgba(45, 212, 191, 0.12);
+    border-color: rgba(45, 212, 191, 0.3);
 }
 
 .prob-copy-btn {
     background: rgba(0, 0, 0, 0.04);
     border: 1px solid var(--border-color);
     color: var(--text-muted-color);
-    border-radius: 10px;
-    padding: 7px 16px;
-    font-size: 0.86rem;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.76rem;
     font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 5px;
     transition: all 0.15s ease;
     touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body.dark .prob-copy-btn {
@@ -4775,37 +4769,42 @@ body.dark .prob-copy-btn {
     color: #cbd5e1;
 }
 
-.prob-copy-btn:hover {
+.prob-copy-btn:hover,
+.prob-copy-btn:active {
     background: var(--primary-color);
     color: #ffffff;
     border-color: var(--primary-color);
 }
 
-/* HIGH CONTRAST ULTRA-HD DISPLAY MATH CONTAINERS */
+/* HIGH CONTRAST DISPLAY MATH (SCROLL-SAFE & PROPORTIONATE) */
 .prob-math-display {
     background: #050811;
-    border: 1.5px solid rgba(56, 189, 248, 0.42);
-    border-radius: 16px;
-    padding: 22px 30px;
-    margin: 6px 0;
+    border: 1.5px solid rgba(56, 189, 248, 0.4);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin: 2px 0;
     color: #38bdf8;
     font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 1.35rem;
+    font-size: clamp(0.95rem, 3.8vw, 1.25rem);
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: inset 0 4px 14px rgba(0, 0, 0, 0.7), 0 4px 24px rgba(56, 189, 248, 0.14);
+    justify-content: flex-start;
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.65), 0 3px 14px rgba(56, 189, 248, 0.1);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .prob-math-inline-block {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 12px;
+    gap: 8px;
     font-weight: 600;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    margin: 0 auto;
 }
 
 /* Fraction Rendering */
@@ -4814,36 +4813,37 @@ body.dark .prob-copy-btn {
     flex-direction: column;
     vertical-align: middle;
     text-align: center;
-    padding: 0 10px;
-    line-height: 1.22;
+    padding: 0 6px;
+    line-height: 1.18;
 }
 
 .math-num {
-    border-bottom: 2.5px solid currentColor;
-    padding-bottom: 4px;
-    font-size: 0.98em;
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 2px;
+    font-size: 0.95em;
     font-weight: 700;
 }
 
 .math-den {
-    padding-top: 4px;
-    font-size: 0.98em;
+    padding-top: 2px;
+    font-size: 0.95em;
     font-weight: 700;
 }
 
 /* Meaning Box */
 .prob-meaning-box {
-    background: rgba(13, 148, 136, 0.09);
-    border-left: 5px solid var(--primary-color);
-    border-radius: 0 16px 16px 0;
-    padding: 16px 22px;
-    font-size: 1.05rem;
-    line-height: 1.7;
+    background: rgba(13, 148, 136, 0.08);
+    border-left: 4px solid var(--primary-color);
+    border-radius: 0 12px 12px 0;
+    padding: 12px 14px;
+    font-size: clamp(0.88rem, 2.9vw, 1rem);
+    line-height: 1.55;
     color: var(--text-dark-color);
+    word-break: break-word;
 }
 
 body.dark .prob-meaning-box {
-    background: rgba(13, 148, 136, 0.16);
+    background: rgba(13, 148, 136, 0.15);
     color: #e2e8f0;
     border-left-color: #2dd4bf;
 }
@@ -4856,29 +4856,30 @@ body.dark .prob-meaning-box strong {
     color: #2dd4bf;
 }
 
-/* Worked Example & Steps */
+/* Worked Example & Steps (Clean responsive step list) */
 .prob-example-section {
     background: rgba(0, 0, 0, 0.02);
     border: 1.5px solid var(--border-color);
-    border-radius: 18px;
-    padding: 22px 26px;
+    border-radius: 14px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
+    box-sizing: border-box;
 }
 
 body.dark .prob-example-section {
     background: #070b14;
-    border-color: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .prob-scenario-title {
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: 0.96rem;
     color: var(--text-dark-color);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 body.dark .prob-scenario-title {
@@ -4886,10 +4887,11 @@ body.dark .prob-scenario-title {
 }
 
 .prob-scenario-desc {
-    font-size: 1.02rem;
-    line-height: 1.65;
+    font-size: clamp(0.86rem, 2.8vw, 0.96rem);
+    line-height: 1.5;
     color: var(--text-color);
     margin: 0;
+    word-break: break-word;
 }
 
 body.dark .prob-scenario-desc {
@@ -4898,23 +4900,25 @@ body.dark .prob-scenario-desc {
 
 .prob-step-row {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
-    font-size: 1.02rem;
-    line-height: 1.6;
+    gap: 6px;
+    font-size: clamp(0.86rem, 2.8vw, 0.96rem);
+    line-height: 1.5;
+    word-break: break-word;
 }
 
 .prob-step-badge {
     background: rgba(2, 132, 199, 0.18);
     color: #0284c7;
-    font-size: 0.85rem;
+    font-size: 0.74rem;
     font-weight: 800;
-    padding: 5px 13px;
-    border-radius: 8px;
+    padding: 3px 9px;
+    border-radius: 6px;
     border: 1px solid rgba(2, 132, 199, 0.35);
     flex-shrink: 0;
-    margin-top: 2px;
     text-transform: uppercase;
+    display: inline-block;
 }
 
 body.dark .prob-step-badge {
@@ -4925,78 +4929,147 @@ body.dark .prob-step-badge {
 
 .prob-step-calc {
     font-family: 'Fira Code', monospace;
-    font-size: 1.08rem;
+    font-size: clamp(0.88rem, 3vw, 1rem);
     font-weight: 600;
     color: #0f766e;
-    background: rgba(13, 148, 136, 0.12);
-    padding: 6px 14px;
-    border-radius: 8px;
+    background: rgba(13, 148, 136, 0.1);
+    padding: 4px 10px;
+    border-radius: 7px;
     display: inline-block;
-    margin-top: 2px;
+    word-break: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 body.dark .prob-step-calc {
     color: #2dd4bf;
-    background: rgba(45, 212, 191, 0.16);
+    background: rgba(45, 212, 191, 0.15);
 }
 
 .prob-check-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     background: rgba(16, 185, 129, 0.14);
     color: #10b981;
     border: 1.5px solid rgba(16, 185, 129, 0.35);
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 0.98rem;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.86rem;
     font-weight: 700;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 
-/* Mobile Breakpoints */
-@media (max-width: 640px) {
+/* ==========================================================================
+   DESKTOP & TABLET ADAPTIVE BREAKPOINTS (>= 768px and >= 1024px)
+   ========================================================================== */
+
+@media (min-width: 768px) {
     .prob-modal-overlay {
-        padding: 4px;
+        padding: 16px;
     }
-    
+
     .prob-modal-box {
-        width: 100vw;
-        height: 98vh;
-        max-height: 100vh;
-        min-height: unset;
-        border-radius: 16px;
+        width: 95vw;
+        max-width: 1380px;
+        height: 94vh;
+        max-height: 94vh;
+        min-height: 560px;
+        border: 1.5px solid var(--border-color);
+        border-radius: 24px;
+        box-shadow: 0 35px 90px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.12);
     }
-    
+
+    body.dark .prob-modal-box {
+        border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .prob-modal-box.is-fullscreen {
+        width: 100vw !important;
+        max-width: 100vw !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+
     .prob-modal-header {
-        padding: 16px 18px 14px 18px;
+        padding: 20px 32px 18px 32px;
     }
-    
-    .prob-modal-title {
-        font-size: 1.3rem;
-    }
-    
+
     .prob-modal-toolbar {
-        padding: 12px 18px;
-        gap: 10px;
+        padding: 14px 32px;
     }
-    
-    .prob-search-input {
-        padding: 11px 16px 11px 40px;
-        font-size: 0.92rem;
-    }
-    
+
     .prob-modal-content {
-        padding: 18px 20px 32px 20px;
-        gap: 18px;
+        padding: 24px 32px 36px 32px;
+        gap: 22px;
     }
-    
+
     .prob-card {
-        padding: 20px;
+        padding: 24px 28px;
+        border-radius: 20px;
     }
-    
+
+    .prob-card-hdr {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .prob-card-hdr > div:not(.prob-card-title-group),
+    .prob-card-meta-row {
+        padding-left: 0;
+        width: auto;
+        justify-content: flex-end;
+    }
+
+    .prob-step-row {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .prob-step-badge {
+        margin-top: 2px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .prob-modal-overlay {
+        padding: 12px;
+    }
+
+    .prob-modal-box {
+        width: 96vw;
+        max-width: 1480px;
+        height: 95vh;
+        max-height: 96vh;
+    }
+
+    .prob-modal-header {
+        padding: 22px 36px 18px 36px;
+    }
+
+    .prob-modal-title {
+        font-size: 1.65rem;
+    }
+
+    .prob-modal-toolbar {
+        padding: 16px 36px;
+    }
+
+    .prob-modal-content {
+        padding: 28px 38px 44px 38px;
+        gap: 24px;
+    }
+
+    .prob-card {
+        padding: 26px 32px;
+    }
+
     .prob-math-display {
-        font-size: 1.12rem;
-        padding: 16px 18px;
+        padding: 18px 26px;
+        font-size: 1.25rem;
     }
 }
