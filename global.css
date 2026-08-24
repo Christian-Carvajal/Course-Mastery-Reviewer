@@ -6097,49 +6097,112 @@ body.dark .btn-topic-examples {
 }
 
 
+
 /* ==========================================================================
-   MULTI-DEVICE RESPONSIVE REFACTOR (MOBILE FIRST, TABLET, DESKTOP)
+   UNIVERSAL RESPONSIVE ENGINE & ZERO-DEFECT MOBILE REFACTOR
    ========================================================================== */
+
+*, *::before, *::after {
+    box-sizing: border-box !important;
+}
 
 html, body {
     overflow-x: hidden !important;
-    width: 100%;
-    max-width: 100vw;
-    box-sizing: border-box;
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-text-size-adjust: 100%;
 }
 
-/* 1. Mobile Header & Top App Bar */
+/* 1. App Topbar Mobile Polish */
 .app-topbar {
+    position: sticky;
+    top: 0;
+    z-index: 120;
     height: 56px;
     max-height: 56px;
+    width: 100%;
+    background: rgba(9, 9, 11, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+}
+
+body:not(.dark) .app-topbar {
+    background: rgba(255, 255, 255, 0.88);
 }
 
 .topbar-container {
     height: 56px;
-    padding: 0 clamp(0.75rem, 3vw, 1.25rem);
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    flex-shrink: 1;
 }
 
 .brand-icon {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.brand-text {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .brand-title {
     font-size: 1.05rem;
+    font-weight: 800;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-dark-color);
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+#nav-timer-toggle {
+    display: none !important;
+}
+
+@media (min-width: 1024px) {
+    #nav-timer-toggle {
+        display: inline-flex !important;
+    }
 }
 
 .mobile-avatar-btn {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     background: var(--card-bg-color);
     border: 1px solid var(--border-color);
-    color: var(--text-dark-color);
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.15s ease;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
 }
@@ -6156,68 +6219,164 @@ html, body {
     }
 }
 
-/* 2. Compact Hero Card on Mobile */
-@media (max-width: 767px) {
-    .dashboard-hero-card {
-        padding: 1.1rem 1rem !important;
-        margin-bottom: 1.25rem !important;
-        border-radius: 16px !important;
-    }
+/* 2. Portal Container (Mobile First) */
+.portal-container {
+    width: 100% !important;
+    max-width: 1440px !important;
+    margin: 0.75rem auto 0 auto !important;
+    padding: 0 12px calc(76px + env(safe-area-inset-bottom, 16px)) 12px !important;
+    box-sizing: border-box !important;
+}
 
-    .hero-header-row {
-        margin-bottom: 0.4rem !important;
-        gap: 0.4rem !important;
-    }
-
-    .hero-greeting {
-        font-size: 0.76rem !important;
-    }
-
-    .hero-creator-badge {
-        font-size: 0.72rem !important;
-        padding: 0.15rem 0.55rem !important;
-    }
-
-    .hero-title {
-        font-size: 1.2rem !important;
-        margin-bottom: 0.35rem !important;
-        line-height: 1.25 !important;
-    }
-
-    .hero-subtitle {
-        font-size: 0.84rem !important;
-        margin-bottom: 0.85rem !important;
-        line-height: 1.4 !important;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .hero-actions-row {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 0.5rem !important;
-    }
-
-    .hero-actions-row .btn {
-        width: 100% !important;
-        justify-content: center !important;
-        padding: 0.55rem 0.5rem !important;
-        font-size: 0.82rem !important;
-        min-height: 44px !important;
-    }
-
-    .hero-actions-row .btn:last-child {
-        grid-column: span 2;
+@media (min-width: 768px) {
+    .portal-container {
+        padding: 0 1.25rem 3rem 1.25rem !important;
+        margin: 1.25rem auto !important;
     }
 }
 
-/* 3. Smooth Swipeable Term Selector */
+@media (min-width: 1024px) {
+    .portal-container {
+        padding: 0 1.5rem 4rem 1.5rem !important;
+        margin: 1.5rem auto !important;
+    }
+}
+
+/* 3. Hero Card Responsive Rules */
+.dashboard-hero-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    background: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+}
+
+@media (min-width: 768px) {
+    .dashboard-hero-card {
+        padding: 1.75rem 2rem !important;
+        border-radius: 20px !important;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
+.hero-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 0.4rem;
+}
+
+.hero-greeting {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    min-width: 0;
+}
+
+.hero-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 8px var(--primary-color);
+    flex-shrink: 0;
+}
+
+.hero-status-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hero-creator-badge {
+    font-size: 0.72rem;
+    color: var(--text-muted-color);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    padding: 2px 8px;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.hero-title {
+    font-size: clamp(1.15rem, 4vw, 1.75rem) !important;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--text-dark-color);
+    margin: 0.25rem 0 0.35rem 0;
+    line-height: 1.25;
+}
+
+.hero-subtitle {
+    font-size: 0.84rem;
+    color: var(--text-muted-color);
+    line-height: 1.4;
+    margin: 0 0 0.85rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .hero-subtitle {
+        font-size: 0.95rem;
+        -webkit-line-clamp: 3;
+        margin-bottom: 1.25rem;
+    }
+}
+
+.hero-actions-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+}
+
+@media (min-width: 640px) {
+    .hero-actions-row {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+    }
+    .hero-actions-row .btn {
+        width: auto !important;
+    }
+}
+
+.hero-actions-row .btn {
+    min-height: 44px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    justify-content: center;
+    touch-action: manipulation;
+}
+
+.hero-actions-row .btn:last-child {
+    grid-column: span 2;
+}
+
+@media (min-width: 640px) {
+    .hero-actions-row .btn:last-child {
+        grid-column: auto;
+    }
+}
+
+/* 4. Swipeable Term Selector */
 .term-switcher-container {
-    margin-bottom: 1.25rem;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 1rem !important;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
 }
 
 .term-switcher-pills {
@@ -6227,7 +6386,9 @@ html, body {
     scrollbar-width: none !important;
     -ms-overflow-style: none !important;
     -webkit-overflow-scrolling: touch !important;
-    padding: 4px 2px !important;
+    padding: 4px 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .term-switcher-pills::-webkit-scrollbar {
@@ -6238,98 +6399,314 @@ html, body {
     flex-shrink: 0 !important;
     white-space: nowrap !important;
     min-height: 44px !important;
-    padding: 0.55rem 1.15rem !important;
-    font-size: 0.88rem !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.86rem !important;
+    border-radius: 12px;
     touch-action: manipulation !important;
-    -webkit-tap-highlight-color: transparent;
 }
 
-/* 4. Subject Accordion Headers & Module Cards */
+/* 5. Bento Grid & Defensive Layout */
+.portal-dashboard-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 1.25rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (min-width: 1024px) {
+    .portal-dashboard-grid {
+        grid-template-columns: minmax(0, 1fr) 340px !important;
+        gap: 2rem !important;
+        align-items: flex-start !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .portal-dashboard-grid {
+        grid-template-columns: minmax(0, 1fr) 370px !important;
+    }
+}
+
+.dashboard-main-stage {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.portal-term-content {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* 6. Bento Subject Cards (Defensive Flex & Multi-Line Text) */
+.bento-subject-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    background: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 16px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+    box-shadow: var(--card-shadow);
+}
+
+@media (min-width: 768px) {
+    .bento-subject-card {
+        padding: 1.5rem !important;
+        border-radius: 20px !important;
+        margin-bottom: 1.5rem !important;
+    }
+}
+
 .subject-card-header {
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 12px !important;
+    gap: 8px !important;
     width: 100% !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
+    margin-bottom: 0.85rem !important;
+    padding-bottom: 0.75rem !important;
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .subject-header-left {
     display: flex !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 8px !important;
     min-width: 0 !important;
     flex: 1 1 auto !important;
+    overflow: hidden !important;
+}
+
+.subject-icon-box {
+    width: 38px !important;
+    height: 38px !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.25rem !important;
+    flex-shrink: 0 !important;
 }
 
 .subject-header-left > div {
     min-width: 0 !important;
     flex: 1 1 auto !important;
+    overflow: hidden !important;
 }
 
 .subject-title {
-    font-size: clamp(1.02rem, 3.5vw, 1.25rem) !important;
+    font-size: clamp(0.98rem, 3.4vw, 1.25rem) !important;
+    font-weight: 800 !important;
+    color: var(--text-dark-color) !important;
+    margin: 0 !important;
+    line-height: 1.25 !important;
     white-space: normal !important;
     word-break: break-word !important;
-    line-height: 1.25 !important;
-    margin: 0 !important;
+    overflow-wrap: break-word !important;
 }
 
 .subject-subtitle {
-    font-size: 0.78rem !important;
+    font-size: 0.74rem !important;
     color: var(--text-muted-color) !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
     margin: 2px 0 0 0 !important;
+    line-height: 1.3 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
 }
 
 .subject-header-right {
     display: flex !important;
     align-items: center !important;
-    gap: 8px !important;
+    gap: 6px !important;
     flex-shrink: 0 !important;
 }
 
 .subject-module-badge {
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    padding: 2px 6px !important;
+    border-radius: 12px !important;
+    white-space: nowrap !important;
     flex-shrink: 0 !important;
-    font-size: 0.72rem !important;
-    padding: 3px 8px !important;
 }
 
 .accordion-chevron {
+    font-size: 0.72rem !important;
+    color: var(--text-muted-color) !important;
+    transition: transform 0.2s ease !important;
     flex-shrink: 0 !important;
 }
 
-/* Module Sub-Cards */
-.topic-bento-card {
-    padding: 12px 14px !important;
-    gap: 10px !important;
-    min-height: 48px !important;
+.bento-subject-card.collapsed .accordion-chevron {
+    transform: rotate(-90deg);
+}
+
+.bento-subject-card.collapsed .subject-topics-grid {
+    display: none !important;
+}
+
+.bento-subject-card.collapsed {
+    padding-bottom: 1rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+.bento-subject-card.collapsed .subject-card-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: none !important;
+}
+
+/* 7. Subject Topics Subgrid & Topic Bento Cards */
+.subject-topics-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
     box-sizing: border-box !important;
 }
 
+@media (min-width: 640px) {
+    .subject-topics-grid {
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)) !important;
+        gap: 10px !important;
+    }
+}
+
+.topic-bento-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    background: var(--card-elevated-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px !important;
+    padding: 10px 12px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 8px !important;
+    text-decoration: none !important;
+    transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 44px !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.topic-bento-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+    box-shadow: var(--card-hover-shadow);
+    background: var(--card-bg-color);
+}
+
+.topic-bento-main {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+}
+
+.topic-bento-top {
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin-bottom: 3px !important;
+    flex-wrap: wrap !important;
+}
+
+.topic-tag-pill {
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    padding: 2px 6px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
+.topic-qcount-pill {
+    font-size: 0.68rem !important;
+    color: var(--text-muted-color) !important;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 1px 5px !important;
+    border-radius: 6px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+}
+
 .topic-bento-title {
-    font-size: 0.95rem !important;
-    margin-bottom: 0.25rem !important;
+    font-size: 0.92rem !important;
+    font-weight: 700 !important;
+    color: var(--text-dark-color) !important;
+    margin: 0 !important;
+    line-height: 1.25 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
 }
 
 .topic-bento-desc {
-    font-size: 0.78rem !important;
+    font-size: 0.75rem !important;
+    color: var(--text-muted-color) !important;
+    margin: 2px 0 0 0 !important;
     line-height: 1.35 !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
 }
 
 .btn-topic-examples {
-    min-height: 38px !important;
-    padding: 5px 10px !important;
-    font-size: 0.74rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    margin-top: 6px !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    color: #fbbf24 !important;
+    background: rgba(245, 158, 11, 0.12) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    padding: 4px 8px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    min-height: 32px !important;
+    touch-action: manipulation !important;
 }
 
-/* 5. Safe Area Insets & Bottom Navigation */
-.portal-container {
-    padding-bottom: calc(72px + env(safe-area-inset-bottom, 16px)) !important;
+.topic-bento-arrow {
+    font-size: 1rem !important;
+    color: var(--text-muted-color) !important;
+    flex-shrink: 0 !important;
+    margin-left: 4px !important;
+    transition: transform 0.15s ease !important;
 }
 
+.topic-bento-card:hover .topic-bento-arrow {
+    transform: translateX(3px);
+    color: var(--primary-color);
+}
+
+/* 8. Fixed Bottom Navigation Bar */
 @media (max-width: 1023px) {
     .mobile-bottom-nav {
         display: grid !important;
@@ -6346,6 +6723,7 @@ html, body {
         border-top: 1px solid var(--border-color) !important;
         z-index: 200 !important;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35) !important;
+        box-sizing: border-box !important;
     }
 
     body:not(.dark) .mobile-bottom-nav {
@@ -6356,14 +6734,13 @@ html, body {
         min-height: 44px !important;
         min-width: 44px !important;
         padding: 4px 0 !important;
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent;
     }
 }
 
 @media (min-width: 1024px) {
     .mobile-bottom-nav {
         display: none !important;
-    }
-    .portal-container {
-        padding-bottom: 4rem !important;
     }
 }
