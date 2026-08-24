@@ -59,30 +59,36 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 function initTheme() {
     const savedTheme = safeGetStorage('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark) || savedTheme === null;
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-        document.body.classList.add('dark');
+    if (isDark && savedTheme !== 'light') {
+        document.documentElement.classList.add('dark');
+        if (document.body) document.body.classList.add('dark');
     } else {
-        document.body.classList.remove('dark');
+        document.documentElement.classList.remove('dark');
+        if (document.body) document.body.classList.remove('dark');
     }
 
-    // Bind to the theme toggle button if it exists
-    const themeBtn = document.querySelector('.theme-toggle-btn');
-    if (themeBtn) {
-        themeBtn.addEventListener('click', toggleTheme);
-        updateThemeToggleIcon(themeBtn);
-    }
+    // Bind to all theme toggle buttons if they exist
+    const themeBtns = document.querySelectorAll('.theme-toggle-btn');
+    themeBtns.forEach(btn => {
+        btn.removeEventListener('click', toggleTheme);
+        btn.addEventListener('click', toggleTheme);
+        updateThemeToggleIcon(btn);
+    });
 }
 
 function toggleTheme() {
-    const isDark = document.body.classList.toggle('dark');
+    const isDark = document.documentElement.classList.toggle('dark');
+    if (document.body) {
+        if (isDark) document.body.classList.add('dark');
+        else document.body.classList.remove('dark');
+    }
     safeSetStorage('theme', isDark ? 'dark' : 'light');
     
-    const themeBtn = document.querySelector('.theme-toggle-btn');
-    if (themeBtn) {
-        updateThemeToggleIcon(themeBtn);
-    }
+    const themeBtns = document.querySelectorAll('.theme-toggle-btn');
+    themeBtns.forEach(btn => updateThemeToggleIcon(btn));
 }
 
 function updateThemeToggleIcon(btn) {

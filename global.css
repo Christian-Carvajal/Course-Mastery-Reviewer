@@ -1,3 +1,27 @@
+/* ZERO-LEAK THEME ANTI-FLASH FOUNDATION */
+html {
+    background-color: #09090b;
+    color: #f8fafc;
+}
+
+html:not(.dark) {
+    background-color: #f8fafc;
+    color: #0f172a;
+    color-scheme: light;
+}
+
+html.dark {
+    background-color: #09090b !important;
+    color: #f8fafc !important;
+    color-scheme: dark;
+}
+
+html.dark body,
+body.dark {
+    background-color: #09090b !important;
+    color: #f8fafc !important;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
 
 :root {
@@ -48,6 +72,7 @@
     color-scheme: light dark;
 }
 
+html.dark,
 body.dark {
     /* Calming Dark Palette */
     --bg-color: #0b0f19;            /* Deep Blue-Gray */
