@@ -56,6 +56,7 @@
         
         <!-- DASHBOARD HERO CARD -->
         <section class="dashboard-hero-card" id="portal-hero-auth-card">
+            <canvas id="hero-particle-canvas" class="hero-particle-canvas"></canvas>
             <div class="hero-content">
                 <div class="hero-header-row">
                     <div class="hero-greeting">
@@ -1074,5 +1075,7 @@
 
         setTimeout(silentCloudSyncAndUpdate, 150);
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="./heroCanvas.js"></script>
 </body>
 </html>

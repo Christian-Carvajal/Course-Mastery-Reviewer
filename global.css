@@ -7203,3 +7203,28 @@ body:not(.dark) .prob-search-input {
         font-size: 1.18rem !important;
     }
 }
+
+
+/* 3D Hero Particle Canvas */
+.dashboard-hero-card {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.hero-particle-canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+    border-radius: inherit !important;
+    opacity: 0.85;
+}
+
+.hero-content {
+    position: relative !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+}

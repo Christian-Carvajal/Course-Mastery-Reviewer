@@ -1,10 +1,11 @@
-const CACHE_NAME = 'reviewer-pwa-v140';
+const CACHE_NAME = 'reviewer-pwa-v141';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
     '/global.css',
     '/global.js',
     '/chatbot.js',
+    '/heroCanvas.js',
     '/supabaseClient.js',
     '/manifest.json',
     '/favicon.ico',
@@ -30,6 +31,7 @@ const STATIC_ASSETS = [
 
 // External CDN dependencies required for full offline capability
 const CDN_ASSETS = [
+    'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js',
     'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2',
     'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js'
 ];
