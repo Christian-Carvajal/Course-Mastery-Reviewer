@@ -4402,7 +4402,8 @@ button, a, input, select, textarea, label,
 }
 
 body.dark .prob-modal-box {
-    background: #090e1a;
+    background: #121215;
+    border: 1px solid rgba(255, 255, 255, 0.10);
 }
 
 /* Header (Clean, responsive flex column/row with safe-area spacing) */
@@ -4531,7 +4532,7 @@ body.dark .prob-modal-btn-icon {
 }
 
 body.dark .prob-modal-toolbar {
-    background: #0b1120;
+    background: #121215;
     border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -4566,9 +4567,9 @@ body.dark .prob-modal-toolbar {
 }
 
 body.dark .prob-search-input {
-    background: #111a2e;
-    border-color: rgba(255, 255, 255, 0.14);
-    color: #ffffff;
+    background: #18181b;
+    border-color: rgba(255, 255, 255, 0.10);
+    color: #fafafa;
 }
 
 .prob-search-input:focus {
@@ -4577,7 +4578,7 @@ body.dark .prob-search-input {
 }
 
 body.dark .prob-search-input:focus {
-    background: #15223c;
+    background: #18181b;
     border-color: #2dd4bf;
     box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.25);
 }
@@ -4612,9 +4613,9 @@ body.dark .prob-search-input:focus {
 }
 
 body.dark .prob-chip {
-    background: #111a2e;
-    border-color: rgba(255, 255, 255, 0.12);
-    color: #94a3b8;
+    background: #18181b;
+    border-color: rgba(255, 255, 255, 0.10);
+    color: #a1a1aa;
 }
 
 .prob-chip.active {
@@ -4665,9 +4666,9 @@ body.dark .prob-chip {
 }
 
 body.dark .prob-card {
-    background: #0e1526;
-    border-color: rgba(255, 255, 255, 0.11);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    background: #121215;
+    border-color: rgba(255, 255, 255, 0.10);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
 /* Card Header: Organized 2-level on mobile to eliminate clutter */
@@ -4778,8 +4779,8 @@ body.dark .prob-copy-btn {
 
 /* HIGH CONTRAST DISPLAY MATH (SCROLL-SAFE & PROPORTIONATE) */
 .prob-math-display {
-    background: #050811;
-    border: 1.5px solid rgba(56, 189, 248, 0.4);
+    background: #09090b;
+    border: 1.5px solid rgba(56, 189, 248, 0.35);
     border-radius: 14px;
     padding: 14px 16px;
     margin: 2px 0;
@@ -4869,7 +4870,7 @@ body.dark .prob-meaning-box strong {
 }
 
 body.dark .prob-example-section {
-    background: #070b14;
+    background: #18181b;
     border-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -5138,7 +5139,7 @@ body.dark {
     --accent-hover: #7dd3fc;
     --accent-light: rgba(56, 189, 248, 0.12);
 
-    --header-bg: linear-gradient(135deg, #050811 0%, #042f2e 100%);
+    --header-bg: linear-gradient(135deg, #09090b 0%, #042f2e 100%);
     --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.45);
     --card-hover-shadow: 0 12px 30px -4px rgba(20, 184, 166, 0.2), 0 4px 12px -2px rgba(0, 0, 0, 0.5);
 }
@@ -6743,4 +6744,34 @@ body:not(.dark) .app-topbar {
     .mobile-bottom-nav {
         display: none !important;
     }
+}
+
+/* WORKED EXAMPLES UNIFIED THEME TOKENS */
+
+body:not(.dark) .prob-math-display {
+    background: #f0fdf4 !important;
+    border: 1.5px solid rgba(13, 148, 136, 0.35) !important;
+    color: #0f766e !important;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(13, 148, 136, 0.08) !important;
+}
+
+body:not(.dark) .prob-card {
+    background: #ffffff !important;
+    border-color: #e4e4e7 !important;
+}
+
+body:not(.dark) .prob-example-section {
+    background: #f8fafc !important;
+    border-color: #e4e4e7 !important;
+}
+
+body:not(.dark) .prob-modal-toolbar {
+    background: #fcfcfc !important;
+    border-bottom-color: #e4e4e7 !important;
+}
+
+body:not(.dark) .prob-search-input {
+    background: #ffffff !important;
+    border-color: #e4e4e7 !important;
+    color: #18181b !important;
 }
