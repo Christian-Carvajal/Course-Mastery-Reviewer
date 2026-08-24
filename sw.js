@@ -1,4 +1,4 @@
-const CACHE_NAME = 'reviewer-pwa-v146';
+const CACHE_NAME = 'reviewer-pwa-v148';
 const STATIC_ASSETS = [
     '/',
     '/index.html',

@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initGlobalNavigation();
     initStudyLayout();
+    initAutoUpdateChecker();
 });
 
 // ==========================================
@@ -2181,57 +2182,146 @@ if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || wi
 // ==========================================
 // PWA GRACEFUL AUTO-UPDATE CONTROLLER (Zero Cache Wiping)
 // ==========================================
+// ==========================================
+// 3-LAYER AUTO-UPDATE & SMART REFRESH SYSTEM
+// ==========================================
+let initialBuildTimeRef = null;
+let hasDispatchedUpdateToast = false;
+
 function initAutoUpdateChecker() {
-    let isChecking = false;
+    if (window.location.protocol === 'file:') return;
 
-    const checkVersion = async () => {
-        if (isChecking || !navigator.onLine || window.location.protocol === 'file:') return;
-        isChecking = true;
+    // 1. Poll /version.json with cache-busting query param
+    const checkForUpdate = async () => {
+        if (!navigator.onLine) return;
         try {
-            const versionUrl = '/version.json';
-            const res = await fetch(`${versionUrl}?_t=${Date.now()}`, { cache: 'no-store' });
-            if (!res.ok) return;
-            const data = await res.json();
-            const localVersion = safeGetStorage('app_release_version');
+            const response = await fetch(`/version.json?t=${Date.now()}`, { cache: 'no-store' });
+            if (!response.ok) return;
+            const data = await response.json();
+            const fetchedTime = Number(data.buildTime || 0);
 
-            if (localVersion && data.version && localVersion !== data.version) {
-                console.log(`[Auto-Updater] New version available: ${data.version} (current: ${localVersion}). Requesting Service Worker upgrade...`);
+            // On first load, store initial build timestamp
+            if (!initialBuildTimeRef) {
+                initialBuildTimeRef = fetchedTime;
                 safeSetStorage('app_release_version', data.version);
-                localStorage.setItem('portal_active_build_time', String(data.buildTime || data.version));
-
-                // Notify Service Worker to update and activate atomically
-                if ('serviceWorker' in navigator) {
-                    const regs = await navigator.serviceWorker.getRegistrations();
-                    for (const reg of regs) {
-                        await reg.update();
-                        if (reg.waiting) {
-                            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-                        }
-                    }
-                }
-            } else if (!localVersion && data.version) {
-                safeSetStorage('app_release_version', data.version);
-                localStorage.setItem('portal_active_build_time', String(data.buildTime || data.version));
+                return;
             }
-        } catch (e) {
-            // Offline or network error ignored
-        } finally {
-            isChecking = false;
+
+            // If new deployment timestamp > initial load timestamp (or version differs), pop update toast!
+            if ((fetchedTime && fetchedTime > initialBuildTimeRef) || (data.version && data.version !== safeGetStorage('app_release_version'))) {
+                console.log(`[Auto-Updater] New deployment detected: ${data.version} (build: ${fetchedTime}). Triggering smart update toast...`);
+                showAppUpdateToast(data.version);
+            }
+        } catch (err) {
+            // Ignore offline/network errors
         }
     };
 
-    // Check on load
-    setTimeout(checkVersion, 1500);
+    // Check on initial load
+    setTimeout(checkForUpdate, 1500);
 
-    // Check when user returns to tab
+    // Poll every 60 seconds (60,000 ms) for rapid zero-friction updates
+    setInterval(checkForUpdate, 60000);
+
+    // Check immediately when user switches back to this browser tab
+    window.addEventListener('focus', checkForUpdate);
     document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === 'visible') {
-            checkVersion();
+            checkForUpdate();
         }
     });
 
-    window.addEventListener('focus', checkVersion);
+    // 2. Chunk / Script Error Auto-Recovery Listener
+    const handleChunkError = (event) => {
+        const errorMsg = String(event?.reason || event?.message || '');
+        if (
+            errorMsg.includes('ChunkLoadError') ||
+            errorMsg.includes('Failed to fetch dynamically imported module') ||
+            errorMsg.includes('Loading chunk') ||
+            errorMsg.includes('Unexpected token <')
+        ) {
+            event?.preventDefault?.();
+            console.warn('[Auto-Recovery] Missing chunk or stale module detected. Performing instant reload...');
+            window.location.reload();
+        }
+    };
+    window.addEventListener('unhandledrejection', handleChunkError);
+    window.addEventListener('error', handleChunkError);
 }
+
+// Floating UI Update Toast
+window.showAppUpdateToast = function(version) {
+    if (hasDispatchedUpdateToast) return;
+    hasDispatchedUpdateToast = true;
+
+    // Remove existing toast if present
+    const existing = document.getElementById('app-update-toast');
+    if (existing) existing.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'app-update-toast';
+    toast.className = 'app-update-toast-banner';
+    toast.setAttribute('role', 'alert');
+    toast.innerHTML = `
+        <div class="update-toast-content">
+            <div class="update-toast-icon">✨</div>
+            <div class="update-toast-info">
+                <div class="update-toast-title">New Update Available</div>
+                <div class="update-toast-desc">A new version was just deployed (${version || 'Latest'}).</div>
+            </div>
+        </div>
+        <div class="update-toast-actions">
+            <button class="update-toast-btn" onclick="window.applyAppUpdate()">Update Now</button>
+            <button class="update-toast-close" onclick="window.dismissUpdateToast()" title="Dismiss">&times;</button>
+        </div>
+    `;
+    document.body.appendChild(toast);
+    
+    // Animate in
+    requestAnimationFrame(() => {
+        toast.classList.add('visible');
+    });
+};
+
+window.dismissUpdateToast = function() {
+    const toast = document.getElementById('app-update-toast');
+    if (toast) {
+        toast.classList.remove('visible');
+        setTimeout(() => toast.remove(), 300);
+    }
+};
+
+window.applyAppUpdate = async function() {
+    const toast = document.getElementById('app-update-toast');
+    if (toast) {
+        const btn = toast.querySelector('.update-toast-btn');
+        if (btn) {
+            btn.textContent = 'Updating...';
+            btn.disabled = true;
+        }
+    }
+
+    try {
+        // Clear all Service Worker caches
+        if ('caches' in window) {
+            const keys = await caches.keys();
+            await Promise.all(keys.map(k => caches.delete(k)));
+        }
+
+        // Notify Service Worker to skip waiting
+        if ('serviceWorker' in navigator) {
+            const regs = await navigator.serviceWorker.getRegistrations();
+            for (const reg of regs) {
+                if (reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+                await reg.update();
+            }
+        }
+    } catch (e) {}
+
+    // Force reload with fresh assets
+    window.location.reload();
+};
+
 
 // ==========================================
 // Web Audio API Sound Effects Manager
