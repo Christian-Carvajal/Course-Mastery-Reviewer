@@ -6795,244 +6795,244 @@ html:not(.dark) .prob-search-input {
 
 
 /* ==========================================================================
-   DESKTOP FULL-SPACE UTILIZATION & HIGH-LEGIBILITY TYPOGRAPHY (HCI PRINCIPLES)
-   Applies strictly to Desktop (>= 1024px) & Wide Monitors (>= 1440px)
-   Leaves mobile ports 100% compact, defensive, and untouched.
+   BALANCED DESKTOP PROPORTIONS & NATURAL TYPOGRAPHY (GOLDEN RATIO LAYOUT)
+   Restores clean, comfortable desktop proportions without stretching.
    ========================================================================== */
 
 @media (min-width: 1024px) {
     /* 1. Global Desktop Canvas & Containers */
     .container,
     .portal-container {
-        max-width: 1720px !important;
-        width: 95vw !important;
-        margin: 2rem auto !important;
-        padding: 0 2rem 4rem 2rem !important;
+        max-width: 1380px !important;
+        width: 100% !important;
+        margin: 1.5rem auto !important;
+        padding: 0 1.5rem 4rem 1.5rem !important;
+        box-sizing: border-box !important;
     }
 
     /* 2. Desktop Navigation Topbar */
     .topbar-container {
-        max-width: 1720px !important;
-        padding: 0 2rem !important;
+        max-width: 1380px !important;
+        padding: 0 1.5rem !important;
     }
 
     .brand-title {
-        font-size: 1.25rem !important;
+        font-size: 1.15rem !important;
     }
 
     .brand-badge {
-        font-size: 0.82rem !important;
-        padding: 4px 12px !important;
+        font-size: 0.72rem !important;
+        padding: 2px 8px !important;
     }
 
     .topbar-action-pill {
-        padding: 0.5rem 1.15rem !important;
-        font-size: 0.92rem !important;
+        padding: 0.45rem 0.95rem !important;
+        font-size: 0.84rem !important;
     }
 
     /* 3. Desktop Hero Welcome Banner */
     .dashboard-hero-card {
-        padding: 2.25rem 2.75rem !important;
-        border-radius: 24px !important;
-        margin-bottom: 2rem !important;
+        padding: 1.75rem 2.25rem !important;
+        border-radius: 20px !important;
+        margin-bottom: 1.5rem !important;
     }
 
     .hero-title {
-        font-size: 2.25rem !important;
-        letter-spacing: -0.03em !important;
-        margin: 0.5rem 0 0.75rem 0 !important;
+        font-size: 1.85rem !important;
+        letter-spacing: -0.025em !important;
+        margin: 0.35rem 0 0.5rem 0 !important;
     }
 
     .hero-subtitle {
-        font-size: 1.08rem !important;
-        line-height: 1.65 !important;
-        max-width: 95% !important;
-        margin-bottom: 1.5rem !important;
+        font-size: 0.95rem !important;
+        line-height: 1.55 !important;
+        max-width: 850px !important;
+        margin-bottom: 1.25rem !important;
         display: block !important;
     }
 
     .hero-greeting {
-        font-size: 0.92rem !important;
+        font-size: 0.82rem !important;
     }
 
     .hero-creator-badge {
-        font-size: 0.85rem !important;
-        padding: 4px 12px !important;
+        font-size: 0.78rem !important;
+        padding: 3px 10px !important;
     }
 
     .hero-actions-row .btn {
-        padding: 0.75rem 1.5rem !important;
-        font-size: 0.95rem !important;
-        min-height: 48px !important;
-        border-radius: 12px !important;
+        padding: 0.55rem 1.15rem !important;
+        font-size: 0.86rem !important;
+        min-height: 42px !important;
+        border-radius: 10px !important;
     }
 
     /* 4. Desktop Term Switcher */
     .term-switcher-container {
-        margin-bottom: 2rem !important;
-        padding-bottom: 1rem !important;
+        margin-bottom: 1.5rem !important;
+        padding-bottom: 0.75rem !important;
     }
 
     .term-pill-btn {
-        font-size: 1rem !important;
-        padding: 0.75rem 1.5rem !important;
-        border-radius: 14px !important;
-        min-height: 48px !important;
+        font-size: 0.9rem !important;
+        padding: 0.6rem 1.25rem !important;
+        border-radius: 24px !important;
+        min-height: 42px !important;
     }
 
     /* 5. Desktop Bento Grid & Right Control Rail */
     .portal-dashboard-grid {
-        grid-template-columns: minmax(0, 1fr) 380px !important;
-        gap: 2.5rem !important;
+        grid-template-columns: minmax(0, 1fr) 350px !important;
+        gap: 1.75rem !important;
         align-items: flex-start !important;
     }
 
     .bento-subject-card {
-        padding: 2.25rem 2.5rem !important;
-        border-radius: 24px !important;
-        margin-bottom: 2.25rem !important;
+        padding: 1.5rem 1.75rem !important;
+        border-radius: 18px !important;
+        margin-bottom: 1.5rem !important;
     }
 
     .subject-icon-box {
-        width: 52px !important;
-        height: 52px !important;
-        border-radius: 14px !important;
-        font-size: 1.65rem !important;
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 12px !important;
+        font-size: 1.4rem !important;
     }
 
     .subject-title {
-        font-size: 1.55rem !important;
+        font-size: 1.25rem !important;
         font-weight: 800 !important;
-        letter-spacing: -0.025em !important;
+        letter-spacing: -0.02em !important;
     }
 
     .subject-subtitle {
-        font-size: 0.95rem !important;
-        line-height: 1.5 !important;
-        margin-top: 4px !important;
+        font-size: 0.84rem !important;
+        line-height: 1.4 !important;
+        margin-top: 3px !important;
         display: block !important;
     }
 
     .subject-module-badge {
-        font-size: 0.82rem !important;
-        padding: 4px 12px !important;
-        border-radius: 20px !important;
+        font-size: 0.72rem !important;
+        padding: 3px 9px !important;
+        border-radius: 14px !important;
     }
 
     .subject-topics-grid {
-        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)) !important;
-        gap: 16px !important;
+        grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)) !important;
+        gap: 12px !important;
     }
 
     .topic-bento-card {
-        padding: 18px 22px !important;
-        border-radius: 16px !important;
-        min-height: 56px !important;
+        padding: 14px 16px !important;
+        border-radius: 14px !important;
+        min-height: 48px !important;
     }
 
     .topic-bento-title {
-        font-size: 1.12rem !important;
+        font-size: 1.02rem !important;
         font-weight: 800 !important;
-        margin: 4px 0 !important;
+        margin: 2px 0 !important;
     }
 
     .topic-bento-desc {
-        font-size: 0.9rem !important;
-        line-height: 1.5 !important;
+        font-size: 0.82rem !important;
+        line-height: 1.45 !important;
         display: -webkit-box !important;
         -webkit-line-clamp: 2 !important;
     }
 
     .topic-tag-pill {
-        font-size: 0.76rem !important;
-        padding: 3px 8px !important;
+        font-size: 0.7rem !important;
+        padding: 2px 6px !important;
     }
 
     .topic-qcount-pill {
-        font-size: 0.76rem !important;
-        padding: 2px 7px !important;
+        font-size: 0.7rem !important;
+        padding: 1px 6px !important;
     }
 
     .btn-topic-examples {
-        font-size: 0.82rem !important;
-        padding: 6px 12px !important;
-        margin-top: 8px !important;
-        min-height: 36px !important;
+        font-size: 0.76rem !important;
+        padding: 4px 10px !important;
+        margin-top: 6px !important;
+        min-height: 32px !important;
     }
 
-    /* Right Control Rail Typography & Sizing */
+    /* Right Control Rail */
     .dashboard-rail {
         display: flex !important;
         flex-direction: column !important;
-        gap: 1.75rem !important;
+        gap: 1.25rem !important;
         position: sticky !important;
         top: 84px !important;
     }
 
     .rail-card {
-        padding: 1.75rem 2rem !important;
-        border-radius: 22px !important;
+        padding: 1.35rem 1.5rem !important;
+        border-radius: 18px !important;
     }
 
     .rail-card-title {
-        font-size: 1.2rem !important;
+        font-size: 1.05rem !important;
         font-weight: 800 !important;
-        margin-bottom: 1.25rem !important;
+        margin-bottom: 1rem !important;
     }
 
     .rail-gauge-wrap {
-        width: 140px !important;
-        height: 140px !important;
+        width: 110px !important;
+        height: 110px !important;
     }
 
     .rail-gauge-val {
-        font-size: 2rem !important;
-        font-weight: 800 !important;
-    }
-
-    .rail-stat-value {
         font-size: 1.5rem !important;
         font-weight: 800 !important;
     }
 
-    .rail-stat-label {
-        font-size: 0.85rem !important;
+    .rail-stat-value {
+        font-size: 1.25rem !important;
+        font-weight: 800 !important;
     }
 
-    /* 6. Desktop Subject Study Reviewer Pages (Eliminate Empty Voids) */
+    .rail-stat-label {
+        font-size: 0.75rem !important;
+    }
+
+    /* 6. Desktop Subject Study Reviewer Pages */
     .study-layout {
         display: flex !important;
         flex-direction: row !important;
-        gap: 3rem !important;
+        gap: 2rem !important;
         align-items: flex-start !important;
         width: 100% !important;
     }
 
     .study-sidebar {
-        width: 320px !important;
-        min-width: 320px !important;
+        width: 280px !important;
+        min-width: 280px !important;
         position: sticky !important;
         top: 84px !important;
         max-height: calc(100vh - 100px) !important;
         overflow-y: auto !important;
-        padding-right: 0.75rem !important;
+        padding-right: 0.5rem !important;
         flex-shrink: 0 !important;
     }
 
     .toc-card {
-        border-radius: 20px !important;
+        border-radius: 16px !important;
         padding: 0 !important;
     }
 
     .toc-summary {
-        font-size: 1.05rem !important;
-        padding: 1.1rem 1.5rem !important;
+        font-size: 0.95rem !important;
+        padding: 0.9rem 1.25rem !important;
     }
 
     .toc-link {
-        font-size: 0.96rem !important;
-        padding: 6px 12px !important;
-        line-height: 1.45 !important;
+        font-size: 0.88rem !important;
+        padding: 5px 10px !important;
+        line-height: 1.4 !important;
     }
 
     .study-main {
@@ -7042,182 +7042,131 @@ html:not(.dark) .prob-search-input {
         width: 100% !important;
     }
 
-    /* Study Guide Typography for Blurry Vision / High Readability */
+    /* Study Guide Typography */
     .study-main h1 {
-        font-size: 2.75rem !important;
+        font-size: 2.25rem !important;
         font-weight: 800 !important;
-        letter-spacing: -0.03em !important;
-        margin-bottom: 1rem !important;
+        letter-spacing: -0.025em !important;
+        margin-bottom: 0.75rem !important;
     }
 
     .study-main h2 {
-        font-size: 2rem !important;
+        font-size: 1.65rem !important;
         font-weight: 800 !important;
-        letter-spacing: -0.025em !important;
-        margin: 2.5rem 0 1.25rem 0 !important;
+        letter-spacing: -0.02em !important;
+        margin: 2rem 0 1rem 0 !important;
         line-height: 1.3 !important;
         border-bottom: 1px solid var(--border-color) !important;
-        padding-bottom: 0.6rem !important;
+        padding-bottom: 0.5rem !important;
     }
 
     .study-main h3 {
-        font-size: 1.5rem !important;
+        font-size: 1.28rem !important;
         font-weight: 700 !important;
-        margin: 2rem 0 1rem 0 !important;
+        margin: 1.5rem 0 0.75rem 0 !important;
         color: var(--primary-color) !important;
     }
 
     .study-main h4 {
-        font-size: 1.25rem !important;
+        font-size: 1.1rem !important;
         font-weight: 700 !important;
-        margin: 1.5rem 0 0.75rem 0 !important;
+        margin: 1.25rem 0 0.5rem 0 !important;
     }
 
     .study-main p {
-        font-size: 1.125rem !important; /* 18px high-legibility body text */
-        line-height: 1.8 !important;
-        margin-bottom: 1.5rem !important;
+        font-size: 1.02rem !important;
+        line-height: 1.7 !important;
+        margin-bottom: 1.25rem !important;
         color: var(--text-color) !important;
     }
 
     .study-main ul, 
     .study-main ol {
-        margin-bottom: 1.5rem !important;
-        padding-left: 1.75rem !important;
+        margin-bottom: 1.25rem !important;
+        padding-left: 1.5rem !important;
     }
 
     .study-main li {
-        font-size: 1.1rem !important;
-        line-height: 1.75 !important;
-        margin-bottom: 0.65rem !important;
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
+        margin-bottom: 0.5rem !important;
     }
 
-    /* Tables, Comparison Grids & Callout Cards across the full width */
+    /* Tables & Cards */
     table {
         width: 100% !important;
-        margin: 2rem 0 !important;
-        border-radius: 16px !important;
-        font-size: 1.05rem !important;
+        margin: 1.5rem 0 !important;
+        border-radius: 12px !important;
+        font-size: 0.95rem !important;
     }
 
     th, td {
-        padding: 16px 20px !important;
-        font-size: 1.05rem !important;
-        line-height: 1.6 !important;
+        padding: 12px 16px !important;
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
     }
 
     th {
-        font-size: 1.1rem !important;
-        font-weight: 800 !important;
+        font-size: 0.98rem !important;
+        font-weight: 700 !important;
     }
 
     .definition-card,
     .concept-card,
     .meaning-box,
     .callout-box {
-        padding: 1.75rem 2.25rem !important;
-        border-radius: 18px !important;
-        margin: 2rem 0 !important;
-        font-size: 1.125rem !important;
-        line-height: 1.75 !important;
+        padding: 1.25rem 1.75rem !important;
+        border-radius: 14px !important;
+        margin: 1.5rem 0 !important;
+        font-size: 1rem !important;
+        line-height: 1.65 !important;
     }
 
     .formula-card,
     .formula-box {
-        padding: 1.75rem 2.25rem !important;
-        border-radius: 18px !important;
-        margin: 2rem 0 !important;
-        font-size: 1.25rem !important;
+        padding: 1.25rem 1.75rem !important;
+        border-radius: 14px !important;
+        margin: 1.5rem 0 !important;
+        font-size: 1.1rem !important;
     }
 
     .formula-text {
-        font-size: 1.4rem !important;
+        font-size: 1.2rem !important;
     }
 
     .formula-explain {
-        font-size: 1rem !important;
-        line-height: 1.6 !important;
+        font-size: 0.92rem !important;
+        line-height: 1.55 !important;
     }
 
-    /* 7. Quiz Cards on Desktop */
+    /* 7. Quiz Cards */
     .quiz-card {
-        padding: 2rem 2.5rem !important;
-        border-radius: 22px !important;
-        margin-bottom: 2rem !important;
-    }
-
-    .quiz-question-text {
-        font-size: 1.35rem !important; /* 21.6px large question font */
-        font-weight: 700 !important;
-        line-height: 1.5 !important;
+        padding: 1.5rem 2rem !important;
+        border-radius: 18px !important;
         margin-bottom: 1.5rem !important;
     }
 
+    .quiz-question-text {
+        font-size: 1.18rem !important;
+        font-weight: 700 !important;
+        line-height: 1.45 !important;
+        margin-bottom: 1.25rem !important;
+    }
+
     .quiz-opt-btn {
-        padding: 16px 22px !important;
-        font-size: 1.125rem !important; /* 18px clear options */
-        line-height: 1.5 !important;
-        border-radius: 14px !important;
-        min-height: 56px !important;
-        margin-bottom: 12px !important;
+        padding: 12px 18px !important;
+        font-size: 0.98rem !important;
+        line-height: 1.45 !important;
+        border-radius: 12px !important;
+        min-height: 48px !important;
+        margin-bottom: 10px !important;
     }
 
     .quiz-explanation-box {
-        padding: 1.5rem 2rem !important;
-        font-size: 1.08rem !important;
-        line-height: 1.7 !important;
-        border-radius: 16px !important;
-    }
-}
-
-@media (min-width: 1440px) {
-    .container,
-    .portal-container {
-        max-width: 1820px !important;
-        width: 96vw !important;
-        padding: 0 3rem 5rem 3rem !important;
-    }
-
-    .topbar-container {
-        max-width: 1820px !important;
-        padding: 0 3rem !important;
-    }
-
-    .portal-dashboard-grid {
-        grid-template-columns: minmax(0, 1fr) 420px !important;
-        gap: 3rem !important;
-    }
-
-    .subject-topics-grid {
-        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)) !important;
-        gap: 18px !important;
-    }
-
-    .study-layout {
-        gap: 4rem !important;
-    }
-
-    .study-sidebar {
-        width: 360px !important;
-        min-width: 360px !important;
-    }
-
-    .study-main p {
-        font-size: 1.18rem !important; /* 19px for ultra-wide monitors */
-        line-height: 1.85 !important;
-    }
-
-    .study-main li {
-        font-size: 1.15rem !important;
-        line-height: 1.8 !important;
-    }
-
-    .quiz-question-text {
-        font-size: 1.45rem !important;
-    }
-
-    .quiz-opt-btn {
-        font-size: 1.18rem !important;
+        padding: 1.25rem 1.5rem !important;
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+        border-radius: 14px !important;
     }
 }
 
