@@ -5073,3 +5073,15 @@ body.dark .prob-step-calc {
         font-size: 1.25rem;
     }
 }
+
+/* ==========================================================================
+   AI CHATBOT UI (TEMPORARILY HIDDEN ON INTERFACE - LOGIC PRESERVED)
+   ========================================================================== */
+#ai-study-chatbot-root,
+#ai-chat-trigger,
+#ai-chat-modal,
+#btn-ai-tutor-wb,
+#mob-btn-ai-tutor,
+.ai-chat-trigger {
+    display: none !important;
+}
