@@ -362,6 +362,48 @@ function initStudyLayout() {
 // 4. Subject & Lesson Metadata Mapping
 // ==========================================
 window.SUBJECT_LESSON_MAP = {
+    'accessControl': {
+        subject: 'Information Assurance & Security',
+        courseCode: 'IAS 101',
+        term: 'Prelim Term',
+        lesson: 'Access Control Models & Principles',
+        lessonSubtitle: 'IAAA, 5 Authentication Factors, Least Privilege & Security Models'
+    },
+    'week1And2': {
+        subject: 'Information Assurance & Security',
+        courseCode: 'IAS 101',
+        term: 'Prelim Term',
+        lesson: 'Foundations & Threat Landscape (Weeks 1–2)',
+        lessonSubtitle: 'CIA Triad, Parkerian Hexad, Attack Vectors & Defense-in-Depth'
+    },
+    'week3And4': {
+        subject: 'Information Assurance & Security',
+        courseCode: 'IAS 101',
+        term: 'Prelim Term',
+        lesson: 'Governance & Risk Management (Weeks 3–4)',
+        lessonSubtitle: 'Security Policies, ISO 27001 ISMS & Quantitative Risk Analysis'
+    },
+    'probabilityDistribution': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Prelim Term',
+        lesson: 'Probability Distributions',
+        lessonSubtitle: 'Discrete & Continuous Distributions, Moments & Z-Scores'
+    },
+    'setsEventsBayesianInference': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Prelim Term',
+        lesson: 'Sets, Events & Bayesian Inference',
+        lessonSubtitle: 'Set Operations, Conditional Probability & Bayes\' Theorem'
+    },
+    'introductionToAutomataTheoryFormalLanguages': {
+        subject: 'Automata Theory & Formal Languages',
+        courseCode: 'Automata Theory',
+        term: 'Prelim Term',
+        lesson: 'Introduction to Automata & Formal Languages',
+        lessonSubtitle: 'Chomsky Hierarchy, Language Operations & Formal Grammars'
+    },
     'automataComputabilityAndComplexity': {
         subject: 'Automata Theory & Formal Languages',
         courseCode: 'CS 311',

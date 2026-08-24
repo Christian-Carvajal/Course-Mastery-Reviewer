@@ -26,7 +26,7 @@
             summary: `**Classical (Theoretical) Probability Definition**:\n\n\\[ P(A) = \\frac{n(A)}{n(S)} = \\frac{\\text{Number of Favorable Outcomes}}{\\text{Total Number of Possible Outcomes in Sample Space}} \\]\n\n• **P(A)**: Probability of event A occurring \\( (0 \\le P(A) \\le 1) \\)\n• **n(A)**: Count of outcomes favorable to event A\n• **n(S)**: Total count of equally likely outcomes in sample space \\( S \\)\n\n### Axioms of Probability:\n• \\( 0 \\le P(A) \\le 1 \\) (0% to 100%)\n• \\( P(\\emptyset) = 0 \\) (Impossible event)\n• \\( P(S) = 1.0 \\) (Certain event)\n• \\( \\sum P(\\text{all basic outcomes}) = 1.0 \\)`,
             clues: 'Use when all outcomes in a sample space are equally likely (e.g. rolling dice, tossing coins, drawing cards). Look for keywords: "Find the probability of...", "Chance of outcome...", "Equally likely".',
             example: 'Rolling an even number on a 6-sided die:\n• Sample space S = {1, 2, 3, 4, 5, 6}, n(S) = 6\n• Event A (Even) = {2, 4, 6}, n(A) = 3\n• P(Even) = 3 / 6 = 0.50 (50%)',
-            link: '/subject/dataMining/Prelim/probabilities.html'
+            link: '/subject/dataMining/prelim/probabilities.html'
         },
         {
             id: 'formula_probability_empirical',
@@ -38,7 +38,7 @@
             summary: `**Empirical / Relative Frequency Probability Definition**:\n\n\\[ P(A) = \\frac{f}{N} = \\frac{\\text{Frequency of Event A Observed}}{\\text{Total Number of Trials / Observations}} \\]\n\n• **f**: Observed frequency of event A\n• **N**: Total number of trials/observations\n\n• **Law of Large Numbers**: As \\( N \\to \\infty \\), the empirical probability \\( P(A) \\) converges to the theoretical classical probability.`,
             clues: 'Use when probability is calculated from historical data tables, recorded test results, or laboratory experiments. Look for keywords: "Based on survey...", "Observed in past records...", "Experimental trials".',
             example: 'A factory tests 500 light bulbs and finds 15 defective:\n• P(Defective) = 15 / 500 = 0.03 (3%)',
-            link: '/subject/dataMining/Prelim/probabilities.html'
+            link: '/subject/dataMining/prelim/probabilities.html'
         },
         {
             id: 'formula_complement',
@@ -50,7 +50,7 @@
             summary: `**Complement Probability Rule**:\n\n\\[ P(A') = 1 - P(A) \\quad \\text{or} \\quad P(\\text{not } A) = 1 - P(A) \\]\n\n\\[ P(\\text{at least one success}) = 1 - P(\\text{all failures}) \\]\n\n• **P(A)**: Probability that event A occurs\n• **P(A\')**: Probability that event A does NOT occur\n• \\( P(A) + P(A') = 1.0 \\)`,
             clues: 'Use whenever calculating "at least one", "none", or when finding the opposite event is much easier than computing all positive combinations.',
             example: 'If probability of rain is 0.35, probability of NO rain is:\n• P(No Rain) = 1 - 0.35 = 0.65 (65%)',
-            link: '/subject/dataMining/Prelim/probabilities.html'
+            link: '/subject/dataMining/prelim/probabilities.html'
         },
         {
             id: 'formula_addition_rule',
@@ -62,7 +62,7 @@
             summary: `**General Addition Rule (Any two events A and B)**:\n\n\\[ P(A \\cup B) = P(A) + P(B) - P(A \\cap B) \\]\n\n**Special Rule for Mutually Exclusive (Disjoint) Events \\( (A \\cap B = \\emptyset) \\)**:\n\n\\[ P(A \\cup B) = P(A) + P(B) \\]`,
             clues: 'Use when the question asks for the probability of "A OR B" occurring. Look for the keyword "or" or "either".',
             example: 'Drawing a King or a Heart from a standard 52-card deck:\n• P(King) = 4/52, P(Heart) = 13/52, P(King ∩ Heart) = 1/52\n• P(King ∪ Heart) = 4/52 + 13/52 - 1/52 = 16/52 = 4/13 ≈ 0.3077',
-            link: '/subject/dataMining/Prelim/sets-events-bayesianinference.html'
+            link: '/subject/dataMining/prelim/setsEventsBayesianInference.html'
         },
         {
             id: 'formula_conditional_probability',
@@ -74,7 +74,7 @@
             summary: `**Conditional Probability of A Given B**:\n\n\\[ P(A | B) = \\frac{P(A \\cap B)}{P(B)} \\quad [\\text{where } P(B) > 0] \\]\n\n• **P(A|B)**: Probability of event A occurring given that event B has already occurred\n• **P(A ∩ B)**: Joint probability of both A and B occurring\n• **P(B)**: Probability of the conditioning event B (the reduced sample space)`,
             clues: 'Use when prior information or condition is given. Look for keywords: "given that...", "if it is known that...", "among those who...".',
             example: 'In a class, 30% play soccer and basketball, and 50% play soccer. Probability a student plays basketball given they play soccer:\n• P(Basketball | Soccer) = 0.30 / 0.50 = 0.60 (60%)',
-            link: '/subject/dataMining/Prelim/sets-events-bayesianinference.html'
+            link: '/subject/dataMining/prelim/setsEventsBayesianInference.html'
         },
         {
             id: 'formula_bayes_theorem',
@@ -86,7 +86,7 @@
             summary: `**Bayes\' Theorem Formula**:\n\n\\[ P(H | E) = \\frac{P(E | H) \\cdot P(H)}{P(E)} = \\frac{P(E | H) \\cdot P(H)}{\\sum_{i} P(E | H_i) \\cdot P(H_i)} \\]\n\n• **P(H|E)**: Posterior Probability (updated probability of hypothesis after seeing evidence)\n• **P(E|H)**: Likelihood (probability of evidence given hypothesis is true)\n• **P(H)**: Prior Probability (initial belief before evidence)\n• **P(E)**: Marginal Probability of Evidence (Total Probability Law)`,
             clues: 'Use for medical test diagnostics (true/false positive rates), spam filtering, or reversing conditional probability direction (e.g. given P(B|A), find P(A|B)).',
             example: 'Disease prevalence P(D) = 0.01. Test accuracy P(+|D) = 0.95. False positive P(+|D\') = 0.05.\n• P(+) = (0.95)(0.01) + (0.05)(0.99) = 0.0095 + 0.0495 = 0.059\n• P(D|+) = (0.95 * 0.01) / 0.059 = 0.0095 / 0.059 ≈ 0.161 (16.1%)',
-            link: '/subject/dataMining/Prelim/sets-events-bayesianinference.html'
+            link: '/subject/dataMining/prelim/setsEventsBayesianInference.html'
         },
         {
             id: 'formula_binomial_distribution',
@@ -97,7 +97,7 @@
             title: 'Binomial Probability Distribution Formula',
             summary: `**Binomial Distribution Formula**:\n\n\\[ P(X = k) = \\binom{n}{k} p^k (1 - p)^{n - k} = \\frac{n!}{k!(n - k)!} p^k (1 - p)^{n - k} \\]\n\n• **n**: Total number of independent trials\n• **k**: Number of successful trials \\( (k = 0, 1, 2, \\dots, n) \\)\n• **p**: Probability of success on a single trial\n• **(1 - p) or q**: Probability of failure on a single trial\n\n### Key Statistical Properties:\n• **Mean (Expected Value)**: \\( \\mu = n \\cdot p \\)\n• **Variance**: \\( \\sigma^2 = n \\cdot p \\cdot (1 - p) \\)\n• **Standard Deviation**: \\( \\sigma = \\sqrt{n \\cdot p \\cdot (1 - p)} \\)`,
             clues: 'Use when there are a fixed number of n independent trials, exactly two outcomes (success/failure), and constant probability p.',
-            link: '/subject/dataMining/Prelim/probabilitydistribution.html'
+            link: '/subject/dataMining/prelim/probabilityDistribution.html'
         },
         {
             id: 'formula_poisson_distribution',
@@ -108,7 +108,7 @@
             title: 'Poisson Probability Distribution Formula',
             summary: `**Poisson Distribution Formula**:\n\n\\[ P(X = k) = \\frac{e^{-\\lambda} \\lambda^k}{k!} \\]\n\n• **λ (lambda)**: Average arrival rate / expected number of occurrences per interval\n• **k**: Number of occurrences \\( (k = 0, 1, 2, \\dots) \\)\n• **e**: Euler\'s constant \\( \\approx 2.71828 \\)\n\n### Special Property:\n• **Mean**: \\( \\mu = \\lambda \\)\n• **Variance**: \\( \\sigma^2 = \\lambda \\) *(Mean strictly equals Variance!)*\n• **Standard Deviation**: \\( \\sigma = \\sqrt{\\lambda} \\)`,
             clues: 'Use for counting rare events occurring in a fixed continuous interval of time, area, or volume. Look for keywords: "average rate of arrivals per hour", "defects per square meter".',
-            link: '/subject/dataMining/Prelim/probabilitydistribution.html'
+            link: '/subject/dataMining/prelim/probabilityDistribution.html'
         },
         {
             id: 'formula_normalization',
@@ -119,7 +119,7 @@
             title: 'Data Normalization: Min-Max Scaling & Z-Score Standardization',
             summary: `• **Min-Max Normalization** (rescales data to range [new_min, new_max], typically [0, 1]):\n\n\\[ v' = \\frac{v - \\min_A}{\\max_A - \\min_A} \\times (\\text{new\\_max}_A - \\text{new\\_min}_A) + \\text{new\\_min}_A \\]\n\n• **Z-Score Standardization** (transforms data to mean \\( \\mu = 0 \\), standard deviation \\( \\sigma = 1 \\)):\n\n\\[ z = \\frac{x - \\mu}{\\sigma} \\]\n\n• **IQR Outlier Detection**:\n  - \\( \\text{IQR} = Q3 - Q1 \\)\n  - Outlier lower bound: \\( Q1 - 1.5 \\times \\text{IQR} \\)\n  - Outlier upper bound: \\( Q3 + 1.5 \\times \\text{IQR} \\)`,
             clues: 'Use when scaling numerical features for distance-based ML models (KNN/K-Means) or standardizing normal distributions.',
-            link: '/subject/dataMining/Prelim/traditionalDataTechniques.html'
+            link: '/subject/dataMining/prelim/traditionalDataTechniques.html'
         },
 
         // --- PIONEERS & HISTORICAL FIGURES ---
@@ -132,7 +132,7 @@
             title: 'Alan Turing (1912–1954) — Father of Theoretical Computer Science',
             summary: `**Alan Mathison Turing** was an English mathematician, computer scientist, and logician regarded as the father of modern computer science and AI.\n\n• **Turing Machine (1936)**: Introduced the universal abstract model of digital computation with an infinite tape and read/write head.\n• **Halting Problem**: Proved via diagonalization that there exist mathematically undecidable problems that no algorithm can ever solve.\n• **Enigma Codebreaker**: Designed the electro-mechanical *Bombe* machine at Bletchley Park, cracking the German WWII Enigma ciphers.\n• **Turing Test (1950)**: Proposed the standard operational test for evaluating machine intelligence.`,
             clues: 'Questions asking who invented the Turing Machine, proved undecidability of the Halting Problem, broke the Enigma cipher, or proposed the Turing Test.',
-            link: '/subject/automataTheory/Prelim/automataComputabilityAndComplexity.html'
+            link: '/subject/automataTheory/prelim/automataComputabilityAndComplexity.html'
         },
         {
             id: 'noam_chomsky',
@@ -143,7 +143,7 @@
             title: 'Noam Chomsky — Formal Language Theory & Grammars',
             summary: `**Noam Chomsky** is an American linguist and scientist who formulated the **Chomsky Hierarchy (1956)**, classifying formal languages and automata into 4 levels:\n\n1. **Type 3 (Regular Languages)**: Recognized by Finite Automata (DFA/NFA) / Regular Expressions.\n2. **Type 2 (Context-Free Languages)**: Recognized by Pushdown Automata (PDA) using a stack / CFGs.\n3. **Type 1 (Context-Sensitive Languages)**: Recognized by Linear Bounded Automata (LBA).\n4. **Type 0 (Recursively Enumerable Languages)**: Recognized by Turing Machines (Unrestricted Grammars).`,
             clues: 'Questions classifying formal grammars or matching machine architectures to language classes.',
-            link: '/subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html'
+            link: '/subject/automataTheory/prelim/introductionToAutomataTheoryFormalLanguages.html'
         },
 
         // --- OPERATING SYSTEM CONFIGURATION ---
@@ -156,7 +156,7 @@
             title: 'What is an Operating System (OS)?',
             summary: `An **Operating System (OS)** is system software that acts as an intermediary between computer hardware and user application programs.\n\n### Primary Core Roles:\n1. **Resource Manager**: Manages and allocates CPU time (Scheduling), RAM Memory (Paging/Virtual Memory), File Systems, and I/O devices.\n2. **Hardware Abstraction Layer**: Exposes standardized APIs called **System Calls** (e.g. \`open()\`, \`read()\`, \`fork()\`), shielding applications from hardware differences.\n3. **Protection & Isolation**: Enforces **Dual-Mode Execution** (User Mode Ring 3 vs Kernel Mode Ring 0) to prevent buggy apps from crashing the machine.`,
             clues: 'Questions asking for the definition, roles, or architectural purpose of an operating system.',
-            link: '/subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html'
+            link: '/subject/operatingSystemConfiguration/prelim/introductionToOperatingSystems.html'
         },
         {
             id: 'cpu_scheduling',
@@ -167,7 +167,7 @@
             title: 'CPU Scheduling Algorithms (FCFS, SJF, SRTF, Round Robin)',
             summary: `• **FCFS (First-Come First-Served)**: Non-preemptive, simple, but suffers from the **Convoy Effect** (short processes wait behind long ones).\n• **SJF (Shortest Job First)**: Non-preemptive, provably **optimal minimum average waiting time**, but risks starvation of long jobs.\n• **SRTF (Shortest Remaining Time First)**: Preemptive SJF.\n• **Round Robin (RR)**: Preemptive, allocates fixed **Time Quantum (q)** in circular FIFO queue. High responsiveness.\n\n### Scheduling Formulas:\n• **Turnaround Time** = Completion Time - Arrival Time\n• **Waiting Time** = Turnaround Time - Burst Time`,
             clues: 'Questions on Gantt chart calculations, average waiting times, convoy effect, or time quantum tuning.',
-            link: '/subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html'
+            link: '/subject/operatingSystemConfiguration/prelim/osStructuresAndSystemCalls.html'
         },
 
         // --- AUTOMATA THEORY ---
@@ -180,7 +180,7 @@
             title: 'Deterministic vs Non-Deterministic Finite Automata (DFA vs NFA)',
             summary: `• **DFA (Deterministic Finite Automata)**:\n  - 5-tuple \\( M = (Q, \\Sigma, \\delta, q_0, F) \\)\n  - Transition function \\( \\delta: Q \\times \\Sigma \\to Q \\)\n  - Exactly ONE transition per state and symbol. No ε-transitions.\n\n• **NFA (Non-Deterministic Finite Automata)**:\n  - Transition function \\( \\delta: Q \\times \\Sigma \\to 2^Q \\)\n  - Can transition to 0, 1, or multiple states. Allows ε-transitions.\n\n• **Power Equivalence**:\n  - NFAs and DFAs have identical recognition power (both accept Type 3 Regular Languages).\n  - Any NFA with n states converts to an equivalent DFA with at most **2ⁿ states** via Subset Construction.`,
             clues: 'Questions comparing DFA and NFA, defining transition functions, or calculating maximum DFA states (2ⁿ).',
-            link: '/subject/automataTheory/Prelim/automataComputabilityAndComplexity.html'
+            link: '/subject/automataTheory/prelim/automataComputabilityAndComplexity.html'
         },
 
         // --- INFORMATION ASSURANCE & SECURITY ---
@@ -193,7 +193,7 @@
             title: 'The CIA Triad & Core Security Principles',
             summary: `• **Confidentiality**: Prevents unauthorized disclosure of information (Encryption AES/RSA, ACLs, Data Masking).\n• **Integrity**: Prevents unauthorized modification or tampering of data (Cryptographic Hashes SHA-256, Digital Signatures).\n• **Availability**: Ensures timely and reliable access for authorized users (Redundancy, Backups, RAID, DDoS Mitigation).\n\n• **Non-Repudiation**: Inability of a sender to deny an action/message (Digital Signatures, PKI, Audit Logs).\n• **Defense in Depth**: Layered security across physical, technical, and administrative controls.`,
             clues: 'Questions categorizing security incidents, data breaches, or compliance requirements under CIA principles.',
-            link: '/subject/informationAssuranceandSecurtiy/Prelim/week1-2.html'
+            link: '/subject/informationAssuranceAndSecurity/prelim/week1And2.html'
         }
     ];
 

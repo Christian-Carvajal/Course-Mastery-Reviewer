@@ -1,4 +1,4 @@
-const CACHE_NAME = 'reviewer-pwa-v135';
+const CACHE_NAME = 'reviewer-pwa-v136';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -12,20 +12,20 @@ const STATIC_ASSETS = [
     '/icons/icon-512.png',
     '/version.json',
     '/whiteboard.html',
-    '/subject/automataTheory/Prelim/automataComputabilityAndComplexity.html',
-    '/subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html',
-    '/subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html',
-    '/subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html',
-    '/subject/informationAssuranceandSecurtiy/Prelim/week1-2.html',
-    '/subject/informationAssuranceandSecurtiy/Prelim/week3-4.html',
-    '/subject/dataMining/Prelim/introductionToDataScience.html',
-    '/subject/dataMining/Prelim/probabilities.html',
-    '/subject/dataMining/Prelim/probabilitydistribution.html',
-    '/subject/dataMining/Prelim/sets-events-bayesianinference.html',
-    '/subject/dataMining/Prelim/traditionalDataTechniques.html',
-    '/subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html',
-    '/subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html',
-    '/subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html'
+    '/subject/automataTheory/prelim/automataComputabilityAndComplexity.html',
+    '/subject/automataTheory/prelim/introductionToAutomataTheoryFormalLanguages.html',
+    '/subject/automataTheory/prelim/theCentralConceptsOfAutomata.html',
+    '/subject/informationAssuranceAndSecurity/prelim/accessControl.html',
+    '/subject/informationAssuranceAndSecurity/prelim/week1And2.html',
+    '/subject/informationAssuranceAndSecurity/prelim/week3And4.html',
+    '/subject/dataMining/prelim/introductionToDataScience.html',
+    '/subject/dataMining/prelim/probabilities.html',
+    '/subject/dataMining/prelim/probabilityDistribution.html',
+    '/subject/dataMining/prelim/setsEventsBayesianInference.html',
+    '/subject/dataMining/prelim/traditionalDataTechniques.html',
+    '/subject/operatingSystemConfiguration/prelim/introductionToOperatingSystems.html',
+    '/subject/operatingSystemConfiguration/prelim/networkConfigurationInWindowsOS.html',
+    '/subject/operatingSystemConfiguration/prelim/osStructuresAndSystemCalls.html'
 ];
 
 // External CDN dependencies required for full offline capability
