@@ -11,9 +11,7 @@
     }
 
     // Default Project Credentials
-    // Replace with your own Supabase Project URL if you want cloud sync (or leave as is for 100% offline mode)
-    const DEFAULT_SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-    // Replace with your Supabase Anon/Public Key (or leave as is for 100% offline mode)
+    const DEFAULT_SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
     const DEFAULT_SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
 
     // Helper: Safe LocalStorage Access

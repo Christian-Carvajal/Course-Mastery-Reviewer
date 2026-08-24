@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Course Mastery Reviewer &amp; Quiz Portal</title>
     <link rel="stylesheet" href="global.css">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#09090b">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -26,7 +26,7 @@
             </div>
 
             <div class="topbar-actions">
-                <a href="/whiteboard.html" target="_blank" class="topbar-action-pill whiteboard-pill" title="Open Interactive Canvas Whiteboard">
+                <a href="./whiteboard.html" target="_blank" class="topbar-action-pill whiteboard-pill" title="Open Interactive Canvas Whiteboard">
                     <span class="pill-icon">📝</span>
                     <span class="pill-label">Whiteboard</span>
                 </a>
@@ -70,7 +70,7 @@
                 <div class="hero-actions-row" id="hero-auth-actions">
                     <button class="btn btn-primary" onclick="window.openAuthModal('register')">✨ Create Account</button>
                     <button class="btn btn-secondary" onclick="window.openAuthModal('signin')">🔑 Sign In</button>
-                    <a href="/whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                    <a href="./whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
                 </div>
             </div>
         </section>
@@ -842,8 +842,12 @@
                 const raw = localStorage.getItem('quiz_progress_' + topicKey);
                 if (raw) {
                     const parsed = JSON.parse(raw);
-                    const answered = parsed.filter(x => x !== null && x !== undefined).length;
-                    return { answered, raw: parsed };
+                    if (Array.isArray(parsed)) {
+                        const answered = parsed.filter(x => x !== null && x !== undefined).length;
+                        return { answered, raw: parsed };
+                    } else if (parsed && typeof parsed.answered === 'number') {
+                        return { answered: parsed.answered, raw: parsed };
+                    }
                 }
             } catch (e) {}
             return { answered: 0, raw: [] };
@@ -980,7 +984,7 @@
                     actions.innerHTML = `
                         <button class="btn btn-primary" onclick="window.openAuthModal('profile')">⚙️ Account &amp; Sync Settings</button>
                         <button class="btn btn-secondary" onclick="window.handleForceCloudPull()">🔄 Pull Latest Cloud Data</button>
-                        <a href="/whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                        <a href="./whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
                     `;
                 }
                 if (topbarIcon) topbarIcon.innerText = '🟢';
@@ -993,7 +997,7 @@
                     actions.innerHTML = `
                         <button class="btn btn-primary" onclick="window.openAuthModal('register')">✨ Create Account</button>
                         <button class="btn btn-secondary" onclick="window.openAuthModal('signin')">🔑 Sign In</button>
-                        <a href="/whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                        <a href="./whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
                     `;
                 }
                 if (topbarIcon) topbarIcon.innerText = '👤';

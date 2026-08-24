@@ -2080,9 +2080,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 // PWA Service Worker & Install Prompt Registration
 // ==========================================
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js', { scope: '/' }).then((reg) => {
+        const swPath = window.location.pathname.includes('/subject/') ? '../../../sw.js' : './sw.js';
+        navigator.serviceWorker.register(swPath).then((reg) => {
             console.log('PWA Service Worker active:', reg.scope);
             
             // Check for updates immediately on load
@@ -2131,7 +2132,7 @@ function initAutoUpdateChecker() {
     let isChecking = false;
 
     const checkVersion = async () => {
-        if (isChecking || !navigator.onLine) return;
+        if (isChecking || !navigator.onLine || window.location.protocol === 'file:') return;
         isChecking = true;
         try {
             const versionUrl = '/version.json';
