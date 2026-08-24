@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Automata, Computability & Complexity | Complete Reviewer & Quiz</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Automata Theory & Formal Languages</h1>
+        <p>Module 1: Automata, Computability & Complexity — 73-Question Academic Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">Computability & Complexity</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+            <div class="card">
+ <h2 id="learning-outcomes">1. Learning Outcomes</h2>
+ <ul>
+ <li>Know (some) limitations of computer science.</li>
+ <li>Understand the concept of computable and non-computable functions.</li>
+ <li>Introduce the concept of Turing machines.</li>
+ <li>Present ideas about halting.</li>
+ <li>Enumerate example of tractable and non-tractable problems.</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="limitations-of-cs">2. Limitations of Computer Science</h2>
+ <p>Major reasons useful calculations cannot be done:</p>
+ <ol>
+ <li>
+ <strong>Execution time of program is too long:</strong>
+ <br>Problem can take years or centuries to finish.
+ </li>
+ <li>
+ <strong>Problem is not computable:</strong>
+ <br>No computer program can solve the problem.
+ </li>
+ <li>
+ <strong>We do not know how to write a program to solve the problem:</strong>
+ <br>Problems that can conceivably be solved; includes many problems in artificial intelligence and computer vision, such as understanding language, object recognition, tracking, prediction.
+ </li>
+ </ol>
+ </div>
+
+ <div class="card">
+ <h2 id="decision-problems">3. Decision Problems & Problem Reduction</h2>
+ <p>What problems can be solved by computers?</p>
+ <ul>
+ <li>Equivalent to: “What decision problems can be solved?”</li>
+ <li><strong>Decision problem:</strong> Problem where the answer is always YES/NO.</li>
+ <li>Arbitrary problem can always be reduced to a decision problem.</li>
+ <li>There are decision problems for which algorithms do not exist:
+ <ul>
+ <li>There are more different decision problems than there are different programs.</li>
+ <li>If there are more decision problems than programs, then it must be the case that some decision problems cannot be solved by programs.</li>
+ </ul>
+ </li>
+ </ul>
+
+ <h3>Decision Problems vs. Particular Answers</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Decision Problem (YES/NO)</th>
+ <th>Particular Answer Required</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>Is 613,511 a prime number? (NO)</td>
+ <td>What is the smallest prime factor of 613,511?</td>
+ </tr>
+ <tr>
+ <td>Is my birthday on a Sunday next year? (NO / YES)</td>
+ <td>On what day of the week is my birthday next year?</td>
+ </tr>
+ <tr>
+ <td>Will I pass the Automata final exam?</td>
+ <td>What grade will I get on the Automata final exam?</td>
+ </tr>
+ </tbody>
+ </table>
+ <p><em>The process of answering questions where a particular answer is uniquely determined from the given information can be viewed as the evaluation of a function.</em></p>
+ </div>
+
+ <div class="card">
+ <h2 id="functions-computability">4. Functions & Computability</h2>
+ <div class="definition-card">
+ <span class="def-badge">Definition</span>
+ <p>A <strong>function</strong> is a correspondence between a collection of possible input values and a collection of output values such that each possible input is assigned a unique output.</p>
+ </div>
+
+ <h3>Function Characteristics & Examples</h3>
+ <ul>
+ <li><strong>Addition function example:</strong> Inputs are value pairs, outputs are values representing the sum of each input pair. Output is unique, exactly one value for each input pair.</li>
+ <li><strong>Function evaluation:</strong> The process of determining output for given input is called computing or evaluating the function.</li>
+ <li>The ability to evaluate functions gives us the ability to solve problems (e.g. to solve the addition problem we must evaluate the addition function).</li>
+ <li><strong>Evaluation examples:</strong>
+ <ul>
+ <li>F(x) = x + 1 &rarr; F(2) = 3</li>
+ <li>F(x,y) = x + y &rarr; F(2,3) = 5</li>
+ </ul>
+ </li>
+ </ul>
+
+ <h3>Computable vs. Noncomputable Functions</h3>
+ <ul>
+ <li><strong>Algorithms:</strong> The means by which we formally express the evaluation of a function.</li>
+ <li><strong>Can we design algorithms to evaluate ALL functions?</strong> No!</li>
+ <li><strong>Noncomputable functions:</strong> Functions so complex that there is no well-defined step-by-step process for determining their output based on their input values. The evaluation of these functions lies beyond the capabilities of any algorithmic system.</li>
+ <li><strong>Computable functions:</strong> Functions whose output values can be determined algorithmically from their input values (functions having an algorithm that solves them).</li>
+ </ul>
+
+ <h3>Limitations of Machines & Alien Life Question</h3>
+ <ul>
+ <li>Machines can only perform computations described by algorithms: the study of computable functions is the study of the ultimate capabilities of machines.</li>
+ <li>If we can build a machine with the capabilities to evaluate the entire set of computable functions, then the machines we build are as powerful as we can make them.</li>
+ <li>If we discover that the solution to a problem requires the evaluation of a noncomputable function, we know the solution to that problem lies beyond the capabilities of machines.</li>
+ <li><strong>Q: Is it possible to write a Java program to answer: Does extraterrestrial life exist?</strong>
+ <br><strong>A: Yes!</strong> The question is answered either by a program that returns “yes” or by a program that returns “no”. We just don’t know which program is correct.
+ </li>
+ <li><strong>Is a problem Computable?</strong> Suppose we create a list of all programs for evaluating computable problems. To ask whether a problem is computable is to ask if there is a program in the list to solve the problem. This is not the same as actually identifying the program in the list that solves the problem. There are many computable problems whose solutions have not yet been identified.</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="turing-machines">5. Abstract Model of Computation & Turing Machines</h2>
+ <div class="definition-card">
+ <span class="def-badge">Turing Machine (1936)</span>
+ <p>The first abstract model of computation was defined by <strong>Alan Turing in 1936</strong>: <strong>The Turing Machine</strong>.</p>
+ </div>
+ <ul>
+ <li>A Turing Machine is a purely theoretical device, developed well before technology was capable of providing the machines we know as “computers” today.</li>
+ <li>Model to study the capabilities and limitations of computational processes and computing machinery.</li>
+ <li>Provide a context in which solutions to all things computable can be expressed.</li>
+ <li>Provide a standard to which the power of other computational systems can be compared.</li>
+ </ul>
+
+ <h3>Turing-Computable &hArr; Computable</h3>
+ <ul>
+ <li>A function is computable if it can be computed by a Turing machine;</li>
+ <li>or, a function is computable if a program exists that can compute it;</li>
+ <li>or, a function is computable if there is an effective algorithm for evaluating the function which, given any input values for which the function is defined, produces the correct result and halts in a finite amount of time.</li>
+ <li><strong>Q: Is there anything a Turing Machine cannot do?</strong> <strong>A: Yes!</strong></li>
+ <li><strong>Noncomputability:</strong> A function is noncomputable if there is no Turing machine that could compute it, or any function that cannot be computed by any program. There are many more functions than there are programs, so it is not possible to have a program for every function.</li>
+ <li><strong>Noncomputable problem example:</strong> List all subroutines that input an integer and return an integer (e.g. <code>int sub1(int x) { return 1; }</code>, <code>int sub2(int x) { return 2; }</code>). Can make infinitely many such subroutines.</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="halting-problem">6. Halting & The Halting Problem</h2>
+ 
+ <h3>Halting Behavior</h3>
+ <ul>
+ <li><strong>Programs that run forever do not halt:</strong> (e.g., <code>programA</code> with infinite loops).
+ <div class="code-box">int programA(int x) {<br>&nbsp;&nbsp;while(x == x)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x;<br>&nbsp;&nbsp;return x;<br>}</div>
+ </li>
+ <li><strong>Programs may halt on some inputs but not on others:</strong> (e.g., <code>programB</code>).
+ <div class="code-box">int programB(int x) {<br>&nbsp;&nbsp;while(x > 10)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x;<br>&nbsp;&nbsp;return x;<br>}</div>
+ </li>
+ <li><strong>Programs with no loops always halt:</strong> Programs composed of assignment statements, if statements and the return statement.</li>
+ </ul>
+
+ <h3>Halt or Not? (Code Analysis)</h3>
+ <ul>
+ <li><strong>Loop 1:</strong>
+ <div class="code-box">while(x > 1) {<br>&nbsp;&nbsp;if(x > 2)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x - 2;<br>&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x + 2;<br>}</div>
+ <em>If x = 8:</em> 8 &rarr; 6 &rarr; 4 &rarr; 2 &rarr; 4 &rarr; 2 (Infinite loop, does not terminate).
+ <br><em>If x = 9:</em> 9 &rarr; 7 &rarr; 5 &rarr; 3 &rarr; 1 (Terminates when x = 1).
+ </li>
+ <li><strong>Loop 2 (Collatz-like):</strong>
+ <div class="code-box">while(x > 1) {<br>&nbsp;&nbsp;if(x % 2 == 0)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x / 2;<br>&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;x = 3*x + 1;<br>}</div>
+ <em>If x = 8:</em> 8 &rarr; 4 &rarr; 2 &rarr; 1 (Terminates).
+ <br><em>If x = 7:</em> 7 &rarr; 22 &rarr; 11 &rarr; 34 &rarr; 17 &rarr; 52 &rarr; 26 &rarr; 13 &rarr; 40 &rarr; 20 &rarr; 10 &rarr; 5 &rarr; 16 &rarr; 8 &rarr; 4 &rarr; 2 &rarr; 1 (Terminates).
+ </li>
+ </ul>
+
+ <h3>The Halting Problem & Proof of Noncomputability</h3>
+ <ul>
+ <li><strong>The Question:</strong> Is it possible to write a Java program to answer: <em>Does a given program halt on all inputs?</em></li>
+ <li>It would be useful if we could write a program or compiler to test if a given source program contains an infinite loop, so we would never execute a program with an infinite loop.</li>
+ <li><strong>The Halting Problem is noncomputable:</strong> There is no single finite program that will answer the halting question for all programs. No finite program can be written that will check other programs and halt in a finite time giving a solution to the halting problem.</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="tractable-intractable">7. Program Execution Time: Tractable vs. Intractable Problems</h2>
+ <p><strong>Program Execution Time:</strong> How long a program takes to perform computations on large inputs. Computable problems are basically divided into two classes:</p>
+
+ <table>
+ <thead>
+ <tr>
+ <th>Class</th>
+ <th>Definition & Complexity</th>
+ <th>Examples</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Tractable</strong></td>
+ <td>Computations that can be completed in a reasonable time period. Running time on N inputs is <strong>logarithmic or polynomial in N</strong>.</td>
+ <td>
+ • Searching or sorting N inputs<br>
+ • Computing the sum of positive integers of size N<br>
+ • Finding the largest element in an N x M array<br>
+ • Counting the number of characters in a Java program
+ </td>
+ </tr>
+ <tr>
+ <td><strong>Intractable</strong></td>
+ <td>Computations that cannot be realistically completed except for small examples. Running time on N inputs is <strong>exponential in N</strong>.</td>
+ <td>
+ • Computing all permutations of N inputs<br>
+ • Towers of Hanoi<br>
+ • Traveling Salesperson<br>
+ • Bin Packing<br>
+ • Graph Coloring
+ </td>
+ </tr>
+ </tbody>
+ </table>
+
+ <h3>Detailed Intractable Problem Descriptions</h3>
+ <ul>
+ <li><strong>Towers of Hanoi:</strong> How long to move n disks? (Impractical / exponential).</li>
+ <li><strong>Traveling Salesperson Problem:</strong> A traveling salesperson must visit each of some number of cities before returning home; knows the distance between each of the cities; wants to minimize the total distance traveled while visiting all of the cities. (Requires trying all paths from every starting point).</li>
+ <li><strong>Bin Packing:</strong> Pack a given set of items having different sizes into a minimum number of equal-sized bins. <em>Example:</em> Pack trucks with barrels using the smallest possible number of trucks.</li>
+ <li><strong>Graph Coloring:</strong> Color the vertices of a graph such that no edge connects two identically colored vertices using the minimum number of colors.</li>
+ </ul>
+ </div>
+        </div>
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 73</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+            <div id="quiz-container"></div>
+        </div>
+
+        <!-- TAB 3: QUICK REFERENCE & FORMULAS -->
+        <div id="formulas" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2>Quick Reference: Computability, Complexity & Halting Problem</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr><th>Complexity Class</th><th>Deterministic Time</th><th>Key Characterization</th><th>Canonical Example</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Class P</strong></td><td>Polynomial O(n<sup>k</sup>)</td><td>Tractable / Efficiently Solvable</td><td>Shortest Path, Sorting, 2-SAT</td></tr>
+                        <tr><td><strong>Class NP</strong></td><td>Non-deterministic Poly Time</td><td>Verifiable in Polynomial Time</td><td>3-SAT, Traveling Salesperson, Clique</td></tr>
+                        <tr><td><strong>NP-Complete</strong></td><td>Hardest in NP</td><td>Every problem in NP reduces to it in Poly Time</td><td>SAT (Cook-Levin Theorem)</td></tr>
+                        <tr><td><strong>Decidable (R)</strong></td><td>Halts on all inputs</td><td>Turing Machine always halts with Accept/Reject</td><td>A_DFA, E_DFA, EQ_DFA</td></tr>
+                        <tr><td><strong>Turing-Recognizable (RE)</strong></td><td>Halts on 'yes', may loop on 'no'</td><td>Partially Decidable / Semi-Decidable</td><td>A_TM (Halting Problem)</td></tr>
+                        <tr><td><strong>Undecidable (Non-RE)</strong></td><td>No TM exists</td><td>Cannot be recognized or decided</td><td>Complement of A_TM, EQ_TM</td></tr>
+                    </tbody>
+                </table>
+
+                
+            <!-- Interactive Tool 1: Computational Complexity & Big-O Step Simulator -->
+            <div class="calc-card" style="margin-top:1.5rem;">
+                <div class="calc-title">🧮 Tool 1: Computational Complexity & Growth Rate Step Calculator</div>
+                <div class="calc-desc">Calculate the exact number of operations/steps required by algorithms across major complexity classes (P vs NP, Logarithmic to Exponential).</div>
+                
+                <div class="calc-grid">
+                    <div class="calc-field">
+                        <label class="calc-label" for="comp-n">Input Size (n):</label>
+                        <input type="number" id="comp-n" class="calc-input" value="10" min="1" max="1000" step="1" oninput="calculateComplexity()">
+                    </div>
+                    <div class="calc-field">
+                        <label class="calc-label" for="comp-speed">Processor Speed (Ops / Sec):</label>
+                        <input type="number" id="comp-speed" class="calc-input" value="1000000" min="1000" step="100000" oninput="calculateComplexity()">
+                    </div>
+                </div>
+
+                <div class="calc-result-box">
+                    <div class="calc-result-header">
+                        <span style="font-weight:700; font-size:0.95rem;">Operation Steps & Execution Time:</span>
+                        <span class="calc-result-val" id="comp-res-val">O(n²) = 100 steps (0.10 ms)</span>
+                    </div>
+                    <div class="calc-math-steps" id="comp-math-steps">
+                        <strong>Complexity Breakdown for Input n = 10:</strong><br>
+                        <div class="step-line">• <strong>O(log n) [Logarithmic]:</strong> 3.32 steps | ~0.000 ms</div>
+                        <div class="step-line">• <strong>O(n) [Linear]:</strong> 10 steps | ~0.010 ms</div>
+                        <div class="step-line">• <strong>O(n log n) [Linearithmic]:</strong> 33.22 steps | ~0.033 ms</div>
+                        <div class="step-line">• <strong>O(n²) [Polynomial - Class P]:</strong> 100 steps | ~0.100 ms</div>
+                        <div class="step-line">• <strong>O(2ⁿ) [Exponential - Intractable]:</strong> 1,024 steps | ~1.024 ms</div>
+                        <div class="step-line">• <strong>O(n!) [Factorial - Exhaustive Search]:</strong> 3,628,800 steps | ~3.63 sec</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Tool 2: Decidability & Halting Problem Classifier -->
+            <div class="calc-card" style="margin-top:1.5rem;">
+                <div class="calc-title">🧮 Tool 2: Decision Problem Decidability & Reduction Classifier</div>
+                <div class="calc-desc">Explore problem classification, decidability properties, and reduction paths across Turing machines.</div>
+                
+                <div class="calc-grid">
+                    <div class="calc-field">
+                        <label class="calc-label" for="prob-type">Select Problem / Language:</label>
+                        <select id="prob-type" class="calc-input" onchange="classifyProblem()">
+                            <option value="dfa_acceptance">A_DFA (DFA Acceptance - Does M accept w?)</option>
+                            <option value="dfa_emptiness">E_DFA (DFA Emptiness - Is L(M) empty?)</option>
+                            <option value="dfa_equivalence">EQ_DFA (DFA Equivalence - Is L(A) = L(B)?)</option>
+                            <option value="cfg_acceptance">A_CFG (CFG Acceptance - Does G generate w?)</option>
+                            <option value="cfg_emptiness">E_CFG (CFG Emptiness - Is L(G) empty?)</option>
+                            <option value="atm_halting">A_TM (Turing Machine Acceptance / Halting Problem)</option>
+                            <option value="tm_emptiness">E_TM (Turing Machine Emptiness)</option>
+                            <option value="tm_equivalence">EQ_TM (Turing Machine Equivalence)</option>
+                            <option value="pcp">Post Correspondence Problem (PCP)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="calc-result-box">
+                    <div class="calc-result-header">
+                        <span style="font-weight:700; font-size:0.95rem;">Decidability & Complexity Class:</span>
+                        <span class="calc-result-val" id="prob-res-val">Decidable (Solvable Algorithmically)</span>
+                    </div>
+                    <div class="calc-math-steps" id="prob-math-steps">
+                        <strong>Theoretical Classification:</strong><br>
+                        <div class="step-line">• <strong>Status:</strong> <span style="color:#16a34a; font-weight:700;">Decidable</span></div>
+                        <div class="step-line">• <strong>Algorithm / Proof:</strong> Simulate DFA M on input w. Since DFA transitions always halt after |w| steps, the decision procedure always halts and decides correctly.</div>
+                    </div>
+                </div>
+            </div>
+    
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const quizData = [
+    {
+        "q": "Which of the following is listed as a major reason useful calculations cannot be done?",
+        "options": [
+            "Computer monitors lack sufficient color depth in order to fulfill secondary operational objectives",
+            "Execution time of program is too long (problem can take years or centuries to finish)",
+            "High-level programming languages are prohibited in order to fulfill secondary operational objectives",
+            "Operating systems refuse to allocate RAM in order to fulfill secondary operational objectives"
+        ],
+        "correct": 1,
+        "exp": "Major reasons useful calculations cannot be done: Execution time of program is too long (problem can take years or centuries to finish).",
+        "section": "1. Limitations of Computer Science"
+    },
+    {
+        "q": "What is the second major reason useful calculations cannot be done?",
+        "options": [
+            "Problem is not computable (no computer program can solve the problem)",
+            "Microkernels are slightly slower in order to fulfill secondary operational objectives",
+            "The operating system has no system calls in order to fulfill secondary operational objectives",
+            "Hardware storage is too small in order to fulfill secondary operational objectives"
+        ],
+        "correct": 0,
+        "exp": "Major reason 2: Problem is not computable (no computer program can solve the problem).",
+        "section": "1. Limitations of Computer Science"
+    },
+    {
+        "q": "What is the third major reason useful calculations cannot be done?",
+        "options": [
+            "We do not know how to write a program to solve the problem",
+            "Turing machines cannot read binary in order to fulfill secondary operational objectives",
+            "Java programs cannot evaluate integers in order to fulfill secondary operational objectives",
+            "Algorithms only run on supercomputers in order to fulfill secondary operational objectives"
+        ],
+        "correct": 0,
+        "exp": "Major reason 3: We do not know how to write a program to solve the problem (problems that can conceivably be solved).",
+        "section": "1. Limitations of Computer Science"
+    },
+    {
+        "q": "Which fields and tasks are explicitly listed under problems we do not know how to write a program to solve?",
+        "options": [
+            "Artificial intelligence and computer vision (understanding language, object recognition, tracking, prediction)",
+            "Searching and sorting arrays configured for general baseline system administration evaluated under formal computational grammar and state transition constraints",
+            "Adding two numbers together configured for general baseline system administration",
+            "Counting characters in a text file configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Includes many problems in artificial intelligence and computer vision, such as understanding language, object recognition, tracking, prediction.",
+        "section": "1. Limitations of Computer Science"
+    },
+    {
+        "q": "The question 'What problems can be solved by computers?' is equivalent to which question?",
+        "options": [
+            "What hardware components can be manufactured?",
+            "What decision problems can be solved?",
+            "What operating systems can be booted?",
+            "What subroutines can return integers?"
+        ],
+        "correct": 1,
+        "exp": "What problems can be solved by computers? Equivalent to: 'What decision problems can be solved?'",
+        "section": "1. Limitations of Computer Science"
+    },
+    {
+        "q": "What is a Decision Problem?",
+        "options": [
+            "A problem that outputs a floating-point decimal",
+            "A problem where the answer is always YES/NO",
+            "A problem that runs in polynomial time strictly",
+            "A program with no loops"
+        ],
+        "correct": 1,
+        "exp": "Decision problem: problem where the answer is always YES/NO.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "Can an arbitrary problem be reduced to a decision problem?",
+        "options": [
+            "No, only mathematical addition can be reduced",
+            "Arbitrary problem can always be reduced to a decision problem",
+            "Only intractable problems can be reduced evaluated under formal computational grammar and state transition constraints",
+            "No, reduction is mathematically impossible"
+        ],
+        "correct": 1,
+        "exp": "Arbitrary problem can always be reduced to a decision problem.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "Why do decision problems exist for which algorithms do not exist?",
+        "options": [
+            "Because all programmers write bugs under standard organizational security baseline protocols",
+            "There are more different decision problems than there are different programs",
+            "Because Java limits file size under standard organizational security baseline protocols",
+            "Because Turing machines cannot halt under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "There are decision problems for which algorithms do not exist because there are more different decision problems than there are different programs.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "If there are more decision problems than programs, what must be the case?",
+        "options": [
+            "Some decision problems cannot be solved by programs",
+            "All decision problems are tractable evaluated under formal computational grammar and state transition constraints",
+            "Computers can solve every arbitrary problem",
+            "Turing machines must have infinite loops"
+        ],
+        "correct": 0,
+        "exp": "If there are more decision problems than programs, then it must be the case that some decision problems cannot be solved by programs.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "Which of the following is an example of a decision problem with a YES/NO answer?",
+        "options": [
+            "What is the smallest prime factor of 613,511?",
+            "Is 613,511 a prime number?",
+            "What grade will I get on the Automata final exam?",
+            "On what day of the week is my birthday next year?"
+        ],
+        "correct": 1,
+        "exp": "'Is 613,511 a prime number?' is a decision problem with a YES/NO answer (NO).",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "Which of the following represents a question requiring a particular answer from a set of solutions?",
+        "options": [
+            "Is my birthday on a Sunday next year?",
+            "Will I pass the Automata final exam?",
+            "What is the smallest prime factor of 613,511?",
+            "Is 613,511 a prime number? configured for general baseline system administration"
+        ],
+        "correct": 2,
+        "exp": "'What is the smallest prime factor of 613,511?' requires a particular answer from a set of possible solutions.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "How can the process of answering questions where a particular answer is uniquely determined be viewed?",
+        "options": [
+            "As the evaluation of a function",
+            "As an intractable heuristic",
+            "As an infinite loop",
+            "As a hardware failure"
+        ],
+        "correct": 0,
+        "exp": "The process of answering questions where a particular answer is uniquely determined from given information can be viewed as the evaluation of a function.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "What is the exact definition of a function in the PDF?",
+        "options": [
+            "A sequence of Java instructions that loops forever designed to support enterprise operational infrastructure",
+            "A correspondence between a collection of possible input values and a collection of output values such that each possible input is assigned a unique output",
+            "A hardware device designed by Alan Turing in 1936 designed to support enterprise operational infrastructure evaluated under formal computational grammar and state transition constraints",
+            "An exponential calculation that takes centuries to run designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A function is a correspondence between a collection of possible input values and a collection of output values such that each possible input is assigned a unique output.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "In the addition function example, what are the inputs and outputs?",
+        "options": [
+            "Inputs are value pairs; outputs are values representing the sum of each input pair (unique output)",
+            "Inputs are text files; outputs are binary digits configured for general baseline system administration",
+            "Inputs are cities; outputs are shortest paths configured for general baseline system administration",
+            "Inputs are YES/NO; outputs are integers configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Addition function: inputs are value pairs, outputs are values representing the sum of each input pair (exactly one unique output).",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "What is the process of determining the output for a given input called?",
+        "options": [
+            "Compiling or assembling across standard production computing environments",
+            "Computing or evaluating the function",
+            "Halting or breaking across standard production computing environments",
+            "Shuffling or balancing across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Process of determining output for given input is called computing or evaluating the function.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "What gives us the ability to solve problems?",
+        "options": [
+            "The ability to evaluate functions",
+            "The ability to avoid writing loops",
+            "The speed of network cables",
+            "The use of infinite disks"
+        ],
+        "correct": 0,
+        "exp": "The ability to evaluate functions gives us the ability to solve problems.",
+        "section": "2. Decision Problems & Problem Reduction"
+    },
+    {
+        "q": "For the function F(x) = x + 1, what is F(2)?",
+        "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+        ],
+        "correct": 1,
+        "exp": "F(x) = x + 1 -> F(2) = 3.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "For the function F(x, y) = x + y, what is F(2, 3)?",
+        "options": [
+            "3",
+            "5",
+            "6",
+            "8"
+        ],
+        "correct": 1,
+        "exp": "F(x,y) = x + y -> F(2,3) = 5.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What are algorithms in relation to functions?",
+        "options": [
+            "The physical components that execute Java bytecode",
+            "The means by which we formally express the evaluation of a function",
+            "The theoretical models defined by Alan Turing evaluated under formal computational grammar and state transition constraints",
+            "The exponential running times of programs"
+        ],
+        "correct": 1,
+        "exp": "Algorithms are the means by which we formally express the evaluation of a function.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "Can we design algorithms to evaluate ALL functions?",
+        "options": [
+            "Yes, every function has an algorithm",
+            "No!",
+            "Yes, if using modern AI supercomputers",
+            "Yes, in polynomial time"
+        ],
+        "correct": 1,
+        "exp": "Can we design algorithms to evaluate ALL functions? No!",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What are Noncomputable functions?",
+        "options": [
+            "Functions that return negative integers configured for general baseline system administration",
+            "Functions so complex that there is no well-defined step-by-step process for determining their output based on their input values",
+            "Functions with logarithmic execution time configured for general baseline system administration evaluated under formal computational grammar and state transition constraints",
+            "Functions that only run on MS-DOS configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Noncomputable: functions so complex that there is no well-defined step-by-step process for determining their output; lies beyond capabilities of any algorithmic system.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What are Computable functions?",
+        "options": [
+            "Functions whose output values can be determined algorithmically from their input values",
+            "Functions that take centuries to finish configured for general baseline system administration",
+            "Functions with no unique output configured for general baseline system administration",
+            "Functions that cannot be written in Java configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Computable functions: Functions whose output values can be determined algorithmically from their input values (functions having an algorithm that solves them).",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "Why is the study of computable functions the study of the ultimate capabilities of machines?",
+        "options": [
+            "Because machines can only perform computations described by algorithms",
+            "Because machines have infinite memory under standard organizational security baseline protocols",
+            "Because all algorithms are written in Java",
+            "Because Turing machines can solve noncomputable problems"
+        ],
+        "correct": 0,
+        "exp": "Machines can only perform computations described by algorithms: the study of computable functions is the study of the ultimate capabilities of machines.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What is true if we build a machine capable of evaluating the entire set of computable functions?",
+        "options": [
+            "The machine can solve noncomputable problems",
+            "The machines we build are as powerful as we can make them",
+            "The machine will never halt designed to support enterprise operational infrastructure",
+            "An all algorithms become logarithmic operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "If we can build a machine with the capabilities to evaluate the entire set of computable functions, then the machines we build are as powerful as we can make them.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "If a problem requires the evaluation of a noncomputable function, what do we know about its solution?",
+        "options": [
+            "It can be solved by adding more RAM configured for general baseline system administration",
+            "The solution to that problem lies beyond the capabilities of machines",
+            "It is tractable in polynomial time configured for general baseline system administration",
+            "It can be solved by a Java while loop configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "If we discover that the solution requires evaluation of a noncomputable function, we know the solution lies beyond the capabilities of machines.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "Is it possible to write a Java program to answer 'Does extraterrestrial life exist?'",
+        "options": [
+            "No, because extraterrestrial life is noncomputable",
+            "Yes!",
+            "No, Java does not support alien queries",
+            "Only on a Turing machine with infinite tape"
+        ],
+        "correct": 1,
+        "exp": "Q: Is it possible to write a Java program to answer: Does extraterrestrial life exist? A: Yes!",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "Why is it possible to write a Java program to answer whether extraterrestrial life exists?",
+        "options": [
+            "Because astronomers have already compiled the code under standard organizational security baseline protocols",
+            "The question is answered either by a program that returns 'yes' or by a program that returns 'no'; we just don't know which program is correct",
+            "Because the answer is always YES in polynomial time under standard organizational security baseline protocols evaluated under formal computational grammar and state transition constraints",
+            "Because it is an intractable problem under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "The question is answered either by a program that returns 'yes' or by a program that returns 'no'. We just don’t know which program is correct.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What does it mean to ask if a problem is computable?",
+        "options": [
+            "To ask if we have already identified the code in a repository",
+            "To ask if there is a program in the list of all computable programs to solve the problem",
+            "To ask if the running time is exactly 1 second",
+            "To ask if the problem has multiple outputs under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "To ask whether a problem is computable is to ask if there is a program in the list to solve the problem.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "Is asking if a problem is computable the same as actually identifying the program that solves it?",
+        "options": [
+            "Yes, they are identical under standard production system configurations",
+            "This is not the same as actually identifying the program in the list that solves the problem",
+            "Yes, because all computable problems are already solved evaluated under formal computational grammar and state transition constraints",
+            "No, because noncomputable problems have known programs"
+        ],
+        "correct": 1,
+        "exp": "This is not the same as actually identifying the program in the list that solves the problem. There are many computable problems whose solutions have not yet been identified.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "Who defined the first abstract model of computation, and in what year?",
+        "options": [
+            "Alan Turing in 1936",
+            "John von Neumann in 1945",
+            "Dennis Ritchie in 1970",
+            "Ada Lovelace in 1840"
+        ],
+        "correct": 0,
+        "exp": "The first abstract model of computation was defined by Alan Turing in 1936 (The Turing Machine).",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What is a Turing Machine?",
+        "options": [
+            "A physical supercomputer built during World War II designed to support enterprise operational infrastructure",
+            "A purely theoretical device developed well before technology was capable of providing modern computers",
+            "A Java compiler for decision problems designed to support enterprise operational infrastructure",
+            "A commercial server running Linux designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Turing Machine is a purely theoretical device, developed well before technology was capable of providing the machines we know as 'computers' today.",
+        "section": "3. Functions & Computability"
+    },
+    {
+        "q": "What is the purpose of the Turing Machine model?",
+        "options": [
+            "To study the capabilities and limitations of computational processes and computing machinery",
+            "To manufacture silicon chips under standard organizational security baseline protocols",
+            "To format magnetic disks under standard organizational security baseline protocols",
+            "To eliminate the need for algorithms under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Model to study the capabilities and limitations of computational processes and computing machinery.",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "What does the Turing Machine provide regarding all computable things?",
+        "options": [
+            "A context in which solutions to all things computable can be expressed",
+            "A programming language syntax under standard production system configurations",
+            "A commercial operating system interface",
+            "An exponential runtime boundary under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Provide a context in which solutions to all things computable can be expressed.",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "How does the Turing Machine relate to other computational systems?",
+        "options": [
+            "It provides a standard to which the power of other computational systems can be compared",
+            "It proves other systems are noncomputable under standard production system configurations",
+            "It runs 10 times slower than modern CPUs under standard production system configurations",
+            "It replaces all microkernels under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Provide a standard to which the power of other computational systems can be compared.",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "When is a function considered 'Turing-Computable'?",
+        "options": [
+            "If it can be computed by a Turing machine",
+            "If a program exists that can compute it",
+            "If an effective algorithm produces the correct result and halts in a finite amount of time",
+            "All of the above"
+        ],
+        "correct": 3,
+        "exp": "A function is computable if it can be computed by a Turing machine, if a program exists, or if an effective algorithm produces correct result and halts in finite time.",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "Is there anything a Turing Machine cannot do?",
+        "options": [
+            "No, a Turing machine can compute anything imaginable",
+            "Yes!",
+            "Only floating-point arithmetic",
+            "Only addition of integers"
+        ],
+        "correct": 1,
+        "exp": "Q: Is there anything a Turing Machine cannot do? A: Yes!",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "What defines a Noncomputable function in relation to Turing machines?",
+        "options": [
+            "A function for which there is no Turing machine that could compute it",
+            "A function that runs in logarithmic time designed to support enterprise operational infrastructure",
+            "A function with two inputs designed to support enterprise operational infrastructure",
+            "A function that returns zero designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A function is noncomputable if there is no Turing machine that could compute it (cannot be computed by any program).",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "Why is it not possible to have a program for every function?",
+        "options": [
+            "Because there are many more functions than there are programs",
+            "Because Java compilers run out of memory evaluated under formal computational grammar and state transition constraints",
+            "Because Turing machines are theoretical",
+            "Because algorithms only accept integer inputs"
+        ],
+        "correct": 0,
+        "exp": "There are many more functions than there are programs; not possible to have a program for every function.",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "In the noncomputable problem example, what task is shown to have infinitely many variations?",
+        "options": [
+            "List all subroutines that input an integer and return an integer (e.g. sub1, sub2)",
+            "List all prime numbers up to 613,511 under standard production system configurations",
+            "Pack barrels into trucks under standard production system configurations",
+            "Color vertices on a graph under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Problem: List all subroutines that input an integer and return an integer (e.g. sub1 returning 1, sub2 returning 2... infinitely many).",
+        "section": "4. Turing Machines & Abstract Models"
+    },
+    {
+        "q": "What is true about programs that run forever?",
+        "options": [
+            "They do not halt",
+            "They are tractable",
+            "They evaluate addition functions",
+            "They are noncomputable functions"
+        ],
+        "correct": 0,
+        "exp": "Programs that run forever do not halt (e.g. programA, programs with infinite loops).",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "In the PDF, what does `programA(int x)` do?",
+        "options": [
+            "Contains `while(x == x) x = x;` and runs forever (does not halt)",
+            "Halts immediately when x = 2 under standard production system configurations",
+            "Calculates the sum of positive integers",
+            "Solves the Towers of Hanoi under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "programA has while(x == x) x = x; which is an infinite loop that does not halt.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "In the PDF, what does `programB(int x)` demonstrate?",
+        "options": [
+            "Programs may halt on some inputs but not on others (halts if x <= 10, loops forever if x > 10)",
+            "Programs with no loops always loop forever under standard production system configurations",
+            "All inputs produce 32-byte packets under standard production system configurations",
+            "Turing machines always terminate under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "programB has while(x > 10) x = x; demonstrating that programs may halt on some inputs but not on others.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "What types of programs always halt?",
+        "options": [
+            "Programs with while(x == x) under standard production system configurations",
+            "Programs with no loops (composed of assignment statements, if statements, and return statement)",
+            "Programs that evaluate noncomputable functions under standard production system configurations",
+            "Programs solving Traveling Salesperson under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Programs with no loops always halt (programs composed of assignment statements, if statements and the return statement).",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Given `while(x > 1) { if(x > 2) x = x - 2; else x = x + 2; }`, what happens if x = 8?",
+        "options": [
+            "It terminates at x = 1 under standard production system configurations",
+            "It enters an infinite loop between 2 and 4 and does not terminate",
+            "It returns 0 immediately under standard production system configurations",
+            "It throws an arithmetic exception"
+        ],
+        "correct": 1,
+        "exp": "If x = 8, sequence is 8 -> 6 -> 4 -> 2 -> 4 -> 2... infinite loop!",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Given `while(x > 1) { if(x > 2) x = x - 2; else x = x + 2; }`, what happens if x = 9?",
+        "options": [
+            "It loops forever between 3 and 5",
+            "It eventually terminates when x becomes 1",
+            "It crashes the JVM under standard production system configurations",
+            "It never enters the while loop"
+        ],
+        "correct": 1,
+        "exp": "If x = 9, sequence is 9 -> 7 -> 5 -> 3 -> 1. Since 1 is not > 1, the loop terminates.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Given `while(x > 1) { if(x % 2 == 0) x = x / 2; else x = 3*x + 1; }`, what happens if x = 8?",
+        "options": [
+            "It terminates (8 -> 4 -> 2 -> 1)",
+            "It loops forever without changing",
+            "It returns 8 under standard production system configurations",
+            "It causes a stack overflow"
+        ],
+        "correct": 0,
+        "exp": "If x = 8, x becomes 4 -> 2 -> 1, which terminates.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Given `while(x > 1) { if(x % 2 == 0) x = x / 2; else x = 3*x + 1; }`, what happens if x = 7?",
+        "options": [
+            "It terminates after reaching 1 (7 -> 22 -> 11 -> 34 ->... -> 1)",
+            "It loops infinitely between 7 and 22",
+            "It terminates at x = 0 under standard production system configurations",
+            "It does not enter the loop under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "If x = 7, it follows the Collatz sequence (7 -> 22 -> 11 ->... -> 1) and terminates.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "What question does The Halting Problem ask?",
+        "options": [
+            "Does a given program halt on all inputs?",
+            "How many disks are in the Towers of Hanoi?",
+            "What is the shortest path between 7 cities?",
+            "Can an addition function return 5?"
+        ],
+        "correct": 0,
+        "exp": "The Halting Problem: Does a given program halt on all inputs?",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Why would a program that solves the halting problem be useful in software development?",
+        "options": [
+            "We could test if a source program contains an infinite loop and never execute a program with an infinite loop",
+            "It would make all programs run in logarithmic time under standard organizational security baseline protocols",
+            "It would eliminate the need for Java compilers under standard organizational security baseline protocols",
+            "It would turn intractable problems into tractable ones under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "It would be useful to test if a given source program contains an infinite loop; we would never execute a program with an infinite loop.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Is the Halting Problem computable or noncomputable?",
+        "options": [
+            "Computable in polynomial time",
+            "The halting problem is noncomputable",
+            "Computable only for Java programs",
+            "Tractable for small inputs"
+        ],
+        "correct": 1,
+        "exp": "The halting problem is noncomputable.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "Why is the halting problem noncomputable?",
+        "options": [
+            "No finite program can be written that will check other programs and halt in a finite time giving a solution to the halting problem",
+            "Because modern computers have finite disk space under standard organizational security baseline protocols evaluated under formal computational grammar and state transition constraints",
+            "Because Alan Turing proved Java is invalid under standard organizational security baseline protocols",
+            "Because compilers cannot parse while loops under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "There is no single finite program that will answer the halting question for all programs. No finite program can be written that will check other programs and halt in a finite time.",
+        "section": "5. The Halting Problem & Undecidability"
+    },
+    {
+        "q": "What is Program Execution Time?",
+        "options": [
+            "The time of day a programmer writes code",
+            "How long a program takes to perform computations on large inputs",
+            "The time required to download a compiler evaluated under formal computational grammar and state transition constraints",
+            "The duration of an operating system install"
+        ],
+        "correct": 1,
+        "exp": "Program Execution Time: How long a program takes to perform computations on large inputs.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Computable problems are basically divided into which two classes based on execution time?",
+        "options": [
+            "Tractable and Intractable computations",
+            "Simple and Complex structures",
+            "Monolithic and Microkernel problems",
+            "Static and Dynamic problems"
+        ],
+        "correct": 0,
+        "exp": "Computable problems are basically divided into two classes: tractable and intractable computations.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "What are Tractable computations?",
+        "options": [
+            "Computations that can be completed in a reasonable time period",
+            "Computations that can take years or centuries",
+            "Noncomputable decision problems",
+            "Programs that run forever under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Computations that can be completed in a reasonable time period are called tractable.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "What is the running time on N inputs for a Tractable computation?",
+        "options": [
+            "Exponential in N across standard production computing environments",
+            "Logarithmic or polynomial in N",
+            "Infinite in N across standard production computing environments",
+            "Constant 1 millisecond"
+        ],
+        "correct": 1,
+        "exp": "A computation is tractable if its running time on N inputs is logarithmic or polynomial in N.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "What are Intractable computations?",
+        "options": [
+            "Computations that cannot be realistically completed except for small examples",
+            "Computations that finish in microseconds",
+            "Problems solved by simple addition under standard production system configurations",
+            "Decision problems with no output under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Intractable computations are those that cannot be realistically completed except for small examples.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "What is the running time on N inputs for an Intractable computation?",
+        "options": [
+            "Logarithmic in N",
+            "Polynomial in N",
+            "Exponential in N",
+            "Zero seconds"
+        ],
+        "correct": 2,
+        "exp": "A computation is intractable if its running time on N inputs is exponential in N.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which of the following is listed as an example of a Tractable problem?",
+        "options": [
+            "Towers of Hanoi configured for general baseline system administration",
+            "Searching or sorting N inputs",
+            "Traveling Salesperson",
+            "Bin Packing configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Tractable problems: searching or sorting N inputs.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which of the following is a Tractable problem?",
+        "options": [
+            "Computing the sum of positive integers of size N",
+            "Computing all permutations of N inputs",
+            "Graph Coloring configured for general baseline system administration",
+            "Towers of Hanoi configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Tractable problems: computing the sum of positive integers of size N.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which array operation is listed as a Tractable problem?",
+        "options": [
+            "Finding the largest element in an N x M array",
+            "Computing all permutation arrays evaluated under formal computational grammar and state transition constraints",
+            "Coloring the array vertices",
+            "Packing array items into trucks"
+        ],
+        "correct": 0,
+        "exp": "Tractable problems: finding the largest element in an N x M array.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which text counting task is listed as a Tractable problem?",
+        "options": [
+            "Counting the number of characters in a Java program",
+            "Solving the Halting Problem on source code evaluated under formal computational grammar and state transition constraints",
+            "Listing all possible integer subroutines",
+            "Visiting all cities in optimal order"
+        ],
+        "correct": 0,
+        "exp": "Tractable problems: counting the number of characters in a Java program.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which permutation task is listed as an Intractable problem?",
+        "options": [
+            "Computing all permutations of N inputs",
+            "Sorting N inputs configured for general baseline system administration",
+            "Searching N inputs configured for general baseline system administration",
+            "Adding two integers configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Intractable problems: computing all permutations of N inputs.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which classic recursive disk puzzle is listed as an Intractable problem?",
+        "options": [
+            "Towers of Hanoi",
+            "Addition function",
+            "Array lookup",
+            "Character counting"
+        ],
+        "correct": 0,
+        "exp": "Intractable problems: Towers of Hanoi.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which city-visiting routing problem is listed as an Intractable problem?",
+        "options": [
+            "Traveling Salesperson",
+            "Binary Search",
+            "Prime factor lookup",
+            "Bubble sort configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Intractable problems: Traveling Salesperson.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which container packaging problem is listed as an Intractable problem?",
+        "options": [
+            "Bin Packing",
+            "Array searching",
+            "Integer addition",
+            "Subroutine listing"
+        ],
+        "correct": 0,
+        "exp": "Intractable problems: Bin Packing.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which vertex coloring problem is listed as an Intractable problem?",
+        "options": [
+            "Graph Coloring",
+            "Character counting",
+            "Matrix finding",
+            "Array summation"
+        ],
+        "correct": 0,
+        "exp": "Intractable problems: Graph Coloring.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "In the Traveling Salesperson Problem, what are the conditions the salesperson must satisfy?",
+        "options": [
+            "Must visit each of some number of cities before returning home, knows distances, and wants to minimize total distance traveled",
+            "Must visit only the closest city and stay there under standard production system configurations evaluated under formal computational grammar and state transition constraints",
+            "Must find the prime factors of each city's population under standard production system configurations",
+            "Must avoid visiting any city with odd coordinates under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Traveling Salesperson: must visit each of some number of cities before returning home, knows distances, wants to minimize total distance.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Why is the brute-force approach to Traveling Salesperson intractable?",
+        "options": [
+            "Trying all paths from every starting point involves computing permutations ({a, b, c...}) which grows exponentially",
+            "Because cities cannot be represented as letters under standard organizational security baseline protocols evaluated under formal computational grammar and state transition constraints",
+            "Because distances between cities are noncomputable under standard organizational security baseline protocols",
+            "Because Turing machines cannot calculate miles under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Trying all paths from every starting point requires evaluating permutations, which takes exponential time.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "How is the Bin Packing problem defined?",
+        "options": [
+            "Pack a given set of items having different sizes into a minimum number of equal-sized bins",
+            "Sort N numbers in ascending order across standard production computing environments",
+            "Color vertices with different shades across standard production computing environments",
+            "Transfer packets through a default gateway across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Bin Packing: Pack a given set of items having different sizes into a minimum number of equal-sized bins.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "What concrete example of Bin Packing is provided in the PDF?",
+        "options": [
+            "Pack trucks with barrels using the smallest possible number of trucks",
+            "Move n disks across 3 pegs under standard production system configurations",
+            "Fit 100 people into one room under standard production system configurations",
+            "Download files over Wi-Fi under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Bin Packing Example: Pack trucks with barrels using the smallest possible number of trucks.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "How is the Graph Coloring problem defined?",
+        "options": [
+            "Color the vertices of a graph such that no edge connects two identically colored vertices using the minimum number of colors",
+            "Fill a rectangular array with random pixels across standard production computing environments evaluated under formal computational grammar and state transition constraints",
+            "Draw lines connecting all cities without crossing across standard production computing environments",
+            "Color the edges of a polygon red and green across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Graph Coloring: Color the vertices of a graph such that no edge connects two identically colored vertices using the minimum number of colors.",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "What example of an impractical problem asks 'What combination of switches turns the light on?'",
+        "options": [
+            "Trying all combinations (exponential number of possibilities)",
+            "Evaluating F(x) = x + 1 under standard production system configurations",
+            "Computing the sum of 2 numbers under standard production system configurations",
+            "Running programB on input 5 under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Slide 20: What combination of switches turns the light on? Try all combinations, how many are there?",
+        "section": "6. Computational Complexity (P vs NP)"
+    },
+    {
+        "q": "Which of the following is true regarding all intractable problems listed in the lesson?",
+        "options": [
+            "They are computable, but their running time is exponential in N, making them impractical except for small examples",
+            "They are noncomputable and have no theoretical solutions configured for general baseline system administration",
+            "They can be solved in logarithmic time on Turing machines configured for general baseline system administration",
+            "They are decision problems with no YES/NO answers configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Intractable problems are computable problems whose exponential running time makes them impractical to complete except for small examples.",
+        "section": "6. Computational Complexity (P vs NP)"
+    }
+];
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+
+        
+        function calculateComplexity() {
+            const n = Math.max(1, parseInt(document.getElementById('comp-n').value) || 1);
+            const speed = Math.max(1, parseFloat(document.getElementById('comp-speed').value) || 1000000);
+
+            const logN = Math.log2(n);
+            const nLogN = n * logN;
+            const n2 = n * n;
+            const exp2n = n <= 30 ? Math.pow(2, n) : Infinity;
+
+            function formatTime(steps) {
+                if (!isFinite(steps)) return "Over Universe Lifetime (> 10¹⁰⁰ yrs)";
+                const sec = steps / speed;
+                if (sec < 0.001) return `${(sec * 1000000).toFixed(2)} µs`;
+                if (sec < 1) return `${(sec * 1000).toFixed(2)} ms`;
+                if (sec < 60) return `${sec.toFixed(2)} sec`;
+                if (sec < 3600) return `${(sec / 60).toFixed(1)} min`;
+                if (sec < 86400) return `${(sec / 3600).toFixed(1)} hrs`;
+                return `${(sec / 86400).toFixed(1)} days`;
+            }
+
+            document.getElementById('comp-res-val').innerText = `O(n²) = ${n2.toLocaleString()} steps (${formatTime(n2)})`;
+            document.getElementById('comp-math-steps').innerHTML = `
+                <strong>Complexity Breakdown for Input n = ${n}:</strong><br>
+                <div class="step-line">• <strong>O(log n) [Logarithmic]:</strong> ${logN.toFixed(2)} steps | ~${formatTime(logN)}</div>
+                <div class="step-line">• <strong>O(n) [Linear]:</strong> ${n.toLocaleString()} steps | ~${formatTime(n)}</div>
+                <div class="step-line">• <strong>O(n log n) [Linearithmic]:</strong> ${nLogN.toFixed(2)} steps | ~${formatTime(nLogN)}</div>
+                <div class="step-line">• <strong>O(n²) [Polynomial - Class P]:</strong> ${n2.toLocaleString()} steps | ~${formatTime(n2)}</div>
+                <div class="step-line">• <strong>O(2ⁿ) [Exponential - Intractable]:</strong> ${isFinite(exp2n) ? exp2n.toLocaleString() : '> 10¹⁰⁰'} steps | ~${formatTime(exp2n)}</div>
+            `;
+        }
+
+        function classifyProblem() {
+            const val = document.getElementById('prob-type').value;
+            const map = {
+                'dfa_acceptance': { status: 'Decidable', color: '#16a34a', desc: 'Simulate DFA M on input w. Halts in exactly |w| steps.' },
+                'dfa_emptiness': { status: 'Decidable', color: '#16a34a', desc: 'Test graph reachability from start state q₀ to any accept state in F.' },
+                'dfa_equivalence': { status: 'Decidable', color: '#16a34a', desc: "Construct symmetric difference DFA C = (A ∩ B') ∪ (A' ∩ B) and test E_DFA(C)." },
+                'cfg_acceptance': { status: 'Decidable', color: '#16a34a', desc: 'Convert to Chomsky Normal Form (CNF) and apply CYK algorithm in O(n³) time.' },
+                'cfg_emptiness': { status: 'Decidable', color: '#16a34a', desc: 'Mark all generating variables bottom-up. Check if start symbol S is marked.' },
+                'atm_halting': { status: 'Undecidable (Turing-Recognizable)', color: '#dc2626', desc: 'Proved undecidable by Alan Turing (1936) via Cantor Diagonalization.' },
+                'tm_emptiness': { status: 'Undecidable (Not Turing-Recognizable)', color: '#dc2626', desc: 'Proved undecidable via reduction from A_TM (Halting Problem).' },
+                'tm_equivalence': { status: 'Undecidable (Not Turing-Recognizable)', color: '#dc2626', desc: 'Proved undecidable via reduction from E_TM.' },
+                'pcp': { status: 'Undecidable', color: '#dc2626', desc: 'Post Correspondence Problem is undecidable; used to prove ambiguity in CFGs is undecidable.' }
+            };
+
+            const info = map[val];
+            document.getElementById('prob-res-val').innerText = info.status;
+            document.getElementById('prob-res-val').style.color = info.color;
+            document.getElementById('prob-math-steps').innerHTML = `
+                <strong>Theoretical Classification:</strong><br>
+                <div class="step-line">• <strong>Status:</strong> <span style="color:${info.color}; font-weight:700;">${info.status}</span></div>
+                <div class="step-line">• <strong>Theoretical Proof:</strong> ${info.desc}</div>
+            `;
+        }
+    
+    </script>
+</body>
+</html>

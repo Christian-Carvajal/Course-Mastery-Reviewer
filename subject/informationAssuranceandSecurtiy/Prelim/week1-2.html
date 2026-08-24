@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Foundations & Threat Landscape | University Study Guide</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Information Assurance & Security</h1>
+        <p>Foundations & Threat Landscape — CIA Triad Principles, Threats, Vulnerabilities & 77-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">Foundations & Threat Landscape</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+
+            <!-- PART 1: INFOSEC & CIA TRIAD -->
+            <div class="card">
+                <h2>PART 1: Foundations of Information Security & The CIA Triad</h2>
+
+                <h3>1.1 What is Information Security?</h3>
+                <p>Information security is the practice of protecting information and information systems from unauthorized access, use, disclosure, disruption, modification, or destruction. ISO/IEC 27001 defines it compactly as the preservation of <strong>confidentiality</strong>, <strong>integrity</strong>, and <strong>availability</strong> of information.</p>
+                <div class="definition-card">
+                    <span class="def-title">Three Core Principles of InfoSec</span>
+                    <ul>
+                        <li><strong>A Process, Not a Product:</strong> Security is an ongoing cycle of risk assessment, control implementation, and monitoring rather than a piece of software you buy once.</li>
+                        <li><strong>A Business Function:</strong> InfoSec enables business operations safely rather than serving as a hurdle or bottleneck to progress.</li>
+                        <li><strong>Shared Responsibility:</strong> Technology provides controls, but human choices, policies, and behavior determine actual security posture.</li>
+                    </ul>
+                </div>
+
+                <h3>1.2 Information Security vs Cybersecurity vs Information Assurance</h3>
+                <p>While often used interchangeably, these terms cover distinct scopes:</p>
+                <ul>
+                    <li><strong>Information Security (InfoSec):</strong> The overarching discipline protecting information in <em>all forms</em>—physical paper files, digital databases, spoken conversations, and hardware assets.</li>
+                    <li><strong>Cybersecurity:</strong> A specialized sub-discipline focused strictly on protecting digital assets, networks, cloud systems, and internet-connected infrastructure from digital threats.</li>
+                    <li><strong>Information Assurance (IA):</strong> The strategic management umbrella that ensures data is correct, available when needed, authentic, non-repudiated, and backed by robust risk management and business continuity plans.</li>
+                </ul>
+
+                <h3>1.3 The CIA Triad</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">The Fundamental Framework</span><br>
+                    <span class="formula-text">CONFIDENTIALITY &bull; INTEGRITY &bull; AVAILABILITY</span>
+                    <div class="formula-explain">
+                        Every security control, policy, or incident response procedure is designed to protect one or more pillars of the CIA Triad.
+                    </div>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-title">1. Confidentiality (Prevent Unauthorized Disclosure)</span>
+                    <p>Ensuring that sensitive information is accessible <strong>only to authorized individuals, entities, or processes</strong>.</p>
+                    <ul>
+                        <li><strong>Key Threats:</strong> Eavesdropping, shoulder surfing, packet sniffing, unauthorized file access, data exfiltration, social engineering.</li>
+                        <li><strong>Core Controls:</strong> AES encryption (at rest and in transit), Role-Based Access Control (RBAC), Multi-Factor Authentication (MFA), Data Loss Prevention (DLP) tools, non-disclosure agreements.</li>
+                        <li><strong>Real-World Breach Example:</strong> An unencrypted database containing customer credit card numbers is exposed to the public internet.</li>
+                    </ul>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-title">2. Integrity (Prevent Unauthorized Modification)</span>
+                    <p>Safeguarding the <strong>accuracy, completeness, and trustworthiness</strong> of data and systems throughout their entire lifecycle.</p>
+                    <ul>
+                        <li><strong>Key Threats:</strong> Unauthorized data tampering, man-in-the-middle (MitM) alterations, malware payload injection, unauthorized SQL updates, transmission corruption.</li>
+                        <li><strong>Core Controls:</strong> Cryptographic hashes (SHA-256), digital signatures, file integrity monitoring (FIM), database transaction logging, write-once backups.</li>
+                        <li><strong>Real-World Breach Example:</strong> An attacker alters bank account balance records or tampers with medical dosage records in a hospital database.</li>
+                    </ul>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-title">3. Availability (Prevent Unauthorized Disruption)</span>
+                    <p>Ensuring that authorized users have <strong>timely and reliable access</strong> to information, systems, and critical services when needed.</p>
+                    <ul>
+                        <li><strong>Key Threats:</strong> Distributed Denial of Service (DDoS) attacks, ransomware encryption of production systems, hardware failures, power outages, physical disasters.</li>
+                        <li><strong>Core Controls:</strong> Redundant server clusters, load balancers, automated failover systems, RAID storage arrays, offsite backups, Disaster Recovery Plans (DRP).</li>
+                        <li><strong>Real-World Breach Example:</strong> A SYN-flood DDoS attack knocks out an e-commerce storefront during peak holiday shopping hours.</li>
+                    </ul>
+                </div>
+
+                <h3>1.4 Extending the Triad: The Parkerian Hexad</h3>
+                <p>Donn Parker expanded the traditional CIA Triad to 6 security elements to address broader security requirements:</p>
+                <ol>
+                    <li><strong>Confidentiality:</strong> Secrecy and restricted access.</li>
+                    <li><strong>Integrity:</strong> Prevention of unauthorized data modification.</li>
+                    <li><strong>Availability:</strong> Timely access to systems and services.</li>
+                    <li><strong>Authenticity:</strong> Verification of the genuine identity of a user, message, or system source.</li>
+                    <li><strong>Possession / Control:</strong> Physical or logical control over data and physical media (e.g., a stolen encrypted laptop maintains confidentiality but loses physical possession).</li>
+                    <li><strong>Utility:</strong> The usefulness or usability of data (e.g., data encrypted with a lost key retains confidentiality but loses utility).</li>
+                </ol>
+            </div>
+
+            <!-- PART 2: THREAT LANDSCAPE & ATTACK VECTORS -->
+            <div class="card">
+                <h2>PART 2: Threat Landscape, Vulnerabilities & Attack Vectors</h2>
+
+                <h3>2.1 Core Security Vocabulary: Asset, Threat, Vulnerability, Risk</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">Risk Formula</span><br>
+                    <span class="formula-text">RISK = THREAT &times; VULNERABILITY &times; IMPACT</span>
+                    <div class="formula-explain">
+                        • <strong>Asset:</strong> Anything of value to the organization (data, infrastructure, IP, reputation, personnel).<br>
+                        • <strong>Threat:</strong> Any potential cause of an unwanted incident that may result in harm to a system or asset.<br>
+                        • <strong>Vulnerability:</strong> A flaw, weakness, or gap in security procedures, design, or implementation that can be exploited.<br>
+                        • <strong>Risk:</strong> The potential for loss, damage, or destruction resulting from a threat exploiting a vulnerability.<br>
+                        • <strong>Control (Safeguard):</strong> A measure put in place to mitigate vulnerability or reduce impact.
+                    </div>
+                </div>
+
+                <h3>2.2 Threat Actor Categories</h3>
+                <p>Threat actors vary widely in intent, resources, technical capability, and motivation:</p>
+                <ul>
+                    <li><strong>Script Kiddies:</strong> Unskilled individuals who run pre-packaged automated scripts and exploits written by others, typically motivated by ego or curiosity.</li>
+                    <li><strong>Hacktivists:</strong> Individuals or groups motivated by political, ideological, or social causes (e.g., Anonymous, disabling government sites in protest).</li>
+                    <li><strong>Cybercriminals:</strong> Profit-driven individuals or organized syndicates conducting ransomware, financial fraud, identity theft, and extortion.</li>
+                    <li><strong>Insider Threats:</strong> Disgruntled employees, contractors, or careless staff members who misuse legitimate access to leak or destroy data.</li>
+                    <li><strong>Nation-State Actors (APTs):</strong> Highly sophisticated, well-funded state-backed threat groups (Advanced Persistent Threats) targeting critical infrastructure, intelligence, and intellectual property over long campaigns.</li>
+                </ul>
+
+                <h3>2.3 Common Attack Vectors</h3>
+                <div class="example-card">
+                    <span class="example-title">Attack Vector Taxonomy</span>
+                    <ul>
+                        <li><strong>Social Engineering & Phishing:</strong> Tricking human users into revealing credentials, executing malicious attachments, or transferring funds (Phishing, Spear Phishing, Whaling, Vishing, Smishing).</li>
+                        <li><strong>Malware & Ransomware:</strong> Malicious code (viruses, worms, trojans, ransomware, spyware, rootkits) designed to compromise or encrypt target systems.</li>
+                        <li><strong>Web Application Attacks:</strong> Exploiting application vulnerabilities like SQL Injection (SQLi), Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and Remote Code Execution (RCE).</li>
+                        <li><strong>Network & Denial of Service Attacks:</strong> Disrupting service availability through Man-in-the-Middle (MitM) eavesdropping, ARP spoofing, DNS poisoning, and DDoS amplification.</li>
+                        <li><strong>Supply Chain Attacks:</strong> Compromising trusted third-party vendor software updates or hardware components to breach downstream targets.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 77</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Dynamically rendered quiz questions -->
+            </div>
+        </div>
+
+        <!-- TAB 3: QUICK REFERENCE -->
+                <!-- TAB 3: QUICK REFERENCE -->
+        <div id="formulas" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2 style="margin:0;">Quick Reference: CIA Triad & Core Security Principles</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Pillar / Principle</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Definition</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Threat Vectors</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Defensive Controls</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Confidentiality</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensuring data is accessible ONLY to authorized entities.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Eavesdropping, Snooping, Data Exfiltration, Shoulder Surfing.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Encryption (AES-256), MFA, Access Control Lists (ACLs).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Integrity</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Safeguarding accuracy and completeness of data against unauthorized modification.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Unauthorized Tampering, Man-in-the-Middle (MitM), SQL Injection.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Cryptographic Hashes (SHA-256), Digital Signatures, Write-Once Storage.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Availability</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensuring systems and data are timely accessible to authorized users when needed.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Denial of Service (DoS/DDoS), Ransomware, Hardware Outages.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Redundancy, RAID, Load Balancing, Offsite Backups, Failover Clusters.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Non-Repudiation</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensuring an action or transaction cannot be denied by the party who performed it.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Impersonation, Log Tampering.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Digital Signatures, Asymmetric PKI, Immutable Audit Logs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: Threat Actor Profiles Matrix</h2>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Threat Actor</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Motivation</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Resource Level</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Sophistication & Tactics</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Script Kiddie</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Thrill, bragging rights, ego</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626;">Low</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Uses pre-made automated tools and scripts without deep technical knowledge.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Hacktivist</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Political, social, or ideological causes</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Moderate</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Website defacement, DDoS, leaking confidential docs (doxxing).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Organized Cybercrime</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Financial Gain</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ransomware-as-a-Service (RaaS), credential harvesting, extortion.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Nation-State (APT)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Espionage, military advantage</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Unlimited (State-Backed)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Zero-day exploits, stealthy long-term persistence (Advanced Persistent Threat).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Insider Threat</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Revenge, greed, carelessness</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Internal Privileges</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Abuses legitimate credentials to bypass perimeter defenses.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: Attack Vectors & Social Engineering Tactics</h2>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin-top:1rem;">
+                    <div class="definition-card">
+                        <span class="def-badge">Spear Phishing vs Whaling</span>
+                        <p><strong>Spear Phishing:</strong> Targeted email attack customized for a specific individual.<br><strong>Whaling:</strong> Spear phishing specifically targeting high-profile C-level executives.</p>
+                    </div>
+                    <div class="definition-card">
+                        <span class="def-badge">Vishing vs Smishing</span>
+                        <p><strong>Vishing:</strong> Social engineering via voice calls / phone scams.<br><strong>Smishing:</strong> Social engineering via SMS text messages.</p>
+                    </div>
+                    <div class="definition-card">
+                        <span class="def-badge">Tailgating vs Piggybacking</span>
+                        <p>Following authorized personnel into a secure building without scanning a badge.</p>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <!-- ==========================================
+                 Interactive Academic Calculators Section
+                 ========================================== -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Interactive Academic Calculators (Live Risk & Threat Engines)</h2>
+                
+                <!-- Calculator 1: Threat Likelihood & Risk Matrix Engine -->
+                <div class="calc-card">
+                    <div class="calc-title">🧮 Part 2 (2.1): Core Security Vocabulary — Security Equation (Asset × Threat × Vulnerability = Risk Score)</div>
+                    <div class="calc-desc">Calculate composite risk score Risk = Asset Criticality × Threat Likelihood × Vulnerability Severity to establish remediation SLAs and defensive prioritization.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-asset">Asset Criticality (1-5):</label>
+                            <select id="risk-asset" class="calc-input" onchange="calculateSecurityRiskScore()">
+                                <option value="5" selected>5 - Mission Critical (Core DB, Financial Systems)</option>
+                                <option value="4">4 - High (Customer Portals, Employee Records)</option>
+                                <option value="3">3 - Moderate (Internal Wiki, Department Files)</option>
+                                <option value="2">2 - Low (Public Marketing Site)</option>
+                                <option value="1">1 - Minimal (Test Lab Workstations)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-threat">Threat Likelihood (1-5):</label>
+                            <select id="risk-threat" class="calc-input" onchange="calculateSecurityRiskScore()">
+                                <option value="5">5 - Frequent / Active (Nation-State / Ransomware Gangs)</option>
+                                <option value="4" selected>4 - Likely (Organized Cybercriminals, Automated Bots)</option>
+                                <option value="3">3 - Moderate (Opportunistic Script Kiddies)</option>
+                                <option value="2">2 - Unlikely (Disgruntled Insiders)</option>
+                                <option value="1">1 - Rare (Isolated Physical Sabotage)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-vuln">Vulnerability Severity (1-5):</label>
+                            <select id="risk-vuln" class="calc-input" onchange="calculateSecurityRiskScore()">
+                                <option value="5">5 - Critical (Zero-Day RCE, Unauthenticated Admin)</option>
+                                <option value="4" selected>4 - High (Public Exploit Available, Weak Auth)</option>
+                                <option value="3">3 - Medium (Missing Patch, Local Privilege Escalation)</option>
+                                <option value="2">2 - Low (Information Disclosure, Weak Cipher)</option>
+                                <option value="1">1 - Informational (Banner Grabbing)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Composite Risk Score & Remediation SLA:</span>
+                            <span class="calc-result-val" id="risk-result-val">Risk Score: 80 / 125 (CRITICAL)</span>
+                        </div>
+                        <div class="calc-math-steps" id="risk-math-steps">
+                            <strong>ISO 27005 Threat Analysis Breakdown:</strong><br>
+                            <div class="step-line">• <strong>Score Formula:</strong> 5 (Asset) × 4 (Threat) × 4 (Vulnerability) = <strong>80 / 125</strong></div>
+                            <div class="step-line">• <strong>Severity Tier:</strong> <span style="color:#dc2626; font-weight:700;">CRITICAL RISK</span> (Immediate Executive Escalation)</div>
+                            <div class="step-line">• <strong>Remediation SLA:</strong> Emergency containment within <strong>24 Hours</strong>. Primary control: Network isolation, virtual patching, and MFA enforcement.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 2: High Availability Nines -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 1 (1.3): The CIA Triad (Availability) — High Availability SLA (The 'Nines') & Downtime Loss</div>
+                    <div class="calc-desc">Calculate permitted downtime allowances per year, month, and day for enterprise High Availability service levels (99.0% to 99.9999%).</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="avail-sla">Target Availability SLA:</label>
+                            <select id="avail-sla" class="calc-input" onchange="calculateAvailabilityDowntime()">
+                                <option value="0.99">99.0% ('Two Nines' - Basic Web Hosting)</option>
+                                <option value="0.999" selected>99.9% ('Three Nines' - Standard Cloud Service)</option>
+                                <option value="0.9999">99.99% ('Four Nines' - Enterprise Production Tier)</option>
+                                <option value="0.99999">99.999% ('Five Nines' - Mission Critical / Telecom)</option>
+                                <option value="0.999999">99.9999% ('Six Nines' - Military / Financial Core)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="avail-cost">Hourly Outage Impact ($ / hr):</label>
+                            <input type="number" id="avail-cost" class="calc-input" value="45000" step="5000" min="0" oninput="calculateAvailabilityDowntime()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Permitted Annual Downtime & Financial Loss:</span>
+                            <span class="calc-result-val" id="avail-result-val">8.76 Hours / yr ($394,200.00 / yr)</span>
+                        </div>
+                        <div class="calc-math-steps" id="avail-math-steps">
+                            <strong>High Availability Analysis:</strong><br>
+                            <div class="step-line">• <strong>Annual Allowed Downtime:</strong> 365.25 days × 24 hrs × (1 - 0.999) = <strong>8.766 Hours / year (525.96 minutes)</strong></div>
+                            <div class="step-line">• <strong>Monthly Allowed Downtime:</strong> <strong>43.83 Minutes / month</strong> | Daily: <strong>1.44 Minutes / day</strong></div>
+                            <div class="step-line">• <strong>Maximum Financial Exposure:</strong> 8.766 hrs × $45,000 / hr = <strong>$394,470.00 / year</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 3: Phishing Exposure Estimator -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 2 (2.3): Common Attack Vectors — Social Engineering & Phishing Exposure Model (Training ROI)</div>
+                    <div class="calc-desc">Model annual corporate breach risk from social engineering tactics (Spear Phishing, Smishing, Vishing) based on organizational employee headcount.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="phish-emp">Total Employees:</label>
+                            <input type="number" id="phish-emp" class="calc-input" value="250" step="25" min="1" oninput="calculatePhishingExposure()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="phish-rate">Click / Failure Rate (%):</label>
+                            <input type="number" id="phish-rate" class="calc-input" value="8" step="1" min="0" max="100" oninput="calculatePhishingExposure()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="phish-cost">Avg Breach Cost ($):</label>
+                            <input type="number" id="phish-cost" class="calc-input" value="120000" step="10000" min="1000" oninput="calculatePhishingExposure()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Annual Social Engineering Exposure:</span>
+                            <span class="calc-result-val" id="phish-result-val">Expected Exposure: $240,000.00 / yr</span>
+                        </div>
+                        <div class="calc-math-steps" id="phish-math-steps">
+                            <strong>Exposure & Training ROI Calculation:</strong><br>
+                            <div class="step-line">• <strong>Susceptible Staff:</strong> 250 employees × 8% failure rate = <strong>20 vulnerable users / month</strong></div>
+                            <div class="step-line">• <strong>Annual Threat Probability:</strong> Estimated 2.0 successful initial access intrusions / year</div>
+                            <div class="step-line">• <strong>Expected Annual Loss:</strong> 2.0 × $120,000 = <strong>$240,000.00 / year</strong></div>
+                            <div class="step-line">• <strong>Mitigation ROI:</strong> Implementing monthly Simulated Phishing Training reduces click rate to &lt; 2%, saving an estimated <strong>$180,000.00 annually</strong>.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div></div>
+
+    <script>
+
+        // ==========================================
+        // Interactive Security Risk Calculators
+        // ==========================================
+        function calculateSecurityRiskScore() {
+            const asset = parseInt(document.getElementById('risk-asset').value) || 1;
+            const threat = parseInt(document.getElementById('risk-threat').value) || 1;
+            const vuln = parseInt(document.getElementById('risk-vuln').value) || 1;
+
+            const score = asset * threat * vuln;
+            const resVal = document.getElementById('risk-result-val');
+            const resSteps = document.getElementById('risk-math-steps');
+
+            let tier = '';
+            let color = '';
+            let sla = '';
+            let control = '';
+
+            if (score >= 75) {
+                tier = 'CRITICAL';
+                color = '#dc2626';
+                sla = '24 Hours';
+                control = 'Immediate network isolation, emergency hotfix patch, executive incident response activation.';
+            } else if (score >= 40) {
+                tier = 'HIGH';
+                color = '#ea580c';
+                sla = '7 Days';
+                control = 'WAF virtual patching, credential rotation, strict MFA enforcement, enhanced SIEM monitoring.';
+            } else if (score >= 15) {
+                tier = 'MEDIUM';
+                color = '#d97706';
+                sla = '30 Days';
+                control = 'Scheduled patch cycle, least-privilege role audit, configuration hardening.';
+            } else {
+                tier = 'LOW';
+                color = '#16a34a';
+                sla = '90 Days';
+                control = 'Routine maintenance, periodic vulnerability scanning, security hygiene review.';
+            }
+
+            if (resVal) {
+                resVal.innerHTML = `<span style="color:</strong>{color}; font-weight:800;">Score: ${score} / 125 (${tier})</span>`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>ISO 27005 Threat Analysis Breakdown:</strong><br>
+                    <div class="step-line">• <strong>Score Formula:</strong> ${asset} (Asset) × ${threat} (Threat) × ${vuln} (Vulnerability) = <strong>${score} / 125</strong></div>
+                    <div class="step-line">• <strong>Severity Tier:</strong> <span style="color:${color}; font-weight:700;">${tier} RISK</span></div>
+                    <div class="step-line">• <strong>Remediation SLA:</strong> Target remediation within <strong>${sla}</strong>.</div>
+                    <div class="step-line">• <strong>Primary Defensive Control:</strong> ${control}</div>
+                `;
+            }
+        }
+
+        function calculateAvailabilityDowntime() {
+            const sla = parseFloat(document.getElementById('avail-sla').value) || 0.999;
+            const costPerHour = parseFloat(document.getElementById('avail-cost').value) || 0;
+
+            const totalHoursPerYear = 365.25 * 24;
+            const downtimeHours = totalHoursPerYear * (1 - sla);
+            const downtimeMins = downtimeHours * 60;
+            const downtimeSecs = downtimeMins * 60;
+            const annualLoss = downtimeHours * costPerHour;
+
+            function formatDowntime(hrs) {
+                if (hrs >= 1.0) return `${hrs.toFixed(2)} Hours / yr`;
+                if (hrs * 60 >= 1.0) return `${(hrs * 60).toFixed(2)} Minutes / yr`;
+                return `${(hrs * 3600).toFixed(1)} Seconds / yr`;
+            }
+
+            const resVal = document.getElementById('avail-result-val');
+            const resSteps = document.getElementById('avail-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `${formatDowntime(downtimeHours)} ($${annualLoss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / yr)`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>High Availability Analysis:</strong><br>
+                    <div class="step-line">• <strong>Annual Allowed Downtime:</strong> 8,766 hrs × (1 - ${sla}) = <strong>${formatDowntime(downtimeHours)} (${downtimeMins.toFixed(2)} mins)</strong></div>
+                    <div class="step-line">• <strong>Monthly Allowed Downtime:</strong> <strong>${(downtimeMins / 12).toFixed(2)} Minutes / month</strong> | Daily: <strong>${(downtimeMins / 365.25).toFixed(2)} Minutes / day</strong></div>
+                    <div class="step-line">• <strong>Maximum Financial Exposure:</strong> ${downtimeHours.toFixed(3)} hrs × $${costPerHour.toLocaleString()} / hr = <strong>$${annualLoss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / year</strong></div>
+                `;
+            }
+        }
+
+        function calculatePhishingExposure() {
+            const emp = parseInt(document.getElementById('phish-emp').value) || 1;
+            const rate = parseFloat(document.getElementById('phish-rate').value) || 0;
+            const cost = parseFloat(document.getElementById('phish-cost').value) || 0;
+
+            const vulnerableMonthly = (emp * (rate / 100));
+            const annualIntrusions = Math.max(0.1, (vulnerableMonthly * 0.1));
+            const expectedAnnualLoss = annualIntrusions * cost;
+            const potentialSavings = expectedAnnualLoss * 0.75;
+
+            const resVal = document.getElementById('phish-result-val');
+            const resSteps = document.getElementById('phish-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `Exposure: $${expectedAnnualLoss.toLocaleString('en-US', { maximumFractionDigits: 0 })} / yr`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Exposure & Training ROI Calculation:</strong><br>
+                    <div class="step-line">• <strong>Susceptible Staff:</strong> ${emp} employees × ${rate}% failure rate = <strong>${vulnerableMonthly.toFixed(1)} vulnerable users / month</strong></div>
+                    <div class="step-line">• <strong>Annual Threat Intrusions:</strong> Estimated ${annualIntrusions.toFixed(2)} successful compromise events / year</div>
+                    <div class="step-line">• <strong>Expected Annual Loss:</strong> ${annualIntrusions.toFixed(2)} × $${cost.toLocaleString()} = <strong>$${expectedAnnualLoss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / year</strong></div>
+                    <div class="step-line">• <strong>Mitigation ROI:</strong> Implementing monthly Simulated Phishing Training reduces click rate to <2%, saving an estimated <strong>$${potentialSavings.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} annually</strong>.</div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof calculateSecurityRiskScore === 'function') calculateSecurityRiskScore();
+            if (typeof calculateAvailabilityDowntime === 'function') calculateAvailabilityDowntime();
+            if (typeof calculatePhishingExposure === 'function') calculatePhishingExposure();
+        });
+
+        const quizData = [
+    {
+        "q": "What is the definition of information security?",
+        "options": [
+            "A buying the newest firewall on the market operating within enterprise data processing pipelines",
+            "The practice of protecting information and information systems from unauthorized access, use, disclosure, disruption, modification, or destruction",
+            "An eliminating all risks permanently from an organization operating within enterprise data processing pipelines enforced through centralized administrative governance and compliance monitoring",
+            "A writing legal contracts for vendors operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Information Security (InfoSec) is the holistic practice of protecting information and information systems from unauthorized access, use, disclosure, disruption, modification, or destruction to maintain confidentiality, integrity, and availability across physical, digital, and administrative domains.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "Which international standard compactly defines InfoSec as the preservation of confidentiality, integrity, and availability?",
+        "options": [
+            "NIST SP 800-53",
+            "ISO/IEC 27001",
+            "PCI-DSS across standard production computing environments",
+            "HIPAA across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "ISO/IEC 27000 defines Information Security as the 'preservation of confidentiality, integrity, and availability of information; in addition, other properties such as authenticity, accountability, non-repudiation, and reliability can also be involved.'",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What does Confidentiality aim to prevent?",
+        "options": [
+            "System downtime under standard production system configurations",
+            "Unauthorized modification of data",
+            "Unauthorized disclosure of information",
+            "Hardware failures under standard production system configurations"
+        ],
+        "correct": 2,
+        "exp": "Confidentiality ensures that information is accessible only to authorized individuals, entities, or processes, preventing unauthorized disclosure, eavesdropping, and data leaks.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What does Integrity safeguard?",
+        "options": [
+            "Data secrecy under standard production system configurations",
+            "Accuracy, completeness, and trustworthiness of data",
+            "24/7 server uptime under standard production system configurations",
+            "User password length under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Integrity safeguards the accuracy, completeness, and authenticity of data and systems, preventing unauthorized modification, deletion, forgery, or corruption throughout the data lifecycle.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What does Availability ensure?",
+        "options": [
+            "That data is encrypted at rest under standard production system configurations",
+            "That authorized users have timely and reliable access to systems",
+            "That no user ever loses their password",
+            "That backups are deleted weekly under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Availability ensures that authorized users have timely, reliable, and uninterrupted access to information assets, network services, and critical infrastructure when needed.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "Which of the following is an asset category in information security?",
+        "options": [
+            "Data and Systems",
+            "Personnel and People",
+            "Reputation and Property",
+            "All of the above"
+        ],
+        "correct": 3,
+        "exp": "Information assets encompass hardware (servers, routers), software (applications, OS), data (databases, customer PII), people (employees, users), documentation, and physical facilities.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is an Asset in security terminology?",
+        "options": [
+            "A weakness in software",
+            "Anything of value to an organization",
+            "An automated attack script",
+            "A legal penalty designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "An Asset is anything of tangible or intangible value to an organization that requires protection (e.g. intellectual property, customer databases, operational servers, financial records).",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is a Threat?",
+        "options": [
+            "A flaw in system design designed to support enterprise operational infrastructure",
+            "Any potential cause of an unwanted incident that may cause harm",
+            "The process of encrypting data designed to support enterprise operational infrastructure",
+            "A type of firewall rule designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Threat is any potential circumstance, event, human actor, or environmental hazard with the capability to exploit a vulnerability and cause harm to an asset.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is a Vulnerability?",
+        "options": [
+            "A security control designed to support enterprise operational infrastructure",
+            "A weakness or flaw in security procedures or technical design",
+            "The financial cost of a breach designed to support enterprise operational infrastructure",
+            "An attacker's motivation designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Vulnerability is a weakness, flaw, misconfiguration, or gap in system security procedures, design, implementation, or internal controls that can be exploited by a threat.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is Risk?",
+        "options": [
+            "The product of Threat, Vulnerability, and Impact",
+            "A software patch designed to support enterprise operational infrastructure",
+            "A physical lock on a door designed to support enterprise operational infrastructure",
+            "A guaranteed breach designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Risk is the potential for loss or damage resulting from the intersection of a threat exploiting a vulnerability: Risk = Probability of Threat Exploitation × Impact to Asset Value.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What control primary protects Confidentiality?",
+        "options": [
+            "RAID storage arrays",
+            "AES Encryption",
+            "UPS backup generators",
+            "Checksums"
+        ],
+        "correct": 1,
+        "exp": "Confidentiality is primarily enforced through cryptographic encryption (AES-256, TLS 1.3), granular Access Control Lists (ACLs), role-based permissions, and data masking.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What control primary protects Integrity?",
+        "options": [
+            "Cryptographic Hashing (SHA-256)",
+            "Load balancing under standard production system configurations",
+            "DLP tools under standard production system configurations",
+            "Screen privacy filters"
+        ],
+        "correct": 0,
+        "exp": "Integrity is primarily protected via cryptographic hash functions (SHA-256), digital signatures, Message Authentication Codes (HMAC), database checksums, and strict file change auditing.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What control primary protects Availability?",
+        "options": [
+            "AES Encryption under standard production system configurations",
+            "Data Loss Prevention",
+            "Redundant clusters & Failover",
+            "Digital Signatures"
+        ],
+        "correct": 2,
+        "exp": "Availability is safeguarded through hardware redundancy (RAID, redundant power supplies), automated failover clustering, load balancing, offsite backups, and DDoS mitigation services.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "A hacker intercepts unencrypted Wi-Fi traffic to read passwords. Which CIA pillar is breached?",
+        "options": [
+            "Integrity",
+            "Availability",
+            "Confidentiality",
+            "Non-repudiation"
+        ],
+        "correct": 2,
+        "exp": "Eavesdropping on unencrypted network traffic breaches Confidentiality because unauthorized parties intercept and read sensitive cleartext credentials.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "An attacker alters student grade records in a database. Which CIA pillar is breached?",
+        "options": [
+            "Confidentiality",
+            "Integrity",
+            "Availability",
+            "Authenticity"
+        ],
+        "correct": 1,
+        "exp": "Modifying student grades in a database unauthorizedly breaches Integrity because the accuracy, trustworthiness, and valid state of official records have been corrupted.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "A DDoS attack overwhelms a web server so students cannot log in. Which CIA pillar is breached?",
+        "options": [
+            "Confidentiality",
+            "Integrity",
+            "Availability",
+            "Possession"
+        ],
+        "correct": 2,
+        "exp": "A Distributed Denial of Service (DDoS) attack overwhelms server bandwidth and compute capacity, knocking the application offline and directly violating Availability.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is the Parkerian Hexad?",
+        "options": [
+            "A 6-step incident response model",
+            "A 6-element expansion of the CIA Triad by Donn Parker",
+            "A cryptographic hashing algorithm",
+            "A network protocol designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "Formulated by Donn B. Parker, the Parkerian Hexad expands the classic 3-pillar CIA triad to 6 foundational security attributes by adding Possession (or Control), Authenticity, and Utility.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "In the Parkerian Hexad, what is Possession?",
+        "options": [
+            "Having physical or logical control of the storage medium",
+            "Knowing the encryption key across standard production computing environments",
+            "Having 100% uptime across standard production computing environments",
+            "Digital signatures across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Possession (Control) in the Parkerian Hexad refers to the physical or logical custody of an asset; stealing an encrypted backup tape breaches Possession even if encryption preserves Confidentiality.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "In the Parkerian Hexad, what is Utility?",
+        "options": [
+            "The monetary value of data",
+            "The usefulness or usability of information",
+            "The speed of the network designed to support enterprise operational infrastructure",
+            "A data backup frequency operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Utility refers to the usefulness and usable state of data; encrypting critical data with a lost private key preserves confidentiality and integrity, but destroys its operational Utility.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is Authenticity?",
+        "options": [
+            "Ensuring data is 100% secret across standard production computing environments",
+            "Verifying the genuine source or identity of a message or user",
+            "Preventing hardware failure across standard production computing environments",
+            "Writing code without bugs across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Authenticity is the property of ensuring that data, communications, or identities genuinely originate from the claimed, legitimate source without forgery.",
+        "section": "Part 1: Foundations of InfoSec, CIA Triad & Parkerian Hexad"
+    },
+    {
+        "q": "What is Non-Repudiation?",
+        "options": [
+            "Preventing a user from denying they performed an action",
+            "Encrypting files on disk across standard production computing environments",
+            "Setting up firewall rules across standard production computing environments",
+            "Creating system backups across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Non-Repudiation provides indisputable cryptographic proof of the origin and delivery of data (via digital signatures and asymmetric cryptography), preventing a sender from falsely denying they sent a message.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "Who are Script Kiddies?",
+        "options": [
+            "State-sponsored military hackers configured for general baseline system administration",
+            "Unskilled individuals using pre-made scripts without deep understanding",
+            "Disgruntled senior developers configured for general baseline system administration",
+            "Certified ethical hackers configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Script Kiddies are unskilled, novice attackers who execute pre-written automated exploit scripts, tools, and vulnerability scanners without understanding the underlying code mechanics.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What motivates Hacktivists?",
+        "options": [
+            "Direct financial theft",
+            "Political, social, or ideological causes",
+            "Boredom under standard production system configurations",
+            "Accidental system misconfiguration"
+        ],
+        "correct": 1,
+        "exp": "Hacktivists are politically, socially, or ideologically motivated threat actors who breach systems or deface websites to promote political causes, expose corruption, or conduct digital protests.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What defines an Insider Threat?",
+        "options": [
+            "An external hacker from another country designed to support enterprise operational infrastructure",
+            "A current or former employee/contractor with legitimate access who misuses it",
+            "A hardware component failure designed to support enterprise operational infrastructure",
+            "A natural disaster designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "An Insider Threat originates from authorized employees, contractors, or business partners who abuse their legitimate credentials, system access, or internal knowledge maliciously or negligently.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is an Advanced Persistent Threat (APT)?",
+        "options": [
+            "A basic virus on a home PC designed to support enterprise operational infrastructure",
+            "A stealthy, highly sophisticated, state-backed continuous hacking campaign",
+            "A spam email campaign designed to support enterprise operational infrastructure",
+            "A temporary network glitch designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "An Advanced Persistent Threat (APT) is a sophisticated, well-funded, state-sponsored or organized cyber espionage group that maintains prolonged, stealthy access inside high-value target networks.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Phishing?",
+        "options": [
+            "Scanning open network ports across standard production computing environments",
+            "Deceptive communication designed to trick targets into revealing credentials or installing malware",
+            "Brute-forcing SSH keys across standard production computing environments implemented across standard enterprise production environments",
+            "Physical theft of laptops across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Phishing is a broad social engineering attack where fraudulent emails or messages impersonate legitimate organizations to trick recipients into revealing passwords, clicking malware links, or sharing financial data.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Spear Phishing?",
+        "options": [
+            "A phishing aimed randomly at millions operating within enterprise data processing pipelines",
+            "A highly targeted phishing attack tailored to a specific individual or organization",
+            "A phishing via voice calls operating within enterprise data processing pipelines",
+            "A phishing via sms operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Spear Phishing is a highly targeted, customized social engineering attack that weaponizes researched personal details (job title, projects, colleagues) to target a specific individual or department.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Whaling?",
+        "options": [
+            "A targeting low-level staff operating within enterprise data processing pipelines",
+            "A spear-phishing attack specifically targeting senior executives or high-profile figures",
+            "An exploiting iot devices operating within enterprise data processing pipelines implemented across standard enterprise production environments",
+            "A flooding network routers operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Whaling is a specialized spear phishing attack specifically targeting high-profile executive leadership (C-level executives, board members, high-ranking government officials).",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Vishing?",
+        "options": [
+            "Phishing via SMS text across standard production computing environments",
+            "Social engineering via voice phone calls",
+            "Phishing via video calls across standard production computing environments",
+            "Malware on USB drives across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Vishing (Voice Phishing) uses fraudulent telephone calls or VoIP caller-ID spoofing to impersonate IT support, bank officials, or law enforcement to extract credentials over the phone.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Smishing?",
+        "options": [
+            "Social engineering conducted over SMS text messages",
+            "Email spamming across standard production computing environments",
+            "Ransomware encryption across standard production computing environments",
+            "Port scanning across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Smishing (SMS Phishing) delivers deceptive links or urgent security prompts via mobile text messages (SMS) to trick mobile users into installing malware or entering login credentials.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Shoulder Surfing?",
+        "options": [
+            "Directly observing someone entering passwords or sensitive info on a screen/keypad",
+            "Intercepting Wi-Fi packets remotely across standard production computing environments",
+            "Decrypting password hashes across standard production computing environments",
+            "Sending fake emails across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Shoulder Surfing is a direct physical observation technique where an attacker watches a victim's screen or keyboard keystrokes to steal passwords, PINs, or confidential documents.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Dumpster Diving?",
+        "options": [
+            "Searching through garbage for sensitive discarded documents or drives",
+            "Hacking database backups across standard production computing environments",
+            "Fuzzing web application inputs across standard production computing environments",
+            "Cleaning up junk code across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Dumpster Diving involves searching through physical trash bins, recycling containers, or discarded IT assets to recover sensitive un-shredded paper documents, passwords, or hardware.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Piggybacking / Tailgating?",
+        "options": [
+            "Following an authorized person through a secure physical door without scanning a badge",
+            "Sharing passwords with colleagues across standard production computing environments",
+            "Connecting multiple routers across standard production computing environments",
+            "Using public Wi-Fi across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Tailgating (Piggybacking) occurs when an unauthorized person physically follows an authorized employee through a secure door or access turnstile without presenting valid credentials.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Social Engineering?",
+        "options": [
+            "Configuring firewall rules across standard production computing environments",
+            "Manipulating human psychology to trick people into breaking security procedures",
+            "Writing computer programs in C++ across standard production computing environments",
+            "Building server hardware across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Social Engineering is the psychological manipulation of human cognitive biases (authority, urgency, fear, greed, helpfulness) to trick individuals into divulging confidential information or bypassing security protocols.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Ransomware?",
+        "options": [
+            "Malware that encrypts target files and demands payment for the decryption key",
+            "Hardware that burns out CPUs across standard production computing environments",
+            "Software that speeds up web browsing across standard production computing environments",
+            "An anti-virus utility designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Ransomware is malicious software that encrypts a victim's local files, databases, and network shares using asymmetric cryptography, demanding a cryptocurrency ransom payment for the decryption key.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Trojan Horse?",
+        "options": [
+            "Self-replicating network worm across standard production computing environments",
+            "Malware disguised as legitimate or useful software",
+            "A hardware firewall appliance designed to support enterprise operational infrastructure",
+            "A secure VPN protocol designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Trojan Horse is malware disguised as legitimate, harmless, or desirable software (e.g. a cracked game, utility, or codec) that executes malicious payloads in the background once launched.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Computer Worm?",
+        "options": [
+            "Malware that requires human interaction to spread across standard production computing environments",
+            "Self-replicating malware that spreads across networks automatically without human action",
+            "A security patch designed to support enterprise operational infrastructure",
+            "A physical cable tester designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Computer Worm is self-replicating, standalone malware that actively propagates across networks by automatically exploiting software vulnerabilities without requiring human execution or a host file.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Spyware?",
+        "options": [
+            "Software covertly monitoring user activity and logging keystrokes",
+            "Software that optimizes RAM across standard production computing environments",
+            "A hardware router designed to support enterprise operational infrastructure",
+            "An open-source browser designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Spyware secretly monitors user activity, tracking keystrokes, browsing history, webcam feeds, and system credentials, transmitting the exfiltrated surveillance data to an attacker.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Keylogger?",
+        "options": [
+            "Software or hardware capturing every keystroke typed by a user",
+            "A password manager designed to support enterprise operational infrastructure",
+            "An SSH key generator designed to support enterprise operational infrastructure",
+            "A digital signature validator designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Keylogger (software or hardware) covertly records every keystroke typed by a user, capturing cleartext passwords, PINs, and confidential communications as they are typed.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Rootkit?",
+        "options": [
+            "An admin utility for Linux designed to support enterprise operational infrastructure",
+            "Stealthy malware designed to gain root/admin control while hiding its presence from the OS",
+            "A hardware motherboard chip designed to support enterprise operational infrastructure",
+            "A backup power supply designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Rootkit is privileged malware designed to intercept kernel-level operating system calls, providing persistent administrative access while actively hiding its presence and associated processes from antivirus tools.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is SQL Injection (SQLi)?",
+        "options": [
+            "Injecting malicious SQL queries into application input fields to manipulate database execution",
+            "Overloading network switches across standard production computing environments implemented across standard enterprise production environments",
+            "Cracking Wi-Fi passwords across standard production computing environments",
+            "Sending spam emails across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "SQL Injection (SQLi) occurs when untrusted user input containing SQL command syntax is concatenated directly into dynamic database queries, allowing attackers to read, alter, or drop entire databases.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Cross-Site Scripting (XSS)?",
+        "options": [
+            "Injecting malicious scripts into trusted websites that execute in victim browsers",
+            "Overloading CPU cores across standard production computing environments",
+            "Physically stealing a hard drive across standard production computing environments",
+            "Spoofing IP addresses across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Cross-Site Scripting (XSS) occurs when web applications reflect or store unsanitized user input containing malicious JavaScript, which executes inside the browsers of other visiting users to steal session cookies.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Cross-Site Request Forgery (CSRF)?",
+        "options": [
+            "Forcing an authenticated user's browser to send unauthorized requests to a vulnerable web app",
+            "Cracking hash digests across standard production computing environments implemented across standard enterprise production environments",
+            "Sniffing Bluetooth signals across standard production computing environments",
+            "Stealing USB sticks across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Cross-Site Request Forgery (CSRF) tricks an authenticated user's web browser into executing unwanted actions (e.g. changing passwords or transferring funds) on a trusted web application without their knowledge.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Zero-Day Vulnerability?",
+        "options": [
+            "A software weakness known for 100 days designed to support enterprise operational infrastructure",
+            "A software vulnerability unknown to the vendor with zero days of patch preparation",
+            "A bug in a hardware router designed to support enterprise operational infrastructure",
+            "An expired SSL certificate designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Zero-Day Vulnerability is a previously unknown software security flaw for which no vendor patch or fix currently exists, giving defenders zero days of advance warning once exploited in the wild.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Man-in-the-Middle (MitM) Attack?",
+        "options": [
+            "An attacker secretively relaying and altering communications between two parties",
+            "A hardware server crash designed to support enterprise operational infrastructure",
+            "A sending junk mail operating within enterprise data processing pipelines",
+            "A brute force attack on passwords designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Man-in-the-Middle (MitM) attack occurs when an adversary secretly intercepts, inspects, or modifies communications between two unsuspecting endpoints who believe they are communicating directly.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is ARP Spoofing?",
+        "options": [
+            "Sending fake ARP messages to link an attacker's MAC address with a legitimate IP address",
+            "Cracking WPA3 passwords across standard production computing environments implemented across standard enterprise production environments",
+            "Sending fake SMS messages across standard production computing environments",
+            "Deleting log files across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "ARP Spoofing (ARP Poisoning) broadcasts fraudulent Address Resolution Protocol messages across a local Ethernet LAN to link the attacker's MAC address with the default gateway's IP address, redirecting traffic through the attacker.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is DNS Poisoning / Cache Poisoning?",
+        "options": [
+            "Corrupting DNS resolver caches to redirect users to malicious IP addresses",
+            "Overheating DNS servers across standard production computing environments",
+            "Buying domain names across standard production computing environments",
+            "Modifying local hosts files across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "DNS Cache Poisoning injects corrupt or fraudulent IP mappings into a DNS resolver's cache, redirecting users navigating to legitimate domain names (e.g. bank.com) to malicious spoofed servers.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Denial of Service (DoS) attack?",
+        "options": [
+            "Overwhelming a target system with requests to disable service availability",
+            "Stealing passwords from a database across standard production computing environments",
+            "Decrypting SSL traffic across standard production computing environments",
+            "Modifying backup files across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A Denial of Service (DoS) attack aims to disrupt legitimate user access by flooding a target server, service, or network with excessive requests to exhaust CPU, memory, or network bandwidth.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What makes a DDoS attack different from a standard DoS attack?",
+        "options": [
+            "DDoS uses multiple distributed compromised computers (botnet) simultaneously",
+            "DDoS uses faster cables under standard production system configurations",
+            "DDoS targets Linux only under standard production system configurations",
+            "DDoS is legal under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "A Distributed Denial of Service (DDoS) attack orchestrates thousands of geographically distributed compromised devices (a botnet) to launch coordinated flood traffic, overwhelming upstream ISP bandwidth.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Botnet?",
+        "options": [
+            "A network of infected computers controlled remotely by a bot master",
+            "A cluster of database servers designed to support enterprise operational infrastructure",
+            "An AI coding assistant designed to support enterprise operational infrastructure",
+            "A firewall cluster designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Botnet is a coordinated network of malware-infected internet-connected devices (zombies) controlled remotely by an attacker (the botmaster) via Command and Control (C2) servers.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Brute Force Attack?",
+        "options": [
+            "Systematically trying every possible password combination until the correct one is found",
+            "Guessing a password once across standard production computing environments implemented across standard enterprise production environments",
+            "Physical break-in across standard production computing environments",
+            "Sending phishing emails across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A Brute Force Attack systematically attempts every possible permutation of characters (a-z, A-Z, 0-9, symbols) until the correct password string is discovered.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Dictionary Attack?",
+        "options": [
+            "Trying words from a pre-compiled wordlist/dictionary to guess passwords",
+            "Translating legal contracts across standard production computing environments",
+            "Searching books for keys across standard production computing environments",
+            "Scanning open ports across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A Dictionary Attack hashes and compares lists of commonly used passwords, dictionary words, and leaked breach lists against target password hashes rather than testing all mathematical combinations.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Credential Stuffing?",
+        "options": [
+            "Automated injection of stolen username/password pairs across multiple websites",
+            "Creating random usernames across standard production computing environments",
+            "Resetting user passwords across standard production computing environments",
+            "Encrypting database tables across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Credential Stuffing uses automated scripts to test massive databases of stolen username/password pairs leaked from past third-party data breaches against unrelated websites, exploiting human password reuse.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Buffer Overflow?",
+        "options": [
+            "Writing more data to a memory buffer than it can hold, overwriting adjacent memory",
+            "Filling up a hard drive across standard production computing environments",
+            "Overloading network bandwidth across standard production computing environments",
+            "Printing too many pages across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A Buffer Overflow occurs when a program writes more data into an allocated memory buffer than it can hold, overflowing into adjacent memory space to overwrite control registers and execute arbitrary shellcode.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Data Exfiltration?",
+        "options": [
+            "The unauthorized transfer of sensitive data out of an organization's network",
+            "An encrypting local files operating within enterprise data processing pipelines",
+            "A restoring backups operating within enterprise data processing pipelines",
+            "A formatting hard drives operating within enterprise data processing pipelines"
+        ],
+        "correct": 0,
+        "exp": "Data Exfiltration is the unauthorized covert copying, transfer, or retrieval of sensitive organizational data from a compromised network to an external server controlled by an attacker.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Drive-By Download?",
+        "options": [
+            "Unintentional download of malicious code triggered merely by visiting a compromised site",
+            "Downloading files over 5G across standard production computing environments implemented across standard enterprise production environments",
+            "Downloading torrents across standard production computing environments",
+            "Copying files to USB across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A Drive-By Download occurs when a user simply visits a compromised or malicious webpage, automatically downloading and executing malware by exploiting unpatched browser vulnerabilities without clicking anything.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Typosquatting / URL Hijacking?",
+        "options": [
+            "Registering domain names with common misspellings of popular sites to trick users",
+            "Hacking DNS root servers across standard production computing environments implemented across standard enterprise production environments",
+            "Stealing Wi-Fi passwords across standard production computing environments",
+            "Creating web redirects across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Typosquatting (URL Hijacking) registers domain names that are slight misspellings of popular websites (e.g. gooogle.com, paypa1.com) to lure users who make typographical errors into phishing traps.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is a Logic Bomb?",
+        "options": [
+            "Code intentionally inserted into software that lies dormant until triggered by a specific event/date",
+            "A physical explosion designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "A compiler error designed to support enterprise operational infrastructure",
+            "An anti-virus scan designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Logic Bomb is malicious code intentionally inserted into an application that remains dormant until triggered by a specific condition (e.g., a specific date, or an employee's deletion from payroll).",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Principle of Least Privilege (PoLP)?",
+        "options": [
+            "Giving users only the minimum access rights necessary to perform their job functions",
+            "Giving everyone admin access across standard production computing environments",
+            "Deleting user accounts monthly across standard production computing environments",
+            "Disabling password changes across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The Principle of Least Privilege (PoLP) dictates that every user, account, process, and system must be granted only the absolute minimum set of privileges necessary to perform their required legitimate job duties.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Defense in Depth?",
+        "options": [
+            "Deploying multiple layered security controls throughout an IT infrastructure",
+            "Using one single super-firewall across standard production computing environments",
+            "Relying solely on passwords across standard production computing environments",
+            "Hiring more security guards across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Defense in Depth (Layered Defense) is the cybersecurity strategy of implementing multiple redundant security controls (firewalls, IDS/IPS, MFA, endpoint EDR, least privilege) across multiple layers so if one control fails, others block the attack.",
+        "section": "Part 2: Threat Landscape, Threat Actors & Attack Taxonomy"
+    },
+    {
+        "q": "What is Data Loss Prevention (DLP)?",
+        "options": [
+            "Software monitoring and preventing unauthorized transmission of sensitive data",
+            "Disk defragmentation across standard production computing environments implemented across standard enterprise production environments",
+            "RAID array backups across standard production computing environments",
+            "Database re-indexing across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Data Loss Prevention (DLP) comprises software tools and security policies that detect, monitor, and block the unauthorized transmission, copying, or exfiltration of sensitive data (credit cards, PII) in-motion, in-use, or at-rest.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is Multi-Factor Authentication (MFA)?",
+        "options": [
+            "Requiring 2 or more distinct authentication factors from different categories",
+            "Using two passwords across standard production computing environments",
+            "Changing passwords every 2 weeks across standard production computing environments",
+            "Logging in from 2 devices across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Multi-Factor Authentication (MFA) requires users to provide two or more independent authentication factors from different categories before access is granted, preventing compromised passwords alone from allowing access.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What are the 3 standard MFA factor categories?",
+        "options": [
+            "Something You Know, Something You Have, Something You Are",
+            "Password, PIN, Secret Question",
+            "Email, Phone, Address under standard production system configurations",
+            "Username, Badge, IP under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "The 3 canonical authentication factors are: (1) Knowledge (Something You Know), (2) Possession (Something You Have), and (3) Inherence (Something You Are).",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is an example of 'Something You Know'?",
+        "options": [
+            "Password or PIN",
+            "Smartcard or OTP token",
+            "Fingerprint or Retina scan",
+            "GPS Location"
+        ],
+        "correct": 0,
+        "exp": "'Something You Know' encompasses secret cognitive knowledge, including passwords, passphrases, PINs, and security challenge questions.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is an example of 'Something You Have'?",
+        "options": [
+            "Hardware token, USB key, or Authenticator app",
+            "Password across standard production computing environments",
+            "Facial recognition across standard production computing environments",
+            "Job title across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "'Something You Have' includes physical or digital tokens in the user's possession, such as hardware security keys (YubiKey), smart cards, or Time-based One-Time Password (TOTP) authenticator apps.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is an example of 'Something You Are'?",
+        "options": [
+            "Fingerprint, Biometric Iris Scan, or Facial Scan",
+            "Password across standard production computing environments",
+            "Security Badge across standard production computing environments",
+            "SMS Code across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "'Something You Are' refers to biological or physical characteristics (biometrics), including fingerprints, facial recognition, iris scans, and voiceprints.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is Supply Chain Security?",
+        "options": [
+            "Securing the software, hardware, and vendor ecosystem against upstream compromise",
+            "Inspecting shipping boxes across standard production computing environments enforced through centralized administrative governance and compliance monitoring",
+            "Tracking truck routes across standard production computing environments",
+            "Buying cheaper servers across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Supply Chain Security manages and mitigates risks associated with third-party vendors, suppliers, open-source libraries, hardware manufacturers, and logistics partners.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "An internet-facing server missing 3 months of security patches is an example of a...",
+        "options": [
+            "Vulnerability",
+            "Threat under standard production system configurations",
+            "Control",
+            "Risk Treatment"
+        ],
+        "correct": 0,
+        "exp": "An internet-connected server missing critical security patches is a Vulnerability — a flaw or weakness in system maintenance that can be weaponized by threat actors.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "A finance clerk is tricked by a convincing email into wiring funds. Which attack family?",
+        "options": [
+            "Social Engineering",
+            "Buffer Overflow",
+            "SQL Injection",
+            "DDoS configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Tricking an employee into wiring funds via fraudulent executive impersonation (Business Email Compromise) is a Social Engineering / Phishing attack.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "Which of these is a risk treatment rather than a technical control?",
+        "options": [
+            "Accepting and signing off on the risk",
+            "Installing a firewall configured for general baseline system administration",
+            "Enabling MFA configured for general baseline system administration",
+            "Encrypting database tables"
+        ],
+        "correct": 0,
+        "exp": "Risk Transfer (e.g., purchasing cyber liability insurance) is a strategic risk treatment decision, whereas firewalls, encryption, and antivirus are technical implementation controls.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "An attacker floods a school portal so students cannot enroll. Which leg of the CIA triad breaks first?",
+        "options": [
+            "Availability",
+            "Confidentiality",
+            "Integrity",
+            "Utility"
+        ],
+        "correct": 0,
+        "exp": "Flooding a school portal so legitimate students cannot access registration directly exhausts server resources, breaking the Availability pillar of the CIA triad first.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "Which security discipline covers paper files, physical office locks, and digital databases?",
+        "options": [
+            "Information Security (InfoSec)",
+            "Cybersecurity configured for general baseline system administration",
+            "Network Security configured for general baseline system administration",
+            "Cloud Security configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Information Assurance (IA) is the comprehensive discipline that protects information integrity, availability, authenticity, non-repudiation, and confidentiality across physical, technical, and administrative domains.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What type of attack modifies DNS records to send users to a fake banking website?",
+        "options": [
+            "DNS Poisoning / Cache Poisoning",
+            "SYN Flood under standard production system configurations",
+            "Buffer Overflow under standard production system configurations",
+            "Shoulder Surfing"
+        ],
+        "correct": 0,
+        "exp": "DNS Spoofing (DNS Cache Poisoning) alters IP resolution records in DNS caches to covertly steer legitimate domain lookups toward attacker-controlled clone websites.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "Why is a hashing algorithm like SHA-256 one-way?",
+        "options": [
+            "It cannot be mathematically reversed to recover the original plaintext",
+            "It only works on numbers under standard organizational security baseline protocols",
+            "It requires a secret key under standard organizational security baseline protocols",
+            "It expires after 24 hours under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Cryptographic hash algorithms (like SHA-256) are mathematically one-way functions designed with modular arithmetic and bitwise permutations so that it is computationally infeasible to invert a hash back into its original pre-image plaintext.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is the main goal of a Security Operations Center (SOC)?",
+        "options": [
+            "Monitor, detect, analyze, and respond to cybersecurity incidents continuously",
+            "Write sales contracts in order to fulfill secondary operational objectives",
+            "Manufacture server racks in order to fulfill secondary operational objectives",
+            "Manage employee payroll in order to fulfill secondary operational objectives"
+        ],
+        "correct": 0,
+        "exp": "The main objective of a Security Operations Center (SOC) is continuous, 24/7 real-time monitoring, threat detection, incident triage, and rapid containment across an organization's digital environment.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is Zero Trust Architecture?",
+        "options": [
+            "Never trust, always verify every access request regardless of origin",
+            "Trusting everyone inside the corporate office LAN",
+            "Disabling firewalls across standard production computing environments",
+            "Eliminating all passwords across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Zero Trust Architecture operates on the core principle: 'Never Trust, Always Verify' — treating all network traffic, internal users, and devices as untrusted, requiring continuous dynamic authentication and least-privilege authorization.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    },
+    {
+        "q": "What is an Air Gap in physical/network security?",
+        "options": [
+            "Physically isolating a secure network from all external networks and the internet",
+            "A wireless Wi-Fi router designed to support enterprise operational infrastructure",
+            "A ventilation fan designed to support enterprise operational infrastructure",
+            "A cloud firewall designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "An Air Gap is a physical security measure that completely isolates a secure computer or network from external networks and the public internet, preventing remote cyber attacks.",
+        "section": "Part 3: Defense-in-Depth, Security Controls & Zero Trust"
+    }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+    </script>
+</body>
+</html>

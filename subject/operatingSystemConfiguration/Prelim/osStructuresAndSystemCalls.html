@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>OS Structures and System Calls | Complete Reviewer & Quiz</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Operating System Configuration</h1>
+        <p>OS Structures & System Calls — Monolithic vs Microkernel, Dual-Mode Execution & 91-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">OS Structures & System Calls</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+            <div class="card">
+                <h2 id="sec-1-outcomes">1. Learning Outcomes</h2>
+                <h3>Attitude</h3>
+                <ul>
+                    <li>Appreciate the importance of structured and modular operating system design in developing reliable and efficient software.</li>
+                </ul>
+
+                <h3>Knowledge</h3>
+                <ul>
+                    <li>Explain the architecture of monolithic and microkernel operating systems.</li>
+                    <li>Describe the concept of a system call.</li>
+                    <li>Explain the transition between User Mode and Kernel Mode.</li>
+                </ul>
+
+                <h3>Skills</h3>
+                <ul>
+                    <li>Draw and compare monolithic and microkernel operating system architectures.</li>
+                    <li>Trace the execution flow of a system call such as open().</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 id="sec-2-what-is-os-structure">2. What is an OS Structure?</h2>
+                <div class="definition-card">
+                    <span class="def-badge">Definition</span>
+                    <p>An <strong>OS Structure</strong> refers to the way an operating system is organized into different components or layers and how these components interact to manage computer hardware and software resources.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 id="sec-3-main-structures">3. The 5 Main OS Structures (Simple, Layered, Microkernel, Modular, Hybrid)</h2>
+                <ol>
+                    <li>
+                        <strong>Simple Structure</strong>
+                        <ul>
+                            <li>The operating system is written as a single large program.</li>
+                            <li>All components can communicate directly.</li>
+                            <li>Easy to design but difficult to maintain.</li>
+                            <li><strong>Example:</strong> MS-DOS.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Layered Structure</strong>
+                        <ul>
+                            <li>The OS is divided into layers.</li>
+                            <li>Each layer performs specific functions and communicates only with the adjacent layers.</li>
+                            <li>Each layer only communicates with the layer directly above or below it.</li>
+                            <li>This layered design makes the operating system easier to develop, debug, maintain, and secure because each layer has a specific responsibility.</li>
+                            <li><strong>Example:</strong> THE Operating System.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Microkernel Structure</strong>
+                        <ul>
+                            <li>Only essential services (such as process management and memory management) run in the kernel.</li>
+                            <li>Other services (file system, device drivers) run in user space.</li>
+                            <li>More secure and reliable but may have slightly lower performance.</li>
+                            <li><strong>Example:</strong> Minix, QNX.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Modular Structure</strong>
+                        <ul>
+                            <li>The OS consists of separate modules that can be loaded or unloaded as needed.</li>
+                            <li>Provides flexibility and better performance.</li>
+                            <li><strong>Example:</strong> Linux.</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Hybrid Structure</strong>
+                        <ul>
+                            <li>Combines features of monolithic and microkernel designs.</li>
+                            <li>Balances performance and modularity.</li>
+                            <li><strong>Example:</strong> Windows, macOS.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h2 id="sec-4-components-layers">4. Operating System Components & Layers</h2>
+                
+                <h3>Operating System Structure Layers (Diagram Order)</h3>
+                <ul>
+                    <li><strong>Applications</strong></li>
+                    <li><strong>System Libraries</strong></li>
+                    <li><strong>System Call Interface</strong></li>
+                    <li><strong>Hardware</strong></li>
+                </ul>
+
+                <h3>Component Definitions</h3>
+                <ul>
+                    <li>
+                        <strong>User Applications:</strong> Programs used by end users, such as web browsers, Microsoft Office, media players, and games.
+                    </li>
+                    <li>
+                        <strong>System Programs:</strong> Utilities and software that help users interact with the operating system, such as command-line shells, compilers, and file managers.
+                    </li>
+                    <li>
+                        <strong>System Call Interface:</strong> Acts as the communication bridge between user programs and the operating system kernel.
+                        <br><em>Example system calls:</em> <code>open()</code>, <code>read()</code>, <code>write()</code>, <code>fork()</code>, and <code>exit()</code>.
+                    </li>
+                    <li>
+                        <strong>Operating System Kernel:</strong> The core of the operating system. Responsible for:
+                        <ul>
+                            <li>Process Management</li>
+                            <li>Memory Management</li>
+                            <li>File Management</li>
+                            <li>Device Management</li>
+                            <li>Security and Protection</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Hardware:</strong> The physical components of the computer, including the CPU, memory (RAM), storage devices, keyboard, mouse, monitor, printers, and network devices.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 id="sec-5-major-structures">5. Major Operating System Structures: Monolithic Kernel In-Depth</h2>
+                <p>The two major operating system structures highlighted are:</p>
+                <ol>
+                    <li><strong>Monolithic Architecture</strong></li>
+                    <li><strong>Microkernel Architecture</strong></li>
+                </ol>
+
+                <h3>Monolithic Architecture</h3>
+                <p>A Monolithic Architecture is an operating system design where all OS services run together in a single large kernel operating in kernel mode. All components can directly communicate with each other because they share the same memory space.</p>
+                <p>A Monolithic Architecture is an OS structure where all operating system services execute within one large kernel and directly interact with each other to manage system resources efficiently.</p>
+
+                <h3>How It Works</h3>
+                <ol>
+                    <li>User applications request services through system calls.</li>
+                    <li>The request enters the kernel.</li>
+                    <li>Kernel components communicate directly with each other.</li>
+                    <li>The kernel accesses the hardware and returns the result to the application.</li>
+                </ol>
+
+                <h3>Monolithic Characteristics</h3>
+                <ul>
+                    <li>Single large kernel</li>
+                    <li>All services run in kernel space</li>
+                    <li>Components communicate directly</li>
+                    <li>High performance due to fewer communication overheads</li>
+                    <li>Easier access to hardware resources</li>
+                </ul>
+
+                <h3>Advantages</h3>
+                <ul>
+                    <li>Fast execution and high performance</li>
+                    <li>Efficient communication between components</li>
+                    <li>Simple design for smaller systems</li>
+                </ul>
+
+                <h3>Disadvantages</h3>
+                <ul>
+                    <li>Large and complex kernel</li>
+                    <li>Difficult to maintain and debug</li>
+                    <li>An error in one component can crash the entire system</li>
+                    <li>Lower security because all services run with full privileges</li>
+                </ul>
+
+                <h3>Examples of Monolithic Operating Systems</h3>
+                <ul>
+                    <li><strong>Linux</strong> (traditional monolithic kernel with modular support)</li>
+                    <li><strong>UNIX</strong></li>
+                    <li><strong>MS-DOS</strong></li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2 id="sec-6-monolithic-vs-microkernel">6. Monolithic Kernel vs. Microkernel Comparison Matrix</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Monolithic Kernel</th>
+                            <th>Microkernel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Size</strong></td>
+                            <td>Large</td>
+                            <td>Small</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Performance</strong></td>
+                            <td>Faster</td>
+                            <td>Slightly slower</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Security</strong></td>
+                            <td>Lower</td>
+                            <td>Higher</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reliability</strong></td>
+                            <td>Lower</td>
+                            <td>Higher</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Services</strong></td>
+                            <td>Inside kernel</td>
+                            <td>Mostly outside kernel</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 91</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions dynamically rendered here -->
+            </div>
+        </div>
+
+
+        <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+        <div id="formulas" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem; gap:0.5rem;">
+                    <h2 style="margin:0;">Quick Reference: OS Structures, System Calls & Kernel Architectures</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+
+                <!-- 1. Monolithic vs Microkernel Master Comparison -->
+                <h3 style="color:var(--primary-color); margin-top:1rem;">1. Monolithic Kernel vs. Microkernel Comparison Matrix</h3>
+                <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Architectural Factor</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Monolithic Kernel</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Microkernel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Kernel Footprint / Size</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Large (Megabytes)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Minimal / Small (Kilobytes)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Execution Performance</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Fast (Direct memory function calls)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#d97706; font-weight:700;">Slightly Slower (IPC message passing overhead)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Security & Privilege Isolation</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Lower (All drivers run in privileged Ring 0)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Higher (Non-essential services run in User Space)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Reliability & Fault Tolerance</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Lower (A driver crash crashes the entire OS)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Higher (Service crashes in user space are isolated and restartable)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Service Locations</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">All services (FS, VMM, Drivers, Scheduler) in Kernel Space.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Only Core IPC, Scheduling, Low-level Memory in Kernel; FS & Drivers in User Space.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Canonical Examples</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:600;">Linux, Traditional UNIX, MS-DOS</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:600;">MINIX, QNX (Automotive/Medical), L4, Mach</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 2. Dual-Mode Operation & System Call Categories -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>2. Dual-Mode CPU Operation & System Call Lifecycle</h2>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+                    
+                    <div class="formula-card" style="border-left:4px solid #0284c7;">
+                        <span class="formula-badge" style="background:#0284c7;">User Mode (Ring 3)</span>
+                        <div class="formula-text" style="font-size:1.05rem; color:#0284c7;">Mode Bit = 1</div>
+                        <p style="font-size:0.85rem; margin:0.4rem 0;">• Runs user applications (Word, Chrome, games).<br>
+                        • Cannot directly access physical hardware or privileged CPU instructions.<br>
+                        • Must issue a <strong>System Call</strong> (software trap) to request OS services.</p>
+                    </div>
+
+                    <div class="formula-card" style="border-left:4px solid #16a34a;">
+                        <span class="formula-badge" style="background:#16a34a;">Kernel Mode (Ring 0)</span>
+                        <div class="formula-text" style="font-size:1.05rem; color:#16a34a;">Mode Bit = 0</div>
+                        <p style="font-size:0.85rem; margin:0.4rem 0;">• Runs the core OS kernel and device drivers.<br>
+                        • Has unrestricted access to all CPU instructions, memory registers, and hardware peripherals.<br>
+                        • Switches Mode Bit back to 1 before returning control to user app.</p>
+                    </div>
+
+                    <div class="formula-card" style="border-left:4px solid #f59e0b;">
+                        <span class="formula-badge" style="background:#f59e0b;">Core POSIX System Calls</span>
+                        <div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">API Primitives</div>
+                        <p style="font-size:0.85rem; margin:0.4rem 0;">
+                        • <code>fork()</code>: Creates a child process clone.<br>
+                        • <code>open() / read() / write()</code>: File descriptor I/O operations.<br>
+                        • <code>exit()</code>: Terminates calling process and returns status.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 3. Interactive Academic Tool: System Call Execution Flow Simulator -->
+            <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid var(--primary-color);">
+                <div class="calc-title">⚡ Live System Call & Dual-Mode Execution Flow Simulator</div>
+                <div class="calc-desc">Trace the exact 5-step hardware and kernel execution path when a user application executes a privileged system call (e.g. opening a file or spawning a child process).</div>
+                
+                <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                    <div class="calc-field" style="grid-column: 1 / -1;">
+                        <label class="calc-label" for="sim-syscall-select">Select System Call to Trace:</label>
+                        <select id="sim-syscall-select" class="calc-input" onchange="simulateSyscallFlow()" style="font-weight:600;">
+                            <option value="open" selected>open("notes.txt", O_RDONLY) — File Descriptor Allocation</option>
+                            <option value="read">read(fd, buffer, 1024) — Secondary Storage Disk Read</option>
+                            <option value="write">write(fd, "Data", 4) — Buffer Flush to Device Controller</option>
+                            <option value="fork">fork() — Process Control Block Duplication</option>
+                            <option value="exit">exit(0) — Process Termination & Memory Deallocation</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="calc-result-box" style="margin-top:1.25rem;">
+                    <div class="calc-result-header">
+                        <span style="font-weight:700; font-size:0.95rem;">System Call Execution Flow:</span>
+                        <span class="calc-result-val" id="sim-syscall-val" style="color:var(--primary-color);">open() &rarr; Mode Bit 1 to 0 &rarr; Kernel Routine</span>
+                    </div>
+                    <div class="calc-math-steps" id="sim-syscall-steps">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Interactive OS Architecture Property Evaluator -->
+            <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid #8b5cf6;">
+                <div class="calc-title">🏛️ OS Structural Architecture Property & Trade-Off Evaluator</div>
+                <div class="calc-desc">Select any of the 5 canonical structural models to evaluate how its organization impacts performance, security, isolation, and real-world system complexity.</div>
+                
+                <div class="calc-grid" style="grid-template-columns: 1fr;">
+                    <div class="calc-field">
+                        <label class="calc-label" for="sim-arch-select">Select Structural Model:</label>
+                        <select id="sim-arch-select" class="calc-input" onchange="evaluateArchitecture()" style="font-weight:600;">
+                            <option value="monolithic" selected>1. Monolithic Architecture (Linux, Traditional Unix)</option>
+                            <option value="microkernel">2. Microkernel Architecture (MINIX, QNX, L4)</option>
+                            <option value="layered">3. Layered Structure Architecture (THE Multiprogramming System)</option>
+                            <option value="modular">4. Modular / Loadable Kernel Modules Architecture (Solaris, Modern Linux LKM)</option>
+                            <option value="hybrid">5. Hybrid Structure Architecture (Windows NT, macOS XNU)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="calc-result-box" style="margin-top:1.25rem;">
+                    <div class="calc-result-header">
+                        <span style="font-weight:700; font-size:0.95rem;">Architectural Properties:</span>
+                        <span class="calc-result-val" id="sim-arch-val">Monolithic: High Speed, Low Fault Isolation</span>
+                    </div>
+                    <div class="calc-math-steps" id="sim-arch-steps">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script>
+        // ==========================================
+        // System Call Lifecycle Simulator Logic
+        // ==========================================
+        function simulateSyscallFlow() {
+            const sc = document.getElementById('sim-syscall-select').value;
+            const resVal = document.getElementById('sim-syscall-val');
+            const resSteps = document.getElementById('sim-syscall-steps');
+
+            if (sc === 'open') {
+                resVal.innerHTML = '<span style="color:#0284c7;">open() System Call &rarr; File Descriptor Returned</span>';
+                resSteps.innerHTML = `
+                    <strong>5-Step Execution Flow:</strong><br>
+                    <div class="step-line">• <strong>Step 1 (User Space):</strong> User App calls standard C library wrapper <code>open("notes.txt", O_RDONLY)</code>.</div>
+                    <div class="step-line">• <strong>Step 2 (Trap Generated):</strong> Library puts opcode for <code>sys_open</code> into CPU register (RAX = 2) and issues software interrupt <code>syscall</code>.</div>
+                    <div class="step-line">• <strong>Step 3 (Mode Switch):</strong> CPU hardware catches trap &amp; flips <strong>Mode Bit from 1 (User) to 0 (Kernel)</strong>.</div>
+                    <div class="step-line">• <strong>Step 4 (Kernel Execution):</strong> Kernel looks up System Call Table, verifies user read permissions, checks inode on disk, and creates entry in Open File Table.</div>
+                    <div class="step-line">• <strong>Step 5 (Return):</strong> Kernel places integer file descriptor (e.g. <code>fd = 3</code>) into return register, restores user stack, switches <strong>Mode Bit from 0 back to 1</strong>, and resumes user app.</div>
+                `;
+            } else if (sc === 'read') {
+                resVal.innerHTML = '<span style="color:#16a34a;">read() System Call &rarr; Buffer Populated with Bytes</span>';
+                resSteps.innerHTML = `
+                    <strong>5-Step Execution Flow:</strong><br>
+                    <div class="step-line">• <strong>Step 1 (User Space):</strong> App calls <code>read(fd, buffer, 1024)</code> passing memory pointer and byte count.</div>
+                    <div class="step-line">• <strong>Step 2 (Trap & Mode Switch):</strong> Software interrupt flips Mode Bit from 1 to 0; CPU jumps to Kernel Interrupt Handler.</div>
+                    <div class="step-line">• <strong>Step 3 (I/O Wait / DMA):</strong> Kernel commands disk controller via Device Driver. Process is moved to WAITING state while DMA controller copies disk sectors to kernel buffer.</div>
+                    <div class="step-line">• <strong>Step 4 (Buffer Copy):</strong> Once hardware interrupt signals transfer complete, kernel copies data to user-space buffer.</div>
+                    <div class="step-line">• <strong>Step 5 (Return):</strong> Mode Bit switches 0 &rarr; 1; returns number of bytes read to user program.</div>
+                `;
+            } else if (sc === 'write') {
+                resVal.innerHTML = '<span style="color:#f59e0b;">write() System Call &rarr; Data Flushed to Device</span>';
+                resSteps.innerHTML = `
+                    <strong>5-Step Execution Flow:</strong><br>
+                    <div class="step-line">• <strong>Step 1 (User Space):</strong> App calls <code>write(fd, "Data", 4)</code>.</div>
+                    <div class="step-line">• <strong>Step 2 (Trap):</strong> CPU switches Mode Bit from 1 to 0 into Kernel Ring 0.</div>
+                    <div class="step-line">• <strong>Step 3 (Cache Write):</strong> Kernel writes bytes into OS page cache/file buffer pool.</div>
+                    <div class="step-line">• <strong>Step 4 (Driver Sync):</strong> Background kernel thread schedules asynchronous disk flush.</div>
+                    <div class="step-line">• <strong>Step 5 (Return):</strong> Returns byte count to user space; Mode Bit restored to 1.</div>
+                `;
+            } else if (sc === 'fork') {
+                resVal.innerHTML = '<span style="color:#8b5cf6;">fork() System Call &rarr; Child Process Spawned</span>';
+                resSteps.innerHTML = `
+                    <strong>5-Step Execution Flow:</strong><br>
+                    <div class="step-line">• <strong>Step 1 (User Space):</strong> Process calls <code>fork()</code> to spawn child clone.</div>
+                    <div class="step-line">• <strong>Step 2 (Trap):</strong> Mode switch 1 &rarr; 0 transfers control to kernel process scheduler.</div>
+                    <div class="step-line">• <strong>Step 3 (Duplication):</strong> Kernel duplicates parent Process Control Block (PCB), page tables, and file descriptors.</div>
+                    <div class="step-line">• <strong>Step 4 (PID Assignment):</strong> Child is assigned a unique PID and placed in the READY queue.</div>
+                    <div class="step-line">• <strong>Step 5 (Dual Return):</strong> Mode Bit flips 0 &rarr; 1; returns child PID to parent and returns <code>0</code> to child process!</div>
+                `;
+            } else if (sc === 'exit') {
+                resVal.innerHTML = '<span style="color:#dc2626;">exit() System Call &rarr; Resources Reclaimed</span>';
+                resSteps.innerHTML = `
+                    <strong>5-Step Execution Flow:</strong><br>
+                    <div class="step-line">• <strong>Step 1 (User Space):</strong> Process completes execution and invokes <code>exit(0)</code>.</div>
+                    <div class="step-line">• <strong>Step 2 (Trap):</strong> Mode switch 1 &rarr; 0 into Kernel Process Terminator.</div>
+                    <div class="step-line">• <strong>Step 3 (Resource Freeing):</strong> Kernel closes open file handles, tears down virtual memory page mappings, and frees allocated RAM frames.</div>
+                    <div class="step-line">• <strong>Step 4 (Zombie / Parent Notify):</strong> Keeps minimal exit code in PCB until parent reads it via <code>wait()</code>.</div>
+                    <div class="step-line">• <strong>Step 5 (Schedule Next):</strong> CPU scheduler immediately dispatches the next ready process.</div>
+                `;
+            }
+        }
+
+        // ==========================================
+        // Architecture Evaluator Logic
+        // ==========================================
+        function evaluateArchitecture() {
+            const arch = document.getElementById('sim-arch-select').value;
+            const resVal = document.getElementById('sim-arch-val');
+            const resSteps = document.getElementById('sim-arch-steps');
+
+            if (arch === 'monolithic') {
+                resVal.innerHTML = '<span style="color:#0284c7;">Monolithic: High Performance, Zero IPC Overhead, Shared Crash Domain</span>';
+                resSteps.innerHTML = `
+                    <div class="step-line">• <strong>Design:</strong> Entire OS (Process, Memory, File Systems, Drivers) runs in a single address space in Kernel Mode (Ring 0).</div>
+                    <div class="step-line">• <strong>Pros:</strong> Maximum speed; internal components communicate via direct C function calls.</div>
+                    <div class="step-line">• <strong>Cons:</strong> A single bug or null-pointer in a 3rd-party device driver can crash (Kernel Panic / BSOD) the entire machine.</div>
+                    <div class="step-line">• <strong>Representative Systems:</strong> Traditional UNIX, Linux, MS-DOS.</div>
+                `;
+            } else if (arch === 'microkernel') {
+                resVal.innerHTML = '<span style="color:#16a34a;">Microkernel: High Isolation, Fault-Tolerant, Message Passing Overhead</span>';
+                resSteps.innerHTML = `
+                    <div class="step-line">• <strong>Design:</strong> Only absolute bare minimum (IPC, low-level memory, scheduling) sits in Kernel. File systems and drivers run as user-space servers.</div>
+                    <div class="step-line">• <strong>Pros:</strong> High reliability; if the file system or graphics driver crashes, it restarts seamlessly without rebooting the OS.</div>
+                    <div class="step-line">• <strong>Cons:</strong> Performance penalty due to frequent context switching and inter-process message passing.</div>
+                    <div class="step-line">• <strong>Representative Systems:</strong> MINIX 3, QNX (Automotive/Medical), L4 microkernel family.</div>
+                `;
+            } else if (arch === 'layered') {
+                resVal.innerHTML = '<span style="color:#f59e0b;">Layered: Strict Hierarchical Abstraction, Linear Dependency</span>';
+                resSteps.innerHTML = `
+                    <div class="step-line">• <strong>Design:</strong> OS is structured into N discrete layers (0 = Hardware, N = User Interface). Each layer N invokes only layer N-1.</div>
+                    <div class="step-line">• <strong>Pros:</strong> Exceptional modularity and ease of verification/debugging.</div>
+                    <div class="step-line">• <strong>Cons:</strong> Difficult to define layer boundaries cleanly; performance overhead from passing through multiple layer wrappers.</div>
+                    <div class="step-line">• <strong>Representative Systems:</strong> Dijkstra's THE Multiprogramming System.</div>
+                `;
+            } else if (arch === 'modular') {
+                resVal.innerHTML = '<span style="color:#8b5cf6;">Modular (LKM): Dynamic Extensibility, Core Kernel with Pluggable Modules</span>';
+                resSteps.innerHTML = `
+                    <div class="step-line">• <strong>Design:</strong> Core kernel with object-oriented interfaces that dynamically load and unload kernel modules (LKMs) on demand at runtime.</div>
+                    <div class="step-line">• <strong>Pros:</strong> Flexible and efficient; drivers load only when hardware is plugged in, without needing to recompile the kernel.</div>
+                    <div class="step-line">• <strong>Cons:</strong> Dynamic modules still run in Kernel Mode, meaning faulty modules can still compromise kernel stability.</div>
+                    <div class="step-line">• <strong>Representative Systems:</strong> Modern Linux Kernel Modules (LKM), Solaris.</div>
+                `;
+            } else if (arch === 'hybrid') {
+                resVal.innerHTML = '<span style="color:#0d9488;">Hybrid: Combined Microkernel Modularity with Monolithic Speed</span>';
+                resSteps.innerHTML = `
+                    <div class="step-line">• <strong>Design:</strong> Combines microkernel layered architecture for modularity while running performance-critical subsystems (like Graphics and File System) inside the kernel address space.</div>
+                    <div class="step-line">• <strong>Pros:</strong> Balances strong modular abstraction with high consumer graphics and I/O throughput.</div>
+                    <div class="step-line">• <strong>Cons:</strong> Retains some monolithic failure modes for in-kernel subsystems.</div>
+                    <div class="step-line">• <strong>Representative Systems:</strong> Windows NT Kernel (Executive + Microkernel layer), Apple macOS (XNU Hybrid Kernel).</div>
+                `;
+            }
+        }
+
+        // ==========================================
+        // Quiz Data Definition
+        // ==========================================
+        const quizData = [
+    {
+        "q": "What does an OS Structure refer to?",
+        "options": [
+            "The mechanical enclosure and dimensions of a computer server under standard production system configurations",
+            "The way an operating system is organized into different components or layers and how these components interact to manage computer hardware and software resources",
+            "The syntax rules of high-level programming languages under standard production system configurations managed by operating system kernel schedulers and virtual memory managers",
+            "The transmission speed of local network interfaces under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "OS Structure refers to the way an operating system is organized into different components or layers and how these components interact to manage computer hardware and software resources.",
+        "section": "Part 1: Learning Outcomes & Fundamentals"
+    },
+    {
+        "q": "Which architectures are students expected to explain under the Knowledge learning outcomes?",
+        "options": [
+            "Client-server and peer-to-peer network architectures",
+            "Monolithic and microkernel operating system architectures",
+            "Von Neumann and Harvard hardware architectures",
+            "RISC and CISC instruction set architectures"
+        ],
+        "correct": 1,
+        "exp": "Knowledge outcome: Explain the architecture of monolithic and microkernel operating systems.",
+        "section": "Part 1: Learning Outcomes & Fundamentals"
+    },
+    {
+        "q": "Which mode transition is specified in the Knowledge learning outcomes?",
+        "options": [
+            "Transition between Standby Mode and Hibernate Mode",
+            "Transition between User Mode and Kernel Mode",
+            "Transition between Single-user Mode and Safe Mode",
+            "Transition between Master Mode and Slave Mode"
+        ],
+        "correct": 1,
+        "exp": "Knowledge outcome: Explain the transition between User Mode and Kernel Mode.",
+        "section": "Part 1: Learning Outcomes & Fundamentals"
+    },
+    {
+        "q": "Which specific system call is named in the Skills learning outcomes to trace execution flow?",
+        "options": [
+            "connect()",
+            "open()",
+            "print()",
+            "execute()"
+        ],
+        "correct": 1,
+        "exp": "Skills outcome: Trace the execution flow of a system call such as open().",
+        "section": "Part 1: Learning Outcomes & Fundamentals"
+    },
+    {
+        "q": "What attitude is encouraged regarding operating system design in the learning outcomes?",
+        "options": [
+            "Appreciate the importance of structured and modular operating system design in developing reliable and efficient software",
+            "Avoid modularity to prevent kernel complexity under standard production system configurations managed by operating system kernel schedulers and virtual memory managers",
+            "Rely exclusively on simple monolithic architectures for all computing needs",
+            "Eliminate system calls to maximize direct application hardware access"
+        ],
+        "correct": 0,
+        "exp": "Attitude outcome: Appreciate the importance of structured and modular operating system design in developing reliable and efficient software.",
+        "section": "Part 1: Learning Outcomes & Fundamentals"
+    },
+    {
+        "q": "How is a Simple Structure operating system written?",
+        "options": [
+            "As isolated user-space processes under standard production system configurations",
+            "As a single large program where all components can communicate directly",
+            "As independent layers communicating through message queues",
+            "As dynamically compiled scripts under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Simple Structure: The operating system is written as a single large program. All components can communicate directly.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "How do components communicate in a Simple OS Structure?",
+        "options": [
+            "Only via remote procedure calls",
+            "All components can communicate directly",
+            "Only through adjacent layers",
+            "Exclusively through user-space servers"
+        ],
+        "correct": 1,
+        "exp": "Simple Structure: All components can communicate directly.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "What is the design and maintenance trade-off of a Simple OS Structure?",
+        "options": [
+            "Difficult to design but easy to maintain",
+            "Easy to design but difficult to maintain",
+            "Requires multi-year architectural planning but maintains itself",
+            "Impossible to design and debug on single-processor machines"
+        ],
+        "correct": 1,
+        "exp": "Simple Structure: Easy to design but difficult to maintain.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "Which operating system is provided as the explicit example of a Simple Structure?",
+        "options": [
+            "Minix",
+            "MS-DOS",
+            "QNX configured for general baseline system administration",
+            "macOS"
+        ],
+        "correct": 1,
+        "exp": "Simple Structure Example: MS-DOS.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "How is a Layered Structure operating system organized?",
+        "options": [
+            "Written as a single unorganized binary file under standard production system configurations",
+            "Divided into layers where each layer performs specific functions and communicates only with adjacent layers",
+            "Runs all services in user space without kernel coordination managed by operating system kernel schedulers and virtual memory managers",
+            "Loads and unloads random modules during execution under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Layered Structure: The OS is divided into layers. Each layer performs specific functions and communicates only with the adjacent layers.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "In a Layered OS Structure, which layers can any given layer communicate with?",
+        "options": [
+            "Only the hardware directly configured for general baseline system administration",
+            "Only the layer directly above or below it (adjacent layers)",
+            "All layers across the operating system indiscriminately",
+            "Only user applications in user space"
+        ],
+        "correct": 1,
+        "exp": "Each layer only communicates with the layer directly above or below it.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "Why does the layered design make an OS easier to develop, debug, maintain, and secure?",
+        "options": [
+            "Because all services run with unrestricted root access",
+            "Because each layer has a specific responsibility",
+            "Because it removes the system call interface",
+            "Because memory management is disabled"
+        ],
+        "correct": 1,
+        "exp": "This layered design makes the operating system easier to develop, debug, maintain, and secure because each layer has a specific responsibility.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "Which system is provided as the example of a Layered Structure?",
+        "options": [
+            "THE Operating System",
+            "MS-DOS configured for general baseline system administration",
+            "Minix configured for general baseline system administration",
+            "Windows 11 configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Layered Structure Example: THE Operating System.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "In a Microkernel Structure, which services run inside the kernel?",
+        "options": [
+            "All operating system services including web browsers",
+            "Only essential services (such as process management and memory management)",
+            "Device drivers and file systems exclusively configured for general baseline system administration",
+            "Command-line shells and compilers configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Microkernel Structure: Only essential services (such as process management and memory management) run in the kernel.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "In a Microkernel Structure, where do services such as the file system and device drivers run?",
+        "options": [
+            "In kernel space",
+            "In user space",
+            "In physical ROM chips",
+            "Inside CPU caches"
+        ],
+        "correct": 1,
+        "exp": "Microkernel Structure: Other services (file system, device drivers) run in user space.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "What are the security, reliability, and performance characteristics of a Microkernel Structure?",
+        "options": [
+            "Lower security and reliability with maximum execution speed",
+            "More secure and reliable but may have slightly lower performance",
+            "Zero security with identical monolithic performance",
+            "Large kernel size with frequent complete system crashes"
+        ],
+        "correct": 1,
+        "exp": "Microkernel Structure: More secure and reliable but may have slightly lower performance.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "Which operating systems are given as examples of a Microkernel Structure?",
+        "options": [
+            "MS-DOS and UNIX",
+            "Minix",
+            "QNX",
+            "Windows and macOS",
+            "THE Operating System and Linux"
+        ],
+        "correct": 1,
+        "exp": "Microkernel Structure Examples: Minix, QNX.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "How is a Modular Structure operating system defined?",
+        "options": [
+            "The OS is built as a single unchangeable program",
+            "The OS consists of separate modules that can be loaded or unloaded as needed",
+            "An all drivers are permanently hardcoded into firmware operating within enterprise data processing pipelines",
+            "A services run entirely outside computer memory operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Modular Structure: The OS consists of separate modules that can be loaded or unloaded as needed.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "What advantages does a Modular Structure provide?",
+        "options": [
+            "Removes the necessity for CPU scheduling",
+            "Provides flexibility and better performance",
+            "Disables the system call interface to save space",
+            "Forces all services into user space without kernel privileges"
+        ],
+        "correct": 1,
+        "exp": "Modular Structure: Provides flexibility and better performance.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "Which operating system is provided as the example of a Modular Structure?",
+        "options": [
+            "MS-DOS",
+            "Linux",
+            "Minix",
+            "THE Operating System"
+        ],
+        "correct": 1,
+        "exp": "Modular Structure Example: Linux.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "How is a Hybrid Structure operating system defined?",
+        "options": [
+            "It combines features of monolithic and microkernel designs",
+            "It eliminates both the kernel and hardware layers managed by operating system kernel schedulers and virtual memory managers",
+            "It relies strictly on 16-bit DOS commands",
+            "It runs exclusively in physical ROM circuits"
+        ],
+        "correct": 0,
+        "exp": "Hybrid Structure: Combines features of monolithic and microkernel designs.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "What is the primary objective of a Hybrid Structure?",
+        "options": [
+            "To force all drivers outside the kernel",
+            "To balance performance and modularity",
+            "To eliminate user applications",
+            "To prevent the use of system libraries"
+        ],
+        "correct": 1,
+        "exp": "Hybrid Structure: Balances performance and modularity.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "Which operating systems are provided as examples of a Hybrid Structure?",
+        "options": [
+            "MS-DOS and UNIX",
+            "Windows",
+            "macOS",
+            "Minix and QNX",
+            "THE Operating System and Linux"
+        ],
+        "correct": 1,
+        "exp": "Hybrid Structure Examples: Windows, macOS.",
+        "section": "Part 2: What is an OS Structure & 5 Architectures"
+    },
+    {
+        "q": "What are the four layers shown in the Operating System Structure diagram from top to bottom?",
+        "options": [
+            "Hardware -> System Libraries -> System Call Interface -> Applications",
+            "Applications -> System Libraries -> System Call Interface -> Hardware",
+            "System Programs -> Applications -> Hardware -> System Libraries",
+            "Kernel -> System Call Interface -> System Programs -> Applications"
+        ],
+        "correct": 1,
+        "exp": "Operating System Structure Diagram Layers: Applications -> System Libraries -> System Call Interface -> Hardware.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "What are User Applications?",
+        "options": [
+            "Low-level firmware routines embedded in motherboard chips",
+            "Programs used by end users",
+            "such as web browsers",
+            "Microsoft Office",
+            "media players",
+            "and games under standard production system configurations",
+            "The communication bridge between hardware and drivers",
+            "The central core responsible for memory allocation"
+        ],
+        "correct": 1,
+        "exp": "User Applications: Programs used by end users, such as web browsers, Microsoft Office, media players, and games.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "Which of the following are explicitly listed as examples of User Applications?",
+        "options": [
+            "Web browsers",
+            "Microsoft Office",
+            "media players",
+            "and games",
+            "Command-line shells",
+            "compilers",
+            "and file managers",
+            "CPU",
+            "memory (RAM)",
+            "storage devices",
+            "and printers",
+            "open()",
+            "read()",
+            "write()",
+            "fork()",
+            "and exit()"
+        ],
+        "correct": 0,
+        "exp": "User Applications examples: web browsers, Microsoft Office, media players, and games.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "What are System Programs?",
+        "options": [
+            "End-user video games and office suites",
+            "Utilities and software that help users interact with the operating system",
+            "such as command-line shells under standard production system configurations",
+            "compilers under standard production system configurations",
+            "and file managers under standard production system configurations",
+            "Physical motherboards under standard production system configurations",
+            "monitors under standard production system configurations",
+            "and mice under standard production system configurations",
+            "Assembly-level CPU register flags under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "System Programs: Utilities and software that help users interact with the operating system, such as command-line shells, compilers, and file managers.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "Which of the following are explicitly listed as examples of System Programs?",
+        "options": [
+            "Command-line shells",
+            "compilers configured for general baseline system administration",
+            "and file managers",
+            "Microsoft Office",
+            "web browsers",
+            "and media players",
+            "CPU configured for general baseline system administration",
+            "RAM configured for general baseline system administration",
+            "storage devices",
+            "and printers",
+            "Minix configured for general baseline system administration",
+            "QNX configured for general baseline system administration",
+            "and Linux configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "System Programs examples: command-line shells, compilers, and file managers.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "What is the function of the System Call Interface?",
+        "options": [
+            "It displays graphical icons on the monitor across standard production computing environments",
+            "Acts as the communication bridge between user programs and the operating system kernel",
+            "It provides physical power to the motherboard across standard production computing environments",
+            "It formats magnetic storage drives directly across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "System Call Interface: Acts as the communication bridge between user programs and the operating system kernel.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "Which example system calls are explicitly listed in the PDF?",
+        "options": [
+            "open()",
+            "read()",
+            "write()",
+            "fork()",
+            "and exit()",
+            "start()",
+            "pause()",
+            "resume()",
+            "delete()",
+            "and purge()",
+            "select()",
+            "insert()",
+            "update()",
+            "drop()",
+            "and alter()",
+            "allocate()",
+            "deallocate()",
+            "swap()",
+            "push()",
+            "and pop()"
+        ],
+        "correct": 0,
+        "exp": "Example system calls: open(), read(), write(), fork(), and exit().",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "What is the Operating System Kernel?",
+        "options": [
+            "An optional text editor used by end users",
+            "The core of the operating system",
+            "A physical cable connecting the mouse to the computer",
+            "A graphical media player"
+        ],
+        "correct": 1,
+        "exp": "Operating System Kernel: The core of the operating system.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "Which of the following represents the five responsibilities of the Operating System Kernel listed in the PDF?",
+        "options": [
+            "Process Management",
+            "Memory Management",
+            "File Management",
+            "Device Management",
+            "Security and Protection",
+            "Web Browsing",
+            "Word Processing",
+            "Spreadsheets",
+            "Gaming configured for general baseline system administration",
+            "Media Playback",
+            "Compilation",
+            "Code Editing",
+            "Syntax Highlighting",
+            "Version Control",
+            "Debugging configured for general baseline system administration",
+            "Hardware Assembly",
+            "Cable Management",
+            "Voltage Regulation",
+            "Cooling configured for general baseline system administration",
+            "Power Distribution"
+        ],
+        "correct": 0,
+        "exp": "Kernel responsibilities: Process Management, Memory Management, File Management, Device Management, Security and Protection.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "How is Hardware defined in the lesson?",
+        "options": [
+            "The collection of system call APIs",
+            "The physical components of the computer",
+            "An including the cpu operating within enterprise data processing pipelines",
+            "A memory (ram) operating within enterprise data processing pipelines",
+            "A storage devices operating within enterprise data processing pipelines",
+            "A keyboard operating within enterprise data processing pipelines",
+            "A mouse operating within enterprise data processing pipelines",
+            "A monitor operating within enterprise data processing pipelines",
+            "A printers operating within enterprise data processing pipelines",
+            "An and network devices operating within enterprise data processing pipelines",
+            "The user-space software utilities",
+            "The layered modular design of Linux"
+        ],
+        "correct": 1,
+        "exp": "Hardware: The physical components of the computer, including the CPU, memory (RAM), storage devices, keyboard, mouse, monitor, printers, and network devices.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "Which physical devices are listed as examples of Hardware in the PDF?",
+        "options": [
+            "CPU",
+            "memory (RAM)",
+            "storage devices",
+            "keyboard",
+            "mouse",
+            "monitor",
+            "printers",
+            "and network devices",
+            "open()",
+            "read()",
+            "write()",
+            "fork()",
+            "and exit()",
+            "Shells",
+            "compilers",
+            "and file managers",
+            "Minix",
+            "QNX",
+            "Linux",
+            "and Windows"
+        ],
+        "correct": 0,
+        "exp": "Hardware includes: CPU, memory (RAM), storage devices, keyboard, mouse, monitor, printers, and network devices.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "What are the two Major Operating System Structures named in the PDF?",
+        "options": [
+            "Client Architecture and Server Architecture",
+            "Monolithic Architecture and Microkernel Architecture",
+            "Simple Architecture and Layered Architecture",
+            "Hardware Architecture and Software Architecture"
+        ],
+        "correct": 1,
+        "exp": "Major Operating System Structures: 1. Monolithic Architecture, 2. Microkernel Architecture.",
+        "section": "Part 3: OS Components & Layered Hierarchy"
+    },
+    {
+        "q": "What is the definition of a Monolithic Architecture?",
+        "options": [
+            "An operating system design where all OS services run together in a single large kernel operating in kernel mode",
+            "A structure where services execute exclusively in user space with message queues managed by operating system kernel schedulers and virtual memory managers",
+            "A design that eliminates the kernel and interacts through hardware jumpers",
+            "A distributed cloud operating system running across multiple servers"
+        ],
+        "correct": 0,
+        "exp": "Monolithic Architecture: An operating system design where all OS services run together in a single large kernel operating in kernel mode.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Why can all components directly communicate with each other in a Monolithic Architecture?",
+        "options": [
+            "Because they use local Ethernet sockets",
+            "Because they share the same memory space",
+            "Because they are isolated in separate user-mode containers",
+            "Because they use microkernel message passing"
+        ],
+        "correct": 1,
+        "exp": "All components can directly communicate with each other because they share the same memory space.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "In a Monolithic Architecture, what enables efficient management of system resources?",
+        "options": [
+            "All operating system services executing within one large kernel and directly interacting with each other",
+            "Isolating all file systems into separate user applications managed by operating system kernel schedulers and virtual memory managers",
+            "Eliminating device drivers from kernel space under standard production system configurations",
+            "Restricting kernel execution to read-only memory under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "A Monolithic Architecture is an OS structure where all operating system services execute within one large kernel and directly interact with each other to manage system resources efficiently.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What is Step 1 of how a Monolithic Architecture works?",
+        "options": [
+            "Kernel components communicate directly with each other",
+            "User applications request services through system calls",
+            "The kernel accesses the hardware directly",
+            "The operating system restarts the CPU"
+        ],
+        "correct": 1,
+        "exp": "How It Works - Step 1: User applications request services through system calls.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What is Step 2 of how a Monolithic Architecture works?",
+        "options": [
+            "The request enters the kernel",
+            "The request is converted into a user-space thread",
+            "The hardware directly executes the user program",
+            "The system call is rejected"
+        ],
+        "correct": 0,
+        "exp": "How It Works - Step 2: The request enters the kernel.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What is Step 3 of how a Monolithic Architecture works?",
+        "options": [
+            "Kernel components communicate directly with each other",
+            "The kernel passes messages through user space",
+            "The application reloads its system libraries",
+            "The file system is unmounted designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "How It Works - Step 3: Kernel components communicate directly with each other.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What is Step 4 of how a Monolithic Architecture works?",
+        "options": [
+            "The kernel accesses the hardware and returns the result to the application",
+            "An all services are unloaded from kernel memory operating within enterprise data processing pipelines",
+            "The application switches permanently to kernel mode",
+            "The system call interface is disabled designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "How It Works - Step 4: The kernel accesses the hardware and returns the result to the application.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Which of the following is an explicit characteristic of Monolithic Architecture?",
+        "options": [
+            "Small microkernel with modular servers",
+            "Single large kernel",
+            "Services running primarily in user space",
+            "Indirect communication through IPC message passing"
+        ],
+        "correct": 1,
+        "exp": "Monolithic Characteristics: Single large kernel.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "In a Monolithic Architecture, where do all operating system services run?",
+        "options": [
+            "In kernel space",
+            "In user space",
+            "In BIOS firmware",
+            "Inside hardware registers"
+        ],
+        "correct": 0,
+        "exp": "Monolithic Characteristics: All services run in kernel space.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Why does a Monolithic Architecture achieve high performance?",
+        "options": [
+            "Due to fewer communication overheads",
+            "Because it has no device drivers",
+            "Because it operates without memory management",
+            "Because it only runs on 64-bit multi-core processors"
+        ],
+        "correct": 0,
+        "exp": "Monolithic Characteristics: High performance due to fewer communication overheads.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "How does Monolithic Architecture interact with hardware resources?",
+        "options": [
+            "Easier access to hardware resources",
+            "Hardware access is strictly forbidden",
+            "Requires multi-hop network proxies to access hardware",
+            "Hardware can only be accessed through user-space daemons"
+        ],
+        "correct": 0,
+        "exp": "Monolithic Characteristics: Easier access to hardware resources.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Which of the following is listed as an Advantage of Monolithic Architecture?",
+        "options": [
+            "Fast execution and high performance",
+            "Small and minimal kernel footprint",
+            "Complete fault isolation between drivers",
+            "Execution with restricted user privileges"
+        ],
+        "correct": 0,
+        "exp": "Advantages: Fast execution and high performance.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Which of the following is listed as an Advantage of Monolithic Architecture for internal communication?",
+        "options": [
+            "Efficient communication between components",
+            "Message passing across address space boundaries",
+            "User-mode RPC pipes configured for general baseline system administration",
+            "Hardware bus arbitration protocols"
+        ],
+        "correct": 0,
+        "exp": "Advantages: Efficient communication between components.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Which of the following is an Advantage of Monolithic Architecture for smaller systems?",
+        "options": [
+            "Simple design for smaller systems",
+            "Complex multi-tiered server hierarchy",
+            "Decoupled microkernel daemons",
+            "Dynamic microservice deployment"
+        ],
+        "correct": 0,
+        "exp": "Advantages: Simple design for smaller systems.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What is listed as a Disadvantage regarding the size and complexity of a Monolithic kernel?",
+        "options": [
+            "Large and complex kernel",
+            "Kernel is too small to support networking",
+            "Kernel has no access to CPU scheduling",
+            "Kernel cannot be executed in kernel mode"
+        ],
+        "correct": 0,
+        "exp": "Disadvantages: Large and complex kernel.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What maintenance and debugging challenge is associated with Monolithic Architecture?",
+        "options": [
+            "Difficult to maintain and debug",
+            "Cannot be debugged using software tools",
+            "Requires re-manufacturing physical CPU chips to patch",
+            "Code is automatically deleted after compilation"
+        ],
+        "correct": 0,
+        "exp": "Disadvantages: Difficult to maintain and debug.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "What happens in a Monolithic Architecture if an error occurs in one kernel component?",
+        "options": [
+            "Only that single driver is restarted while the OS runs unaffected",
+            "An error in one component can crash the entire system",
+            "The system automatically transitions to a microkernel",
+            "The error is silently converted into a user application"
+        ],
+        "correct": 1,
+        "exp": "Disadvantages: An error in one component can crash the entire system.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Why does Monolithic Architecture have lower security?",
+        "options": [
+            "Because all services run with full privileges",
+            "Because it lacks user applications",
+            "Because it cannot encrypt user passwords",
+            "Because system calls are publicly exposed over the internet"
+        ],
+        "correct": 0,
+        "exp": "Disadvantages: Lower security because all services run with full privileges.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "How is Linux described under the Examples of Monolithic Operating Systems?",
+        "options": [
+            "Traditional monolithic kernel with modular support",
+            "Pure layered architecture without system calls",
+            "Pure microkernel architecture",
+            "Simple single-program structure"
+        ],
+        "correct": 0,
+        "exp": "Examples: Linux (traditional monolithic kernel with modular support).",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "Which three operating systems are listed as Examples of Monolithic Operating Systems in the PDF?",
+        "options": [
+            "Linux",
+            "UNIX",
+            "MS-DOS",
+            "Minix",
+            "QNX",
+            "Windows",
+            "macOS",
+            "iOS",
+            "Android",
+            "THE Operating System",
+            "Windows 11",
+            "QNX"
+        ],
+        "correct": 0,
+        "exp": "Examples of Monolithic Operating Systems: Linux, UNIX, MS-DOS.",
+        "section": "Part 4: Monolithic Architecture In-Depth"
+    },
+    {
+        "q": "In the comparison table, what is the Size of a Monolithic Kernel compared to a Microkernel?",
+        "options": [
+            "Monolithic Kernel is Large",
+            "Microkernel is Small",
+            "Monolithic Kernel is Small",
+            "Microkernel is Large",
+            "Both kernels are Large",
+            "Both kernels are Small"
+        ],
+        "correct": 0,
+        "exp": "Comparison Table (Size): Monolithic Kernel = Large | Microkernel = Small.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the comparison table, what is the Performance of a Monolithic Kernel compared to a Microkernel?",
+        "options": [
+            "Monolithic Kernel is Faster",
+            "Microkernel is Slightly slower",
+            "Monolithic Kernel is Slightly slower",
+            "Microkernel is Faster",
+            "Both have identical performance",
+            "Microkernel is significantly faster"
+        ],
+        "correct": 0,
+        "exp": "Comparison Table (Performance): Monolithic Kernel = Faster | Microkernel = Slightly slower.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the comparison table, what is the Security of a Monolithic Kernel compared to a Microkernel?",
+        "options": [
+            "Monolithic Kernel is Higher",
+            "Microkernel is Lower",
+            "Monolithic Kernel is Lower",
+            "Microkernel is Higher",
+            "Both have Lower security",
+            "Both have Higher security"
+        ],
+        "correct": 1,
+        "exp": "Comparison Table (Security): Monolithic Kernel = Lower | Microkernel = Higher.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the comparison table, what is the Reliability of a Monolithic Kernel compared to a Microkernel?",
+        "options": [
+            "Monolithic Kernel is Higher",
+            "Microkernel is Lower",
+            "Monolithic Kernel is Lower",
+            "Microkernel is Higher",
+            "Both have Lower reliability",
+            "Both have Higher reliability"
+        ],
+        "correct": 1,
+        "exp": "Comparison Table (Reliability): Monolithic Kernel = Lower | Microkernel = Higher.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the comparison table, where are Services located in a Monolithic Kernel vs. a Microkernel?",
+        "options": [
+            "Monolithic Kernel: Inside kernel | Microkernel: Mostly outside kernel",
+            "Monolithic Kernel: Mostly outside kernel | Microkernel: Inside kernel",
+            "Monolithic Kernel: In hardware | Microkernel: In BIOS",
+            "Both run services exclusively inside the kernel"
+        ],
+        "correct": 0,
+        "exp": "Comparison Table (Services): Monolithic Kernel = Inside kernel | Microkernel = Mostly outside kernel.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the Monolithic Architecture diagram, what sits in Applications (user-space)?",
+        "options": [
+            "App_1",
+            "App_2",
+            "App_3",
+            "Process Scheduler and Memory Management",
+            "Device Drivers and Hardware",
+            "CPU",
+            "Memory",
+            "and I/O"
+        ],
+        "correct": 0,
+        "exp": "In the Monolithic diagram, App_1, App_2, and App_3 sit in Applications (user-space).",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the Monolithic Architecture diagram, what components are inside the OS kernel box?",
+        "options": [
+            "File System",
+            "I/O Interface",
+            "Network Interface",
+            "Memory Management",
+            "IPC",
+            "Process Scheduler",
+            "Web Browser",
+            "Office Suite",
+            "Media Player",
+            "Games",
+            "CPU",
+            "RAM",
+            "Keyboard",
+            "Mouse",
+            "Monitor",
+            "MS-DOS Command Prompt only"
+        ],
+        "correct": 0,
+        "exp": "In the diagram, File System, I/O Interface, Network Interface, Memory Management, IPC, and Process Scheduler are located within the OS kernel.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the Monolithic Architecture diagram, what layer sits between the OS kernel and Hardware (Proc, Memory, I/O)?",
+        "options": [
+            "System Calls",
+            "Drivers",
+            "Applications",
+            "System Libraries"
+        ],
+        "correct": 1,
+        "exp": "In the diagram, Drivers sit between the OS kernel and Hardware.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the Monolithic Architecture diagram, what connects Applications (user-space) to the OS kernel?",
+        "options": [
+            "System Calls",
+            "Drivers",
+            "Hardware",
+            "Network Cables"
+        ],
+        "correct": 0,
+        "exp": "In the diagram, System Calls connect user-space applications to the OS kernel.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "In the Monolithic Architecture diagram, what physical components are shown under Hardware?",
+        "options": [
+            "Proc",
+            "Memory",
+            "I/O",
+            "App_1",
+            "App_2",
+            "App_3",
+            "File System",
+            "IPC",
+            "Process Scheduler",
+            "System Libraries and System Calls"
+        ],
+        "correct": 0,
+        "exp": "In the diagram, Hardware contains Proc, Memory, and I/O.",
+        "section": "Part 5: Monolithic vs. Microkernel Comparison"
+    },
+    {
+        "q": "Which kernel responsibility handles allocating CPU time slices to active processes?",
+        "options": [
+            "Process Management",
+            "Memory Management",
+            "File Management",
+            "Device Management"
+        ],
+        "correct": 0,
+        "exp": "Process Management is a core responsibility of the operating system kernel.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which kernel responsibility manages computer memory allocation (RAM) for active programs?",
+        "options": [
+            "Memory Management",
+            "Process Management",
+            "Device Management",
+            "Security and Protection"
+        ],
+        "correct": 0,
+        "exp": "Memory Management is a core responsibility of the operating system kernel.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which kernel responsibility organizes files and directories on storage devices?",
+        "options": [
+            "File Management",
+            "Memory Management",
+            "Device Management",
+            "Process Management"
+        ],
+        "correct": 0,
+        "exp": "File Management is a core responsibility of the operating system kernel.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which kernel responsibility handles interaction with peripheral hardware and controllers?",
+        "options": [
+            "Device Management",
+            "Memory Management",
+            "File Management",
+            "Process Management"
+        ],
+        "correct": 0,
+        "exp": "Device Management is a core responsibility of the operating system kernel.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which kernel responsibility prevents unauthorized access and secures system resources?",
+        "options": [
+            "Security and Protection",
+            "Device Management managed by operating system kernel schedulers and virtual memory managers",
+            "File Management",
+            "Memory Management"
+        ],
+        "correct": 0,
+        "exp": "Security and Protection is a core responsibility of the operating system kernel.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "What role do web browsers and media players play in an operating system?",
+        "options": [
+            "They are User Applications used by end users",
+            "They are System Programs that manage the CPU",
+            "They are System Calls bridging kernel space",
+            "They are Physical Hardware devices"
+        ],
+        "correct": 0,
+        "exp": "Web browsers and media players are User Applications used by end users.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "What role do command-line shells and compilers play in an operating system?",
+        "options": [
+            "They are System Programs that help users interact with the operating system",
+            "They are User Applications like games configured for general baseline system administration",
+            "They are hardware storage controllers configured for general baseline system administration",
+            "They are microkernel memory managers configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Command-line shells and compilers are System Programs helping users interact with the OS.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "What is the execution flow when a program calls open()?",
+        "options": [
+            "Application requests open() -> enters kernel via System Call Interface -> kernel handles request -> accesses hardware via drivers -> returns result to application",
+            "Application accesses hard drive sectors directly without kernel intervention across standard production computing environments managed by operating system kernel schedulers and virtual memory managers",
+            "Application reboots hardware into safe mode across standard production computing environments",
+            "Application deletes drivers to prevent file access across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Execution flow: User application requests service -> enters kernel -> kernel accesses hardware -> returns result.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system structure provides flexibility and better performance by loading or unloading separate modules as needed?",
+        "options": [
+            "Modular Structure",
+            "Simple Structure",
+            "Microkernel Structure",
+            "Layered Structure"
+        ],
+        "correct": 0,
+        "exp": "Modular Structure: The OS consists of separate modules that can be loaded or unloaded as needed, providing flexibility and better performance.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system structure divides the OS into layers where each layer communicates only with the layer directly above or below it?",
+        "options": [
+            "Layered Structure",
+            "Simple Structure",
+            "Monolithic Structure",
+            "Hybrid Structure"
+        ],
+        "correct": 0,
+        "exp": "Layered Structure: Divided into layers where each layer communicates only with the layer directly above or below it.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system structure runs only process management and memory management in the kernel while running file systems in user space?",
+        "options": [
+            "Microkernel Structure",
+            "Monolithic Structure",
+            "Simple Structure",
+            "Modular Structure"
+        ],
+        "correct": 0,
+        "exp": "Microkernel Structure: Only essential services run in the kernel; other services run in user space.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system structure is written as a single large program and exemplified by MS-DOS?",
+        "options": [
+            "Simple Structure",
+            "Microkernel Structure",
+            "Modular Structure",
+            "Hybrid Structure"
+        ],
+        "correct": 0,
+        "exp": "Simple Structure: Written as a single large program; Example: MS-DOS.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system structure combines monolithic and microkernel designs and is exemplified by Windows and macOS?",
+        "options": [
+            "Hybrid Structure",
+            "Simple Structure",
+            "Layered Structure",
+            "Modular Structure"
+        ],
+        "correct": 0,
+        "exp": "Hybrid Structure: Combines features of monolithic and microkernel designs; Examples: Windows, macOS.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Why is an error in one component catastrophic in a Monolithic Architecture?",
+        "options": [
+            "Because all services run together in kernel space sharing memory",
+            "so an error in one component can crash the entire system",
+            "Because microkernel user-space processes cannot restart",
+            "Because MS-DOS lacks hardware drivers under standard organizational security baseline protocols",
+            "Because system calls only execute once per boot"
+        ],
+        "correct": 0,
+        "exp": "In Monolithic Architecture, an error in one component can crash the entire system because all services run with full privileges in shared kernel space.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system is an example of a Microkernel Structure that offers high reliability and security at slightly lower performance?",
+        "options": [
+            "QNX",
+            "MS-DOS",
+            "UNIX",
+            "THE Operating System"
+        ],
+        "correct": 0,
+        "exp": "QNX (and Minix) is an example of Microkernel Structure.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system is an example of a Layered Structure where each layer has a specific responsibility?",
+        "options": [
+            "THE Operating System",
+            "MS-DOS configured for general baseline system administration",
+            "Minix configured for general baseline system administration",
+            "QNX configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "THE Operating System is an example of Layered Structure.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system represents a traditional monolithic kernel with modular support?",
+        "options": [
+            "Linux",
+            "Minix",
+            "QNX",
+            "MS-DOS"
+        ],
+        "correct": 0,
+        "exp": "Linux is a traditional monolithic kernel with modular support.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which of the following correctly pairs an OS Structure with its corresponding example from the lesson?",
+        "options": [
+            "Simple Structure: MS-DOS | Layered: THE OS | Microkernel: Minix",
+            "QNX | Modular: Linux | Hybrid: Windows",
+            "macOS configured for general baseline system administration",
+            "Simple Structure: Linux | Layered: MS-DOS | Microkernel: Windows | Modular: QNX | Hybrid: Minix",
+            "Simple Structure: QNX | Layered: macOS | Microkernel: Linux | Modular: MS-DOS | Hybrid: THE OS",
+            "Simple Structure: Windows | Layered: Minix | Microkernel: MS-DOS | Modular: macOS | Hybrid: Linux"
+        ],
+        "correct": 0,
+        "exp": "Correct pairings: Simple (MS-DOS), Layered (THE OS), Microkernel (Minix, QNX), Modular (Linux), Hybrid (Windows, macOS).",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "What is the primary function of drivers in the Monolithic OS architecture?",
+        "options": [
+            "To mediate between the OS kernel and physical hardware (Proc",
+            "Memory across standard production computing environments",
+            "I/O) across standard production computing environments",
+            "To execute user games and media players across standard production computing environments",
+            "To format HTML pages in web browsers across standard production computing environments",
+            "To replace system calls in user space across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Drivers sit between the OS kernel and hardware to manage device communication.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "What is the role of System Libraries in the Operating System Structure diagram?",
+        "options": [
+            "They sit between User Applications and the System Call Interface to assist application execution",
+            "They replace physical RAM chips across standard production computing environments",
+            "They execute inside the CPU ALU directly across standard production computing environments",
+            "They format storage drives without kernel intervention across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "System Libraries sits between Applications and System Call Interface in the OS hierarchy.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which system call example terminates the calling process?",
+        "options": [
+            "exit()",
+            "fork()",
+            "open()",
+            "read()"
+        ],
+        "correct": 0,
+        "exp": "exit() is listed as a system call example in the PDF.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which system call example creates a duplicate/child process?",
+        "options": [
+            "fork()",
+            "open()",
+            "write()",
+            "read()"
+        ],
+        "correct": 0,
+        "exp": "fork() is listed as a system call example in the PDF.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which system call examples perform data retrieval and data output on opened files?",
+        "options": [
+            "read() and write()",
+            "fork() and exit()",
+            "open() and close()",
+            "load() and unload()"
+        ],
+        "correct": 0,
+        "exp": "read() and write() are example system calls listed in the PDF.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Why does Monolithic Architecture provide fast execution?",
+        "options": [
+            "Because all services run together in a single large kernel sharing memory",
+            "avoiding inter-process message-passing overhead in order to fulfill secondary operational objectives",
+            "Because it has no security checks or user applications",
+            "Because it runs without system libraries under standard organizational security baseline protocols",
+            "Because it uses only read-only memory under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Monolithic Architecture provides fast execution because all components share memory space in a single kernel, resulting in fewer communication overheads.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "What is the main reason a Microkernel has higher reliability than a Monolithic Kernel?",
+        "options": [
+            "Services run mostly outside the kernel in user space",
+            "so failures in services (like file systems or drivers) do not bring down the entire kernel",
+            "It uses larger binary files than monolithic systems",
+            "It disables hardware interrupts completely",
+            "It has faster execution speeds than monolithic systems"
+        ],
+        "correct": 0,
+        "exp": "Microkernel reliability is higher because services run mostly outside the kernel in user space.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    },
+    {
+        "q": "Which operating system structures are categorized as the two 'Major Operating System Structures' in the PDF?",
+        "options": [
+            "Monolithic Architecture and Microkernel Architecture",
+            "Simple Structure and Modular Structure",
+            "Layered Structure and Hybrid Structure",
+            "Hardware Architecture and Software Architecture"
+        ],
+        "correct": 0,
+        "exp": "The two major OS structures highlighted are Monolithic Architecture and Microkernel Architecture.",
+        "section": "Part 6: System Calls & Kernel Responsibilities"
+    }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+        document.addEventListener('DOMContentLoaded', () => {
+            simulateSyscallFlow();
+            evaluateArchitecture();
+        });
+    </script>
+</body>
+</html>

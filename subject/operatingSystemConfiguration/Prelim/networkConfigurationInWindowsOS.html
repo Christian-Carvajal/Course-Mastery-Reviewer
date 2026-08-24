@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <title>Network Configuration in Windows OS | Master Reviewer & Quiz</title>
+ <link rel="stylesheet" href="../../../global.css">
+ <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+ <header class="app-header">
+ <h1>Operating System Configuration</h1>
+ <p>Network Configuration in Windows OS — TCP/IP, DHCP, Subnetting, CLI Diagnostics & 90-Question Mastery Quiz</p>
+ </header>
+
+ <nav class="sticky-nav">
+ <div class="nav-left">
+ <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+ <span class="nav-title">Network Configuration in Windows OS</span>
+ </div>
+ <div class="nav-tabs">
+ <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+ <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+ <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+ </div>
+ <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+ </nav>
+
+ <div class="container">
+
+ <!-- TAB 1: REVIEWER TEXT -->
+ <div id="reviewer" class="tab-content active">
+ <div class="card">
+ <h2 id="sec-1-outcomes">1. Learning Outcomes</h2>
+ <p>At the end of this lesson, students should be able to:</p>
+ <ul>
+ <li>✔ Explain network configuration.</li>
+ <li>✔ Identify basic networking components.</li>
+ <li>✔ Configure IPv4 settings in Windows.</li>
+ <li>✔ Differentiate Static and Dynamic IP addresses.</li>
+ <li>✔ Use Windows networking tools.</li>
+ <li>✔ Perform basic network troubleshooting.</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-2-what-is-netconfig">2. What is Network Configuration?</h2>
+ <div class="definition-card">
+ <span class="def-badge">Definition</span>
+ <p><strong>Network Configuration</strong> is the process of setting up a computer's network settings so it can communicate with other devices and access the Internet.</p>
+ </div>
+
+ <h3>It Includes:</h3>
+ <ul>
+ <li>IP Address</li>
+ <li>Subnet Mask</li>
+ <li>Default Gateway</li>
+ <li>DNS Server</li>
+ <li>Network Adapter Settings</li>
+ </ul>
+
+ <h3>Why is it Important?</h3>
+ <ul>
+ <li>✔ Internet Access</li>
+ <li>✔ File Sharing</li>
+ <li>✔ Printer Sharing</li>
+ <li>✔ Remote Access</li>
+ <li>✔ Network Security</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-3-data-flow">3. Basic Network Connection & Data Flow</h2>
+ <p><strong>Connection Chain:</strong> PC (Client) &rarr; Router (Gateway) &rarr; Internet</p>
+ <ul>
+ <li><strong>PC (Client):</strong> The PC generates data and sends it to the router.</li>
+ <li><strong>Router (Gateway):</strong> The router receives the data, processes it, and forwards it to the Internet.</li>
+ <li><strong>Internet:</strong> The data reaches the Internet and is delivered to the destination.</li>
+ <li><strong>Data Flow:</strong> PC &rarr; Router &rarr; Internet</li>
+ </ul>
+
+ <h3>Network Topology (Office / Small Business Network Example)</h3>
+ <ul>
+ <li><strong>Topology Type:</strong> Star Topology (All devices connect to a central device: Switch / Router / AP)</li>
+ <li><strong>Router Functions:</strong> Routing / NAT, Firewall / Security, Acts as Default Gateway, DHCP Server (192.168.1.1)</li>
+ <li><strong>IP Addressing Scheme:</strong>
+ <ul>
+ <li>Network Address: 192.168.1.0</li>
+ <li>Subnet Mask: 255.255.255.0</li>
+ <li>Default Gateway: 192.168.1.1 (Router)</li>
+ <li>DHCP Range: 192.168.1.100 192.168.1.200</li>
+ <li>DNS Server: 8.8.8.8 (Google DNS) | 1.1.1.1 (Cloudflare DNS)</li>
+ </ul>
+ </li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-4-components">4. Basic Network Components</h2>
+ <ul>
+ <li><strong>IP Address:</strong> A unique address assigned to every device. <em>Example:</em> 192.168.1.100</li>
+ <li><strong>Subnet Mask:</strong> Determines the network and host portions. <em>Example:</em> 255.255.255.0</li>
+ <li><strong>Default Gateway:</strong> Allows communication outside the local network. <em>Example:</em> 192.168.1.1</li>
+ <li><strong>DNS Server:</strong> Translates website names into IP addresses.
+ <ul>
+ <li>Google DNS Example: 8.8.8.8</li>
+ <li>Cloudflare DNS Example: 1.1.1.1</li>
+ </ul>
+ </li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-5-ip-dhcp">5. Static vs. Dynamic IP Address & DHCP</h2>
+
+ <h3>Static vs Dynamic IP Address</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Feature</th>
+ <th>Static IP</th>
+ <th>Dynamic IP (DHCP)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td><strong>Configuration</strong></td><td>Manual Configuration</td><td>Automatic Configuration</td></tr>
+ <tr><td><strong>Address Type</strong></td><td>Permanent Address</td><td>Temporary Address</td></tr>
+ <tr><td><strong>Used by</strong></td><td>Used by Servers</td><td>Used by Home PCs</td></tr>
+ <tr><td><strong>Management</strong></td><td>Less Flexible</td><td>Easy to Manage</td></tr>
+ </tbody>
+ </table>
+
+ <h3>DHCP (Dynamic Host Configuration Protocol)</h3>
+ <p>Automatically assigns:</p>
+ <ul>
+ <li>IP Address</li>
+ <li>Subnet Mask</li>
+ <li>Gateway</li>
+ <li>DNS</li>
+ </ul>
+ <p><em>Interaction Flow:</em> DHCP Client requests "I need an IP Address" &rarr; Router / DHCP Server assigns "Here's your IP Address 192.168.1.100"</p>
+
+ <h3>Configuration Notes</h3>
+ <ul>
+ <li><strong>Dynamic IP (DHCP):</strong> Automatically assigns network settings from a DHCP server. Recommended for most home and office users.</li>
+ <li><strong>Static IP:</strong> Manually configured and commonly used for servers, printers, and network devices that require a fixed address.</li>
+ <li><strong>DNS Server:</strong> Converts domain names (such as www.google.com) into IP addresses so users can access websites.</li>
+ <li><strong>Static IP Warning:</strong> When configuring a static IP address, always ensure it belongs to the correct network and does not duplicate another device's IP address to avoid address conflicts.</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-6-connection-types">6. Types of Network Connections (Wired vs Wireless)</h2>
+
+ <table>
+ <thead>
+ <tr>
+ <th>Feature / Aspect</th>
+ <th>Ethernet (Wired)</th>
+ <th>Wi-Fi (Wireless)</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td><strong>Media / Transmission</strong></td><td>🔌 Uses an Ethernet (RJ-45) cable</td><td>📶 Uses radio waves</td></tr>
+ <tr><td><strong>Speed & Transfer</strong></td><td>Faster data transfer</td><td>Convenient mobility</td></tr>
+ <tr><td><strong>Stability</strong></td><td>More stable connection</td><td>Easy to connect multiple devices</td></tr>
+ <tr><td><strong>Latency</strong></td><td>Lower latency</td><td>Signal strength depends on distance</td></tr>
+ <tr><td><strong>Interference</strong></td><td>Less interference</td><td>Can be affected by walls and other devices</td></tr>
+ <tr><td><strong>Ideal Use Cases</strong></td><td>Ideal for gaming, servers, and offices</td><td>Ideal for laptops, smartphones, and tablets</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-7-commands-ipconfig">7. Viewing Network Configuration & Commands</h2>
+ 
+ <h3>Command Prompt Tools</h3>
+ <ul>
+ <li>
+ <strong><code>ipconfig</code></strong>
+ <br>Displays: IP Address, Gateway, Subnet Mask
+ </li>
+ <li>
+ <strong><code>ipconfig /all</code></strong>
+ <br>Displays: MAC Address, DNS, DHCP, Host Name
+ </li>
+ </ul>
+
+ <h3>Demonstration Steps</h3>
+ <ol>
+ <li>Press Windows + R.</li>
+ <li>Type <code>cmd</code> and press Enter.</li>
+ <li>In Command Prompt, type <code>ipconfig</code>.</li>
+ <li>Point out the IPv4 Address, Subnet Mask, and Default Gateway in the output.</li>
+ <li>Explain how these values help determine whether a computer is properly connected to the network.</li>
+ </ol>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-8-ping-diagnostics">8. Network Diagnostic Commands: Ping</h2>
+ <p>The <code>ping</code> command is one of the first tools used by IT professionals to verify network connectivity and troubleshoot communication problems.</p>
+ <div class="code-box">ping 8.8.8.8<br>ping google.com</div>
+
+ <h3>Ping Output Breakdown</h3>
+ <ul>
+ <li><strong>Reply from:</strong> The destination device responded successfully.</li>
+ <li><strong>bytes=32:</strong> Size of each packet sent.</li>
+ <li><strong>time=18ms:</strong> Round-trip time; lower values indicate a faster connection.</li>
+ <li><strong>TTL (Time To Live):</strong> Limits how many network devices (hops) a packet can pass through before being discarded.</li>
+ <li><strong>Packets Sent/Received/Lost:</strong> Indicates whether the connection is reliable. A 0% loss means all packets reached the destination successfully.</li>
+ </ul>
+
+ <h3>Common Ping Results</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Result</th>
+ <th>Meaning</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td>✅ <strong>Reply from...</strong></td><td>Connection is successful.</td></tr>
+ <tr><td>❌ <strong>Request timed out</strong></td><td>The destination did not respond.</td></tr>
+ <tr><td>❌ <strong>Destination host unreachable</strong></td><td>The computer cannot reach the target network or device.</td></tr>
+ <tr><td>❌ <strong>Ping request could not find host</strong></td><td>DNS could not resolve the hostname.</td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-9-configure-ipv4">9. Configuring IPv4 Settings</h2>
+
+ <h3>Method 1: Using Windows Settings (Windows 11)</h3>
+ <ol>
+ <li>Open Settings.</li>
+ <li>Select Network & Internet.</li>
+ <li>Click Ethernet or Wi-Fi.</li>
+ <li>Select your active network connection.</li>
+ <li>Under IP Assignment, click Edit.</li>
+ <li>Choose Manual and enable IPv4.</li>
+ <li>Enter the network information, then click Save.</li>
+ </ol>
+
+ <h3>Setting Example Values</h3>
+ <table>
+ <thead>
+ <tr><th>Setting</th><th>Example Value</th></tr>
+ </thead>
+ <tbody>
+ <tr><td>IP Address</td><td>192.168.1.100</td></tr>
+ <tr><td>Subnet Mask</td><td>255.255.255.0</td></tr>
+ <tr><td>Default Gateway</td><td>192.168.1.1</td></tr>
+ <tr><td>Preferred DNS</td><td>8.8.8.8</td></tr>
+ <tr><td>Alternate DNS</td><td>1.1.1.1</td></tr>
+ </tbody>
+ </table>
+
+ <h3>Legacy Method (Control Panel)</h3>
+ <ol>
+ <li>Open Control Panel.</li>
+ <li>Go to Network and Sharing Center.</li>
+ <li>Click Change adapter settings.</li>
+ <li>Right-click the active network adapter and select Properties.</li>
+ <li>Double-click Internet Protocol Version 4 (TCP/IPv4).</li>
+ <li>Select either:
+ <ul>
+ <li>1. Obtain an IP address automatically (DHCP), or</li>
+ <li>2. Use the following IP address (Static IP).</li>
+ </ul>
+ </li>
+ <li>Enter the required IP configuration and click OK.</li>
+ </ol>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-10-troubleshooting">10. Common Network Problems & Troubleshooting</h2>
+ 
+ <h3>Common Network Problems</h3>
+ <ul>
+ <li>❌ No Internet</li>
+ <li>❌ Wrong IP Address</li>
+ <li>❌ Faulty Cable</li>
+ <li>❌ Disabled Adapter</li>
+ <li>❌ Incorrect DNS</li>
+ <li>❌ Firewall Blocking Connection</li>
+ </ul>
+
+ <h3>Network Warning Icons</h3>
+ <p>A computer displaying a network warning icon indicates that there is a problem with the network connection. The warning icon may appear as a <strong>yellow triangle with an exclamation mark</strong>, a <strong>globe icon</strong>, or a <strong>red X</strong> on the network symbol, depending on the Windows version.</p>
+
+ <h3>Problem and Possible Cause Matrix</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Problem</th>
+ <th>Possible Cause</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr><td>❌ <strong>No Internet Connection</strong></td><td>Router or modem is offline, ISP outage</td></tr>
+ <tr><td>❌ <strong>Limited Connectivity</strong></td><td>Incorrect IP configuration or DHCP issue</td></tr>
+ <tr><td>❌ <strong>IP Address Conflict</strong></td><td>Two devices are using the same IP address</td></tr>
+ <tr><td>❌ <strong>Disabled Network Adapter</strong></td><td>Adapter is disabled in Windows</td></tr>
+ <tr><td>❌ <strong>Network Cable Unplugged</strong></td><td>Ethernet cable is loose or disconnected</td></tr>
+ <tr><td>❌ <strong>Incorrect DNS Settings</strong></td><td>Unable to resolve website names</td></tr>
+ <tr><td>❌ <strong>Firewall Blocking Access</strong></td><td>Security settings prevent communication</td></tr>
+ <tr><td>❌ <strong>Outdated Network Driver</strong></td><td>Driver is missing, corrupted, or incompatible</td></tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <!-- TAB 2: INTERACTIVE QUIZ -->
+ <div id="quiz" class="tab-content">
+ <div class="quiz-header">
+ <div class="score-display" id="score-display">Score: 0 / 90</div>
+ <div class="btn-group">
+ <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+ <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+ </div>
+ </div>
+
+ <div id="quiz-container">
+ <!-- Quiz questions dynamically rendered here -->
+ </div>
+ </div>
+
+
+ <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+ <div id="formulas" class="tab-content">
+ <div class="card">
+ <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem; gap:0.5rem;">
+ <h2 style="margin:0;">Quick Reference: Windows Network Configuration & Diagnostic Commands</h2>
+ <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+ </div>
+
+ <!-- 1. Windows Network Commands Reference Matrix -->
+ <h3 style="color:var(--primary-color); margin-top:1rem;">1. Windows CLI Diagnostic & Configuration Command Matrix</h3>
+ <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
+ <thead>
+ <tr style="background:var(--primary-color); color:white;">
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Command Syntax</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Action & Purpose</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Output / Key Parameters</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Displays quick summary of active network adapters.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">IPv4 Address, Subnet Mask, Default Gateway.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /all</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Displays exhaustive configuration for all physical & virtual adapters.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Physical MAC Address, DHCP Server, DNS Servers, Lease Obtained/Expires, Host Name.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /release</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Drops active DHCP lease and clears the current IP address.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">IPv4 set to 0.0.0.0; informs DHCP server that address is freed.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /renew</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Requests a fresh IP address and lease parameters from DHCP server.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Triggers DHCP Discover/Request; assigns new IP configuration.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /flushdns</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Purges and resets the contents of the local DNS resolver cache.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Removes stale/outdated DNS IP records; forces new DNS lookups.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ping &lt;target&gt;</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Tests Layer 3 network reachability using ICMP Echo Requests.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Round-trip time (latency in ms), Packet loss %, TTL (Time To Live).</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ping 127.0.0.1</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Tests local TCP/IP stack integrity (Loopback Test).</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Confirms network card and OS protocol stack are functioning without leaving PC.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">tracert &lt;target&gt;</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Traces the exact router hop path packets take to destination.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Lists intermediate router IPs and millisecond response times per hop.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">nslookup &lt;domain&gt;</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Queries DNS name servers to resolve domain names to IP addresses.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Server IP, Non-authoritative answer, resolved IPv4/IPv6 addresses.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <!-- 2. IPv4 Classes & Subnetting Matrix -->
+ <div class="card" style="margin-top:1.5rem;">
+ <h2>2. IPv4 Address Classes & Special Purpose Addresses</h2>
+ <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+ 
+ <div class="formula-card" style="border-left:4px solid #0284c7;">
+ <span class="formula-badge" style="background:#0284c7;">Class A</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#0284c7;">1.0.0.0 – 126.255.255.255</div>
+ <p style="font-size:0.85rem; margin:0.4rem 0;"><strong>Default Mask:</strong> 255.0.0.0 (/8)<br>
+ <strong>Network / Host:</strong> 8 bits Net, 24 bits Host (16.7M hosts/net).<br>
+ <strong>Private Range:</strong> 10.0.0.0 – 10.255.255.255 (Large Enterprise).</p>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #0d9488;">
+ <span class="formula-badge" style="background:#0d9488;">Class B</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#0d9488;">128.0.0.0 – 191.255.255.255</div>
+ <p style="font-size:0.85rem; margin:0.4rem 0;"><strong>Default Mask:</strong> 255.255.0.0 (/16)<br>
+ <strong>Network / Host:</strong> 16 bits Net, 16 bits Host (65,534 hosts/net).<br>
+ <strong>Private Range:</strong> 172.16.0.0 – 172.31.255.255 (Medium Enterprise).</p>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #f59e0b;">
+ <span class="formula-badge" style="background:#f59e0b;">Class C</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">192.0.0.0 – 223.255.255.255</div>
+ <p style="font-size:0.85rem; margin:0.4rem 0;"><strong>Default Mask:</strong> 255.255.255.0 (/24)<br>
+ <strong>Network / Host:</strong> 24 bits Net, 8 bits Host (254 hosts/net).<br>
+ <strong>Private Range:</strong> 192.168.0.0 – 192.168.255.255 (Home & Small LAN).</p>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #dc2626;">
+ <span class="formula-badge" style="background:#dc2626;">Special & Reserved Addresses</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#dc2626;">Loopback & APIPA</div>
+ <p style="font-size:0.85rem; margin:0.4rem 0;">
+ <strong>127.0.0.1:</strong> Local Loopback (Internal TCP/IP test).<br>
+ <strong>169.254.x.x:</strong> APIPA (Automatic Private IP when DHCP fails).<br>
+ <strong>255.255.255.255:</strong> Limited Local Broadcast.<br>
+ <strong>8.8.8.8 & 1.1.1.1:</strong> Public DNS (Google & Cloudflare).</p>
+ </div>
+
+ </div>
+ </div>
+
+ <!-- 3. Interactive Subnet Mask & Network ID Calculator -->
+ <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid var(--primary-color);">
+ <div class="calc-title">🖩 Live IPv4 Subnet, Network ID & Host Range Calculator</div>
+ <div class="calc-desc">Enter any IPv4 host address and subnet mask to calculate Network ID, Broadcast Address, Usable Host Range, and binary bitwise AND breakdown in real time.</div>
+ 
+ <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+ <div class="calc-field">
+ <label class="calc-label" for="calc-ip">Host IPv4 Address:</label>
+ <input type="text" id="calc-ip" class="calc-input" value="192.168.1.50" oninput="calculateSubnetLive()">
+ </div>
+ <div class="calc-field">
+ <label class="calc-label" for="calc-mask">Subnet Mask (or CIDR):</label>
+ <select id="calc-mask" class="calc-input" onchange="calculateSubnetLive()" style="font-weight:600;">
+ <option value="255.255.255.0" selected>255.255.255.0 (/24) — Class C Standard</option>
+ <option value="255.255.0.0">255.255.0.0 (/16) — Class B Standard</option>
+ <option value="255.0.0.0">255.0.0.0 (/8) — Class A Standard</option>
+ <option value="255.255.255.128">255.255.255.128 (/25) — 126 Hosts</option>
+ <option value="255.255.255.192">255.255.255.192 (/26) — 62 Hosts</option>
+ <option value="255.255.255.224">255.255.255.224 (/27) — 30 Hosts</option>
+ <option value="255.255.255.240">255.255.255.240 (/28) — 14 Hosts</option>
+ </select>
+ </div>
+ </div>
+
+ <div class="calc-result-box" style="margin-top:1.25rem;">
+ <div class="calc-result-header">
+ <span style="font-weight:700; font-size:0.95rem;">Calculated Network ID:</span>
+ <span class="calc-result-val" id="calc-net-id">192.168.1.0</span>
+ </div>
+ <div class="calc-math-steps" id="calc-subnet-steps">
+ <!-- Populated dynamically -->
+ </div>
+ </div>
+ </div>
+
+ <!-- 4. Interactive Windows Diagnostic Simulator -->
+ <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid #0284c7;">
+ <div class="calc-title">💻 Windows Network Command Prompt Terminal Simulator</div>
+ <div class="calc-desc">Select any Windows networking command to simulate its execution output and inspect the underlying network protocol mechanics.</div>
+ 
+ <div class="calc-grid" style="grid-template-columns: 1fr;">
+ <div class="calc-field">
+ <label class="calc-label" for="sim-cmd-select">Select Command to Execute in CMD:</label>
+ <select id="sim-cmd-select" class="calc-input" onchange="runCmdSimulator()" style="font-weight:600;">
+ <option value="ipconfig" selected>ipconfig (Basic Network Overview)</option>
+ <option value="ipconfig_all">ipconfig /all (Detailed Hardware & DHCP Parameters)</option>
+ <option value="ipconfig_flushdns">ipconfig /flushdns (Purge DNS Cache)</option>
+ <option value="ping_router">ping 192.168.1.1 (Gateway Reachability Test)</option>
+ <option value="ping_public">ping 8.8.8.8 (Internet Connectivity Test)</option>
+ <option value="ping_loopback">ping 127.0.0.1 (Local TCP/IP Stack Loopback Test)</option>
+ <option value="tracert">tracert google.com (Route Hop Trace)</option>
+ <option value="nslookup">nslookup google.com (DNS Record Lookup)</option>
+ </select>
+ </div>
+ </div>
+
+ <div style="background:#0f172a; color:#f8fafc; padding:1.2rem; border-radius:8px; font-family:Consolas, Monaco, monospace; font-size:0.88rem; line-height:1.5; margin-top:1rem; border:1px solid #334155; overflow-x:auto;" id="cmd-terminal-box">
+ <!-- Populated dynamically -->
+ </div>
+ </div>
+
+ </div>
+
+
+ </div>
+
+ <script>
+ // ==========================================
+ // Subnet & IP Calculator Logic
+ // ==========================================
+ function calculateSubnetLive() {
+ const ipStr = (document.getElementById('calc-ip').value || '192.168.1.50').trim();
+ const maskStr = document.getElementById('calc-mask').value;
+ const resNetId = document.getElementById('calc-net-id');
+ const resSteps = document.getElementById('calc-subnet-steps');
+
+ const ipOcts = ipStr.split('.').map(Number);
+ const maskOcts = maskStr.split('.').map(Number);
+
+ if (ipOcts.length !== 4 || ipOcts.some(n => isNaN(n) || n < 0 || n > 255)) {
+ resNetId.innerHTML = '<span style="color:#dc2626;">Invalid IP Address</span>';
+ resSteps.innerHTML = 'Please enter a valid IPv4 address in decimal dot format (e.g. 192.168.1.50).';
+ return;
+ }
+
+ const netOcts = ipOcts.map((oct, i) => oct & maskOcts[i]);
+ const netId = netOcts.join('.');
+
+ // Calculate wildcard and broadcast
+ const wildOcts = maskOcts.map(oct => 255 - oct);
+ const bcastOcts = netOcts.map((oct, i) => oct | wildOcts[i]);
+ const bcastId = bcastOcts.join('.');
+
+ // Usable hosts
+ const firstHost = `${netOcts[0]}.${netOcts[1]}.${netOcts[2]}.${netOcts[3] + 1}`;
+ const lastHost = `${bcastOcts[0]}.${bcastOcts[1]}.${bcastOcts[2]}.${bcastOcts[3] - 1}`;
+ 
+ // Total usable hosts
+ const totalBits = maskOcts.reduce((acc, oct) => acc + oct.toString(2).split('1').length - 1, 0);
+ const hostBits = 32 - totalBits;
+ const totalHosts = Math.max(0, Math.pow(2, hostBits) - 2);
+
+ let ipClass = 'Class C (Private / Home LAN)';
+ if (ipOcts[0] >= 1 && ipOcts[0] <= 126) ipClass = 'Class A';
+ else if (ipOcts[0] >= 128 && ipOcts[0] <= 191) ipClass = 'Class B';
+ else if (ipOcts[0] >= 192 && ipOcts[0] <= 223) ipClass = 'Class C';
+ else if (ipOcts[0] >= 224 && ipOcts[0] <= 239) ipClass = 'Class D (Multicast)';
+
+ resNetId.innerText = `${netId} / ${totalBits} (${totalHosts.toLocaleString()} Usable Hosts)`;
+ resSteps.innerHTML = `
+ <strong>Subnet Derivation & Network Breakdown:</strong><br>
+ <div class="step-line">• <strong>Address Classification:</strong> ${ipClass}</div>
+ <div class="step-line">• <strong>Network ID (Bitwise AND):</strong> ${ipOcts.join('.')} &amp; ${maskOcts.join('.')} = <strong>${netId}</strong></div>
+ <div class="step-line">• <strong>Broadcast Address:</strong> ${bcastId} (all host bits set to 1)</div>
+ <div class="step-line">• <strong>Usable Host Address Range:</strong> ${firstHost} &mdash; ${lastHost}</div>
+ <div class="step-line">• <strong>Capacity:</strong> 2<sup>${hostBits}</sup> &minus; 2 = <strong>${totalHosts.toLocaleString()} assignable host devices</strong>.</div>
+ `;
+ }
+
+ // ==========================================
+ // Command Simulator Logic
+ // ==========================================
+ function runCmdSimulator() {
+ const cmd = document.getElementById('sim-cmd-select').value;
+ const term = document.getElementById('cmd-terminal-box');
+
+ if (cmd === 'ipconfig') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>ipconfig</strong><br><br>
+Windows IP Configuration<br><br>
+Ethernet adapter Ethernet 1:<br>
+ Connection-specific DNS Suffix . : lan<br>
+ IPv4 Address. . . . . . . . . . . : 192.168.1.50<br>
+ Subnet Mask . . . . . . . . . . . : 255.255.255.0<br>
+ Default Gateway . . . . . . . . . : 192.168.1.1<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> Basic Layer 3 configuration confirmed. PC is on the 192.168.1.0/24 subnet and sends foreign traffic to Gateway 192.168.1.1.
+ `;
+ } else if (cmd === 'ipconfig_all') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>ipconfig /all</strong><br><br>
+Windows IP Configuration<br>
+ Host Name . . . . . . . . . . . . : DESKTOP-LABPC01<br>
+ Primary Dns Suffix . . . . . . . : campus.edu<br>
+ Node Type . . . . . . . . . . . . : Hybrid<br>
+ IP Routing Enabled. . . . . . . . : No<br><br>
+Ethernet adapter Ethernet 1:<br>
+ Description . . . . . . . . . . . : Intel(R) Ethernet Controller I225-V<br>
+ Physical Address. . . . . . . . . : 00-1A-2B-3C-4D-5E<br>
+ DHCP Enabled. . . . . . . . . . . : Yes<br>
+ IPv4 Address. . . . . . . . . . . : 192.168.1.50 (Preferred)<br>
+ Subnet Mask . . . . . . . . . . . : 255.255.255.0<br>
+ Lease Obtained. . . . . . . . . . : Monday, August 17, 2026 8:00:00 AM<br>
+ Lease Expires . . . . . . . . . . : Tuesday, August 18, 2026 8:00:00 AM<br>
+ Default Gateway . . . . . . . . . : 192.168.1.1<br>
+ DHCP Server . . . . . . . . . . . : 192.168.1.1<br>
+ DNS Servers . . . . . . . . . . . : 8.8.8.8, 1.1.1.1<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> Full hardware NIC MAC address (00-1A-2B-3C-4D-5E) and DHCP lease lifecycle visible.
+ `;
+ } else if (cmd === 'ipconfig_flushdns') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>ipconfig /flushdns</strong><br><br>
+Windows IP Configuration<br><br>
+Successfully flushed the DNS Resolver Cache.<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> Local cached DNS records have been wiped clean. Next web requests will fetch fresh A records from upstream DNS server.
+ `;
+ } else if (cmd === 'ping_router') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>ping 192.168.1.1</strong><br><br>
+Pinging 192.168.1.1 with 32 bytes of data:<br>
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=64<br>
+Reply from 192.168.1.1: bytes=32 time=&lt;1ms TTL=64<br>
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=64<br>
+Reply from 192.168.1.1: bytes=32 time=1ms TTL=64<br><br>
+Ping statistics for 192.168.1.1:<br>
+ Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),<br>
+Approximate round trip times in milli-seconds:<br>
+ Minimum = 0ms, Maximum = 1ms, Average = 0ms<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> Gateway router is responsive with 0% packet loss and minimal local LAN latency (1ms).
+ `;
+ } else if (cmd === 'ping_public') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>ping 8.8.8.8</strong><br><br>
+Pinging 8.8.8.8 with 32 bytes of data:<br>
+Reply from 8.8.8.8: bytes=32 time=14ms TTL=118<br>
+Reply from 8.8.8.8: bytes=32 time=15ms TTL=118<br>
+Reply from 8.8.8.8: bytes=32 time=13ms TTL=118<br>
+Reply from 8.8.8.8: bytes=32 time=14ms TTL=118<br><br>
+Ping statistics for 8.8.8.8:<br>
+ Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),<br>
+Approximate round trip times in milli-seconds:<br>
+ Minimum = 13ms, Maximum = 15ms, Average = 14ms<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> Public Internet connectivity confirmed. Google DNS is reached across WAN with 14ms latency.
+ `;
+ } else if (cmd === 'ping_loopback') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>ping 127.0.0.1</strong><br><br>
+Pinging 127.0.0.1 with 32 bytes of data:<br>
+Reply from 127.0.0.1: bytes=32 time=&lt;1ms TTL=128<br>
+Reply from 127.0.0.1: bytes=32 time=&lt;1ms TTL=128<br>
+Reply from 127.0.0.1: bytes=32 time=&lt;1ms TTL=128<br>
+Reply from 127.0.0.1: bytes=32 time=&lt;1ms TTL=128<br><br>
+Ping statistics for 127.0.0.1:<br>
+ Packets: Sent = 4, Received = 4, Lost = 0 (0% loss),<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> Internal Loopback test PASSED. The local TCP/IP protocol stack and Windows network software are healthy.
+ `;
+ } else if (cmd === 'tracert') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>tracert google.com</strong><br><br>
+Tracing route to google.com [142.250.190.46] over a maximum of 30 hops:<br><br>
+ 1 1 ms &lt;1 ms &lt;1 ms 192.168.1.1 [Local Gateway]<br>
+ 2 8 ms 7 ms 8 ms 10.200.0.1 [ISP Gateway Router]<br>
+ 3 12 ms 11 ms 12 ms 172.16.50.4 [Regional Backbone]<br>
+ 4 15 ms 14 ms 15 ms 142.250.190.46 [Google Edge Server]<br><br>
+Trace complete.<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> 4 hops traversed from local PC to destination. No intermediate routing loops or packet drops detected.
+ `;
+ } else if (cmd === 'nslookup') {
+ term.innerHTML = `
+<span style="color:#38bdf8;">C:\Users\Student&gt;</span> <strong>nslookup google.com</strong><br><br>
+Server: dns.google<br>
+Address: 8.8.8.8<br><br>
+Non-authoritative answer:<br>
+Name: google.com<br>
+Addresses: 2607:f8b0:4004:c1b::64<br>
+ 142.250.190.46<br><br>
+<span style="color:#4ade80;">[Analysis]:</span> DNS Resolution successful. Domain google.com resolved to IPv4 address 142.250.190.46 via DNS server 8.8.8.8.
+ `;
+ }
+ }
+
+ // ==========================================
+ // Quiz Data Definition
+ // ==========================================
+ const quizData = [
+    {
+        "q": "What is Network Configuration?",
+        "options": [
+            "The process of assembling physical PC chassis parts designed to support enterprise operational infrastructure",
+            "The process of setting up a computer's network settings so it can communicate with other devices and access the Internet",
+            "A tool used exclusively for graphic design and video editing designed to support enterprise operational infrastructure",
+            "The process of installing an operating system kernel from source code designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "Network Configuration is the process of setting up a computer's network settings so it can communicate with other devices and access the Internet.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which of the following is NOT listed as an item included in Network Configuration?",
+        "options": [
+            "IP Address configured for general baseline system administration",
+            "Subnet Mask configured for general baseline system administration",
+            "Default Gateway",
+            "CPU Clock Multiplier"
+        ],
+        "correct": 3,
+        "exp": "Network Configuration includes: IP Address, Subnet Mask, Default Gateway, DNS Server, Network Adapter Settings.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which of the following is an item included in Network Configuration?",
+        "options": [
+            "DNS Server",
+            "Monitor Refresh Rate",
+            "Audio Sample Depth",
+            "Keyboard Layout Language"
+        ],
+        "correct": 0,
+        "exp": "Network Configuration includes: IP Address, Subnet Mask, Default Gateway, DNS Server, Network Adapter Settings.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which adapter parameter is included in Network Configuration?",
+        "options": [
+            "Network Adapter Settings",
+            "Graphics Card Overclock",
+            "RAM Timing Profiles",
+            "Fan Speed Controls"
+        ],
+        "correct": 0,
+        "exp": "Network Configuration includes Network Adapter Settings.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which reason explains why Network Configuration is important for accessing online web platforms?",
+        "options": [
+            "Internet Access",
+            "Physical cooling",
+            "Video rendering",
+            "Hard drive defragmentation"
+        ],
+        "correct": 0,
+        "exp": "Why is it Important? Internet Access, File Sharing, Printer Sharing, Remote Access, Network Security.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which reason explains why Network Configuration is important for document distribution among local PCs?",
+        "options": [
+            "File Sharing",
+            "Overclocking",
+            "Audio mixing",
+            "Compiler optimization"
+        ],
+        "correct": 0,
+        "exp": "Network Configuration enables File Sharing.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which reason explains why Network Configuration is important for hardware peripheral access across an office?",
+        "options": [
+            "Printer Sharing",
+            "BIOS flashing",
+            "RAM overclocking",
+            "Battery recalibration"
+        ],
+        "correct": 0,
+        "exp": "Network Configuration enables Printer Sharing.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which reason explains why Network Configuration is important for controlling a device from another location?",
+        "options": [
+            "Remote Access",
+            "Direct memory access",
+            "Power supply distribution",
+            "GPU rendering"
+        ],
+        "correct": 0,
+        "exp": "Network Configuration enables Remote Access.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "Which reason explains why Network Configuration is important for protecting systems from unauthorized access?",
+        "options": [
+            "Network Security",
+            "High DPI scaling",
+            "Disk partitioning",
+            "USB formatting"
+        ],
+        "correct": 0,
+        "exp": "Network Configuration is important for Network Security.",
+        "section": "Part 2: What is Network Configuration & Importance"
+    },
+    {
+        "q": "What is the correct Data Flow sequence in a basic network connection?",
+        "options": [
+            "Internet -> PC -> Router",
+            "PC -> Router -> Internet",
+            "Router -> PC -> Internet",
+            "PC -> Internet -> Router"
+        ],
+        "correct": 1,
+        "exp": "Data Flow: PC -> Router -> Internet.",
+        "section": "Part 3: Basic Network Connection & Data Flow"
+    },
+    {
+        "q": "What role does the PC (Client) play in a basic network connection?",
+        "options": [
+            "The PC generates data and sends it to the router",
+            "The PC provides WAN connectivity to the ISP",
+            "The PC converts website domain names to binary",
+            "The PC assigns dynamic IP addresses to external servers"
+        ],
+        "correct": 0,
+        "exp": "PC (Client): The PC generates data and sends it to the router.",
+        "section": "Part 3: Basic Network Connection & Data Flow"
+    },
+    {
+        "q": "What role does the Router (Gateway) play in a basic network connection?",
+        "options": [
+            "The router receives the data",
+            "processes it configured for general baseline system administration",
+            "and forwards it to the Internet",
+            "The router displays graphical web pages directly",
+            "The router permanently stores user application files",
+            "The router executes client-side Python scripts"
+        ],
+        "correct": 0,
+        "exp": "Router (Gateway): The router receives the data, processes it, and forwards it to the Internet.",
+        "section": "Part 3: Basic Network Connection & Data Flow"
+    },
+    {
+        "q": "What occurs when data reaches the Internet in a basic network connection?",
+        "options": [
+            "The data is discarded immediately",
+            "The data reaches the Internet and is delivered to the destination",
+            "The data is converted back into physical Ethernet cables",
+            "The data enters local RAM cache under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Internet: The data reaches the Internet and is delivered to the destination.",
+        "section": "Part 3: Basic Network Connection & Data Flow"
+    },
+    {
+        "q": "What cable type connects the PC (Client) to the Router in the basic connection diagram?",
+        "options": [
+            "Ethernet Cable",
+            "HDMI Cable",
+            "VGA Cable",
+            "Audio Jack"
+        ],
+        "correct": 0,
+        "exp": "The diagram shows an Ethernet Cable connecting PC (Client) to Router (Gateway).",
+        "section": "Part 3: Basic Network Connection & Data Flow"
+    },
+    {
+        "q": "What connection type links the Router to the Internet cloud?",
+        "options": [
+            "Internet Connection (ISP)",
+            "USB 3.0 Cable",
+            "Serial RS-232",
+            "SATA link under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Internet Connection (ISP) connects Router to Internet.",
+        "section": "Part 3: Basic Network Connection & Data Flow"
+    },
+    {
+        "q": "What topology type is illustrated in the Office / Small Business Network example?",
+        "options": [
+            "Star Topology",
+            "Ring Topology",
+            "Bus Topology",
+            "Mesh Topology"
+        ],
+        "correct": 0,
+        "exp": "Topology Type: Star Topology (All devices connect to a central device: Switch / Router / AP).",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "How is Star Topology defined in the PDF diagram?",
+        "options": [
+            "All devices connect in a continuous circle across standard production computing environments",
+            "All devices connect to a central device: Switch / Router / AP",
+            "All devices share a single backbone coaxial cable",
+            "Each device connects to every other device directly"
+        ],
+        "correct": 1,
+        "exp": "Star Topology: All devices connect to a central device: Switch / Router / AP.",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "What is the Network Address in the example addressing scheme?",
+        "options": [
+            "192.168.1.0",
+            "192.168.1.1",
+            "255.255.255.0",
+            "192.168.1.100"
+        ],
+        "correct": 0,
+        "exp": "Addressing Scheme - Network Address: 192.168.1.0.",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "What is the Subnet Mask in the example addressing scheme?",
+        "options": [
+            "255.255.255.0",
+            "255.0.0.0 across standard production computing environments",
+            "255.255.0.0",
+            "192.168.1.0"
+        ],
+        "correct": 0,
+        "exp": "Addressing Scheme - Subnet Mask: 255.255.255.0.",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "What is the Default Gateway IP address in the example addressing scheme?",
+        "options": [
+            "192.168.1.1 (Router)",
+            "192.168.1.100 across standard production computing environments",
+            "8.8.8.8 across standard production computing environments",
+            "192.168.1.0 across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Addressing Scheme - Default Gateway: 192.168.1.1 (Router).",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "What is the DHCP Range in the example addressing scheme?",
+        "options": [
+            "192.168.1.100 192.168.1.200",
+            "192.168.1.1 192.168.1.50",
+            "10.0.0.1 10.0.0.255",
+            "172.16.0.1 172.16.0.100"
+        ],
+        "correct": 0,
+        "exp": "Addressing Scheme - DHCP Range: 192.168.1.100 192.168.1.200.",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "Which IP address represents Google DNS in the addressing scheme?",
+        "options": [
+            "8.8.8.8",
+            "1.1.1.1",
+            "192.168.1.1",
+            "192.168.1.100"
+        ],
+        "correct": 0,
+        "exp": "DNS Server: 8.8.8.8 (Google DNS).",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "Which IP address represents Cloudflare DNS in the addressing scheme?",
+        "options": [
+            "1.1.1.1",
+            "8.8.8.8",
+            "192.168.1.50",
+            "255.255.255.0"
+        ],
+        "correct": 0,
+        "exp": "DNS Server: 1.1.1.1 (Cloudflare DNS).",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "Which four functions are listed under Router's Function in the topology diagram?",
+        "options": [
+            "Routing / NAT",
+            "Firewall / Security",
+            "Acts as Default Gateway",
+            "DHCP Server",
+            "Word processing",
+            "Spreadsheets",
+            "Compiling code",
+            "Web hosting",
+            "Data storage",
+            "File deletion",
+            "RAM allocation",
+            "CPU scheduling",
+            "Signal amplification",
+            "Display rendering",
+            "Audio playback",
+            "Printing"
+        ],
+        "correct": 0,
+        "exp": "Router's Function: Routing / NAT, Firewall / Security, Acts as Default Gateway, DHCP Server.",
+        "section": "Part 4: Basic Network Components & Topology"
+    },
+    {
+        "q": "What is an IP Address?",
+        "options": [
+            "A unique address assigned to every device",
+            "A hardware serial number that cannot be changed",
+            "A domain name like google.com",
+            "A transmission protocol for audio"
+        ],
+        "correct": 0,
+        "exp": "IP Address: A unique address assigned to every device. Example: 192.168.1.100.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What is the function of a Subnet Mask?",
+        "options": [
+            "Determines the network and host portions",
+            "Encrypts network passwords",
+            "Translates domain names to IP addresses",
+            "Measures packet round-trip time"
+        ],
+        "correct": 0,
+        "exp": "Subnet Mask: Determines the network and host portions. Example: 255.255.255.0.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What is the function of the Default Gateway?",
+        "options": [
+            "Allows communication outside the local network",
+            "Blocks all incoming internet traffic permanently",
+            "Assigns permanent MAC addresses to network cards",
+            "Converts web text to PDF format"
+        ],
+        "correct": 0,
+        "exp": "Default Gateway: Allows communication outside the local network. Example: 192.168.1.1.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What is the function of a DNS Server?",
+        "options": [
+            "Translates website names into IP addresses",
+            "Assigns dynamic IP addresses automatically",
+            "Measures physical cable resistance",
+            "Connects client PCs to monitor displays"
+        ],
+        "correct": 0,
+        "exp": "DNS Server: Translates website names into IP addresses.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "How is a Static IP configured compared to a Dynamic IP?",
+        "options": [
+            "Static IP is Manual Configuration; Dynamic IP is Automatic Configuration",
+            "Static IP is Automatic; Dynamic IP is Manual managed by operating system kernel schedulers and virtual memory managers",
+            "Both are configured automatically via BIOS",
+            "Both require manual router firmware updates"
+        ],
+        "correct": 0,
+        "exp": "Configuration: Static IP = Manual Configuration | Dynamic IP (DHCP) = Automatic Configuration.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What is the Address Type of a Static IP compared to a Dynamic IP?",
+        "options": [
+            "Static IP is a Permanent Address; Dynamic IP is a Temporary Address",
+            "Static IP is Temporary; Dynamic IP is Permanent",
+            "Both addresses are Temporary across standard production computing environments",
+            "Both addresses are Permanent across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Address Type: Static IP = Permanent Address | Dynamic IP = Temporary Address.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "Who typically uses a Static IP compared to a Dynamic IP?",
+        "options": [
+            "Static IP is Used by Servers; Dynamic IP is Used by Home PCs",
+            "Static IP is Used by Home PCs; Dynamic IP is Used by Servers",
+            "Static IP is used only by smartphones",
+            "Dynamic IP is used only by printers configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Used by: Static IP = Used by Servers | Dynamic IP = Used by Home PCs.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What is the management trade-off between Static and Dynamic IP?",
+        "options": [
+            "Static IP is Less Flexible; Dynamic IP is Easy to Manage",
+            "Static IP is Easy to Manage; Dynamic IP is Less Flexible",
+            "Both are impossible to manage on Windows",
+            "Dynamic IP requires daily manual entry across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Static IP = Less Flexible | Dynamic IP = Easy to Manage.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What does the acronym DHCP stand for?",
+        "options": [
+            "Dynamic Host Configuration Protocol",
+            "Direct Hardware Control Protocol",
+            "Domain Host Connection Protocol",
+            "Digital Host Communication Path"
+        ],
+        "correct": 0,
+        "exp": "DHCP stands for Dynamic Host Configuration Protocol.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "Which four network settings are automatically assigned by DHCP?",
+        "options": [
+            "IP Address",
+            "Subnet Mask",
+            "Gateway",
+            "DNS",
+            "Username",
+            "Password",
+            "Bio",
+            "Profile picture",
+            "CPU frequency",
+            "RAM timings",
+            "Fan speed",
+            "Core voltage",
+            "File permissions",
+            "Audit logs",
+            "Encryption keys",
+            "Passphrases"
+        ],
+        "correct": 0,
+        "exp": "DHCP Automatically assigns: IP Address, Subnet Mask, Gateway, DNS.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "Why is Dynamic IP (DHCP) recommended for most home and office users?",
+        "options": [
+            "It automatically assigns network settings from a DHCP server without manual entry",
+            "It prevents users from connecting to Wi-Fi under standard organizational security baseline protocols",
+            "It eliminates the need for a default gateway under standard organizational security baseline protocols",
+            "It forces computers to use static routing tables under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Dynamic IP (DHCP): Automatically assigns network settings from a DHCP server. Recommended for most home and office users.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "For which devices is a Static IP commonly used?",
+        "options": [
+            "Servers",
+            "printers",
+            "and network devices that require a fixed address",
+            "Temporary guest smartphones exclusively",
+            "Disposable web browser tabs",
+            "Battery-powered laptops on public Wi-Fi"
+        ],
+        "correct": 0,
+        "exp": "Static IP: Manually configured and commonly used for servers, printers, and network devices that require a fixed address.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What critical warning is given when configuring a Static IP address?",
+        "options": [
+            "Always ensure it belongs to the correct network and does not duplicate another device's IP address to avoid address conflicts",
+            "Never enter a subnet mask under standard production system configurations managed by operating system kernel schedulers and virtual memory managers",
+            "Always change the IP every 5 minutes under standard production system configurations",
+            "Only configure static IPs on disconnected computers under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Note: When configuring a static IP address, always ensure it belongs to the correct network and does not duplicate another device's IP address to avoid address conflicts.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What occurs if two devices on the same network are configured with the exact same IP address?",
+        "options": [
+            "An IP Address Conflict",
+            "Internet speed doubles",
+            "The subnet mask converts to 255.0.0.0",
+            "Both devices merge into a single virtual server"
+        ],
+        "correct": 0,
+        "exp": "IP Address Conflict: Two devices are using the same IP address.",
+        "section": "Part 5: Static vs. Dynamic IP Address & DHCP"
+    },
+    {
+        "q": "What physical cable type is used by an Ethernet (Wired) connection?",
+        "options": [
+            "Ethernet (RJ-45) cable",
+            "Coaxial BNC cable",
+            "Fiber optic SC connector",
+            "USB Type-C cable"
+        ],
+        "correct": 0,
+        "exp": "Ethernet (Wired): Uses an Ethernet (RJ-45) cable.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "What transmission medium is used by Wi-Fi (Wireless)?",
+        "options": [
+            "Radio waves",
+            "Infrared beams",
+            "Copper wires",
+            "Sound pulses"
+        ],
+        "correct": 0,
+        "exp": "Wi-Fi (Wireless): Uses radio waves.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "How does data transfer speed compare between Ethernet and Wi-Fi?",
+        "options": [
+            "Ethernet provides faster data transfer",
+            "Wi-Fi is always 100x faster than Ethernet",
+            "Both have identical transmission speeds in all conditions",
+            "Ethernet speed depends strictly on distance from the cell tower"
+        ],
+        "correct": 0,
+        "exp": "Ethernet: Faster data transfer.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "How does stability compare between Ethernet and Wi-Fi?",
+        "options": [
+            "Ethernet provides a more stable connection",
+            "Wi-Fi is completely immune to physical obstacles",
+            "Ethernet connections disconnect whenever doors close",
+            "Wi-Fi has lower stability but zero latency"
+        ],
+        "correct": 0,
+        "exp": "Ethernet: More stable connection.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "How does latency compare between Ethernet and Wi-Fi?",
+        "options": [
+            "Ethernet has lower latency",
+            "Wi-Fi has lower latency than wired cables",
+            "Both have infinite latency",
+            "Latency is determined solely by the monitor"
+        ],
+        "correct": 0,
+        "exp": "Ethernet: Lower latency.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "How does interference compare between Ethernet and Wi-Fi?",
+        "options": [
+            "Ethernet experiences less interference",
+            "Wi-Fi experiences zero interference through walls",
+            "Ethernet is heavily affected by household microwaves",
+            "Both experience identical interference levels"
+        ],
+        "correct": 0,
+        "exp": "Ethernet: Less interference.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "What environments and use cases are ideal for Ethernet (Wired)?",
+        "options": [
+            "Gaming",
+            "servers",
+            "and offices",
+            "Smartphones and tablets on the move",
+            "Outdoor public parks exclusively",
+            "Drones and autonomous vehicles"
+        ],
+        "correct": 0,
+        "exp": "Ethernet: Ideal for gaming, servers, and offices.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "What is a primary convenience benefit of Wi-Fi (Wireless)?",
+        "options": [
+            "Convenient mobility and easy connection of multiple devices",
+            "Zero packet latency under heavy interference",
+            "Immunity to wall obstructions across standard production computing environments",
+            "Fixed permanent IP configuration across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Wi-Fi: Convenient mobility, Easy to connect multiple devices.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "What factor determines signal strength in a Wi-Fi connection?",
+        "options": [
+            "Distance (Signal strength depends on distance)",
+            "The color of the Ethernet cable",
+            "The number of characters in the IP address",
+            "The speed of the computer fan"
+        ],
+        "correct": 0,
+        "exp": "Wi-Fi: Signal strength depends on distance.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "What physical obstacles can degrade Wi-Fi signal performance?",
+        "options": [
+            "Walls and other devices",
+            "Fiber optic patch panels",
+            "Keyboard keys",
+            "Subnet masks"
+        ],
+        "correct": 0,
+        "exp": "Wi-Fi: Can be affected by walls and other devices.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "What devices are listed as ideal for Wi-Fi (Wireless)?",
+        "options": [
+            "Laptops",
+            "smartphones",
+            "and tablets",
+            "High-volume data center database servers",
+            "Core network infrastructure switches",
+            "Enterprise storage array networks"
+        ],
+        "correct": 0,
+        "exp": "Wi-Fi: Ideal for laptops, smartphones, and tablets.",
+        "section": "Part 6: Types of Network Connections (Wired vs Wireless)"
+    },
+    {
+        "q": "Which command displays the basic IP Address, Default Gateway, and Subnet Mask in Windows Command Prompt?",
+        "options": [
+            "ipconfig",
+            "ping configured for general baseline system administration",
+            "tracert",
+            "netstat"
+        ],
+        "correct": 0,
+        "exp": "Command: `ipconfig` -> Displays: IP Address, Gateway, Subnet Mask.",
+        "section": "Part 7: Viewing Network Configuration & Commands"
+    },
+    {
+        "q": "Which command displays detailed network information including MAC Address, DNS, DHCP, and Host Name?",
+        "options": [
+            "ipconfig /all",
+            "ipconfig /release",
+            "ipconfig /renew",
+            "ping -t"
+        ],
+        "correct": 0,
+        "exp": "Command: `ipconfig /all` -> Displays: MAC Address, DNS, DHCP, Host Name.",
+        "section": "Part 7: Viewing Network Configuration & Commands"
+    },
+    {
+        "q": "What key combination opens the Windows Run dialog?",
+        "options": [
+            "Windows + R",
+            "Windows + E",
+            "Ctrl + Shift + Esc",
+            "Alt + F4"
+        ],
+        "correct": 0,
+        "exp": "Demonstration Step 1: Press Windows + R.",
+        "section": "Part 7: Viewing Network Configuration & Commands"
+    },
+    {
+        "q": "What command is typed into the Run dialog to open Command Prompt?",
+        "options": [
+            "cmd",
+            "terminal",
+            "powershell",
+            "bash"
+        ],
+        "correct": 0,
+        "exp": "Demonstration Step 2: Type cmd and press Enter.",
+        "section": "Part 7: Viewing Network Configuration & Commands"
+    },
+    {
+        "q": "In the demonstration, why do you check IPv4 Address, Subnet Mask, and Default Gateway in the `ipconfig` output?",
+        "options": [
+            "To determine whether a computer is properly connected to the network",
+            "To change the computer's monitor resolution",
+            "To format the hard drive under standard organizational security baseline protocols",
+            "To overclock the CPU under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Demonstration Step 5: Explain how these values help determine whether a computer is properly connected to the network.",
+        "section": "Part 7: Viewing Network Configuration & Commands"
+    },
+    {
+        "q": "What is the primary role of the `ping` command in network troubleshooting?",
+        "options": [
+            "One of the first tools used by IT professionals to verify network connectivity and troubleshoot communication problems",
+            "A tool used to write HTML web code designed to support enterprise operational infrastructure managed by operating system kernel schedulers and virtual memory managers",
+            "An antivirus program used to clean trojans designed to support enterprise operational infrastructure",
+            "A command used to encrypt hard drive partitions designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "The ping command is one of the first tools used by IT professionals to verify network connectivity and troubleshoot communication problems.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "In ping output, what does `Reply from <IP>` indicate?",
+        "options": [
+            "The destination device responded successfully",
+            "The destination device is offline managed by operating system kernel schedulers and virtual memory managers",
+            "The packet was discarded by a firewall",
+            "DNS failed to resolve the address"
+        ],
+        "correct": 0,
+        "exp": "Reply from The destination device responded successfully.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "In ping output, what does `bytes=32` represent?",
+        "options": [
+            "Size of each packet sent",
+            "The total hard drive space remaining",
+            "The speed of the network router in megabits",
+            "The number of hops to the server"
+        ],
+        "correct": 0,
+        "exp": "bytes=32 Size of each packet sent.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "In ping output, what does `time=18ms` represent?",
+        "options": [
+            "Round-trip time; lower values indicate a faster connection",
+            "The time of day the packet was created managed by operating system kernel schedulers and virtual memory managers",
+            "The total battery life remaining on the client",
+            "The timeout limit before packet discard"
+        ],
+        "correct": 0,
+        "exp": "time=18ms Round-trip time; lower values indicate a faster connection.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "What does TTL (Time To Live) indicate in ping output?",
+        "options": [
+            "Limits how many network devices (hops) a packet can pass through before being discarded",
+            "The expiration date of the operating system license",
+            "The time left before the router reboots under standard production system configurations",
+            "The total duration of an active user session"
+        ],
+        "correct": 0,
+        "exp": "TTL (Time To Live) Limits how many network devices (hops) a packet can pass through before being discarded.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "In ping statistics, what does `Lost = 0 (0% loss)` indicate?",
+        "options": [
+            "All packets reached the destination successfully",
+            "indicating a reliable connection",
+            "The connection is completely offline",
+            "Half of the packets were intercepted by an attacker",
+            "The router is rejecting all traffic"
+        ],
+        "correct": 0,
+        "exp": "Packets Sent/Received/Lost Indicates whether the connection is reliable. A 0% loss means all packets reached the destination successfully.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "What is the meaning of the common ping result `Reply from...`?",
+        "options": [
+            "Connection is successful",
+            "The destination did not respond",
+            "The computer cannot reach the target network",
+            "DNS could not resolve the hostname"
+        ],
+        "correct": 0,
+        "exp": "Reply from... : Connection is successful.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "What is the meaning of the common ping result `Request timed out`?",
+        "options": [
+            "The destination did not respond",
+            "Connection is successful",
+            "The network cable is missing",
+            "The IP address was changed automatically"
+        ],
+        "correct": 0,
+        "exp": "Request timed out : The destination did not respond.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "What is the meaning of the common ping result `Destination host unreachable`?",
+        "options": [
+            "The computer cannot reach the target network or device",
+            "Connection is successful with 0ms latency",
+            "The web browser is closed designed to support enterprise operational infrastructure",
+            "The DNS server is fully functional"
+        ],
+        "correct": 0,
+        "exp": "Destination host unreachable : The computer cannot reach the target network or device.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "What is the meaning of the common ping result `Ping request could not find host`?",
+        "options": [
+            "DNS could not resolve the hostname",
+            "The target server responded with 32 bytes",
+            "The Ethernet cable is transmitting at full capacity",
+            "The default gateway was bypassed successfully"
+        ],
+        "correct": 0,
+        "exp": "Ping request could not find host : DNS could not resolve the hostname.",
+        "section": "Part 8: Network Diagnostic Commands (Ping)"
+    },
+    {
+        "q": "In Windows 11 Settings (Method 1), under which category do you configure network settings?",
+        "options": [
+            "Network & Internet",
+            "Personalization",
+            "Apps & Features",
+            "System & Storage"
+        ],
+        "correct": 0,
+        "exp": "Method 1: Open Settings -> Select Network & Internet.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In Windows 11 Settings, what do you click under 'IP Assignment' to enter a static IP?",
+        "options": [
+            "Edit",
+            "Delete",
+            "Format",
+            "Refresh"
+        ],
+        "correct": 0,
+        "exp": "Method 1 Step 5: Under IP Assignment, click Edit.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In Windows 11 Settings, after selecting 'Manual', which IP version must be enabled?",
+        "options": [
+            "IPv4",
+            "IPv2",
+            "IPX/SPX",
+            "AppleTalk"
+        ],
+        "correct": 0,
+        "exp": "Method 1 Step 6: Choose Manual and enable IPv4.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In the example configuration settings, what value is entered for IP Address?",
+        "options": [
+            "192.168.1.100",
+            "192.168.1.1",
+            "255.255.255.0",
+            "8.8.8.8"
+        ],
+        "correct": 0,
+        "exp": "Setting Example Value - IP Address: 192.168.1.100.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In the example configuration settings, what value is entered for Subnet Mask?",
+        "options": [
+            "255.255.255.0",
+            "192.168.1.100",
+            "192.168.1.1",
+            "1.1.1.1"
+        ],
+        "correct": 0,
+        "exp": "Setting Example Value - Subnet Mask: 255.255.255.0.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In the example configuration settings, what value is entered for Default Gateway?",
+        "options": [
+            "192.168.1.1",
+            "192.168.1.100",
+            "255.255.255.0",
+            "8.8.8.8"
+        ],
+        "correct": 0,
+        "exp": "Setting Example Value - Default Gateway: 192.168.1.1.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In the example configuration settings, what value is entered for Preferred DNS?",
+        "options": [
+            "8.8.8.8",
+            "192.168.1.1",
+            "255.255.255.0",
+            "192.168.1.100"
+        ],
+        "correct": 0,
+        "exp": "Setting Example Value - Preferred DNS: 8.8.8.8.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In the example configuration settings, what value is entered for Alternate DNS?",
+        "options": [
+            "1.1.1.1",
+            "8.8.8.8",
+            "192.168.1.1",
+            "255.255.255.0"
+        ],
+        "correct": 0,
+        "exp": "Setting Example Value - Alternate DNS: 1.1.1.1.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In the Legacy Method (Control Panel), which menu do you navigate to after opening Control Panel?",
+        "options": [
+            "Network and Sharing Center",
+            "Administrative Tools",
+            "Device Manager configured for general baseline system administration",
+            "Programs and Features"
+        ],
+        "correct": 0,
+        "exp": "Legacy Method Step 2: Go to Network and Sharing Center.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In Network and Sharing Center, what link do you click to view your network adapters?",
+        "options": [
+            "Change adapter settings",
+            "Manage 3D displays",
+            "Uninstall programs",
+            "Configure audio devices"
+        ],
+        "correct": 0,
+        "exp": "Legacy Method Step 3: Click Change adapter settings.",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In adapter properties, which protocol item do you double-click to configure IPv4 settings?",
+        "options": [
+            "Internet Protocol Version 4 (TCP/IPv4)",
+            "File and Printer Sharing for Microsoft Networks",
+            "Internet Protocol Version 6 (TCP/IPv6)",
+            "Link-Layer Topology Discovery Responder"
+        ],
+        "correct": 0,
+        "exp": "Legacy Method Step 5: Double-click Internet Protocol Version 4 (TCP/IPv4).",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In TCP/IPv4 properties, which radio button option enables DHCP automatic configuration?",
+        "options": [
+            "Obtain an IP address automatically",
+            "Use the following IP address",
+            "Disable all network traffic",
+            "Validate settings upon reboot only"
+        ],
+        "correct": 0,
+        "exp": "Legacy Method Step 6.1: Obtain an IP address automatically (DHCP).",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "In TCP/IPv4 properties, which radio button option enables manual Static IP entry?",
+        "options": [
+            "Use the following IP address",
+            "Obtain an IP address automatically",
+            "Bypass default gateway",
+            "Disable TCP/IP stack"
+        ],
+        "correct": 0,
+        "exp": "Legacy Method Step 6.2: Use the following IP address (Static IP).",
+        "section": "Part 9: Configuring IPv4 Settings in Windows"
+    },
+    {
+        "q": "Which of the following is explicitly listed as a Common Network Problem in the PDF?",
+        "options": [
+            "Faulty Cable",
+            "Overheated GPU",
+            "Cracked monitor screen",
+            "Low printer ink"
+        ],
+        "correct": 0,
+        "exp": "Common Network Problems: No Internet, Wrong IP Address, Faulty Cable, Disabled Adapter, Incorrect DNS, Firewall Blocking Connection.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "Which of the following is listed as a Common Network Problem?",
+        "options": [
+            "Disabled Adapter",
+            "Unregistered copy of Windows",
+            "Slow mouse cursor",
+            "Keyboard key sticking"
+        ],
+        "correct": 0,
+        "exp": "Common Network Problems include Disabled Adapter.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "Which security component can be a possible cause of connection problems if configured too strictly?",
+        "options": [
+            "Firewall Blocking Connection",
+            "Power supply surge protector",
+            "RAM parity error configured for general baseline system administration",
+            "BIOS clock battery"
+        ],
+        "correct": 0,
+        "exp": "Common Network Problems: Firewall Blocking Connection.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What does a network warning icon displayed on a computer indicate?",
+        "options": [
+            "There is a problem with the network connection",
+            "The hard drive is 100% full managed by operating system kernel schedulers and virtual memory managers",
+            "A new email has arrived",
+            "The battery is fully charged"
+        ],
+        "correct": 0,
+        "exp": "A computer displaying a network warning icon indicates that there is a problem with the network connection.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "How may the network warning icon appear depending on the Windows version?",
+        "options": [
+            "A yellow triangle with an exclamation mark",
+            "a globe icon under standard production system configurations",
+            "or a red X on the network symbol",
+            "A green checkmark or blue circle",
+            "A flashing printer symbol",
+            "A spinning clock icon"
+        ],
+        "correct": 0,
+        "exp": "The warning icon may appear as a yellow triangle with an exclamation mark, a globe icon, or a red X on the network symbol.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'No Internet Connection'?",
+        "options": [
+            "Router or modem is offline",
+            "ISP outage",
+            "Monitor brightness is set to zero",
+            "Keyboard is unplugged",
+            "Printer has a paper jam"
+        ],
+        "correct": 0,
+        "exp": "Problem: No Internet Connection | Possible Cause: Router or modem is offline, ISP outage.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'Limited Connectivity'?",
+        "options": [
+            "Incorrect IP configuration or DHCP issue",
+            "CPU fan is spinning slowly across standard production computing environments",
+            "RAM is running in single-channel mode",
+            "The web browser theme is dark"
+        ],
+        "correct": 0,
+        "exp": "Problem: Limited Connectivity | Possible Cause: Incorrect IP configuration or DHCP issue.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'IP Address Conflict'?",
+        "options": [
+            "Two devices are using the same IP address",
+            "The ISP disconnected service",
+            "The Ethernet cable is 50 meters long",
+            "The default gateway has no password"
+        ],
+        "correct": 0,
+        "exp": "Problem: IP Address Conflict | Possible Cause: Two devices are using the same IP address.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'Disabled Network Adapter'?",
+        "options": [
+            "Adapter is disabled in Windows",
+            "Router is running in bridge mode",
+            "Subnet mask is 255.255.255.0",
+            "DNS server is 8.8.8.8"
+        ],
+        "correct": 0,
+        "exp": "Problem: Disabled Network Adapter | Possible Cause: Adapter is disabled in Windows.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'Network Cable Unplugged'?",
+        "options": [
+            "Ethernet cable is loose or disconnected",
+            "Wi-Fi frequency is set to 5 GHz",
+            "Static IP was configured manually",
+            "Command prompt was run as administrator"
+        ],
+        "correct": 0,
+        "exp": "Problem: Network Cable Unplugged | Possible Cause: Ethernet cable is loose or disconnected.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'Incorrect DNS Settings'?",
+        "options": [
+            "Unable to resolve website names",
+            "Ethernet transfer rate drops by 50%",
+            "Computer cannot power on",
+            "Printer queue is paused"
+        ],
+        "correct": 0,
+        "exp": "Problem: Incorrect DNS Settings | Possible Cause: Unable to resolve website names.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'Firewall Blocking Access'?",
+        "options": [
+            "Security settings prevent communication",
+            "Network cable is loose across standard production computing environments",
+            "DHCP lease expired across standard production computing environments",
+            "MAC address was duplicated across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Problem: Firewall Blocking Access | Possible Cause: Security settings prevent communication.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    },
+    {
+        "q": "What is the possible cause for the problem 'Outdated Network Driver'?",
+        "options": [
+            "Driver is missing",
+            "corrupted",
+            "or incompatible",
+            "IP address is dynamic",
+            "Default gateway is 192.168.1.1",
+            "Subnet mask is incorrect"
+        ],
+        "correct": 0,
+        "exp": "Problem: Outdated Network Driver | Possible Cause: Driver is missing, corrupted, or incompatible.",
+        "section": "Part 10: Common Network Problems & Troubleshooting"
+    }
+];
+
+ const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+ document.addEventListener('DOMContentLoaded', () => {
+ calculateSubnetLive();
+ runCmdSimulator();
+ });
+ </script>
+</body>
+</html>

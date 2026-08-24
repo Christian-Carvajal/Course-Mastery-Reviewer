@@ -1,0 +1,5 @@
+/informationAssuranceandSecurtiy/*  /subject/informationAssuranceandSecurtiy/:splat  301!
+/dataMining/*                       /subject/dataMining/:splat                       301!
+/operatingSystemConfiguration/*     /subject/operatingSystemConfiguration/:splat     301!
+/*/*/index.html                     /index.html                                      301!
+/*/index.html                       /index.html                                      301!

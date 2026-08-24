@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <title>Introduction to Operating Systems | Complete Reviewer & Quiz</title>
+ <link rel="stylesheet" href="../../../global.css">
+ <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+ <header class="app-header">
+ <h1>Operating System Configuration</h1>
+ <p>Introduction to Operating Systems — Evolution, Core Functions, OS Types & 88-Question Mastery Quiz</p>
+ </header>
+
+ <nav class="sticky-nav">
+ <div class="nav-left">
+ <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+ <span class="nav-title">Introduction to Operating Systems</span>
+ </div>
+ <div class="nav-tabs">
+ <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+ <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+ <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+ </div>
+ <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+ </nav>
+
+ <div class="container">
+
+ <!-- TAB 1: REVIEWER TEXT -->
+ <div id="reviewer" class="tab-content active">
+ <div class="card">
+ <h2 id="sec-1-outcomes">1. Learning Outcomes & Agenda</h2>
+
+ <h3>Knowledge</h3>
+ <ul>
+ <li>✔ Define an Operating System.</li>
+ <li>✔ Describe the functions of an Operating System.</li>
+ <li>✔ Identify the components of an Operating System.</li>
+ </ul>
+
+ <h3>Skills</h3>
+ <ul>
+ <li>✔ Differentiate various Operating Systems.</li>
+ <li>✔ Classify Operating Systems according to their purpose.</li>
+ </ul>
+
+ <h3>Learning Agenda</h3>
+ <ul>
+ <li>What is an Operating System?</li>
+ <li>History of Operating Systems</li>
+ <li>Functions of an OS</li>
+ <li>Components of an OS</li>
+ <li>Types of Operating Systems</li>
+ <li>Examples of Modern Operating Systems</li>
+ <li>Interactive Activity</li>
+ <li>Seatwork</li>
+ <li>Quiz</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-2-what-is-os">2. What is an Operating System?</h2>
+ <div class="definition-card">
+ <span class="def-badge">Definition</span>
+ <p>An <strong>Operating System (OS)</strong> is system software that acts as an interface between the computer hardware and the user.</p>
+ </div>
+
+ <h3>It Manages:</h3>
+ <ul>
+ <li>CPU</li>
+ <li>Memory</li>
+ <li>Storage</li>
+ <li>Input devices</li>
+ <li>Output devices</li>
+ <li>Software applications</li>
+ </ul>
+ <p><strong>The Operating System is the manager of the entire computer system.</strong></p>
+
+ <h3>Why is an Operating System Important?</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Without an OS...</th>
+ <th>With an OS...</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td>
+ ❌ Computer cannot run programs<br>
+ ❌ No file management<br>
+ ❌ No internet browsing<br>
+ ❌ No printing<br>
+ ❌ No multitasking
+ </td>
+ <td>
+ ✔ Everything works together.
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-3-history-evolution">3. History & Evolution of Operating Systems</h2>
+ <table>
+ <thead>
+ <tr>
+ <th>Generation</th>
+ <th>Period</th>
+ <th>Major Innovation</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>First</strong></td>
+ <td>1940s1950s</td>
+ <td>No Operating System</td>
+ </tr>
+ <tr>
+ <td><strong>Second</strong></td>
+ <td>1950s1960s</td>
+ <td>Batch Processing</td>
+ </tr>
+ <tr>
+ <td><strong>Third</strong></td>
+ <td>1960s1970s</td>
+ <td>Multiprogramming & Time Sharing</td>
+ </tr>
+ <tr>
+ <td><strong>Fourth</strong></td>
+ <td>1980sPresent</td>
+ <td>GUI-Based Operating Systems</td>
+ </tr>
+ <tr>
+ <td><strong>Modern</strong></td>
+ <td>2000sPresent</td>
+ <td>Cloud, Virtualization, Mobile OS, AI</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-4-core-functions">4. Main Functions of an Operating System</h2>
+ <p>The Operating System performs several important tasks:</p>
+
+ <h3>Process Management</h3>
+ <ul>
+ <li>Runs programs</li>
+ <li>Allocates CPU</li>
+ <li>Schedules processes</li>
+ </ul>
+
+ <h3>Memory Management</h3>
+ <ul>
+ <li>Allocates RAM</li>
+ <li>Protects memory</li>
+ <li>Shares memory</li>
+ </ul>
+
+ <h3>File Management</h3>
+ <ul>
+ <li>Stores files</li>
+ <li>Creates folders</li>
+ <li>Deletes files</li>
+ <li>Retrieves data</li>
+ </ul>
+
+ <h3>Device Management</h3>
+ <ul>
+ <li>Keyboard</li>
+ <li>Mouse</li>
+ <li>Printer</li>
+ <li>USB</li>
+ <li>Monitor</li>
+ </ul>
+
+ <h3>Security</h3>
+ <ul>
+ <li>User Accounts</li>
+ <li>Passwords</li>
+ <li>Permissions</li>
+ <li>Encryption</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-5-os-types">5. Types of Operating Systems</h2>
+ <p>The PDF categorizes the following types of Operating Systems:</p>
+ <ul>
+ <li>Batch OS</li>
+ <li>Time Sharing OS</li>
+ <li>Distributed OS</li>
+ <li>Network OS</li>
+ <li>Real-Time OS</li>
+ <li>Embedded OS</li>
+ <li>Mobile OS</li>
+ <li>Desktop OS</li>
+ <li>Server OS</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="sec-6-modern-os">6. Desktop & Modern Operating Systems</h2>
+
+ <h3>Desktop Operating Systems</h3>
+ <ul>
+ <li>
+ <strong>Windows:</strong> Most popular desktop OS. Used in: Schools, Businesses, Homes.
+ </li>
+ <li>
+ <strong>macOS:</strong> Developed by Apple. Known for: Security, Performance, Creativity.
+ </li>
+ <li>
+ <strong>Linux:</strong> Open Source. Popular among: Servers, Programmers, Cybersecurity Professionals.
+ </li>
+ </ul>
+
+ <h3>Comparison of Popular Operating Systems</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Operating System</th>
+ <th>Windows</th>
+ <th>Linux</th>
+ <th>macOS</th>
+ <th>Android</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td><strong>Developer / Origin</strong></td>
+ <td>Microsoft</td>
+ <td>Open Source</td>
+ <td>Apple</td>
+ <td>Google</td>
+ </tr>
+ <tr>
+ <td><strong>User Interface</strong></td>
+ <td>GUI</td>
+ <td>CLI + GUI</td>
+ <td>GUI</td>
+ <td>Touch</td>
+ </tr>
+ <tr>
+ <td><strong>Primary Platform</strong></td>
+ <td>PC</td>
+ <td>Server</td>
+ <td>Mac</td>
+ <td>Mobile</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <!-- TAB 2: INTERACTIVE QUIZ -->
+ <div id="quiz" class="tab-content">
+ <div class="quiz-header">
+ <div class="score-display" id="score-display">Score: 0 / 88</div>
+ <div class="btn-group">
+ <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+ <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+ </div>
+ </div>
+
+ <div id="quiz-container">
+ <!-- Quiz questions dynamically rendered here -->
+ </div>
+ </div>
+
+
+ <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+ <div id="formulas" class="tab-content">
+ <div class="card">
+ <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem; gap:0.5rem;">
+ <h2 style="margin:0;">Quick Reference: Operating System Generations & Core Functions Matrix</h2>
+ <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+ </div>
+
+ <!-- 1. OS Evolution Matrix Table -->
+ <h3 style="color:var(--primary-color); margin-top:1rem;">1. Operating System Historical Evolution (1st to Modern Gen)</h3>
+ <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
+ <thead>
+ <tr style="background:var(--primary-color); color:white;">
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Generation & Era</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Hardware Technology</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Major Innovation / Breakthrough</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Operating Paradigm</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">1st Gen (1940s–1950s)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Vacuum Tubes & Plugboards</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">No OS (Direct Hardware Coding)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Manual setup via punch cards & wire patch panels; single-user reservation.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">2nd Gen (1950s–1960s)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Transistors & Magnetic Tape</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Batch Processing Systems</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Jobs collected into batches on magnetic tape; single job in memory at a time.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">3rd Gen (1960s–1970s)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Integrated Circuits (ICs)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Multiprogramming & Time Sharing</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Multiple jobs in memory concurrently; CPU time slicing enables interactive terminals (UNIX).</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">4th Gen (1980s–Present)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Microprocessors & VLSI</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Personal Computers & GUIs</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">User-friendly graphical interfaces (Windows, macOS); distributed network connections.</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Modern Gen (2000s–Present)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Multi-Core CPUs & Mobile SoCs</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Cloud, Mobile, Virtualization & AI</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Hypervisors, mobile touch OS (Android/iOS), distributed cloud microservices & AI acceleration.</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <!-- 2. Core OS Functions Matrix -->
+ <div class="card" style="margin-top:1.5rem;">
+ <h2>2. The 5 Core Operating System Management Functions</h2>
+ <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+ 
+ <div class="formula-card" style="border-left:4px solid #0284c7;">
+ <span class="formula-badge" style="background:#0284c7;">1. Process Management</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#0284c7;">CPU Scheduling & Concurrency</div>
+ <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
+ <li><strong>Runs Software:</strong> Executes user applications & background services.</li>
+ <li><strong>Allocates CPU:</strong> Assigns CPU burst time using scheduling algorithms.</li>
+ <li><strong>Schedules Processes:</strong> Context switches between active process threads.</li>
+ </ul>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #0d9488;">
+ <span class="formula-badge" style="background:#0d9488;">2. Memory Management</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#0d9488;">RAM Allocation & Protection</div>
+ <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
+ <li><strong>Allocates RAM:</strong> Dynamically assigns primary memory space to active programs.</li>
+ <li><strong>Protects Memory:</strong> Prevents processes from overwriting each other's memory blocks.</li>
+ <li><strong>Shares Memory:</strong> Coordinates shared memory buffers for inter-process communication.</li>
+ </ul>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #f59e0b;">
+ <span class="formula-badge" style="background:#f59e0b;">3. File Management</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">Hierarchical Storage & I/O</div>
+ <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
+ <li><strong>Stores & Organizes:</strong> Manages directories, folder paths, and file tables (NTFS, ext4).</li>
+ <li><strong>Creates & Deletes:</strong> Allocates disk blocks for new files and reclaims deleted sectors.</li>
+ <li><strong>Retrieves Data:</strong> Reads byte streams accurately from secondary storage drives.</li>
+ </ul>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #8b5cf6;">
+ <span class="formula-badge" style="background:#8b5cf6;">4. Device Management</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#8b5cf6;">Peripheral Drivers & Buffering</div>
+ <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
+ <li><strong>Device Drivers:</strong> Communicates with hardware controllers (Keyboard, Mouse, GPU).</li>
+ <li><strong>I/O Buffering:</strong> Smooths speed mismatches between fast CPU and slow peripherals.</li>
+ <li><strong>Port Coordination:</strong> Manages USB, PCIe, Monitor output, and Printer spoolers.</li>
+ </ul>
+ </div>
+
+ <div class="formula-card" style="border-left:4px solid #dc2626;">
+ <span class="formula-badge" style="background:#dc2626;">5. Security & Protection</span>
+ <div class="formula-text" style="font-size:1.05rem; color:#dc2626;">Authentication & Access Control</div>
+ <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
+ <li><strong>User Accounts:</strong> Manages unique credentials, identities, and admin groups.</li>
+ <li><strong>Authentication:</strong> Validates passwords, biometric scans, and MFA tokens.</li>
+ <li><strong>Permissions & Crypto:</strong> Enforces read/write/execute rights and encrypts storage.</li>
+ </ul>
+ </div>
+
+ </div>
+ </div>
+
+ <!-- 3. Types of OS Matrix -->
+ <div class="card" style="margin-top:1.5rem;">
+ <h2>3. Operating System Typology & Comparison Matrix</h2>
+ <table style="width:100%; border-collapse:collapse; margin-top:0.75rem;">
+ <thead>
+ <tr style="background:var(--primary-color); color:white;">
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">OS Type</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Definition & Behavior</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Characteristics</th>
+ <th style="padding:0.75rem; border:1px solid var(--border-color);">Real-World Example</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Batch OS</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Groups similar jobs into batches and executes sequentially without manual user intervention.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">High throughput for bulk data; zero interactive debugging during run.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">IBM OS/360, Payroll processing</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Time-Sharing OS</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Allocates rapid CPU time slices (quanta) among multiple simultaneous users.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Fast response time; multi-user interactive terminal support.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Multics, UNIX, Linux servers</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Distributed OS</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Coordinates a cluster of autonomous computers over a network to act as a single system.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Resource sharing, fault tolerance, horizontal scalability.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Apache Hadoop, Amoeba, Plan 9</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Network OS (NOS)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Provides specialized services (DNS, DHCP, Active Directory, file sharing) over a LAN.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Centralized user management, print serving, robust security.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Windows Server, Novell NetWare</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Real-Time OS (RTOS)</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Guarantees task completion within strict, deterministic time deadlines.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Hard RTOS (missed deadline = catastrophe) vs. Soft RTOS (degraded QoS).</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">VxWorks, QNX, FreeRTOS (Medical/Aerospace)</td>
+ </tr>
+ <tr>
+ <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Mobile OS</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Optimized for portable handheld touchscreens with power and thermal constraints.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Touch UI, sensors (GPS/Gyro), cellular radios, aggressive battery management.</td>
+ <td style="padding:0.75rem; border:1px solid var(--border-color);">Android (Google), iOS (Apple)</td>
+ </tr>
+ </tbody>
+ </table>
+ </div>
+
+ <!-- 4. Interactive Academic Tool: Process Lifecycle & State Machine Simulator -->
+ <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid var(--primary-color);">
+ <div class="calc-title">🔄 Live Process State Transition & CPU Allocation Simulator</div>
+ <div class="calc-desc">Explore how the Operating System's Process Management and CPU Scheduler coordinate state transitions across the 5 canonical process states (New &rarr; Ready &rarr; Running &rarr; Waiting &rarr; Terminated).</div>
+ 
+ <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+ <div class="calc-field">
+ <label class="calc-label" for="sim-process-name">Process Identifier:</label>
+ <input type="text" id="sim-process-name" class="calc-input" value="chrome.exe (PID 4120)" oninput="simulateProcessState()">
+ </div>
+ <div class="calc-field">
+ <label class="calc-label" for="sim-event-trigger">Scheduler / Hardware Event:</label>
+ <select id="sim-event-trigger" class="calc-input" onchange="simulateProcessState()" style="font-weight:600;">
+ <option value="admit">1. Process Creation (Admission to RAM)</option>
+ <option value="dispatch" selected>2. CPU Dispatch (Assigned to CPU Core)</option>
+ <option value="interrupt">3. Timer Interrupt (Time Quantum Expired)</option>
+ <option value="io_wait">4. I/O / Event Request (Disk/Network Wait)</option>
+ <option value="io_done">5. I/O Completion (Disk Ready Signal)</option>
+ <option value="terminate">6. Process Exit (Release All Resources)</option>
+ </select>
+ </div>
+ </div>
+
+ <div class="calc-result-box" style="margin-top:1.25rem;">
+ <div class="calc-result-header">
+ <span style="font-weight:700; font-size:0.95rem;">Current Active State:</span>
+ <span class="calc-result-val" id="sim-state-val" style="color:var(--primary-color);">RUNNING (State Bit: Active on Core 0)</span>
+ </div>
+ <div class="calc-math-steps" id="sim-state-steps">
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Previous State:</strong> READY Queue &rarr; <strong>New State:</strong> RUNNING</div>
+ <div class="step-line">• <strong>OS Component:</strong> Short-Term CPU Scheduler & Dispatcher</div>
+ <div class="step-line">• <strong>Action:</strong> Restores CPU registers from Process Control Block (PCB) and switches CPU to User Mode to execute program instructions.</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> Process pages loaded in RAM; CPU Program Counter actively advancing.</div>
+ </div>
+ </div>
+ </div>
+
+ </div>
+
+
+ </div>
+
+ <script>
+ // ==========================================
+ // Process State Machine Simulation Logic
+ // ==========================================
+ function simulateProcessState() {
+ const proc = document.getElementById('sim-process-name').value || 'process.exe';
+ const evt = document.getElementById('sim-event-trigger').value;
+ const resVal = document.getElementById('sim-state-val');
+ const resSteps = document.getElementById('sim-state-steps');
+
+ if (evt === 'admit') {
+ resVal.innerHTML = '<span style="color:#2563eb;">NEW (State: Created in Pool)</span>';
+ resSteps.innerHTML = `
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Transition:</strong> Secondary Storage &rarr; <strong>NEW &rarr; READY</strong></div>
+ <div class="step-line">• <strong>OS Component:</strong> Long-Term Scheduler (Job Scheduler)</div>
+ <div class="step-line">• <strong>Action:</strong> OS allocates Process Control Block (PCB), assigns PID, and loads binary pages into available RAM.</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> PCB instantiated; process enqueued into Ready Queue waiting for CPU time.</div>
+ `;
+ } else if (evt === 'dispatch') {
+ resVal.innerHTML = '<span style="color:#16a34a;">RUNNING (State: Active on CPU Core)</span>';
+ resSteps.innerHTML = `
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Transition:</strong> READY Queue &rarr; <strong>RUNNING</strong></div>
+ <div class="step-line">• <strong>OS Component:</strong> Short-Term Scheduler & Dispatcher</div>
+ <div class="step-line">• <strong>Action:</strong> Performs context switch, loads CPU registers from PCB, and switches mode bit from 0 (Kernel) to 1 (User).</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> CPU executes instructions directly; memory pages active in L1/L2 cache and RAM.</div>
+ `;
+ } else if (evt === 'interrupt') {
+ resVal.innerHTML = '<span style="color:#d97706;">READY (State: Preempted by Timer)</span>';
+ resSteps.innerHTML = `
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Transition:</strong> RUNNING &rarr; <strong>READY (Preempted)</strong></div>
+ <div class="step-line">• <strong>OS Component:</strong> Hardware Timer & Interrupt Handler</div>
+ <div class="step-line">• <strong>Action:</strong> Timer interrupt fires when time quantum expires. OS saves current register values to PCB and moves process back to Ready Queue.</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> Remains in RAM; yields CPU to the next scheduled task in the queue.</div>
+ `;
+ } else if (evt === 'io_wait') {
+ resVal.innerHTML = '<span style="color:#8b5cf6;">WAITING / BLOCKED (State: I/O In Progress)</span>';
+ resSteps.innerHTML = `
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Transition:</strong> RUNNING &rarr; <strong>WAITING / BLOCKED</strong></div>
+ <div class="step-line">• <strong>OS Component:</strong> System Call Interface & Device Driver Queue</div>
+ <div class="step-line">• <strong>Action:</strong> Process initiates a blocking I/O request (e.g. read file / network socket). Process yields CPU and waits in Device Queue.</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> Blocked from CPU execution until the hardware device controller completes data transfer.</div>
+ `;
+ } else if (evt === 'io_done') {
+ resVal.innerHTML = '<span style="color:#0284c7;">READY (State: I/O Complete & Enqueued)</span>';
+ resSteps.innerHTML = `
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Transition:</strong> WAITING &rarr; <strong>READY Queue</strong></div>
+ <div class="step-line">• <strong>OS Component:</strong> Device Controller Interrupt Service Routine (ISR)</div>
+ <div class="step-line">• <strong>Action:</strong> Peripheral signals hardware interrupt that buffer is full. OS updates process status in PCB to READY.</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> Enqueued in Ready Queue; eligible to be picked up by the next CPU dispatch cycle.</div>
+ `;
+ } else if (evt === 'terminate') {
+ resVal.innerHTML = '<span style="color:#dc2626;">TERMINATED (State: Resources Reclaimed)</span>';
+ resSteps.innerHTML = `
+ <strong>Kernel Architectural Trace:</strong><br>
+ <div class="step-line">• <strong>Transition:</strong> RUNNING &rarr; <strong>TERMINATED</strong></div>
+ <div class="step-line">• <strong>OS Component:</strong> Process Destroyer & Memory Reclaimer</div>
+ <div class="step-line">• <strong>Action:</strong> Process executes exit() system call. OS closes open file descriptors, releases RAM pages, and cleans up PCB.</div>
+ <div class="step-line">• <strong>RAM & Resource Status:</strong> Memory deallocated; PID released back to kernel ID pool.</div>
+ `;
+ }
+ }
+
+ // ==========================================
+ // Quiz Data Definition
+ // ==========================================
+ const quizData = [
+    {
+        "q": "What is an Operating System (OS)?",
+        "options": [
+            "Application software designed strictly for spreadsheets and word processing",
+            "System software that acts as an interface between the computer hardware and the user",
+            "A hardware circuit board that supplies power to the CPU",
+            "A web browser used to access internet platforms designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "An Operating System (OS) is system software that acts as an interface between the computer hardware and the user.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "Which hardware processing unit is managed by the Operating System?",
+        "options": [
+            "CPU",
+            "HTTP",
+            "HTML",
+            "URL"
+        ],
+        "correct": 0,
+        "exp": "The Operating System manages the CPU.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "Which computer resource is managed by the Operating System for active running programs?",
+        "options": [
+            "Memory",
+            "Static paper records",
+            "Analog tape spools",
+            "Monitor glass thickness"
+        ],
+        "correct": 0,
+        "exp": "The Operating System manages Memory.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "What long-term data repository is managed by the Operating System?",
+        "options": [
+            "Storage",
+            "CPU clock speed",
+            "Network cables",
+            "Power switches"
+        ],
+        "correct": 0,
+        "exp": "The Operating System manages Storage.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "Which categories of devices are managed by the Operating System?",
+        "options": [
+            "Input devices and Output devices",
+            "Manual abacuses and paper cards",
+            "Battery cells only configured for general baseline system administration",
+            "Plastic casing components"
+        ],
+        "correct": 0,
+        "exp": "The Operating System manages Input devices and Output devices.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "Besides hardware, what software components does an Operating System manage?",
+        "options": [
+            "Software applications",
+            "Printed textbook pages",
+            "Manual typewriter keys",
+            "Motherboard solder joints"
+        ],
+        "correct": 0,
+        "exp": "The Operating System manages software applications.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "According to the PDF, what is the overall title or role given to the Operating System?",
+        "options": [
+            "The creator of the computer hardware",
+            "The manager of the entire computer system",
+            "The programmer of user applications",
+            "A temporary utility software"
+        ],
+        "correct": 1,
+        "exp": "The Operating System is the manager of the entire computer system.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "What happens to program execution without an Operating System?",
+        "options": [
+            "Computer cannot run programs",
+            "Programs run 10 times faster",
+            "All programs execute in cloud servers",
+            "Programs compile directly to HTML"
+        ],
+        "correct": 0,
+        "exp": "Without an OS: Computer cannot run programs.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "What happens to file organization without an Operating System?",
+        "options": [
+            "No file management",
+            "Files are automatically stored in RAM",
+            "Files are encrypted permanently",
+            "All files become batch scripts"
+        ],
+        "correct": 0,
+        "exp": "Without an OS: No file management.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "Can a user browse the internet without an Operating System?",
+        "options": [
+            "Yes under standard production system configurations",
+            "using a monitor directly",
+            "No under standard production system configurations",
+            "without an OS there is no internet browsing",
+            "Yes under standard production system configurations",
+            "through physical USB connections",
+            "Yes under standard production system configurations",
+            "using BIOS settings"
+        ],
+        "correct": 1,
+        "exp": "Without an OS: No internet browsing.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "What happens to printing capability without an Operating System?",
+        "options": [
+            "Printers format paper faster",
+            "No printing",
+            "Printers connect via Bluetooth automatically",
+            "Printing converts to PDF without software"
+        ],
+        "correct": 1,
+        "exp": "Without an OS: No printing.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "What happens to concurrent task handling without an Operating System?",
+        "options": [
+            "Multitasking becomes infinite",
+            "No multitasking",
+            "CPUs share power across motherboards",
+            "Processes schedule themselves automatically"
+        ],
+        "correct": 1,
+        "exp": "Without an OS: No multitasking.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "According to the PDF, what is the outcome 'With an OS'?",
+        "options": [
+            "Everything works together.",
+            "Hardware is eliminated.",
+            "Only batch processing is permitted.",
+            "Applications cannot access memory."
+        ],
+        "correct": 0,
+        "exp": "With an OS: Everything works together.",
+        "section": "Part 2: What is an Operating System & Core Roles"
+    },
+    {
+        "q": "What period corresponds to the First Generation of Operating Systems?",
+        "options": [
+            "1940s1950s",
+            "1950s1960s",
+            "1960s1970s",
+            "1980sPresent"
+        ],
+        "correct": 0,
+        "exp": "First Generation period: 1940s1950s.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What was the Major Innovation of the First Generation (1940s1950s)?",
+        "options": [
+            "Batch Processing",
+            "No Operating System",
+            "GUI-Based Operating Systems",
+            "Multiprogramming"
+        ],
+        "correct": 1,
+        "exp": "First Generation major innovation: No Operating System.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What period corresponds to the Second Generation of Operating Systems?",
+        "options": [
+            "1940s1950s",
+            "1950s1960s",
+            "1960s1970s",
+            "2000sPresent"
+        ],
+        "correct": 1,
+        "exp": "Second Generation period: 1950s1960s.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What was the Major Innovation of the Second Generation (1950s1960s)?",
+        "options": [
+            "GUI-Based Operating Systems",
+            "Batch Processing",
+            "Cloud and AI",
+            "No Operating System"
+        ],
+        "correct": 1,
+        "exp": "Second Generation major innovation: Batch Processing.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What period corresponds to the Third Generation of Operating Systems?",
+        "options": [
+            "1950s1960s",
+            "1960s1970s",
+            "1980sPresent",
+            "2000sPresent"
+        ],
+        "correct": 1,
+        "exp": "Third Generation period: 1960s1970s.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What was the Major Innovation of the Third Generation (1960s1970s)?",
+        "options": [
+            "Multiprogramming & Time Sharing",
+            "Batch Processing implemented across standard enterprise production environments",
+            "No Operating System",
+            "Touch interfaces"
+        ],
+        "correct": 0,
+        "exp": "Third Generation major innovation: Multiprogramming & Time Sharing.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What period corresponds to the Fourth Generation of Operating Systems?",
+        "options": [
+            "1960s1970s",
+            "1980sPresent",
+            "1940s1950s",
+            "1950s1960s"
+        ],
+        "correct": 1,
+        "exp": "Fourth Generation period: 1980sPresent.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What was the Major Innovation of the Fourth Generation (1980sPresent)?",
+        "options": [
+            "GUI-Based Operating Systems",
+            "No Operating System",
+            "Batch Processing",
+            "Punch cards under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Fourth Generation major innovation: GUI-Based Operating Systems.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What period corresponds to the Modern Generation of Operating Systems?",
+        "options": [
+            "1980s1990s",
+            "2000sPresent",
+            "1960s1970s",
+            "1940s1950s"
+        ],
+        "correct": 1,
+        "exp": "Modern Generation period: 2000sPresent.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "What are the Major Innovations of the Modern Generation (2000sPresent)?",
+        "options": [
+            "Cloud",
+            "Virtualization",
+            "Mobile OS",
+            "AI under standard production system configurations",
+            "Batch Processing only",
+            "No Operating System",
+            "Simple vacuum tube processing"
+        ],
+        "correct": 0,
+        "exp": "Modern Generation major innovations: Cloud, Virtualization, Mobile OS, AI.",
+        "section": "Part 3: History & Evolution of Operating Systems"
+    },
+    {
+        "q": "Which of the following is a sub-task of Process Management?",
+        "options": [
+            "Allocates RAM",
+            "Runs programs",
+            "Creates folders",
+            "Encrypts files"
+        ],
+        "correct": 1,
+        "exp": "Process Management sub-task: Runs programs.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which hardware resource allocation is handled under Process Management?",
+        "options": [
+            "Allocates CPU",
+            "Allocates RAM",
+            "Allocates USB slots",
+            "Allocates printer paper"
+        ],
+        "correct": 0,
+        "exp": "Process Management sub-task: Allocates CPU.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What scheduling task is performed under Process Management?",
+        "options": [
+            "Schedules processes",
+            "Schedules disk formatting",
+            "Schedules password resets",
+            "Schedules monitor refreshing"
+        ],
+        "correct": 0,
+        "exp": "Process Management sub-task: Schedules processes.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which of the following are the three tasks under Process Management?",
+        "options": [
+            "Runs programs",
+            "Allocates CPU",
+            "Schedules processes",
+            "Allocates RAM",
+            "Protects memory",
+            "Shares memory",
+            "Stores files",
+            "Creates folders",
+            "Deletes files",
+            "User Accounts",
+            "Passwords",
+            "Permissions"
+        ],
+        "correct": 0,
+        "exp": "Process Management: Runs programs, Allocates CPU, Schedules processes.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which specific type of memory allocation is handled under Memory Management?",
+        "options": [
+            "Allocates RAM",
+            "Allocates Hard Drive partitions",
+            "Allocates CPU cache L1",
+            "Allocates ROM chips"
+        ],
+        "correct": 0,
+        "exp": "Memory Management sub-task: Allocates RAM.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What protective function is handled under Memory Management?",
+        "options": [
+            "Protects memory",
+            "Protects monitor glass",
+            "Protects USB ports",
+            "Protects paper trays"
+        ],
+        "correct": 0,
+        "exp": "Memory Management sub-task: Protects memory.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What sharing task is performed under Memory Management?",
+        "options": [
+            "Shares memory",
+            "Shares passwords publicly",
+            "Shares CPU registers",
+            "Shares mouse cursors"
+        ],
+        "correct": 0,
+        "exp": "Memory Management sub-task: Shares memory.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which of the following are the three tasks under Memory Management?",
+        "options": [
+            "Allocates RAM",
+            "Protects memory",
+            "Shares memory",
+            "Runs programs",
+            "Allocates CPU",
+            "Schedules processes",
+            "Creates folders",
+            "Deletes files",
+            "Retrieves data",
+            "Keyboard",
+            "Mouse",
+            "Printer"
+        ],
+        "correct": 0,
+        "exp": "Memory Management: Allocates RAM, Protects memory, Shares memory.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which function of an Operating System stores files and creates folders?",
+        "options": [
+            "Process Management",
+            "Memory Management",
+            "File Management",
+            "Device Management"
+        ],
+        "correct": 2,
+        "exp": "File Management handles: Stores files, Creates folders, Deletes files, Retrieves data.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which sub-task under File Management removes unwanted files from storage?",
+        "options": [
+            "Deletes files",
+            "Allocates RAM",
+            "Schedules processes",
+            "Protects memory"
+        ],
+        "correct": 0,
+        "exp": "File Management sub-task: Deletes files.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which sub-task under File Management fetches stored information from storage?",
+        "options": [
+            "Retrieves data",
+            "Runs programs",
+            "Allocates CPU",
+            "Shares memory"
+        ],
+        "correct": 0,
+        "exp": "File Management sub-task: Retrieves data.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which of the following are the four tasks under File Management?",
+        "options": [
+            "Stores files",
+            "Creates folders",
+            "Deletes files",
+            "Retrieves data",
+            "Allocates RAM",
+            "Protects memory",
+            "Shares memory",
+            "Encrypts RAM",
+            "Keyboard",
+            "Mouse",
+            "Printer",
+            "USB",
+            "User Accounts",
+            "Passwords",
+            "Permissions",
+            "Encryption"
+        ],
+        "correct": 0,
+        "exp": "File Management: Stores files, Creates folders, Deletes files, Retrieves data.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which input device is explicitly listed under Device Management?",
+        "options": [
+            "Keyboard",
+            "Stylus pen",
+            "Microphone",
+            "Scanner"
+        ],
+        "correct": 0,
+        "exp": "Device Management lists: Keyboard, Mouse, Printer, USB, Monitor.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which pointing device is listed under Device Management?",
+        "options": [
+            "Mouse",
+            "Touchpad",
+            "Trackball",
+            "Joystick"
+        ],
+        "correct": 0,
+        "exp": "Device Management lists: Mouse.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which output device for physical paper copies is listed under Device Management?",
+        "options": [
+            "Printer",
+            "Plotter",
+            "3D Cutter",
+            "Fax"
+        ],
+        "correct": 0,
+        "exp": "Device Management lists: Printer.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which port/interface standard is listed under Device Management?",
+        "options": [
+            "USB",
+            "HDMI",
+            "VGA",
+            "Ethernet"
+        ],
+        "correct": 0,
+        "exp": "Device Management lists: USB.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which visual display hardware is listed under Device Management?",
+        "options": [
+            "Monitor",
+            "Projector",
+            "VR Headset",
+            "OLED Display"
+        ],
+        "correct": 0,
+        "exp": "Device Management lists: Monitor.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which five devices/components are explicitly listed under Device Management in the PDF?",
+        "options": [
+            "Keyboard",
+            "Mouse",
+            "Printer",
+            "USB",
+            "Monitor",
+            "CPU",
+            "RAM",
+            "Hard Drive",
+            "Motherboard",
+            "Power Supply",
+            "Web Browser",
+            "Compiler",
+            "Shell",
+            "File Manager",
+            "Game",
+            "User Accounts",
+            "Passwords",
+            "Permissions",
+            "Encryption",
+            "Firewalls"
+        ],
+        "correct": 0,
+        "exp": "Device Management: Keyboard, Mouse, Printer, USB, Monitor.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What user identity mechanism is listed under Security functions of an OS?",
+        "options": [
+            "User Accounts",
+            "Batch scripts",
+            "Cloud buckets",
+            "Storage sectors"
+        ],
+        "correct": 0,
+        "exp": "Security lists: User Accounts, Passwords, Permissions, Encryption.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What authentication mechanism is listed under Security in the OS functions?",
+        "options": [
+            "Passwords",
+            "Biometric iris scans",
+            "Smart cards",
+            "Physical keys"
+        ],
+        "correct": 0,
+        "exp": "Security lists: Passwords.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What access-limiting control is listed under Security in the OS functions?",
+        "options": [
+            "Permissions",
+            "Time sharing",
+            "Process scheduling",
+            "RAM allocation"
+        ],
+        "correct": 0,
+        "exp": "Security lists: Permissions.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "What data-scrambling mechanism is listed under Security in the OS functions?",
+        "options": [
+            "Encryption",
+            "Compression",
+            "Formatting",
+            "Batching"
+        ],
+        "correct": 0,
+        "exp": "Security lists: Encryption.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which four elements are explicitly listed under the Security function in the PDF?",
+        "options": [
+            "User Accounts",
+            "Passwords",
+            "Permissions",
+            "Encryption",
+            "Firewalls",
+            "Antivirus",
+            "Intrusion Detection",
+            "VPN configured for general baseline system administration",
+            "RAM configured for general baseline system administration",
+            "ROM configured for general baseline system administration",
+            "Cache configured for general baseline system administration",
+            "Virtual Memory",
+            "Keyboard",
+            "Mouse configured for general baseline system administration",
+            "Monitor configured for general baseline system administration",
+            "Printer configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Security: User Accounts, Passwords, Permissions, Encryption.",
+        "section": "Part 4: Main Functions of an Operating System"
+    },
+    {
+        "q": "Which type of OS processes jobs in groups without manual user intervention during execution?",
+        "options": [
+            "Batch OS",
+            "Real-Time OS",
+            "Mobile OS",
+            "Desktop OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Batch OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS allows multiple users to share system resources concurrently via time slices?",
+        "options": [
+            "Time Sharing OS",
+            "Embedded OS",
+            "Batch OS configured for general baseline system administration",
+            "Single-user OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Time Sharing OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS manages a collection of independent computers and presents them as a single system?",
+        "options": [
+            "Distributed OS",
+            "Desktop OS",
+            "Batch OS configured for general baseline system administration",
+            "Embedded OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Distributed OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS provides networking features and connects multiple computers over a local network?",
+        "options": [
+            "Network OS",
+            "Real-Time OS",
+            "Embedded OS",
+            "Batch OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Network OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS is designed to process data and respond within strict time constraints?",
+        "options": [
+            "Real-Time OS",
+            "Batch OS",
+            "Time Sharing OS",
+            "Desktop OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Real-Time OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS is dedicated to control specific hardware appliances or embedded systems?",
+        "options": [
+            "Embedded OS",
+            "Desktop OS",
+            "Server OS",
+            "Time Sharing OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Embedded OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS is specifically designed for smartphones and tablets?",
+        "options": [
+            "Mobile OS",
+            "Server OS",
+            "Batch OS",
+            "Distributed OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Mobile OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS is designed for personal computer workstations used by individuals?",
+        "options": [
+            "Desktop OS",
+            "Batch OS",
+            "Real-Time OS",
+            "Embedded OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Desktop OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which type of OS is optimized to manage network services, databases, and client requests in data centers?",
+        "options": [
+            "Server OS",
+            "Mobile OS",
+            "Embedded OS",
+            "Desktop OS"
+        ],
+        "correct": 0,
+        "exp": "Types of OS lists: Server OS.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "How many types of Operating Systems are listed on the 'Types of Operating Systems' slide in the PDF?",
+        "options": [
+            "9 types",
+            "4 types",
+            "5 types",
+            "12 types"
+        ],
+        "correct": 0,
+        "exp": "The slide lists 9 types: Batch, Time Sharing, Distributed, Network, Real-Time, Embedded, Mobile, Desktop, Server.",
+        "section": "Part 5: Types of Operating Systems"
+    },
+    {
+        "q": "Which operating system is described as the 'Most popular desktop OS'?",
+        "options": [
+            "Windows",
+            "Linux",
+            "macOS",
+            "Android"
+        ],
+        "correct": 0,
+        "exp": "Windows: Most popular desktop OS.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which three environments are explicitly listed where Windows is used?",
+        "options": [
+            "Schools",
+            "Businesses",
+            "Homes",
+            "Space shuttles",
+            "Satellites",
+            "Submarines",
+            "Supercomputers",
+            "Mainframes",
+            "Web servers exclusively",
+            "Smartwatches",
+            "Smart TVs",
+            "Smart Cars"
+        ],
+        "correct": 0,
+        "exp": "Windows is used in: Schools, Businesses, Homes.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Who developed macOS?",
+        "options": [
+            "Microsoft",
+            "Google",
+            "Apple",
+            "Open Source community"
+        ],
+        "correct": 2,
+        "exp": "macOS: Developed by Apple.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What three qualities is macOS known for in the PDF?",
+        "options": [
+            "Security",
+            "Performance",
+            "Creativity",
+            "Low cost",
+            "Open source",
+            "Command line",
+            "Gaming",
+            "Batch processing",
+            "Modularity",
+            "Touch interface",
+            "Mobile apps",
+            "Cloud hosting"
+        ],
+        "correct": 0,
+        "exp": "macOS is known for: Security, Performance, Creativity.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "How is the development/licensing model of Linux described?",
+        "options": [
+            "Commercial proprietary",
+            "Open Source",
+            "Apple proprietary",
+            "Microsoft licensed"
+        ],
+        "correct": 1,
+        "exp": "Linux: Open Source.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Among which three groups is Linux described as popular?",
+        "options": [
+            "Servers",
+            "Programmers",
+            "Cybersecurity Professionals",
+            "Casual gamers",
+            "Elementary schools",
+            "Graphic designers",
+            "Mobile phone users",
+            "Tablet artists",
+            "Photographers",
+            "Office secretaries",
+            "Bank tellers",
+            "Retail cashiers"
+        ],
+        "correct": 0,
+        "exp": "Linux is popular among: Servers, Programmers, Cybersecurity Professionals.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the popular OS comparison table, who is the company/origin behind Windows?",
+        "options": [
+            "Microsoft",
+            "Apple",
+            "Google",
+            "Open Source"
+        ],
+        "correct": 0,
+        "exp": "Windows Developer: Microsoft.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the popular OS comparison table, who is the company/origin behind Linux?",
+        "options": [
+            "Microsoft",
+            "Apple configured for general baseline system administration",
+            "Google configured for general baseline system administration",
+            "Open Source"
+        ],
+        "correct": 3,
+        "exp": "Linux Origin: Open Source.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the popular OS comparison table, who is the company/origin behind macOS?",
+        "options": [
+            "Microsoft",
+            "Apple",
+            "Google",
+            "Open Source"
+        ],
+        "correct": 1,
+        "exp": "macOS Developer: Apple.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the popular OS comparison table, who is the company/origin behind Android?",
+        "options": [
+            "Microsoft",
+            "Apple",
+            "Google",
+            "Open Source"
+        ],
+        "correct": 2,
+        "exp": "Android Developer: Google.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What user interface type is listed for Windows in the comparison table?",
+        "options": [
+            "GUI",
+            "CLI + GUI",
+            "Touch",
+            "Voice"
+        ],
+        "correct": 0,
+        "exp": "Windows Interface: GUI.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What user interface type is listed for Linux in the comparison table?",
+        "options": [
+            "GUI",
+            "CLI + GUI",
+            "Touch",
+            "Brain-computer interface"
+        ],
+        "correct": 1,
+        "exp": "Linux Interface: CLI + GUI.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What user interface type is listed for macOS in the comparison table?",
+        "options": [
+            "GUI",
+            "CLI + GUI",
+            "Touch",
+            "CLI only"
+        ],
+        "correct": 0,
+        "exp": "macOS Interface: GUI.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What user interface type is listed for Android in the comparison table?",
+        "options": [
+            "GUI",
+            "CLI + GUI",
+            "Touch",
+            "Batch cards"
+        ],
+        "correct": 2,
+        "exp": "Android Interface: Touch.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What primary platform is listed for Windows in the comparison table?",
+        "options": [
+            "PC",
+            "Server",
+            "Mac",
+            "Mobile"
+        ],
+        "correct": 0,
+        "exp": "Windows Platform: PC.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What primary platform is listed for Linux in the comparison table?",
+        "options": [
+            "PC under standard production system configurations",
+            "Server",
+            "Mac",
+            "Mobile"
+        ],
+        "correct": 1,
+        "exp": "Linux Platform: Server.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What primary platform is listed for macOS in the comparison table?",
+        "options": [
+            "PC",
+            "Server",
+            "Mac",
+            "Mobile"
+        ],
+        "correct": 2,
+        "exp": "macOS Platform: Mac.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What primary platform is listed for Android in the comparison table?",
+        "options": [
+            "PC under standard production system configurations",
+            "Server",
+            "Mac",
+            "Mobile"
+        ],
+        "correct": 3,
+        "exp": "Android Platform: Mobile.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the Group Activity prompt, which four specific user actions are questioned if there were no OS?",
+        "options": [
+            "Save files",
+            "Use printers",
+            "Play games",
+            "Connect to Wi-Fi",
+            "Buy servers",
+            "Write code",
+            "Format hard drives",
+            "Compile kernels",
+            "Compile scripts",
+            "Encrypt passwords",
+            "Allocate RAM",
+            "Schedule CPU",
+            "Browse web",
+            "Write text",
+            "Run antivirus",
+            "Check logs"
+        ],
+        "correct": 0,
+        "exp": "Group Activity questions: How would people: Save files? Use printers? Play games? Connect to Wi-Fi?",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "How many minutes are allocated for groups to present their answers in the Group Activity?",
+        "options": [
+            "1 minute",
+            "3 minutes",
+            "10 minutes",
+            "15 minutes"
+        ],
+        "correct": 1,
+        "exp": "Group Activity: Present your answer in 3 minutes.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which four major OS logos are featured in the presentation visual slides?",
+        "options": [
+            "macOS",
+            "Android",
+            "Linux (Tux)",
+            "Windows 11",
+            "MS-DOS",
+            "UNIX",
+            "QNX",
+            "Minix",
+            "Solaris",
+            "FreeBSD",
+            "NetBSD",
+            "OpenBSD",
+            "ChromeOS",
+            "Ubuntu",
+            "Debian",
+            "Fedora"
+        ],
+        "correct": 0,
+        "exp": "Slide 3 features the logos of macOS, Android, Linux, and Windows 11.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the Second Generation (1950s1960s), how did computers process tasks?",
+        "options": [
+            "Through Batch Processing",
+            "Through Cloud Virtualization",
+            "Through GUI touch windows",
+            "Through Multiprogramming time sharing"
+        ],
+        "correct": 0,
+        "exp": "Second Generation (1950s1960s) innovation was Batch Processing.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "In the Third Generation (1960s1970s), what breakthrough allowed multiple programs to share CPU time?",
+        "options": [
+            "Multiprogramming & Time Sharing",
+            "Virtual reality rendering",
+            "Artificial Intelligence neural networks",
+            "Single-user DOS prompts"
+        ],
+        "correct": 0,
+        "exp": "Third Generation (1960s1970s) brought Multiprogramming & Time Sharing.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which generation introduced Graphical User Interfaces (GUI) for operating systems?",
+        "options": [
+            "First Generation (1940s1950s)",
+            "Second Generation (1950s1960s)",
+            "Third Generation (1960s1970s)",
+            "Fourth Generation (1980sPresent)"
+        ],
+        "correct": 3,
+        "exp": "Fourth Generation (1980sPresent) introduced GUI-Based Operating Systems.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which generation introduced Virtualization, Cloud computing, and Mobile OS?",
+        "options": [
+            "Modern Generation (2000sPresent)",
+            "Third Generation (1960s1970s)",
+            "Second Generation (1950s1960s)",
+            "First Generation (1940s1950s)"
+        ],
+        "correct": 0,
+        "exp": "Modern Generation (2000sPresent) introduced Cloud, Virtualization, Mobile OS, AI.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "What is the primary interface used by Android OS?",
+        "options": [
+            "Touch",
+            "CLI",
+            "Keyboard-only navigation",
+            "Batch cards"
+        ],
+        "correct": 0,
+        "exp": "Android user interface is Touch.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which operating system provides both Command Line Interface (CLI) and Graphical User Interface (GUI)?",
+        "options": [
+            "Linux",
+            "Android",
+            "Windows 11 strictly",
+            "macOS strictly"
+        ],
+        "correct": 0,
+        "exp": "Linux is listed with interface type: CLI + GUI.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which OS function is directly responsible for organizing file deletions and data retrieval?",
+        "options": [
+            "File Management",
+            "Process Management",
+            "Memory Management",
+            "Device Management"
+        ],
+        "correct": 0,
+        "exp": "File Management manages: Stores files, Creates folders, Deletes files, Retrieves data.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which OS function manages RAM protection and sharing among active programs?",
+        "options": [
+            "Memory Management",
+            "File Management",
+            "Process Management",
+            "Device Management"
+        ],
+        "correct": 0,
+        "exp": "Memory Management manages: Allocates RAM, Protects memory, Shares memory.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which OS function manages computer peripheral devices such as keyboard, mouse, and printer?",
+        "options": [
+            "Device Management",
+            "Memory Management",
+            "File Management",
+            "Security configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Device Management manages: Keyboard, Mouse, Printer, USB, Monitor.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which OS function enforces user permissions, passwords, and encryption?",
+        "options": [
+            "Security",
+            "File Management",
+            "Process Management",
+            "Memory Management"
+        ],
+        "correct": 0,
+        "exp": "Security enforces: User Accounts, Passwords, Permissions, Encryption.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    },
+    {
+        "q": "Which OS function coordinates CPU scheduling and runs software programs?",
+        "options": [
+            "Process Management",
+            "Device Management",
+            "Memory Management",
+            "Security configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Process Management coordinates: Runs programs, Allocates CPU, Schedules processes.",
+        "section": "Part 6: Desktop & Modern Operating Systems"
+    }
+];
+
+ const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+ document.addEventListener('DOMContentLoaded', () => {
+ simulateProcessState();
+ });
+ </script>
+</body>
+</html>

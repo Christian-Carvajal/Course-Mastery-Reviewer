@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>University Mastery Reviewer Portal</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Course Reviewer</h1>
+        <p>Structured study guides, key references, and interactive practice quizzes built for deep subject understanding and complete exam readiness.</p>
+        <div style="margin-top: 0.85rem; display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(13, 148, 136, 0.12); border: 1px solid var(--primary-color); padding: 0.35rem 0.95rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">
+            <span>✨ Created by <strong>Christian Ezekiel</strong></span>
+        </div>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <span style="font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--primary-color);">Portal</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+            <button class="auth-nav-pill" onclick="window.openAuthModal('signin')" aria-label="Student Cloud Sync">👤 Sign In / Create Account</button>
+            <button id="pwa-install-btn" class="btn btn-secondary" onclick="window.installPWA()" style="display:none; padding:0.35rem 0.75rem; font-size:0.85rem; border-radius:20px; align-items:center; gap:0.3rem;">📱 Install App</button>
+            <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Portal Hero / Course Header -->
+        <div style="margin-bottom: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h2 style="border-bottom: none; margin-bottom: 0.5rem; font-size: 1.8rem;">Personal Study & Mastery Hub</h2>
+                <p style="color: var(--text-muted-color); font-size: 1rem; margin-bottom: 0;">Select a subject below to view study guides, practice full shuffle quizzes with in-depth breakdowns, and track study sessions.</p>
+            </div>
+            <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted-color); background: var(--card-bg-color); border: 1px solid var(--border-color); padding: 0.4rem 0.85rem; border-radius: 20px;">
+                Made by: <strong>Christian Ezekiel</strong>
+            </div>
+        </div>
+
+        
+        <!-- Prominent Student Account & Cloud Sync Banner -->
+        <div class="card" id="portal-hero-auth-card" style="margin-bottom: 1.75rem; border-left: 4px solid var(--primary-color); background: linear-gradient(to right, rgba(13, 148, 136, 0.05), var(--card-bg-color));">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                <div style="flex:1; min-width:280px;">
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+                        <span style="font-size:1.4rem;" id="hero-auth-icon">☁️</span>
+                        <h3 style="margin:0; font-size:1.15rem; border:none; padding:0;" id="hero-auth-title">Multi-Device Cloud Sync &amp; Student Account</h3>
+                    </div>
+                    <p style="font-size:0.88rem; color:var(--text-muted-color); margin:0;" id="hero-auth-desc">
+                        Create an account or sign in to save your quiz answers, scores, and mastery percentages across your phone, tablet, and laptop.
+                    </p>
+                </div>
+                <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;" id="hero-auth-actions">
+                    <button class="btn btn-primary" onclick="window.openAuthModal('register')" style="font-size:0.85rem; padding:0.45rem 1rem;">✨ Create Account</button>
+                    <button class="btn btn-secondary" onclick="window.openAuthModal('signin')" style="font-size:0.85rem; padding:0.45rem 1rem;">🔑 Sign In</button>
+                    <button class="btn btn-secondary" onclick="window.openAuthModal('forgot')" style="font-size:0.85rem; padding:0.45rem 0.85rem;" title="Forgot password?">❓ Recover</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Study Whiteboard Tool -->
+        <div class="card" style="margin-bottom: 1.75rem; border-left: 4px solid #7c3aed; background: linear-gradient(to right, rgba(124, 58, 237, 0.05), var(--card-bg-color));">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                <div style="flex:1; min-width:240px;">
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
+                        <span style="font-size:1.4rem;">📝</span>
+                        <h3 style="margin:0; font-size:1.15rem; border:none; padding:0;">Study Whiteboard</h3>
+                    </div>
+                    <p style="font-size:0.88rem; color:var(--text-muted-color); margin:0;">
+                        Open a full-screen whiteboard in a new tab to sketch equations, diagrams, and notes while studying. Supports pen, eraser, multiple colors, board backgrounds, undo/redo, and save to PNG.
+                    </p>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="window.open('/whiteboard.html', '_blank')" style="font-size:0.85rem; padding:0.45rem 1rem; background:#7c3aed; border-color:#7c3aed;">📝 Open Whiteboard</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Term Tab Navigation -->
+        <div class="portal-tabs-nav">
+            <button class="portal-tab-btn active" onclick="switchPortalTerm('prelim')">Prelim Term</button>
+            <button class="portal-tab-btn" onclick="switchPortalTerm('midterm')">Midterm Term</button>
+            <button class="portal-tab-btn" onclick="switchPortalTerm('finals')">Finals Term</button>
+        </div>
+
+        <div class="portal-grid">
+            <!-- Left Panel: Content -->
+            <div>
+                <!-- PRELIM TERM CONTENT -->
+                <div id="term-prelim" class="portal-term-content active">
+                    
+                    <!-- Subject 1: IAS -->
+                    <div class="subject-section">
+                        <h3 class="subject-title">Information Assurance & Security</h3>
+                        <div class="topic-cards-grid">
+                                                        <a href="subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Access Control Models & Principles</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">IAS</span>
+                                        <span>71 Questions</span>
+                                        <span>IAAA, 5 Auth Factors, DAC, MAC, RBAC & ABAC</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/informationAssuranceandSecurtiy/Prelim/week1-2.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Foundations & Threat Landscape</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">IAS</span>
+                                        <span>75 Questions</span>
+                                        <span>CIA Triad, Threats & Attack Vectors</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/informationAssuranceandSecurtiy/Prelim/week3-4.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Governance & Risk Management</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">IAS</span>
+                                        <span>79 Questions</span>
+                                        <span>Policies, ISO 27001 & Risk Management</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+                        </div>
+                    </div>
+
+                    
+                    <!-- Subject 3: Operating System Configuration -->
+                    <div class="subject-section">
+                        <h3 class="subject-title">Operating System Configuration</h3>
+                        <div class="topic-cards-grid">
+                            
+                            <a href="subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Introduction to Operating Systems</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">OS Config</span>
+                                        <span>88 Questions</span>
+                                        <span>Evolution, Functions & Typology</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Network Configuration in Windows OS</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">OS Config</span>
+                                        <span>90 Questions</span>
+                                        <span>TCP/IP, DHCP, Subnetting & CLI</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">OS Structures & System Calls</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">OS Config</span>
+                                        <span>91 Questions</span>
+                                        <span>Monolithic vs Microkernel & POSIX</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                                        <!-- Subject 4: Automata Theory & Formal Languages -->
+                    <div class="subject-section">
+                        <h3 class="subject-title">Automata Theory & Formal Languages</h3>
+                        <div class="topic-cards-grid">
+                            
+                            <a href="subject/automataTheory/Prelim/automataComputabilityAndComplexity.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Automata, Computability & Complexity</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Automata Theory</span>
+                                        <span>73 Questions</span>
+                                        <span>Turing Machines, P vs NP & Halting</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Intro to Automata & Formal Languages</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Automata Theory</span>
+                                        <span>75 Questions</span>
+                                        <span>Chomsky Hierarchy & Pioneers</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">The Central Concepts of Automata</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Automata Theory</span>
+                                        <span>80 Questions</span>
+                                        <span>Alphabets, Strings, Powers & DFA</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <!-- Subject 2: Data Mining -->
+                    <div class="subject-section">
+                        <h3 class="subject-title">Data Mining</h3>
+                        <div class="topic-cards-grid">
+                            
+                            <a href="subject/dataMining/Prelim/introductionToDataScience.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Introduction to Data Science</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Data Mining</span>
+                                        <span>81 Questions</span>
+                                        <span>Foundations, AI & Roles</span>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/dataMining/Prelim/probabilities.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Probabilities</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Data Mining</span>
+                                        <span>94 Questions</span>
+                                        <span>Theory, Empirical & Intervals</span>
+                                    </div>
+                                    <div class="topic-card-actions">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openProbabilityExamplesModal();" title="View Step-by-Step Probability Worked Examples (Display Math)">💡 Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/dataMining/Prelim/probabilitydistribution.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Probability Distributions</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Data Mining</span>
+                                        <span>76 Questions</span>
+                                        <span>Discrete &amp; Continuous</span>
+                                    </div>
+                                    <div class="topic-card-actions">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openDistributionsExamplesModal();" title="View Step-by-Step Probability Distributions Worked Examples (Display Math)">💡 Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/dataMining/Prelim/sets-events-bayesianinference.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Sets, Events &amp; Bayesian Inference</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Data Mining</span>
+                                        <span>75 Questions</span>
+                                        <span>Conditional &amp; Bayesian</span>
+                                    </div>
+                                    <div class="topic-card-actions">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openBayesianExamplesModal();" title="View Step-by-Step Sets & Bayesian Worked Examples (Display Math)">💡 Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                            <a href="subject/dataMining/Prelim/traditionalDataTechniques.html" class="topic-card">
+                                <div class="topic-card-info">
+                                    <div class="topic-title">Traditional Data Techniques</div>
+                                    <div class="topic-meta">
+                                        <span class="topic-badge">Data Mining</span>
+                                        <span>91 Questions</span>
+                                        <span>Mining, Masking &amp; Metrics</span>
+                                    </div>
+                                    <div class="topic-card-actions">
+                                        <button type="button" class="btn-topic-examples" onclick="event.preventDefault(); event.stopPropagation(); window.openTraditionalExamplesModal();" title="View Step-by-Step Traditional Data Techniques Worked Examples (Display Math)">💡 Examples</button>
+                                    </div>
+                                </div>
+                                <div class="topic-link-arrow">→</div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- MIDTERM TERM CONTENT (LOCKED) -->
+                <div id="term-midterm" class="portal-term-content" style="display: none;">
+                    <div class="cute-placeholder">
+                        <span class="cute-placeholder-icon">📚✨</span>
+                        <div class="cute-placeholder-text">No subjects available yet!</div>
+                        <div class="cute-placeholder-sub">Focus on your Prelim reviewer for now. Keep up the great work! ✨</div>
+                    </div>
+                </div>
+
+                <!-- FINALS TERM CONTENT (LOCKED) -->
+                <div id="term-finals" class="portal-term-content" style="display: none;">
+                    <div class="cute-placeholder">
+                        <span class="cute-placeholder-icon">🎓💤</span>
+                        <div class="cute-placeholder-text">No subjects available yet!</div>
+                        <div class="cute-placeholder-sub">Focus on your Prelim reviewer for now. Keep up the great work! ✨</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Panel: Sidebar Widgets -->
+            <div class="portal-sidebar">
+                
+                <!-- Quick Jump Search -->
+                <div class="widget-card">
+                    <h3>Quick Jump Index</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted-color); margin-bottom: 0.75rem;">Search and jump directly to any topic or definition in the study guides:</p>
+                    <div class="search-container">
+                        <input type="text" class="search-input" id="portal-search" placeholder="Type key term... (e.g. ABAC, Poisson)">
+                        <div class="search-results" id="search-results-box"></div>
+                    </div>
+                </div>
+
+                <!-- Study Focus Timer Toggle Widget -->
+                <div class="widget-card">
+                    <h3>Study Focus Timer</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted-color); margin-bottom: 0.75rem;">Manage study sessions via the floating control panel in the bottom right corner of your screen.</p>
+                    <button class="btn btn-primary" onclick="if (window.focusTimer) window.focusTimer.toggleHide();" style="width:100%; font-size:0.85rem; padding: 0.55rem 1rem; border-radius: var(--border-radius-sm);">⏱️ Toggle Focus Timer Panel</button>
+                </div>
+
+                <!-- Progress Tracker Widget -->
+                <div class="widget-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                        <h3 style="margin: 0;">Mastery Progress</h3>
+                    </div>
+                    <div class="progress-list" id="progress-list-container">
+                        <!-- Progress items populated dynamically -->
+                    </div>
+                    <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--border-color);">
+                        <button class="btn btn-danger" onclick="resetAllCourseProgress()" style="width: 100%; font-size: 0.82rem; padding: 0.55rem 0.85rem; border-radius: var(--border-radius-sm); display: flex; align-items: center; justify-content: center; gap: 0.4rem; background: var(--incorrect-bg-color); color: var(--incorrect-color); border: 1px solid var(--incorrect-color); font-weight: 600;">
+                            <span>🗑️</span> Reset All Progress
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mistake Vault Widget -->
+                <div class="mistake-vault-card" id="mistake-vault-widget">
+                    <!-- Populated dynamically by MistakeVaultManager -->
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="supabaseClient.js"></script>
+    <script src="global.js"></script>
+    <script>
+        // ==========================================
+        // 1. Portal Term Switching
+        // ==========================================
+        function switchPortalTerm(term) {
+            // Remove active classes
+            document.querySelectorAll('.portal-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.portal-term-content').forEach(content => {
+                content.style.display = 'none';
+                content.classList.remove('active');
+            });
+
+            // Find target elements
+            const btn = Array.from(document.querySelectorAll('.portal-tab-btn')).find(b => b.innerText.toLowerCase().includes(term));
+            if (btn) btn.classList.add('active');
+
+            const content = document.getElementById(`term-${term}`);
+            if (content) {
+                content.style.display = 'block';
+                content.classList.add('active');
+            }
+        }
+
+        // Note: Focus Timer is now globally managed by global.js
+
+        // ==========================================
+        // 3. Search Indexing & Quick Jump
+        // ==========================================
+        const searchIndex = [
+                                                // Computability & Complexity
+            { topic: "Computability & Complexity", title: "Limitations of Computer Science & Unsolvable Problems", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "limitations-of-cs" },
+            { topic: "Computability & Complexity", title: "Decision Problems & Problem Reduction Paths", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "decision-problems" },
+            { topic: "Computability & Complexity", title: "Functions & Computability (Total vs Partial)", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "functions-computability" },
+            { topic: "Computability & Complexity", title: "Turing Machine Model & Church-Turing Thesis", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "turing-machines" },
+            { topic: "Computability & Complexity", title: "The Halting Problem & Undecidability Proof", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "halting-problem" },
+            { topic: "Computability & Complexity", title: "Tractable vs Intractable Computations (Class P vs NP)", file: "subject/automataTheory/Prelim/automataComputabilityAndComplexity.html", hash: "tractable-intractable" },
+
+            // Intro to Automata & Formal Languages
+            { topic: "Intro to Automata", title: "What is Automata? Core Computational Questions", file: "subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html", hash: "what-is-automata" },
+            { topic: "Intro to Automata", title: "Pioneers of Computation (Turing, Church, Kleene, Von Neumann)", file: "subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html", hash: "pioneers-computation" },
+            { topic: "Intro to Automata", title: "What is a Formal Language? (Formal vs Informal)", file: "subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html", hash: "formal-language-definition" },
+            { topic: "Intro to Automata", title: "Properties of Formal Languages & String Operations", file: "subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html", hash: "formal-language-properties" },
+            { topic: "Intro to Automata", title: "Defining Formal Languages (EQUAL, EVEN-EVEN, Palindromes)", file: "subject/automataTheory/Prelim/introductiontoAutomataTheoryFormalLanguages.html", hash: "defining-formal-languages" },
+
+            // Central Concepts of Automata
+            { topic: "Central Concepts of Automata", title: "Alphabets (Σ), Symbols & Non-Empty Finite Sets", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "alphabets-definitions" },
+            { topic: "Central Concepts of Automata", title: "Strings, Length (|w|), Empty String (ε) & Concatenation", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "strings-operations" },
+            { topic: "Central Concepts of Automata", title: "Powers of an Alphabet (Σ^k), Kleene Star (Σ*) & Plus (Σ⁺)", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "powers-alphabet" },
+            { topic: "Central Concepts of Automata", title: "Languages, Grammars & Set Operations on Languages", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "languages-grammars" },
+            { topic: "Central Concepts of Automata", title: "The Membership Problem (Deciding w ∈ L)", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "membership-problem" },
+            { topic: "Central Concepts of Automata", title: "Applications of Automata (Compilers, Protocols, Verification)", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "applications-automata" },
+            { topic: "Central Concepts of Automata", title: "Finite Automata 5-Tuple & Transition State Diagrams", file: "subject/automataTheory/Prelim/theCentralConceptsOfAutomata.html", hash: "finite-automata-examples" },
+
+            // Operating System Configuration: Intro to OS
+            { topic: "Intro to Operating Systems", title: "What is an Operating System & Core Roles", file: "subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html", hash: "sec-2-what-is-os" },
+            { topic: "Intro to Operating Systems", title: "History & Evolution of OS (1st to Modern Gen)", file: "subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html", hash: "sec-3-history-evolution" },
+            { topic: "Intro to Operating Systems", title: "5 Main Functions of an OS (Process, Memory, File, Device, Security)", file: "subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html", hash: "sec-4-core-functions" },
+            { topic: "Intro to Operating Systems", title: "7 Types of Operating Systems (Batch, Time-Sharing, RTOS, Mobile)", file: "subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html", hash: "sec-5-os-types" },
+            { topic: "Intro to Operating Systems", title: "Desktop & Modern OS Ecosystems (Windows, Linux, macOS, Android)", file: "subject/operatingSystemConfiguration/Prelim/introductionToOperatingSystems.html", hash: "sec-6-modern-os" },
+
+            // Operating System Configuration: Network Configuration
+            { topic: "Network Configuration (Windows)", title: "What is Network Configuration & Why It Matters", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-2-what-is-netconfig" },
+            { topic: "Network Configuration (Windows)", title: "Basic Network Components (NIC, Switch, Router, Modem)", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-4-components" },
+            { topic: "Network Configuration (Windows)", title: "Static vs Dynamic IP & DHCP (DORA Process)", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-5-ip-dhcp" },
+            { topic: "Network Configuration (Windows)", title: "Wired Ethernet vs Wi-Fi Wireless Connections", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-6-connection-types" },
+            { topic: "Network Configuration (Windows)", title: "Windows Network Commands (ipconfig, /all, /flushdns)", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-7-commands-ipconfig" },
+            { topic: "Network Configuration (Windows)", title: "Network Diagnostics: Ping, Latency & Packet Loss", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-8-ping-diagnostics" },
+            { topic: "Network Configuration (Windows)", title: "IPv4 Subnetting, Default Gateways & DNS Settings", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-9-configure-ipv4" },
+            { topic: "Network Configuration (Windows)", title: "Common Network Problems & Troubleshooting Decision Tree", file: "subject/operatingSystemConfiguration/Prelim/networkConfigurationInWindowsOS.html", hash: "sec-10-troubleshooting" },
+
+            // Operating System Configuration: OS Structures & System Calls
+            { topic: "OS Structures & System Calls", title: "What is an OS Structure & Architectural Paradigms", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-2-what-is-os-structure" },
+            { topic: "OS Structures & System Calls", title: "5 Main OS Structures (Simple, Layered, Microkernel, Modular, Hybrid)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-3-main-structures" },
+            { topic: "OS Structures & System Calls", title: "OS Components & Layer Hierarchy (Apps, System Calls, Kernel, Hardware)", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-4-components-layers" },
+            { topic: "OS Structures & System Calls", title: "Monolithic Architecture In-Depth & Crash Propagation", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-5-major-structures" },
+            { topic: "OS Structures & System Calls", title: "Monolithic Kernel vs Microkernel Comparison Matrix", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "sec-6-monolithic-vs-microkernel" },
+            { topic: "OS Structures & System Calls", title: "Dual-Mode Execution (User Mode 1 vs Kernel Mode 0) & Traps", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "formulas" },
+            { topic: "OS Structures & System Calls", title: "POSIX System Calls (open, read, write, fork, exit) Flow", file: "subject/operatingSystemConfiguration/Prelim/osStructuresAndSystemCalls.html", hash: "formulas" },
+
+            // Access Control
+            { topic: "Access Control Models", title: "Why Access Control Matters", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "why-access-control-matters" },
+            { topic: "Access Control Models", title: "Identification, Authentication, Authorization", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "identification-authentication-authorization" },
+            { topic: "Access Control Models", title: "Authentication Factors (Know, Have, Are...)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "authentication-factors" },
+            { topic: "Access Control Models", title: "The Principle of Least Privilege", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "principle-of-least-privilege" },
+            { topic: "Access Control Models", title: "Discretionary Access Control (DAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "dac" },
+            { topic: "Access Control Models", title: "Mandatory Access Control (MAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "mac" },
+            { topic: "Access Control Models", title: "Role-Based Access Control (RBAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "rbac" },
+            { topic: "Access Control Models", title: "Attribute-Based Access Control (ABAC)", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "abac" },
+            { topic: "Access Control Models", title: "Worked Example: Academic vs Military", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "worked-example" },
+            { topic: "Access Control Models", title: "Comparison Matrix & Key Terms", file: "subject/informationAssuranceandSecurtiy/Prelim/accesscontrol.html", hash: "matrix-and-comparison" },
+
+            // Foundations & Threat Landscape
+            { topic: "Foundations & Threat Landscape", title: "InfoSec Definition & CIA Triad", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "reviewer" },
+            { topic: "Foundations & Threat Landscape", title: "Threat Landscape & Attack Vectors", file: "subject/informationAssuranceandSecurtiy/Prelim/week1-2.html", hash: "reviewer" },
+
+            // Governance & Risk Management
+            { topic: "Governance & Risk Management", title: "Security Governance & ISO 27001", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "reviewer" },
+            { topic: "Governance & Risk Management", title: "Risk Management & Treatment Options", file: "subject/informationAssuranceandSecurtiy/Prelim/week3-4.html", hash: "reviewer" },
+            
+            // Intro to Data Science
+            { topic: "Intro to Data Science", title: "Evolution of Data Science & Big Three", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "reviewer" },
+            { topic: "Intro to Data Science", title: "Data Analysis vs Data Analytics", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "reviewer" },
+            { topic: "Intro to Data Science", title: "Machine Learning & AI Overview", file: "subject/dataMining/Prelim/introductionToDataScience.html", hash: "reviewer" },
+
+            // Data Mining: Probabilities
+            { topic: "Probabilities & Fundamentals", title: "Basic Probabilities & Fundamentals", file: "subject/dataMining/Prelim/probabilities.html", hash: "reviewer" },
+            { topic: "Probabilities & Fundamentals", title: "Expected Values & Experimental Probability", file: "subject/dataMining/Prelim/probabilities.html", hash: "reviewer" },
+
+            // Probability Distributions
+            { topic: "Probability Distributions", title: "What is a Probability Distribution?", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "what-is-distribution" },
+            { topic: "Probability Distributions", title: "Mean and Variance Definitions", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "mean-and-variance" },
+            { topic: "Probability Distributions", title: "Discrete vs Continuous Split", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "discrete-vs-continuous" },
+            { topic: "Probability Distributions", title: "Uniform Distribution (Discrete)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "uniform-distribution" },
+            { topic: "Probability Distributions", title: "Bernoulli Distribution", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "bernoulli-distribution" },
+            { topic: "Probability Distributions", title: "Binomial Distribution & Combos", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "binomial-distribution" },
+            { topic: "Probability Distributions", title: "Poisson Distribution (Intervals)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "poisson-distribution" },
+            { topic: "Probability Distributions", title: "Normal Distribution & SD limits", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "normal-distribution" },
+            { topic: "Probability Distributions", title: "Student's T Distribution (Small Samples)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "students-t-distribution" },
+            { topic: "Probability Distributions", title: "Chi-Squared Distribution", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "chi-squared-distribution" },
+            { topic: "Probability Distributions", title: "Exponential Distribution (Half-lives)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "exponential-distribution" },
+            { topic: "Probability Distributions", title: "Logistic Distribution (CDF Sigmoid)", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "logistic-distribution" },
+            { topic: "Probability Distributions", title: "FIFA 19 Case Study & Histograms", file: "subject/dataMining/Prelim/probabilitydistribution.html", hash: "fifa-19-case-study" },
+            
+            // Sets & Bayesian
+            { topic: "Sets, Events & Bayes", title: "Events as Sets & Venn Circles", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "events-as-sets" },
+            { topic: "Sets, Events & Bayes", title: "Set Notation Reference Table", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "set-notation" },
+            { topic: "Sets, Events & Bayes", title: "Intersections & Unions (Venn)", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "intersections" },
+            { topic: "Sets, Events & Bayes", title: "Independent and Dependent Events", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "independent-dependent-events" },
+            { topic: "Sets, Events & Bayes", title: "Conditional Probability Formula", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "conditional-probability" },
+            { topic: "Sets, Events & Bayes", title: "Law of Total Probability Formula", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "total-probability" },
+            { topic: "Sets, Events & Bayes", title: "Bayes' Theorem Core Equation", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "bayes-theorem" },
+            { topic: "Sets, Events & Bayes", title: "Worked Example: Medical Test Prior", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "medical-test-example" },
+            { topic: "Sets, Events & Bayes", title: "Spam Filter & Sequential Updates", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "spam-filter" },
+            { topic: "Sets, Events & Bayes", title: "Odds Form of Bayes' Rule", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "odds-form" },
+            { topic: "Sets, Events & Bayes", title: "Three Mistakes (Prosecutor's Fallacy)", file: "subject/dataMining/Prelim/sets-events-bayesianinference.html", hash: "three-mistakes" },
+
+            // Traditional Data Techniques
+            { topic: "Traditional Data Techniques", title: "Pre-processing, Big Data & BI", file: "subject/dataMining/Prelim/traditionalDataTechniques.html", hash: "reviewer" }
+        ];
+
+        const searchInput = document.getElementById('portal-search');
+        const resultsBox = document.getElementById('search-results-box');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                resultsBox.style.display = 'none';
+                return;
+            }
+
+            // Find matching terms
+            const matches = searchIndex.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.topic.toLowerCase().includes(query)
+            );
+
+            if (matches.length === 0) {
+                resultsBox.innerHTML = '<div style="padding:0.75rem 1rem; font-size:0.9rem; color:var(--text-muted-color);">No matching sections found.</div>';
+            } else {
+                resultsBox.innerHTML = matches.map(item => `
+                    <a class="search-result-item" href="/${item.file.replace(/^\//, '')}#${item.hash}" style="text-decoration:none; display:block;">
+                        <span class="result-topic">${item.topic}</span>
+                        <span class="result-heading">${item.title}</span>
+                    </a>
+                `).join('');
+            }
+            resultsBox.style.display = 'block';
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                resultsBox.style.display = 'none';
+            }
+        });
+
+        // ==========================================
+        // 4. Progress Tracker Dashboard
+        // ==========================================
+                const topics = [
+                        { key: 'automataComputabilityAndComplexity', title: 'Computability & Complexity', total: 73 },
+            { key: 'introductiontoAutomataTheoryFormalLanguages', title: 'Intro to Automata Theory', total: 75 },
+            { key: 'theCentralConceptsOfAutomata', title: 'Central Concepts of Automata', total: 80 },
+            { key: 'introductionToOperatingSystems', title: 'Intro to Operating Systems', total: 88 },
+            { key: 'networkConfigurationInWindowsOS', title: 'Network Configuration (Windows)', total: 90 },
+            { key: 'osStructuresAndSystemCalls', title: 'OS Structures & System Calls', total: 91 },
+
+            { key: 'accesscontrol', title: 'Access Control Models', total: 71 },
+            { key: 'week1-2', title: 'Foundations & Threat Landscape', total: 77 },
+            { key: 'week3-4', title: 'Governance & Risk Management', total: 79 },
+            { key: 'introductionToDataScience', title: 'Introduction to Data Science', total: 81 },
+            { key: 'probabilities', title: 'Probabilities', total: 94 },
+            { key: 'probabilitydistribution', title: 'Probability Distributions', total: 76 },
+            { key: 'sets-events-bayesianinference', title: 'Sets, Events & Bayes', total: 75 },
+            { key: 'traditionalDataTechniques', title: 'Traditional Data Techniques', total: 91 }
+        ];
+
+        function formatStudyTime(sec) {
+            if (!sec || sec <= 0) return '0s';
+            const hrs = Math.floor(sec / 3600);
+            const mins = Math.floor((sec % 3600) / 60);
+            const secs = sec % 60;
+            if (hrs > 0) {
+                return `${hrs}h ${mins}m`;
+            }
+            if (mins > 0) {
+                return `${mins}m ${secs}s`;
+            }
+            return `${secs}s`;
+        }
+
+        function renderProgressTracker() {
+            const container = document.getElementById('progress-list-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+
+            // Compute topic stats for dynamic hierarchy sorting
+            const topicStats = topics.map((t, originalIndex) => {
+                const rawProgress = safeGetStorage(`quiz_progress_${t.key}`);
+                const highscore = parseInt(safeGetStorage(`quiz_highscore_${t.key}`) || '0', 10);
+                
+                let progress = { answered: 0, correct: 0, completed: false };
+                if (rawProgress) {
+                    try {
+                        progress = JSON.parse(rawProgress);
+                    } catch (e) {}
+                } else {
+                    const rawSession = safeGetStorage(`quiz_session_state_${t.key}`);
+                    if (rawSession) {
+                        try {
+                            const sess = JSON.parse(rawSession);
+                            progress = {
+                                answered: sess.answeredCount || 0,
+                                correct: sess.correctCount || 0,
+                                completed: (sess.answeredCount || 0) === t.total
+                            };
+                        } catch (e) {}
+                    }
+                }
+
+                const bestScore = Math.max(highscore, progress.correct || 0);
+                const pct = Math.round((progress.answered / t.total) * 100);
+                const isCompleted = Boolean(progress.completed || progress.answered === t.total);
+
+                return {
+                    topic: t,
+                    progress,
+                    bestScore,
+                    pct,
+                    isCompleted,
+                    originalIndex
+                };
+            });
+
+            // Dynamic Hierarchy Sorting:
+            // 1. Completed modules first
+            // 2. Highest completion rate (e.g. 100% -> 50% -> 1% -> 0%)
+            // 3. Highest best score
+            // 4. Original order
+            topicStats.sort((a, b) => {
+                if (a.isCompleted !== b.isCompleted) {
+                    return a.isCompleted ? -1 : 1;
+                }
+                if (b.pct !== a.pct) {
+                    return b.pct - a.pct;
+                }
+                if (b.bestScore !== a.bestScore) {
+                    return b.bestScore - a.bestScore;
+                }
+                return a.originalIndex - b.originalIndex;
+            });
+
+            topicStats.forEach(({ topic: t, progress, bestScore, pct, isCompleted }) => {
+                const item = document.createElement('div');
+                item.className = 'progress-item';
+
+                item.innerHTML = `
+                    <div class="progress-item-header">
+                        <span class="progress-lbl">${t.title}</span>
+                        <span class="progress-val">${progress.answered}/${t.total} Qs (${pct}%)</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fg" style="width: ${pct}%"></div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.35rem; font-size:0.75rem;">
+                        <span style="color:var(--text-muted-color);">
+                            ${(progress.answered > 0 || bestScore > 0) ? `Best: <strong>${bestScore}</strong>/${t.total}` : 'Not started'}
+                        </span>
+                        ${isCompleted ? '<span class="progress-completed-badge">Completed</span>' : ''}
+                    </div>
+                `;
+
+                container.appendChild(item);
+            });
+        }
+
+        
+        // Update Hero Auth Banner on Portal based on auth state
+        window.updateHeroAuthBanner = function() {
+            let user = null;
+            if (window.SupabaseSync && typeof window.SupabaseSync.getCurrentStudent === 'function') {
+                user = window.SupabaseSync.getCurrentStudent();
+            } else {
+                try {
+                    const raw = localStorage.getItem('student_active_session');
+                    user = raw ? JSON.parse(raw) : null;
+                } catch (e) {}
+            }
+
+            const icon = document.getElementById('hero-auth-icon');
+            const title = document.getElementById('hero-auth-title');
+            const desc = document.getElementById('hero-auth-desc');
+            const actions = document.getElementById('hero-auth-actions');
+
+            if (!icon || !title || !desc || !actions) return;
+
+            if (user && user.username) {
+                icon.innerText = '🎓';
+                title.innerHTML = `Welcome back, <strong>${user.username}</strong>! <span style="font-size:0.75rem; color:#10b981; font-weight:700; background:rgba(16,185,129,0.12); padding:0.2rem 0.5rem; border-radius:12px;">🟢 Cloud Sync Active</span>`;
+                desc.innerText = 'Your quiz progress, mistake vault, and study mastery are synchronizing in real-time across your devices.';
+                actions.innerHTML = `
+                    <button class="btn btn-primary" onclick="window.openAuthModal('profile')" style="font-size:0.85rem; padding:0.45rem 1rem;">⚙️ Profile &amp; Sync</button>
+                    <button class="btn btn-secondary" onclick="window.handleForceCloudPull()" style="font-size:0.85rem; padding:0.45rem 0.85rem;">🔄 Pull Cloud</button>
+                    <button class="btn btn-secondary" onclick="window.handleSignOut()" style="font-size:0.85rem; padding:0.45rem 0.85rem;">🚪 Sign Out</button>
+                `;
+            } else {
+                icon.innerText = '☁️';
+                title.innerText = 'Multi-Device Cloud Sync & Student Account';
+                desc.innerText = 'Create an account or sign in to save your quiz answers, scores, and mastery percentages across your phone, tablet, and laptop.';
+                actions.innerHTML = `
+                    <button class="btn btn-primary" onclick="window.openAuthModal('register')" style="font-size:0.85rem; padding:0.45rem 1rem;">✨ Create Account</button>
+                    <button class="btn btn-secondary" onclick="window.openAuthModal('signin')" style="font-size:0.85rem; padding:0.45rem 1rem;">🔑 Sign In</button>
+                    <button class="btn btn-secondary" onclick="window.openAuthModal('forgot')" style="font-size:0.85rem; padding:0.45rem 0.85rem;" title="Forgot password?">❓ Recover</button>
+                `;
+            }
+        };
+
+        // Run immediately and register all lifecycle hooks
+        window.updateHeroAuthBanner();
+        document.addEventListener('DOMContentLoaded', window.updateHeroAuthBanner);
+        window.addEventListener('pageshow', window.updateHeroAuthBanner);
+        window.addEventListener('focus', window.updateHeroAuthBanner);
+        window.addEventListener('authUpdated', window.updateHeroAuthBanner);
+        window.addEventListener('storage', (e) => {
+            if (!e.key || e.key === 'student_active_session') {
+                window.updateHeroAuthBanner();
+            }
+        });
+
+        // Render progress on load and listen for real-time updates across tabs, focus, and page restores
+        renderProgressTracker();
+
+        // 1. Cross-tab real-time storage event (updates instantly when answering in another tab/window)
+        window.addEventListener('storage', (e) => {
+            if (e.key && (e.key.startsWith('quiz_progress_') || e.key.startsWith('quiz_session_state_') || e.key.startsWith('study_time_'))) {
+                renderProgressTracker();
+            }
+        });
+
+        // 2. Internal custom events
+        window.addEventListener('quizProgressUpdated', renderProgressTracker);
+        window.addEventListener('mistakeVaultUpdated', renderProgressTracker);
+        window.addEventListener('studyTimeUpdated', renderProgressTracker);
+
+        // 3. Page restoration, focus & visibility events (updates instantly when returning to portal without reload)
+        async function silentCloudSyncAndUpdate() {
+            renderProgressTracker();
+            if (window.SupabaseSync && typeof window.SupabaseSync.getCurrentStudent === 'function' && window.SupabaseSync.getCurrentStudent()) {
+                try {
+                    await window.SupabaseSync.pullAllCloudProgressToLocal();
+                    await window.SupabaseSync.pullAllCloudMistakes();
+                    renderProgressTracker();
+                } catch (e) {}
+            }
+        }
+
+        window.addEventListener('pageshow', silentCloudSyncAndUpdate);
+        window.addEventListener('focus', silentCloudSyncAndUpdate);
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                silentCloudSyncAndUpdate();
+            }
+        });
+
+        // Trigger on initial startup
+        setTimeout(silentCloudSyncAndUpdate, 150);
+    </script>
+    <footer style="text-align: center; padding: 2rem 1rem 1.5rem; color: var(--text-muted-color); font-size: 0.85rem; border-top: 1px solid var(--border-color); margin-top: 3rem;">
+        <p style="margin-bottom: 0;">Personal Course Reviewer • Made by <strong>Christian Ezekiel</strong></p>
+    </footer>
+</body>
+</html>

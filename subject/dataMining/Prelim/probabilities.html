@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Probabilities | University Study Guide</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Data Mining</h1>
+        <p>Probabilities — Measuring Event Likelihoods & 94-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">Probabilities</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+            <button class="nav-btn" onclick="window.openProbabilityExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+
+            <div class="card">
+                <h2>PART ONE: Basic Probabilities & Fundamentals</h2>
+
+                <h3>1. Why It Matters  Decisions Are Made Under Uncertainty</h3>
+                <p>Life is full of uncertain events, and we usually have to weigh the possible outcomes before we decide. Executives face the same problem at a much larger scale, whether they are funding a research project, approving a merger, or walking away from a buyout.</p>
+                <p>Probability and statistical data let them estimate how likely each outcome is, then make the call with evidence instead of instinct.</p>
+                <ul>
+                    <li>What is the chance of success?</li>
+                    <li>What is the probability that we fail?</li>
+                    <li>Is the risk actually worth taking?</li>
+                </ul>
+
+                <h3>2. Definition  So what is probability?</h3>
+                <ul>
+                    <li><strong>1. In plain words:</strong> The chance of something happening.</li>
+                    <li><strong>2. More academically:</strong> The likelihood of an event occurring.</li>
+                </ul>
+                <p><em>Same idea, two registers. Use the second one in your write-ups.</em></p>
+
+                <h3>3. Terminology  An event is an outcome, or a set of them</h3>
+                <p>An event is a specific outcome, or a combination of several outcomes. The outcomes themselves can be almost anything:</p>
+                <ul>
+                    <li><strong>A:</strong> Getting heads when flipping a coin</li>
+                    <li><strong>B:</strong> Rolling a four on a six sided die</li>
+                    <li><strong>C:</strong> Running a mile in under six minutes</li>
+                </ul>
+                <p>One experiment can hold several events. A coin flip has two possible outcomes, so it has two events, and each one needs its own probability.</p>
+
+                <h3>4. Notation  We write probabilities as numbers</h3>
+                <p>Knowing an event is merely likely or unlikely is rarely enough. We want to measure and compare, so we express probability numerically:</p>
+                <ul>
+                    <li><strong>Percentage:</strong> 20%</li>
+                    <li><strong>Fraction:</strong> 1/5</li>
+                    <li><strong>Real number (conventional):</strong> 0.2</li>
+                </ul>
+                <p>By convention we use real numbers between 0 and 1, so 0.2 rather than 20% or one fifth.</p>
+
+                <h3>5. Interpretation  Reading a probability value</h3>
+                <table>
+                    <thead>
+                        <tr><th>Value</th><th>Interpretation</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>absolutely will not happen</td></tr>
+                        <tr><td>0.2</td><td>unlikely</td></tr>
+                        <tr><td>0.5</td><td>even chance</td></tr>
+                        <tr><td>0.66</td><td>likely</td></tr>
+                        <tr><td>1</td><td>absolutely will happen</td></tr>
+                    </tbody>
+                </table>
+                <p>Higher value, higher likelihood. Nothing more mysterious than that. Most events we care about land somewhere in the middle, so values like 0.2, 0.5 and 0.66 are what you should expect to see.</p>
+
+                <h3>6. The Core Rule  How we actually compute it</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">Formula</span><br>
+                    <span class="formula-text">P(A) = number of preferred outcomes / total number of possible outcomes</span>
+                    <div class="formula-explain">
+                        • <strong>1. Preferred outcomes:</strong> The results we want to see happen. Some textbooks call these favorable outcomes. Both terms mean the same thing.<br>
+                        • <strong>2. Sample space:</strong> Every outcome that is possible at all. This is the denominator, and getting it right is usually the hard part.
+                    </div>
+                </div>
+
+                <h3>7. Worked Examples  Two straightforward cases & combined outcomes</h3>
+                <ul>
+                    <li><strong>Flipping a coin and getting heads:</strong> 1 preferred outcome / 2 possible outcomes &rarr; P(heads) = 1/2 = 0.5 (Heads is the only preferred outcome, and there are two possible outcomes in total).</li>
+                    <li><strong>Rolling a four on a six sided die:</strong> 1 preferred outcome / 6 possible outcomes &rarr; P(four) = 1/6 &approx; 0.167 (Still one preferred outcome, but the sample space is now three times larger).</li>
+                    <li><strong>Combined Outcomes (Rolling a number divisible by three):</strong> We would accept either a three or a six. Sample space stays at 6. Preferred outcomes = 2 (the faces 3 and 6). Possible outcomes = 6. Probability = 2/6 &approx; 0.33 (roughly a one in three chance).</li>
+                </ul>
+
+                <h3>8. A Useful Shortcut  Independent events multiply</h3>
+                <p>The probability of two independent events happening at the same time equals the product of their individual probabilities:</p>
+                <div class="formula-card">
+                    <span class="formula-text">P(ace of spades) = P(ace) &times; P(spade) = (1/13) &times; (1/4) = 1/52</span>
+                </div>
+                <p><em>Treat independent events as events that do not affect each other.</em></p>
+
+                <h3>9. Scale Check  Winning the lottery</h3>
+                <p>Preferred outcomes are the tickets you bought. Possible outcomes number upward of 175 million.</p>
+                <ul>
+                    <li><strong>0.0000000057:</strong> One ticket, roughly a 1 in 175,000,000 chance</li>
+                    <li><strong>0.5:</strong> A single coin toss, for comparison</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>PART TWO: Expected Values & Experimental Probability</h2>
+
+                <h3>1. Foundations  What is an experiment?</h3>
+                <ul>
+                    <li><strong>1. Trial:</strong> One flip of the coin, with the outcome written down. That single action is a trial.</li>
+                    <li><strong>2. Experiment:</strong> Many trials run together. Toss a coin 20 times and record all 20 outcomes, and that whole process is one experiment.</li>
+                </ul>
+                <p><em>Example:</em> One experiment, 20 trials (HTTHTHHTHTTHTHHHTHTH) &rarr; 11 heads out of 20 trials, so the experimental probability here is 0.55. Close to the theoretical 0.5, but not identical.</p>
+
+                <h3>2. Two Kinds of Probability  Where the number comes from</h3>
+                <ul>
+                    <li><strong>Theoretical (True Probability):</strong> Worked out from the structure of the problem itself, the way we did with coins, dice and cards.</li>
+                    <li><strong>Experimental Probability:</strong> Worked out by actually running the trials and counting what happened. No structural reasoning required.</li>
+                </ul>
+                <p>The two are rarely identical, but the experimental value is a good approximation. We reach for it whenever the true probability is unknown, or would take far too many factors to compute.</p>
+
+                <h3>3. The Experimental Rule</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">Experimental Formula</span><br>
+                    <span class="formula-text">P = number of successful trials / total number of trials</span>
+                </div>
+                <p><em>Shop queue example:</em> Eight out of ten visits to local shop waiting in line &rarr; 80% queue, 20% no queue.</p>
+
+                <h3>4. Definition  The Expected Value E(A)</h3>
+                <p>The outcome we expect to occur when we run an experiment.</p>
+                <ul>
+                    <li><strong>Categorical outcomes (Suits, colours, yes or no):</strong>
+                        <div class="formula-card"><span class="formula-text">E(A) = P(A) &times; n</span></div>
+                        <em>Example:</em> Drawing a card 20 times with replacement for spades &rarr; <strong>E(spade) = 0.25 &times; 20 = 5</strong>. An expected value of 5 does not guarantee 5. You could draw 4 spades, or 6, or in principle all 20.
+                    </li>
+                    <li><strong>Numerical outcomes (Points, prices, quantities):</strong> Weight every value by its probability (Take each value in sample space, multiply by probability, add them all up).
+                        <div class="formula-card"><span class="formula-text">E(A) = &sum; (Value &times; Probability)</span></div>
+                        <em>Archery Target Example:</em> Outer ring (10 pts, p=0.5 &rarr; 5), Second ring (20 pts, p=0.4 &rarr; 8), Bullseye (100 pts, p=0.1 &rarr; 10). Total <strong>E(A) = 5 + 8 + 10 = 23</strong>.
+                    </li>
+                </ul>
+
+                <h3>5. Why It Matters  Predictions come as intervals</h3>
+                <p>You can never score 23 with one shot. Expected values let us make predictions about the future based on past data. The future carries too much uncertainty for a single exact number, so we forecast a likely range instead (e.g., meteorologists: "3 to 5 feet of snow", "temperatures up to 90 degrees").</p>
+            </div>
+
+            <div class="card">
+                <h2>PART THREE: Probability Frequency Distribution</h2>
+
+                <h3>1. Two Dice Example  Sum of Tops</h3>
+                <p>Throwing two standard six-sided dice yields 36 possible outcomes (<strong>6 &times; 6</strong>). <strong>P(sum = 7) = 6 / 36 = 1/6 &approx; 0.167</strong>. Expected value <strong>E(sum) = 7</strong>. Most probable is not the same as likely (seven carries a probability of only 1/6).</p>
+
+                <h3>2. Definition & Expressions</h3>
+                <p><strong>Probability frequency distribution:</strong> A collection of the probabilities for each possible outcome. Expressed as a table or a graph.</p>
+                
+                <h3>3. Steps to Build a Probability Frequency Distribution</h3>
+                <ul>
+                    <li><strong>Step One (Count Frequency):</strong> Record the number of times each unique sum features in ascending order.</li>
+                    <li><strong>Step Two (Turn Frequency into Probability):</strong> Divide frequency by sample space size (36).</li>
+                </ul>
+
+                <table>
+                    <thead>
+                        <tr><th>Sum</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Frequency</strong></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td></tr>
+                        <tr><td><strong>Probability</strong></td><td>1/36</td><td>2/36</td><td>3/36</td><td>4/36</td><td>5/36</td><td>6/36</td><td>5/36</td><td>4/36</td><td>3/36</td><td>2/36</td><td>1/36</td></tr>
+                    </tbody>
+                </table>
+                <p><em>As a Graph:</em> Tallest bars cluster around the expected value (7), so an interval built there carries the highest probability.</p>
+            </div>
+
+            <div class="card">
+                <h2>PART FOUR: Complements</h2>
+
+                <h3>1. Definition  Everything the event is not</h3>
+                <p>The complement of an event covers whatever the event leaves out, completing the rest of the sample space. Written as <strong>A'</strong>. Note that <strong>(A')' = A</strong>.</p>
+                <p><em>Example:</em> Event A = Rolling an even number (2, 4, 6); Complement A' = Rolling an odd number (1, 3, 5).</p>
+
+                <h3>2. The Rule Underneath It  All outcomes total one</h3>
+                <p><strong>P(heads) + P(tails) = 0.5 + 0.5 = 1  (certainty)</strong>. All probabilities in a sample space total one.</p>
+
+                <h3>3. Diagnostics  If your probabilities do not total one</h3>
+                <ul>
+                    <li><strong>Sum > 1:</strong> Double counting (some assumed outcomes occur at the same time).</li>
+                    <li><strong>Sum < 1:</strong> Missing outcomes from the sample space.</li>
+                </ul>
+
+                <h3>4. The Complement Formula</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">Formula</span><br>
+                    <span class="formula-text">P(A') = 1 - P(A)</span>
+                </div>
+                <p>Reach for it when the event is crowded: count the few outcomes you do not want instead of many outcomes you do want.</p>
+                <p><em>Worked Example (Rolling 1, 2, 4, 5, or 6):</em> Complement way is <strong>1 - P(3) = 1 - 1/6 = 5/6</strong>. Same answer, one subtraction instead of five additions.</p>
+
+                <h3>5. Combinatorics: The Formula Sheet (Every Formula in One Place)</h3>
+                <p>When computing sample spaces for complex trials (e.g. lottery draws, password generation, card hands), we rely on the 3 fundamental branches of combinatorics: <strong>Permutations</strong>, <strong>Variations</strong>, and <strong>Combinations</strong>.</p>
+                
+                                <!-- Slide-Style Formula Sheet -->
+                <div class="slide-formula-sheet-container">
+                    <div class="slide-sheet-eyebrow">EVERY FORMULA IN ONE PLACE</div>
+                    <div class="slide-sheet-title">The formula sheet</div>
+                    
+                    <div class="slide-sheet-grid">
+                        <!-- Column Headers -->
+                        <div></div>
+                        <div class="slide-sheet-col-head">Permutations</div>
+                        <div class="slide-sheet-col-head">Variations</div>
+                        <div class="slide-sheet-col-head">Combinations</div>
+
+                        <!-- Row 1: Without repetition -->
+                        <div class="slide-row-label">Without repetition</div>
+                        
+                        <div class="slide-formula-cell">
+                            <span>n!</span>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <div class="slide-math-fraction">
+                                <span class="num">n!</span>
+                                <span class="denom">(n - p)!</span>
+                            </div>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <div class="slide-math-fraction">
+                                <span class="num">n!</span>
+                                <span class="denom">p! &times; (n - p)!</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: With repetition -->
+                        <div class="slide-row-label">With repetition</div>
+                        
+                        <div class="slide-formula-cell empty">
+                            <span>not covered in this section</span>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <span>n<sup>p</sup></span>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <div class="slide-math-fraction">
+                                <span class="num">(n + p - 1)!</span>
+                                <span class="denom">p! &times; (n - 1)!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-sheet-footnote">
+                        <em>n is the size of the full set. &nbsp; p is how many positions we are filling. &nbsp; Combinations with repetition appear here for completeness.</em>
+                    </div>
+                </div>
+
+
+
+                <!-- Detailed When to Use & Examples Matrix -->
+                <div style="margin-top: 1.5rem;">
+                    <h3 style="color:var(--primary-color); margin-bottom: 0.75rem;">🎯 When to Use Each Formula & Practical Exam Examples</h3>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1rem;">
+                        
+                        <!-- 1. Permutations Without Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #0d9488;">
+                            <span class="formula-badge" style="background:#0d9488;">1. Permutations (Without Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#0d9488; margin: 0.4rem 0;">n!</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Arranging <em>ALL</em> n items in an ordered sequence. Every single item is used once, and order is strictly critical.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"arrange all items", "line up people in a row", "books on a shelf", "anagrams of distinct letters"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> In how many ways can you arrange 5 distinct books on a shelf?<br>
+                                <strong>Solution:</strong> n! = 5! = 5 &times; 4 &times; 3 &times; 2 &times; 1 = <strong>120 ways</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 2. Variations Without Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #6366f1;">
+                            <span class="formula-badge" style="background:#6366f1;">2. Variations (Without Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#6366f1; margin: 0.4rem 0;">n! &divide; (n - p)!</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Selecting and ordering p items from a larger pool of n distinct items (p &lt; n). <em>Order matters</em> and items cannot be reused.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"1st, 2nd, and 3rd place", "President, VP, and Secretary", "running order for top finishers"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> 10 sprinters run in a race. In how many ways can Gold, Silver, and Bronze be awarded?<br>
+                                <strong>Solution:</strong> 10! &divide; (10 - 3)! = 10 &times; 9 &times; 8 = <strong>720 podium finishes</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 3. Variations With Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #8b5cf6;">
+                            <span class="formula-badge" style="background:#8b5cf6;">3. Variations (With Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#8b5cf6; margin: 0.4rem 0;">n<sup>p</sup></div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Filling p ordered positions where each position can independently pick from any of the n options (items can be repeated).</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"ATM PIN codes", "alphanumeric passwords", "coin toss sequences", "license plates"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> How many 4-digit PINs can be made using digits 0 to 9?<br>
+                                <strong>Solution:</strong> n = 10 digits, p = 4 slots &rarr; n<sup>p</sup> = 10<sup>4</sup> = <strong>10,000 PINs</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 4. Combinations Without Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #0284c7;">
+                            <span class="formula-badge" style="background:#0284c7;">4. Combinations (Without Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#0284c7; margin: 0.4rem 0;">n! &divide; [p! &times; (n - p)!]</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Selecting a subset of p items from n items where <em>order does NOT matter</em> and items cannot repeat.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"lottery numbers", "poker hand of cards", "select a committee / team of members", "sample group"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> Choosing 6 numbers out of 49 in a standard lottery draw:<br>
+                                <strong>Solution:</strong> 49! &divide; [6! &times; 43!] = <strong>13,983,816 combinations</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 5. Combinations With Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #d97706;">
+                            <span class="formula-badge" style="background:#d97706;">5. Combinations (With Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#d97706; margin: 0.4rem 0;">(n + p - 1)! &divide; [p! &times; (n - 1)!]</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Selecting p items from n distinct categories where order does NOT matter, but multiple items can belong to the same category.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"buy p scoops of ice cream from n flavors", "choose p donuts from n types", "stars and bars"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> Buying 5 scoops of ice cream from 3 flavors (Vanilla, Chocolate, Strawberry):<br>
+                                <strong>Solution:</strong> n = 3, p = 5 &rarr; (3 + 5 - 1)! &divide; [5! &times; 2!] = 7! &divide; (120 &times; 2) = <strong>21 combinations</strong>.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- TAB 2
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 93</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions dynamically rendered here -->
+            </div>
+        </div>
+
+        <!-- TAB 3: FORMULAS / QUICK REFERENCE -->
+                <!-- TAB 3: QUICK REFERENCE -->
+        <div id="formulas" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2 style="margin:0;">Quick Reference: Probability Laws & Formulas Matrix</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Rule / Law</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Mathematical Formula</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Condition / Application</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Range Axiom</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">0 ≤ P(A) ≤ 1</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Probabilities must always fall between 0 and 1 inclusive.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Complement Rule</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">P(A') = 1 - P(A)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Probability of event A not occurring.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Addition Rule (General)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Probability of A or B occurring for overlapping events.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Addition Rule (Mutually Exclusive)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">P(A ∪ B) = P(A) + P(B)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Applies when A and B cannot occur together (P(A ∩ B) = 0).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Multiplication Rule (General)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">P(A ∩ B) = P(A) × P(B|A)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Probability of both A and B occurring for dependent events.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Multiplication Rule (Independent)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">P(A ∩ B) = P(A) × P(B)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Applies when occurrence of A does not alter probability of B.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Expected Value E(X)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">E(X) = Σ [xᵢ · P(xᵢ)]</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Weighted average of all possible values in a probability frequency distribution.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Experimental Probability</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">P_exp(A) = Successful Trials / Total Trials</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Empirical probability from experiments. Converges to theoretical probability as trials &rarr; &infin;.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Total Probability Sum</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Σ P(X = xᵢ) = 1</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">The probabilities of all mutually exclusive elementary outcomes in a sample space must sum to 1.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <!-- 52-Card Deck Breakdown & Probability Reference Matrix -->
+            <div class="card" style="margin-top:1.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:0.5rem;">
+                    <h2 style="margin:0;">🃏 Quick Reference: Standard 52-Card Deck Breakdown & Probability Reference</h2>
+                    <span class="quiz-subject-pill" style="font-size:0.75rem;">Sample Space Reference Guide</span>
+                </div>
+                <p style="color:var(--text-muted-color); font-size:0.9rem; margin-top:0.3rem;">A standard international playing card deck contains exactly <strong>52 cards</strong> (excluding Jokers), divided into 2 colors, 4 suits, and 13 ranks.</p>
+
+                <!-- Visual Deck Breakdown Grid -->
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="background:var(--bg-color); border:1px solid var(--border-color); border-left:4px solid #ef4444; border-radius:8px; padding:0.85rem;">
+                        <div style="font-weight:700; color:#ef4444; font-size:1rem; margin-bottom:0.3rem;">🔴 RED CARDS (26 Total = 1/2 = 50%)</div>
+                        <ul style="margin:0.25rem 0 0 1.1rem; padding:0; font-size:0.85rem; line-height:1.5;">
+                            <li><strong>♥️ Hearts (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
+                            <li><strong>♦️ Diamonds (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
+                            <li><strong>Red Face Cards:</strong> 6 (3 Hearts + 3 Diamonds)</li>
+                            <li><strong>Red Aces:</strong> 2 (Ace of Hearts, Ace of Diamonds)</li>
+                        </ul>
+                    </div>
+                    <div style="background:var(--bg-color); border:1px solid var(--border-color); border-left:4px solid #0d9488; border-radius:8px; padding:0.85rem;">
+                        <div style="font-weight:700; color:var(--primary-color); font-size:1rem; margin-bottom:0.3rem;">⚫ BLACK CARDS (26 Total = 1/2 = 50%)</div>
+                        <ul style="margin:0.25rem 0 0 1.1rem; padding:0; font-size:0.85rem; line-height:1.5;">
+                            <li><strong>♠️ Spades (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
+                            <li><strong>♣️ Clubs (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
+                            <li><strong>Black Face Cards:</strong> 6 (3 Spades + 3 Clubs)</li>
+                            <li><strong>Black Aces:</strong> 2 (Ace of Spades, Ace of Clubs)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Master Breakdown Table -->
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Category / Feature</th>
+                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Cards Included</th>
+                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Count (Total: 52)</th>
+                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Probability Formula P(E)</th>
+                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Fraction & Decimal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Any Color (Red or Black)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Red (♥️, ♦️) or Black (♠️, ♣️)</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">26 cards</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">26 / 52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/2 = 0.50 (50%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Any Specific Suit</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Hearts (♥️), Diamonds (♦️), Spades (♠️), or Clubs (♣️)</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">13 cards each</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">13 / 52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/4 = 0.25 (25%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Any Specific Rank (e.g. Ace, King, 7)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">1 per suit (e.g. 4 Aces: ♥️A, ♦️A, ♠️A, ♣️A)</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">4 cards per rank</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 / 52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/13 ≈ 0.0769 (7.69%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Face Cards (Court Cards: J, Q, K)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 Jacks, 4 Queens, 4 Kings (6 Red, 6 Black)</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">12 cards total</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">12 / 52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">3/13 ≈ 0.2308 (23.08%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Number / Pip Cards (2 through 10)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Cards 2, 3, 4, 5, 6, 7, 8, 9, 10 across 4 suits</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">36 cards total</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">36 / 52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">9/13 ≈ 0.6923 (69.23%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Specific Single Card (e.g. Ace of Spades)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Unique individual card</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1 card</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">1 / 52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/52 ≈ 0.01923 (1.92%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Ace OR King (Mutually Exclusive Events)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 Aces + 4 Kings (No overlap: P(Ace ∩ King) = 0)</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">8 cards</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">P(A ∪ B) = 4/52 + 4/52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">8/52 = 2/13 ≈ 0.1538 (15.38%)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Ace OR Spade (Overlapping Events)</strong></td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 Aces + 13 Spades − 1 Ace of Spades</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">16 cards</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color);">P(A ∪ B) = 4/52 + 13/52 − 1/52</td>
+                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">16/52 = 4/13 ≈ 0.3077 (30.77%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: Discrete Probability Distributions Formulas</h2>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+                    <div class="formula-card">
+                        <span class="formula-badge">Binomial Distribution</span>
+                        <div class="formula-text">P(X = k) = C(n,k) × p^k × (1-p)^(n-k)</div>
+                        <div class="formula-explain">Mean μ = np | Variance σ² = np(1-p). Fixed n independent trials with 2 outcomes.</div>
+                    </div>
+                    <div class="formula-card">
+                        <span class="formula-badge">Poisson Distribution</span>
+                        <div class="formula-text">P(X = k) = (λ^k × e^-λ) / k!</div>
+                        <div class="formula-explain">Mean μ = λ | Variance σ² = λ. Counts rare event occurrences per fixed unit interval.</div>
+                    </div>
+                </div>
+            </div>
+        
+            
+                        <!-- Combinatorics Formula Sheet Matrix -->
+            <div class="card" style="margin-top:1.5rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:0.5rem;">
+                    <h2 style="margin:0;">Quick Reference: Combinatorics Master Formula Sheet</h2>
+                    <span class="quiz-subject-pill" style="font-size:0.75rem;">Lecture Formula Sheet</span>
+                </div>
+                <!-- Slide-Style Formula Sheet -->
+                <div class="slide-formula-sheet-container">
+                    <div class="slide-sheet-eyebrow">EVERY FORMULA IN ONE PLACE</div>
+                    <div class="slide-sheet-title">The formula sheet</div>
+                    
+                    <div class="slide-sheet-grid">
+                        <!-- Column Headers -->
+                        <div></div>
+                        <div class="slide-sheet-col-head">Permutations</div>
+                        <div class="slide-sheet-col-head">Variations</div>
+                        <div class="slide-sheet-col-head">Combinations</div>
+
+                        <!-- Row 1: Without repetition -->
+                        <div class="slide-row-label">Without repetition</div>
+                        
+                        <div class="slide-formula-cell">
+                            <span>n!</span>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <div class="slide-math-fraction">
+                                <span class="num">n!</span>
+                                <span class="denom">(n - p)!</span>
+                            </div>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <div class="slide-math-fraction">
+                                <span class="num">n!</span>
+                                <span class="denom">p! &times; (n - p)!</span>
+                            </div>
+                        </div>
+
+                        <!-- Row 2: With repetition -->
+                        <div class="slide-row-label">With repetition</div>
+                        
+                        <div class="slide-formula-cell empty">
+                            <span>not covered in this section</span>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <span>n<sup>p</sup></span>
+                        </div>
+                        
+                        <div class="slide-formula-cell">
+                            <div class="slide-math-fraction">
+                                <span class="num">(n + p - 1)!</span>
+                                <span class="denom">p! &times; (n - 1)!</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slide-sheet-footnote">
+                        <em>n is the size of the full set. &nbsp; p is how many positions we are filling. &nbsp; Combinations with repetition appear here for completeness.</em>
+                    </div>
+                </div>
+
+                <!-- Interactive Combinatorics Formula Calculator -->
+                <div class="calc-card" style="margin-top: 1.5rem; border-left: 4px solid var(--primary-color);">
+                    <div class="calc-title">🧮 Live Interactive Combinatorics Calculator (Permutations, Variations & Combinations)</div>
+                    <div class="calc-desc">Select any of the 5 counting formulas from the lecture slide to dynamically calculate outcomes with live step-by-step mathematical breakdowns and real-world exam explanations.</div>
+                    
+                    <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                        <div class="calc-field" style="grid-column: 1 / -1;">
+                            <label class="calc-label" for="comb-mode" style="font-weight:700; color:var(--primary-color);">Select Formula / Operation:</label>
+                            <select id="comb-mode" class="calc-input" onchange="updateCombinatoricsMode()" style="font-weight:600; font-size:0.95rem;">
+                                <option value="perm_no_rep" selected>1. Permutations Without Repetition: n!</option>
+                                <option value="var_no_rep">2. Variations Without Repetition: n! &divide; (n - p)!</option>
+                                <option value="var_with_rep">3. Variations With Repetition: nᵖ</option>
+                                <option value="comb_no_rep">4. Combinations Without Repetition: n! &divide; [p! &times; (n - p)!]</option>
+                                <option value="comb_with_rep">5. Combinations With Repetition: (n + p - 1)! &divide; [p! &times; (n - 1)!]</option>
+                            </select>
+                        </div>
+                        <div class="calc-field" id="field-comb-n">
+                            <label class="calc-label" for="comb-n">Total Set Size (n):</label>
+                            <input type="number" id="comb-n" class="calc-input" value="5" min="1" max="500" step="1" oninput="calculateCombinatoricsLive()" onkeyup="calculateCombinatoricsLive()" onchange="calculateCombinatoricsLive()">
+                        </div>
+                        <div class="calc-field" id="field-comb-p" style="display:none;">
+                            <label class="calc-label" for="comb-p">Positions / Items Chosen (p):</label>
+                            <input type="number" id="comb-p" class="calc-input" value="3" min="1" max="500" step="1" oninput="calculateCombinatoricsLive()" onkeyup="calculateCombinatoricsLive()" onchange="calculateCombinatoricsLive()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box" style="margin-top: 1.25rem;">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;" id="comb-result-label">Permutations (All n arranged):</span>
+                            <span class="calc-result-val" id="comb-result-val">P(5) = 120 arrangements</span>
+                        </div>
+                        <div class="calc-math-steps" id="comb-math-steps">
+                            <strong>Step-by-Step Live Mathematical Derivation:</strong><br>
+                            <div class="step-line">• <strong>Formula:</strong> P(n) = n!</div>
+                            <div class="step-line">• <strong>Computation:</strong> 5! = 5 &times; 4 &times; 3 &times; 2 &times; 1 = <strong>120</strong></div>
+                            <div class="step-line">• <strong>Exam Meaning:</strong> There are exactly 120 unique ways to arrange all 5 distinct items in a row (e.g. books on a shelf).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed When to Use & Examples Matrix -->
+                <div style="margin-top: 1.5rem;">
+                    <h3 style="color:var(--primary-color); margin-bottom: 0.75rem;">🎯 When to Use Each Formula & Practical Exam Examples</h3>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1rem;">
+                        
+                        <!-- 1. Permutations Without Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #0d9488;">
+                            <span class="formula-badge" style="background:#0d9488;">1. Permutations (Without Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#0d9488; margin: 0.4rem 0;">n!</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Arranging <em>ALL</em> n items in an ordered sequence. Every single item is used once, and order is strictly critical.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"arrange all items", "line up people in a row", "books on a shelf", "anagrams of distinct letters"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> In how many ways can you arrange 5 distinct books on a shelf?<br>
+                                <strong>Solution:</strong> n! = 5! = 5 &times; 4 &times; 3 &times; 2 &times; 1 = <strong>120 ways</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 2. Variations Without Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #6366f1;">
+                            <span class="formula-badge" style="background:#6366f1;">2. Variations (Without Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#6366f1; margin: 0.4rem 0;">n! &divide; (n - p)!</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Selecting and ordering p items from a larger pool of n distinct items (p &lt; n). <em>Order matters</em> and items cannot be reused.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"1st, 2nd, and 3rd place", "President, VP, and Secretary", "running order for top finishers"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> 10 sprinters run in a race. In how many ways can Gold, Silver, and Bronze be awarded?<br>
+                                <strong>Solution:</strong> 10! &divide; (10 - 3)! = 10 &times; 9 &times; 8 = <strong>720 podium finishes</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 3. Variations With Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #8b5cf6;">
+                            <span class="formula-badge" style="background:#8b5cf6;">3. Variations (With Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#8b5cf6; margin: 0.4rem 0;">n<sup>p</sup></div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Filling p ordered positions where each position can independently pick from any of the n options (items can be repeated).</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"ATM PIN codes", "alphanumeric passwords", "coin toss sequences", "license plates"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> How many 4-digit PINs can be made using digits 0 to 9?<br>
+                                <strong>Solution:</strong> n = 10 digits, p = 4 slots &rarr; n<sup>p</sup> = 10<sup>4</sup> = <strong>10,000 PINs</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 4. Combinations Without Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #0284c7;">
+                            <span class="formula-badge" style="background:#0284c7;">4. Combinations (Without Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#0284c7; margin: 0.4rem 0;">n! &divide; [p! &times; (n - p)!]</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Selecting a subset of p items from n items where <em>order does NOT matter</em> and items cannot repeat.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"lottery numbers", "poker hand of cards", "select a committee / team of members", "sample group"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> Choosing 6 numbers out of 49 in a standard lottery draw:<br>
+                                <strong>Solution:</strong> 49! &divide; [6! &times; 43!] = <strong>13,983,816 combinations</strong>.
+                            </div>
+                        </div>
+
+                        <!-- 5. Combinations With Repetition -->
+                        <div class="formula-card" style="border-left: 4px solid #d97706;">
+                            <span class="formula-badge" style="background:#d97706;">5. Combinations (With Repetition)</span>
+                            <div class="formula-text" style="font-size:1.15rem; color:#d97706; margin: 0.4rem 0;">(n + p - 1)! &divide; [p! &times; (n - 1)!]</div>
+                            <p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use:</strong> Selecting p items from n distinct categories where order does NOT matter, but multiple items can belong to the same category.</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Key Trigger Phrases:</strong> <em>"buy p scoops of ice cream from n flavors", "choose p donuts from n types", "stars and bars"</em>.</p>
+                            <div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+                                <strong>💡 Exam Example:</strong> Buying 5 scoops of ice cream from 3 flavors (Vanilla, Chocolate, Strawberry):<br>
+                                <strong>Solution:</strong> n = 3, p = 5 &rarr; (3 + 5 - 1)! &divide; [5! &times; 2!] = 7! &divide; (120 &times; 2) = <strong>21 combinations</strong>.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ==========================================
+                 Interactive Academic Calculators Section
+                 ========================================== -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Interactive Academic Calculators (Live Math & Application Engines)</h2>
+                
+                <!-- Calculator 1: Expected Value E(X) Engine -->
+                <div class="calc-card">
+                    <div class="calc-title">🧮 Part 2 & 3: Expected Value E(X), Probability Frequency Distribution & Universal Axiom (Σ P = 1.0)</div>
+                    <div class="calc-desc">Enter your distinct numerical outcomes and their probabilities. This tool verifies if your probabilities sum to exactly 100%, calculates the long-term expected mean E(X) = Σ [xᵢ · P(xᵢ)], and computes the full step-by-step variance.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="ev-x1">Outcome 1 (x₁):</label>
+                            <input type="number" id="ev-x1" class="calc-input" value="10" step="1" oninput="calculateExpectedValue()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ev-p1">Probability P(x₁):</label>
+                            <input type="number" id="ev-p1" class="calc-input" value="0.2" step="0.05" min="0" max="1" oninput="calculateExpectedValue()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ev-x2">Outcome 2 (x₂):</label>
+                            <input type="number" id="ev-x2" class="calc-input" value="20" step="1" oninput="calculateExpectedValue()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ev-p2">Probability P(x₂):</label>
+                            <input type="number" id="ev-p2" class="calc-input" value="0.5" step="0.05" min="0" max="1" oninput="calculateExpectedValue()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ev-x3">Outcome 3 (x₃):</label>
+                            <input type="number" id="ev-x3" class="calc-input" value="30" step="1" oninput="calculateExpectedValue()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ev-p3">Probability P(x₃):</label>
+                            <input type="number" id="ev-p3" class="calc-input" value="0.3" step="0.05" min="0" max="1" oninput="calculateExpectedValue()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Expected Value & Axiom Check:</span>
+                            <span class="calc-result-val" id="ev-result-val">E(X) = 21.000</span>
+                        </div>
+                        <div class="calc-math-steps" id="ev-math-steps">
+                            <strong>Step-by-Step Mathematical Derivation:</strong><br>
+                            <div class="step-line">• <strong>Total Probability Check:</strong> Σ P(xᵢ) = 0.2 + 0.5 + 0.3 = <strong>1.000</strong> (✓ Valid Universal Sample Space)</div>
+                            <div class="step-line">• <strong>Expected Value:</strong> E(X) = (10 × 0.2) + (20 × 0.5) + (30 × 0.3) = 2.0 + 10.0 + 9.0 = <strong>21.000</strong></div>
+                            <div class="step-line">• <strong>Variance σ²:</strong> Σ (xᵢ - E[X])² · P(xᵢ) = (10 - 21)²(0.2) + (20 - 21)²(0.5) + (30 - 21)²(0.3) = 24.2 + 0.5 + 24.3 = <strong>49.000</strong> (StdDev σ = 7.000)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 2: Binomial & Poisson Engine -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Discrete Distributions: Binomial B(n, p) and Poisson(λ) Probability Calculator</div>
+                    <div class="calc-desc">Calculate exact probability P(X = k), cumulative distribution, Mean μ, and Variance σ² for independent Bernoulli trials or rare Poisson occurrences in a fixed interval.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="dist-type">Distribution Type:</label>
+                            <select id="dist-type" class="calc-input" onchange="toggleDistInputs()">
+                                <option value="binomial">Binomial Distribution B(n, p)</option>
+                                <option value="poisson">Poisson Distribution Poisson(λ)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field" id="field-n">
+                            <label class="calc-label" for="dist-n">Number of Trials (n):</label>
+                            <input type="number" id="dist-n" class="calc-input" value="10" min="1" max="100" step="1" oninput="calculateDistProbability()">
+                        </div>
+                        <div class="calc-field" id="field-p">
+                            <label class="calc-label" for="dist-p">Success Probability (p):</label>
+                            <input type="number" id="dist-p" class="calc-input" value="0.3" min="0" max="1" step="0.05" oninput="calculateDistProbability()">
+                        </div>
+                        <div class="calc-field" id="field-lambda" style="display:none;">
+                            <label class="calc-label" for="dist-lambda">Average Rate (λ):</label>
+                            <input type="number" id="dist-lambda" class="calc-input" value="3.5" min="0.01" step="0.5" oninput="calculateDistProbability()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="dist-k">Target Events (k):</label>
+                            <input type="number" id="dist-k" class="calc-input" value="3" min="0" step="1" oninput="calculateDistProbability()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Probability Result:</span>
+                            <span class="calc-result-val" id="dist-result-val">P(X = 3) = 0.2668 (26.68%)</span>
+                        </div>
+                        <div class="calc-math-steps" id="dist-math-steps">
+                            <strong>Step-by-Step Distribution Analysis:</strong><br>
+                            <div class="step-line">• <strong>PMF Formula:</strong> P(X = 3) = C(10, 3) × (0.3)³ × (0.7)⁷ = 120 × 0.0270 × 0.0824 = <strong>0.2668</strong></div>
+                            <div class="step-line">• <strong>Mean μ:</strong> n × p = 10 × 0.3 = <strong>3.000</strong></div>
+                            <div class="step-line">• <strong>Variance σ²:</strong> n × p × (1 - p) = 10 × 0.3 × 0.7 = <strong>2.100</strong> (StdDev σ = 1.449)</div>
+                        </div>
+                    </div>
+                </div>
+
+                                <!-- Calculator 3: Probability Laws Engine -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 1 & 4: Independent Multiplication Rule, General Addition & Complement Rule</div>
+                    <div class="calc-desc">Input marginal probabilities P(A), P(B), and joint intersection P(A ∩ B) to compute the combined union P(A ∪ B), complements, and test whether events A and B are statistically independent.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="prob-a">P(A):</label>
+                            <input type="number" id="prob-a" class="calc-input" value="0.60" min="0" max="1" step="0.05" oninput="calculateProbabilityLaws()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="prob-b">P(B):</label>
+                            <input type="number" id="prob-b" class="calc-input" value="0.40" min="0" max="1" step="0.05" oninput="calculateProbabilityLaws()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="prob-ab">Joint P(A ∩ B):</label>
+                            <input type="number" id="prob-ab" class="calc-input" value="0.24" min="0" max="1" step="0.05" oninput="calculateProbabilityLaws()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Union & Independence Status:</span>
+                            <span class="calc-result-val" id="laws-result-val">P(A ∪ B) = 0.7600 (Independent)</span>
+                        </div>
+                        <div class="calc-math-steps" id="laws-math-steps">
+                            <strong>Probability Laws Breakdown:</strong><br>
+                            <div class="step-line">• <strong>General Addition Law:</strong> P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = 0.60 + 0.40 - 0.24 = <strong>0.7600</strong></div>
+                            <div class="step-line">• <strong>Complement Rule:</strong> P(A') = 1 - 0.60 = <strong>0.4000</strong> | P(B') = 1 - 0.40 = <strong>0.6000</strong></div>
+                            <div class="step-line">• <strong>Independence Check:</strong> P(A) × P(B) = 0.60 × 0.40 = 0.2400. Since P(A ∩ B) = P(A) · P(B), <strong>Events A and B are statistically independent</strong>.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 4: Classical vs Experimental Probability -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 2: Classical Probability vs. Experimental Rule (Law of Large Numbers)</div>
+                    <div class="calc-desc">Compare theoretical deduction P = Favorable ÷ Total against empirical observation P_exp = Successes ÷ Trials to observe real-time convergence under the Law of Large Numbers.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="exp-fav">Theoretical Favorable (k):</label>
+                            <input type="number" id="exp-fav" class="calc-input" value="1" min="0" step="1" oninput="calculateEmpiricalComparison()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="exp-tot">Sample Space Total (N):</label>
+                            <input type="number" id="exp-tot" class="calc-input" value="6" min="1" step="1" oninput="calculateEmpiricalComparison()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="exp-obs">Observed Successes (s):</label>
+                            <input type="number" id="exp-obs" class="calc-input" value="18" min="0" step="1" oninput="calculateEmpiricalComparison()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="exp-trials">Total Trials Run (n):</label>
+                            <input type="number" id="exp-trials" class="calc-input" value="100" min="1" step="10" oninput="calculateEmpiricalComparison()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Empirical vs. Theoretical Comparison:</span>
+                            <span class="calc-result-val" id="emp-result-val">P_theo = 16.67% | P_exp = 18.00%</span>
+                        </div>
+                        <div class="calc-math-steps" id="emp-math-steps">
+                            <strong>Law of Large Numbers Convergence:</strong><br>
+                            <div class="step-line">• <strong>Theoretical Probability:</strong> P_theo = 1 ÷ 6 = <strong>0.1667 (16.67%)</strong></div>
+                            <div class="step-line">• <strong>Experimental Probability:</strong> P_exp = 18 ÷ 100 = <strong>0.1800 (18.00%)</strong></div>
+                            <div class="step-line">• <strong>Empirical Variance:</strong> |P_theo - P_exp| = <strong>0.0133 (1.33% difference)</strong>. As trials approach infinity (n &rarr; &infin;), experimental frequency converges to theoretical probability.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div></div>
+
+    <script>
+
+        // ==========================================
+        // Interactive Probability Calculators Logic
+        // ==========================================
+        
+        
+        
+        function updateCombinatoricsMode() {
+            const mode = document.getElementById('comb-mode').value;
+            const fieldP = document.getElementById('field-comb-p');
+            const inputN = document.getElementById('comb-n');
+            const inputP = document.getElementById('comb-p');
+
+            if (mode === 'perm_no_rep') {
+                fieldP.style.display = 'none';
+            } else {
+                fieldP.style.display = 'flex';
+            }
+
+            calculateCombinatoricsLive();
+        }
+
+                function calculateCombinatoricsLive() {
+            const mode = document.getElementById('comb-mode').value;
+            const nRaw = document.getElementById('comb-n').value;
+            const pRaw = document.getElementById('comb-p').value;
+            
+            const n = parseInt(nRaw) || 0;
+            const p = parseInt(pRaw) || 0;
+
+            const resLabel = document.getElementById('comb-result-label');
+            const resVal = document.getElementById('comb-result-val');
+            const resSteps = document.getElementById('comb-math-steps');
+
+            if (n <= 0) {
+                resVal.innerHTML = '<span style="color:#d97706;">Please enter n &ge; 1</span>';
+                resSteps.innerHTML = 'Enter a valid total set size n to see the live mathematical breakdown.';
+                return;
+            }
+
+            // Performance / Anti-Freeze Safety Guard
+            if (n > 500) {
+                resVal.innerHTML = '<span style="color:#d97706;">⚠️ Capped at n &le; 500</span>';
+                resSteps.innerHTML = `
+                    <div class="step-line" style="color:#d97706;"><strong>Performance Safety Guard:</strong> To ensure instant, lag-free responsiveness in your browser, the calculator is safely capped at <strong>n &le; 500</strong> (which already exceeds 1,134 digits!).</div>
+                    <div class="step-line">Real-world academic and exam problems typically use <strong>n = 1 to 100</strong> (e.g. lottery draws with n = 49).</div>
+                `;
+                return;
+            }
+
+            function bigFact(num) {
+                if (num < 0) return 0n;
+                if (num === 0 || num === 1) return 1n;
+                let r = 1n;
+                for (let i = 2n; i <= BigInt(num); i++) r *= i;
+                return r;
+            }
+
+            function formatBig(val) {
+                const s = val.toString();
+                if (s.length <= 15) {
+                    return Number(s).toLocaleString('en-US');
+                }
+                const exp = s.length - 1;
+                const lead = s.slice(0, 5);
+                const leadFormatted = lead[0] + '.' + lead.slice(1);
+                return `${leadFormatted} &times; 10<sup>${exp}</sup> (${s.length} digits)`;
+            }
+
+            if (mode === 'perm_no_rep') {
+                resLabel.innerText = `Permutations P(${n}):`;
+                const perm = bigFact(n);
+                resVal.innerHTML = `P(${n}) = ${formatBig(perm)} arrangements`;
+                
+                let compText = '';
+                if (n <= 7) {
+                    compText = `${n}! = ${Array.from({length: n}, (_, i) => n - i).join(' &times; ')} = <strong>${formatBig(perm)}</strong>`;
+                } else {
+                    compText = `${n}! = ${n} &times; ${n-1} &times; ${n-2} &times; ... &times; 1 = <strong>${formatBig(perm)}</strong>`;
+                }
+
+                resSteps.innerHTML = `
+                    <strong>Step-by-Step Permutations Breakdown:</strong><br>
+                    <div class="step-line">• <strong>Formula:</strong> P(n) = n!</div>
+                    <div class="step-line">• <strong>Computation:</strong> ${compText}</div>
+                    <div class="step-line">• <strong>Exam Meaning:</strong> Exactly <strong>${formatBig(perm)}</strong> unique ways to arrange all ${n} distinct items in a row (order strictly matters).</div>
+                `;
+            } else if (mode === 'var_no_rep') {
+                resLabel.innerText = `Variations V(${n}, ${p}):`;
+                if (p <= 0) {
+                    resVal.innerHTML = '<span style="color:#d97706;">Please enter p &ge; 1</span>';
+                    resSteps.innerHTML = 'Enter the number of positions p to fill.';
+                    return;
+                }
+                if (p > n) {
+                    resVal.innerHTML = '<span style="color:#dc2626;">Error: p cannot exceed n</span>';
+                    resSteps.innerHTML = `<span style="color:#dc2626;"><strong>Invalid Input:</strong> Cannot pick ${p} distinct items from a pool of only ${n} items without repetition (p &le; n).</span>`;
+                    return;
+                }
+                const variations = bigFact(n) / bigFact(n - p);
+                resVal.innerHTML = `V(${n}, ${p}) = ${formatBig(variations)} ordered outcomes`;
+                
+                let factorsText = '';
+                if (p <= 6) {
+                    factorsText = Array.from({length: p}, (_, i) => n - i).join(' &times; ');
+                } else {
+                    factorsText = `${n} &times; ${n-1} &times; ... &times; ${n - p + 1}`;
+                }
+
+                resSteps.innerHTML = `
+                    <strong>Step-by-Step Variations Breakdown (Order Matters, No Repeats):</strong><br>
+                    <div class="step-line">• <strong>Formula:</strong> V(n, p) = n! &divide; (n - p)!</div>
+                    <div class="step-line">• <strong>Factorial Cancellation:</strong> ${n}! &divide; (${n} - ${p})! = ${factorsText} = <strong>${formatBig(variations)}</strong></div>
+                    <div class="step-line">• <strong>Exam Meaning:</strong> Exactly <strong>${formatBig(variations)}</strong> ways to select and rank ${p} items from ${n} total contestants (e.g. 1st, 2nd, 3rd place).</div>
+                `;
+            } else if (mode === 'var_with_rep') {
+                resLabel.innerText = `Variations with Repetition V_rep(${n}, ${p}):`;
+                if (p <= 0) {
+                    resVal.innerHTML = '<span style="color:#d97706;">Please enter p &ge; 1</span>';
+                    resSteps.innerHTML = 'Enter the number of slots p to fill.';
+                    return;
+                }
+                if (p > 500) {
+                    resVal.innerHTML = '<span style="color:#d97706;">⚠️ Power capped at p &le; 500</span>';
+                    resSteps.innerHTML = '<div class="step-line" style="color:#d97706;"><strong>Safety Guard:</strong> Power is capped at p &le; 500 to prevent browser freezing.</div>';
+                    return;
+                }
+                const variations = BigInt(n) ** BigInt(p);
+                resVal.innerHTML = `V_rep(${n}, ${p}) = ${formatBig(variations)} sequences`;
+                
+                let seqText = '';
+                if (p <= 6) {
+                    seqText = `${Array(p).fill(n).join(' &times; ')} = <strong>${formatBig(variations)}</strong>`;
+                } else {
+                    seqText = `${n}<sup>${p}</sup> = <strong>${formatBig(variations)}</strong>`;
+                }
+
+                resSteps.innerHTML = `
+                    <strong>Step-by-Step Variations Breakdown (Order Matters, With Repeats):</strong><br>
+                    <div class="step-line">• <strong>Formula:</strong> V_rep(n, p) = n<sup>p</sup></div>
+                    <div class="step-line">• <strong>Computation:</strong> ${seqText}</div>
+                    <div class="step-line">• <strong>Exam Meaning:</strong> Exactly <strong>${formatBig(variations)}</strong> possible codes/sequences of length ${p} choosing from ${n} options each slot (e.g. ${p}-digit PIN with digits 0 to ${n-1}).</div>
+                `;
+            } else if (mode === 'comb_no_rep') {
+                resLabel.innerText = `Combinations C(${n}, ${p}):`;
+                if (p <= 0) {
+                    resVal.innerHTML = '<span style="color:#d97706;">Please enter p &ge; 1</span>';
+                    resSteps.innerHTML = 'Enter the group size p to choose.';
+                    return;
+                }
+                if (p > n) {
+                    resVal.innerHTML = '<span style="color:#dc2626;">Error: p cannot exceed n</span>';
+                    resSteps.innerHTML = `<span style="color:#dc2626;"><strong>Invalid Input:</strong> Cannot choose a subgroup of ${p} items from ${n} total items without repetition (p &le; n).</span>`;
+                    return;
+                }
+                const combinations = bigFact(n) / (bigFact(p) * bigFact(n - p));
+                resVal.innerHTML = `C(${n}, ${p}) = ${formatBig(combinations)} combinations`;
+                
+                resSteps.innerHTML = `
+                    <strong>Step-by-Step Combinations Breakdown (Order Irrelevant, No Repeats):</strong><br>
+                    <div class="step-line">• <strong>Formula:</strong> C(n, p) = n! &divide; [p! &times; (n - p)!]</div>
+                    <div class="step-line">• <strong>Computation:</strong> ${n}! &divide; [${p}! &times; (${n} - ${p})!] = <strong>${formatBig(combinations)}</strong></div>
+                    <div class="step-line">• <strong>Exam Meaning:</strong> Exactly <strong>${formatBig(combinations)}</strong> unique unordered subsets of ${p} items chosen from ${n} total items (e.g. lottery ticket numbers, committee selection).</div>
+                `;
+            } else if (mode === 'comb_with_rep') {
+                resLabel.innerText = `Combinations with Repetition C_rep(${n}, ${p}):`;
+                if (p <= 0) {
+                    resVal.innerHTML = '<span style="color:#d97706;">Please enter p &ge; 1</span>';
+                    resSteps.innerHTML = 'Enter the number of items p to choose.';
+                    return;
+                }
+                if (n + p > 500) {
+                    resVal.innerHTML = '<span style="color:#d97706;">⚠️ Capped at (n + p) &le; 500</span>';
+                    resSteps.innerHTML = '<div class="step-line" style="color:#d97706;"><strong>Safety Guard:</strong> Sum of n + p is capped at 500 to keep calculations instantaneous.</div>';
+                    return;
+                }
+                const combNum = bigFact(n + p - 1);
+                const combDen = bigFact(p) * bigFact(n - 1);
+                const combinations = combNum / combDen;
+                resVal.innerHTML = `C_rep(${n}, ${p}) = ${formatBig(combinations)} combinations`;
+                
+                resSteps.innerHTML = `
+                    <strong>Step-by-Step Combinations Breakdown (Order Irrelevant, With Repeats):</strong><br>
+                    <div class="step-line">• <strong>Formula:</strong> C_rep(n, p) = (n + p - 1)! &divide; [p! &times; (n - 1)!]</div>
+                    <div class="step-line">• <strong>Computation:</strong> (${n} + ${p} - 1)! &divide; [${p}! &times; (${n} - 1)!] = ${n + p - 1}! &divide; [${p}! &times; ${n - 1}!] = <strong>${formatBig(combinations)}</strong></div>
+                    <div class="step-line">• <strong>Exam Meaning:</strong> Exactly <strong>${formatBig(combinations)}</strong> ways to select ${p} items from ${n} distinct categories allowing repeats (e.g. choosing ${p} scoops of ice cream from ${n} flavors).</div>
+                `;
+            }
+        }function calculateExpectedValue() {
+            const x1 = parseFloat(document.getElementById('ev-x1').value) || 0;
+            const p1 = parseFloat(document.getElementById('ev-p1').value) || 0;
+            const x2 = parseFloat(document.getElementById('ev-x2').value) || 0;
+            const p2 = parseFloat(document.getElementById('ev-p2').value) || 0;
+            const x3 = parseFloat(document.getElementById('ev-x3').value) || 0;
+            const p3 = parseFloat(document.getElementById('ev-p3').value) || 0;
+
+            const sumP = p1 + p2 + p3;
+            const ev = (x1 * p1) + (x2 * p2) + (x3 * p3);
+            const variance = (Math.pow(x1 - ev, 2) * p1) + (Math.pow(x2 - ev, 2) * p2) + (Math.pow(x3 - ev, 2) * p3);
+            const stdDev = Math.sqrt(variance);
+
+            const isAxiomValid = Math.abs(sumP - 1.0) < 0.001;
+            const statusMsg = isAxiomValid ? '(✓ Valid Universal Sample Space)' : '(⚠️ Warning: Σ P ≠ 1.000)';
+
+            const resVal = document.getElementById('ev-result-val');
+            const resSteps = document.getElementById('ev-math-steps');
+
+            if (resVal) resVal.innerHTML = `E(X) = ${ev.toFixed(3)}`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Step-by-Step Mathematical Derivation:</strong><br>
+                    <div class="step-line">• <strong>Total Probability Check:</strong> Σ P(xᵢ) = ${p1.toFixed(2)} + ${p2.toFixed(2)} + ${p3.toFixed(2)} = <strong>${sumP.toFixed(3)}</strong> ${statusMsg}</div>
+                    <div class="step-line">• <strong>Expected Value Formula:</strong> E(X) = (${x1} × ${p1.toFixed(2)}) + (${x2} × ${p2.toFixed(2)}) + (${x3} × ${p3.toFixed(2)}) = <strong>${ev.toFixed(3)}</strong></div>
+                    <div class="step-line">• <strong>Variance σ²:</strong> Σ (xᵢ - E[X])² · P(xᵢ) = (${x1} - ${ev.toFixed(2)})²(${p1.toFixed(2)}) + (${x2} - ${ev.toFixed(2)})²(${p2.toFixed(2)}) + (${x3} - ${ev.toFixed(2)})²(${p3.toFixed(2)}) = <strong>${variance.toFixed(3)}</strong> (StdDev σ = ${stdDev.toFixed(3)})</div>
+                `;
+            }
+        }
+
+        function toggleDistInputs() {
+            const type = document.getElementById('dist-type').value;
+            const fieldN = document.getElementById('field-n');
+            const fieldP = document.getElementById('field-p');
+            const fieldLambda = document.getElementById('field-lambda');
+
+            if (type === 'binomial') {
+                fieldN.style.display = 'flex';
+                fieldP.style.display = 'flex';
+                fieldLambda.style.display = 'none';
+            } else {
+                fieldN.style.display = 'none';
+                fieldP.style.display = 'none';
+                fieldLambda.style.display = 'flex';
+            }
+            calculateDistProbability();
+        }
+
+        function combinations(n, k) {
+            if (k < 0 || k > n) return 0;
+            if (k === 0 || k === n) return 1;
+            let c = 1;
+            for (let i = 1; i <= k; i++) {
+                c = c * (n - (k - i)) / i;
+            }
+            return c;
+        }
+
+        function factorial(n) {
+            if (n <= 1) return 1;
+            let f = 1;
+            for (let i = 2; i <= n; i++) f *= i;
+            return f;
+        }
+
+        function calculateDistProbability() {
+            const type = document.getElementById('dist-type').value;
+            const k = parseInt(document.getElementById('dist-k').value) || 0;
+            const resVal = document.getElementById('dist-result-val');
+            const resSteps = document.getElementById('dist-math-steps');
+
+            if (type === 'binomial') {
+                const n = parseInt(document.getElementById('dist-n').value) || 1;
+                const p = parseFloat(document.getElementById('dist-p').value) || 0;
+                
+                if (k > n) {
+                    if (resVal) resVal.innerHTML = `P(X = ${k}) = 0.0000`;
+                    if (resSteps) resSteps.innerHTML = `<em>Target events k (${k}) cannot exceed total trials n (${n}).</em>`;
+                    return;
+                }
+
+                const c = combinations(n, k);
+                const prob = c * Math.pow(p, k) * Math.pow(1 - p, n - k);
+                const mean = n * p;
+                const variance = n * p * (1 - p);
+                const stdDev = Math.sqrt(variance);
+
+                if (resVal) resVal.innerHTML = `P(X = ${k}) = ${prob.toFixed(4)} (${(prob * 100).toFixed(2)}%)`;
+                if (resSteps) {
+                    resSteps.innerHTML = `
+                        <strong>Binomial Distribution Analysis B(n = ${n}, p = ${p}):</strong><br>
+                        <div class="step-line">• <strong>PMF Formula:</strong> P(X = ${k}) = C(${n}, ${k}) × (${p})<sup>${k}</sup> × (${(1-p).toFixed(2)})<sup>${n-k}</sup> = ${c} × ${Math.pow(p,k).toFixed(4)} × ${Math.pow(1-p, n-k).toFixed(4)} = <strong>${prob.toFixed(4)}</strong></div>
+                        <div class="step-line">• <strong>Mean μ:</strong> n × p = ${n} × ${p} = <strong>${mean.toFixed(3)}</strong></div>
+                        <div class="step-line">• <strong>Variance σ²:</strong> n × p × (1 - p) = <strong>${variance.toFixed(3)}</strong> (StdDev σ = ${stdDev.toFixed(3)})</div>
+                    `;
+                }
+            } else {
+                const lambda = parseFloat(document.getElementById('dist-lambda').value) || 1;
+                const prob = (Math.pow(lambda, k) * Math.exp(-lambda)) / factorial(k);
+                const mean = lambda;
+                const variance = lambda;
+                const stdDev = Math.sqrt(variance);
+
+                if (resVal) resVal.innerHTML = `P(X = ${k}) = ${prob.toFixed(4)} (${(prob * 100).toFixed(2)}%)`;
+                if (resSteps) {
+                    resSteps.innerHTML = `
+                        <strong>Poisson Distribution Analysis Poisson(λ = ${lambda}):</strong><br>
+                        <div class="step-line">• <strong>PMF Formula:</strong> P(X = ${k}) = (${lambda}<sup>${k}</sup> × e<sup>-${lambda}</sup>) ÷ ${k}! = (${Math.pow(lambda,k).toFixed(3)} × ${Math.exp(-lambda).toFixed(4)}) ÷ ${factorial(k)} = <strong>${prob.toFixed(4)}</strong></div>
+                        <div class="step-line">• <strong>Mean μ:</strong> λ = <strong>${mean.toFixed(3)}</strong></div>
+                        <div class="step-line">• <strong>Variance σ²:</strong> λ = <strong>${variance.toFixed(3)}</strong> (StdDev σ = ${stdDev.toFixed(3)})</div>
+                    `;
+                }
+            }
+        }
+
+        function calculateProbabilityLaws() {
+            const pa = parseFloat(document.getElementById('prob-a').value) || 0;
+            const pb = parseFloat(document.getElementById('prob-b').value) || 0;
+            const pab = parseFloat(document.getElementById('prob-ab').value) || 0;
+
+            const pUnion = Math.min(1.0, Math.max(0.0, pa + pb - pab));
+            const compA = 1 - pa;
+            const compB = 1 - pb;
+
+            const expectedIndep = pa * pb;
+            const isIndep = Math.abs(pab - expectedIndep) < 0.001;
+            const indepMsg = isIndep ? 'Events A and B are statistically independent' : 'Events A and B are dependent';
+
+            const resVal = document.getElementById('laws-result-val');
+            const resSteps = document.getElementById('laws-math-steps');
+
+            if (resVal) resVal.innerHTML = `P(A ∪ B) = ${pUnion.toFixed(4)} (${isIndep ? 'Independent' : 'Dependent'})`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Probability Laws Breakdown:</strong><br>
+                    <div class="step-line">• <strong>General Addition Law:</strong> P(A ∪ B) = P(A) + P(B) - P(A ∩ B) = ${pa.toFixed(2)} + ${pb.toFixed(2)} - ${pab.toFixed(2)} = <strong>${pUnion.toFixed(4)}</strong></div>
+                    <div class="step-line">• <strong>Complement Rule:</strong> P(A') = 1 - ${pa.toFixed(2)} = <strong>${compA.toFixed(4)}</strong> | P(B') = 1 - ${pb.toFixed(2)} = <strong>${compB.toFixed(4)}</strong></div>
+                    <div class="step-line">• <strong>Independence Test:</strong> P(A) × P(B) = ${pa.toFixed(2)} × ${pb.toFixed(2)} = ${expectedIndep.toFixed(4)}. Since P(A ∩ B) ${isIndep ? '=' : '≠'} P(A) · P(B), <strong>${indepMsg}</strong>.</div>
+                `;
+            }
+        }
+
+        function calculateEmpiricalComparison() {
+            const fav = parseFloat(document.getElementById('exp-fav').value) || 0;
+            const tot = parseFloat(document.getElementById('exp-tot').value) || 1;
+            const obs = parseFloat(document.getElementById('exp-obs').value) || 0;
+            const trials = parseFloat(document.getElementById('exp-trials').value) || 1;
+
+            const pTheo = fav / tot;
+            const pExp = obs / trials;
+            const diff = Math.abs(pTheo - pExp);
+
+            const resVal = document.getElementById('emp-result-val');
+            const resSteps = document.getElementById('emp-math-steps');
+
+            if (resVal) resVal.innerHTML = `P_theo = ${(pTheo * 100).toFixed(2)}% | P_exp = ${(pExp * 100).toFixed(2)}%`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Law of Large Numbers Convergence:</strong><br>
+                    <div class="step-line">• <strong>Theoretical Probability:</strong> P_theo = ${fav} ÷ ${tot} = <strong>${pTheo.toFixed(4)} (${(pTheo * 100).toFixed(2)}%)</strong></div>
+                    <div class="step-line">• <strong>Experimental Probability:</strong> P_exp = ${obs} ÷ ${trials} = <strong>${pExp.toFixed(4)} (${(pExp * 100).toFixed(2)}%)</strong></div>
+                    <div class="step-line">• <strong>Empirical Difference:</strong> |P_theo - P_exp| = <strong>${diff.toFixed(4)} (${(diff * 100).toFixed(2)}%)</strong>. As total trials approach infinity (n &rarr; &infin;), experimental probability converges to true theoretical probability.</div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof calculateExpectedValue === 'function') calculateExpectedValue();
+            if (typeof calculateDistProbability === 'function') calculateDistProbability();
+            if (typeof calculateProbabilityLaws === 'function') calculateProbabilityLaws();
+            if (typeof calculateEmpiricalComparison === 'function') calculateEmpiricalComparison();
+        });
+
+        const quizData = [
+    {
+        "q": "What scale of numbers measures how likely an event really is?",
+        "options": [
+            "-1 to +1 under standard production system configurations",
+            "0 (impossible) to 1 (certain)",
+            "0 to 100 under standard production system configurations",
+            "1 to 10 under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "By Kolmogorov's first probability axiom, the probability P(A) of any event is a non-negative real number bounded strictly on the interval [0, 1]. A probability of 0 denotes an impossible event, while 1 denotes absolute certainty.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "why do decisions need to be made?",
+        "options": [
+            "Under certainty",
+            "Under uncertainty",
+            "Without data",
+            "Using only instinct"
+        ],
+        "correct": 1,
+        "exp": "Real-world business, scientific, and financial decisions operate in non-deterministic environments where future states cannot be known with 100% certainty. Probability provides the formal mathematical discipline to quantify risk and optimize decision-making under uncertainty.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What allows executives to estimate the likelihood of each outcome and make calls with evidence instead of instinct?",
+        "options": [
+            "Probability and statistical data",
+            "Personal intuition computed across multi-dimensional attribute distributions in statistical datasets",
+            "Loudest voice in the room",
+            "Unstructured audio"
+        ],
+        "correct": 0,
+        "exp": "Probability theory and statistical data replace subjective guesswork with empirical likelihoods, allowing organizations to model potential risks, forecast demand, and execute evidence-based decisions rather than relying on unreliable intuition.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "Which of the following is NOT in the study guide as a probability question?",
+        "options": [
+            "What is the chance of success?",
+            "What is the probability that we fail?",
+            "Is the risk actually worth taking?",
+            "What is the stock price today?"
+        ],
+        "correct": 3,
+        "exp": "In probability theory, the sample space (S or Ω) represents the universal set of all mutually exclusive and collectively exhaustive outcomes. An event A is formally defined as any subset of the sample space (A ⊆ S).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What scale value represents an event that is 'impossible'?",
+        "options": [
+            "0",
+            "0.2",
+            "0.5",
+            "1"
+        ],
+        "correct": 0,
+        "exp": "Because probability measures a relative frequency or proportion of a total sample space, it is bounded between 0 (0% chance / impossible) and 1 (100% chance / certainty). Values below 0 or above 1 are mathematically undefined.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is probability defined as 'in plain words'?",
+        "options": [
+            "The likelihood of an event occurring",
+            "The chance of something happening",
+            "The number of trials in an experiment",
+            "The sample space size"
+        ],
+        "correct": 1,
+        "exp": "When a single fair 6-sided die is rolled, each face {1, 2, 3, 4, 5, 6} has an equal probability of 1/6 (≈ 16.67%). Under Laplace's classical definition, every elementary outcome in a fair trial is equiprobable.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is probability defined as 'more academically'?",
+        "options": [
+            "The chance of something happening",
+            "The likelihood of an event occurring",
+            "The sum of all trials designed to support enterprise operational infrastructure",
+            "The denominator of an outcome"
+        ],
+        "correct": 1,
+        "exp": "In a single coin toss, the sample space is S = {Heads, Tails}. Because both outcomes are equiprobable, P(Heads) = 1/2 = 0.50 (or 50%), representing an unbiased binary trial.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "Which register of definition is recommended for write-ups?",
+        "options": [
+            "Plain words",
+            "Academic register",
+            "Percentage register",
+            "Fraction register"
+        ],
+        "correct": 1,
+        "exp": "When a coin is tossed twice, the sample space consists of 4 equally likely ordered pairs: S = {(H,H), (H,T), (T,H), (T,T)}. The event 'getting at least one head' includes {(H,H), (H,T), (T,H)}, giving P = 3/4 = 0.75 (75%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "How is an event defined in study guide terminology?",
+        "options": [
+            "A trial with 20 outcomes",
+            "An outcome, or a set of them",
+            "A computer algorithm",
+            "An impossible scale check"
+        ],
+        "correct": 1,
+        "exp": "When two fair 6-sided dice are rolled simultaneously, the total number of distinct ordered pairs in the sample space is 6 × 6 = 36 possible outcomes.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "How many events does a single coin flip hold?",
+        "options": [
+            "One event",
+            "Two events",
+            "Four events",
+            "Six events"
+        ],
+        "correct": 1,
+        "exp": "Rolling a sum of 7 has 6 favorable outcomes: {(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)}. Thus, P(Sum = 7) = 6/36 = 1/6 ≈ 0.1667 (16.67%), making 7 the single most frequent sum on two dice.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "Which representation is used by convention when writing probabilities?",
+        "options": [
+            "Percentages configured for general baseline system administration",
+            "Fractions configured for general baseline system administration",
+            "Real numbers between 0 and 1",
+            "Ratios configured for general baseline system administration"
+        ],
+        "correct": 2,
+        "exp": "Rolling a sum of 2 can only occur via the unique combination {(1,1)}. With only 1 favorable outcome out of 36 possibilities in the sample space, P(Sum = 2) = 1/36 ≈ 0.0278 (2.78%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "How is 20% expressed in conventional probability notation?",
+        "options": [
+            "20",
+            "1/5",
+            "0.2",
+            "0.02"
+        ],
+        "correct": 2,
+        "exp": "Rolling a sum of 12 can only occur via the single pair {(6,6)}. Thus, P(Sum = 12) = 1/36 ≈ 0.0278 (2.78%), identical to the probability of rolling a sum of 2.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What interpretation is given for a probability value of 0.2?",
+        "options": [
+            "absolutely will not happen",
+            "unlikely",
+            "even chance",
+            "likely"
+        ],
+        "correct": 1,
+        "exp": "Because the combinations for rolling two dice are symmetric around 7, both Sum = 2 {(1,1)} and Sum = 12 {(6,6)} have a cardinality of 1. Hence, their probabilities are identical at 1/36.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What interpretation is given for a probability value of 0.5?",
+        "options": [
+            "unlikely",
+            "even chance",
+            "likely",
+            "absolutely will happen"
+        ],
+        "correct": 1,
+        "exp": "The sums 3 {(1,2),(2,1)} and 11 {(5,6),(6,5)} each have exactly 2 favorable combinations. Therefore, P(Sum = 3) = P(Sum = 11) = 2/36 = 1/18 ≈ 0.0556 (5.56%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What interpretation is given for a probability value of 0.66?",
+        "options": [
+            "unlikely",
+            "even chance",
+            "likely",
+            "absolutely will happen"
+        ],
+        "correct": 2,
+        "exp": "The sums 4 {(1,3),(2,2),(3,1)} and 10 {(4,6),(5,5),(6,4)} each have exactly 3 favorable outcomes. Their probability is P = 3/36 = 1/12 ≈ 0.0833 (8.33%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What interpretation is given for a probability value of 1?",
+        "options": [
+            "unlikely under standard production system configurations",
+            "even chance",
+            "likely under standard production system configurations",
+            "absolutely will happen"
+        ],
+        "correct": 3,
+        "exp": "The sums 5 {(1,4),(2,3),(3,2),(4,1)} and 9 {(3,6),(4,5),(5,4),(6,3)} each have 4 favorable combinations. Their probability is P = 4/36 = 1/9 ≈ 0.1111 (11.11%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is the Core Rule formula for P(A)?",
+        "options": [
+            "P(A) = total outcomes / preferred outcomes across standard production computing environments",
+            "P(A) = number of preferred outcomes / total number of possible outcomes",
+            "P(A) = successful trials * n across standard production computing environments",
+            "P(A) = 1 - sample space across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "The sums 6 {(1,5),(2,4),(3,3),(4,2),(5,1)} and 8 {(2,6),(3,5),(4,4),(5,3),(6,2)} each possess 5 favorable outcomes out of 36, yielding P = 5/36 ≈ 0.1389 (13.89%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What are preferred outcomes also called in some textbooks?",
+        "options": [
+            "Sample space",
+            "Favorable outcomes",
+            "Experimental trials",
+            "Complements"
+        ],
+        "correct": 1,
+        "exp": "Because 7 is the modal value (most frequent sum) with 6 favorable outcomes, as you move further away from 7 in either direction (towards 2 or towards 12), the number of combinations strictly decreases symmetrically.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is the denominator of the core rule formula called?",
+        "options": [
+            "Preferred outcomes",
+            "Favorable outcomes",
+            "Sample space",
+            "Expected value"
+        ],
+        "correct": 2,
+        "exp": "A standard deck of playing cards contains 52 cards divided evenly into 4 suits (Spades, Hearts, Diamonds, Clubs) of 13 cards each. There are 2 red suits (Hearts, Diamonds) totaling 26 red cards, and 2 black suits totaling 26 black cards.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "what is usually the hard part of computing probability?",
+        "options": [
+            "Finding preferred outcomes",
+            "Getting the sample space right",
+            "Multiplying fractions",
+            "Converting to percentages"
+        ],
+        "correct": 1,
+        "exp": "There are 13 spades in a 52-card deck. Drawing a spade has a probability of P(Spade) = 13/52 = 1/4 = 0.25 (25%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is the probability of flipping a coin and getting heads?",
+        "options": [
+            "0.2",
+            "0.5",
+            "0.167",
+            "1.0"
+        ],
+        "correct": 1,
+        "exp": "There are 4 Aces in a standard 52-card deck (one per suit). The probability of drawing an Ace is P(Ace) = 4/52 = 1/13 ≈ 0.0769 (7.69%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is the probability of rolling a four on a six-sided die?",
+        "options": [
+            "1/4 across standard production computing environments",
+            "1/2 across standard production computing environments",
+            "1/6 ≈ 0.167",
+            "2/6 ≈ 0.33"
+        ],
+        "correct": 2,
+        "exp": "There are 26 red cards (13 Hearts + 13 Diamonds) in a standard 52-card deck. The probability of drawing a red card is P(Red) = 26/52 = 1/2 = 0.50 (50%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "In rolling a number divisible by three on a die, what are the preferred outcomes?",
+        "options": [
+            "Face 3 only",
+            "Face 6 only",
+            "Faces 3 and 6",
+            "Faces 1, 2, 3, and 6"
+        ],
+        "correct": 2,
+        "exp": "Face cards (Court cards) consist of Kings, Queens, and Jacks across all 4 suits, totaling 3 × 4 = 12 cards. The probability of drawing a face card is P(Face) = 12/52 = 3/13 ≈ 0.2308 (23.08%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is the probability of rolling a number divisible by three on a six-sided die?",
+        "options": [
+            "1/6 ≈ 0.167",
+            "2/6 ≈ 0.33",
+            "3/6 = 0.5",
+            "4/6 ≈ 0.66"
+        ],
+        "correct": 1,
+        "exp": "There is exactly 1 Ace of Spades in a standard 52-card deck. The probability of drawing this specific card is P = 1/52 ≈ 0.0192 (1.92%).",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "How do independent events combine when calculating simultaneous probability?",
+        "options": [
+            "Independent events add",
+            "Independent events subtract",
+            "Independent events multiply",
+            "Independent events divide"
+        ],
+        "correct": 2,
+        "exp": "Drawing a card with replacement means the drawn card is returned to the deck before the next draw, keeping the sample space size at 52 and trials independent. Drawing without replacement changes the probabilities of subsequent draws because the sample space shrinks.",
+        "section": "Part 1: Basic Probabilities & Fundamentals"
+    },
+    {
+        "q": "What is P(ace of spades) computed as in the shortcut example?",
+        "options": [
+            "P(ace) + P(spade) = 17/52 across standard production computing environments",
+            "P(ace) × P(spade) = (1/13) × (1/4) = 1/52",
+            "P(ace) / P(spade) = 4/13 across standard production computing environments",
+            "1 - P(ace) = 12/13 across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Two events A and B are independent if the occurrence of one does not alter the probability of the other: P(A ∩ B) = P(A) × P(B), or equivalently P(A|B) = P(A).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "How should independent events be treated for now?",
+        "options": [
+            "Events that always happen together",
+            "Events that do not affect each other",
+            "Events with zero sample space",
+            "Events with sum greater than 1"
+        ],
+        "correct": 1,
+        "exp": "When flipping two coins, coin 1 and coin 2 are physically independent. The probability of both landing heads is P(H₁ ∩ H₂) = P(H₁) × P(H₂) = 0.5 × 0.5 = 0.25 (25%).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "In the lottery scale check example, what are the preferred outcomes?",
+        "options": [
+            "All tickets printed",
+            "The tickets you bought",
+            "175 million tickets",
+            "The winning number"
+        ],
+        "correct": 1,
+        "exp": "Two events are mutually exclusive (disjoint) if they cannot happen at the same time: A ∩ B = ∅, which means P(A ∩ B) = 0.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "How many possible outcomes exist in the lottery scale check example?",
+        "options": [
+            "100,000 under standard production system configurations",
+            "1 million under standard production system configurations",
+            "Upward of 175 million",
+            "36 million under standard production system configurations"
+        ],
+        "correct": 2,
+        "exp": "For mutually exclusive events, the probability that either event occurs is simply the sum of their individual probabilities: P(A ∪ B) = P(A) + P(B).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is the probability of winning the lottery with one ticket in the scale check?",
+        "options": [
+            "0.000057 across standard production computing environments",
+            "0.0000000057",
+            "0.0057 across standard production computing environments",
+            "0.5 across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "For any two general events (which may overlap), the General Addition Rule states P(A ∪ B) = P(A) + P(B) - P(A ∩ B). Subtracting the intersection prevents double-counting elements belonging to both sets.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What coin toss value is given for comparison alongside the lottery probability?",
+        "options": [
+            "0.2",
+            "0.5",
+            "0.66",
+            "1.0"
+        ],
+        "correct": 1,
+        "exp": "In a 52-card deck, there are 4 Kings and 4 Queens. Because a single card cannot be both a King and a Queen (mutually exclusive), P(King or Queen) = 4/52 + 4/52 = 8/52 = 2/13 ≈ 0.1538 (15.38%).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "Why do we express probabilities numerically?",
+        "options": [
+            "To determine whether they are likely or unlikely",
+            "To compute which event is relatively more likely",
+            "We don't express probabilities numerically",
+            "To feed them as data to computers"
+        ],
+        "correct": 1,
+        "exp": "Expressing probabilities as precise numerical values [0, 1] enables mathematical comparison, quantitative modeling, decision optimization, and algorithm implementation, eliminating the ambiguity of qualitative words like 'maybe' or 'likely'.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "Which is the preferred representation of probability for rock-paper-scissors first go?",
+        "options": [
+            "33.(3)%",
+            "1/3",
+            "0.3(3)",
+            "1 to 2"
+        ],
+        "correct": 2,
+        "exp": "Numerical probabilities allow direct computation of relative likelihoods (e.g. 0.35 vs 0.30), enabling decision-makers to quantitatively evaluate which scenario carries higher expected utility.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is the probability of drawing a spade from a standard deck of cards?",
+        "options": [
+            "0.5",
+            "0.25",
+            "0.2",
+            "0.08"
+        ],
+        "correct": 1,
+        "exp": "Standard probability notation utilizes exact fractions or decimals (e.g., 0.333... or 1/3) bounded in [0, 1], rather than subjective labels or qualitative percentages that lack mathematical rigor in algebraic derivations.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "How many cards and spades are in a standard deck as noted in KC Part One 03/03?",
+        "options": [
+            "52 cards, 13 spades",
+            "52 cards, 26 spades",
+            "100 cards, 25 spades",
+            "36 cards, 6 spades"
+        ],
+        "correct": 0,
+        "exp": "With 13 spades in a standard 52-card deck, the classical probability of drawing a spade is P(Spade) = 13/52 = 1/4 = 0.25 (25%).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is an experiment defined as in Part Two?",
+        "options": [
+            "One single flip of a coin across standard production computing environments",
+            "What we expect outcome to be if we run an experiment many times / Many trials run together",
+            "Dividing frequency by sample space across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "A complement of a trial designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A standard deck of cards contains exactly 52 cards, structured into 4 suits (Spades, Hearts, Diamonds, Clubs) of 13 ranks each (Ace through King).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is a trial defined as in Part Two?",
+        "options": [
+            "Tossing a coin 20 times across standard production computing environments",
+            "One flip of the coin, with the outcome written down",
+            "A collection of probabilities designed to support enterprise operational infrastructure",
+            "An archery bullseye score designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "In probability terminology, an experiment refers to a repeatable procedure with a well-defined set of possible outcomes, consisting of multiple individual trials performed under identical conditions.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "In the 20 coin flip example, 11 heads out of 20 trials gives what experimental probability?",
+        "options": [
+            "0.50",
+            "0.55",
+            "0.60",
+            "0.11"
+        ],
+        "correct": 1,
+        "exp": "A trial is a single execution or performance of an experiment (e.g., one flip of a coin or one roll of a die) that produces one realized outcome.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is another name for theoretical probability?",
+        "options": [
+            "Experimental probability",
+            "True probability",
+            "Categorical probability",
+            "Interval probability"
+        ],
+        "correct": 1,
+        "exp": "An outcome is the specific result observed from a single trial (e.g., landing on 'Heads' or rolling a '4').",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "How is theoretical probability worked out?",
+        "options": [
+            "By counting trials under standard production system configurations",
+            "From the structure of the problem itself",
+            "By asking a manager under standard production system configurations",
+            "By graphing a histogram"
+        ],
+        "correct": 1,
+        "exp": "Theoretical probability (classical probability) represents the true mathematical probability deduced a priori from the intrinsic symmetry and physical structure of the sample space.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "How is experimental probability worked out?",
+        "options": [
+            "From the structure of the problem",
+            "By actually running the trials and counting what happened",
+            "Using the lottery shortcut under standard production system configurations",
+            "Multiplying independent events"
+        ],
+        "correct": 1,
+        "exp": "Theoretical probability is determined analytically from the logical structure and known equal likelihood of elementary outcomes, without requiring empirical trial data.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "When do we reach for experimental probability?",
+        "options": [
+            "When true probability is known under standard production system configurations",
+            "Whenever true probability is unknown, or would take far too many factors to compute",
+            "Only when flipping coins under standard production system configurations",
+            "When sample space is 2 under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Experimental probability (empirical probability) is calculated a posteriori based on observed historical data or experimental frequency: P(E) = (number of times event occurred) ÷ (total trials).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is the Experimental Rule formula?",
+        "options": [
+            "P = total trials / successful trials across standard production computing environments",
+            "P = number of successful trials / total number of trials",
+            "P = value × probability across standard production computing environments",
+            "P = 1 - theoretical probability across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "The Law of Large Numbers (LLN) proves that as the number of independent trials n approaches infinity, the experimental relative frequency converges almost surely to the theoretical probability.",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "In the shop queue example (8 out of 10 visits waiting in line), what is the queue probability?",
+        "options": [
+            "20%",
+            "50%",
+            "80%",
+            "100%"
+        ],
+        "correct": 2,
+        "exp": "If an event occurs 8 times in 10 trials, the empirical (experimental) probability is 8/10 = 0.80 (80%).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "What is expected value E(A) defined as?",
+        "options": [
+            "The true probability of a single trial",
+            "The outcome we expect to occur when we run an experiment",
+            "The sum of all sample space frequencies computed across multi-dimensional attribute distributions in statistical datasets",
+            "The complement of an experimental trial"
+        ],
+        "correct": 1,
+        "exp": "In the shop queue example where 8 of 10 visits involved waiting, the experimental probability of waiting on a visit is 8 ÷ 10 = 0.80 (80%).",
+        "section": "Part 2: Expected Value & Uncertainty"
+    },
+    {
+        "q": "Which formula is used for expected value of categorical outcomes?",
+        "options": [
+            "E(A) = P(A) × n",
+            "E(A) = Value × Probability",
+            "E(A) = n / P(A)",
+            "E(A) = 1 - P(A)"
+        ],
+        "correct": 0,
+        "exp": "A discrete variable has countable outcomes (e.g. integers 1, 2, 3, number of students, coin flips), whereas a continuous variable can take on any real value within an interval (e.g. height, time, temperature).",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What are examples of categorical outcomes listed?",
+        "options": [
+            "Points, prices, quantities",
+            "Suits, colours, yes or no",
+            "Heads, sums, dice",
+            "Percentages, fractions, decimals"
+        ],
+        "correct": 1,
+        "exp": "Numerical outcomes represent quantitative measurable numbers (e.g. test scores, monetary revenue), whereas categorical outcomes represent qualitative labels or classes.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "In drawing cards 20 times with replacement for spades, what is E(spade)?",
+        "options": [
+            "2",
+            "4",
+            "5",
+            "10"
+        ],
+        "correct": 2,
+        "exp": "Categorical outcomes classify data into qualitative categories, such as card suits (Spades, Hearts), traffic light colors (Red, Green), or binary responses (Yes, No).",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Does an expected value of 5 guarantee drawing exactly 5 spades in 20 draws?",
+        "options": [
+            "Yes, always under standard production system configurations",
+            "No, you could draw 4, 6, or in principle all 20",
+            "Yes, if the deck is standard",
+            "No, it guarantees zero under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "When drawing cards 20 times with replacement, where P(Spade) = 0.25, the Expected Value of spades drawn is E[X] = n × p = 20 × 0.25 = 5 spades.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "How do you calculate expected value for numerical outcomes?",
+        "options": [
+            "Multiply probability by n under standard production system configurations",
+            "Take each value in sample space, multiply by probability, add them all up",
+            "Divide total points by total layers under standard production system configurations",
+            "Subtract 1 from total trials under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Expected Value E(X) = Σ [x × P(x)] represents the long-run weighted average outcome if an experiment is repeated independently an infinite number of times.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "In the archery example, what is the points and probability for the Outer Ring?",
+        "options": [
+            "10 points, p = 0.5 (val = 5)",
+            "20 points, p = 0.4 (val = 8)",
+            "100 points, p = 0.1 (val = 10)",
+            "23 points, p = 1.0"
+        ],
+        "correct": 0,
+        "exp": "To calculate the expected value of a discrete random variable, multiply each possible numerical outcome value x by its corresponding probability P(x), and then sum all the products: E(X) = Σ x_i P(x_i).",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "In the archery example, what is the points and probability for the Second Ring?",
+        "options": [
+            "10 points, p = 0.5 (val = 5)",
+            "20 points, p = 0.4 (val = 8)",
+            "100 points, p = 0.1 (val = 10)",
+            "23 points, p = 0.4"
+        ],
+        "correct": 1,
+        "exp": "In the archery example, scoring 10 points with probability 0.5 contributes 10 × 0.5 = 5.0 weighted points to the expected score.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "In the archery example, what is the points and probability for the Bullseye?",
+        "options": [
+            "10 points, p = 0.5 (val = 5)",
+            "20 points, p = 0.4 (val = 8)",
+            "100 points, p = 0.1 (val = 10)",
+            "23 points, p = 0.1"
+        ],
+        "correct": 2,
+        "exp": "In the archery example, scoring 20 points with probability 0.4 contributes 20 × 0.4 = 8.0 weighted points to the expected score.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is the total expected value E(A) in the archery target example?",
+        "options": [
+            "10",
+            "20",
+            "23",
+            "130"
+        ],
+        "correct": 2,
+        "exp": "In the archery example, hitting the bullseye for 100 points with probability 0.1 contributes 100 × 0.1 = 10.0 weighted points to the expected score.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Can you ever score 23 with one shot in the archery target example?",
+        "options": [
+            "Yes, on the outer ring",
+            "Yes, on the bullseye",
+            "No, you can never score 23 with one shot",
+            "Yes, if probability is 0.5 computed across multi-dimensional attribute distributions in statistical datasets"
+        ],
+        "correct": 2,
+        "exp": "Total Expected Value for the archer is the sum of all weighted outcomes: E(X) = (10 × 0.5) + (20 × 0.4) + (100 × 0.1) = 5 + 8 + 10 = 23 points per shot.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Why bother calculating expected value if you can't hit 23 in one shot?",
+        "options": [
+            "To find true sample space under standard organizational security baseline protocols",
+            "Because expected values let us make predictions about the future based on past data",
+            "To double count outcomes under standard organizational security baseline protocols",
+            "To calculate complements under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "The expected value of 23 is a long-run mathematical average, not a possible single-shot score. The archer can only score 10, 20, or 100 on any individual arrow.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "How do predictions usually come when forecasting future events?",
+        "options": [
+            "As single exact numbers",
+            "As intervals (a likely range)",
+            "As percentages over 100%",
+            "As coin flip trials"
+        ],
+        "correct": 1,
+        "exp": "A point forecast gives a single specific number (e.g. 'sales will be 500 units'), whereas an interval forecast provides a bounded range with an associated confidence level (e.g. 'sales will be between 450 and 550 units with 95% probability').",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Which profession is cited as constantly forecasting using intervals?",
+        "options": [
+            "Executives",
+            "Meteorologists",
+            "Card players",
+            "Lottery buyers"
+        ],
+        "correct": 1,
+        "exp": "Because real-world systems are subject to stochastic fluctuations, probabilistic forecasts are most realistically expressed as intervals (ranges of probable values) rather than deceptive single-point estimates.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Which classifies as an experiment but not a trial?",
+        "options": [
+            "Flipping a coin 20 times and recording 20 different outcomes",
+            "Flipping a coin 20 times and recording outcome of last throw",
+            "Flipping a coin once and recording outcome",
+            "Flipping a coin 20 times without recording outcomes"
+        ],
+        "correct": 0,
+        "exp": "Meteorologists express weather forecasts as probability intervals (e.g., '60% chance of 10–20 mm rainfall') because atmospheric dynamics are complex chaotic systems with inherent uncertainty.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Why do we use experimental probabilities?",
+        "options": [
+            "Good predictors for theoretical ones in order to fulfill secondary operational objectives",
+            "Easy to compute in order to fulfill secondary operational objectives",
+            "Easy to compute and serve as good predictors for theoretical ones",
+            "None of the above in order to fulfill secondary operational objectives"
+        ],
+        "correct": 2,
+        "exp": "Flipping a coin 20 times constitutes an experiment comprising 20 consecutive trials, whereas a single flip is merely one trial.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Why do we use intervals when forecasting future events?",
+        "options": [
+            "Expected value might have low probability",
+            "Increase likelihood of predictions being accurate",
+            "Expected value could be unattainable",
+            "All of the above"
+        ],
+        "correct": 3,
+        "exp": "Single-point predictions in complex environments almost always fail because they convey a false sense of certainty and ignore the variance and distribution of potential risks.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "How many total possible outcomes exist when throwing two standard six-sided dice?",
+        "options": [
+            "6",
+            "12",
+            "36",
+            "64"
+        ],
+        "correct": 2,
+        "exp": "Interval forecasts are essential in decision analysis because they transparently convey uncertainty, provide risk margins for contingency planning, and reflect realistic probabilistic variance.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "In the two dice table, how many times does the sum of 7 appear?",
+        "options": [
+            "1 time",
+            "4 times",
+            "5 times",
+            "6 times"
+        ],
+        "correct": 3,
+        "exp": "A 6x6 grid representing all combinations of two fair dice contains 6 × 6 = 36 total elementary outcomes in its sample space.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is P(sum = 7) when throwing two dice?",
+        "options": [
+            "1/36 across standard production computing environments",
+            "5/36 across standard production computing environments",
+            "6/36 = 1/6 ≈ 0.167",
+            "12/36 across standard production computing environments"
+        ],
+        "correct": 2,
+        "exp": "In the 6x6 dice sum matrix, the sum of 7 appears across the full secondary diagonal: (1,6), (2,5), (3,4), (4,3), (5,2), and (6,1) — exactly 6 times.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is the expected value E(sum) when rolling two six-sided dice?",
+        "options": [
+            "6",
+            "7",
+            "8",
+            "12"
+        ],
+        "correct": 1,
+        "exp": "The probability of rolling a sum of 7 with two fair dice is P(Sum = 7) = 6 favorable outcomes ÷ 36 total outcomes = 1/6 ≈ 0.1667 (16.67%).",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Is 'most probable' the same as 'likely' for rolling a sum of 7?",
+        "options": [
+            "Yes, exact same under standard production system configurations",
+            "No, seven carries a probability of only 1/6, so you cannot reasonably bet on landing exactly there",
+            "Yes, because it is 100% under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "No, because its probability is 0 under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "The sum of 7 has the highest frequency (6/36) because it has more unique additive integer partitions using numbers from 1 to 6 than any other sum.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is a probability frequency distribution defined as?",
+        "options": [
+            "A list of 20 coin flip trials designed to support enterprise operational infrastructure",
+            "A collection of the probabilities for each possible outcome",
+            "An experimental queue percentage designed to support enterprise operational infrastructure",
+            "The product of independent events designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "Even though 7 is the modal (most probable) sum, its probability is only 16.67%. It is still far more likely (83.33% chance) that the sum will be something OTHER than 7, so one cannot treat 'most probable' as an absolute certainty.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What are the two ways a probability frequency distribution is normally expressed?",
+        "options": [
+            "As a fraction and as a percentage",
+            "As a table and as a graph",
+            "As a trial and as an experiment",
+            "As a formula and as an interval"
+        ],
+        "correct": 1,
+        "exp": "A probability frequency distribution is a mathematical function or table that maps each mutually exclusive outcome in the sample space to its corresponding probability.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is Step One in building a probability frequency distribution from the dice table?",
+        "options": [
+            "Turn each frequency into a probability",
+            "Count how often each sum appears",
+            "Multiply independent events",
+            "Subtract from 1"
+        ],
+        "correct": 1,
+        "exp": "A probability frequency distribution is conventionally displayed either as a tabular summary (listing outcomes x and P(x)) or graphically as a histogram / PMF bar chart.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "In Step One of the dice example, what is the frequency of rolling a sum of 8?",
+        "options": [
+            "3",
+            "4",
+            "5",
+            "6"
+        ],
+        "correct": 2,
+        "exp": "Step One in constructing an empirical frequency distribution is to tally the absolute occurrence count (frequency f) for each distinct outcome across the sample space.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is Step Two in building a probability frequency distribution?",
+        "options": [
+            "Count how often each sum appears across standard production computing environments",
+            "Turn each frequency into a probability by dividing by sample space size",
+            "Add up values × probabilities across standard production computing environments",
+            "Calculate expected value across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "The sum of 8 can be formed by 5 pairs: (2,6), (3,5), (4,4), (5,3), and (6,2). Thus, its frequency in the two-dice sample space is 5.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What is the true probability of rolling a sum of 2 or 12 with two dice?",
+        "options": [
+            "1/36",
+            "2/36",
+            "6/36",
+            "1/6"
+        ],
+        "correct": 0,
+        "exp": "Step Two converts raw frequencies f into relative probabilities P(x) by dividing each frequency by the total size of the sample space N: P(x) = f / N.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Where do the tallest bars cluster on a probability frequency distribution graph?",
+        "options": [
+            "At the ends (2 and 12)",
+            "Around the expected value",
+            "At zero under standard production system configurations",
+            "Randomly under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Sums 2 {(1,1)} and 12 {(6,6)} each feature only 1 favorable cell in the 36-cell grid, giving each a probability of P = 1/36 ≈ 0.0278 (2.78%).",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Why is P(sum = 7) equal to 1/6?",
+        "options": [
+            "Die has 6 sides so expected value is 1/6 in order to fulfill secondary operational objectives",
+            "36 favorable and 6 sample space in order to fulfill secondary operational objectives",
+            "6 favorable outcomes and 36 outcomes in sample space, 6/36 = 1/6",
+            "None of the above in order to fulfill secondary operational objectives"
+        ],
+        "correct": 2,
+        "exp": "In a symmetric, unimodal distribution (like two rolled dice), the tallest bars cluster around the center, which represents the Expected Value (Mean = 7).",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "What does the frequency of a value within the sample space represent?",
+        "options": [
+            "Number of times the value features in sample space",
+            "Likelihood of outcome occurring computed across multi-dimensional attribute distributions in statistical datasets",
+            "Collection of probabilities",
+            "Table or graph matching occurrence"
+        ],
+        "correct": 0,
+        "exp": "P(Sum = 7) = 1/6 because there are 6 favorable combinations out of 36 equally likely outcomes in the sample space, simplifying to 6/36 = 1/6.",
+        "section": "Part 3: Probability Frequency Distribution"
+    },
+    {
+        "q": "Which sum of two dice has a frequency of 3 in the 6x6 table?",
+        "options": [
+            "10 configured for general baseline system administration",
+            "4 configured for general baseline system administration",
+            "4 and 10",
+            "3 configured for general baseline system administration"
+        ],
+        "correct": 2,
+        "exp": "The frequency of an outcome represents the raw count of times that specific value appears within the sample space or experimental dataset.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What is the definition of the complement of an event?",
+        "options": [
+            "Everything the event is across standard production computing environments",
+            "Everything the event is not (covers whatever event leaves out)",
+            "The square of the event designed to support enterprise operational infrastructure",
+            "The experimental probability designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "Sums 4 {(1,3),(2,2),(3,1)} and 10 {(4,6),(5,5),(6,4)} each have exactly 3 favorable outcomes in the 36-outcome dice sample space.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "If event A is rolling an even number (2, 4, 6), what is its complement A'?",
+        "options": [
+            "Rolling a 6 across standard production computing environments",
+            "Rolling an odd number (1, 3, 5)",
+            "Rolling a 2 or 4 across standard production computing environments",
+            "Flipping heads across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "According to Kolmogorov's second probability axiom, the sum of probabilities of all mutually exclusive and collectively exhaustive outcomes across the entire sample space must equal exactly 1.0 (100% certainty): Σ P(x_i) = 1.0.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What is the complement of a complement (A')' equal to?",
+        "options": [
+            "An a' operating within enterprise data processing pipelines",
+            "A (the event itself)",
+            "A 1 operating within enterprise data processing pipelines",
+            "A 0 operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "If the sum of probabilities across all outcomes does not equal 1.0, the model violates basic probability axioms, indicating either missed outcomes (if Σ P < 1) or double-counted intersections (if Σ P > 1).",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What is the rule underneath complements regarding total probability?",
+        "options": [
+            "All outcomes together add up to zero across standard production computing environments",
+            "All the outcomes together add up to one (100% certainty)",
+            "Probabilities multiply to one across standard production computing environments",
+            "Complement is always 0.5 across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "The Complement Rule states that the probability of an event NOT occurring, P(A'), is equal to 1 minus the probability of the event occurring: P(A') = 1 - P(A).",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "In coin tossing, P(heads) + P(tails) = 0.5 + 0.5 equals what?",
+        "options": [
+            "0.2 under standard production system configurations",
+            "0.5 under standard production system configurations",
+            "1 (certainty)",
+            "2.0 under standard production system configurations"
+        ],
+        "correct": 2,
+        "exp": "If the probability of rain is P(Rain) = 0.30, the probability of no rain is its complement: P(No Rain) = 1 - 0.30 = 0.70 (70%).",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What diagnostic error is indicated if your probabilities sum to > 1?",
+        "options": [
+            "Missing outcomes in sample space under standard production system configurations",
+            "Sum is greater than one: double counting (some outcomes occur at same time)",
+            "Experiment is incomplete under standard production system configurations",
+            "Theoretical probability is negative under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "For a fair coin, P(Heads) + P(Tails) = 0.5 + 0.5 = 1.0, satisfying the axiom of total probability because Heads and Tails form a complete partition of the sample space.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What diagnostic error is indicated if your sample space outcomes sum to less than 1?",
+        "options": [
+            "Double counting outcomes under standard production system configurations",
+            "Sum is less than one: missing one or more possible outcomes from sample space",
+            "Certainty reached under standard production system configurations",
+            "Too many trials under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "If the calculated probabilities across purported outcomes sum to greater than 1.0, it indicates that outcomes are not mutually exclusive and overlapping events have been double-counted.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What is the formula for finding complement probability P(A')?",
+        "options": [
+            "P(A') = P(A) - 1",
+            "P(A') = 1 − P(A)",
+            "P(A') = 1 / P(A)",
+            "P(A') = P(A) × n"
+        ],
+        "correct": 1,
+        "exp": "If the sum of probabilities of all listed outcomes is less than 1.0, it indicates that one or more possible elementary outcomes have been omitted from the sample space.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "Why do we reach for the complement formula when an event is crowded?",
+        "options": [
+            "It multiplies independent events under standard organizational security baseline protocols",
+            "Count the few outcomes you do not want instead of many you do want",
+            "It guarantees expected value under standard organizational security baseline protocols",
+            "It removes sample space under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "The complement of event A, denoted A' or Aᶜ, contains all outcomes in the universal sample space S that do not belong to set A: A' = S  A.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "In the worked example of rolling 1, 2, 4, 5, or 6, what is the complement calculation?",
+        "options": [
+            "1/6 + 1/6 = 2/6 across standard production computing environments",
+            "1 − P(3) = 1 − 1/6 = 5/6",
+            "P(3) = 1/6 across standard production computing environments",
+            "5 × 1/6 = 5/6 across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "If P(A) = 0.75, the probability of its complement is P(A') = 1 - 0.75 = 0.25 (25%).",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "Which statement is FALSE?",
+        "options": [
+            "Complement of an event is everything event is not",
+            "Event and complement add up entire sample space",
+            "Complement of Heads is Tails",
+            "The complement of rolling a 6 is rolling a 1"
+        ],
+        "correct": 3,
+        "exp": "When rolling a fair 6-sided die, the complement of rolling a 1 is rolling any other face {2, 3, 4, 5, 6}, which has a probability of 1 - 1/6 = 5/6.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "What is the complement of NOT rolling a 3?",
+        "options": [
+            "Not rolling a 3",
+            "Rolling a 3",
+            "Not rolling 1, 2, 4 or 5",
+            "Rolling a 4"
+        ],
+        "correct": 1,
+        "exp": "The complement of rolling a 6 is rolling any number in {1, 2, 3, 4, 5}. Claiming the complement is only 'rolling a 1' is false because it ignores the outcomes 2, 3, 4, and 5.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "Which of these are complements?",
+        "options": [
+            "Positive and negative numbers",
+            "Non-negative and non-positive numbers",
+            "Positive numbers and non-negative numbers",
+            "Negative numbers and non-negative numbers"
+        ],
+        "correct": 3,
+        "exp": "The Complement Rule is especially useful in computing 'at least one' probabilities: P(at least 1 success) = 1 - P(zero successes), which avoids computing multiple tedious combinatorial terms.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "Returning to the lottery example with basic notions in place opens up which field?",
+        "options": [
+            "Business Intelligence",
+            "Combinatorics",
+            "Machine Learning",
+            "Qualitative Analytics"
+        ],
+        "correct": 1,
+        "exp": "Combinatorics is the mathematical branch that studies methods for counting, arranging, and selecting subsets of elements from finite sets.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "Which three terms are listed under combinatorics at the end of Part Four?",
+        "options": [
+            "Mean, Variance, SD configured for general baseline system administration",
+            "Variations, Permutations, Combinations",
+            "Trials, Experiments, Events",
+            "Tables, Graphs, Formulas"
+        ],
+        "correct": 1,
+        "exp": "Calculating complex sample spaces (like winning the lottery or card combinations) requires combinatorics to enumerate total possible combinations without manually listing millions of outcomes.",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "How are Variations defined in combinatorics?",
+        "options": [
+            "Order matters, and repetition may be allowed",
+            "Arranging set of elements among themselves",
+            "Selecting group where order is irrelevant",
+            "Sum of probabilities across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The three fundamental branches of counting in combinatorics are Permutations (order matters, all elements used), Variations (order matters, subset of elements), and Combinations (order does not matter).",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "How are Permutations defined in combinatorics?",
+        "options": [
+            "Order matters and repetition allowed",
+            "Arranging a set of elements among themselves",
+            "Selecting group where order is irrelevant",
+            "Experimental queue trials across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "In combinatorics, Variations (k-permutations) count the number of ordered subsets of k elements chosen from n items, where order matters (e.g. 1st, 2nd, and 3rd place podium finishes).",
+        "section": "Part 4: Complements & Combinatorics"
+    },
+    {
+        "q": "How are Combinations defined in combinatorics?",
+        "options": [
+            "Order matters and repetition allowed",
+            "Arranging set of elements among themselves",
+            "Selecting a group where order is irrelevant",
+            "Sample space total across standard production computing environments"
+        ],
+        "correct": 2,
+        "exp": "In combinatorics, Permutations count the number of distinct ways to arrange a complete set of n distinct elements in sequence, where order is significant: n! = n × (n-1) × ... × 1.",
+        "section": "Part 4: Complements & Combinatorics"
+    }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof updateCombinatoricsMode === 'function') {
+                updateCombinatoricsMode();
+            }
+        });
+    </script>
+</body>
+</html>

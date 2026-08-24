@@ -1,0 +1,26 @@
+# Environment & Secret Keys
+.env
+.env.*
+*.env
+
+# Local logs & database schemas
+master_schema.sql
+*.sql
+*.log
+
+# Deployment & Provider configs
+.netlify/
+netlify.toml
+
+# Documentation & Metadata
+docs/
+instructions.md
+version.json
+extracted_data/
+scratch/
+
+# OS / Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

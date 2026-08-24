@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Governance & Risk Management | University Study Guide</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Information Assurance & Security</h1>
+        <p>Governance & Risk Management — Security Policies, ISO 27001, Risk Management & 79-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">Governance & Risk Management</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+
+            <!-- PART 1: GOVERNANCE, POLICIES & STANDARDS -->
+            <div class="card">
+                <h2>PART 1: Information Security Governance, Policies & ISO 27001</h2>
+
+                <h3>1.1 What is Information Security Governance?</h3>
+                <p>Security governance is the system by which an organization directs, controls, and oversees its information security strategy. It ensures that security activities align with organizational goals, comply with laws, and manage risks responsibly.</p>
+                
+                <div class="definition-card">
+                    <span class="def-title">Governance vs Management</span>
+                    <ul>
+                        <li><strong>Governance (Leadership & Direction):</strong> Executive leadership sets security objectives, defines risk appetite, allocates resources, and evaluates oversight.</li>
+                        <li><strong>Management (Execution & Operations):</strong> Security teams plan, build, run, and monitor security controls to achieve executive direction.</li>
+                    </ul>
+                </div>
+
+                <h3>1.2 The Document Hierarchy: Policy, Standard, Guideline, Procedure</h3>
+                <p>Organizations govern security through a structured hierarchy of four distinct document types:</p>
+
+                <div class="definition-card">
+                    <span class="def-title">1. Information Security Policy (Mandatory, High-Level)</span>
+                    <p>Executive management's formal statement of intent, rules, and direction regarding security.</p>
+                    <ul>
+                        <li><strong>Characteristics:</strong> Concise, high-level, technology-neutral, mandatory across the organization.</li>
+                        <li><strong>Example:</strong> "All organizational data must be protected against unauthorized access, loss, or disclosure."</li>
+                    </ul>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-title">2. Standards (Mandatory, Specific)</span>
+                    <p>Mandatory, measurable requirements and baseline rules supporting security policies.</p>
+                    <ul>
+                        <li><strong>Characteristics:</strong> Specific, measurable, enforceable, technology-focused.</li>
+                        <li><strong>Example:</strong> "User passwords must be at least 12 characters, include 3 character classes, and expire every 90 days."</li>
+                    </ul>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-title">3. Guidelines (Discretionary, Advisory)</span>
+                    <p>Recommended best practices and advisory suggestions that assist with compliance.</p>
+                    <ul>
+                        <li><strong>Characteristics:</strong> Non-mandatory, flexible, advisory context.</li>
+                        <li><strong>Example:</strong> "It is recommended to use password manager software to generate random passphrases."</li>
+                    </ul>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-title">4. Procedures & Work Instructions (Mandatory, Step-by-Step)</span>
+                    <p>Detailed step-by-step instructions describing exactly how to perform specific tasks or operational processes.</p>
+                    <ul>
+                        <li><strong>Characteristics:</strong> Highly detailed, step-by-step SOPs, operational focus.</li>
+                        <li><strong>Example:</strong> "Step 1: Open AWS IAM Console. Step 2: Click Create User. Step 3: Attach MFA policy..."</li>
+                    </ul>
+                </div>
+
+                <h3>1.3 The ISO/IEC 27001 Framework</h3>
+                <p>ISO/IEC 27001 is the international benchmark standard for establishing, implementing, maintaining, and continually improving an <strong>Information Security Management System (ISMS)</strong>.</p>
+
+                <div class="example-card">
+                    <span class="example-title">Key ISO 27001 Components</span>
+                    <ul>
+                        <li><strong>ISMS Clauses (4 to 10):</strong> Mandatory requirements covering leadership commitment, risk assessment, planning, support, operation, performance evaluation, and continual improvement.</li>
+                        <li><strong>Annex A Controls (93 Controls in ISO 27001:2022):</strong> A comprehensive catalog of security controls organized into 4 themes: Organizational, People, Physical, and Technological.</li>
+                        <li><strong>Statement of Applicability (SoA):</strong> A mandatory document declaring which Annex A controls apply to the organization, which are excluded, and the technical justification for each decision.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- PART 2: RISK MANAGEMENT PROCESS -->
+            <div class="card">
+                <h2>PART 2: Risk Management & Decision-Making Frameworks</h2>
+
+                <h3>2.1 The Risk Management Cycle (ISO 27005)</h3>
+                <p>Risk management is an ongoing, iterative process rather than a one-time audit checklist:</p>
+
+                <div class="formula-card">
+                    <span class="formula-badge">5-Step Risk Management Cycle</span><br>
+                    <span class="formula-text">IDENTIFY &rarr; ANALYZE &rarr; EVALUATE &rarr; TREAT &rarr; MONITOR</span>
+                    <div class="formula-explain">
+                        1. <strong>Context & Identification:</strong> Catalog assets, threats, existing controls, and vulnerabilities.<br>
+                        2. <strong>Risk Analysis:</strong> Determine likelihood and potential impact to calculate risk magnitude.<br>
+                        3. <strong>Risk Evaluation:</strong> Compare calculated risk against organizational risk appetite and tolerance thresholds.<br>
+                        4. <strong>Risk Treatment:</strong> Select and implement treatment strategies (Avoid, Mitigate, Transfer, Accept).<br>
+                        5. <strong>Monitoring & Review:</strong> Continuously monitor residual risks, control effectiveness, and emerging threats.
+                    </div>
+                </div>
+
+                <h3>2.2 The 4 Risk Treatment Options</h3>
+                <div class="definition-card">
+                    <span class="def-title">Selecting Risk Response Strategies</span>
+                    <ul>
+                        <li><strong>1. Risk Mitigation (Reduction):</strong> Implementing security controls (firewalls, encryption, MFA, patching) to reduce vulnerability or impact.</li>
+                        <li><strong>2. Risk Avoidance:</strong> Eliminating the risk entirely by choosing not to engage in the risky activity or retiring a vulnerable system.</li>
+                        <li><strong>3. Risk Transfer (Sharing):</strong> Shifting financial or operational impact to a third party (e.g., purchasing cybersecurity insurance or outsourcing to a managed vendor with SLA indemnification).</li>
+                        <li><strong>4. Risk Acceptance:</strong> Formally deciding to carry the risk without additional controls when the risk falls within tolerance or mitigation costs exceed potential loss. Must be signed off by a named Risk Owner.</li>
+                    </ul>
+                </div>
+
+                <h3>2.3 Inherent Risk vs Residual Risk</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">Risk Equation</span><br>
+                    <span class="formula-text">RESIDUAL RISK = INHERENT RISK - CONTROLS</span>
+                    <div class="formula-explain">
+                        • <strong>Inherent Risk:</strong> The raw level of risk present before any security controls or safeguards are applied.<br>
+                        • <strong>Residual Risk:</strong> The remaining risk that exists <em>after</em> security controls have been implemented.<br>
+                        • <strong>Goal:</strong> Reduce Residual Risk until it is equal to or below the organization's Risk Tolerance threshold.
+                    </div>
+                </div>
+
+                <h3>2.4 Risk Matrix & Qualitative vs Quantitative Analysis</h3>
+                <ul>
+                    <li><strong>Qualitative Risk Analysis:</strong> Rates likelihood and impact using subjective scales (High, Medium, Low) on a Risk Matrix grid. Fast and intuitive for prioritizing risks.</li>
+                    <li><strong>Quantitative Risk Analysis:</strong> Assigns numerical monetary values to risk components using financial metrics:
+                        <ul>
+                            <li><strong>Single Loss Expectancy (SLE):</strong> Asset Value (&times;) Exposure Factor.</li>
+                            <li><strong>Annualized Rate of Occurrence (ARO):</strong> Estimated frequency of occurrence per year.</li>
+                            <li><strong>Annualized Loss Expectancy (ALE):</strong> SLE (&times;) ARO.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 79</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Dynamically rendered quiz questions -->
+            </div>
+        </div>
+
+        <!-- TAB 3: QUICK REFERENCE -->
+        <div id="formulas" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2 style="margin:0;">Quick Reference</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+
+                <h2>Quick Reference: Security Governance Documents Hierarchy</h2>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Document Type</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Enforceability</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Level of Detail</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Purpose & Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Policy</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">High-Level Overview</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Executive management direction & rules (e.g., Information Security Policy, AUP).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Standard</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Specific Metrics</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Measurable baseline requirements (e.g., 12-char password minimum, AES-256 encryption).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Guideline</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Discretionary / Advisory</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Flexible Guidance</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Recommended best practices and advice (e.g., password manager recommendations).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Procedure (SOP)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Step-by-Step Instructions</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Detailed operational steps for performing a specific task (e.g., Firewall Rule Change SOP).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: The 4 Risk Treatment Strategies</h2>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Strategy</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Action Taken</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Real-World Example</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Executive Sign-Off</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Mitigation (Reduction)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Implement controls to shrink likelihood or impact</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Deploying firewalls, MFA, and automated backups.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Security Team / IT Dept</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Avoidance</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Eliminate risk entirely by stopping the risky activity</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Canceling a dangerous software feature or refusing high-risk vendor integrations.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Executive Leadership</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Transfer (Sharing)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Shift financial liability to a third party</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Purchasing Cyber Insurance or establishing vendor SLA penalties.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">CFO / Legal Counsel</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Acceptance</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Formally carry residual risk without adding controls</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Documenting and approving a low-impact legacy system risk.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Named Risk Owner (CISO/CEO)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: Quantitative Risk Analysis Formulas</h2>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+                    <div class="formula-card">
+                        <span class="formula-badge">Single Loss Expectancy</span>
+                        <div class="formula-text">SLE = Asset Value (AV) × Exposure Factor (EF)</div>
+                        <div class="formula-explain">Monetary loss incurred each time a single threat event takes place.</div>
+                    </div>
+                    <div class="formula-card">
+                        <span class="formula-badge">Annualized Loss Expectancy</span>
+                        <div class="formula-text">ALE = SLE × Annualized Rate of Occurrence (ARO)</div>
+                        <div class="formula-explain">Total estimated financial loss expected per year for a specific risk.</div>
+                    </div>
+                    <div class="formula-card">
+                        <span class="formula-badge">Qualitative Risk Rank</span>
+                        <div class="formula-text">Risk Exposure = Likelihood × Impact</div>
+                        <div class="formula-explain">Position on a Risk Matrix grid (Red=Critical, Yellow=Moderate, Green=Low).</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: ISO Standards Family & NIST CSF 5 Core Functions</h2>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Framework / Standard</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Focus Area</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Components & Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27001:2022</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">ISMS Certification Standard</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Specifies ISMS requirements; 93 Annex A controls in 4 themes (Organizational, People, Physical, Technological). Statement of Applicability (SoA) required.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27002:2022</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Code of Practice / Implementation</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Provides detailed practical guidance and implementation steps for controls listed in Annex A.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27005</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Risk Management Guidelines</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Outlines the 5-step risk cycle: Context/Identify, Analyze, Evaluate, Treat, Monitor.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>NIST CSF</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">5 Core Functions Framework</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Identify</strong> (Asset Management), <strong>Protect</strong> (Access Control, Safeguards), <strong>Detect</strong> (SIEM, Anomalies), <strong>Respond</strong> (Containment, Mitigation), <strong>Recover</strong> (Resilience).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: BCP/DRP Metrics & Regulatory Compliance Framework</h2>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+                    <div class="definition-card">
+                        <span class="def-badge">RTO vs RPO</span>
+                        <p><strong>RTO (Recovery Time Objective):</strong> Max acceptable downtime after disruption.<br><strong>RPO (Recovery Point Objective):</strong> Max acceptable data loss volume measured in time.</p>
+                    </div>
+                    <div class="definition-card">
+                        <span class="def-badge">Compliance Standards</span>
+                        <p><strong>PCI-DSS:</strong> Credit card transaction security.<br><strong>HIPAA:</strong> Protected Health Information (PHI).<br><strong>GDPR:</strong> EU personal data privacy rights.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ==========================================
+                 Interactive Academic Calculators Section
+                 ========================================== -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Interactive Academic Calculators (Live Quantitative Risk & BCP Engines)</h2>
+                
+                <!-- Calculator 1: Quantitative Risk & CBA -->
+                <div class="calc-card">
+                    <div class="calc-title">🧮 Part 2 (2.4): Quantitative Risk Analysis (SLE & ALE) and Cost-Benefit Analysis (CBA / ROSI)</div>
+                    <div class="calc-desc">Calculate Single Loss Expectancy (SLE), Annualized Loss Expectancy (ALE), and evaluate if a security countermeasure is financially justified via Cost-Benefit Analysis.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-av">Asset Value ($):</label>
+                            <input type="number" id="risk-av" class="calc-input" value="100000" step="5000" min="0" oninput="calculateRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-ef-pre">Prior Exposure Factor [%]:</label>
+                            <input type="number" id="risk-ef-pre" class="calc-input" value="50" step="5" min="0" max="100" oninput="calculateRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-aro-pre">Prior Annual Occurrence (ARO):</label>
+                            <input type="number" id="risk-aro-pre" class="calc-input" value="2" step="0.1" min="0" oninput="calculateRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-cost">Annual Safeguard Cost ($):</label>
+                            <input type="number" id="risk-cost" class="calc-input" value="15000" step="500" min="0" oninput="calculateRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-ef-post">Post-Control Exposure Factor [%]:</label>
+                            <input type="number" id="risk-ef-post" class="calc-input" value="10" step="5" min="0" max="100" oninput="calculateRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="risk-aro-post">Post-Control Occurrence (ARO):</label>
+                            <input type="number" id="risk-aro-post" class="calc-input" value="0.5" step="0.1" min="0" oninput="calculateRisk()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Cost-Benefit Analysis (CBA) & ROSI:</span>
+                            <span class="calc-result-val" id="risk-result-val">+$80,000.00 / yr (533.3% ROSI)</span>
+                        </div>
+                        <div class="calc-math-steps" id="risk-math-steps">
+                            <strong>Financial Risk Analysis:</strong><br>
+                            <div class="step-line">• <strong>Pre-Control Loss:</strong> SLE = $100,000 × 50% = $50,000 | <strong>ALE (Prior)</strong> = $50,000 × 2.0 = <strong>$100,000.00 / yr</strong></div>
+                            <div class="step-line">• <strong>Post-Control Loss:</strong> SLE = $100,000 × 10% = $10,000 | <strong>ALE (Post)</strong> = $10,000 × 0.5 = <strong>$5,000.00 / yr</strong></div>
+                            <div class="step-line">• <strong>Annual Risk Reduction:</strong> $100,000 - $5,000 = <strong>$95,000.00 / yr</strong></div>
+                            <div class="step-line">• <strong>CBA Net Benefit:</strong> ALE(prior) - ALE(post) - Cost = $100,000 - $5,000 - $15,000 = <strong style="color:#16a34a;">+$80,000.00 / yr (✓ Cost-Justified)</strong></div>
+                            <div class="step-line">• <strong>Return on Security Investment (ROSI):</strong> ($80,000 ÷ $15,000) × 100% = <strong>+533.33%</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 2: BCP/DRP Outage Loss -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 BCP / DRP Metrics: Outage Downtime Cost, RTO vs. MTD Tolerability Buffer & RPO Data Loss</div>
+                    <div class="calc-desc">Calculate total financial downtime exposure and compare Recovery Time Objective (RTO) against Maximum Tolerable Downtime (MTD) and Recovery Point Objective (RPO).</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="bcp-loss-rate">Hourly Downtime Cost ($/hr):</label>
+                            <input type="number" id="bcp-loss-rate" class="calc-input" value="25000" step="1000" min="0" oninput="calculateBCPMetrics()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="bcp-rto">Recovery Time Objective - RTO (hrs):</label>
+                            <input type="number" id="bcp-rto" class="calc-input" value="4" step="0.5" min="0.1" oninput="calculateBCPMetrics()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="bcp-mtd">Max Tolerable Downtime - MTD (hrs):</label>
+                            <input type="number" id="bcp-mtd" class="calc-input" value="12" step="1" min="0.1" oninput="calculateBCPMetrics()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="bcp-rpo">Recovery Point Objective - RPO (hrs):</label>
+                            <input type="number" id="bcp-rpo" class="calc-input" value="1" step="0.25" min="0" oninput="calculateBCPMetrics()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="bcp-tx-rate">Transactions Processed / hr:</label>
+                            <input type="number" id="bcp-tx-rate" class="calc-input" value="1200" step="100" min="0" oninput="calculateBCPMetrics()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Outage Cost & Tolerability Status:</span>
+                            <span class="calc-result-val" id="bcp-result-val">Total Loss: $100,000.00 | Tolerable (+8.0h Buffer)</span>
+                        </div>
+                        <div class="calc-math-steps" id="bcp-math-steps">
+                            <strong>BCP/DRP Resilience Assessment:</strong><br>
+                            <div class="step-line">• <strong>Total Outage Cost:</strong> 4.0 hrs (RTO) × $25,000 / hr = <strong>$100,000.00</strong></div>
+                            <div class="step-line">• <strong>Tolerability Margin (MTD - RTO):</strong> 12.0 hrs (MTD) - 4.0 hrs (RTO) = <strong style="color:#16a34a;">+8.0 hrs Buffer</strong> (✓ RTO within MTD limits)</div>
+                            <div class="step-line">• <strong>Data Loss Exposure (RPO):</strong> 1.0 hr × 1,200 tx/hr = <strong>1,200 transactions</strong> at risk of permanent data loss between backup intervals.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 3: Inherent vs Residual Risk -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 2 (2.3): Inherent Risk vs. Residual Risk & Control Mitigation Efficiency Calculator</div>
+                    <div class="calc-desc">Quantify baseline inherent risk exposure before controls and calculate the final residual risk remaining after security control implementation.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="inh-av">Asset Replacement Value ($):</label>
+                            <input type="number" id="inh-av" class="calc-input" value="250000" step="10000" min="1000" oninput="calculateInherentResidualRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="inh-score">Inherent Threat Severity (1-10):</label>
+                            <input type="number" id="inh-score" class="calc-input" value="8" step="1" min="1" max="10" oninput="calculateInherentResidualRisk()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ctrl-eff">Control Mitigation Efficiency (%):</label>
+                            <input type="number" id="ctrl-eff" class="calc-input" value="85" step="5" min="0" max="100" oninput="calculateInherentResidualRisk()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Residual Risk & Mitigation Value:</span>
+                            <span class="calc-result-val" id="inh-result-val">Residual Risk: $30,000.00 (85% Mitigated)</span>
+                        </div>
+                        <div class="calc-math-steps" id="inh-math-steps">
+                            <strong>Inherent & Residual Risk Breakdown:</strong><br>
+                            <div class="step-line">• <strong>Inherent Financial Exposure:</strong> $250,000 × (8 ÷ 10) = <strong>$200,000.00</strong> (Raw risk without controls)</div>
+                            <div class="step-line">• <strong>Mitigated Risk Value:</strong> $200,000 × 85% = <strong>$170,000.00 reduction</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // ==========================================
+        // Interactive Quantitative Risk & BCP Logic
+        // ==========================================
+        function calculateRisk() {
+            const av = parseFloat(document.getElementById('risk-av').value) || 0;
+            const efPre = (parseFloat(document.getElementById('risk-ef-pre').value) || 0) / 100;
+            const aroPre = parseFloat(document.getElementById('risk-aro-pre').value) || 0;
+            const cost = parseFloat(document.getElementById('risk-cost').value) || 0;
+            const efPost = (parseFloat(document.getElementById('risk-ef-post').value) || 0) / 100;
+            const aroPost = parseFloat(document.getElementById('risk-aro-post').value) || 0;
+
+            const slePre = av * efPre;
+            const alePre = slePre * aroPre;
+
+            const slePost = av * efPost;
+            const alePost = slePost * aroPost;
+
+            const riskReduction = alePre - alePost;
+            const cba = riskReduction - cost;
+            const rosi = cost > 0 ? (cba / cost) * 100 : 0;
+
+            const isJustified = cba > 0;
+            const sign = cba >= 0 ? '+' : '-';
+            const absCba = Math.abs(cba);
+
+            const resVal = document.getElementById('risk-result-val');
+            const resSteps = document.getElementById('risk-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `<span style="color:${isJustified ? '#16a34a' : '#dc2626'}">${sign}$${absCba.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / yr (${rosi.toFixed(1)}% ROSI)</span>`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Financial Risk Analysis:</strong><br>
+                    <div class="step-line">• <strong>Pre-Control Loss:</strong> SLE = $${slePre.toLocaleString()} | <strong>ALE (Prior)</strong> = $${slePre.toLocaleString()} × ${aroPre} = <strong>$${alePre.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / yr</strong></div>
+                    <div class="step-line">• <strong>Post-Control Loss:</strong> SLE = $${slePost.toLocaleString()} | <strong>ALE (Post)</strong> = $${slePost.toLocaleString()} × ${aroPost} = <strong>$${alePost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / yr</strong></div>
+                    <div class="step-line">• <strong>Annual Risk Reduction:</strong> $${alePre.toLocaleString()} - $${alePost.toLocaleString()} = <strong>$${riskReduction.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / yr</strong></div>
+                    <div class="step-line">• <strong>CBA Net Benefit:</strong> ALE(prior) - ALE(post) - Safeguard Cost = $${alePre.toLocaleString()} - $${alePost.toLocaleString()} - $${cost.toLocaleString()} = <strong style="color:${isJustified ? '#16a34a' : '#dc2626'}">${sign}$${absCba.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} / yr (${isJustified ? '✓ Cost-Justified' : '✗ Financially Infeasible'})</strong></div>
+                    <div class="step-line">• <strong>Return on Security Investment (ROSI):</strong> ($${cba.toLocaleString()} ÷ $${cost.toLocaleString()}) × 100% = <strong>${rosi >= 0 ? '+' : ''}${rosi.toFixed(2)}%</strong></div>
+                `;
+            }
+        }
+
+        function calculateBCPMetrics() {
+            const lossRate = parseFloat(document.getElementById('bcp-loss-rate').value) || 0;
+            const rto = parseFloat(document.getElementById('bcp-rto').value) || 0;
+            const mtd = parseFloat(document.getElementById('bcp-mtd').value) || 0;
+            const rpo = parseFloat(document.getElementById('bcp-rpo').value) || 0;
+            const txRate = parseFloat(document.getElementById('bcp-tx-rate').value) || 0;
+
+            const totalOutageCost = rto * lossRate;
+            const margin = mtd - rto;
+            const txLost = rpo * txRate;
+
+            const isTolerable = margin >= 0;
+            const resVal = document.getElementById('bcp-result-val');
+            const resSteps = document.getElementById('bcp-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `Total Loss: $${totalOutageCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} | <span style="color:${isTolerable ? '#16a34a' : '#dc2626'}">${isTolerable ? `Tolerable (+${margin.toFixed(1)}h Buffer)` : `CRITICAL (-${Math.abs(margin).toFixed(1)}h Deficit!)`}</span>`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>BCP/DRP Resilience Assessment:</strong><br>
+                    <div class="step-line">• <strong>Total Downtime Loss:</strong> ${rto.toFixed(1)} hrs (RTO) × $${lossRate.toLocaleString()} / hr = <strong>$${totalOutageCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
+                    <div class="step-line">• <strong>Tolerability Margin (MTD - RTO):</strong> ${mtd.toFixed(1)} hrs (MTD) - ${rto.toFixed(1)} hrs (RTO) = <strong style="color:${isTolerable ? '#16a34a' : '#dc2626'};">${isTolerable ? `+${margin.toFixed(1)} hrs Safety Buffer (✓ RTO within MTD)` : `-${Math.abs(margin).toFixed(1)} hrs DEFICIT (❌ System Fails MTD Threshold!)`}</strong></div>
+                    <div class="step-line">• <strong>Max Data Loss Window (RPO):</strong> ${rpo.toFixed(2)} hrs × ${txRate.toLocaleString()} tx/hr = <strong>${txLost.toLocaleString()} transactions</strong> at risk of permanent loss.</div>
+                `;
+            }
+        }
+
+        function calculateInherentResidualRisk() {
+            const av = parseFloat(document.getElementById('inh-av').value) || 0;
+            const score = parseFloat(document.getElementById('inh-score').value) || 1;
+            const eff = (parseFloat(document.getElementById('ctrl-eff').value) || 0) / 100;
+
+            const inherent = av * (score / 10);
+            const mitigated = inherent * eff;
+            const residual = inherent - mitigated;
+
+            const resVal = document.getElementById('inh-result-val');
+            const resSteps = document.getElementById('inh-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `Residual Risk: $${residual.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${(eff * 100).toFixed(0)}% Mitigated)`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Inherent & Residual Risk Breakdown:</strong><br>
+                    <div class="step-line">• <strong>Inherent Financial Exposure:</strong> $${av.toLocaleString()} × (${score} ÷ 10) = <strong>$${inherent.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> (Raw risk without controls)</div>
+                    <div class="step-line">• <strong>Mitigated Risk Value:</strong> $${inherent.toLocaleString()} × ${(eff * 100).toFixed(0)}% = <strong>$${mitigated.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} reduction</strong></div>
+                    <div class="step-line">• <strong>Residual Risk:</strong> $${inherent.toLocaleString()} - $${mitigated.toLocaleString()} = <strong style="color:#2563eb;">$${residual.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong> (Tolerable residual risk accepted by asset owner)</div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof calculateRisk === 'function') calculateRisk();
+            if (typeof calculateBCPMetrics === 'function') calculateBCPMetrics();
+            if (typeof calculateInherentResidualRisk === 'function') calculateInherentResidualRisk();
+        });
+
+
+        function calculateBCPMetrics() {
+            const lossRate = parseFloat(document.getElementById('bcp-loss-rate').value) || 0;
+            const rto = parseFloat(document.getElementById('bcp-rto').value) || 0;
+            const mtd = parseFloat(document.getElementById('bcp-mtd').value) || 0;
+            const rpo = parseFloat(document.getElementById('bcp-rpo').value) || 0;
+            const txRate = parseFloat(document.getElementById('bcp-tx-rate').value) || 0;
+
+            const totalOutageCost = rto * lossRate;
+            const margin = mtd - rto;
+            const txLost = rpo * txRate;
+
+            const isTolerable = margin >= 0;
+            const resVal = document.getElementById('bcp-result-val');
+            const resSteps = document.getElementById('bcp-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `Total Loss: $${totalOutageCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} | <span style="color:${isTolerable ? '#16a34a' : '#dc2626'}">${isTolerable ? `Tolerable (${margin.toFixed(1)}h Buffer)` : `CRITICAL (${Math.abs(margin).toFixed(1)}h Deficit!)`}</span>`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>BCP/DRP Resilience Assessment:</strong><br>
+                    • <strong>Total Downtime Loss:</strong> ${rto.toFixed(1)} hrs (RTO) × $${lossRate.toLocaleString()} / hr = <strong>$${totalOutageCost.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong><br>
+                    • <strong>Tolerability Margin (MTD - RTO):</strong> ${mtd.toFixed(1)} hrs (MTD) - ${rto.toFixed(1)} hrs (RTO) = <strong style="color:${isTolerable ? '#16a34a' : '#dc2626'};">${isTolerable ? `+${margin.toFixed(1)} hrs Safety Buffer (✓ RTO within MTD)` : `-${Math.abs(margin).toFixed(1)} hrs DEFICIT (❌ System Fails MTD Threshold!)`}</strong><br>
+                    • <strong>Max Data Loss Window (RPO):</strong> ${rpo.toFixed(2)} hrs × ${txRate.toLocaleString()} tx/hr = <strong>${txLost.toLocaleString()} transactions</strong> at risk of permanent loss.
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof calculateRisk === 'function') calculateRisk();
+            if (typeof calculateBCPMetrics === 'function') calculateBCPMetrics();
+        });
+
+        const quizData = [
+    {
+        "q": "Why is a control that lives only in one person's head not a true control?",
+        "options": [
+            "It is a habit that leaves when the person leaves",
+            "It is illegal under ISO 27001",
+            "It requires password reset under standard organizational security baseline protocols",
+            "It costs too much money under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "A control existing only in someone's head lacks formal documentation, repeatability, auditability, and institutional continuity. If that person leaves or is unavailable, the control ceases to function reliably.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Information Security Governance?",
+        "options": [
+            "The system by which executive leadership directs, controls, and oversees security strategy",
+            "A writing software code operating within enterprise data processing pipelines enforced through centralized administrative governance and compliance monitoring",
+            "A configuring firewall rules operating within enterprise data processing pipelines",
+            "A buying cyber insurance operating within enterprise data processing pipelines"
+        ],
+        "correct": 0,
+        "exp": "Information Security Governance is the overarching system of organizational structures, strategic policies, leadership oversight, and processes that direct and control InfoSec to ensure alignment with business objectives and regulatory mandates.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is the primary purpose of an Information Security Policy?",
+        "options": [
+            "Provide step-by-step technical commands under standard organizational security baseline protocols",
+            "Express executive management's formal intent, rules, and direction for security",
+            "Recommend optional software tools in order to fulfill secondary operational objectives",
+            "List server serial numbers in order to fulfill secondary operational objectives"
+        ],
+        "correct": 1,
+        "exp": "An Information Security Policy is a high-level, mandatory governance document issued by senior management that defines the organization's overarching security philosophy, objectives, roles, and behavioral expectations.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What characterizes a Security Standard?",
+        "options": [
+            "Optional advisory advice across standard production computing environments",
+            "Mandatory, specific, and measurable technical baseline requirements",
+            "Executive high-level vision across standard production computing environments",
+            "Hardware manual across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "A Security Standard is a mandatory, quantifiable, and enforceable technical specification or benchmark (e.g. 'All wireless networks must enforce WPA3-Enterprise with AES-GCM').",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What characterizes a Security Guideline?",
+        "options": [
+            "Mandatory legal contract across standard production computing environments",
+            "Discretionary advisory recommendations and best practices",
+            "Step-by-step system build script across standard production computing environments",
+            "Executive punishment policy across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "A Security Guideline provides discretionary, non-mandatory advice, industry best practices, and recommendations to assist users in implementing security policies effectively.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What characterizes a Security Procedure / SOP?",
+        "options": [
+            "High-level goal across standard production computing environments",
+            "Detailed step-by-step operational instructions for performing tasks",
+            "Advisory recommendation across standard production computing environments",
+            "Annual financial budget across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "A Security Procedure (or Standard Operating Procedure - SOP) is a mandatory, step-by-step sequential instructional manual explaining precisely HOW to execute a specific operational security task.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is ISO/IEC 27001?",
+        "options": [
+            "An international standard for establishing and operating an Information Security Management System (ISMS)",
+            "A firewall programming language designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "A US federal privacy law designed to support enterprise operational infrastructure",
+            "An anti-virus software brand designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "ISO/IEC 27001 is the leading international, auditable management standard that specifies requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "In ISO 27001, what is the Statement of Applicability (SoA)?",
+        "options": [
+            "A list of employee salaries designed to support enterprise operational infrastructure",
+            "A document declaring which Annex A controls apply, which are excluded, and why",
+            "An invoice for IT equipment designed to support enterprise operational infrastructure",
+            "A software license agreement designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "In ISO 27001, the Statement of Applicability (SoA) is a mandatory document that lists all 93 Annex A security controls, declaring which controls are included or excluded along with justifications and implementation status.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "How many control themes exist in ISO 27001:2022 Annex A?",
+        "options": [
+            "4 Themes (Organizational, People, Physical, Technological)",
+            "10 Themes under standard production system configurations",
+            "2 Themes under standard production system configurations",
+            "50 Themes under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "ISO/IEC 27001:2022 organizes its 93 Annex A controls into 4 consolidated themes: Organizational (37 controls), People (8 controls), Physical (14 controls), and Technological (34 controls).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Management in plain terms?",
+        "options": [
+            "Ongoing work of finding what could go wrong, deciding impact, and choosing actions before incidents occur",
+            "Buying firewalls once a year across standard production computing environments implemented across standard enterprise production environments",
+            "Filing tax returns across standard production computing environments",
+            "Ignoring small security bugs across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Risk Management is the structured, ongoing process of identifying, analyzing, evaluating, treating, and monitoring risks to maintain them within an organization's acceptable risk appetite.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is the 5-step Risk Management Cycle under ISO 27005?",
+        "options": [
+            "Identify, Analyze, Evaluate, Treat, Monitor",
+            "Buy, Install, Run, Delete, Repeat",
+            "Scan, Hack, Patch, Test, Reboot",
+            "Plan, Do, Check, Act, Stop across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Under ISO 27005, the Risk Management Cycle follows 5 sequential phases: (1) Context Establishment, (2) Risk Identification, (3) Risk Analysis, (4) Risk Evaluation, and (5) Risk Treatment & Monitoring.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Inherent Risk?",
+        "options": [
+            "The raw level of risk present before any controls are applied",
+            "The risk remaining after all firewalls are configured",
+            "The cost of cyber insurance designed to support enterprise operational infrastructure",
+            "A risk that cannot cause harm designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Inherent Risk is the raw, baseline level of risk present in an asset or process before any safeguards, mitigations, or countermeasures are applied.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Residual Risk?",
+        "options": [
+            "The raw risk before controls designed to support enterprise operational infrastructure",
+            "The remaining risk that exists after security controls are implemented",
+            "A risk that has been deleted operating within enterprise data processing pipelines",
+            "A risk caused by bad weather operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Residual Risk is the remaining level of risk that persists after security controls, safeguards, and treatment plans have been implemented: Residual Risk = Inherent Risk - Control Mitigation Effect.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Mitigation?",
+        "options": [
+            "Implementing security controls to reduce vulnerability or impact",
+            "Canceling the project across standard production computing environments",
+            "Buying insurance across standard production computing environments",
+            "Ignoring the risk across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Risk Mitigation (Reduction) is the active deployment of technical, physical, or administrative controls (firewalls, encryption, employee training) to decrease the likelihood or impact of a threat.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Avoidance?",
+        "options": [
+            "Eliminating risk entirely by choosing not to perform the risky activity",
+            "Installing antivirus across standard production computing environments",
+            "Signing an NDA across standard production computing environments",
+            "Paying a ransom across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Risk Avoidance eliminates risk by completely terminating or declining to engage in the high-risk business activity or technology (e.g., refusing to store credit card data on local servers).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Transfer?",
+        "options": [
+            "Shifting financial or operational impact to a third party (e.g. cyber insurance)",
+            "Deploying a firewall across standard production computing environments implemented across standard enterprise production environments",
+            "Changing passwords across standard production computing environments",
+            "Hiring intern coders across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Risk Transfer shifts the financial burden of potential risk impacts to a third party (e.g., purchasing cyber liability insurance or outsourcing hosting to an SLA-backed cloud provider).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Acceptance?",
+        "options": [
+            "Formally deciding to carry the residual risk without added controls, signed off by a Risk Owner",
+            "Ignoring a risk secretly across standard production computing environments implemented across standard enterprise production environments",
+            "Hiding a bug from management across standard production computing environments",
+            "Failing an audit across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Risk Acceptance is an informed management decision to acknowledge and retain a residual risk without deploying further controls, typically when the cost of mitigation exceeds the potential loss.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "Who is the Risk Owner?",
+        "options": [
+            "The named executive or manager accountable for deciding risk treatment and accepting residual risk",
+            "The junior IT helpdesk technician configured for general baseline system administration implemented across standard enterprise production environments",
+            "The external auditor configured for general baseline system administration",
+            "The software vendor configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "The Risk Owner is the designated senior manager or business process owner who possesses the formal authority, accountability, and budget to accept, manage, or treat assigned operational risks.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Appetite?",
+        "options": [
+            "The broad level and type of risk an organization is willing to accept in pursuit of its goals",
+            "The exact numeric score on a matrix designed to support enterprise operational infrastructure",
+            "The budget allocated for firewalls designed to support enterprise operational infrastructure",
+            "The number of hackers attacking daily designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Risk Appetite is the high-level, aggregate amount and type of risk an organization is willingly prepared to pursue or retain in order to achieve its strategic business objectives.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is Risk Tolerance?",
+        "options": [
+            "The specific acceptable variation around risk appetite boundaries",
+            "A law passed by government designed to support enterprise operational infrastructure",
+            "The size of a database backup designed to support enterprise operational infrastructure",
+            "The speed of CPU processors designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Risk Tolerance is the specific, measurable variance or boundary around risk objectives that an organization is willing to tolerate for individual operations or projects.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What does Qualitative Risk Analysis use to rate risk?",
+        "options": [
+            "Subjective descriptive scales (e.g., High, Medium, Low) on a Risk Matrix",
+            "Exact financial calculations in dollars",
+            "Complex differential calculus under standard production system configurations",
+            "Random numbers under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Qualitative Risk Analysis uses subjective, descriptive scales (e.g. Low, Medium, High, Critical) and risk matrices based on expert judgment to rank and prioritize risks.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What does Quantitative Risk Analysis use to rate risk?",
+        "options": [
+            "Exact monetary and numerical financial values (SLE, ARO, ALE)",
+            "Color codes under standard production system configurations",
+            "Surveys under standard production system configurations",
+            "Guesswork under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Quantitative Risk Analysis uses objective monetary figures, actuarial data, and mathematical formulas (SLE, ARO, ALE) to express risk exposure in financial terms (e.g. dollars per year).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "In quantitative risk analysis, what is SLE?",
+        "options": [
+            "Single Loss Expectancy (Asset Value x Exposure Factor)",
+            "System Logging Engine across standard production computing environments",
+            "Standard License Entry across standard production computing environments",
+            "Software Logic Error across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Single Loss Expectancy (SLE) is the financial loss incurred each time a specific threat successfully exploits an asset: SLE = Asset Value (AV) × Exposure Factor (EF).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "In quantitative risk analysis, what is ARO?",
+        "options": [
+            "Annualized Rate of Occurrence",
+            "Asset Recovery Option",
+            "Automated Risk Oversight",
+            "Access Restriction Order"
+        ],
+        "correct": 0,
+        "exp": "Annualized Rate of Occurrence (ARO) is the estimated number of times a specific threat event is expected to occur within a one-year calendar period (e.g., once every 2 years = ARO 0.5).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "In quantitative risk analysis, what is ALE?",
+        "options": [
+            "Annualized Loss Expectancy (SLE x ARO)",
+            "Asset Log Entry across standard production computing environments",
+            "Access Level Exemption across standard production computing environments",
+            "Application Logic Engine across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Annualized Loss Expectancy (ALE) is the total estimated yearly financial loss resulting from a given risk: ALE = Single Loss Expectancy (SLE) × Annualized Rate of Occurrence (ARO).",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "If an asset is worth <strong>100,000 and Exposure Factor is 20%, what is SLE?",
+        "options": [
+            "</strong>20,000",
+            "<strong>100,000",
+            "</strong>5,000",
+            "<strong>50,000"
+        ],
+        "correct": 0,
+        "exp": "With Asset Value =</strong>100,000 and Exposure Factor = 20% (0.20): SLE = AV × EF = <strong>100,000 × 0.20 =</strong>20,000.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "If SLE is <strong>20,000 and ARO is 0.5 (once every 2 years), what is ALE?",
+        "options": [
+            "</strong>10,000 per year",
+            "<strong>20,000 per year",
+            "</strong>40,000 per year",
+            "<strong>5,000 per year"
+        ],
+        "correct": 0,
+        "exp": "With SLE =</strong>20,000 and ARO = 0.5 (once every 2 years): ALE = SLE × ARO = <strong>20,000 × 0.5 =</strong>10,000 per year.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "Can a rare event outrank a frequent nuisance on a risk matrix?",
+        "options": [
+            "Yes, if the rare event has catastrophic impact",
+            "No, frequency always wins implemented across standard enterprise production environments",
+            "Only if it is a ransomware attack",
+            "Matrix grids do not allow rare events"
+        ],
+        "correct": 0,
+        "exp": "Yes, on a risk matrix, a rare high-impact catastrophic event (e.g., total data center destruction) can outrank a frequent low-impact nuisance because massive impact elevates overall risk severity.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What do colors on a Risk Matrix establish?",
+        "options": [
+            "Action priority and escalation requirements",
+            "Software license tiers",
+            "Network cable speeds under standard production system configurations",
+            "Employee pay grades under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "The color coding on a Risk Matrix (Green, Yellow, Red) visually establishes risk severity tiers and management escalation thresholds, mandating immediate remediation for high-risk red zones.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What makes risk management 'management' rather than a one-time audit?",
+        "options": [
+            "The continuous monitor, review, and repeat loop",
+            "Having a big budget under standard production system configurations",
+            "Hiring external consultants",
+            "Using Linux servers under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Risk management is an ongoing lifecycle ('management') because threat landscapes, software vulnerabilities, business processes, and technologies continuously evolve, requiring periodic reviews.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "A one-page management statement that student data must be kept confidential is a...",
+        "options": [
+            "Policy",
+            "Standard",
+            "Procedure",
+            "Guideline"
+        ],
+        "correct": 0,
+        "exp": "A high-level mandatory directive from management establishing that student data must remain confidential is classified as an Information Security Policy.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "'Passwords must be at least 12 characters' is best described as a...",
+        "options": [
+            "Standard",
+            "Policy",
+            "Guideline",
+            "Procedure"
+        ],
+        "correct": 0,
+        "exp": "A mandatory, specific rule stating 'Passwords must be at least 12 characters' is a technical Security Standard.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "A firewall and MFA are added to a server. The risk left afterwards is called...",
+        "options": [
+            "Residual risk",
+            "Inherent risk",
+            "Avoided risk",
+            "Transferred risk"
+        ],
+        "correct": 0,
+        "exp": "The risk remaining on a server after adding a firewall, MFA, and hardening controls is termed Residual Risk.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "On a risk matrix, a rare event with catastrophic impact usually lands as...",
+        "options": [
+            "High or Critical",
+            "Low under standard production system configurations",
+            "Negligible",
+            "Informational"
+        ],
+        "correct": 0,
+        "exp": "On a standard 5x5 risk matrix, a rare likelihood combined with catastrophic operational or financial impact typically lands in the High / Critical risk category, requiring active senior executive oversight.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "Deciding how much risk an organization will accept is whose call?",
+        "options": [
+            "Leadership / Named Risk Owner",
+            "The junior intern configured for general baseline system administration",
+            "The database software",
+            "The internet service provider"
+        ],
+        "correct": 0,
+        "exp": "Determining acceptable risk levels and formally accepting residual risk is exclusively the responsibility of executive leadership and designated business Risk Owners, not technical technicians.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What document records which ISO 27001 Annex A controls apply and why?",
+        "options": [
+            "Statement of Applicability (SoA)",
+            "Network topology diagram",
+            "Employee handbook in order to fulfill secondary operational objectives",
+            "Tax audit report in order to fulfill secondary operational objectives"
+        ],
+        "correct": 0,
+        "exp": "The Statement of Applicability (SoA) is the definitive ISO 27001 document that catalogs which Annex A controls are implemented and provides formal justifications for any excluded controls.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "Do you have to implement all 93 Annex A controls in ISO 27001?",
+        "options": [
+            "No, risk assessment determines which controls are necessary and justified",
+            "Yes, all 93 are compulsory for every company",
+            "Only if you use Microsoft Windows under standard production system configurations",
+            "Only if mandated by law under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "No, organizations only implement Annex A controls deemed necessary based on their formal risk assessment and legal requirements, provided exclusions are justified in the Statement of Applicability.",
+        "section": "Part 1: Security Governance, Policy Hierarchy & ISO 27001 ISMS"
+    },
+    {
+        "q": "What is the primary role of a Change Management Policy?",
+        "options": [
+            "Ensure system changes are reviewed, tested, approved, and logged to prevent outages",
+            "Prevent employees from changing jobs across standard production computing environments",
+            "Enforce password changes daily across standard production computing environments",
+            "Manage currency exchanges across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Change Management enforces structured approval, testing, risk assessment, and rollback procedures for all IT changes to prevent service outages and security vulnerabilities.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is an Acceptable Use Policy (AUP)?",
+        "options": [
+            "Rules governing how employees may use corporate equipment, networks, and internet access",
+            "Rules for buying office furniture across standard production computing environments",
+            "Software code licenses across standard production computing environments",
+            "Building maintenance guidelines across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "An Acceptable Use Policy (AUP) specifies the permitted and prohibited uses of organizational IT assets, email, internet, and devices by employees and contractors.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Business Continuity Plan (BCP)?",
+        "options": [
+            "A comprehensive plan ensuring vital business functions operate during and after a disaster",
+            "A sales presentation designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "A tax filing strategy designed to support enterprise operational infrastructure",
+            "A software installer designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Business Continuity Plan (BCP) is a strategic operational plan that ensures critical business functions, personnel, and customer operations continue operating during and immediately following a major disaster.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Disaster Recovery Plan (DRP)?",
+        "options": [
+            "A technical IT plan for restoring IT infrastructure, servers, and data after a disaster",
+            "A fire evacuation drill designed to support enterprise operational infrastructure",
+            "An insurance policy claim form designed to support enterprise operational infrastructure",
+            "A customer support script designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Disaster Recovery Plan (DRP) is a tactical technical plan focused specifically on restoring IT infrastructure, data centers, servers, databases, and network connectivity after a disaster.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Recovery Time Objective (RTO)?",
+        "options": [
+            "Maximum acceptable duration of time that a system can be down after a disruption",
+            "The time it takes to buy a new server in order to fulfill secondary operational objectives",
+            "The age of a backup tape in order to fulfill secondary operational objectives",
+            "The duration of an employee shift in order to fulfill secondary operational objectives"
+        ],
+        "correct": 0,
+        "exp": "Recovery Time Objective (RTO) is the maximum acceptable duration of time that a system, application, or service can remain offline following a disaster before catastrophic damage occurs.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Recovery Point Objective (RPO)?",
+        "options": [
+            "Maximum acceptable amount of data loss measured in time (e.g. 4 hours of data)",
+            "The physical location of backup tapes in order to fulfill secondary operational objectives",
+            "The cost of data recovery in order to fulfill secondary operational objectives",
+            "The number of servers recovered in order to fulfill secondary operational objectives"
+        ],
+        "correct": 0,
+        "exp": "Recovery Point Objective (RPO) is the maximum tolerable volume of data loss measured in time (e.g. 1 hour of lost transactions) that an organization can withstand between the last backup and a disaster.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "If a company has an RPO of 1 hour, how frequently must backups be taken?",
+        "options": [
+            "At least every 1 hour",
+            "Once a week",
+            "Every 24 hours",
+            "Only on holidays"
+        ],
+        "correct": 0,
+        "exp": "If an organization establishes an RPO of 1 hour, data backups or replication synchronization must occur at least every 1 hour to prevent data loss from exceeding that threshold.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Security Audit?",
+        "options": [
+            "A formal evaluation of an organization's compliance with security policies, standards, or regulations",
+            "A checking employee attendance operating within enterprise data processing pipelines enforced through centralized administrative governance and compliance monitoring",
+            "A counting office chairs operating within enterprise data processing pipelines",
+            "An updating server drivers operating within enterprise data processing pipelines"
+        ],
+        "correct": 0,
+        "exp": "A Security Audit is an independent, systematic evaluation of an organization's security posture, testing compliance against formal policies, standards (ISO 27001), and regulatory controls.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is the difference between an Internal Audit and External Audit?",
+        "options": [
+            "Internal audits are conducted by staff for self-assessment; External audits are run by independent third parties for certification/compliance",
+            "Internal audits test firewalls; External test laptops across standard production computing environments implemented across standard enterprise production environments",
+            "There is no difference across standard production computing environments",
+            "External audits are free across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Internal Audits are conducted by an organization's own staff to assess readiness and identify control weaknesses internally, whereas External Audits are conducted by independent accredited third parties for official certification or regulatory compliance.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Compliance in information security?",
+        "options": [
+            "Adhering to external laws, regulations, and industry security standards (e.g. GDPR, PCI-DSS, HIPAA)",
+            "Following competitor advice across standard production computing environments enforced through centralized administrative governance and compliance monitoring",
+            "Paying employee bonuses across standard production computing environments",
+            "Buying legal software across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Compliance is the state of adhering to applicable external laws, government regulations, industry standards, contractual obligations, and internal security policies.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What does PCI-DSS regulate?",
+        "options": [
+            "Protection of payment card data and credit card transactions",
+            "Healthcare patient records under standard production system configurations",
+            "Student transcripts under standard production system configurations",
+            "Military defense secrets under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Payment Card Industry Data Security Standard (PCI-DSS) enforces strict technical and operational controls for organizations that store, process, or transmit credit cardholder data.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What does HIPAA regulate?",
+        "options": [
+            "Protection of Personal Health Information (PHI) in the healthcare industry",
+            "Credit card processing under standard production system configurations",
+            "Public university tuition rates under standard production system configurations",
+            "Web search history under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "The Health Insurance Portability and Accountability Act (HIPAA) regulates the privacy, security, and breach notification standards for Protected Health Information (PHI) in healthcare.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What does GDPR govern?",
+        "options": [
+            "Data protection and privacy rights for individuals within the European Union",
+            "US federal government servers under standard production system configurations",
+            "Cryptocurrency trading under standard production system configurations",
+            "Wireless router frequencies under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "The General Data Protection Regulation (GDPR) is a comprehensive European Union regulation governing data privacy, personal data sovereignty, consent, and user data rights worldwide.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Third-Party Risk Assessment?",
+        "options": [
+            "Evaluating security risks introduced by external vendors, suppliers, and cloud providers",
+            "Scanning internal laptops across standard production computing environments implemented across standard enterprise production environments",
+            "Testing employee passwords across standard production computing environments",
+            "Buying new monitors across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A Third-Party Risk Assessment evaluates the cybersecurity posture, data handling practices, and compliance of external vendors, SaaS providers, and suppliers prior to granting system access.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Service Level Agreement (SLA)?",
+        "options": [
+            "A contractual commitment defining performance metrics, uptime guarantees, and remedies between vendor and client",
+            "A software download link designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "A employee job description designed to support enterprise operational infrastructure",
+            "A hardware wiring diagram designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Service Level Agreement (SLA) is a legally binding contract between a service provider and customer specifying guaranteed performance metrics, uptime percentages (e.g. 99.9%), and penalty remedies.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Segregation of Duties (SoD)?",
+        "options": [
+            "Dividing critical tasks among multiple people to prevent fraud and unauthorized actions",
+            "Assigning 1 person all admin rights across standard production computing environments",
+            "Working in separate office rooms across standard production computing environments",
+            "Using 2 monitors across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Segregation of Duties (SoD) divides critical tasks and approval permissions among multiple individuals to prevent fraud, unauthorized changes, and single points of human failure.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "Why must Security Policies be reviewed periodically?",
+        "options": [
+            "Threats, technology, laws, and business environments evolve over time",
+            "To pass the time under standard organizational security baseline protocols",
+            "Because software expires under standard organizational security baseline protocols",
+            "To change font styles under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Security policies must be reviewed at least annually or after major organizational/technological changes to ensure they remain legally compliant, effective, and aligned with emerging threat vectors.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Key Risk Indicator (KRI)?",
+        "options": [
+            "A metric used to indicate how risky an activity is or provide early warnings of risk exposure",
+            "A password hash key designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "A physical room key designed to support enterprise operational infrastructure",
+            "A database primary key designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Key Risk Indicator (KRI) is a forward-looking metric that provides early warning signals that an organization's risk exposure is increasing (e.g. rising number of failed privileged login attempts).",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Key Performance Indicator (KPI) in security?",
+        "options": [
+            "A metric measuring how effectively security controls or processes achieve operational goals",
+            "A network ping test designed to support enterprise operational infrastructure enforced through centralized administrative governance and compliance monitoring",
+            "A CPU clock rate designed to support enterprise operational infrastructure",
+            "A salary bonus designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Key Performance Indicator (KPI) in security measures the operational efficiency and effectiveness of security controls (e.g. Mean Time to Detect [MTTD], Mean Time to Remediate [MTTR]).",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is the primary role of a Chief Information Security Officer (CISO)?",
+        "options": [
+            "Executive leader responsible for aligning security strategy with business objectives and governance",
+            "Fixing printer jams across standard production computing environments enforced through centralized administrative governance and compliance monitoring",
+            "Writing database code across standard production computing environments",
+            "Installing network cables across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The Chief Information Security Officer (CISO) is the executive responsible for establishing the enterprise vision, strategy, governance, and management of information security and cyber risk.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is an Information Security Steering Committee?",
+        "options": [
+            "A cross-functional group of business leaders providing executive oversight on security strategy and budget",
+            "A group of junior coders designed to support enterprise operational infrastructure enforced through centralized administrative governance and compliance monitoring",
+            "An external audit firm designed to support enterprise operational infrastructure",
+            "A software helpdesk team designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "An Information Security Steering Committee is a governance body comprising cross-functional executive leaders (IT, Legal, HR, Finance, CISO) that aligns security strategy with overarching business priorities.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Security Exception / Waiver Process?",
+        "options": [
+            "A formal process for reviewing and approving temporary non-compliance with a security standard",
+            "An ignoring rules without permission operating within enterprise data processing pipelines",
+            "A disabling antivirus permanently operating within enterprise data processing pipelines",
+            "A fired employees operating within enterprise data processing pipelines"
+        ],
+        "correct": 0,
+        "exp": "A Security Exception / Waiver Process formally evaluates, documents, and approves temporary non-compliance with a security standard, requiring compensating controls and executive sign-off.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What are Compensating Controls?",
+        "options": [
+            "Alternative security mechanisms put in place when a primary control cannot be implemented",
+            "Paying extra salary to security staff under standard production system configurations",
+            "Buying insurance under standard production system configurations",
+            "Deleting old logs under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Compensating Controls are alternative security countermeasures deployed to mitigate risk when a primary security control cannot be implemented due to technical or business constraints.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is the primary focus of ISO 27002?",
+        "options": [
+            "Providing detailed implementation guidance and code of practice for Annex A controls",
+            "Defining mandatory audit rules across standard production computing environments",
+            "Calculating financial tax rates across standard production computing environments",
+            "Setting Wi-Fi frequencies across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "ISO/IEC 27002 provides a comprehensive code of practice and practical implementation guidance for the security controls referenced in ISO 27001 Annex A.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is ISO 27005 focused on?",
+        "options": [
+            "Information security risk management processes and guidelines",
+            "Cloud encryption protocols across standard production computing environments",
+            "Physical door lock specs across standard production computing environments",
+            "Desktop OS setup across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "ISO/IEC 27005 provides detailed guidelines and methodologies for conducting information security risk assessments and risk management within an ISO 27001 ISMS.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is NIST Cybersecurity Framework (CSF)?",
+        "options": [
+            "A popular framework based on 5 core functions: Identify, Protect, Detect, Respond, Recover",
+            "A US government secret key designed to support enterprise operational infrastructure enforced through centralized administrative governance and compliance monitoring",
+            "A database language designed to support enterprise operational infrastructure",
+            "A network protocol designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "The NIST Cybersecurity Framework (CSF) is a voluntary, risk-based framework developed by the US National Institute of Standards and Technology to help organizations manage and reduce cybersecurity risks.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What are the 5 Core Functions of NIST CSF?",
+        "options": [
+            "Identify, Protect, Detect, Respond, Recover",
+            "Plan, Build, Run, Test, Fix implemented across standard enterprise production environments",
+            "Input, Process, Output, Store, Delete",
+            "Access, Authn, Authz, Audit, Exit"
+        ],
+        "correct": 0,
+        "exp": "The 5 core functions of NIST CSF 1.1 are: (1) Identify, (2) Protect, (3) Detect, (4) Respond, and (5) Recover (expanded with Govern in CSF 2.0).",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "In NIST CSF, what does 'Protect' encompass?",
+        "options": [
+            "Implementing safeguards to ensure delivery of critical services (e.g. Access Control, Awareness, Data Security)",
+            "Monitoring network traffic under standard production system configurations implemented across standard enterprise production environments",
+            "Recovering from backups under standard production system configurations",
+            "Writing incident reports under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In NIST CSF, 'Protect' outlines safeguards to ensure delivery of critical services, including access control, awareness training, data security, and protective maintenance.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "In NIST CSF, what does 'Detect' encompass?",
+        "options": [
+            "Identifying the occurrence of a cybersecurity event in a timely manner (e.g. SIEM, anomaly detection)",
+            "Installing firewalls under standard production system configurations implemented across standard enterprise production environments",
+            "Replacing hard drives under standard production system configurations",
+            "Setting budgets under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In NIST CSF, 'Detect' defines activities to identify the timely occurrence of cybersecurity events, anomalies, and intrusion indicators through continuous monitoring.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "In NIST CSF, what does 'Respond' encompass?",
+        "options": [
+            "Taking action regarding a detected cybersecurity incident (containment, analysis, mitigation)",
+            "Buying new laptops under standard production system configurations implemented across standard enterprise production environments",
+            "Creating user accounts under standard production system configurations",
+            "Taking routine backups under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In NIST CSF, 'Respond' contains action plans to contain, mitigate, analyze, and eradicate security incidents once detected, preventing widespread damage.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "In NIST CSF, what does 'Recover' encompass?",
+        "options": [
+            "Restoring capabilities and services that were impaired due to an incident (resilience & business restoration)",
+            "Paying ransom under standard production system configurations implemented across standard enterprise production environments",
+            "Scanning open ports under standard production system configurations",
+            "Writing new policies under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In NIST CSF, 'Recover' establishes plans to restore impaired services, rebuild affected systems, and communicate recovery status to stakeholders following an incident.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Risk Register?",
+        "options": [
+            "A centralized database/document logging all identified risks, owners, treatment plans, and residual risk levels",
+            "A list of employee passwords designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "A receipt for software purchases designed to support enterprise operational infrastructure",
+            "An asset inventory of monitors designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Risk Register is a centralized repository that logs identified risks, risk owners, likelihood/impact scores, current controls, residual risk ratings, and planned treatment actions.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "Why must a Risk Register be updated regularly?",
+        "options": [
+            "Risks, threats, system architectures, and control effectiveness change constantly",
+            "Because software requires re-installation under standard organizational security baseline protocols",
+            "To fill up hard drive space under standard organizational security baseline protocols",
+            "To change document dates under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "A Risk Register must be reviewed and updated regularly because changes in software, infrastructure, vendors, and threat actors constantly alter risk likelihoods and severities.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Risk Exposure?",
+        "options": [
+            "The measure of potential loss associated with a risk, combining likelihood and impact",
+            "An exposing servers to public wi-fi operating within enterprise data processing pipelines",
+            "A leaving office doors open operating within enterprise data processing pipelines",
+            "An unencrypted emails operating within enterprise data processing pipelines"
+        ],
+        "correct": 0,
+        "exp": "Risk Exposure is the quantified measure of potential loss facing an organization based on the probability of threat events multiplied by their estimated financial and operational impact.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Shadow IT?",
+        "options": [
+            "IT systems, software, or cloud services deployed within an organization without official IT/security approval",
+            "Dark web websites across standard production computing environments implemented across standard enterprise production environments",
+            "Working night shifts across standard production computing environments",
+            "Offsite server backups across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Shadow IT refers to hardware, software, cloud applications, or unauthorized devices used within an organization without explicit IT and security department approval or oversight.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is the primary risk of Shadow IT?",
+        "options": [
+            "Unmonitored systems lack security controls, policy compliance, and data backups",
+            "Higher electricity bills across standard production computing environments",
+            "Slower CPU speeds across standard production computing environments",
+            "Fewer desk spaces across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The primary risk of Shadow IT is unauthorized data storage and leakage in unmonitored cloud services, creating unpatched vulnerabilities and regulatory non-compliance.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Vendor Lock-In?",
+        "options": [
+            "Dependence on a single cloud or software vendor making migration to another provider difficult or costly",
+            "Physical locks on server racks across standard production computing environments implemented across standard enterprise production environments",
+            "Expired user accounts across standard production computing environments",
+            "Network cable unplugging across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Vendor Lock-In occurs when an organization becomes overly dependent on a single vendor's proprietary technology, making migration to alternatives prohibitively expensive or complex.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is a Security Baseline?",
+        "options": [
+            "Minimum mandatory security configuration settings required for systems before deployment",
+            "The bottom line of a contract designed to support enterprise operational infrastructure",
+            "A network ping benchmark designed to support enterprise operational infrastructure",
+            "The lowest employee salary designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A Security Baseline is a documented minimum standard of technical security configurations that all servers, endpoints, and network devices must meet before entering production.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is Hardening in system administration?",
+        "options": [
+            "Securing a system by reducing its surface of vulnerability (disabling unused ports, services, default accounts)",
+            "Enclosing servers in metal cases across standard production computing environments implemented across standard enterprise production environments",
+            "Making passwords longer across standard production computing environments",
+            "Pouring concrete around server racks across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "System Hardening is the process of securing a system by minimizing its attack surface: disabling unnecessary services, removing default accounts, closing unused ports, and applying security patches.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What is an Incident Response Plan (IRP)?",
+        "options": [
+            "Documented procedures for detecting, responding to, and recovering from cybersecurity incidents",
+            "A server purchase guide designed to support enterprise operational infrastructure implemented across standard enterprise production environments",
+            "An employment contract designed to support enterprise operational infrastructure",
+            "A customer feedback form designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "An Incident Response Plan (IRP) is a documented, structured framework that guides cybersecurity teams in rapidly detecting, containing, investigating, and recovering from security breaches.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    },
+    {
+        "q": "What are the 6 standard stages of Incident Response?",
+        "options": [
+            "Preparation, Identification, Containment, Eradication, Recovery, Lessons Learned",
+            "Scan, Hack, Run, Hide, Delete, Forget under standard production system configurations",
+            "Plan, Code, Test, Deploy, Monitor, Stop under standard production system configurations",
+            "Detect, Ignore, Wait, Call Help, Reboot, Exit"
+        ],
+        "correct": 0,
+        "exp": "The 6 standard phases of NIST/SANS Incident Response are: (1) Preparation, (2) Identification / Detection, (3) Containment, (4) Eradication, (5) Recovery, and (6) Lessons Learned.",
+        "section": "Part 2: ISO 27005 Risk Management, SLE/ALE Formulas & BCP/DRP"
+    }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+    </script>
+</body>
+</html>

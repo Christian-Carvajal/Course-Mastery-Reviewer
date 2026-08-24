@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Introduction to Data Science | University Study Guide</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Data Mining</h1>
+        <p>Introduction to Data Science  Complete Academic Reviewer & 81-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">Introduction to Data Science</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+
+            <div class="card">
+                <h2>1. What's so important about data?  The Big Three</h2>
+                <p>The three teams that sit around the data in most organisations:</p>
+                <ol>
+                    <li><strong>Data Team:</strong> Solves a business problem and does a significant amount of work on the data that is available first.</li>
+                    <li><strong>Business Intelligence Team:</strong> Provides business insights through dashboards and reporting.</li>
+                    <li><strong>Data Science Team:</strong> Uses business analytics or data analytics tools to build models that predict future outcomes.</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h2>2. Evolution of the Data Science Industry</h2>
+                <p>Each stage keeps everything before it and adds one new capability. Driven by the growth of data and radical improvements in technology.</p>
+                <ol>
+                    <li><strong>Statistics:</strong>
+                        <ul>
+                            <li>Gathering and cleaning data sets</li>
+                            <li>Applying statistical methods</li>
+                        </ul>
+                    </li>
+                    <li><strong>Data mining:</strong>
+                        <ul>
+                            <li>Gathering and cleaning data sets</li>
+                            <li>Applying statistical methods</li>
+                            <li>Extracting patterns from data</li>
+                        </ul>
+                    </li>
+                    <li><strong>Predictive analytics:</strong>
+                        <ul>
+                            <li>Gathering and cleaning data sets</li>
+                            <li>Applying statistical methods</li>
+                            <li>Extracting patterns from data</li>
+                            <li>Performing more accurate forecasts</li>
+                        </ul>
+                    </li>
+                    <li><strong>Data science:</strong>
+                        <ul>
+                            <li>Gathering and cleaning data sets</li>
+                            <li>Applying statistical methods</li>
+                            <li>Extracting patterns from data</li>
+                            <li>Performing more accurate forecasts</li>
+                            <li>The term used today</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h2>3. Data Analysis vs Data Analytics</h2>
+                <p>Two words people use interchangeably. They are not the same thing.</p>
+                
+                <h3>What is Data Analysis?</h3>
+                <ol>
+                    <li><strong>Break it down:</strong> Divide a dataset into manageable chunks, study them individually, then examine how they relate to the other parts.</li>
+                    <li><strong>Look at what happened:</strong> You are working with events that have already taken place.</li>
+                    <li><strong>Answer How and Why:</strong> The output is an explanation, not a prediction.</li>
+                </ol>
+
+                <h3>What is Data Analytics?</h3>
+                <ol>
+                    <li><strong>Explore what's ahead:</strong> Analytics is aimed at potential future events.</li>
+                    <li><strong>Apply reasoning:</strong> Logical and computational reasoning applied to the component parts you obtained in an analysis.</li>
+                    <li><strong>Turn patterns into action:</strong> Look for patterns, then explore what you could do with them going forward.</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h2>4. Qualitative & Quantitative Analytics</h2>
+                <p>Two ways of getting to an answer:</p>
+                <ul>
+                    <li><strong>Qualitative (Intuition + Analysis):</strong> Human judgment applied to what the data shows.</li>
+                    <li><strong>Quantitative (Formulas + Algorithms):</strong> Structured methods that scale beyond what a person can hold in mind.</li>
+                </ul>
+
+                <div class="definition-card">
+                    <span class="def-badge">Knowledge Check</span>
+                    <p><strong>Question:</strong> Which of the following is associated with the meaning of the term "analytics"?</p>
+                    <p><strong>Correct Answer:</strong> Essentially, analytics involves applying logical and computational reasoning to the components derived from an analysis.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>5. Business Analytics</h2>
+                <p>Analytics applied specifically to business data, aimed at a decision rather than at discovery for its own sake.</p>
+                <ul>
+                    <li><strong>What it works with:</strong> Sales, operations, marketing, and finance data. The everyday records a business already generates.</li>
+                    <li><strong>What it asks:</strong> How are we performing, what is driving it, and what is likely to happen next quarter.</li>
+                    <li><strong>What it produces:</strong> Dashboards, reports, and forecasting models that a manager can actually act on.</li>
+                    <li><strong>Where it sits:</strong> The bridge between the BI team's reporting and the data science team's predictive models.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>6. Business Intelligence (BI) & BI in Practice</h2>
+                <p><strong>Business Intelligence (BI):</strong> The process of analysing and reporting historical business data.</p>
+                <ul>
+                    <li><strong>Aims to explain past events:</strong> Uses business data.</li>
+                    <li><strong>Backward looking:</strong> It reports what already happened, it does not forecast.</li>
+                    <li><strong>Shared view:</strong> Everyone reads performance from the same numbers.</li>
+                    <li><strong>BI Dashboard:</strong> Historical performance, read at a glance.</li>
+                </ul>
+
+                <h3>Business Intelligence in Practice</h3>
+                <p>Includes all technology-driven tools involved in the process of analyzing, understanding and reporting available past data (BI Report, BI Dashboard):</p>
+                <ul>
+                    <li><strong>Make decisions:</strong> On evidence, rather than on instinct or the loudest voice.</li>
+                    <li><strong>Extract insights:</strong> Work out what the numbers are actually saying.</li>
+                    <li><strong>Extract ideas:</strong> Surface new questions worth chasing next.</li>
+                </ul>
+
+                <div class="definition-card">
+                    <span class="def-badge">Knowledge Check</span>
+                    <p><strong>Question:</strong> Which of the following best describes business intelligence (BI)?</p>
+                    <p><strong>Correct Answer:</strong> Analysing and reporting historical business data to explain past events.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>7. Machine Learning (ML) & How It Works</h2>
+                <p><strong>Machine Learning (ML):</strong> The ability of machines to predict outcomes without being explicitly programmed.</p>
+                <p>ML is about creating and implementing algorithms that let machines receive data and use this data to:</p>
+                <ul>
+                    <li><strong>Make predictions:</strong> Estimate what is likely to happen next, from data it has already seen.</li>
+                    <li><strong>Analyse patterns:</strong> Find structure in volumes of data far too large to eyeball.</li>
+                    <li><strong>Give recommendations:</strong> Suggest the next action, product, or route worth taking.</li>
+                </ul>
+                <p>Machine learning is the engine behind the predictive side of data science.</p>
+
+                <h3>How Machine Learning Works</h3>
+                <p><strong>Formula:</strong> Mathematics + Computing power + AI (Artificial intelligence) = Predict outcomes from data without being explicitly programmed to.</p>
+                <p><strong>The algorithm, step by step:</strong> Training data &rarr; Model &rarr; Minimise the error &rarr; Predictions.</p>
+                <p><strong>AI + statistics =</strong> Predictions with unprecedented accuracy.</p>
+            </div>
+
+            <div class="card">
+                <h2>8. Artificial Intelligence (AI): Traditional vs Generative AI</h2>
+                <p><strong>Artificial Intelligence (AI):</strong> Simulating human knowledge and decision making with computers.</p>
+                <ul>
+                    <li>We, as humans, have only managed to reach AI through machine learning.</li>
+                    <li><strong>Judgment, not just calculation:</strong> The aim is decisions a person would otherwise have to make.</li>
+                    <li><strong>Learned, not hand-written:</strong> The rules come from data, which is why ML is the route in.</li>
+                    <li>Machine learning is the part of AI we have actually built.</li>
+                </ul>
+
+                <h3>Traditional AI vs Generative AI</h3>
+                <p>Two different jobs, both sitting under the same AI umbrella:</p>
+                <ul>
+                    <li><strong>Traditional AI:</strong> Mainly applied to structured datasets to improve efficiency and accuracy in repetitive tasks. (Examples: Forecasting, fraud detection, recommendation ranking).</li>
+                    <li><strong>Generative AI:</strong> Generating new raw data or content, such as text, code, audio, or images, by relying on patterns from a given training dataset. (Examples: Chat assistants, image generation, code completion).</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>9. Data & Data Science at a Glance Timeline & Needs</h2>
+                
+                <h3>When Each One Is Applied</h3>
+                <ul>
+                    <li><strong>Traditional and big data:</strong> At the beginning of your analysis.</li>
+                    <li><strong>Business intelligence:</strong> After the data has been gathered and organised.</li>
+                    <li><strong>Traditional methods and ML:</strong> After BI reports have been created and discussed.</li>
+                </ul>
+
+                <h3>Why You Need Each One</h3>
+                <ul>
+                    <li><strong>Traditional and big data:</strong> Data-driven decisions require well-organised and relevant raw data stored in a digital format.</li>
+                    <li><strong>Business intelligence:</strong> Use data to create reports and dashboards to gain business insights.</li>
+                    <li><strong>Traditional methods:</strong> Assess potential future scenarios by using advanced statistical methods.</li>
+                    <li><strong>Machine learning:</strong> Utilise artificial intelligence to predict behaviour in unprecedented ways.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>10. Traditional Data vs Big Data</h2>
+
+                <h3>Traditional Data</h3>
+                <p>The everyday, orderly kind. Most businesses run on it.</p>
+                <ul>
+                    <li><strong>Structured:</strong> Rows and columns with a fixed shape you can count on.</li>
+                    <li><strong>Managed from one computer:</strong> No cluster needed. It fits in a single database on a single machine. One machine is enough.</li>
+                </ul>
+
+                <h3>Big Data</h3>
+                <p>Too much, too varied, and too fast for a single machine to hold. Stored and processed across many machines.</p>
+                <ul>
+                    <li><strong>Structured:</strong> Tidy rows and columns, the same shape as traditional data.</li>
+                    <li><strong>Semi-structured:</strong> Tags or markers but no fixed table. Think JSON or XML.</li>
+                    <li><strong>Unstructured:</strong> Text, images, audio, video. No inherent shape at all.</li>
+                </ul>
+
+                <h3>The Vs of Big Data</h3>
+                <ul>
+                    <li><strong>3 Vs (The original three almost everyone agrees on):</strong> Volume, Variety, Velocity.</li>
+                    <li><strong>5 Vs, 7 Vs, 11 Vs (Added along the way):</strong> Value, Variability, Visualisation, Vision.</li>
+                </ul>
+
+                <h3>Comparison Table</h3>
+                <table>
+                    <thead>
+                        <tr><th>Feature</th><th>Traditional Data</th><th>Big Data</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Volume</strong></td><td>Small enough to sit on a single machine.</td><td>Distributed between many computers.</td></tr>
+                        <tr><td><strong>Variety</strong></td><td>Uniform rows and columns, one shape throughout.</td><td>Text, images, audio, mobile. Many shapes at once.</td></tr>
+                        <tr><td><strong>Velocity</strong></td><td>Arrives and updates at a steady, manageable pace.</td><td>Retrieved in real time.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h2>11. Traditional Methods</h2>
+                <p>Perfect for forecasting future performance with great accuracy (Predictive Analytics).</p>
+                <ul>
+                    <li><strong>Regression:</strong> Fit a line through the data to estimate one value from another.</li>
+                    <li><strong>Cluster analysis:</strong> Group observations that behave alike, without being told the groups.</li>
+                    <li><strong>Factor analysis:</strong> Reduce many variables down to the few underlying drivers.</li>
+                </ul>
+
+                <div class="definition-card">
+                    <span class="def-badge">Knowledge Check</span>
+                    <p><strong>Question:</strong> Which column from our infographic contains activities that belong to the field of predictive analytics, and does not aim solely to explain past behaviour?</p>
+                    <p><strong>Correct Answer:</strong> Traditional methods.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>12. Data Science Process (5 Steps)</h2>
+                <p>Data science is a discipline reliant on data availability, while business analytics does not completely rely on data. It is mostly the part that uses complex mathematical, statistical, and programming tools.</p>
+                <p>Every earlier stage still lives inside it. Data science is simply the name the industry settled on.</p>
+
+                <h3>The Algorithm / Process, Step by Step:</h3>
+                <ol>
+                    <li><strong>Ask:</strong> Start from a real question, not from the data you happen to have.</li>
+                    <li><strong>Gather and clean:</strong> Collect the data and get it into a state you can trust.</li>
+                    <li><strong>Explore:</strong> Apply statistical methods and find the patterns that matter.</li>
+                    <li><strong>Model:</strong> Build something that forecasts, classifies, or ranks.</li>
+                    <li><strong>Act:</strong> Put the result in front of the person who has to decide.</li>
+                </ol>
+            </div>
+
+        </div>
+
+        <!-- TAB 2
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 81</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions dynamically rendered here -->
+            </div>
+        </div>
+
+        <!-- TAB 3: FORMULAS / QUICK REFERENCE -->
+        <div id="formulas" class="tab-content">
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2 style="margin:0;">Quick Reference & Summary Matrix</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+                
+                <h3>The Big Three Teams</h3>
+                <table>
+                    <thead>
+                        <tr><th>Team</th><th>Primary Function</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Data Team</td><td>Solves a business problem and does a significant amount of work on available data first.</td></tr>
+                        <tr><td>Business Intelligence Team</td><td>Provides business insights through dashboards and reporting.</td></tr>
+                        <tr><td>Data Science Team</td><td>Uses business analytics or data analytics tools to build models that predict future outcomes.</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Data Analysis vs Data Analytics</h3>
+                <table>
+                    <thead>
+                        <tr><th>Aspect</th><th>Data Analysis</th><th>Data Analytics</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Focus</strong></td><td>Events that have already taken place (Past).</td><td>Aimed at potential future events (Future).</td></tr>
+                        <tr><td><strong>Method</strong></td><td>Divide dataset into manageable chunks, study individually, examine relations.</td><td>Apply logical and computational reasoning to component parts.</td></tr>
+                        <tr><td><strong>Output</strong></td><td>Explanation (Answers How and Why), not a prediction.</td><td>Turn patterns into action (explore what you could do going forward).</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>Traditional Data vs Big Data</h3>
+                <table>
+                    <thead>
+                        <tr><th>Feature</th><th>Traditional Data</th><th>Big Data</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Volume</strong></td><td>Sits on a single machine.</td><td>Distributed between many computers.</td></tr>
+                        <tr><td><strong>Variety</strong></td><td>Uniform rows and columns.</td><td>Text, images, audio, mobile (many shapes).</td></tr>
+                        <tr><td><strong>Velocity</strong></td><td>Steady, manageable pace.</td><td>Retrieved in real time.</td></tr>
+                        <tr><td><strong>Storage</strong></td><td>Single database on single computer.</td><td>Stored and processed across many machines.</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>AI & ML Summary</h3>
+                <table>
+                    <thead>
+                        <tr><th>Concept</th><th>Definition / Function</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Artificial Intelligence (AI)</td><td>Simulating human knowledge and decision making with computers.</td></tr>
+                        <tr><td>Machine Learning (ML)</td><td>The ability of machines to predict outcomes without being explicitly programmed. Engine of predictive data science.</td></tr>
+                        <tr><td>Traditional AI</td><td>Applied to structured datasets to improve efficiency/accuracy in repetitive tasks (Forecasting, fraud detection).</td></tr>
+                        <tr><td>Generative AI</td><td>Generating new raw content (text, code, audio, images) relying on patterns from training dataset.</td></tr>
+                    </tbody>
+                </table>
+
+                <h3>5-Step Data Science Algorithm</h3>
+                <ol>
+                    <li><strong>Ask:</strong> Start from a real question, not from available data.</li>
+                    <li><strong>Gather and clean:</strong> Collect data into a trusted state.</li>
+                    <li><strong>Explore:</strong> Apply statistical methods and find key patterns.</li>
+                    <li><strong>Model:</strong> Build something that forecasts, classifies, or ranks.</li>
+                    <li><strong>Act:</strong> Put result in front of the decision maker.</li>
+                </ol>
+            </div>
+        
+            
+            <!-- ==========================================
+                 Interactive Academic Calculators Section
+                 ========================================== -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Interactive Academic Calculators (Live Data Architecture & Growth Engines)</h2>
+                
+                <!-- Calculator 1: Big Data Velocity & Volume Engine -->
+                <div class="calc-card">
+                    <div class="calc-title">🧮 Topic 10: The Vs of Big Data — Ingestion Velocity, Volume Scaling & Architecture Scaler</div>
+                    <div class="calc-desc">Calculate storage capacity and ingestion bandwidth scaling to evaluate when analytical workloads transition from Traditional Data to Big Data architectures.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="ds-rec-size">Average Record Size (Bytes):</label>
+                            <input type="number" id="ds-rec-size" class="calc-input" value="500" step="50" min="10" oninput="calculateDataScaling()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ds-velocity">Event Ingestion Rate (events / sec):</label>
+                            <input type="number" id="ds-velocity" class="calc-input" value="2500" step="250" min="1" oninput="calculateDataScaling()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="ds-duration">Collection Timeframe (Days):</label>
+                            <input type="number" id="ds-duration" class="calc-input" value="30" step="5" min="1" oninput="calculateDataScaling()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Scaled Footprint & Architecture Recommendation:</span>
+                            <span class="calc-result-val" id="ds-result-val">3.24 TB / month (Big Data Lakehouse)</span>
+                        </div>
+                        <div class="calc-math-steps" id="ds-math-steps">
+                            <strong>Workload Scalability Analysis:</strong><br>
+                            <div class="step-line">• <strong>Total Ingested Events:</strong> 2,500 events/sec × 86,400 sec/day × 30 days = <strong>6,480,000,000 records (6.48 Billion)</strong></div>
+                            <div class="step-line">• <strong>Total Storage Volume:</strong> 6.48B records × 500 Bytes = <strong>3.24 TB (3,240 GB)</strong></div>
+                            <div class="step-line">• <strong>Network Bandwidth Required:</strong> 1.25 MB/s = <strong>10.00 Mbps continuous stream</strong></div>
+                            <div class="step-line">• <strong>Recommended Architecture:</strong> <span style="color:#0d9488; font-weight:700;">Distributed Big Data Architecture</span> (Apache Kafka ingestion buffer + Parquet columnar lakehouse storage).</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 2: Unit Converter & Growth Forecaster -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Topic 10: Big Data Storage Hierarchy (Bytes to Petabytes) & Growth Forecaster</div>
+                    <div class="calc-desc">Convert data storage units across binary magnitudes (1 KB = 1,024 B) and project future storage requirements based on compounding annual growth rates.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="conv-size">Baseline Data Size:</label>
+                            <input type="number" id="conv-size" class="calc-input" value="750" step="50" min="1" oninput="calculateVolumeGrowth()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="conv-unit">Starting Unit:</label>
+                            <select id="conv-unit" class="calc-input" onchange="calculateVolumeGrowth()">
+                                <option value="GB" selected>Gigabytes (GB)</option>
+                                <option value="TB">Terabytes (TB)</option>
+                                <option value="MB">Megabytes (MB)</option>
+                                <option value="PB">Petabytes (PB)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="conv-growth">Annual Data Growth Rate (%):</label>
+                            <input type="number" id="conv-growth" class="calc-input" value="35" step="5" min="0" oninput="calculateVolumeGrowth()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">3-Year Storage Projection:</span>
+                            <span class="calc-result-val" id="conv-result-val">1.84 TB in 3 Years (+146.0%)</span>
+                        </div>
+                        <div class="calc-math-steps" id="conv-math-steps">
+                            <strong>Compounding Growth Projection:</strong><br>
+                            <div class="step-line">• <strong>Current Volume:</strong> 750 GB = 768,000 MB = <strong>0.732 TB</strong> = 805,306,368,000 Bytes</div>
+                            <div class="step-line">• <strong>1-Year Forecast (+35%):</strong> 750 GB × 1.35 = <strong>1,012.50 GB (0.989 TB)</strong></div>
+                            <div class="step-line">• <strong>3-Year Forecast (+35% compound):</strong> 750 GB × (1.35)³ = <strong>1,845.28 GB (1.802 TB)</strong></div>
+                            <div class="step-line">• <strong>5-Year Forecast:</strong> 750 GB × (1.35)⁵ = <strong>3,367.64 GB (3.289 TB)</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 3: KPI Growth Analyzer -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Topic 4 & 5: Quantitative Analytics — Performance Metric Growth Rate & Strategic Target Attainment</div>
+                    <div class="calc-desc">Evaluate percentage changes between baseline and current metrics against organizational strategic performance targets.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="kpi-base">Baseline Metric (V₁):</label>
+                            <input type="number" id="kpi-base" class="calc-input" value="12000" step="500" min="1" oninput="calculateKPIGrowth()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="kpi-curr">Current Metric (V₂):</label>
+                            <input type="number" id="kpi-curr" class="calc-input" value="16500" step="500" min="0" oninput="calculateKPIGrowth()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="kpi-target">Strategic Target Goal (T):</label>
+                            <input type="number" id="kpi-target" class="calc-input" value="15000" step="500" min="1" oninput="calculateKPIGrowth()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Growth Rate & Goal Attainment:</span>
+                            <span class="calc-result-val" id="kpi-result-val">+37.50% Growth | 110.00% Target Met</span>
+                        </div>
+                        <div class="calc-math-steps" id="kpi-math-steps">
+                            <strong>Analytics Variance Breakdown:</strong><br>
+                            <div class="step-line">• <strong>Absolute Growth:</strong> V₂ - V₁ = 16,500 - 12,000 = <strong>+4,500 units</strong></div>
+                            <div class="step-line">• <strong>Percentage Growth Rate:</strong> [(V₂ - V₁) ÷ V₁] × 100% = (4,500 ÷ 12,000) × 100% = <strong>+37.50%</strong></div>
+                            <div class="step-line">• <strong>Strategic Target Attainment:</strong> (V₂ ÷ T) × 100% = (16,500 ÷ 15,000) × 100% = <strong style="color:#16a34a;">110.00% (Target Surpassed by +10.0%)</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div></div>
+
+    <script>
+
+        // ==========================================
+        // Interactive Data Science Scaling Logic
+        // ==========================================
+        function calculateDataScaling() {
+            const recSize = parseFloat(document.getElementById('ds-rec-size').value) || 0;
+            const velocity = parseFloat(document.getElementById('ds-velocity').value) || 0;
+            const days = parseFloat(document.getElementById('ds-duration').value) || 1;
+
+            const totalSeconds = days * 86400;
+            const totalRecords = velocity * totalSeconds;
+            const totalBytes = totalRecords * recSize;
+
+            const totalMB = totalBytes / (1024 * 1024);
+            const totalGB = totalBytes / (1024 * 1024 * 1024);
+            const totalTB = totalBytes / (1024 * 1024 * 1024 * 1024);
+
+            const throughputBytesPerSec = velocity * recSize;
+            const throughputMbps = (throughputBytesPerSec * 8) / (1000 * 1000);
+
+            let volStr = '';
+            let archRec = '';
+            let archColor = '';
+
+            if (totalTB >= 1.0) {
+                volStr = `${totalTB.toFixed(2)} TB`;
+                archRec = 'Big Data Distributed Architecture (Kafka + Spark / Cloud Lakehouse)';
+                archColor = '#0d9488';
+            } else if (totalGB >= 1.0) {
+                volStr = `${totalGB.toFixed(2)} GB`;
+                archRec = 'Modern Analytical Warehouse (BigQuery / PostgreSQL Columnar)';
+                archColor = '#2563eb';
+            } else {
+                volStr = `${totalMB.toFixed(2)} MB`;
+                archRec = 'Traditional Relational Database (SQL / SQLite / OLTP)';
+                archColor = '#16a34a';
+            }
+
+            const resVal = document.getElementById('ds-result-val');
+            const resSteps = document.getElementById('ds-math-steps');
+
+            if (resVal) {
+                resVal.innerHTML = `<span style="color:${archColor}; font-weight:800;">${volStr} (${archRec})</span>`;
+            }
+
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Workload Scalability Analysis:</strong><br>
+                    <div class="step-line">• <strong>Total Ingested Events:</strong> ${velocity.toLocaleString()} events/sec × 86,400 sec/day × ${days} days = <strong>${totalRecords.toLocaleString()} records</strong></div>
+                    <div class="step-line">• <strong>Total Storage Volume:</strong> ${totalRecords.toLocaleString()} records × ${recSize} Bytes = <strong>${volStr}</strong></div>
+                    <div class="step-line">• <strong>Network Stream Bandwidth:</strong> <strong>${throughputMbps.toFixed(2)} Mbps continuous stream</strong></div>
+                    <div class="step-line">• <strong>Recommended Architecture:</strong> <span style="color:${archColor}; font-weight:700;">${archRec}</span></div>
+                `;
+            }
+        }
+
+        function calculateVolumeGrowth() {
+            const size = parseFloat(document.getElementById('conv-size').value) || 1;
+            const unit = document.getElementById('conv-unit').value;
+            const growth = (parseFloat(document.getElementById('conv-growth').value) || 0) / 100;
+
+            const unitMultiplier = { 'MB': 1, 'GB': 1024, 'TB': 1024 * 1024, 'PB': 1024 * 1024 * 1024 };
+            const sizeInMB = size * (unitMultiplier[unit] || 1024);
+
+            const y1MB = sizeInMB * Math.pow(1 + growth, 1);
+            const y3MB = sizeInMB * Math.pow(1 + growth, 3);
+            const y5MB = sizeInMB * Math.pow(1 + growth, 5);
+
+            function formatMB(mb) {
+                if (mb >= 1024 * 1024 * 1024) return `${(mb / (1024 * 1024 * 1024)).toFixed(2)} PB`;
+                if (mb >= 1024 * 1024) return `${(mb / (1024 * 1024)).toFixed(2)} TB`;
+                if (mb >= 1024) return `${(mb / 1024).toFixed(2)} GB`;
+                return `${mb.toFixed(2)} MB`;
+            }
+
+            const y3Formatted = formatMB(y3MB);
+            const totalGrowthPct = (Math.pow(1 + growth, 3) - 1) * 100;
+
+            const resVal = document.getElementById('conv-result-val');
+            const resSteps = document.getElementById('conv-math-steps');
+
+            if (resVal) resVal.innerHTML = `${y3Formatted} in 3 Years (+${totalGrowthPct.toFixed(1)}%)`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Compounding Growth Projection:</strong><br>
+                    <div class="step-line">• <strong>Current Volume:</strong> ${size} ${unit} = <strong>${formatMB(sizeInMB)}</strong></div>
+                    <div class="step-line">• <strong>1-Year Forecast (+${(growth * 100).toFixed(0)}%):</strong> <strong>${formatMB(y1MB)}</strong></div>
+                    <div class="step-line">• <strong>3-Year Forecast (+${(growth * 100).toFixed(0)}% compound):</strong> <strong>${formatMB(y3MB)}</strong></div>
+                    <div class="step-line">• <strong>5-Year Forecast (+${(growth * 100).toFixed(0)}% compound):</strong> <strong>${formatMB(y5MB)}</strong></div>
+                `;
+            }
+        }
+
+        function calculateKPIGrowth() {
+            const v1 = parseFloat(document.getElementById('kpi-base').value) || 1;
+            const v2 = parseFloat(document.getElementById('kpi-curr').value) || 0;
+            const target = parseFloat(document.getElementById('kpi-target').value) || 1;
+
+            const absChange = v2 - v1;
+            const growthPct = (absChange / v1) * 100;
+            const targetPct = (v2 / target) * 100;
+            const growthSign = growthPct >= 0 ? '+' : '';
+
+            const resVal = document.getElementById('kpi-result-val');
+            const resSteps = document.getElementById('kpi-math-steps');
+
+            if (resVal) resVal.innerHTML = `${growthSign}${growthPct.toFixed(2)}% Growth | ${targetPct.toFixed(2)}% Target Met`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Analytics Variance Breakdown:</strong><br>
+                    <div class="step-line">• <strong>Absolute Metric Change:</strong> V₂ - V₁ = ${v2.toLocaleString()} - ${v1.toLocaleString()} = <strong>${growthSign}${absChange.toLocaleString()} units</strong></div>
+                    <div class="step-line">• <strong>Percentage Growth Rate:</strong> [(V₂ - V₁) ÷ V₁] × 100% = (${absChange.toLocaleString()} ÷ ${v1.toLocaleString()}) × 100% = <strong>${growthSign}${growthPct.toFixed(2)}%</strong></div>
+                    <div class="step-line">• <strong>Strategic Target Attainment:</strong> (V₂ ÷ Target) × 100% = (${v2.toLocaleString()} ÷ ${target.toLocaleString()}) × 100% = <strong style="color:${targetPct >= 100 ? '#16a34a' : '#ea580c'}">${targetPct.toFixed(2)}% (${targetPct >= 100 ? `Goal Surpassed by +${(targetPct - 100).toFixed(1)}%` : `Goal Deficit of -${(100 - targetPct).toFixed(1)}%`})</strong></div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof calculateDataScaling === 'function') calculateDataScaling();
+            if (typeof calculateVolumeGrowth === 'function') calculateVolumeGrowth();
+            if (typeof calculateKPIGrowth === 'function') calculateKPIGrowth();
+        });
+
+        const quizData = [
+    {
+        "q": "Which team solves a business problem and does a significant amount of work on the data that is available first?",
+        "options": [
+            "Business Intelligence Team",
+            "Data Team",
+            "Data Science Team",
+            "Predictive Analytics Team"
+        ],
+        "correct": 1,
+        "exp": "The Data Engineering / Data Architecture team focuses on the primary ingestion, ETL pipeline construction, cleansing, and warehouse storage of raw operational data before downstream analytics.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "Which team provides business insights through dashboards and reporting?",
+        "options": [
+            "Data Team (responsible for routine operational infrastructure support)",
+            "Business Intelligence Team",
+            "Data Science Team",
+            "Machine Learning Team"
+        ],
+        "correct": 1,
+        "exp": "The Business Intelligence (BI) / Reporting team builds interactive dashboards, tracks KPIs, and provides diagnostic reports to summarize operational performance for stakeholders.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "Which team uses business analytics or data analytics tools to build models that predict future outcomes?",
+        "options": [
+            "Data Team",
+            "Business Intelligence Team",
+            "Data Science Team",
+            "Database Team"
+        ],
+        "correct": 2,
+        "exp": "The Data Science / Advanced Analytics team uses statistical modeling, regression, and machine learning to forecast future trends and optimize strategic decisions.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "how many main teams sit around data in most organisations?",
+        "options": [
+            "Two",
+            "Three",
+            "Five",
+            "Seven"
+        ],
+        "correct": 1,
+        "exp": "Modern enterprise data architectures typically center around 3 core functional pillars: Data Engineering (infrastructure), Business Intelligence (descriptive analytics), and Data Science (predictive & prescriptive modeling).",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What rule governs each stage in the evolution of the data science industry?",
+        "options": [
+            "Each stage replaces the previous stage entirely",
+            "Each stage keeps everything before it and adds one new capability",
+            "Each stage reduces data volume by half",
+            "Each stage uses fewer algorithms under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "The evolutionary rule of data science is cumulative: each new technological stage subsumes, preserves, and builds upon the foundational capabilities of earlier stages rather than discarding them.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "Which two capabilities define the Statistics stage in the evolution of data science?",
+        "options": [
+            "Gathering and cleaning data sets; Applying statistical methods",
+            "Extracting patterns; Performing forecasts across standard production computing environments",
+            "Building dashboards; Generating code across standard production computing environments",
+            "Distributed computing; Real-time retrieval across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The foundational Statistics stage focused on formal hypothesis testing, probability distributions, sampling theory, and descriptive statistical summaries of finite datasets.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What new capability does Data Mining add to Statistics?",
+        "options": [
+            "Performing more accurate forecasts",
+            "The term used today",
+            "Extracting patterns from data",
+            "Building chat assistants"
+        ],
+        "correct": 2,
+        "exp": "Data Mining extended classical statistics by introducing automated algorithmic pattern discovery, association rule mining (e.g. Apriori), and anomaly detection across large relational databases.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What new capability does Predictive Analytics add to Data Mining?",
+        "options": [
+            "Gathering data sets",
+            "Applying statistical methods",
+            "Performing more accurate forecasts",
+            "Generating images computed across multi-dimensional attribute distributions in statistical datasets"
+        ],
+        "correct": 2,
+        "exp": "Predictive Analytics shifted the focus from retrospective pattern discovery to forward-looking predictive modeling, leveraging supervised algorithms to forecast unknown future events.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What additions characterize 'Data science' in the industry evolution model?",
+        "options": [
+            "It removes statistical methods across standard production computing environments",
+            "It adds 'The term used today' while keeping all previous capabilities",
+            "It uses only single-machine storage across standard production computing environments",
+            "It stops extracting patterns across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Modern Data Science synthesizes statistics, computer science, distributed Big Data infrastructure, and deep learning algorithms to process massive multimodal data at enterprise scale.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What drives the evolution of the data science industry?",
+        "options": [
+            "Decreasing data volumes and manual entry",
+            "The growth of data and radical improvements in technology",
+            "Strict government limits on database size computed across multi-dimensional attribute distributions in statistical datasets",
+            "Replacing statistics with intuition"
+        ],
+        "correct": 1,
+        "exp": "The evolution of data science is driven by exponential increases in compute capacity (Moore's law, GPUs, cloud clusters) and the massive explosion of digitized multi-source data (IoT, web, mobile).",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "Are Data Analysis and Data Analytics the same thing?",
+        "options": [
+            "Yes, they are identical in every way",
+            "No, people use them interchangeably, but they are not the same thing",
+            "Data Analysis is for future events, Analytics is for past events",
+            "Data Analytics works only without data"
+        ],
+        "correct": 1,
+        "exp": "Data Analysis and Data Analytics are distinct: Data Analysis is descriptive (dissecting past historical facts to explain 'what happened'), whereas Data Analytics is predictive and prescriptive (modeling future trajectories).",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What is the first step of Data Analysis?",
+        "options": [
+            "Explore what's ahead across standard production computing environments",
+            "Break it down: Divide a dataset into manageable chunks, study them individually, then examine how they relate to the other parts",
+            "Turn patterns into action across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Build a neural network across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "The first step of Data Analysis is defining the specific research question and scoping the business problem to establish clear investigative boundaries.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "In Data Analysis, what time orientation are you working with?",
+        "options": [
+            "Potential future events",
+            "Events that have already taken place",
+            "Real-time future predictions computed across multi-dimensional attribute distributions in statistical datasets",
+            "Unprecedented scenarios"
+        ],
+        "correct": 1,
+        "exp": "Data Analysis operates strictly with a retrospective time orientation — examining past transactional logs and historical performance records.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What is the output of Data Analysis?",
+        "options": [
+            "A future prediction designed to support enterprise operational infrastructure",
+            "An explanation, not a prediction",
+            "An automated image designed to support enterprise operational infrastructure",
+            "A hardware cluster designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "The primary outputs of Data Analysis are descriptive summaries, root-cause diagnostic reports, and contextual visualizations that explain past operational phenomena.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What is Data Analytics aimed at?",
+        "options": [
+            "Events that have already taken place",
+            "Potential future events",
+            "Cleaning historical logs only",
+            "Replacing all managers"
+        ],
+        "correct": 1,
+        "exp": "Data Analytics is aimed at forward-looking discovery, predictive forecasting, optimization modeling, and automated decision-making under uncertainty.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What reasoning is applied in Data Analytics?",
+        "options": [
+            "Pure emotional instinct in order to fulfill secondary operational objectives",
+            "Logical and computational reasoning applied to component parts obtained in analysis",
+            "Guesswork without data in order to fulfill secondary operational objectives computed across multi-dimensional attribute distributions in statistical datasets",
+            "Manual paper records in order to fulfill secondary operational objectives"
+        ],
+        "correct": 1,
+        "exp": "Data Analytics combines deductive mathematical logic with inductive machine learning reasoning (generalizing patterns from sample training data to unseen populations).",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What is step 3 of Data Analytics?",
+        "options": [
+            "Answer How and Why across standard production computing environments",
+            "Turn patterns into action: Look for patterns, then explore what you could do with them going forward",
+            "Divide dataset into chunks across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Report historical BI numbers across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Step 3 of the Data Analytics lifecycle is Model Evaluation & Validation — benchmarking predictive performance using metrics like RMSE, ROC-AUC, and cross-validation against holdout test datasets.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What components form Qualitative Analytics?",
+        "options": [
+            "Formulas + Algorithms",
+            "Intuition + Analysis",
+            "Database + Server",
+            "Text + Video"
+        ],
+        "correct": 1,
+        "exp": "Qualitative Analytics synthesizes non-numerical data such as customer interview transcripts, ethnographic observations, brand sentiment, and expert domain intuition.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What is Qualitative Analytics defined as?",
+        "options": [
+            "Structured methods that scale beyond mind capacity",
+            "Human judgment applied to what the data shows",
+            "Automated code completion across standard production computing environments",
+            "Fitting a regression line across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Qualitative Analytics is the structured interpretation of non-quantified subjective data (text, sentiment, user experience feedback) to extract underlying themes and motivational drivers.",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What components form Quantitative Analytics?",
+        "options": [
+            "Intuition + Analysis",
+            "Formulas + Algorithms",
+            "Sales + Operations",
+            "Dashboards + Reports"
+        ],
+        "correct": 1,
+        "exp": "Quantitative Analytics applies mathematical, numerical, and statistical methods to structured measurable metrics (revenue figures, conversion rates, server latency).",
+        "section": "Part 1: The Big Three & Evolution of Data Science"
+    },
+    {
+        "q": "What is Quantitative Analytics defined as?",
+        "options": [
+            "Human judgment applied to what the data shows across standard production computing environments",
+            "Structured methods that scale beyond what a person can hold in mind",
+            "Explaining past events backward across standard production computing environments",
+            "Dividing datasets into chunks across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Quantitative Analytics is the rigorous mathematical measurement, statistical modeling, and algorithmic processing of numeric data to derive objective empirical conclusions.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "Which of the following is associated with the meaning of the term 'analytics' (Knowledge Check)?",
+        "options": [
+            "Dividing a dataset into manageable chunks, studying them individually across standard production computing environments",
+            "Explaining past events through analytics across standard production computing environments",
+            "Essentially, analytics involves applying logical and computational reasoning to the components derived from an analysis",
+            "None of the above across standard production computing environments"
+        ],
+        "correct": 2,
+        "exp": "The term 'analytics' fundamentally denotes the application of logical, mathematical, and computational methods to discover, interpret, and communicate meaningful predictive patterns in data.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "How is Business Analytics defined?",
+        "options": [
+            "Analytics applied specifically to business data, aimed at a decision rather than at discovery for its own sake",
+            "Analyzing raw images without business goals across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Storing unstructured video on a single PC across standard production computing environments",
+            "Generating random text across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Business Analytics bridges data science and executive decision-making, using predictive models and quantitative techniques to solve specific commercial problems and optimize business strategy.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What data does Business Analytics work with?",
+        "options": [
+            "Unstructured audio files only under standard production system configurations",
+            "Sales, operations, marketing, and finance data (everyday records a business already generates)",
+            "Pure synthetic data under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Sensor logs from space under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Business Analytics operates primarily on processed operational, customer, and financial data combined with market indicators and competitive benchmarks.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What questions does Business Analytics ask?",
+        "options": [
+            "What is the speed of light? under standard production system configurations",
+            "How are we performing, what is driving it, and what is likely to happen next quarter",
+            "How to write Python code? under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Which graphics card is best? under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Business Analytics asks forward-looking and prescriptive questions: 'Why did this trend emerge?', 'What will happen next quarter?', and 'What is the optimal strategic intervention?'",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What does Business Analytics produce?",
+        "options": [
+            "Raw semi-structured JSON under standard production system configurations",
+            "Dashboards, reports, and forecasting models that a manager can actually act on",
+            "Hardware clusters under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Unstructured videos under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Business Analytics produces actionable predictive models, revenue forecasts, scenario simulations, and prescriptive optimization recommendations for business leaders.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "Where does Business Analytics sit in an organization?",
+        "options": [
+            "At the very start of data gathering only under standard production system configurations",
+            "The bridge between the BI team's reporting and the data science team's predictive models",
+            "Completely separate from BI and Data Science",
+            "Inside the hardware maintenance team under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Business Analytics sits at the intersection of business domain expertise, statistical analysis, and technology, serving as the strategic bridge between engineering and executive leadership.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What is Business Intelligence (BI)?",
+        "options": [
+            "The process of analysing and reporting historical business data",
+            "A generating new synthetic code operating within enterprise data processing pipelines",
+            "A predicting 10-year weather trends operating within enterprise data processing pipelines",
+            "A building deep learning hardware operating within enterprise data processing pipelines"
+        ],
+        "correct": 0,
+        "exp": "Business Intelligence (BI) is the set of technologies and practices for transforming structured historical business data into actionable dashboards, KPIs, and operational reports.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "Why is BI described as 'backward looking'?",
+        "options": [
+            "It looks at future scenarios under standard organizational security baseline protocols",
+            "It reports what already happened, it does not forecast",
+            "It uses non-digital paper logs under standard organizational security baseline protocols",
+            "It cannot be read on a computer under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "BI is described as 'backward-looking' because its analytical queries aggregate historical transaction data to describe and diagnose what has already occurred up to the present moment.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What does 'Shared view' mean in BI?",
+        "options": [
+            "Everyone writes different code",
+            "Everyone reads performance from the same numbers",
+            "Sharing computer screens physically computed across multi-dimensional attribute distributions in statistical datasets",
+            "Dividing data across 100 computers"
+        ],
+        "correct": 1,
+        "exp": "In BI, a 'shared single source of truth' means all departments align on standardized definitions, centralized warehouse schemas, and reconciled KPI metrics to prevent conflicting departmental reports.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "Which of the following best describes business intelligence (BI) (Knowledge Check)?",
+        "options": [
+            "Building models that predict future outcomes from available data",
+            "Analysing and reporting historical business data to explain past events",
+            "Generating new raw content such as text, code, audio, or images",
+            "None of the above configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Business Intelligence is best described as the discipline of ingesting, cleaning, and aggregating historical business data to deliver descriptive reports and interactive KPI dashboards.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "In BI practice, what does 'Make decisions' mean?",
+        "options": [
+            "On instinct or the loudest voice",
+            "On evidence, rather than on instinct or the loudest voice",
+            "By coin flip under standard production system configurations",
+            "By asking external vendors under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "In BI practice, 'making decisions' refers to executives utilizing verified dashboard metrics and trend analyses to guide budget allocations, staffing, and operational policies.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "In BI practice, what does 'Extract insights' mean?",
+        "options": [
+            "Work out what the numbers are actually saying",
+            "Write new algorithms under standard production system configurations",
+            "Clean JSON tags under standard production system configurations",
+            "Compress video files under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In BI practice, 'extracting insights' means identifying meaningful correlations, sudden performance anomalies, and efficiency bottlenecks hidden within aggregated operational data.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "In BI practice, what does 'Extract ideas' mean?",
+        "options": [
+            "Delete past database logs",
+            "Surface new questions worth chasing next",
+            "Build hardware servers",
+            "Stop reporting under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "In BI practice, 'extracting ideas' involves discovering untapped commercial opportunities (such as high-converting customer micro-segments) through exploratory slice-and-dice data querying.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What is Machine Learning (ML)?",
+        "options": [
+            "The ability of machines to predict outcomes without being explicitly programmed",
+            "An explicitly writing 10,000 if-else statements operating within enterprise data processing pipelines",
+            "A manual data entry into excel operating within enterprise data processing pipelines",
+            "A physical engine inside a vehicle designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Machine Learning (ML) is the computational subfield of AI focused on developing algorithms that iteratively learn mathematical representations and optimize performance from data without explicit manual rule programming.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What three tasks do ML algorithms let machines perform with data?",
+        "options": [
+            "Make predictions, Analyse patterns, Give recommendations",
+            "Clean data, Format tables, Print reports computed across multi-dimensional attribute distributions in statistical datasets",
+            "Delete logs, Store JSON, Build PCs",
+            "Ask questions, Hire teams, Run meetings"
+        ],
+        "correct": 0,
+        "exp": "Machine Learning algorithms enable computers to: (1) Make probabilistic predictions on unseen data, (2) Discover latent multidimensional patterns, and (3) Generate personalized prescriptive recommendations.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What does 'Make predictions' mean in Machine Learning?",
+        "options": [
+            "Guess without looking at past records",
+            "Estimate what is likely to happen next, from data it has already seen",
+            "Generate human voice audio under standard production system configurations",
+            "Format SQL tables under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "In ML, 'making predictions' means outputting a continuous forecast (regression) or discrete class label (classification) when provided with novel, previously unobserved feature inputs.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What does 'Analyse patterns' mean in Machine Learning?",
+        "options": [
+            "Find structure in volumes of data far too large to eyeball",
+            "Look at 5 rows manually under standard production system configurations",
+            "Draw charts by hand under standard production system configurations",
+            "Ask a manager under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In ML, 'analyzing patterns' means automatically identifying complex non-linear correlations, clusters, and structural regularities across high-dimensional feature spaces.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What does 'Give recommendations' mean in Machine Learning?",
+        "options": [
+            "Suggest the next action, product, or route worth taking",
+            "Report last quarter's revenue",
+            "Export CSV files under standard production system configurations",
+            "Shutdown servers under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In ML, 'giving recommendations' refers to ranking items or actions (e.g. collaborative filtering recommendation engines) based on learned user preferences and contextual similarity.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "Machine learning is described as the engine behind which side of data science?",
+        "options": [
+            "Historical BI side",
+            "Predictive side",
+            "Qualitative side",
+            "Hardware side"
+        ],
+        "correct": 1,
+        "exp": "Machine Learning is the algorithmic computational engine powering the advanced predictive and prescriptive branches of modern data science.",
+        "section": "Part 2: Data Analysis vs Analytics & Business Intelligence"
+    },
+    {
+        "q": "What three components combine to predict outcomes in Machine Learning?",
+        "options": [
+            "Mathematics + Computing power + AI",
+            "Data team + BI team + Management",
+            "SQL + Excel + Word",
+            "Sales + Marketing + Finance"
+        ],
+        "correct": 0,
+        "exp": "ML combines: (1) Training Data (historical experience), (2) Mathematical Model (hypothesis function), and (3) Optimization Algorithm (guided by an objective loss function) to predict outcomes.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "What is the step-by-step algorithm pipeline in Machine Learning?",
+        "options": [
+            "Training data -> Model -> Minimise the error -> Predictions",
+            "Predictions -> Model -> Training data -> Error",
+            "Ask -> Gather -> Clean -> Model across standard production computing environments",
+            "Big data -> Traditional data -> BI -> ML across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The ML algorithmic pipeline progresses through: Data Ingestion -> Feature Engineering -> Model Training via Loss Minimization -> Hyperparameter Tuning -> Validation on Holdout Data.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "What combination produces predictions with unprecedented accuracy?",
+        "options": [
+            "AI + statistics",
+            "Excel + Word",
+            "BI + Sales",
+            "Intuition + Judgment"
+        ],
+        "correct": 0,
+        "exp": "Combining massive training datasets, deep neural network architectures, and distributed GPU compute clusters enables modern ML models to achieve superhuman predictive accuracy.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "What is Artificial Intelligence (AI)?",
+        "options": [
+            "Simulating human knowledge and decision making with computers",
+            "Replacing all physical computers with paper",
+            "A database table with 3 columns designed to support enterprise operational infrastructure",
+            "A traditional regression line designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "Artificial Intelligence (AI) is the overarching academic and technological discipline dedicated to engineering computational systems capable of performing tasks that typically require human cognitive intelligence.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "How have humans managed to reach AI so far?",
+        "options": [
+            "Through machine learning",
+            "Through manual hand-written rulebooks",
+            "Without using any data",
+            "By using only traditional single-computer databases"
+        ],
+        "correct": 0,
+        "exp": "Human progress in AI has primarily been achieved through empirical data-driven Machine Learning and Deep Neural Networks rather than hand-coded symbolic logic systems.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Are the rules in AI hand-written or learned?",
+        "options": [
+            "Hand-written by programmers",
+            "Learned, not hand-written: The rules come from data",
+            "Randomly guessed under standard production system configurations",
+            "Imported from BI dashboards"
+        ],
+        "correct": 1,
+        "exp": "In modern AI systems, decision boundaries and operational rules are learned statistically and inductively from data through optimization, rather than being manually hand-written by software developers.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Machine learning is described as what part of AI?",
+        "options": [
+            "The part of AI we have actually built",
+            "The theoretical part we cannot build",
+            "The hardware casing",
+            "The historical reporting tool"
+        ],
+        "correct": 0,
+        "exp": "Machine Learning is a fundamental core technical subset of Artificial Intelligence, representing the empirical statistical learning engine within the broader AI domain.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "What is Traditional AI mainly applied to?",
+        "options": [
+            "Generating new raw text or images across standard production computing environments",
+            "Structured datasets to improve efficiency and accuracy in repetitive tasks",
+            "Creating music tracks from scratch across standard production computing environments",
+            "Unstructured video processing only across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Traditional (Symbolic/Deterministic) AI was primarily applied to expert rule engines, deterministic game trees (e.g. chess search), and formal knowledge graphs with explicit logic constraints.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Which of the following are examples of Traditional AI?",
+        "options": [
+            "Chat assistants and image generation",
+            "Forecasting, fraud detection, recommendation ranking",
+            "Code completion and audio generation",
+            "Writing essays configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Traditional AI examples include rule-based expert systems, heuristic A* pathfinding algorithms, and deterministic decision trees with fixed conditional logic.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "What is Generative AI defined as?",
+        "options": [
+            "Generating new raw data or content, such as text, code, audio, or images, by relying on patterns from a given training dataset",
+            "Reporting historical sales in a BI dashboard across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Storing structured tables on one machine across standard production computing environments",
+            "Grouping observations with cluster analysis across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Generative AI refers to deep learning models (such as LLMs and Diffusion models) trained on massive corpora to synthesize novel, high-fidelity content (text, code, images, audio, 3D structures).",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Which of the following are examples of Generative AI?",
+        "options": [
+            "Fraud detection and forecasting",
+            "Chat assistants, image generation, code completion",
+            "Cluster analysis and factor analysis",
+            "Simple regression lines configured for general baseline system administration"
+        ],
+        "correct": 1,
+        "exp": "Prominent Generative AI examples include Transformer Large Language Models (ChatGPT, Claude, Gemini), Diffusion image synthesizers (Midjourney, Stable Diffusion), and generative code models.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "When in the analysis process are Traditional and Big Data applied?",
+        "options": [
+            "At the beginning of your analysis",
+            "After BI reports have been created",
+            "At the very end of predictive modeling",
+            "Only after ML predictions are complete"
+        ],
+        "correct": 0,
+        "exp": "Traditional Data and Big Data techniques are applied at the very start of the pipeline — during data collection, ingestion, filtering, and initial pre-processing.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "When in the process is Business Intelligence applied?",
+        "options": [
+            "Before data is gathered",
+            "After the data has been gathered and organised",
+            "After ML algorithms finish training computed across multi-dimensional attribute distributions in statistical datasets",
+            "At the end of the timeline only"
+        ],
+        "correct": 1,
+        "exp": "Business Intelligence is applied in the middle stage of the analytics lifecycle — organizing cleansed data into reporting dashboards to describe and diagnose current business performance.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "When in the process are Traditional Methods and ML applied?",
+        "options": [
+            "At the beginning of analysis",
+            "Before gathering data under standard production system configurations",
+            "After BI reports have been created and discussed",
+            "Instead of gathering data"
+        ],
+        "correct": 2,
+        "exp": "Traditional statistical methods (linear regression) and Machine Learning algorithms are applied in the advanced downstream stages to perform predictive forecasting and prescriptive optimization.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Why do you need Traditional and Big Data?",
+        "options": [
+            "Data-driven decisions require well-organised and relevant raw data stored in a digital format",
+            "To eliminate the need for computers under standard organizational security baseline protocols",
+            "To replace all business managers under standard organizational security baseline protocols",
+            "To bypass statistical methods under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "Traditional and Big Data architectures are essential because all subsequent BI dashboards, statistical models, and ML algorithms require clean, structured, and reliable data pipelines to function.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Why do you need Business Intelligence?",
+        "options": [
+            "To predict 50 years into the future under standard organizational security baseline protocols",
+            "Use data to create reports and dashboards to gain business insights",
+            "To generate synthetic images under standard organizational security baseline protocols",
+            "To cluster unlabelled data under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Business Intelligence is necessary to provide operational visibility, track organizational health, align departments around unified KPIs, and diagnose performance drivers.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Why do you need Traditional Methods?",
+        "options": [
+            "To store video files under standard organizational security baseline protocols",
+            "Assess potential future scenarios by using advanced statistical methods",
+            "To create chat assistants under standard organizational security baseline protocols",
+            "To manage single-machine databases under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Traditional statistical methods are needed because they provide transparent, interpretable, and computationally efficient baseline models for hypothesis testing and linear relationships.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "Why do you need Machine Learning?",
+        "options": [
+            "To report past Q1 revenue under standard organizational security baseline protocols",
+            "Utilise artificial intelligence to predict behaviour in unprecedented ways",
+            "To fit uniform rows in Excel under standard organizational security baseline protocols",
+            "To write manual paper logs under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Machine Learning is needed to capture complex non-linear relationships, automate high-dimensional classification, and handle unstructured data (computer vision, NLP) where traditional linear models fail.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "How is Traditional Data described?",
+        "options": [
+            "The everyday, orderly kind that most businesses run on",
+            "Too varied and fast for any cluster computed across multi-dimensional attribute distributions in statistical datasets",
+            "Unstructured video without shape",
+            "Retrieved exclusively in real time"
+        ],
+        "correct": 0,
+        "exp": "Traditional Data consists of structured numeric and text records stored in standard relational databases (RDBMS) on single servers or local networks.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "What is Structured Data?",
+        "options": [
+            "Text, images, audio, video with no shape",
+            "Rows and columns with a fixed shape you can count on",
+            "JSON or XML tags across standard production computing environments",
+            "Distributed across 1,000 clusters across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Structured Data conforms to a rigid, predefined tabular schema consisting of clearly typed columns (fields) and rows (records), easily queryable via SQL.",
+        "section": "Part 3: Machine Learning & Big Data Foundations (5 Vs)"
+    },
+    {
+        "q": "How is Traditional Data managed and stored?",
+        "options": [
+            "Distributed between many computers under standard production system configurations",
+            "Managed from one computer; fits in a single database on a single machine",
+            "Across global server farms only under standard production system configurations",
+            "In paper folders under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Traditional Data is managed using Relational Database Management Systems (e.g. PostgreSQL, MySQL, Oracle, SQL Server) running standard SQL ACID transactions.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "How is Big Data defined?",
+        "options": [
+            "Data that fits on a single laptop spreadsheet easily across standard production computing environments",
+            "Too much, too varied, and too fast for a single machine to hold; stored and processed across many machines",
+            "Structured data in a single SQL table across standard production computing environments",
+            "Historical reports read at a glance across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Big Data refers to datasets whose volume, velocity, variety, and complexity exceed the storage capacity, memory limits, and processing capabilities of traditional single-node relational databases.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Semi-structured Data?",
+        "options": [
+            "Uniform rows and columns across standard production computing environments",
+            "Tags or markers but no fixed table (Think JSON or XML)",
+            "Raw audio and video across standard production computing environments",
+            "Single database tables across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Semi-structured data contains organizational markers or hierarchical tags without conforming to a rigid tabular schema (e.g. JSON, XML, NoSQL documents).",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Unstructured Data?",
+        "options": [
+            "JSON or XML files across standard production computing environments",
+            "Fixed rows and columns across standard production computing environments",
+            "Text, images, audio, video (No inherent shape at all)",
+            "Excel spreadsheets across standard production computing environments"
+        ],
+        "correct": 2,
+        "exp": "Unstructured data lacks any predefined data model or schema, comprising multimedia formats such as raw text documents, video streams, audio recordings, and satellite imagery.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What are the original 3 Vs of Big Data that almost everyone agrees on?",
+        "options": [
+            "Volume, Variety, Velocity",
+            "Value, Vision, Verification",
+            "Vector, Variable, Variance",
+            "Validity, Visualisation, Volume"
+        ],
+        "correct": 0,
+        "exp": "The canonical original 3 Vs of Big Data established by Gartner/Doug Laney are: Volume (data scale), Velocity (speed of generation/streaming), and Variety (diversity of formats).",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "Which Vs were added along the way (5, 7, 11 Vs)?",
+        "options": [
+            "Value, Variability, Visualisation, Vision",
+            "Velocity, Volume, Variety computed across multi-dimensional attribute distributions in statistical datasets",
+            "Vector, Variance, Volatility",
+            "Verification, Validation, Virtual"
+        ],
+        "correct": 0,
+        "exp": "Subsequent industry frameworks expanded Big Data to include Veracity (data reliability/truthfulness) and Value (business impact), forming the widely recognized 5 Vs framework.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "Comparing Volume: Traditional Data vs Big Data?",
+        "options": [
+            "Traditional sits on a single machine; Big Data is distributed between many computers",
+            "Traditional is distributed; Big Data sits on one PC computed across multi-dimensional attribute distributions in statistical datasets",
+            "Both sit on a single machine under standard production system configurations",
+            "Both require cloud clusters under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Traditional Data scales in megabytes to gigabytes on single hard drives, whereas Big Data scales across distributed clusters from terabytes and petabytes up to exabytes.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "Comparing Variety: Traditional Data vs Big Data?",
+        "options": [
+            "Traditional has many shapes; Big Data has uniform rows",
+            "Traditional has uniform rows/columns (one shape); Big Data has text, images, audio, mobile (many shapes)",
+            "Both use JSON XML only under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Both are unstructured under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Traditional Data is strictly structured tabular data (numbers, dates, text strings), whereas Big Data encompasses multi-modal structured, semi-structured, and unstructured media.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "Comparing Velocity: Traditional Data vs Big Data?",
+        "options": [
+            "Traditional is real-time; Big Data is monthly",
+            "Traditional arrives/updates at steady, manageable pace; Big Data is retrieved in real time",
+            "Both update every nanosecond under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Neither can be retrieved under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Traditional Data updates via scheduled batch intervals (hourly, nightly), whereas Big Data streams continuously in real-time or sub-second micro-batches (IoT feeds, financial tick data).",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What are Traditional Methods perfect for?",
+        "options": [
+            "Cleaning raw hardware logs",
+            "Forecasting future performance with great accuracy",
+            "Creating chat assistants under standard production system configurations",
+            "Storing JSON files under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Traditional Methods (linear regression, ANOVA, logistic regression) are ideal for well-understood, low-dimensional structured datasets where model interpretability and statistical significance are paramount.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Regression in Traditional Methods?",
+        "options": [
+            "Fit a line through the data to estimate one value from another",
+            "Group observations without being told groups",
+            "Reduce many variables to underlying drivers across standard production computing environments",
+            "Generate synthetic images across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "In traditional methods, Regression models the mathematical functional relationship between one continuous target variable and one or more predictor features using ordinary least squares.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Cluster Analysis in Traditional Methods?",
+        "options": [
+            "Fit a regression line across standard production computing environments",
+            "Group observations that behave alike, without being told the groups",
+            "Reduce variables to drivers across standard production computing environments",
+            "Build BI reports across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "In traditional methods, Cluster Analysis partitions observations into discrete subgroups based on Euclidean or Manhattan distance metrics in feature space without prior labels.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Factor Analysis in Traditional Methods?",
+        "options": [
+            "Fit a line through data across standard production computing environments",
+            "Reduce many variables down to the few underlying drivers",
+            "Group observations that behave alike across standard production computing environments",
+            "Stream real-time video across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "In traditional methods, Factor Analysis condenses multiple correlated survey or sensor variables into a smaller set of underlying latent variables (factors) to simplify dimensionality.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "Which column from the infographic contains activities that belong to predictive analytics and does not aim solely to explain past behavior (Knowledge Check)?",
+        "options": [
+            "Traditional data",
+            "Big data configured for general baseline system administration",
+            "Business intelligence",
+            "Traditional methods"
+        ],
+        "correct": 3,
+        "exp": "Predictive Analytics contains forward-looking algorithms (supervised regression, classification, time-series forecasting) that model future outcomes rather than merely describing past historical events.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "How does Data Science compare to Business Analytics on Slide 21?",
+        "options": [
+            "Data science is reliant on data availability; business analytics does not completely rely on data and mostly uses complex math/stats/programming tools",
+            "Data science uses no math under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Business analytics relies 100% on programming clusters under standard production system configurations",
+            "They are identical in reliance on data under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "While Business Analytics focuses primarily on structured operational data to solve corporate business problems, Data Science encompasses advanced computational modeling, unstructured data, and complex ML research.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Step 1 of the Data Science process?",
+        "options": [
+            "Gather and clean across standard production computing environments",
+            "Ask: Start from a real question, not from the data you happen to have",
+            "Explore statistical methods across standard production computing environments",
+            "Model a forecast across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Step 1 of the Data Science lifecycle is Problem Definition & Business Framing — clearly defining the analytical objective, success metrics, and feasibility constraints.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Step 2 of the Data Science process?",
+        "options": [
+            "Ask a question across standard production computing environments",
+            "Gather and clean: Collect the data and get it into a state you can trust",
+            "Build a model across standard production computing environments",
+            "Put result in front of decision maker across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Step 2 of the Data Science lifecycle is Data Ingestion & Exploration (EDA) — acquiring raw data from diverse sources and analyzing distributions, missingness, and anomalies.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Step 3 of the Data Science process?",
+        "options": [
+            "Explore: Apply statistical methods and find the patterns that matter",
+            "Model a classifier across standard production computing environments",
+            "Act on results across standard production computing environments",
+            "Ask a business question across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Step 3 of the Data Science lifecycle is Data Pre-processing & Feature Engineering — cleaning, normalizing, transforming, and extracting informative mathematical features.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Step 4 of the Data Science process?",
+        "options": [
+            "Model: Build something that forecasts, classifies, or ranks",
+            "Ask a question across standard production computing environments",
+            "Gather raw data across standard production computing environments",
+            "Present to manager across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Step 4 of the Data Science lifecycle is Model Selection, Training & Evaluation — training candidate ML algorithms, tuning hyperparameters, and validating generalization performance on holdout data.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What is Step 5 of the Data Science process?",
+        "options": [
+            "Act: Put the result in front of the person who has to decide",
+            "Collect JSON files across standard production computing environments",
+            "Fit a regression line across standard production computing environments",
+            "Store data on one machine across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "Step 5 of the Data Science lifecycle is Model Deployment, Monitoring & Maintenance — serving models via APIs into production environments and tracking data drift over time.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    },
+    {
+        "q": "What statement summarizes the relationship of earlier stages to Data Science?",
+        "options": [
+            "Earlier stages are erased under standard production system configurations",
+            "Every earlier stage still lives inside it. Data science is simply the name the industry settled on",
+            "Data science excludes statistics under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "Data science replaces all BI teams under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Data Science does not replace earlier statistical and analytical stages; rather, it synthesizes and integrates data engineering, statistics, BI, and machine learning into a comprehensive end-to-end discipline.",
+        "section": "Part 4: Data Science Process & Generative AI Architectures"
+    }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+    </script>
+</body>
+</html>

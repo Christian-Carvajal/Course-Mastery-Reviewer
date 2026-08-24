@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+ <title>The Central Concepts of Automata | Complete Reviewer & Quiz</title>
+ <link rel="stylesheet" href="../../../global.css">
+ <script src="../../../global.js"></script>
+ <link rel="manifest" href="/manifest.json">
+ <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+ <header class="app-header">
+ <h1>Automata Theory & Formal Languages</h1>
+ <p>Module 3: The Central Concepts of Automata — 80-Question Academic Mastery Quiz</p>
+ </header>
+
+ <nav class="sticky-nav">
+ <div class="nav-left">
+ <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+ <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+ <span class="nav-title">Central Concepts of Automata</span>
+ </div>
+ <div class="nav-tabs">
+ <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+ <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+ <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+ </div>
+ <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+ </nav>
+
+ <div class="container">
+
+ <!-- TAB 1: REVIEWER TEXT -->
+ <div id="reviewer" class="tab-content active">
+<div class="card">
+ <h2 id="alphabets-definitions">1. Alphabets & Formal Definitions</h2>
+ <div class="definition-card">
+ <span class="def-badge">Definition</span>
+ <p>An <strong>alphabet</strong> is a finite, non-empty set of symbols.</p>
+ </div>
+ <ul>
+ <li>We use the symbol <strong>&sum;</strong> (sigma) to denote an alphabet.</li>
+ </ul>
+
+ <h3>Examples of Alphabets:</h3>
+ <ul>
+ <li><strong>Binary:</strong> &sum; = {0, 1}</li>
+ <li><strong>All lower case letters:</strong> &sum; = {a, b, c,.. z}</li>
+ <li><strong>Alphanumeric:</strong> &sum; = {a-z, A-Z, 0-9}</li>
+ <li><strong>Numeric:</strong> &sum; = {0, 1, 2, 3,.. 9}</li>
+ <li><strong>DNA molecule letters:</strong> &sum; = {A, C, G, T}</li>
+ <li><strong>Initials of my name:</strong> &sum; = {A, B, G}</li>
+ <li><strong>Octal numbers:</strong> &sum; = {0, 1, 2, 3, 4, 5, 6, 7}</li>
+ <li><strong>Arbitrary:</strong> &sum; = {a, b, c}</li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="strings-operations">2. Strings and String Operations</h2>
+ <div class="definition-card">
+ <span class="def-badge">Definition</span>
+ <p>A <strong>string</strong> or <strong>word</strong> is a finite sequence of symbols chosen from &sum;.</p>
+ </div>
+ <ul>
+ <li><strong>Empty string:</strong> &epsilon; (or "epsilon").</li>
+ <li><strong>Length of a string <strong>w</strong>:</strong> Denoted by "<strong>|w|</strong>", is equal to the number of (non-&epsilon;) characters in the string.</li>
+ </ul>
+
+ <h3>Length Examples (&sum; = {0, 1}):</h3>
+ <ul>
+ <li><strong>x = 010100 &rArr; |x| = 6</strong></li>
+ <li><strong>x = 01&epsilon; 0&epsilon; 1&epsilon; 00&epsilon; &rArr; |x| = 6</strong></li>
+ <li><strong>y = 111 &rArr; |y| = 3</strong></li>
+ </ul>
+
+ <h3>Concatenation of Strings:</h3>
+ <p><strong>xy</strong> = concatenation of two strings <strong>x</strong> and <strong>y</strong>:</p>
+ <ul>
+ <li><strong>x = 010100; quad y = 111</strong></li>
+ <li><strong>xy = 010100111 &rArr; |xy| = 9</strong></li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="powers-alphabet">3. Powers of an Alphabet (&sum;<sup>k</sup>, &sum;<sup>*</sup>, &sum;<sup>+</sup>)</h2>
+ <p>Let &sum; be an alphabet:</p>
+ <ul>
+ <li><strong>&sum;<sup>k</sup>:</strong> The set of all strings of length <strong>k</strong>.</li>
+ </ul>
+
+ <h3>If &sum; = {0, 1}:</h3>
+ <ul>
+ <li><strong>&sum;<sup>1</sup>:</strong> {0, 1}</li>
+ <li><strong>&sum;<sup>2</sup>:</strong> {01, 00, 10, 11}</li>
+ <li><strong>&sum;<sup>3</sup>:</strong> {000, 111, 010, 101, 001, 100, 011, 110}</li>
+ <li><strong>&sum;<sup>4</sup>:</strong> {0000, 1111, 0101, 1010, 0011, 1100, &hellip;}</li>
+ </ul>
+
+ <h3>Kleene Star (&sum;<sup>*</sup>) vs. Positive Closure (&sum;<sup>+</sup>):</h3>
+ <ul>
+ <li><strong>&sum;<sup>*</sup> (Kleene Star):</strong>
+ <br>&sum;<sup>*</sup> = &sum;<sup>0</sup> &cup; &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &hellip;
+ <br>&sum;<sup>*</sup> = {&epsilon;, 0, 1, 00, 01, 10, 11, 000, 001, 010, &hellip;}
+ </li>
+ <li><strong>&sum;<sup>+</sup> (Positive Closure):</strong>
+ <br>&sum;<sup>+</sup> = &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &sum;<sup>3</sup> &cup; &hellip;
+ <br>&sum;<sup>+</sup> = {0, 1, 00, 01, 10, 11, 000, 001, 010, &hellip;}
+ </li>
+ </ul>
+ </div>
+
+ <div class="card">
+ <h2 id="languages-grammars">4. Languages & Grammars</h2>
+ 
+ <h3>Chomsky's Definitions (1959)</h3>
+ <ul>
+ <li><strong>Languages:</strong> &ldquo;A language is a collection of sentences of finite length all constructed from a finite alphabet of symbols&rdquo;</li>
+ <li><strong>Grammars:</strong> &ldquo;A grammar can be regarded as a device that enumerates the sentences of a language&rdquo; - nothing more, nothing less</li>
+ <li><em>Citation:</em> N. Chomsky, <em>Information and Control</em>, Vol 2, 1959</li>
+ </ul>
+
+ <h3>Grammar & Language Relationships</h3>
+ <ul>
+ <li>An alphabet is a set of symbols: {0, 1}</li>
+ <li>Languages (or &ldquo;words&rdquo;) are strings of symbols: {0, 1, 00, 01, 10, 1&hellip;}</li>
+ <li>A language is a set of sentences: <strong>L = {0<sup>n</sup> 1<sup>n</sup> : n &ge; 0} = {&epsilon;, 01, 0011, &hellip;}</strong></li>
+ <li>A grammar is a finite list of rules defining a language. <em>Example:</em>
+ <div class="code-box">
+ S &rarr; 0A &nbsp;&nbsp;&nbsp;&nbsp; B &rarr; 1B<br>
+ A &rarr; 1A &nbsp;&nbsp;&nbsp;&nbsp; B &rarr; 0F<br>
+ A &rarr; 0B &nbsp;&nbsp;&nbsp;&nbsp; F &rarr; &epsilon;
+ </div>
+ </li>
+ </ul>
+
+ <h3>Formal Definition of Language</h3>
+ <p><strong>L</strong> is said to be a language over alphabet &sum;, only if <strong>L &sube; sum<sup>*</sup></strong>.</p>
+ <p>&rarr; This is because &sum;<sup>*</sup> is the set of all strings (of all possible length including 0) over the given alphabet &sum;.</p>
+
+ <h3>Language Examples:</h3>
+ <ol>
+ <li>Let <strong>L</strong> be the language of all strings consisting of <strong>n</strong> 0’s followed by <strong>n</strong> 1’s:
+ <br><strong>L = {&epsilon;, 01, 0011, 000111, &hellip;}</strong>
+ </li>
+ <li>Let <strong>L</strong> be the language of all strings with equal number of 0’s and 1’s:
+ <br><strong>L = {&epsilon;, 01, 10, 0011, 1100, 0101, 1010, 1001, &hellip;}</strong>
+ </li>
+ </ol>
+
+             <div class="definition-card">
+                <span class="def-badge">Empty Language</span>
+                <p><strong>&Oslash;</strong> denotes the Empty language.</p>
+                <p>• Let <strong>L = {&epsilon;}</strong>; Is <strong>L = &empty;</strong>? <em>(No, {&epsilon;} contains the empty string of length 0, whereas &empty; contains no strings at all)</em>.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 id="membership-problem">5. The Membership Problem</h2>
+            <div class="definition-card">
+                <span class="def-badge">Problem Definition</span>
+                <p>Given a string <strong>w &isin; &Sigma;*</strong> and a language <strong>L</strong> over &Sigma;, decide whether or not <strong>w &isin; L</strong>.</p>
+            </div>
+
+            <h3>Worked Example:</h3>
+            <ul>
+                <li>Let <strong>w = 100011</strong></li>
+                <li>Length: <strong>|w| = 6</strong></li>
+                <li><strong>Question:</strong> Is <strong>w &isin;</strong> the language of strings with equal number of 0s and 1s?</li>
+                <li><strong>Answer:</strong> <strong>YES!</strong> (Contains three 0s and three 1s).</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 id="applications-automata">6. Applications of Automata</h2>
+            <ul>
+                <li>Software for designing and checking the behavior of digital circuits</li>
+                <li>Lexical analyzer of a typical compiler</li>
+                <li>Software for scanning large bodies of text (e.g., web pages) for pattern finding</li>
+                <li>Software for verifying systems of all types that have a finite number of states (e.g., stock market transaction, communication/network protocol)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 id="finite-automata-examples">7. Finite Automata Examples</h2>
+
+            <h3>1. On/Off Switch</h3>
+            <ul>
+                <li><strong>States:</strong> <code>off</code> (Start state) and <code>on</code></li>
+                <li><strong>Action / Input:</strong> <code>Push</code></li>
+                <li><em>Transitions:</em> Start &rarr; (off) &rarr; [Push] &rarr; (on) &rarr; [Push] &rarr; (off)</li>
+            </ul>
+
+            <h3>2. Modeling Recognition of the Word &ldquo;then&rdquo;</h3>
+            <p>State Transition Flow:</p>
+            <div class="code-box">
+                Start &rarr; () --t--> (t) --h--> (th) --e--> (the) --n--> ((then))
+            </div>
+            <ul>
+                <li><strong>Start state:</strong> Initial empty circle with incoming Start arrow</li>
+                <li><strong>Transition:</strong> Directed arrows labeled with characters (<strong>t, h, e, n</strong>)</li>
+                <li><strong>Intermediate states:</strong> (t), (th), (the)</li>
+                <li><strong>Final state:</strong> ((then)) (Represented with double circles)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>8. Summary of Takeaways</h2>
+            <ul>
+                <li>Defined alphabet &rarr; &Sigma;</li>
+                <li>Defined string &rarr; sequence of symbols in the alphabet</li>
+                <li>Defined languages &rarr; <strong>L</strong></li>
+                <li>Computed the length of a string</li>
+                <li>Concatenation</li>
+                <li>Powers of an alphabet</li>
+                <li>The empty string</li>
+                <li>Applications of automata</li>
+                <li>Some examples of finite automata</li>
+            </ul>
+        </div>
+    </div>
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+ <div id="quiz" class="tab-content">
+ <div class="quiz-header">
+ <div class="score-display" id="score-display">Score: 0 / 80</div>
+ <div class="btn-group">
+ <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+ <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+ </div>
+ </div>
+ <div id="quiz-container"></div>
+ </div>
+
+ <!-- TAB 3: QUICK REFERENCE & FORMULAS -->
+ <div id="formulas" class="tab-content">
+ <div class="card">
+ <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+ <h2>Quick Reference: Alphabets, Strings, Powers & Finite Automata</h2>
+ <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+ </div>
+
+ <table>
+ <thead>
+ <tr><th>Formal Concept</th><th>Notation / Formula</th><th>Formal Definition</th><th>Example</th></tr>
+ </thead>
+ <tbody>
+ <tr><td><strong>Alphabet</strong></td><td>&Sigma;</td><td>A non-empty, finite set of symbols</td><td>&Sigma; = {0, 1} (Binary)</td></tr>
+ <tr><td><strong>String / Word</strong></td><td>w &isin; &Sigma;*</td><td>A finite sequence of symbols chosen from &Sigma;</td><td>w = 01011</td></tr>
+ <tr><td><strong>Empty String</strong></td><td>&epsilon; or &lambda;</td><td>String with zero occurrences of symbols (|&epsilon;| = 0)</td><td>w&epsilon; = &epsilon;w = w</td></tr>
+ <tr><td><strong>String Length</strong></td><td>|w|</td><td>Number of symbol positions in string w</td><td>|01011| = 5</td></tr>
+ <tr><td><strong>Alphabet Power</strong></td><td>&Sigma;<sup>k</sup></td><td>Set of all strings of length exactly k (|&Sigma;<sup>k</sup>| = |&Sigma;|<sup>k</sup>)</td><td>{0, 1}² = {00, 01, 10, 11}</td></tr>
+ <tr><td><strong>Kleene Star</strong></td><td>&Sigma;*</td><td>Set of all possible strings from &Sigma;, including &epsilon;</td><td>&Sigma;⁰ &cup; &Sigma;¹ &cup; &Sigma;² &cup; &hellip;</td></tr>
+ <tr><td><strong>Kleene Plus</strong></td><td>&Sigma;⁺</td><td>Set of all non-empty strings from &Sigma; (excludes &epsilon;)</td><td>&Sigma;* \ { &epsilon; }</td></tr>
+ <tr><td><strong>DFA 5-Tuple</strong></td><td>M = (Q, &Sigma;, &delta;, q₀, F)</td><td>States, Alphabet, Transition Func, Start State, Final States</td><td>&delta;: Q &times; &Sigma; &rarr; Q</td></tr>
+ </tbody>
+ </table>
+
+
+ <!-- Interactive Tool 1: Alphabet Powers & Kleene Star Generator -->
+ <div class="calc-card" style="margin-top:1.5rem;">
+ <div class="calc-title">🧮 Tool 1: Alphabet Powers (&Sigma;<sup>k</sup>), Kleene Star (&Sigma;<sup>*</sup>) & Plus (&Sigma;<sup>+</sup>) Generator</div>
+ <div class="calc-desc">Enter an alphabet &Sigma; (e.g. 0, 1 or a, b) and power k to compute all generated strings and set cardinality |&Sigma;<sup>k</sup>| = |&Sigma;|<sup>k</sup>.</div>
+ 
+ <div class="calc-grid">
+ <div class="calc-field">
+ <label class="calc-label" for="alph-sigma">Alphabet &Sigma; (comma-separated):</label>
+ <input type="text" id="alph-sigma" class="calc-input" value="0, 1" oninput="generateAlphabetPowers()">
+ </div>
+ <div class="calc-field">
+ <label class="calc-label" for="alph-k">Power (k):</label>
+ <input type="number" id="alph-k" class="calc-input" value="3" min="0" max="5" step="1" oninput="generateAlphabetPowers()">
+ </div>
+ </div>
+
+ <div class="calc-result-box">
+ <div class="calc-result-header">
+ <span style="font-weight:700; font-size:0.95rem;">Generated String Set &Sigma;<sup>k</sup>:</span>
+ <span class="calc-result-val" id="alph-res-val">&Sigma;³ = {000, 001, 010, 011, 100, 101, 110, 111}</span>
+ </div>
+ <div class="calc-math-steps" id="alph-math-steps">
+ <strong>Set Cardinality & Power Properties:</strong><br>
+ <div class="step-line">• <strong>Alphabet Size |&Sigma;|:</strong> 2 symbols</div>
+ <div class="step-line">• <strong>Power Cardinality |&Sigma;<sup>k</sup>|:</strong> 2³ = <strong>8 strings</strong></div>
+ <div class="step-line">• <strong>&Sigma;⁰ (Base Case):</strong> { &epsilon; } (Empty String, length 0)</div>
+ <div class="step-line">• <strong>Kleene Star (&Sigma;*):</strong> &Sigma;⁰ &cup; &Sigma;¹ &cup; &Sigma;² &cup; &hellip; (Includes &epsilon;)</div>
+ <div class="step-line">• <strong>Kleene Plus (&Sigma;⁺):</strong> &Sigma;¹ &cup; &Sigma;² &cup; &Sigma;³ &cup; &hellip; = &Sigma;* \ { &epsilon; }</div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Interactive Tool 2: String Operations Inspector (Prefix, Suffix, Reversal w<sup>R</sup>) -->
+ <div class="calc-card" style="margin-top:1.5rem;">
+ <div class="calc-title">🧮 Tool 2: String Operations, Substrings, Prefixes, Suffixes & Reversal (w<sup>R</sup>)</div>
+ <div class="calc-desc">Analyze string length |w|, proper prefixes, proper suffixes, substrings, and the reversal identity (uv)<sup>R</sup> = v<sup>R</sup>u<sup>R</sup>.</div>
+ 
+ <div class="calc-grid">
+ <div class="calc-field">
+ <label class="calc-label" for="str-u">String u:</label>
+ <input type="text" id="str-u" class="calc-input" value="01" oninput="inspectStringOps()">
+ </div>
+ <div class="calc-field">
+ <label class="calc-label" for="str-v">String v:</label>
+ <input type="text" id="str-v" class="calc-input" value="100" oninput="inspectStringOps()">
+ </div>
+ </div>
+
+ <div class="calc-result-box">
+ <div class="calc-result-header">
+ <span style="font-weight:700; font-size:0.95rem;">Concatenation & Reversal:</span>
+ <span class="calc-result-val" id="str-res-val">uv = "01100" | (uv)<sup>R</sup> = "00110"</span>
+ </div>
+ <div class="calc-math-steps" id="str-math-steps">
+ <strong>String Property Derivations:</strong><br>
+ <div class="step-line">• <strong>Length |uv|:</strong> |u| + |v| = 2 + 3 = <strong>5</strong></div>
+ <div class="step-line">• <strong>Prefixes of uv:</strong> { &epsilon;, 0, 01, 011, 0110, 01100 }</div>
+ <div class="step-line">• <strong>Suffixes of uv:</strong> { &epsilon;, 0, 00, 100, 1100, 01100 }</div>
+ <div class="step-line">• <strong>Reversal Property:</strong> (uv)<sup>R</sup> = v<sup>R</sup>u<sup>R</sup> = (100)<sup>R</sup>(01)<sup>R</sup> = 00110</div>
+ </div>
+ </div>
+ </div>
+ 
+ </div>
+ </div>
+
+ </div>
+
+ <script>
+ const quizData = [
+    {
+        "q": "What is an alphabet according to Module 3?",
+        "options": [
+            "An infinite set of programming statements",
+            "A finite, non-empty set of symbols",
+            "A sequence of words with English semantics",
+            "A continuous function over real numbers"
+        ],
+        "correct": 1,
+        "exp": "An alphabet is defined as a finite, non-empty set of symbols.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "Which mathematical symbol is used to denote an alphabet?",
+        "options": [
+            "&sum; (sigma)",
+            "&epsilon; (epsilon)",
+            "&Oslash; (empty set)",
+            "&Lambda; (lambda)"
+        ],
+        "correct": 0,
+        "exp": "We use the symbol &sum; (sigma) to denote an alphabet.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "Which set represents the Binary alphabet in the PDF?",
+        "options": [
+            "&sum; = {0, 1}",
+            "&sum; = {0, 1, 2}",
+            "&sum; = {a, b}",
+            "&sum; = {1, 2}"
+        ],
+        "correct": 0,
+        "exp": "Binary: &sum; = {0, 1}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What symbols comprise the 'All lower case letters' alphabet?",
+        "options": [
+            "&sum; = {a, b, c,.. z}",
+            "&sum; = {A, B, C,.. Z}",
+            "&sum; = {a-z, A-Z, 0-9}",
+            "&sum; = {a, b, c}"
+        ],
+        "correct": 0,
+        "exp": "All lower case letters: &sum; = {a,b,c,..z}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What symbols comprise the Alphanumeric alphabet?",
+        "options": [
+            "&sum; = {a-z, A-Z, 0-9}",
+            "&sum; = {0, 1, 2, 3,.. 9}",
+            "&sum; = {A, C, G, T}",
+            "&sum; = {0, 1}"
+        ],
+        "correct": 0,
+        "exp": "Alphanumeric: &sum; = {a-z, A-Z, 0-9}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What symbols comprise the Numeric alphabet?",
+        "options": [
+            "&sum; = {0, 1, 2, 3,.. 9}",
+            "&sum; = {0, 1}",
+            "&sum; = {1, 2, 3, 4, 5, 6, 7, 8, 9}",
+            "&sum; = {0-9, A-F}"
+        ],
+        "correct": 0,
+        "exp": "Numeric: &sum; = {0, 1, 2, 3,.. 9}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What four letters form the DNA molecule alphabet in the PDF?",
+        "options": [
+            "&sum; = {A, C, G, T}",
+            "&sum; = {A, B, C, D}",
+            "&sum; = {A, U, C, G}",
+            "&sum; = {D, N, A, M}"
+        ],
+        "correct": 0,
+        "exp": "DNA molecule letters: &sum; = {A, C, G, T}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What alphabet is given for 'Initials of my name' in the slide?",
+        "options": [
+            "&sum; = {A, B, G}",
+            "&sum; = {A, B, C}",
+            "&sum; = {D, I, T}",
+            "&sum; = {K, L, D}"
+        ],
+        "correct": 0,
+        "exp": "Initials of my name: &sum; = {A, B, G}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What symbols comprise the Octal numbers alphabet?",
+        "options": [
+            "&sum; = {0, 1, 2, 3, 4, 5, 6, 7}",
+            "&sum; = {1, 2, 3, 4, 5, 6, 7, 8}",
+            "&sum; = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}",
+            "&sum; = {0, 1}"
+        ],
+        "correct": 0,
+        "exp": "Octal numbers: &sum; = {0, 1, 2, 3, 4, 5, 6, 7}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What is the Arbitrary alphabet example listed in the PDF?",
+        "options": [
+            "&sum; = {a, b, c}",
+            "&sum; = {x, y, z}",
+            "&sum; = {0, 1}",
+            "&sum; = {+, -, *, /}"
+        ],
+        "correct": 0,
+        "exp": "Arbitrary: &sum; = {a, b, c}.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "Can an alphabet be empty according to the definition?",
+        "options": [
+            "No, an alphabet is a finite, non-empty set of symbols",
+            "Yes, an alphabet can be &Oslash; evaluated under formal computational grammar and state transition constraints",
+            "Yes, if it contains only &epsilon;",
+            "Only in formal syntactic languages"
+        ],
+        "correct": 0,
+        "exp": "By definition, an alphabet is a finite, non-empty set of symbols.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "Can an alphabet be infinite in formal automata theory?",
+        "options": [
+            "No, an alphabet must be finite",
+            "Yes, alphabets are always infinite",
+            "Yes, for natural languages like English",
+            "Only when defining real numbers"
+        ],
+        "correct": 0,
+        "exp": "An alphabet is explicitly defined as a finite set of symbols.",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "What are the individual elements of an alphabet called?",
+        "options": [
+            "Symbols (or letters)",
+            "Strings under standard production system configurations",
+            "Languages under standard production system configurations",
+            "Grammars under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "An alphabet is a finite set of symbols (letters).",
+        "section": "1. Alphabets & Formal Definitions"
+    },
+    {
+        "q": "Which of the following represents an alphabet of 2 symbols?",
+        "options": [
+            "&sum; = {0, 1}",
+            "&sum; = {A, C, G, T}",
+            "&sum; = {a, b, c}",
+            "&sum; = {0, 1, 2, 3, 4, 5, 6, 7}"
+        ],
+        "correct": 0,
+        "exp": "Binary &sum; = {0, 1} has exactly 2 symbols.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "Which of the following represents an alphabet of 8 symbols?",
+        "options": [
+            "Octal numbers: &sum; = {0, 1, 2, 3, 4, 5, 6, 7}",
+            "Numeric: &sum; = {0, 1, 2,.. 9}",
+            "DNA: &sum; = {A, C, G, T} configured for general baseline system administration",
+            "Binary: &sum; = {0, 1} configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Octal numbers &sum; = {0, 1, 2, 3, 4, 5, 6, 7} has 8 symbols.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "What is a string (or word)?",
+        "options": [
+            "A finite sequence of symbols chosen from &sum;",
+            "An infinite set of alphabets",
+            "A compiler grammar rule designed to support enterprise operational infrastructure",
+            "An empty set of operations designed to support enterprise operational infrastructure"
+        ],
+        "correct": 0,
+        "exp": "A string or word is a finite sequence of symbols chosen from &sum;.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "What symbol denotes the empty string in Module 3?",
+        "options": [
+            "&epsilon; (or 'epsilon')",
+            "&Oslash; under standard production system configurations",
+            "&sum; under standard production system configurations",
+            "<strong>|w|</strong>"
+        ],
+        "correct": 0,
+        "exp": "Empty string is &epsilon; (or 'epsilon').",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "How is the length of a string <strong>w</strong> denoted and calculated?",
+        "options": [
+            "Denoted by '|w|', equal to the number of (non-&epsilon;) characters in the string",
+            "Denoted by '&sum;(w)', equal to the sum of ASCII codes evaluated under formal computational grammar and state transition constraints",
+            "Denoted by 'w<sup>R</sup>', equal to the number of vowels",
+            "Denoted by '&epsilon;(w)', equal to zero always"
+        ],
+        "correct": 0,
+        "exp": "Length of a string w, denoted by '|w|', is equal to the number of (non-&epsilon;) characters in the string.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "If <strong>x = 010100</strong> over &sum; = {0, 1}, what is <strong>|x|</strong>?",
+        "options": [
+            "6",
+            "5",
+            "4",
+            "7"
+        ],
+        "correct": 0,
+        "exp": "x = 010100 -> |x| = 6.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "If <strong>x = 01&epsilon; 0&epsilon; 1&epsilon; 00&epsilon;</strong>, what is <strong>|x|</strong>?",
+        "options": [
+            "6",
+            "10",
+            "4",
+            "0"
+        ],
+        "correct": 0,
+        "exp": "Epsilon does not contribute to string length, so |x| = 6.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "If <strong>y = 111</strong>, what is <strong>|y|</strong>?",
+        "options": [
+            "3",
+            "1",
+            "111",
+            "0"
+        ],
+        "correct": 0,
+        "exp": "y = 111 -> |y| = 3.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "What does <strong>xy</strong> represent when <strong>x</strong> and <strong>y</strong> are strings?",
+        "options": [
+            "Concatenation of two strings x and y",
+            "Multiplication of numerical values",
+            "Intersection of two alphabets",
+            "The reverse of string x"
+        ],
+        "correct": 0,
+        "exp": "xy = concatenation of two strings x and y.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "Given <strong>x = 010100</strong> and <strong>y = 111</strong>, what is the concatenated string <strong>xy</strong>?",
+        "options": [
+            "010100111",
+            "111010100",
+            "010100 across standard production computing environments",
+            "111 across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "x = 010100, y = 111 -> xy = 010100111.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "Given <strong>x = 010100</strong> and <strong>y = 111</strong>, what is <strong>|xy|</strong>?",
+        "options": [
+            "9",
+            "6",
+            "3",
+            "18"
+        ],
+        "correct": 0,
+        "exp": "|xy| = 6 + 3 = 9.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "What is the length of the empty string &epsilon; (<strong>|&epsilon;|</strong>)?",
+        "options": [
+            "0",
+            "1",
+            "Undefined",
+            "Infinite"
+        ],
+        "correct": 0,
+        "exp": "The empty string has 0 non-epsilon characters, so its length is 0.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "If <strong>w = a&epsilon; b&epsilon; c</strong>, what is <strong>|w|</strong>?",
+        "options": [
+            "3",
+            "5",
+            "1",
+            "0"
+        ],
+        "correct": 0,
+        "exp": "Ignoring &epsilon;, characters are a, b, c -> length is 3.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "What is the result of concatenating a string <strong>w</strong> with the empty string &epsilon; (<strong>w&epsilon;</strong>)?",
+        "options": [
+            "w",
+            "&epsilon;",
+            "|w|",
+            "&Oslash;"
+        ],
+        "correct": 0,
+        "exp": "Concatenating with &epsilon; leaves the string unchanged: w&epsilon; = w.",
+        "section": "2. Strings and String Operations"
+    },
+    {
+        "q": "If <strong>x = 00</strong> and <strong>y = 11</strong>, what is <strong>|xy|</strong>?",
+        "options": [
+            "4",
+            "2",
+            "0",
+            "8"
+        ],
+        "correct": 0,
+        "exp": "|x| = 2, |y| = 2 -> |xy| = 4.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "Is a string allowed to contain symbols from outside its defined alphabet &sum;?",
+        "options": [
+            "No, a string is a sequence of symbols chosen strictly from &sum;",
+            "Yes, any unicode character can be added across standard production computing environments",
+            "Yes, but only numbers across standard production computing environments",
+            "Only if the string is empty across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "A string is a finite sequence of symbols chosen strictly from &sum;.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "What operations are listed on the ALPHABETS & STRINGS title card?",
+        "options": [
+            "|w|, w<sup>R</sup>",
+            "sin(x), cos(x)",
+            "push(), pop()",
+            "fork(), exit()"
+        ],
+        "correct": 0,
+        "exp": "Title card lists Operations: |w|, w<sup>R</sup>.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "What does &sum;<sup>k</sup> represent?",
+        "options": [
+            "The set of all strings of length k",
+            "The alphabet multiplied by k evaluated under formal computational grammar and state transition constraints",
+            "A string containing k zeros",
+            "A grammar with k rules"
+        ],
+        "correct": 0,
+        "exp": "&sum;<sup>k</sup> = the set of all strings of length k.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "If &sum; = {0, 1}, what is &sum;<sup>1</sup>?",
+        "options": [
+            "{0, 1}",
+            "{00, 11}",
+            "{&epsilon;}",
+            "{01, 10}"
+        ],
+        "correct": 0,
+        "exp": "&sum;<sup>1</sup> = {0, 1}.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "If &sum; = {0, 1}, what is &sum;<sup>2</sup>?",
+        "options": [
+            "{01, 00, 10, 11}",
+            "{0, 1} across standard production computing environments",
+            "{000, 111} across standard production computing environments",
+            "{&epsilon;, 0, 1}"
+        ],
+        "correct": 0,
+        "exp": "&sum;<sup>2</sup> = {01, 00, 10, 11}.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "How many strings are in &sum;<sup>2</sup> when &sum; = {0, 1}?",
+        "options": [
+            "4",
+            "2",
+            "8",
+            "16"
+        ],
+        "correct": 0,
+        "exp": "2<sup>2</sup> = 4 strings ({00, 01, 10, 11}).",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "If &sum; = {0, 1}, what is &sum;<sup>3</sup>?",
+        "options": [
+            "{000, 111, 010, 101, 001, 100, 011, 110}",
+            "{00, 01, 10, 11} across standard production computing environments",
+            "{0, 1} across standard production computing environments",
+            "{0000, 1111} across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "&sum;<sup>3</sup> = {000, 111, 010, 101, 001, 100, 011, 110}.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "How many strings are in &sum;<sup>3</sup> when &sum; = {0, 1}?",
+        "options": [
+            "8",
+            "6",
+            "4",
+            "3"
+        ],
+        "correct": 0,
+        "exp": "2<sup>3</sup> = 8 strings.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "What strings are shown under &sum;<sup>4</sup> for &sum; = {0, 1}?",
+        "options": [
+            "{0000, 1111, 0101, 1010, 0011, 1100, &hellip;}",
+            "{000, 111, 010} under standard production system configurations",
+            "{0, 1} under standard production system configurations",
+            "{&epsilon;} under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "&sum;<sup>4</sup> = {0000, 1111, 0101, 1010, 0011, 1100, …}.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "How many total strings exist in &sum;<sup>4</sup> when &sum; = {0, 1}?",
+        "options": [
+            "16 (2<sup>4</sup>)",
+            "4 under standard production system configurations",
+            "8 under standard production system configurations",
+            "32 under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "2<sup>4</sup> = 16 strings.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "What is the formula defining Kleene Star (&sum;<sup>*</sup>)?",
+        "options": [
+            "&sum;<sup>*</sup> = &sum;<sup>0</sup> &cup; &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &hellip;",
+            "&sum;<sup>*</sup> = &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &sum;<sup>3</sup> &cup; &hellip;",
+            "&sum;<sup>*</sup> = &sum;<sup>1</sup> &cap; &sum;<sup>2</sup> across standard production computing environments",
+            "&sum;<sup>*</sup> = &sum;<sup>k</sup> across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "&sum;* = &sum;<sup>0</sup> &cup; &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; …",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "What is &sum;<sup>0</sup> equal to for any alphabet &sum;?",
+        "options": [
+            "{&epsilon;}",
+            "&Oslash;",
+            "{0} across standard production computing environments",
+            "{1} across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "&sum;<sup>0</sup> is the set of all strings of length 0, which is {&epsilon;}.",
+        "section": "3. Powers of an Alphabet (Σ^k, Σ*, Σ⁺)"
+    },
+    {
+        "q": "What are the elements of &sum;<sup>*</sup> when &sum; = {0, 1}?",
+        "options": [
+            "{&epsilon;, 0, 1, 00, 01, 10, 11, 000, 001, 010, &hellip;}",
+            "{0, 1, 00, 01, 10, 11, &hellip;} (excluding &epsilon;)",
+            "{00, 11, 0000, 1111} under standard production system configurations",
+            "{&Oslash;} under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "&sum;* = {&epsilon;, 0, 1, 00, 01, 10, 11, 000, 001, 010, … }.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "What is the formula defining Positive Closure (&sum;<sup>+</sup>)?",
+        "options": [
+            "&sum;<sup>+</sup> = &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &sum;<sup>3</sup> &cup; &hellip;",
+            "&sum;<sup>+</sup> = &sum;<sup>0</sup> &cup; &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &hellip;",
+            "&sum;<sup>+</sup> = {&epsilon;} across standard production computing environments",
+            "&sum;<sup>+</sup> = &sum;<sup>k</sup> across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "&sum;+ = &sum;<sup>1</sup> &cup; &sum;<sup>2</sup> &cup; &sum;<sup>3</sup> &cup; …",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "What are the elements of &sum;<sup>+</sup> when &sum; = {0, 1}?",
+        "options": [
+            "{0, 1, 00, 01, 10, 11, 000, 001, 010, &hellip;}",
+            "{&epsilon;, 0, 1, 00, 01, 10, 11, &hellip;}",
+            "{&epsilon;} under standard production system configurations",
+            "{&Oslash;} under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "&sum;+ = {0, 1, 00, 01, 10, 11, 000, 001, 010, … }.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "What is the exact difference between &sum;<sup>*</sup> and &sum;<sup>+</sup>?",
+        "options": [
+            "&sum;<sup>*</sup> includes the empty string &epsilon; (&sum;<sup>0</sup>), whereas &sum;<sup>+</sup> does not",
+            "&sum;<sup>+</sup> includes &epsilon;, whereas &sum;<sup>*</sup> does not across standard production computing environments",
+            "&sum;<sup>*</sup> contains only binary strings across standard production computing environments",
+            "&sum;<sup>+</sup> is finite while &sum;<sup>*</sup> is infinite across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "&sum;* includes &sum;<sup>0</sup> ({&epsilon;}) while &sum;+ starts at &sum;<sup>1</sup> and excludes &epsilon;.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "Which relationship between &sum;<sup>*</sup> and &sum;<sup>+</sup> is mathematically true?",
+        "options": [
+            "&sum;<sup>*</sup> = &sum;<sup>+</sup> &cup; {&epsilon;}",
+            "&sum;<sup>+</sup> = &sum;<sup>*</sup> &cup; {&epsilon;}",
+            "&sum;<sup>*</sup> = &sum;<sup>+</sup> &cap; {&epsilon;}",
+            "&sum;<sup>*</sup> &cap; &sum;<sup>+</sup> = &Oslash;"
+        ],
+        "correct": 0,
+        "exp": "&sum;* is &sum;+ unified with &sum;<sup>0</sup> ({&epsilon;}).",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "How did N. Chomsky (1959) define a language?",
+        "options": [
+            "“A language is a collection of sentences of finite length all constructed from a finite alphabet of symbols”",
+            "“A finite list of transitions inside a microkernel” across standard production computing environments evaluated under formal computational grammar and state transition constraints",
+            "“A computer program that runs without halting” across standard production computing environments",
+            "“A mathematical formula with no variables” across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "N. Chomsky (1959): “A language is a collection of sentences of finite length all constructed from a finite alphabet of symbols”.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "How did N. Chomsky (1959) define a grammar?",
+        "options": [
+            "“A grammar can be regarded as a device that enumerates the sentences of a language - nothing more, nothing less”",
+            "“A compiler that checks spelling in web browsers” across standard production computing environments evaluated under formal computational grammar and state transition constraints",
+            "“An alphabet consisting of uppercase letters” across standard production computing environments",
+            "“An algorithm that solves the halting problem” across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "N. Chomsky (1959): “A grammar can be regarded as a device that enumerates the sentences of a language” - nothing more, nothing less.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "Where was Chomsky's 1959 definition of language and grammar published?",
+        "options": [
+            "Information and Control, Vol 2, 1959",
+            "IEEE Transactions on Software Engineering, 1980",
+            "Communications of the ACM, 1965",
+            "Operating Systems Review, 1972"
+        ],
+        "correct": 0,
+        "exp": "Citation: N. Chomsky, Information and Control, Vol 2, 1959.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "What is a grammar in formal language theory?",
+        "options": [
+            "A finite list of rules defining a language",
+            "A list of physical hardware ports",
+            "A table of IP addresses and subnet masks",
+            "A set of noncomputable numbers"
+        ],
+        "correct": 0,
+        "exp": "A grammar is a finite list of rules defining a language.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "Which rule is part of the example grammar in the PDF?",
+        "options": [
+            "S &rarr; 0A",
+            "S &rarr; 1S",
+            "S &rarr; exit()",
+            "S &rarr; push"
+        ],
+        "correct": 0,
+        "exp": "Example grammar: S -> 0A, A -> 1A, A -> 0B, B -> 1B, B -> 0F, F -> &epsilon;.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "Which terminal rule is part of the example grammar in the PDF?",
+        "options": [
+            "F &rarr; &epsilon;",
+            "F &rarr; 111",
+            "F &rarr; &Oslash;",
+            "F &rarr; S configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "The terminal rule in the example grammar is F -> &epsilon;.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "Under what condition is <strong>L</strong> said to be a language over alphabet &sum;?",
+        "options": [
+            "Only if L &sube; &sum;<sup>*</sup>",
+            "Only if L = &sum;<sup>+</sup>",
+            "Only if L &sube; &Oslash;",
+            "Only if L has exactly 10 strings"
+        ],
+        "correct": 0,
+        "exp": "L is said to be a language over alphabet &sum;, only if L &sube; &sum;*.",
+        "section": "4. Languages & Generative Grammars"
+    },
+    {
+        "q": "Why must <strong>L &sube; sum<sup>*</sup></strong> for any language <strong>L</strong> over &sum;?",
+        "options": [
+            "Because &sum;<sup>*</sup> is the set of all strings (of all possible length including 0) over &sum;",
+            "Because grammars cannot produce numbers under standard organizational security baseline protocols",
+            "Because &sum;* contains only finite alphabets under standard organizational security baseline protocols",
+            "Because languages cannot contain &epsilon; under standard organizational security baseline protocols"
+        ],
+        "correct": 0,
+        "exp": "This is because &sum;* is the set of all strings (of all possible length including 0) over the given alphabet &sum;.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "What strings form the language <strong>L = {0<sup>n</sup> 1<sup>n</sup> : n &ge; 0}</strong>?",
+        "options": [
+            "L = {&epsilon;, 01, 0011, 000111, &hellip;}",
+            "L = {0, 1, 01, 10, &hellip;} evaluated under formal computational grammar and state transition constraints",
+            "L = {00, 11, 000, 111, &hellip;}",
+            "L = {10, 1100, 111000, &hellip;}"
+        ],
+        "correct": 0,
+        "exp": "Example 1: L = {&epsilon;, 01, 0011, 000111, …}.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "What strings form the language of all strings with an equal number of 0’s and 1’s?",
+        "options": [
+            "L = {&epsilon;, 01, 10, 0011, 1100, 0101, 1010, 1001, &hellip;}",
+            "L = {01, 0011, 000111, &hellip;} only",
+            "L = {0, 1, 00, 11, &hellip;} under standard production system configurations",
+            "L = {000, 111, 0000, 1111, &hellip;}"
+        ],
+        "correct": 0,
+        "exp": "Example 2: L = {&epsilon;, 01, 10, 0011, 1100, 0101, 1010, 1001, …}.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "What symbol denotes the Empty language?",
+        "options": [
+            "&Oslash;",
+            "&epsilon;",
+            "&sum;",
+            "&Lambda;"
+        ],
+        "correct": 0,
+        "exp": "Definition: &Oslash; denotes the Empty language.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "If <strong>L = {&epsilon;}</strong>, is <strong>L = &empty;</strong>?",
+        "options": [
+            "No! L = {&epsilon;} contains one string of length 0, whereas &Oslash; contains no strings at all",
+            "Yes, they are identical under standard production system configurations evaluated under formal computational grammar and state transition constraints",
+            "Yes, because &epsilon; has length 0 under standard production system configurations",
+            "Only if &sum; = {0, 1} under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "L = {&epsilon;} is a language containing one element (&epsilon;), so it is not the empty language &Oslash;.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "How many elements are in the language <strong>L = {&epsilon;}</strong>?",
+        "options": [
+            "1 element",
+            "0 elements",
+            "Infinite elements",
+            "2 elements"
+        ],
+        "correct": 0,
+        "exp": "<strong>L = {&epsilon;}</strong> has cardinality 1 (it contains the empty string).",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "How many elements are in the empty language &Oslash;?",
+        "options": [
+            "0 elements",
+            "1 element",
+            "Infinite elements",
+            "&epsilon;"
+        ],
+        "correct": 0,
+        "exp": "The empty language &Oslash; contains zero strings.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "What is a language in relation to sentences?",
+        "options": [
+            "A language is a set of sentences",
+            "A language is an operating system kernel",
+            "A language is a single character",
+            "A language is a physical switch"
+        ],
+        "correct": 0,
+        "exp": "A language is a set of sentences.",
+        "section": "5. The Membership Problem"
+    },
+    {
+        "q": "What is The Membership Problem?",
+        "options": [
+            "Given a string w &isin; &sum;<sup>*</sup> and a language L over &sum;, decide whether or not w &isin; L",
+            "Determining whether a user is an administrator on Windows across standard production computing environments",
+            "Finding the shortest path between all cities in a graph across standard production computing environments",
+            "Checking if an alphabet contains vowels across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "The Membership Problem: Given a string w &isin; &sum;* and a language L over &sum;, decide whether or not w &isin; L.",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "In the worked example, what is string <strong>w</strong>?",
+        "options": [
+            "w = 100011",
+            "w = 010100",
+            "w = 111",
+            "w = 0011"
+        ],
+        "correct": 0,
+        "exp": "Example: Let w = 100011.",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "What is the length <strong>|w|</strong> of string <strong>w = 100011</strong>?",
+        "options": [
+            "6",
+            "5",
+            "4",
+            "7"
+        ],
+        "correct": 0,
+        "exp": "|w| = 6 for w = 100011.",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "In string <strong>w = 100011</strong>, how many 0s and 1s are there?",
+        "options": [
+            "Three 0s and three 1s",
+            "Four 0s and two 1s",
+            "Two 0s and four 1s",
+            "Six 0s and zero 1s"
+        ],
+        "correct": 0,
+        "exp": "w = 100011 has 0s at positions 2, 3, 4 (three 0s) and 1s at positions 1, 5, 6 (three 1s).",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "Is <strong>w = 100011</strong> a member of the language of strings with an equal number of 0s and 1s?",
+        "options": [
+            "YES!",
+            "NO",
+            "Undefined",
+            "Only if reversed"
+        ],
+        "correct": 0,
+        "exp": "Q: Is w &isin; the language of strings with equal number of 0s and 1s? YES!",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "If <strong>w = 001</strong>, is <strong>w</strong> a member of the language of equal 0s and 1s?",
+        "options": [
+            "NO (two 0s and one 1)",
+            "YES under standard production system configurations",
+            "Only if tokenized",
+            "Undefined under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "w = 001 has two 0s and one 1, so it is NOT in the language.",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "Is the empty string &epsilon; a member of the language <strong>L = {0<sup>n</sup> 1<sup>n</sup> : n &ge; 0}</strong>?",
+        "options": [
+            "YES (for n = 0, 0<sup>0</sup> 1<sup>0</sup> = &epsilon;)",
+            "NO under standard production system configurations",
+            "Only when &sum; has 4 symbols",
+            "Undefined under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "For n = 0, the string is &epsilon;, which is explicitly in L.",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "Which hardware design application of automata is explicitly listed in the PDF?",
+        "options": [
+            "Software for designing and checking the behavior of digital circuits",
+            "Software for soldering CPU chips configured for general baseline system administration",
+            "Software for measuring power supply voltage",
+            "Software for formatting USB drives configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Application: Software for designing and checking the behavior of digital circuits.",
+        "section": "6. Applications of Automata"
+    },
+    {
+        "q": "Which compiler component is an application of automata theory?",
+        "options": [
+            "Lexical analyzer of a typical compiler",
+            "Linker loading shared DLLs",
+            "Code generation register allocator",
+            "Text editor font renderer"
+        ],
+        "correct": 0,
+        "exp": "Application: Lexical analyzer of a typical compiler.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "What pattern-finding application of automata is listed in the PDF?",
+        "options": [
+            "Software for scanning large bodies of text (e.g., web pages) for pattern finding",
+            "Software for creating 3D computer graphics",
+            "Software for audio noise reduction under standard production system configurations",
+            "Software for video frame interpolation under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Application: Software for scanning large bodies of text (e.g., web pages) for pattern finding.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "What system verification application of automata is listed in the PDF?",
+        "options": [
+            "Software for verifying systems of all types that have a finite number of states",
+            "Software for benchmarking CPU floating point units",
+            "Software for defragmenting storage drives",
+            "Software for overclocking system memory under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "Application: Software for verifying systems of all types that have a finite number of states.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "Which two real-world systems with finite states are explicitly given as examples for verification?",
+        "options": [
+            "Stock market transaction, communication/network protocol",
+            "Web browser, media player configured for general baseline system administration",
+            "Printer spooler, keyboard buffer configured for general baseline system administration",
+            "SQL database, ERD diagram configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Examples: stock market transaction, communication/network protocol.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "In the On/Off switch finite automaton example, what are the two states?",
+        "options": [
+            "off and on",
+            "start and stop",
+            "open and close",
+            "read and write"
+        ],
+        "correct": 0,
+        "exp": "On/Off switch states: 'off' and 'on'.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "In the On/Off switch example, which state is the Start state?",
+        "options": [
+            "off",
+            "on",
+            "Push",
+            "Intermediate"
+        ],
+        "correct": 0,
+        "exp": "Start arrow points directly to the 'off' state.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "In the On/Off switch example, what is the action/input that causes a state transition?",
+        "options": [
+            "Push",
+            "Click",
+            "Toggle",
+            "Switch"
+        ],
+        "correct": 0,
+        "exp": "Action: Push.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "In the On/Off switch model, what happens when 'Push' is performed in the 'on' state?",
+        "options": [
+            "Transitions back to the 'off' state",
+            "Remains in the 'on' state",
+            "Enters an error state",
+            "Terminates execution (evaluating baseline parameters under standard system constraints)"
+        ],
+        "correct": 0,
+        "exp": "Push while in 'on' transitions back to 'off'.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "In the finite automaton modeling recognition of the word 'then', what is the initial input character?",
+        "options": [
+            "t",
+            "h",
+            "e",
+            "n"
+        ],
+        "correct": 0,
+        "exp": "Start state transitions on 't' to state (t).",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "In the 'then' recognition automaton, what are the intermediate states?",
+        "options": [
+            "(t), (th), (the)",
+            "(start), (end)",
+            "(then) under standard production system configurations",
+            "(off), (on)"
+        ],
+        "correct": 0,
+        "exp": "Intermediate states are labeled: (t), (th), (the).",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "How is the Final state ((then)) visually represented in the automaton diagram?",
+        "options": [
+            "With a double circle",
+            "With a square box",
+            "With an incoming start arrow",
+            "With a dashed line"
+        ],
+        "correct": 0,
+        "exp": "The Final state ((then)) is denoted by a double circle.",
+        "section": "7. Finite Automata & State Transitions"
+    },
+    {
+        "q": "Which transition sequence successfully reaches the final accepting state in the word recognition model?",
+        "options": [
+            "Start --t--> (t) --h--> (th) --e--> (the) --n--> ((then))",
+            "Start --n--> (n) --e--> (ne) --h--> (neh) --t--> ((neht))",
+            "Start --t--> (th) --e--> ((then)) (evaluating baseline parameters under standard system constraints)",
+            "Start --Push--> (on) --Push--> ((off))"
+        ],
+        "correct": 0,
+        "exp": "Sequence: Start -> t -> (t) -> h -> (th) -> e -> (the) -> n -> ((then)).",
+        "section": "7. Finite Automata & State Transitions"
+    }
+];
+ const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+
+
+ function generateAlphabetPowers() {
+ const raw = document.getElementById('alph-sigma').value.split(',').map(s => s.trim()).filter(Boolean);
+ const k = Math.min(5, Math.max(0, parseInt(document.getElementById('alph-k').value) || 0));
+ const sigma = Array.from(new Set(raw));
+
+ function cartesianPower(arr, power) {
+ if (power === 0) return ['ε'];
+ let res = [''];
+ for (let p = 0; p < power; p++) {
+ const temp = [];
+ for (const prev of res) {
+ for (const symb of arr) {
+ temp.push(prev + symb);
+ }
+ }
+ res = temp;
+ }
+ return res;
+ }
+
+ const resStrings = cartesianPower(sigma, k);
+ const card = Math.pow(sigma.length, k);
+
+ document.getElementById('alph-res-val').innerText = `Σ^<strong>{k} = { </strong>{resStrings.slice(0, 32).join(', ')}{resStrings.length > 32 ? ', …' : ''} }`;
+ document.getElementById('alph-math-steps').innerHTML = `
+ <strong>Set Cardinality & Power Properties:</strong><br>
+ <div class="step-line">• <strong>Alphabet Size |Σ|:</strong> <strong>{sigma.length} symbols (</strong>{sigma.join(', ')})</div>
+ <div class="step-line">• <strong>Power Cardinality |Σ^<strong>{k}|:</strong>{sigma.length}^<strong>{k} = {card} strings</strong></div>
+ <div class="step-line">• <strong>Σ⁰ (Base Case):</strong> { ε } (Empty string of length 0)</div>
+ <div class="step-line">• <strong>Kleene Star (Σ*):</strong> Σ⁰ ∪ Σ¹ ∪ Σ² ∪ … (Infinite set of all finite strings, includes ε)</div>
+ <div class="step-line">• <strong>Kleene Plus (Σ⁺):</strong> Σ¹ ∪ Σ² ∪ Σ³ ∪ … = Σ* \\ { ε } (All non-empty strings)</div>
+ `;
+ }
+
+ function inspectStringOps() {
+ const u = document.getElementById('str-u').value.trim();
+ const v = document.getElementById('str-v').value.trim();
+ const uv = u + v;
+
+ const prefixes = [];
+ for (let i = 0; i <= uv.length; i++) {
+ prefixes.push(i === 0 ? 'ε' : uv.substring(0, i));
+ }
+
+ const suffixes = [];
+ for (let i = uv.length; i >= 0; i--) {
+ suffixes.push(i === uv.length ? 'ε' : uv.substring(i));
+ }
+
+ const uRev = u.split('').reverse().join('');
+ const vRev = v.split('').reverse().join('');
+ const uvRev = uv.split('').reverse().join('');
+
+ document.getElementById('str-res-val').innerText = `uv = "<strong>{uv}" | (uv)<sup>R</sup> = "</strong>{uvRev}"`;
+ document.getElementById('str-math-steps').innerHTML = `
+ <strong>String Property Derivations:</strong><br>
+ <div class="step-line">• <strong>Length |uv|:</strong> |u| + |v| = <strong>{u.length} + </strong>{v.length} = <strong>{uv.length}</strong></div>
+ <div class="step-line">• <strong>Prefixes of uv:</strong> { {prefixes.join(', ')} }</div>
+ <div class="step-line">• <strong>Suffixes of uv:</strong> { {suffixes.join(', ')} }</div>
+ <div class="step-line">• <strong>Reversal Property:</strong> (uv)<sup>R</sup> = v<sup>R</sup> u<sup>R</sup> = "<strong>{vRev}" + "</strong>{uRev}" = <strong>"{uvRev}"</strong></div>
+ `;
+ }
+ 
+ </script>
+</body>
+</html>

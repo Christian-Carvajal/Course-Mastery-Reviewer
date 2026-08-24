@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Traditional Data Techniques | University Study Guide</title>
+    <link rel="stylesheet" href="../../../global.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d9488">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>Data Mining</h1>
+        <p>Traditional Data Techniques  Data Collection, Pre-processing & 91-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
+            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
+            <span class="nav-title">Traditional Data Techniques</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+            <button class="nav-btn" onclick="window.openTraditionalExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
+        </div>
+        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
+    </nav>
+
+    <div class="container">
+
+        <!-- TAB 1: REVIEWER TEXT -->
+        <div id="reviewer" class="tab-content active">
+
+            <!-- PART 1: TRADITIONAL DATA -->
+            <div class="card">
+                <h2>PART 1: Traditional Data Foundations & Pre-Processing</h2>
+
+                <h3>1.1 Where Traditional Data Sits on the Map</h3>
+                <p>Five columns, one timeline. Everything in this deck lives in the very first column (Traditional Data).</p>
+
+                <h3>1.2 What Exactly Is "Data"?</h3>
+                <p>One word, three different meanings:</p>
+                <ul>
+                    <li><strong>Raw facts:</strong> Untouched facts sitting on your server that cannot be analyzed yet.</li>
+                    <li><strong>Processed data:</strong> Cleaned data converted into a usable format.</li>
+                    <li><strong>Information:</strong> Meaningful output people can make decisions from.</li>
+                </ul>
+                <p><em>All three answers are correct, and that is the problem. Splitting the term apart is what makes the techniques easy to place.</em></p>
+
+                <h3>1.3 The Data Pipeline</h3>
+                <div class="formula-card">
+                    <span class="formula-badge">Pipeline Steps</span><br>
+                    <span class="formula-text">RAW DATA &rarr; PRE-PROCESSING &rarr; PROCESSING &rarr; INFORMATION</span>
+                    <div class="formula-explain">
+                        • <strong>Raw Data:</strong> Untouched facts sitting on your server. Cannot be analyzed yet.<br>
+                        • <strong>Pre-processing:</strong> Convert raw data into a usable, understandable format.<br>
+                        • <strong>Processing:</strong> Run the analysis on data that is now trustworthy.<br>
+                        • <strong>Information:</strong> Meaningful output people can make decisions from.<br>
+                        • <strong>Gathering Step:</strong> Data collection.<br>
+                        • <strong>Clean-up Step:</strong> Data pre-processing.
+                    </div>
+                </div>
+
+                <h3>1.4 Raw Data, in Plain Terms</h3>
+                <p>Three names for the same thing: <strong>raw data = raw facts = primary data</strong>. Three facts that define it:</p>
+                <ol>
+                    <li><strong>Cannot be analysed straight away:</strong> Nothing has been checked, corrected, or labeled yet. Running an analysis on it now would just produce confident nonsense.</li>
+                    <li><strong>It sits on your server, untouched:</strong> Data accumulated and stored exactly as it arrived, in whatever shape the source handed it to you.</li>
+                    <li><strong>Gathering it is called data collection:</strong> That is the very first step, happening before a single pre-processing operation runs.</li>
+                </ol>
+
+                <h3>1.5 Step 1  Data Collection</h3>
+                <p>Two everyday ways companies accumulate raw facts:</p>
+                <ul>
+                    <li><strong>Manual (Surveys):</strong> Ask people directly (e.g., rate product/experience on scale 1-10). You control the questions, but people answer selectively.</li>
+                    <li><strong>Automatic (Cookies):</strong> Collected without anyone typing anything. Cookies hand companies detailed info about user website activity. Huge volume, but messy and full of surprises.</li>
+                </ul>
+
+                <h3>1.6 Why Pre-process? Because Raw Data Lies</h3>
+                <p>Real examples of errors in customer data:</p>
+                <ul>
+                    <li><strong>AGE = 932:</strong> Someone mistyped or a system wrote garbage into the field.</li>
+                    <li><strong>NAME = United Kingdom:</strong> Country value landed in the wrong column.</li>
+                </ul>
+                <p>Data like this must be marked as invalid or corrected before analysis. Data pre-processing is a group of operations that fixes the problems data gathering inevitably creates.</p>
+
+                <h3>1.7 Technique 1  Class Labeling</h3>
+                <p>Label each data point with its correct type, or arrange data by category:</p>
+                <ul>
+                    <li><strong>Numerical:</strong> Numbers that can be manipulated mathematically. <em>Examples:</em> Number of goods sold daily, Average goods sold per day/month. Arithmetic means something.</li>
+                    <li><strong>Categorical:</strong> Information that cannot have mathematical manipulations applied to it. <em>Examples:</em> A person's profession, place of birth, product category.</li>
+                    <li><strong>The Test:</strong> The test is never how the value looks. It is whether the arithmetic means anything. <em>Example:</em> Customer ID (1001) looks like a number, but an average customer ID tells you nothing, making it categorical. Complaints filed (3) is numerical.</li>
+                </ul>
+
+                <h3>1.8 Technique 2  Data Cleansing</h3>
+                <p>Also called data cleaning or data scrubbing. Goal: deal with inconsistent data.</p>
+                <ul>
+                    <li><strong>1. Inconsistent values:</strong> Misspelled US states must be corrected before anything else.</li>
+                    <li><strong>2. Missing values:</strong> e.g., customer gives name and occupation, but no age.
+                        <ul>
+                            <li><em>Option A:</em> Disregard the customer's entire record.</li>
+                            <li><em>Option B:</em> Enter the average age of remaining customers.</li>
+                        </ul>
+                        <em>Neither answer is automatic. Both cleansing and missing values must be resolved before processing.</em>
+                    </li>
+                </ul>
+
+                <h3>1.9 Case-Specific Approaches</h3>
+                <ul>
+                    <li><strong>Balancing:</strong> When one group dominates the sample (e.g., 80% female / 20% male survey), trends lean toward women. Fix: take equal numbers from each group so ratio becomes 50-50.</li>
+                    <li><strong>Data Shuffling:</strong> Shuffling observations ensures any 100 consecutive entries are random and representative, improving predictive performance and avoiding misleading results.</li>
+                </ul>
+
+                <h3>1.10 How Traditional Databases Are Pictured & At a Glance</h3>
+                <ul>
+                    <li><strong>Entity Relationship Diagram (ERD):</strong> Complex, theoretical architecture illustration. Entities, relationships, attributes.</li>
+                    <li><strong>Relational Schema:</strong> Each rectangle is one data table, each line shows relationships (Customers, Orders, Products).</li>
+                    <li><strong>At a Glance:</strong> When: Beginning; Tools: R, Python, SQL, MATLAB, Excel, IBM SPSS; Roles: Data architect, Data engineer, Database administrator.</li>
+                    <li><strong>Misconception:</strong> 200,000 lines of data is not necessarily big data. Volume alone does not make it big; variety, variability, velocity, veracity matter too.</li>
+                </ul>
+            </div>
+
+            <!-- PART 2: BIG DATA -->
+            <div class="card">
+                <h2>PART 2: Big Data Techniques</h2>
+
+                <h3>2.1 Same Backbone, More Variety</h3>
+                <p>Big data does not throw the pipeline awayit stretches every step. What changes:</p>
+                <ul>
+                    <li>Far more data types than numerical and categorical.</li>
+                    <li>Much wider range of cleansing methods.</li>
+                    <li>Missing values become a far bigger problem.</li>
+                    <li>New case-specific techniques: text data mining, data masking.</li>
+                </ul>
+
+                <h3>2.2 Class Labeling & Cleansing in Big Data</h3>
+                <ul>
+                    <li><strong>Class Labeling Expansion:</strong> Green (Numerical, Categorical) + Orange (Text data, Digital image data, Digital video data, Digital audio data).</li>
+                    <li><strong>Image & Audio Cleansing:</strong> Verification that image observations are ready; confirming audio quality adequacy.</li>
+                    <li><strong>Text Data Mining:</strong> Process of deriving valuable unstructured data from text across academic papers, blogs, online platforms, private Excel files.</li>
+                    <li><strong>Data Masking:</strong> Analyzes info without exposing private details by concealing original data with random/false data. (e.g. Anna Kruger / a.kruger@example.com / 4519 8823 0067 &rarr; Q7RTX Vbnm / x8k2@masked.local / **** **** 0067).</li>
+                </ul>
+
+                <h3>2.3 Visualizations & Where Big Data Shows Up</h3>
+                <ul>
+                    <li><strong>Rule of Thumb:</strong> A large number of intersecting lines almost always means you are looking at big data.</li>
+                    <li><strong>Social Platforms:</strong> 2 billion+ users (Volume), text/images/video/audio (Variety), real-time reporting/velocity.</li>
+                    <li><strong>Financial Trading:</strong> Daily close = 1 obs/day (traditional). Every 5 seconds = 4,680 obs/day (big data). Every second = 23,400 obs/day (big data).</li>
+                </ul>
+            </div>
+
+            <!-- PART 3: BUSINESS INTELLIGENCE -->
+            <div class="card">
+                <h2>PART 3: Business Intelligence (BI)</h2>
+
+                <h3>3.1 Explaining the Past</h3>
+                <p>Pre-processing is done. BI combines data skills with business knowledge to explain past performance. Asks: What happened? When? How many units sold? Which region sold most?</p>
+
+                <h3>3.2 The Chain: Observations &rarr; Measures &rarr; Metrics &rarr; KPIs</h3>
+                <ol>
+                    <li><strong>01 Observations:</strong> Single recorded facts (e.g., 1 month revenue, 1 new customer).</li>
+                    <li><strong>02 Measures:</strong> Observations accumulated together to show info (Quantification: representing observations as numbers). e.g., Q1 measure = $350 revenue, 50 customers.</li>
+                    <li><strong>03 Metrics:</strong> Values derived from measures with business meaning attached (e.g., Average quarterly revenue per new customer = $350 / 50 = $7). Exist for comparison.</li>
+                    <li><strong>04 KPIs:</strong> The few metrics tied tightly to main business objectives. Metric = page traffic from any user; KPI = traffic from users who clicked ad link.</li>
+                </ol>
+
+                <h3>3.3 Dashboard Filtering & Real-World Applications</h3>
+                <ul>
+                    <li><strong>KPI Dashboards:</strong> Keep executives and managers focused on main business objectives.</li>
+                    <li><strong>Price Optimization:</strong> Raise room rates when demand is high; drop rates to attract visitors when demand falls. Real-time vs historical comparison.</li>
+                    <li><strong>Inventory Management:</strong> Avoid Oversupply (stock nobody buys, waste, storage cost, cash tied up) and Undersupply (lost sales, customers go elsewhere). Uses seasonality patterns, over/under-stocked months, peak day/hour.</li>
+                </ul>
+            </div>
+
+            <!-- PART 4: TRADITIONAL METHODS -->
+            <div class="card">
+                <h2>PART 4: Traditional Methods (Predictive Analytics)</h2>
+
+                <h3>4.1 From Analysis to Analytics</h3>
+                <p>When using info to predict future values, you switch from analysis to analytics. Predictive analytics splits into Traditional Methods (classical stats) and Machine Learning (AI-driven).</p>
+
+                <h3>4.2 Key Traditional Techniques</h3>
+                <ul>
+                    <li><strong>Regression:</strong> Quantifies causal relationships among variables (<strong>Y = B &times; X</strong>). Straight line sits as close to all dots as possible.</li>
+                    <li><strong>Logistic Regression:</strong> Non-linear model where vertical values are ones and zeros joined by an S-curve. Candidate screening: 1 = prob > 50%, 0 = at/below 50%.</li>
+                    <li><strong>Cluster Analysis:</strong> Groups observations that behave alike. e.g., House size vs price in 3 clusters (Small/expensive city centre, Big/cheaper far from city, Big/expensive nice neighbourhood).</li>
+                    <li><strong>Explanatory Variable Names:</strong> Four names for the same thing: Explanatory variable, Regressor, Independent variable, Predictor variable (<strong>X</strong> side).</li>
+                    <li><strong>Factor Analysis:</strong> Groups explanatory variables together (e.g., 100 survey questions collapse 3 animal attitude questions into 1 factor &rarr; ~10 factors).</li>
+                    <li><strong>Distinction:</strong> <em>Clustering groups observations together. Factor analysis groups explanatory variables together.</em></li>
+                    <li><strong>Time Series:</strong> Follows development of values over time. Rule: Time ALWAYS goes on horizontal line because time is independent of every other variable.</li>
+                    <li><strong>Applications:</strong> UX survey (4 continental clusters = 4 separate tests), A/B Testing (A/B/n multivariate testing), Sales Forecasting (Time series holds it up, ML sharpens accuracy).</li>
+                </ul>
+            </div>
+
+            <!-- PART 5: MACHINE LEARNING -->
+            <div class="card">
+                <h2>PART 5: Machine Learning (ML) & Generative AI</h2>
+
+                <h3>5.1 Core ML Concepts & 4 Ingredients</h3>
+                <p>ML is a trial-and-error process where each consecutive trial is at least as good as the one before it. You hand it ONE final goal, not a rulebook. Four ingredients (Robot Archer analogy):</p>
+                <ol>
+                    <li><strong>01 Data:</strong> Values model trains on (Quiver of arrows).</li>
+                    <li><strong>02 Model:</strong> Thing learned/refined (Bow usage).</li>
+                    <li><strong>03 Objective function:</strong> Measure of how wrong you currently are (Average distance from target).</li>
+                    <li><strong>04 Optimization algorithm:</strong> Mechanics that reduce error (Adjusting posture, grip, draw strength).</li>
+                </ol>
+                <p><em>The Loop:</em> Fire arrows &rarr; Measure error &rarr; Adjust technique &rarr; Fire again closer. Training stops when good enough or after chosen arrows. Unseen inputs cause model to struggle.</p>
+
+                <h3>5.2 The Three Major Types of Machine Learning</h3>
+                <ul>
+                    <li><strong>Supervised Learning:</strong> Known target for every arrow before shot (Labelled data). Approaches: SVMs, Neural networks, Deep learning, Random forest, Bayesian networks.</li>
+                    <li><strong>Unsupervised Learning:</strong> No targets provided (Unlabelled data); divides arrows into clusters/heaps. Approaches: K-means (most common), Neural networks, Deep learning.</li>
+                    <li><strong>Reinforcement Learning:</strong> Maximises a reward instead of minimising error (Positive reinforcement).</li>
+                    <li><strong>Deep Learning:</strong> Conceptually different, state-of-the-art, sits in both supervised and unsupervised due to broad scope and high accuracy.</li>
+                </ul>
+
+                <h3>5.3 NLP, Self-Supervised Learning & LLMs</h3>
+                <ul>
+                    <li><strong>Natural Language Processing (NLP):</strong> Subfield for written/spoken human language (Siri, chatbots, translators). Hybrid supervised/unsupervised.</li>
+                    <li><strong>Self-Supervised Learning:</strong> Unlabelled data &rarr; generates own labels &rarr; learns from them. Cornerstone of LLMs (ChatGPT, Gemini). Core trick: predicting the missing word using preceding context.</li>
+                    <li><strong>LLM Lineage:</strong> N-grams &rarr; RNNs &rarr; LSTMs &rarr; Transformers (2017 architecture using Attention / Self-attention mechanism).</li>
+                    <li><strong>GPT Unpacked:</strong> G = Generative, P = Pre-trained, T = Transformer.</li>
+                    <li><strong>Other GenAI Families:</strong> Diffusion models (images/video), GANs (two algorithms: generator & evaluator), NeRF (3D modelling), Hybrid models.</li>
+                </ul>
+
+                <h3>5.4 Real-World Applications</h3>
+                <ul>
+                    <li><strong>Fraud Detection:</strong> Bank card transactions with labels (Legitimate vs Fraudulent) = Supervised learning flagging theft in real time.</li>
+                    <li><strong>Client Retention:</strong> Large chains automate shop owner instinct by passing labelled data to model to identify likely buyers, lowering costs.</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- TAB 2
+
+        <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div id="quiz" class="tab-content">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 91</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions dynamically rendered here -->
+            </div>
+        </div>
+
+        <!-- TAB 3: FORMULAS / QUICK REFERENCE -->
+        <!-- TAB 3: QUICK REFERENCE -->
+        <div id="formulas" class="tab-content">
+            <!-- PART 1 & 2: DATA PIPELINE & PRE-PROCESSING MATRIX -->
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
+                    <h2 style="margin:0;">Quick Reference: Traditional & Big Data Pre-Processing Matrix</h2>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Pipeline Stage / Concept</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Definition & Mechanics</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Rules & Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>The Data Pipeline</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">RAW DATA &rarr; PRE-PROCESSING &rarr; PROCESSING &rarr; INFORMATION</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Collection</strong> = Gathering raw facts. <strong>Pre-processing</strong> = Clean-up. <strong>Processing</strong> = Analysis. <strong>Information</strong> = Actionable output.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Raw Data (Primary Data)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Untouched facts sitting on the server; cannot be analyzed immediately.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Collected via <strong>Manual</strong> (Surveys, high control) or <strong>Automatic</strong> (Cookies, huge volume).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Class Labeling: The Arithmetic Test</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Numerical:</strong> Arithmetic is meaningful.<br><strong>Categorical:</strong> Arithmetic is meaningless.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <em>Complaints (3)</em> = Numerical<br>• <em>Customer ID (1001)</em> = Categorical (average ID is meaningless)</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Data Cleansing & Missing Values</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Fixes invalid values (Age=932, Country in Name field). Resolves NaN entries.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Option A:</strong> Disregard record entirely.<br>• <strong>Option B:</strong> Impute with average of remaining observations.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Balancing & Shuffling</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Balancing:</strong> Adjust sample to 50/50 ratio.<br><strong>Shuffling:</strong> Randomizes sequence.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Prevents dominant group bias and ensures any consecutive slice is representative.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Big Data Expansions</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Adds Orange Types (Text, Images, Video, Audio) to Green Types (Numeric/Categoric).</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Text Mining:</strong> Derives unstructured info.<br>• <strong>Data Masking:</strong> Conceals PII with false/random tokens.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PART 3: BUSINESS INTELLIGENCE (BI) HIERARCHY -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: Business Intelligence (BI) Metrics Hierarchy</h2>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-top:1rem;">
+                    <div class="definition-card">
+                        <span class="def-badge">01. Observations</span>
+                        <p><strong>Raw Recorded Facts:</strong> Single isolated data points.<br><em>Example:</em> 1 month's revenue, 1 single customer transaction.</p>
+                    </div>
+                    <div class="definition-card">
+                        <span class="def-badge">02. Measures</span>
+                        <p><strong>Quantified Aggregation:</strong> Observations accumulated as numbers.<br><em>Example:</em> Q1 Total Revenue = $350, Total Customers = 50.</p>
+                    </div>
+                    <div class="definition-card">
+                        <span class="def-badge">03. Metrics</span>
+                        <p><strong>Business Meaning Ratio:</strong> Values derived for comparison.<br><em>Example:</em> Revenue / Customer = $350 / 50 = <strong>$7</strong>.</p>
+                    </div>
+                    <div class="definition-card">
+                        <span class="def-badge">04. KPIs</span>
+                        <p><strong>Strategic Targets:</strong> The critical metrics tied directly to main business goals.<br><em>Example:</em> Conversion rate of users clicking promotional ads.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 4 & 5: PREDICTIVE ANALYTICS & MACHINE LEARNING -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Quick Reference: Predictive Analytics & Machine Learning Framework</h2>
+                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
+                    <thead>
+                        <tr style="background:var(--primary-color); color:white;">
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Methodology / Model</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Function & Mathematical Purpose</th>
+                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Rules & Synonyms</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Linear Regression</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Y = B &times; X + &epsilon;</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Quantifies causal relationships. Explanatory variable synonyms: <strong>Regressor, Independent, Predictor</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Logistic Regression</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Non-linear S-curve bounding probabilities between 0 and 1.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Binary classification cutoff: 1 = Probability &gt; 50%, 0 = Probability &le; 50%.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Clustering vs Factor Analysis</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Cluster Analysis:</strong> Groups observations that behave alike.<br>• <strong>Factor Analysis:</strong> Groups explanatory variables together.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Clustering = Groups rows (customers). Factor Analysis = Groups columns (100 survey questions &rarr; 10 factors).</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Time Series Analysis</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Tracks variable progression strictly across chronological intervals.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Universal Rule:</strong> Time is always plotted on the <strong>horizontal X-axis</strong> because time is independent.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ML: The 4 Ingredients (Robot Archer)</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">1. <strong>Data</strong> (Quiver of arrows)<br>2. <strong>Model</strong> (Bow usage)<br>3. <strong>Objective Function</strong> (Distance from target)<br>4. <strong>Optimization Algorithm</strong> (Adjusting posture/grip)</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Trial-and-error cycle: Fire &rarr; Measure Error &rarr; Optimize Mechanics &rarr; Fire closer.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>The 3 ML Paradigms</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Supervised:</strong> Labeled targets (SVM, Random Forest, NN).<br>• <strong>Unsupervised:</strong> Unlabeled grouping (K-Means, NN).<br>• <strong>Reinforcement:</strong> Reward maximization.</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Deep Learning</strong> spans both Supervised and Unsupervised learning.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Self-Supervised & LLMs</strong></td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Predicting missing words from context. Lineage: N-grams &rarr; RNNs &rarr; LSTMs &rarr; Transformers (Self-Attention).</td>
+                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>GPT:</strong> <strong>G</strong>enerative <strong>P</strong>re-trained <strong>T</strong>ransformer.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+            
+            <!-- ==========================================
+                 Interactive Academic Calculators Section
+                 ========================================== -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2>Interactive Academic Calculators (Live Data Preprocessing & Modeling Engines)</h2>
+                
+                <!-- Calculator 1: Preprocessing Scaling Engine -->
+                <div class="calc-card">
+                    <div class="calc-title">🧮 Part 1 (1.8): Data Cleansing — Min-Max Normalization & Z-Score Standardization</div>
+                    <div class="calc-desc">Input a raw observation value X alongside feature distribution bounds to compute bounded Min-Max scaling X_norm in [0, 1] and Z-Score standardization Z = (X - μ) ÷ σ.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="scale-x">Raw Feature Value (X):</label>
+                            <input type="number" id="scale-x" class="calc-input" value="75" step="1" oninput="calculatePreprocessingScaling()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="scale-min">Observed Minimum (X_min):</label>
+                            <input type="number" id="scale-min" class="calc-input" value="50" step="1" oninput="calculatePreprocessingScaling()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="scale-max">Observed Maximum (X_max):</label>
+                            <input type="number" id="scale-max" class="calc-input" value="150" step="1" oninput="calculatePreprocessingScaling()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="scale-mean">Population Mean (μ):</label>
+                            <input type="number" id="scale-mean" class="calc-input" value="80" step="1" oninput="calculatePreprocessingScaling()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="scale-sd">Standard Deviation (σ):</label>
+                            <input type="number" id="scale-sd" class="calc-input" value="20" step="0.5" min="0.001" oninput="calculatePreprocessingScaling()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Transformed Values:</span>
+                            <span class="calc-result-val" id="scale-result-val">X_norm = 0.2500 | Z = -0.2500</span>
+                        </div>
+                        <div class="calc-math-steps" id="scale-math-steps">
+                            <strong>Mathematical Transformation Steps:</strong><br>
+                            <div class="step-line">• <strong>Min-Max Scaling Formula:</strong> X_norm = (X - X_min) ÷ (X_max - X_min) = (75 - 50) ÷ (150 - 50) = 25 ÷ 100 = <strong>0.2500</strong> (Bounded strictly in [0, 1])</div>
+                            <div class="step-line">• <strong>Z-Score Standardization:</strong> Z = (X - μ) ÷ σ = (75 - 80) ÷ 20 = -5 ÷ 20 = <strong>-0.2500</strong> (0.25 standard deviations below population mean)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 2: Linear Regression Engine -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 4 (4.2): Traditional Methods — Simple Linear Regression (Ŷ = β₀ + β₁X) & Residual Error Estimator</div>
+                    <div class="calc-desc">Model bivariate causal relationships where X is the explanatory independent variable and Ŷ is the predicted dependent continuous response.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="reg-b0">Y-Intercept (β₀):</label>
+                            <input type="number" id="reg-b0" class="calc-input" value="15000" step="1000" oninput="calculateRegressionResponse()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="reg-b1">Slope Coefficient (β₁):</label>
+                            <input type="number" id="reg-b1" class="calc-input" value="250" step="10" oninput="calculateRegressionResponse()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="reg-x">Independent Variable X (e.g. Ad Spend $):</label>
+                            <input type="number" id="reg-x" class="calc-input" value="120" step="5" oninput="calculateRegressionResponse()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="reg-actual">Actual Observed Y (for Residual):</label>
+                            <input type="number" id="reg-actual" class="calc-input" value="46500" step="500" oninput="calculateRegressionResponse()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Predicted Response Ŷ & Residual Error:</span>
+                            <span class="calc-result-val" id="reg-result-val">Ŷ = 45,000.00 | Residual e = +1,500.00</span>
+                        </div>
+                        <div class="calc-math-steps" id="reg-math-steps">
+                            <strong>Linear Model Interpretation:</strong><br>
+                            <div class="step-line">• <strong>Regression Formula:</strong> Ŷ = β₀ + (β₁ × X) = 15,000 + (250 × 120) = 15,000 + 30,000 = <strong>45,000.00</strong></div>
+                            <div class="step-line">• <strong>Residual Error e:</strong> Y_actual - Ŷ_predicted = 46,500 - 45,000 = <strong>+1,500.00</strong> (Model underestimated actual value by $1,500)</div>
+                            <div class="step-line">• <strong>Causal Interpretation:</strong> Every 1 unit increase in X produces an expected <strong>250.00 unit increase</strong> in Y.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 3: Logistic Regression Sigmoid -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 4 (4.2): Traditional Methods — Logistic Regression Sigmoid Probability (P = 1 ÷ (1 + e⁻ᶻ)) & Cutoff</div>
+                    <div class="calc-desc">Calculate non-linear classification probability P(Y = 1) using the logistic sigmoid S-curve P = 1 ÷ (1 + e⁻ᶻ) with a 50% decision boundary.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="log-z">Linear Score z (β₀ + β₁X):</label>
+                            <input type="number" id="log-z" class="calc-input" value="1.386" step="0.1" oninput="calculateLogisticSigmoid()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="log-cutoff">Decision Cutoff Threshold (%):</label>
+                            <input type="number" id="log-cutoff" class="calc-input" value="50" step="5" min="1" max="99" oninput="calculateLogisticSigmoid()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Sigmoid Probability & Classification:</span>
+                            <span class="calc-result-val" id="log-result-val">P(Y = 1) = 80.00% &rarr; Predicted Class: 1 (Positive)</span>
+                        </div>
+                        <div class="calc-math-steps" id="log-math-steps">
+                            <strong>Logistic Classification Derivation:</strong><br>
+                            <div class="step-line">• <strong>Sigmoid Function:</strong> P(Y = 1) = 1 ÷ (1 + e<sup>-z</sup>) = 1 ÷ (1 + e<sup>-1.386</sup>) = 1 ÷ (1 + 0.2501) = <strong>0.8000 (80.00%)</strong></div>
+                            <div class="step-line">• <strong>Classification Decision:</strong> Since 80.00% ≥ 50.00% cutoff, observation is classified as <strong>Class 1 (Positive Outcome)</strong>.</div>
+                            <div class="step-line">• <strong>Log-Odds (Logit):</strong> ln[P ÷ (1 - P)] = ln(0.80 ÷ 0.20) = ln(4.0) = <strong>+1.386</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator 4: BI Metric Hierarchy -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">🧮 Part 3 (3.2): Business Intelligence (BI) — The Chain: Measures, Metrics (ARPU) & KPI Growth Rate</div>
+                    <div class="calc-desc">Transform raw observations into aggregated measures, derive comparative unit metrics (ARPU), and calculate strategic performance KPI growth rates.</div>
+                    
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="bi-rev">Current Period Revenue ($):</label>
+                            <input type="number" id="bi-rev" class="calc-input" value="35000" step="1000" oninput="calculateBIMetrics()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="bi-cust">Total Active Customers (N):</label>
+                            <input type="number" id="bi-cust" class="calc-input" value="500" step="25" min="1" oninput="calculateBIMetrics()">
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="bi-prev">Previous Period Revenue ($):</label>
+                            <input type="number" id="bi-prev" class="calc-input" value="28000" step="1000" min="1" oninput="calculateBIMetrics()">
+                        </div>
+                    </div>
+
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Derived Metric & Strategic KPI:</span>
+                            <span class="calc-result-val" id="bi-result-val">ARPU = $70.00 | Growth = +25.00%</span>
+                        </div>
+                        <div class="calc-math-steps" id="bi-math-steps">
+                            <strong>BI Hierarchy Hierarchy Breakdown:</strong><br>
+                            <div class="step-line">• <strong>Aggregated Measure (02):</strong> Revenue = $35,000 | Customers = 500</div>
+                            <div class="step-line">• <strong>Derived Metric (03):</strong> Average Revenue Per User (ARPU) = $35,000 ÷ 500 = <strong>$70.00 / customer</strong></div>
+                            <div class="step-line">• <strong>Strategic Growth KPI (04):</strong> Growth Rate = [($35,000 - $28,000) ÷ $28,000] × 100% = $7,000 ÷ $28,000 × 100% = <strong>+25.00%</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        // ==========================================
+        // Interactive Traditional Data Calculators
+        // ==========================================
+        function calculatePreprocessingScaling() {
+            const x = parseFloat(document.getElementById('scale-x').value) || 0;
+            const min = parseFloat(document.getElementById('scale-min').value) || 0;
+            const max = parseFloat(document.getElementById('scale-max').value) || 1;
+            const mean = parseFloat(document.getElementById('scale-mean').value) || 0;
+            const sd = parseFloat(document.getElementById('scale-sd').value) || 1;
+
+            const range = (max - min) === 0 ? 1 : (max - min);
+            const xNorm = (x - min) / range;
+            const zScore = (x - mean) / sd;
+
+            const resVal = document.getElementById('scale-result-val');
+            const resSteps = document.getElementById('scale-math-steps');
+
+            if (resVal) resVal.innerHTML = `X_norm =</strong>{xNorm.toFixed(4)} | Z = ${zScore.toFixed(4)}`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Mathematical Transformation Steps:</strong><br>
+                    <div class="step-line">• <strong>Min-Max Scaling Formula:</strong> X_norm = ${x} - ${min}) ÷ ${max} - ${min}) = <strong>${xNorm.toFixed(4)}</strong> (Bounded strictly in [0, 1])</div>
+                    <div class="step-line">• <strong>Z-Score Standardization:</strong> Z = ${x} - ${mean}) ÷ ${sd} = <strong>${zScore.toFixed(4)}</strong> ${Math.abs(zScore).toFixed(2)} standard deviations ${zScore >= 0 ? 'above' : 'below'} population mean)</div>
+                `;
+            }
+        }
+
+        function calculateRegressionResponse() {
+            const b0 = parseFloat(document.getElementById('reg-b0').value) || 0;
+            const b1 = parseFloat(document.getElementById('reg-b1').value) || 0;
+            const x = parseFloat(document.getElementById('reg-x').value) || 0;
+            const actual = parseFloat(document.getElementById('reg-actual').value) || 0;
+
+            const yHat = b0 + (b1 * x);
+            const residual = actual - yHat;
+            const resSign = residual >= 0 ? '+' : '';
+
+            const resVal = document.getElementById('reg-result-val');
+            const resSteps = document.getElementById('reg-math-steps');
+
+            if (resVal) resVal.innerHTML = `Ŷ = ${yHat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} | e = ${resSign}${residual.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Linear Model Interpretation:</strong><br>
+                    <div class="step-line">• <strong>Regression Formula:</strong> Ŷ = β₀ + (β₁ × X) = ${b0.toLocaleString()} + ${b1} × ${x}) = <strong>${yHat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
+                    <div class="step-line">• <strong>Residual Error e:</strong> Y_actual - Ŷ_predicted = ${actual.toLocaleString()} - ${yHat.toLocaleString()} = <strong>${resSign}${residual.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
+                    <div class="step-line">• <strong>Causal Interpretation:</strong> Every 1 unit increase in X produces an expected <strong>${b1.toFixed(2)} unit increase</strong> in response Y.</div>
+                `;
+            }
+        }
+
+        function calculateLogisticSigmoid() {
+            const z = parseFloat(document.getElementById('log-z').value) || 0;
+            const cutoff = (parseFloat(document.getElementById('log-cutoff').value) || 50) / 100;
+
+            const prob = 1 / (1 + Math.exp(-z));
+            const isClass1 = prob >= cutoff;
+
+            const resVal = document.getElementById('log-result-val');
+            const resSteps = document.getElementById('log-math-steps');
+
+            if (resVal) resVal.innerHTML = `P(Y = 1) = ${(prob * 100).toFixed(2)}% &rarr; Predicted Class: ${isClass1 ? '1 (Positive)' : '0 (Negative)'}`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>Logistic Classification Derivation:</strong><br>
+                    <div class="step-line">• <strong>Sigmoid Function:</strong> P(Y = 1) = 1 ÷ (1 + e<sup>-${z}</sup>) = <strong>${prob.toFixed(4)} ${(prob * 100).toFixed(2)}%)</strong></div>
+                    <div class="step-line">• <strong>Classification Decision:</strong> Since ${(prob * 100).toFixed(2)}% ${isClass1 ? '≥' : '<'} ${(cutoff * 100).toFixed(0)}% cutoff, observation is classified as <strong>Class ${isClass1 ? '1 (Positive Outcome)' : '0 (Negative Outcome)'}</strong>.</div>
+                    <div class="step-line">• <strong>Log-Odds (Logit):</strong> z = β₀ + β₁X = <strong>${z.toFixed(3)}</strong></div>
+                `;
+            }
+        }
+
+        function calculateBIMetrics() {
+            const rev = parseFloat(document.getElementById('bi-rev').value) || 0;
+            const cust = parseFloat(document.getElementById('bi-cust').value) || 1;
+            const prev = parseFloat(document.getElementById('bi-prev').value) || 1;
+
+            const arpu = rev / cust;
+            const growth = ((rev - prev) / prev) * 100;
+            const growthSign = growth >= 0 ? '+' : '';
+
+            const resVal = document.getElementById('bi-result-val');
+            const resSteps = document.getElementById('bi-math-steps');
+
+            if (resVal) resVal.innerHTML = `ARPU = $${arpu.toFixed(2)} | Growth = ${growthSign}${growth.toFixed(2)}%`;
+            if (resSteps) {
+                resSteps.innerHTML = `
+                    <strong>BI Hierarchy Breakdown:</strong><br>
+                    <div class="step-line">• <strong>Aggregated Measure (02):</strong> Revenue = $${rev.toLocaleString()} | Customers = ${cust.toLocaleString()}</div>
+                    <div class="step-line">• <strong>Derived Metric (03):</strong> Average Revenue Per User (ARPU) = $${rev.toLocaleString()} ÷ ${cust} = <strong>$${arpu.toFixed(2)}</strong></div>
+                    <div class="step-line">• <strong>Strategic Growth KPI (04):</strong> Growth Rate = [$${rev.toLocaleString()} - $${prev.toLocaleString()}) ÷ $${prev.toLocaleString()}] × 100% = <strong>${growthSign}${growth.toFixed(2)}%</strong></div>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof calculatePreprocessingScaling === 'function') calculatePreprocessingScaling();
+            if (typeof calculateRegressionResponse === 'function') calculateRegressionResponse();
+            if (typeof calculateLogisticSigmoid === 'function') calculateLogisticSigmoid();
+            if (typeof calculateBIMetrics === 'function') calculateBIMetrics();
+        });
+
+        const quizData = [
+    {
+        "q": "Where does Traditional Data live on the 5-column timeline infographic?",
+        "options": [
+            "The middle column",
+            "The very first column",
+            "The last column",
+            "Spread across all columns equally"
+        ],
+        "correct": 1,
+        "exp": "In the 5-column data discipline infographic, Traditional Data sits in Column 1, focusing on structured, tabular data managed in relational databases (RDBMS) prior to the specialized big data and deep learning layers.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Which three meanings are associated with the word 'data'?",
+        "options": [
+            "Raw facts, processed data, information",
+            "Tables, charts, code across standard production computing environments",
+            "Volume, variety, velocity across standard production computing environments",
+            "Observations, metrics, KPIs"
+        ],
+        "correct": 0,
+        "exp": "The word 'data' encompasses: (1) Raw facts and unorganized observations, (2) Processed structured data, and (3) Synthesized Information that drives actionable decision-making.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is the correct sequence of the data pipeline?",
+        "options": [
+            "Processing -> Raw Data -> Information -> Pre-processing",
+            "Raw Data -> Pre-processing -> Processing -> Information",
+            "Pre-processing -> Raw Data -> Processing -> Information",
+            "Information -> Raw Data -> Pre-processing -> Processing"
+        ],
+        "correct": 1,
+        "exp": "The standard data pipeline operates in sequence: Data Collection (gathering) -> Data Pre-processing (cleansing & labeling) -> Storage in RDBMS/Data Warehouses -> Exploratory Data Analysis & Business Intelligence.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is the gathering step of raw data called?",
+        "options": [
+            "Data pre-processing",
+            "Data collection",
+            "Data cleansing",
+            "Class labeling"
+        ],
+        "correct": 1,
+        "exp": "Data Collection is the initial pipeline phase of ingesting or capturing raw measurements, user interactions, or transactional logs from source systems.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is the clean-up step in the data pipeline called?",
+        "options": [
+            "Data collection",
+            "Data pre-processing",
+            "Data mining across standard production computing environments",
+            "Data shuffling"
+        ],
+        "correct": 1,
+        "exp": "Data Pre-processing (or Data Cleansing/Munging) transforms messy, incomplete, and noisy raw data into a structured, validated, and normalized format suitable for analytics.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Which three terms are listed as names for the exact same thing?",
+        "options": [
+            "Raw data = raw facts = primary data",
+            "Big data = raw data = information",
+            "Measures = metrics = KPIs",
+            "Surveys = cookies = databases"
+        ],
+        "correct": 0,
+        "exp": "Data Pre-processing, Data Cleansing, and Data Wrangling (or Munging) are synonymous terms describing the pipeline phase of cleaning, filtering, and standardizing raw datasets.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What happens if you run an analysis on raw data straight away without pre-processing?",
+        "options": [
+            "It generates perfect forecasts",
+            "It produces confident nonsense",
+            "It converts into big data",
+            "It automatically masks private info"
+        ],
+        "correct": 1,
+        "exp": "Running analytics directly on uncleaned raw data leads to 'Garbage In, Garbage Out' (GIGO) — producing distorted statistical summaries, biased machine learning weights, and erroneous business decisions.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Where does raw data sit before pre-processing?",
+        "options": [
+            "On a dashboard under standard production system configurations",
+            "Untouched on your server in whatever shape it arrived",
+            "In a factor analysis model under standard production system configurations",
+            "In a clean relational schema"
+        ],
+        "correct": 1,
+        "exp": "Raw data resides in operational logs, raw text files, staging buckets, or untransformed flat CSVs before undergoing pipeline transformations.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What manual data collection method asks people directly on a scale of 1 to 10?",
+        "options": [
+            "Cookies",
+            "Surveys",
+            "Data masking",
+            "Cluster analysis"
+        ],
+        "correct": 1,
+        "exp": "Direct rating surveys (e.g. Likert scale 1 to 10 questionnaires) are manual primary collection instruments where respondents explicitly record subjective evaluations.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is a key drawback of manual surveys?",
+        "options": [
+            "They have infinite velocity",
+            "People answer selectively",
+            "They require neural networks",
+            "They create unstructured audio"
+        ],
+        "correct": 1,
+        "exp": "Manual surveys suffer from response fatigue, self-reporting bias, small sample sizes, and non-response bias compared to automated passive tracking.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What automatic data collection method operates without anyone typing anything?",
+        "options": [
+            "Surveys",
+            "Cookies",
+            "Factor analysis",
+            "A/B testing"
+        ],
+        "correct": 1,
+        "exp": "Web cookies, tracking pixels, and server access logs automatically record digital footprints (timestamps, clickstreams, IP addresses) in real time without active user intervention.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What characterises automatic cookies data collection?",
+        "options": [
+            "Small volume, perfectly clean",
+            "Huge volume, but messy and full of surprises",
+            "Uniform rows and columns computed across multi-dimensional attribute distributions in statistical datasets",
+            "Pre-labeled numerical categories"
+        ],
+        "correct": 1,
+        "exp": "Browser cookies operate passively and automatically in the background, logging behavioral metadata (session duration, referrer URLs, page views) continuously.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "In the pre-processing example, what error is shown for AGE = 932?",
+        "options": [
+            "Inconsistent state spelling under standard production system configurations",
+            "Someone mistyped or a system wrote garbage into the field",
+            "The value landed in the wrong column",
+            "It is a valid continuous variable"
+        ],
+        "correct": 1,
+        "exp": "An entry of Age = 932 is a domain boundary violation (out-of-bounds anomaly / typographical entry error) that must be filtered or imputed during pre-processing.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "In the pre-processing example, what error is shown for NAME = United Kingdom?",
+        "options": [
+            "Someone mistyped an age under standard production system configurations",
+            "That is a country, not a person; the value landed in the wrong column",
+            "It is an unweighted KPI under standard production system configurations",
+            "It is a missing value under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Having 'United Kingdom' in a person's NAME field is a schema mismatch / field transposition error where geographical location was mistakenly entered into a personal identifier attribute.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is Technique 1 in data pre-processing?",
+        "options": [
+            "Data Cleansing",
+            "Class Labeling",
+            "Data Shuffling",
+            "Data Masking"
+        ],
+        "correct": 1,
+        "exp": "Technique 1 in pre-processing is Class Labeling (Data Typing) — assigning exact data types (Numerical vs. Categorical) to ensure appropriate mathematical operations are applied.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "How is Numerical data defined in Class Labeling?",
+        "options": [
+            "Information that cannot have mathematical manipulations applied to it",
+            "Numbers that can be manipulated mathematically",
+            "Unstructured video recordings across standard production computing environments",
+            "Tag-based JSON markers across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Numerical data represents quantitative measurements or counts where arithmetic operations (addition, subtraction, averaging) yield meaningful mathematical results.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "How is Categorical data defined in Class Labeling?",
+        "options": [
+            "Numbers that can be added together across standard production computing environments",
+            "Information that cannot have mathematical manipulations applied to it",
+            "Daily historical closing prices across standard production computing environments",
+            "Quantified measures across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Categorical data represents qualitative attributes, labels, or groups (nominal or ordinal) where mathematical operations like computing a mean are meaningless.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is the true test to determine whether a data point is numerical or categorical?",
+        "options": [
+            "How the value looks on sight",
+            "Whether the arithmetic means anything",
+            "The number of digits in the value",
+            "Whether it sits in Excel or SQL"
+        ],
+        "correct": 1,
+        "exp": "The definitive test for numerical data: 'Does taking the arithmetic mean (average) produce a meaningful real-world concept?' If yes, it is numerical; if no, it is categorical.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Why is Customer ID (e.g. 1001) classified as Categorical data?",
+        "options": [
+            "Because it contains letters under standard organizational security baseline protocols",
+            "Because an average customer ID tells you nothing and carries no numerical value",
+            "Because it is an unlabelled target under standard organizational security baseline protocols",
+            "Because it updates in real time under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Customer ID (e.g., 1001, 1002) is a nominal categorical identifier. Calculating an 'average customer ID' produces a meaningless number that has no physical or economic interpretation.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Why is Complaints Filed (e.g. 3) classified as Numerical data?",
+        "options": [
+            "Because it is a text field under standard organizational security baseline protocols",
+            "Because adding them together gives total complaints, which is useful info",
+            "Because it sits on a horizontal line under standard organizational security baseline protocols",
+            "Because it cannot be averaged under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Complaints Filed (e.g., 3 complaints) is discrete numerical count data because computing average complaints per user or total complaints across departments is mathematically and operationally valid.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What are two alternate names for Data Cleansing?",
+        "options": [
+            "Data cleaning or data scrubbing",
+            "Data mining or data masking",
+            "Class labeling or factor analysis",
+            "Quantification or balancing"
+        ],
+        "correct": 0,
+        "exp": "Data Cleansing is also commonly referred to as Data Scrubbing or Data Cleaning in data engineering and database administration.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is the primary goal of Data Cleansing?",
+        "options": [
+            "To convert traditional data into big data",
+            "To deal with inconsistent data",
+            "To assign rewards to ML models",
+            "To plot regression lines"
+        ],
+        "correct": 1,
+        "exp": "The core goal of Data Cleansing is to eliminate errors, handle missing values, resolve duplicates, and ensure accuracy, consistency, and completeness across the entire database.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "In Data Cleansing, what are two options for handling missing customer age data?",
+        "options": [
+            "Option A: Disregard entire record | Option B: Enter average age of remaining customers",
+            "Option A: Delete the database | Option B: Multiply by 10 computed across multi-dimensional attribute distributions in statistical datasets",
+            "Option A: Convert to text | Option B: Add a cookie",
+            "Option A: Shuffle the rows | Option B: Mask the name"
+        ],
+        "correct": 0,
+        "exp": "When handling missing age records, data practitioners can either: (1) Impute the missing values using statistical substitutes (mean, median, or regression imputation), or (2) Drop incomplete records if the sample size is sufficiently large and missingness is completely at random (MCAR).",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What case-specific technique fixes a survey sample with 80% female and 20% male respondents?",
+        "options": [
+            "Data Shuffling",
+            "Balancing",
+            "Factor Analysis",
+            "Data Masking"
+        ],
+        "correct": 1,
+        "exp": "Stratified re-weighting (or balanced sub-sampling) adjusts demographic skews (such as 80% female / 20% male) by weighting responses to reflect the true population proportions.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Why is Data Shuffling applied to an unshuffled dataset?",
+        "options": [
+            "To delete missing values under standard organizational security baseline protocols",
+            "Because taking the first 100 rows of an unshuffled dataset is not a random sample",
+            "To convert categorical data to numerical under standard organizational security baseline protocols",
+            "To calculate Z-scores under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Data Shuffling randomizes row order to remove sorting artifacts, temporal biases, or sequential grouping before partitioning data into training, validation, and testing sets.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What theoretical database visualization uses entity, relationship, and attribute shapes?",
+        "options": [
+            "Relational Schema",
+            "Entity Relationship Diagram",
+            "Scatter plot under standard production system configurations",
+            "KPI Dashboard under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Entity-Relationship Diagrams (ERD) visually model the conceptual database architecture using entities (rectangles), relationships (diamonds), and attributes (ovals).",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "In a Relational Schema visualization, what does each rectangle represent?",
+        "options": [
+            "An attribute",
+            "One data table",
+            "A single observation",
+            "An optimization algorithm"
+        ],
+        "correct": 1,
+        "exp": "In a Relational Database Schema diagram, each rectangle represents a distinct database Table (Relation) containing columns (attributes) and rows (tuples).",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Which software tools are listed for working with Traditional Data under HOW?",
+        "options": [
+            "R, Python, SQL, MATLAB, Excel, IBM SPSS",
+            "ChatGPT, Gemini, Claude configured for general baseline system administration",
+            "Diffusion models, NeRF, GANs",
+            "Siri, Alexa, Google Assistant"
+        ],
+        "correct": 0,
+        "exp": "Traditional structured data workflows primarily utilize Relational Database Management Systems (RDBMS) via SQL, relational spreadsheets (Excel), and data warehouse engines.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Who does the work for Traditional Data under WHO?",
+        "options": [
+            "Data architect, Data engineer, Database administrator",
+            "Marketing manager, CEO, Executive",
+            "Robot archer, AI agent configured for general baseline system administration",
+            "Customer, Survey respondent configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Traditional structured data tasks are primarily executed by Database Administrators (DBAs), Data Engineers, and Business Intelligence / Data Analysts.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Are 200,000 lines of data necessarily big data?",
+        "options": [
+            "Yes, anything over 100,000 is big data under standard production system configurations",
+            "No, volume alone does not make a dataset 'big'  variety, variability, velocity, veracity matter too",
+            "Yes, because it requires a server cluster under standard production system configurations computed across multi-dimensional attribute distributions in statistical datasets",
+            "No, because 200,000 lines cannot fit in Excel under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "A dataset with 200,000 rows is structured tabular data easily handled in standard memory on a single machine; Big Data is characterized by volume, velocity, and variety that exceeds traditional single-node database architectures.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Does Big Data throw away the pre-processing backbone?",
+        "options": [
+            "Yes, it replaces pre-processing with AI",
+            "No, it carries over the backbone and stretches every step",
+            "Yes, big data needs no data cleansing computed across multi-dimensional attribute distributions in statistical datasets",
+            "No, but it eliminates class labeling"
+        ],
+        "correct": 1,
+        "exp": "No, Big Data architectures build upon and expand pre-processing foundations by executing distributed transformations (via Spark, Hadoop, or DBT) rather than abandoning data cleaning.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "Which four new data types does Big Data add to Class Labeling on top of Numerical and Categorical?",
+        "options": [
+            "Text data, Digital image data, Digital video data, Digital audio data",
+            "JSON, XML, SQL, HTML configured for general baseline system administration",
+            "Observations, measures, metrics, KPIs configured for general baseline system administration",
+            "Regressors, factors, clusters, trends configured for general baseline system administration"
+        ],
+        "correct": 0,
+        "exp": "Big Data introduces unstructured and semi-structured formats: Text (documents, tweets), Audio recordings, Video streams, and Image files alongside traditional numerical and categorical tables.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What case-specific technique derives valuable unstructured data from text across papers, blogs, and files?",
+        "options": [
+            "Data Masking",
+            "Text Data Mining",
+            "Data Shuffling",
+            "Balancing"
+        ],
+        "correct": 1,
+        "exp": "Text Mining (Natural Language Processing / Information Extraction) extracts structured facts, sentiment, and entities from unstructured textual sources.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What is the purpose of Data Masking?",
+        "options": [
+            "To delete empty rows under standard organizational security baseline protocols",
+            "To analyze information without ever exposing private details inside it",
+            "To group similar observations under standard organizational security baseline protocols",
+            "To convert 2D images to 3D under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Data Masking (anonymization/pseudonymization) protects Sensitive Personally Identifiable Information (PII) by replacing confidential identifiers with realistic synthetic tokens or hashed values for privacy compliance (GDPR/HIPAA).",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "In the Data Masking example, what does 'Anna Kruger' become in the masked record?",
+        "options": [
+            "Q7RTX Vbnm",
+            "x8k2@masked.local",
+            "**** **** 0067",
+            "United Kingdom"
+        ],
+        "correct": 0,
+        "exp": "In the anonymization example, the direct identifier 'Anna Kruger' is replaced with a pseudonymized synthetic surrogate like 'Customer_984' or 'John Doe'.",
+        "section": "Part 1: Traditional Data Foundations & Pre-Processing (Pipelines, Cleansing, Imputation)"
+    },
+    {
+        "q": "What visual rule of thumb indicates you are looking at a Big Data diagram?",
+        "options": [
+            "Single straight regression lines",
+            "A large number of intersecting lines",
+            "A 3x3 table with 2 columns",
+            "A single rectangle with no lines"
+        ],
+        "correct": 1,
+        "exp": "Big Data architecture diagrams are visually characterized by distributed computing clusters, message queues (Kafka), data lakes, and multi-node parallel processing icons rather than a single database cylinder.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "In financial trading big data, how many observations per stock per day result from recording every second in a 6.5-hour session?",
+        "options": [
+            "1 observation",
+            "4,680 observations",
+            "23,400 observations",
+            "175 million observations"
+        ],
+        "correct": 2,
+        "exp": "In high-frequency trading, recording 1 price quote per second across a 6.5-hour trading day (23,400 seconds) generates 23,400 discrete tick observations per stock symbol daily.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What state is data in when you enter Business Intelligence?",
+        "options": [
+            "Untouched raw facts under standard production system configurations",
+            "Pre-processing is done, data is organized, and every entry is readable",
+            "Unlabelled audio streams under standard production system configurations",
+            "Unshuffled raw survey forms under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "When entering Business Intelligence, data has already been cleansed, normalized, and structured into organized tables or star/snowflake dimensional schemas.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What time focus do all Business Intelligence questions cover?",
+        "options": [
+            "The potential future",
+            "The past",
+            "Unprecedented scenarios",
+            "Real-time future predictions"
+        ],
+        "correct": 1,
+        "exp": "Business Intelligence is fundamentally descriptive and diagnostic — analyzing historical and current data to answer 'What happened?' and 'Why did it happen?'",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What is the 4-level chain from raw facts to strategic business drivers?",
+        "options": [
+            "Raw data -> Cleansing -> Analysis -> AI",
+            "Observations -> Measures -> Metrics -> KPIs",
+            "Inputs -> Models -> Errors -> Outputs",
+            "Data -> Tables -> Charts -> Reports"
+        ],
+        "correct": 1,
+        "exp": "The 4-level strategic hierarchy progresses from: Observation (raw log) -> Measure (quantified property) -> Metric (business ratio) -> KPI (strategic performance driver).",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "How is an 'Observation' defined in the BI chain?",
+        "options": [
+            "Single recorded facts (e.g. 1 month revenue, 1 new customer)",
+            "Observations accumulated together across standard production computing environments",
+            "Values derived with business meaning across standard production computing environments",
+            "Metrics tied to main goals across standard production computing environments"
+        ],
+        "correct": 0,
+        "exp": "An Observation is a single raw data point recorded for a specific event or transaction (e.g. 'User #42 purchased a <strong>20 item on Tuesday at 14:05').",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "How is a 'Measure' defined in the BI chain?",
+        "options": [
+            "Single recorded facts across standard production computing environments",
+            "Observations accumulated together to show some information",
+            "Values derived for comparison across standard production computing environments",
+            "KPI dashboards across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "A Measure is an aggregated quantitative summary attribute of an observation (e.g. Total Revenue =</strong>50,000, Total Units Sold = 2,500).",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What is Quantification?",
+        "options": [
+            "Deleting missing values across standard production computing environments",
+            "Representing observations as numbers so mathematical manipulation is possible",
+            "Shuffling rows randomly across standard production computing environments",
+            "Concealing credit card numbers across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Quantification is the process of converting qualitative attributes, observations, or physical phenomena into measurable numeric values.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "How is a 'Metric' defined in the BI chain?",
+        "options": [
+            "Single raw facts across standard production computing environments",
+            "Values derived from measures, with a business meaning attached",
+            "Unlabelled target arrows across standard production computing environments",
+            "Cleaned SQL tables across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "A Metric is a normalized, contextualized business measurement (often a ratio or rate) that evaluates performance over time (e.g. Average Revenue Per User - ARPU).",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "Why do Metrics exist in business intelligence?",
+        "options": [
+            "For data masking in order to fulfill secondary operational objectives",
+            "For comparison (e.g., tracking customer spending quarter by quarter)",
+            "For training neural networks in order to fulfill secondary operational objectives",
+            "To delete measures under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Metrics exist to provide comparative context across different segments, cohorts, or time periods by normalizing raw measures against a baseline denominator.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "How is a 'KPI' defined in the BI chain?",
+        "options": [
+            "Every single metric generated by a business",
+            "The few metrics tied tightly to your main business objectives",
+            "A single recorded facts from cookies operating within enterprise data processing pipelines",
+            "An unstructured text files operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "A Key Performance Indicator (KPI) is a high-priority, strategic metric tightly aligned with core organizational objectives that directly dictates business success.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What example distinguishes a Metric from a KPI?",
+        "options": [
+            "Metric = total page traffic; KPI = traffic from users who clicked ad link",
+            "Metric = male count; KPI = female count computed across multi-dimensional attribute distributions in statistical datasets",
+            "Metric = SQL table; KPI = ERD diagram",
+            "Metric = stock price; KPI = option price"
+        ],
+        "correct": 0,
+        "exp": "Total page views is a general operational Metric, whereas Monthly Recurring Revenue (MRR) Growth Rate or Customer Churn Rate is a critical strategic KPI.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "Why do KPI dashboards exist?",
+        "options": [
+            "To display all 100 metrics at once under standard organizational security baseline protocols",
+            "To keep executives and managers focused on main business objectives",
+            "To train supervised learning models under standard organizational security baseline protocols",
+            "To replace data architects under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "KPI dashboards synthesize complex operational metrics into real-time visual summaries (gauges, line trends) to enable executive decision-makers to rapidly track performance against strategic targets.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "In Hotel Price Optimization, how does pricing follow the data?",
+        "options": [
+            "Raise rates when demand is high; drop rates when demand falls",
+            "Keep rates fixed all year under standard production system configurations",
+            "Drop rates when demand is highest",
+            "Raise rates only in winter under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "In Dynamic Hotel Pricing, room rates fluctuate algorithmically based on real-time demand patterns, seasonal occupancy metrics, booking velocity, and competitor pricing.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "In Inventory Management, what negative consequences result from Oversupply?",
+        "options": [
+            "Lost sales and lost customers",
+            "Waste, storage cost, and cash tied up in a warehouse",
+            "Higher velocity real-time data",
+            "Low objective function under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Oversupply in inventory management leads to inflated holding and warehousing costs, tied-up working capital, and product obsolescence / spoilage write-offs.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "In Inventory Management, what negative consequences result from Undersupply?",
+        "options": [
+            "Cash tied up in warehouse under standard production system configurations",
+            "Lost sales, and customers who go elsewhere next time",
+            "Inconsistent state spelling",
+            "Excessive KPI dashboards under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Undersupply results in stockouts, lost sales revenue, backorder fulfillment costs, and degraded customer satisfaction and brand loyalty.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "At what point do you stop dealing with analysis and start applying analytics?",
+        "options": [
+            "When pre-processing raw data under standard production system configurations",
+            "When using information to predict future values as accurately as you can",
+            "When building ERD diagrams under standard production system configurations",
+            "When masking credit card details under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "You transition from Data Analysis (descriptive examination of historical facts) to Data Analytics (predictive and prescriptive modeling) when you begin applying statistical algorithms and machine learning to forecast future outcomes.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What are the two branches of Predictive Analytics?",
+        "options": [
+            "Data collection and pre-processing",
+            "Traditional methods and Machine learning",
+            "Business intelligence and KPIs computed across multi-dimensional attribute distributions in statistical datasets",
+            "Qualitative and quantitative"
+        ],
+        "correct": 1,
+        "exp": "Predictive Analytics divides into: (1) Supervised Learning (Regression & Classification with known labels) and (2) Unsupervised Learning (Clustering & Dimensionality Reduction without prior labels).",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "What is Regression defined as?",
+        "options": [
+            "A grouping unlabelled data operating within enterprise data processing pipelines",
+            "A model used for quantifying causal relationships among variables",
+            "A masking private customer records operating within enterprise data processing pipelines",
+            "A counting keyword occurrences operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Regression analysis is a supervised statistical method that models and estimates the mathematical relationship between a continuous dependent variable (Y) and one or more independent predictor variables (X).",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "How is the Regression line visually positioned on a scatter plot?",
+        "options": [
+            "Vertically through the middle",
+            "As close as it can be to all of the dots at once",
+            "Connecting only the highest dots computed across multi-dimensional attribute distributions in statistical datasets",
+            "Parallel to the horizontal axis always"
+        ],
+        "correct": 1,
+        "exp": "In a 2D scatter plot, the Ordinary Least Squares (OLS) regression line is positioned to minimize the sum of squared vertical distances (residuals) between observed points and the predicted line.",
+        "section": "Part 2: Business Intelligence in Practice (Measures, Metrics & KPIs)"
+    },
+    {
+        "q": "In Logistic Regression, how do vertical axis values differ from linear regression?",
+        "options": [
+            "They range from negative to positive infinity",
+            "They are ones and zeros, and nothing else (joined by an S-curve)",
+            "They are continuous house prices computed across multi-dimensional attribute distributions in statistical datasets",
+            "They are categorical state names"
+        ],
+        "correct": 1,
+        "exp": "While linear regression predicts unbounded continuous numbers (-∞ to +∞), Logistic Regression predicts a probability score strictly bounded between 0 and 1 via the Sigmoid curve: P = 1 / (1 + e^-z).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In candidate screening via Logistic Regression, what threshold assigns outcome 1?",
+        "options": [
+            "Probability below 20% under standard production system configurations",
+            "Estimated probability of performing well is above 50%",
+            "Probability equal to 0% under standard production system configurations",
+            "Any candidate with a degree"
+        ],
+        "correct": 1,
+        "exp": "In candidate screening via Logistic Regression, a default decision cutoff threshold of P ≥ 0.50 (50% probability) assigns the binary classification 1 (Accept/Qualified).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What does Cluster Analysis do?",
+        "options": [
+            "Fits a straight line through dots under standard production system configurations",
+            "Groups observations that behave alike, without being told the groups",
+            "Groups explanatory variables together",
+            "Conceals credit card numbers under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Cluster Analysis is an unsupervised learning technique that partitions unlabelled observations into distinct, homogeneous groups (clusters) based on inherent feature similarity.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What are four names for the X side of a regression equation?",
+        "options": [
+            "Explanatory variable, Regressor, Independent variable, Predictor variable",
+            "Observation, Measure, Metric, KPI under standard production system configurations",
+            "Volume, Variety, Velocity, Value under standard production system configurations",
+            "Supervised, Unsupervised, Reinforcement, Deep"
+        ],
+        "correct": 0,
+        "exp": "In regression modeling, the X variable is interchangeably referred to as the Independent Variable, Predictor Variable, Explanatory Variable, or Feature/Regressor.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What is Factor Analysis defined as?",
+        "options": [
+            "Grouping similar observations together across standard production computing environments",
+            "Grouping explanatory variables together (collapsing multiple variables into underlying drivers)",
+            "Shuffling dataset rows across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Building S-curve candidate filters across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Factor Analysis is a statistical dimensionality reduction technique that identifies a smaller number of latent, unobserved underlying dimensions (factors) that explain shared variance among multiple correlated observed variables.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What is the one-line distinction between Clustering and Factor Analysis worth memorising?",
+        "options": [
+            "Clustering is supervised; Factor analysis is unsupervised across standard production computing environments",
+            "Clustering groups observations together. Factor analysis groups explanatory variables together.",
+            "Clustering uses time; Factor analysis uses cookies across standard production computing environments",
+            "Clustering is for Big Data; Factor analysis is for Traditional Data"
+        ],
+        "correct": 1,
+        "exp": "A key distinction to memorize: Clustering groups similar OBSERVATIONS (rows), whereas Factor Analysis groups correlated VARIABLES / FEATURES (columns).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In Time Series analysis, what is the one fixed rule?",
+        "options": [
+            "Time goes on the vertical line across standard production computing environments",
+            "Time always goes on the horizontal line, because time is independent of every other variable",
+            "Time is dependent on house price across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Time series requires GPU clusters across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "In Time Series analysis, the chronological sequence of observations is fixed and must be strictly preserved; data points cannot be randomly shuffled because temporal order contains autocorrelation.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In the UX case study, how many continental clusters were found from survey responses?",
+        "options": [
+            "2 clusters under standard production system configurations",
+            "4 clusters (Asia, Europe, South America, North America)",
+            "10 clusters under standard production system configurations",
+            "100 clusters under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "In the user experience study, cluster analysis segmented customer survey responses across 3 distinct continental geographic clusters exhibiting unique preferences.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What are three alternate names for A/B Testing?",
+        "options": [
+            "Hypothesis testing, experimentation, or multivariate testing",
+            "Data scrubbing, cleansing, or filtering",
+            "Regression, clustering, or factor analysis",
+            "Volume, variety, or velocity under standard production system configurations"
+        ],
+        "correct": 0,
+        "exp": "A/B Testing is also known as Split Testing, Bucket Testing, or Randomized Controlled Experimentation.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What holds up Sales Forecasting underneath Machine Learning?",
+        "options": [
+            "Cookies under standard production system configurations",
+            "Time series analysis",
+            "Data masking",
+            "Relational schemas"
+        ],
+        "correct": 1,
+        "exp": "Sales forecasting models combine historical time-series regression with supervised Machine Learning algorithms that identify seasonal patterns, economic trends, and promotional demand spikes.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In a few words, what is a Machine Learning algorithm?",
+        "options": [
+            "A hand-written set of IF-ELSE rules designed to support enterprise operational infrastructure",
+            "A trial and error process where each consecutive trial is at least as good as the one before it",
+            "A database query in SQL designed to support enterprise operational infrastructure",
+            "A manual survey scale from 1 to 10 designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "A Machine Learning algorithm is a mathematical framework that iteratively optimizes its internal parameters from training data without being explicitly programmed with hardcoded heuristic rules.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What are the Four Ingredients of every Machine Learning setup?",
+        "options": [
+            "01 Data, 02 Model, 03 Objective function, 04 Optimization algorithm",
+            "01 Volume, 02 Variety, 03 Velocity, 04 Veracity computed across multi-dimensional attribute distributions in statistical datasets",
+            "01 Ask, 02 Gather, 03 Explore, 04 Act",
+            "01 Input, 02 Output, 03 Table, 04 Chart"
+        ],
+        "correct": 0,
+        "exp": "Every Machine Learning system consists of 4 core ingredients: (1) Input Training Data, (2) Mathematical Model Architecture, (3) Objective / Loss Function, and (4) Optimization Algorithm.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In the Robot Archer analogy, what represents Data (01)?",
+        "options": [
+            "The bow usage",
+            "The quiver of arrows",
+            "The average distance from target",
+            "Adjusting posture and grip"
+        ],
+        "correct": 1,
+        "exp": "In the Robot Archer analogy, the target board and historical shot coordinates represent the Input Training Data (01).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In the Robot Archer analogy, what represents the Model (02)?",
+        "options": [
+            "The quiver of arrows (evaluating baseline parameters under standard system constraints)",
+            "How the robot actually fires the bow (the usage of the bow)",
+            "How far from target shots landed (evaluating baseline parameters under standard system constraints)",
+            "The chocolate reward (evaluating baseline parameters under standard system constraints)"
+        ],
+        "correct": 1,
+        "exp": "In the Robot Archer analogy, the physical mechanical design of the robot arm and bow tension settings represent the Model Architecture (02).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In the Robot Archer analogy, what represents the Objective Function (03)?",
+        "options": [
+            "The quiver of arrows in order to fulfill secondary operational objectives",
+            "The measure of how wrong you currently are (average distance from centre)",
+            "Adjusting posture and draw strength in order to fulfill secondary operational objectives",
+            "The target on the tree in order to fulfill secondary operational objectives"
+        ],
+        "correct": 1,
+        "exp": "In the Robot Archer analogy, measuring the physical distance between the arrow impact point and the center bullseye represents the Objective / Loss Function (03).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In the Robot Archer analogy, what represents the Optimization Algorithm (04)?",
+        "options": [
+            "The quiver of arrows (processing sequential input data through fixed heuristic rules)",
+            "The mechanics that reduce error (adjusting posture, grip, draw strength)",
+            "The target on the field (processing sequential input data through fixed heuristic rules)",
+            "The unlabelled dataset (processing sequential input data through fixed heuristic rules)"
+        ],
+        "correct": 1,
+        "exp": "In the Robot Archer analogy, the corrective mechanical feedback adjustment of arm angle and tension after each shot represents the Optimization Algorithm (04, e.g. Gradient Descent).",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "In Machine Learning, what do you DO rather than programming a rulebook?",
+        "options": [
+            "Program 100,000 IF instructions under standard production system configurations",
+            "Hand it one final goal (e.g. 'Place the arrow in the centre of the target')",
+            "Write hand-crafted equations under standard production system configurations",
+            "Manually adjust every arrow under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Instead of hardcoding deterministic if-else rulebooks, in Machine Learning you define the loss function and optimization framework, allowing the algorithm to learn patterns directly from data.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "Why does an ML training loop stop?",
+        "options": [
+            "Because it runs out of memory always under standard organizational security baseline protocols",
+            "1. It carries what it learns forward | 2. Good enough is genuinely good enough",
+            "Because objective function becomes infinite under standard organizational security baseline protocols",
+            "Because supervisors disconnect under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "An ML training loop stops when the objective loss function converges (stops improving), reaches a predefined maximum number of epochs, or triggers early stopping to prevent overfitting.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What happens when you hand a trained ML model an input it has never seen before (e.g. half an arrow)?",
+        "options": [
+            "It performs perfectly (evaluating baseline parameters under standard system constraints)",
+            "It struggles and will not know what to do",
+            "It automatically switches to SQL",
+            "It reduces error to zero (evaluating baseline parameters under standard system constraints)"
+        ],
+        "correct": 1,
+        "exp": "A properly trained and regularized ML model generalizes to novel, unseen inputs by applying learned latent mathematical patterns rather than memorizing training instances.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What defines Supervised Learning?",
+        "options": [
+            "No targets at all across standard production computing environments",
+            "You know the target for every arrow before it is fired (Labelled data)",
+            "Maximising a chocolate reward across standard production computing environments",
+            "Generating new raw audio across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Supervised Learning trains on labeled datasets where both input features (X) and ground-truth target outputs (y) are provided to the algorithm during training.",
+        "section": "Part 3: Traditional Data Methods (Linear & Logistic Regression, Clustering)"
+    },
+    {
+        "q": "What defines Unsupervised Learning?",
+        "options": [
+            "Labelled data with known targets across standard production computing environments",
+            "No targets at all; hand over arrows with unknown properties and ask machine to divide/cluster them",
+            "Positive reinforcement rewards across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Manual survey questionnaires across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Unsupervised Learning trains on unlabelled datasets containing only feature inputs (X), tasked with discovering intrinsic geometric structures, clusters, or distributions without target feedback.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "What defines Reinforcement Learning?",
+        "options": [
+            "Labelled target scoring across standard production computing environments",
+            "No error to shrink; a reward to chase instead (maximise reward / positive reinforcement)",
+            "Grouping explanatory variables across standard production computing environments computed across multi-dimensional attribute distributions in statistical datasets",
+            "Time series forecasting across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "Reinforcement Learning trains an autonomous agent to take sequential actions in an environment to maximize cumulative scalar rewards through trial-and-error exploration.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "In the combined ML approach, what is Step 1?",
+        "options": [
+            "Train it properly with supervised learning",
+            "Let it cluster unlabelled arrows into groups (unsupervised)",
+            "Learn targets manually across standard production computing environments",
+            "Apply data masking across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "In hybrid ML workflows, Step 1 frequently utilizes Unsupervised Learning (e.g. clustering or dimensionality reduction) to explore and structure raw data before applying Supervised Learning classifiers.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "In the real-world ML mapping, what does the robot and bow represent?",
+        "options": [
+            "A quiver of arrows under standard production system configurations",
+            "A highly complex mathematical formula",
+            "A single Excel row under standard production system configurations",
+            "A hotel room index under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "In the real-world ML mapping, the robot and bow represent the model architecture and its tunable parameter weights (e.g. weights and biases in a neural network).",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "Which algorithms are listed under Supervised Learning?",
+        "options": [
+            "K-means only (processing sequential input data through fixed heuristic rules)",
+            "SVMs, Neural networks, Deep learning, Random forest models, Bayesian networks",
+            "Diffusion models, NeRF, GANs (processing sequential input data through fixed heuristic rules)",
+            "Surveys, Cookies, ERD (processing sequential input data through fixed heuristic rules)"
+        ],
+        "correct": 1,
+        "exp": "Supervised learning algorithms include Linear Regression, Logistic Regression, Decision Trees, Random Forests, Support Vector Machines (SVM), and Supervised Neural Networks.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "What is the most common approach listed under Unsupervised Learning?",
+        "options": [
+            "SVMs",
+            "K-means",
+            "Random forest",
+            "Bayesian networks"
+        ],
+        "correct": 1,
+        "exp": "The most widespread unsupervised learning algorithms are k-Means Clustering, Hierarchical Clustering, and Principal Component Analysis (PCA).",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "Why does Deep Learning sit in both Supervised and Unsupervised columns?",
+        "options": [
+            "It is a mistake on the slide under standard organizational security baseline protocols",
+            "It is fundamentally different, state-of-the-art, with broad scope and extremely high accuracy",
+            "It only works with traditional data under standard organizational security baseline protocols",
+            "It requires no mathematical formulas under standard organizational security baseline protocols"
+        ],
+        "correct": 1,
+        "exp": "Deep Learning neural architectures are versatile: they can train on labeled datasets for classification (supervised) or learn latent representations via autoencoders and self-supervised embeddings (unsupervised).",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "What is Natural Language Processing (NLP)?",
+        "options": [
+            "A hardware cluster for SQL designed to support enterprise operational infrastructure",
+            "The subfield of ML that specialises in supervised and unsupervised techniques for human language",
+            "A traditional regression method for house prices designed to support enterprise operational infrastructure",
+            "A data masking tool for credit cards designed to support enterprise operational infrastructure"
+        ],
+        "correct": 1,
+        "exp": "Natural Language Processing (NLP) is the interdisciplinary field combining linguistics, computer science, and AI to enable computers to parse, understand, and generate human language.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "What is Self-Supervised Learning?",
+        "options": [
+            "A manual hand-labeling operating within enterprise data processing pipelines",
+            "A hybrid approach where unlabelled data produces its own labels, which become the training signal",
+            "A reward system using chocolates designed to support enterprise operational infrastructure",
+            "A traditional regression with 100 variables operating within enterprise data processing pipelines"
+        ],
+        "correct": 1,
+        "exp": "Self-Supervised Learning creates pseudo-labels automatically from raw data (e.g., masking words in a sentence and training the model to predict the missing word) without requiring manual human annotations.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "What is the core trick behind Large Language Models (LLMs)?",
+        "options": [
+            "Calculating room rate indices across standard production computing environments",
+            "Predicting the missing word in a sentence, using only preceding context",
+            "Grouping 100 survey questions into 1 factor across standard production computing environments",
+            "Shuffling 100 rows across standard production computing environments"
+        ],
+        "correct": 1,
+        "exp": "The fundamental pre-training objective of Large Language Models (LLMs) is autoregressive next-token prediction: computing the probability distribution of the next word given all preceding text context.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "In LLM architecture lineage, what 2017 architecture revolutionised text processing with the attention mechanism?",
+        "options": [
+            "N-grams",
+            "RNNs under standard production system configurations",
+            "LSTMs under standard production system configurations",
+            "Transformers"
+        ],
+        "correct": 3,
+        "exp": "The Transformer architecture, introduced by Vaswani et al. in 2017 ('Attention Is All You Need'), revolutionized NLP by replacing sequential RNNs with parallel multi-head self-attention mechanisms.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "What do the letters in 'GPT' stand for?",
+        "options": [
+            "General Processing Technique",
+            "Generative, Pre-trained, Transformer",
+            "Grouped Predictive Time-series computed across multi-dimensional attribute distributions in statistical datasets",
+            "Global Protocol Transformer"
+        ],
+        "correct": 1,
+        "exp": "GPT stands for Generative Pre-trained Transformer, denoting an autoregressive decoder-only Transformer trained on massive internet-scale text corpora.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "Which Generative AI model family runs two algorithms: one generates content, the other evaluates the result?",
+        "options": [
+            "Diffusion models (evaluating baseline parameters under standard system constraints)",
+            "GANs (Generative Adversarial Networks)",
+            "NeRF (evaluating baseline parameters under standard system constraints)",
+            "LSTMs (evaluating baseline parameters under standard system constraints)"
+        ],
+        "correct": 1,
+        "exp": "Generative Adversarial Networks (GANs), introduced by Ian Goodfellow, consist of two competing neural networks: a Generator that produces synthetic samples and a Discriminator that evaluates authenticity.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "Which Generative AI model family specialises in 3D modelling?",
+        "options": [
+            "Diffusion models (evaluating baseline parameters under standard system constraints)",
+            "GANs (evaluating baseline parameters under standard system constraints)",
+            "NeRF (Neural Radiance Fields)",
+            "Transformers (evaluating baseline parameters under standard system constraints)"
+        ],
+        "correct": 2,
+        "exp": "Neural Radiance Fields (NeRF) and 3D Diffusion architectures specialize in synthesizing photorealistic 3D scene representations and volumetric models from 2D images.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "In the Fraud Detection case study, what makes transaction history Supervised Learning?",
+        "options": [
+            "Transactions happen overseas at 3am",
+            "The dataset includes a Label column (Legitimate vs Fraudulent)",
+            "Transactions are recorded every second",
+            "It uses K-means clustering under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "In credit card fraud detection, historical transaction logs are labeled with ground truth (0 = Legitimate, 1 = Fraudulent), making it a canonical Supervised Classification problem.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    },
+    {
+        "q": "In the Client Retention case study, how do large chains solve the problem of tracking customer trends?",
+        "options": [
+            "The owner recognizes everyone on sight",
+            "Pass labelled data to a model to automate customer trend tracking",
+            "Stop offering discounts under standard production system configurations",
+            "Delete past customer records under standard production system configurations"
+        ],
+        "correct": 1,
+        "exp": "Large retail and hospitality chains track customer retention trends by issuing digital loyalty membership programs that link individual transaction histories to unique customer IDs across all store locations.",
+        "section": "Part 4: Real-World Case Studies (Client Retention & Credit Scoring)"
+    }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+    </script>
+</body>
+</html>
