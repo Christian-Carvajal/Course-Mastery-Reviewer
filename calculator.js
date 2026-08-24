@@ -1,8 +1,7 @@
 // ============================================================================
-// GLOBAL BUILT-IN SCIENTIFIC & CS REVIEWER CALCULATOR (v1.0)
+// GLOBAL BUILT-IN SCIENTIFIC & CS REVIEWER CALCULATOR (v1.1)
 // File: calculator.js
-// 100% Client-Side, Works Everywhere Offline, Dual-Mode (Standard + CS Scientific),
-// Base Conversions (Dec/Hex/Bin/Oct), Formula Presets, Computation Copy & History
+// Compact Ergonomic UI, 1-Click Formula Copier, Skeleton Inserter, Base Converter
 // ============================================================================
 
 (function(window, document) {
@@ -11,6 +10,119 @@
     if (window.ReviewerCalculator) {
         return; // Prevent duplicate instantiation
     }
+
+    const FORMULA_PRESETS = [
+        {
+            category: '🔐 Information Assurance & Security',
+            items: [
+                {
+                    name: 'ALE (Annualized Loss Expectancy)',
+                    formula: 'ALE = SLE * ARO',
+                    skeleton: '* ',
+                    desc: 'Single Loss Expectancy multiplied by Annualized Rate of Occurrence'
+                },
+                {
+                    name: 'SLE (Single Loss Expectancy)',
+                    formula: 'SLE = AV * EF',
+                    skeleton: '* ',
+                    desc: 'Asset Value multiplied by Exposure Factor (0.0 to 1.0)'
+                },
+                {
+                    name: 'Key Space Size (2^k bits)',
+                    formula: 'KeySpace = 2^k',
+                    skeleton: '2^',
+                    desc: 'Total brute-force search space for k-bit keys (e.g. 2^128, 2^256)'
+                },
+                {
+                    name: 'Password Entropy (Bits)',
+                    formula: 'Entropy = L * log2(R)',
+                    skeleton: ' * log2()',
+                    desc: 'Password length L multiplied by log2 of character pool size R'
+                }
+            ]
+        },
+        {
+            category: '📊 Data Mining & Probabilities',
+            items: [
+                {
+                    name: 'Combinations (nCr)',
+                    formula: 'nCr(n, r) = n! / (r! * (n - r)!)',
+                    skeleton: 'nCr(',
+                    desc: 'Number of ways to choose r items from n without order'
+                },
+                {
+                    name: 'Permutations (nPr)',
+                    formula: 'nPr(n, r) = n! / (n - r)!',
+                    skeleton: 'nPr(',
+                    desc: 'Number of ways to arrange r items from n with order'
+                },
+                {
+                    name: 'Bayes Theorem P(A|B)',
+                    formula: 'P(A|B) = (P(B|A) * P(A)) / P(B)',
+                    skeleton: '(*)/',
+                    desc: 'Posterior probability given likelihood, prior, and marginal evidence'
+                },
+                {
+                    name: 'Complement Rule (At Least Once)',
+                    formula: 'P(At Least 1) = 1 - (1 - p)^n',
+                    skeleton: '1 - (1 - )^',
+                    desc: 'Probability of at least one occurrence across n independent trials'
+                },
+                {
+                    name: 'Classical Probability P(A)',
+                    formula: 'P(A) = n(A) / n(S)',
+                    skeleton: '/',
+                    desc: 'Number of favorable outcomes divided by total sample space'
+                }
+            ]
+        },
+        {
+            category: '💻 OS Configuration & Networking',
+            items: [
+                {
+                    name: 'Page / Frame Size (2^d bytes)',
+                    formula: 'PageSize = 2^Offset_Bits',
+                    skeleton: '2^',
+                    desc: 'Page frame capacity in bytes (e.g. 2^12 = 4096 Bytes = 4 KB)'
+                },
+                {
+                    name: 'Page Table Entries Count',
+                    formula: 'Entries = 2^(Virtual_Bits - Offset_Bits)',
+                    skeleton: '2^()',
+                    desc: 'Total page table entries (e.g. 2^(32 - 12) = 2^20 = 1,048,576)'
+                },
+                {
+                    name: 'IPv4 Usable Subnet Hosts',
+                    formula: 'Usable_Hosts = 2^(32 - CIDR) - 2',
+                    skeleton: '2^(32 - ) - 2',
+                    desc: 'Usable host addresses in CIDR prefix (subtracting network and broadcast)'
+                },
+                {
+                    name: 'Byte Unit Conversion (KB to B)',
+                    formula: 'Bytes = KB * 1024',
+                    skeleton: ' * 1024',
+                    desc: 'Multiply by 1024 for KiB, 1024^2 for MiB, 1024^3 for GiB'
+                }
+            ]
+        },
+        {
+            category: '⚡ Automata & Computability',
+            items: [
+                {
+                    name: 'NFA to DFA Powerset States',
+                    formula: 'DFA_Max_States = 2^|Q|',
+                    skeleton: '2^',
+                    desc: 'Maximum states in powerset construction for NFA with |Q| states'
+                },
+                {
+                    name: 'Binary State Complexity log2(N)',
+                    formula: 'Bits = log2(N)',
+                    skeleton: 'log2(',
+                    desc: 'Minimum binary state bits required to encode N distinct states'
+                }
+            ]
+        }
+    ];
 
     class CourseCalculator {
         constructor() {
@@ -21,7 +133,6 @@
             this.expression = '';
             this.result = '0';
             this.history = [];
-            this.memory = 0;
             this.currentBase = 'dec';
 
             this.loadState();
@@ -83,8 +194,8 @@
                         </div>
                     </div>
                     <div class="calc-header-actions">
-                        <button class="calc-hdr-btn" id="calc-toggle-presets" title="CS & Math Formula Presets">📐 Presets</button>
-                        <button class="calc-hdr-btn" id="calc-toggle-history" title="View Calculation History">📜 History (<span id="calc-history-count">0</span>)</button>
+                        <button class="calc-hdr-btn" id="calc-toggle-presets" title="CS & Math Formula Reference Presets">📐 Presets</button>
+                        <button class="calc-hdr-btn" id="calc-toggle-history" title="View Calculation History">📜 (<span id="calc-history-count">0</span>)</button>
                         <button class="calc-hdr-btn" id="calc-toggle-mode" title="Toggle Standard / CS Scientific Mode">⇄ Mode</button>
                         <button class="calc-hdr-btn calc-close-btn" id="calc-btn-close" title="Close Calculator (Esc)">&times;</button>
                     </div>
@@ -125,47 +236,24 @@
                     </div>
                 </div>
 
-                <!-- Presets Drawer Panel (Hidden by default) -->
+                <!-- Presets Drawer Panel (Formula Presets & Quick Reference) -->
                 <div class="calc-drawer-panel" id="calc-presets-drawer" style="display: none;">
                     <div class="drawer-header">
-                        <strong>CS & Course Formula Presets</strong>
+                        <strong>📐 CS & Course Formula Presets</strong>
                         <button class="drawer-close" id="calc-close-presets">&times;</button>
                     </div>
-                    <div class="drawer-grid">
-                        <div class="preset-group">
-                            <span class="preset-group-title">🔐 IAS & Security</span>
-                            <button class="preset-btn" data-calc="120000 * 0.2">ALE (120k × 0.2)</button>
-                            <button class="preset-btn" data-calc="500000 * 0.25">SLE (500k × 0.25)</button>
-                            <button class="preset-btn" data-calc="2**128">AES-128 Key Space (2¹²⁸)</button>
-                            <button class="preset-btn" data-calc="2**256">SHA-256 Key Space (2²⁵⁶)</button>
-                        </div>
-                        <div class="preset-group">
-                            <span class="preset-group-title">📊 Data Mining & Probabilities</span>
-                            <button class="preset-btn" data-calc="nCr(10,3)">Combination ₁₀C₃</button>
-                            <button class="preset-btn" data-calc="nPr(10,3)">Permutation ₁₀P₃</button>
-                            <button class="preset-btn" data-calc="(0.8*0.01)/0.05">Bayes Theorem P(A|B)</button>
-                            <button class="preset-btn" data-calc="1-(5/6)**4">Complement At Least Once</button>
-                        </div>
-                        <div class="preset-group">
-                            <span class="preset-group-title">💻 OS Configuration</span>
-                            <button class="preset-btn" data-calc="2**12">4 KB Page Size (2¹² B)</button>
-                            <button class="preset-btn" data-calc="(2**32)/(2**12)">32-bit Page Entries (2²⁰)</button>
-                            <button class="preset-btn" data-calc="(2**(32-24))-2">/24 Subnet Hosts (254)</button>
-                            <button class="preset-btn" data-calc="(2**(32-28))-2">/28 Subnet Hosts (14)</button>
-                        </div>
-                        <div class="preset-group">
-                            <span class="preset-group-title">⚡ Automata & Computability</span>
-                            <button class="preset-btn" data-calc="2**5">NFA Powerset States (2⁵)</button>
-                            <button class="preset-btn" data-calc="log2(1024)">log₂(1024)</button>
-                            <button class="preset-btn" data-calc="log2(65536)">log₂(65536)</button>
-                        </div>
+                    <div class="drawer-preset-desc">
+                        Click <strong>Copy</strong> to copy the clean formula, or <strong>Insert</strong> to load its skeleton into the keypad for your own numbers!
+                    </div>
+                    <div class="drawer-grid" id="calc-presets-container">
+                        <!-- Rendered dynamically from FORMULA_PRESETS -->
                     </div>
                 </div>
 
-                <!-- History Drawer Panel (Hidden by default) -->
+                <!-- History Drawer Panel -->
                 <div class="calc-drawer-panel" id="calc-history-drawer" style="display: none;">
                     <div class="drawer-header">
-                        <strong>Calculation History</strong>
+                        <strong>📜 Calculation History</strong>
                         <div class="drawer-actions">
                             <button class="drawer-clear-btn" id="calc-clear-history">Clear</button>
                             <button class="drawer-close" id="calc-close-history">&times;</button>
@@ -239,7 +327,7 @@
 
             document.body.appendChild(modal);
 
-            // Also inject a quick link in sticky nav topbar if available
+            // Inject quick pill in sticky nav topbar if available
             const navActions = document.querySelector('.topbar-actions, nav.sticky-nav > div:last-child');
             if (navActions && !navActions.querySelector('.nav-calc-btn')) {
                 const calcNavBtn = document.createElement('button');
@@ -315,20 +403,7 @@
                 });
             }
 
-            const presetsDrawer = document.getElementById('calc-presets-drawer');
-            if (presetsDrawer) {
-                presetsDrawer.addEventListener('click', (e) => {
-                    const btn = e.target.closest('.preset-btn');
-                    if (!btn) return;
-                    const calcStr = btn.getAttribute('data-calc');
-                    if (calcStr) {
-                        this.expression = calcStr;
-                        this.evaluate(true);
-                        this.togglePresets(false);
-                    }
-                });
-            }
-
+            // Keyboard Shortcuts
             document.addEventListener('keydown', (e) => {
                 if ((e.altKey && e.key.toLowerCase() === 'c') || (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'c')) {
                     e.preventDefault();
@@ -355,9 +430,68 @@
                 }
             });
 
+            this.renderPresets();
             this.initDraggable();
             this.renderHistory();
             this.updateModeUI();
+        }
+
+        renderPresets() {
+            const container = document.getElementById('calc-presets-container');
+            if (!container) return;
+
+            container.innerHTML = FORMULA_PRESETS.map(group => `
+                <div class="preset-group">
+                    <span class="preset-group-title">${group.category}</span>
+                    <div class="preset-items-list">
+                        ${group.items.map(item => `
+                            <div class="preset-card">
+                                <div class="preset-card-info">
+                                    <div class="preset-card-name">${item.name}</div>
+                                    <div class="preset-card-formula">${item.formula}</div>
+                                </div>
+                                <div class="preset-card-actions">
+                                    <button class="preset-act-btn preset-copy-formula" data-formula="${item.formula}" title="Copy formula equation to clipboard">
+                                        📋 Copy
+                                    </button>
+                                    <button class="preset-act-btn preset-insert-skel" data-skel="${item.skeleton}" title="Insert formula skeleton onto keypad">
+                                        ⚡ Insert
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Bind Copy & Insert event listeners
+            container.querySelectorAll('.preset-copy-formula').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const formStr = btn.getAttribute('data-formula');
+                    if (formStr) {
+                        this.copyToClipboard(formStr, `Copied Formula: ${formStr}`);
+                    }
+                });
+            });
+
+            container.querySelectorAll('.preset-insert-skel').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const skel = btn.getAttribute('data-skel');
+                    if (skel) {
+                        if (this.expression === '0' || !this.expression) {
+                            this.expression = skel;
+                        } else {
+                            this.expression += skel;
+                        }
+                        this.evaluate(false);
+                        this.updateDisplay();
+                        this.togglePresets(false);
+                        this.showCopyToast(`Inserted ${skel}`);
+                    }
+                });
+            });
         }
 
         initDraggable() {
