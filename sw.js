@@ -1,4 +1,4 @@
-const CACHE_NAME = 'reviewer-pwa-v149';
+const CACHE_NAME = 'reviewer-pwa-v150';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -6,6 +6,7 @@ const STATIC_ASSETS = [
     '/global.js',
     '/chatbot.js',
     '/heroCanvas.js',
+    '/calculator.js',
     '/supabaseClient.js',
     '/manifest.json',
     '/favicon.ico',
