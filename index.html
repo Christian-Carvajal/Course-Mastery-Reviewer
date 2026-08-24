@@ -26,22 +26,27 @@
             </div>
 
             <div class="topbar-actions">
-                <a href="./whiteboard.html" target="_blank" class="topbar-action-pill whiteboard-pill" title="Open Interactive Canvas Whiteboard">
+                <a href="./whiteboard.html" target="_blank" class="topbar-action-pill whiteboard-pill desktop-only-pill" title="Open Interactive Canvas Whiteboard">
                     <span class="pill-icon">📝</span>
                     <span class="pill-label">Whiteboard</span>
                 </a>
 
-                <button class="topbar-action-pill auth-pill auth-nav-pill" onclick="window.openAuthModal('signin')" title="Student Cloud Sync & Account">
+                <button class="topbar-action-pill auth-pill auth-nav-pill desktop-only-pill" onclick="window.openAuthModal('signin')" title="Student Cloud Sync & Account">
                     <span class="pill-icon" id="topbar-auth-icon">👤</span>
                     <span class="pill-label" id="topbar-auth-label">Sign In / Sync</span>
                 </button>
 
-                <button id="pwa-install-btn" class="topbar-action-pill install-pill" onclick="window.installPWA()" style="display:none;" title="Install Offline PWA App">
+                <button id="pwa-install-btn" class="topbar-action-pill install-pill desktop-only-pill" onclick="window.installPWA()" style="display:none;" title="Install Offline PWA App">
                     <span class="pill-icon">📱</span>
                     <span class="pill-label">Install App</span>
                 </button>
 
                 <button class="theme-toggle-btn" aria-label="Toggle Dark / Light Mode" title="Toggle Theme"></button>
+
+                <!-- Mobile Compact Avatar/Sync Button -->
+                <button class="mobile-avatar-btn" onclick="window.openAuthModal('signin')" aria-label="Student Account & Sync" title="Account & Sync">
+                    <span id="mob-topbar-auth-icon">👤</span>
+                </button>
             </div>
         </div>
     </header>
@@ -1004,6 +1009,8 @@
                 }
                 if (topbarIcon) topbarIcon.innerText = '🟢';
                 if (topbarLabel) topbarLabel.innerText = user.username;
+                const mobIcon = document.getElementById('mob-topbar-auth-icon');
+                if (mobIcon) mobIcon.innerText = '🟢';
             } else {
                 if (statusEl) statusEl.innerHTML = `Ready to study • 1,140 Questions Indexed across 4 Subjects`;
                 if (title) title.innerText = 'Personal Study & Mastery Dashboard';
@@ -1017,6 +1024,8 @@
                 }
                 if (topbarIcon) topbarIcon.innerText = '👤';
                 if (topbarLabel) topbarLabel.innerText = 'Sign In / Sync';
+                const mobIcon = document.getElementById('mob-topbar-auth-icon');
+                if (mobIcon) mobIcon.innerText = '👤';
             }
         };
 
