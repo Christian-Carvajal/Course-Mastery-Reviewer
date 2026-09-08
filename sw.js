@@ -1,4 +1,4 @@
-const CACHE_NAME = 'reviewer-pwa-v151';
+const CACHE_NAME = 'reviewer-pwa-v182';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -6,8 +6,8 @@ const STATIC_ASSETS = [
     '/global.js',
     '/chatbot.js',
     '/heroCanvas.js',
-    '/calculator.js',
     '/supabaseClient.js',
+    '/js/html2pdf.bundle.min.js',
     '/manifest.json',
     '/favicon.ico',
     '/icons/icon-192.png',
@@ -20,14 +20,28 @@ const STATIC_ASSETS = [
     '/subject/informationAssuranceAndSecurity/prelim/accessControl.html',
     '/subject/informationAssuranceAndSecurity/prelim/week1And2.html',
     '/subject/informationAssuranceAndSecurity/prelim/week3And4.html',
+    '/subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html',
     '/subject/dataMining/prelim/introductionToDataScience.html',
     '/subject/dataMining/prelim/probabilities.html',
     '/subject/dataMining/prelim/probabilityDistribution.html',
     '/subject/dataMining/prelim/setsEventsBayesianInference.html',
     '/subject/dataMining/prelim/traditionalDataTechniques.html',
+    '/subject/dataMining/Midterm/statisticsFundamentals.html',
+    '/subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html',
+    '/subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html',
     '/subject/operatingSystemConfiguration/prelim/introductionToOperatingSystems.html',
     '/subject/operatingSystemConfiguration/prelim/networkConfigurationInWindowsOS.html',
-    '/subject/operatingSystemConfiguration/prelim/osStructuresAndSystemCalls.html'
+    '/subject/operatingSystemConfiguration/prelim/osStructuresAndSystemCalls.html',
+    '/subject/englishForTheProfession/Prelim/englishForProfession1.html',
+    '/subject/englishForTheProfession/Prelim/modelsOfCommunication.html',
+    '/subject/englishForTheProfession/Prelim/businessWriting.html',
+    '/subject/Resources/automataTheory/resources.html',
+    '/subject/Resources/dataMiningResources/resources.html',
+    '/subject/Resources/dataMiningResources/midterm/resources.html',
+    '/subject/Resources/englishForTheProfession/resources.html',
+    '/subject/Resources/informationAssuranceAndSecurity/resources.html',
+    '/subject/Resources/informationAssuranceAndSecurity/midterm/resources.html',
+    '/subject/Resources/operatingSystemConfiguration/resources.html'
 ];
 
 // External CDN dependencies required for full offline capability

@@ -48,12 +48,32 @@ function safeSetStorage(key, value) {
 // Unified JavaScript Controller for Course Reviewer
 
 document.addEventListener('DOMContentLoaded', () => {
-        if (window.SupabaseSync) window.SupabaseSync.updateNavUI();
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    if (document.body) {
+        document.body.style.overflow = '';
+    }
+    if (document.documentElement) {
+        document.documentElement.style.overflow = '';
+    }
+    if (window.SupabaseSync) window.SupabaseSync.updateNavUI();
     initTheme();
-    initGlobalNavigation();
     initStudyLayout();
-    initAutoUpdateChecker();
+    initGlobalNavigation();
+    initQuickRefFlashcards();
+    initMobileGestures();
+    initZenMode();
+    initEnhancedCommandPalette();
+    initDirectPdfDownloads();
+    if (typeof initAutoUpdateChecker === 'function') {
+        initAutoUpdateChecker();
+    }
 });
+
+function initAutoUpdateChecker() {
+    // 3-layer Auto-updater handled by dedicated PWA auto-updater IIFE
+}
 
 // ==========================================
 // 1. Theme Management (Light / Dark Mode)
@@ -113,32 +133,139 @@ function getPageTopicKey() {
 window.tabScrollPositions = {};
 window.lastActiveTabId = 'reviewer';
 
+// Master Course Curriculum Map for Seamless Navigation
+const COURSE_CURRICULUM = [
+    // Automata Theory (Prelim)
+    { filename: 'theCentralConceptsOfAutomata.html', title: 'The Central Concepts of Automata', term: 'prelim', subject: 'Automata Theory', url: '/subject/automataTheory/prelim/theCentralConceptsOfAutomata.html' },
+    { filename: 'introductionToAutomataTheoryFormalLanguages.html', title: 'Automata Theory & Formal Languages', term: 'prelim', subject: 'Automata Theory', url: '/subject/automataTheory/prelim/introductionToAutomataTheoryFormalLanguages.html' },
+    { filename: 'automataComputabilityAndComplexity.html', title: 'Automata, Computability & Complexity', term: 'prelim', subject: 'Automata Theory', url: '/subject/automataTheory/prelim/automataComputabilityAndComplexity.html' },
+
+    // Data Mining & Science (Prelim)
+    { filename: 'introductionToDataScience.html', title: 'Introduction to Data Science', term: 'prelim', subject: 'Data Mining', url: '/subject/dataMining/prelim/introductionToDataScience.html' },
+    { filename: 'traditionalDataTechniques.html', title: 'Traditional Data Techniques', term: 'prelim', subject: 'Data Mining', url: '/subject/dataMining/prelim/traditionalDataTechniques.html' },
+    { filename: 'probabilities.html', title: 'Probabilities', term: 'prelim', subject: 'Data Mining', url: '/subject/dataMining/prelim/probabilities.html' },
+    { filename: 'setsEventsBayesianInference.html', title: 'Sets, Events & Bayesian Inference', term: 'prelim', subject: 'Data Mining', url: '/subject/dataMining/prelim/setsEventsBayesianInference.html' },
+    { filename: 'probabilityDistribution.html', title: 'Probability Distributions', term: 'prelim', subject: 'Data Mining', url: '/subject/dataMining/prelim/probabilityDistribution.html' },
+
+    // English for the Profession (Prelim)
+    { filename: 'englishForProfession1.html', title: 'Intro to Business Communication & The 8 Cs', term: 'prelim', subject: 'English for the Profession', url: '/subject/englishForTheProfession/prelim/englishForProfession1.html' },
+    { filename: 'modelsOfCommunication.html', title: 'Models of Communication & Stages of Writing', term: 'prelim', subject: 'English for the Profession', url: '/subject/englishForTheProfession/prelim/modelsOfCommunication.html' },
+    { filename: 'businessWriting.html', title: 'Business Writing, Sentence Construction & MEAL', term: 'prelim', subject: 'English for the Profession', url: '/subject/englishForTheProfession/prelim/businessWriting.html' },
+
+    // Information Assurance & Security (Prelim)
+    { filename: 'week1And2.html', title: 'Foundations & Threat Landscape (Weeks 1-2)', term: 'prelim', subject: 'IAS', url: '/subject/informationAssuranceAndSecurity/prelim/week1And2.html' },
+    { filename: 'week3And4.html', title: 'Governance & Risk Management (Weeks 3-4)', term: 'prelim', subject: 'IAS', url: '/subject/informationAssuranceAndSecurity/prelim/week3And4.html' },
+    { filename: 'accessControl.html', title: 'Access Control Models & Principles (Week 5)', term: 'prelim', subject: 'IAS', url: '/subject/informationAssuranceAndSecurity/prelim/accessControl.html' },
+
+    // Operating Systems Configuration (Prelim)
+    { filename: 'introductionToOperatingSystems.html', title: 'Introduction to Operating Systems', term: 'prelim', subject: 'Operating Systems', url: '/subject/operatingSystemConfiguration/prelim/introductionToOperatingSystems.html' },
+    { filename: 'osStructuresAndSystemCalls.html', title: 'OS Structures and System Calls', term: 'prelim', subject: 'Operating Systems', url: '/subject/operatingSystemConfiguration/prelim/osStructuresAndSystemCalls.html' },
+    { filename: 'networkConfigurationInWindowsOS.html', title: 'Network Configuration in Windows OS', term: 'prelim', subject: 'Operating Systems', url: '/subject/operatingSystemConfiguration/prelim/networkConfigurationInWindowsOS.html' },
+
+    // Midterm Modules
+    { filename: 'cryptographyFundamentals.html', title: 'Cryptography Fundamentals (Week 7)', term: 'midterm', subject: 'IAS', url: '/subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html' },
+    { filename: 'statisticsFundamentals.html', title: 'Statistics Fundamentals (Descriptive & Inferential)', term: 'midterm', subject: 'Data Mining', url: '/subject/dataMining/midterm/statisticsFundamentals.html' },
+    { filename: 'confidenceIntervalsAndHypothesisTesting.html', title: 'Confidence Intervals & Hypothesis Testing', term: 'midterm', subject: 'Data Mining', url: '/subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html' },
+    { filename: 'confidenceHypothesisWorkExamples.html', title: 'Confidence Intervals & Hypothesis Testing: Work Examples & Derivations', term: 'midterm', subject: 'Data Mining', url: '/subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html' }
+];
+
+function getRootRelativePath() {
+    const rawPath = window.location.pathname.replace(/\\/g, '/').toLowerCase();
+    const idx = rawPath.indexOf('/subject/');
+    if (idx !== -1) {
+        const sub = rawPath.substring(idx + '/subject/'.length);
+        const segments = sub.split('/').filter(Boolean);
+        return '../'.repeat(segments.length) + 'index.html';
+    }
+    return './index.html';
+}
+
+function detectCurrentTerm() {
+    const rawPath = window.location.pathname.replace(/\\/g, '/').toLowerCase();
+    if (rawPath.includes('/midterm/')) return 'midterm';
+    if (rawPath.includes('/finals/')) return 'finals';
+    if (rawPath.includes('/prelim/')) return 'prelim';
+    if (rawPath.includes('/resources/')) return 'prelim';
+    return null;
+}
+
 function initGlobalNavigation() {
-    // Auto-inject Whiteboard quick link into study page navbars if not already present
+    const currentTerm = detectCurrentTerm();
+    const isPortalPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+
+    // 1. If currently inside a lesson or resource page, record state and synchronize navigation
+    if (currentTerm && !isPortalPage) {
+        safeSetStorage('active_portal_term', currentTerm);
+        safeSetStorage('last_visited_lesson_path', window.location.pathname);
+        safeSetStorage('last_visited_lesson_time', Date.now());
+        safeSetStorage('last_visited_lesson_title', document.title);
+
+        // Synchronize 'Return to Portal' home button dynamically with exact depth and term hash
+        const homeBtns = document.querySelectorAll('a.nav-btn-home');
+        const rootPath = getRootRelativePath();
+        const targetUrl = `${rootPath}#${currentTerm}`;
+        const targetTitle = `Return to ${currentTerm.charAt(0).toUpperCase() + currentTerm.slice(1)} Portal (Alt + Home)`;
+        const targetText = `&larr; Return to ${currentTerm.charAt(0).toUpperCase() + currentTerm.slice(1)} Portal`;
+
+        homeBtns.forEach(btn => {
+            btn.href = targetUrl;
+            btn.title = targetTitle;
+            btn.innerHTML = targetText;
+            btn.addEventListener('click', (e) => {
+                safeSetStorage('active_portal_term', currentTerm);
+                e.preventDefault();
+                window.location.href = targetUrl;
+            });
+        });
+
+        // Add Term Badge to Sticky Nav Title
+        const navTitle = document.querySelector('nav.sticky-nav .nav-title');
+        if (navTitle && !navTitle.querySelector('.badge-nav-term')) {
+            const badge = document.createElement('span');
+            badge.className = 'badge-nav-term';
+            badge.textContent = currentTerm;
+            navTitle.appendChild(badge);
+        }
+
+        // Inject Bottom Curriculum Navigation Pager into Study Guide
+        injectCurriculumPager(currentTerm);
+
+        // Bind Keyboard Shortcuts for Ergonomic Studying
+        bindKeyboardNavigation(currentTerm);
+    }
+
+    // 2. Inject Floating 'Back to Top' Pill Button on all long content pages
+    injectBackToTopButton();
+
+    // 3. Auto-inject Whiteboard quick link into study page navbars if not already present
     const navRight = document.querySelector('nav.sticky-nav > div:last-child');
-    if (navRight && !navRight.querySelector('.nav-wb-btn') && !window.location.pathname.endsWith('index.html') && window.location.pathname !== '/' && !window.location.pathname.endsWith('whiteboard.html')) {
+    if (navRight && !navRight.querySelector('.nav-wb-btn') && !isPortalPage && !window.location.pathname.endsWith('whiteboard.html')) {
         const wbLink = document.createElement('a');
-        wbLink.href = '/whiteboard.html';
+        wbLink.href = getRootRelativePath().replace('index.html', 'whiteboard.html');
         wbLink.target = '_blank';
         wbLink.className = 'topbar-action-pill whiteboard-pill nav-wb-btn';
         wbLink.innerHTML = '<span class="pill-icon">📝</span><span class="pill-label">Whiteboard</span>';
         wbLink.style.marginRight = '0.35rem';
         navRight.insertBefore(wbLink, navRight.firstChild);
     }
+    initDirectPdfDownloads();
+
     const pageKey = getPageTopicKey();
 
-    // 1. Continuous real-time scroll recording for the active tab
-    let scrollRafId = null;
+    // 1. Zero-latency in-memory scroll recording with debounced disk persistence
+    let scrollSaveTimeout = null;
     window.addEventListener('scroll', () => {
-        if (scrollRafId) cancelAnimationFrame(scrollRafId);
-        scrollRafId = requestAnimationFrame(() => {
-            const activeTab = document.querySelector('.tab-content.active');
-            if (activeTab && activeTab.id) {
-                const pos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
-                window.tabScrollPositions[activeTab.id] = pos;
+        const activeTab = document.querySelector('.tab-content.active');
+        if (activeTab && activeTab.id) {
+            const pos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+            window.tabScrollPositions[activeTab.id] = pos;
+            
+            // Debounce disk I/O to guarantee 120 FPS fluid scrolling without main-thread locking
+            if (scrollSaveTimeout) clearTimeout(scrollSaveTimeout);
+            scrollSaveTimeout = setTimeout(() => {
                 safeSetStorage(`scroll_pos_${pageKey}_${activeTab.id}`, pos);
-            }
-        });
+            }, 250);
+        }
     }, { passive: true });
 
     // Save scroll on tab visibility change or unload
@@ -158,8 +285,12 @@ function initGlobalNavigation() {
     });
 
     window.switchTab = function(tabId, updateHash = true) {
-        // Step A: Save scroll position of currently visible tab before hiding it
         const currentActiveTab = document.querySelector('.tab-content.active');
+        if (currentActiveTab && currentActiveTab.id === tabId) {
+            return; // Already active, do not interrupt user scrolling
+        }
+
+        // Step A: Save scroll position of currently visible tab before hiding it
         if (currentActiveTab && currentActiveTab.id) {
             const currentId = currentActiveTab.id;
             const currentPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
@@ -194,20 +325,18 @@ function initGlobalNavigation() {
             window.history.replaceState(null, '', `#${tabId}`);
         }
 
-        // Step C: Restore exact saved scroll position for target tab after DOM layout reflow
+        // Step C: Restore exact saved scroll position for target tab smoothly
         const savedScroll = window.tabScrollPositions[tabId] !== undefined 
             ? window.tabScrollPositions[tabId] 
             : safeGetStorage(`scroll_pos_${pageKey}_${tabId}`);
 
         const targetY = (savedScroll !== null && savedScroll !== undefined) ? parseInt(savedScroll, 10) : 0;
 
-        // Double-pass layout-settled scroll restoration
-        requestAnimationFrame(() => {
-            window.scrollTo({ top: targetY, behavior: 'instant' });
-            setTimeout(() => {
+        if (targetY > 0) {
+            requestAnimationFrame(() => {
                 window.scrollTo({ top: targetY, behavior: 'instant' });
-            }, 30);
-        });
+            });
+        }
     };
 
     // Auto-restore active tab and its exact scroll position on initial page load / reload
@@ -284,9 +413,49 @@ function initStudyLayout() {
     tocContent.className = 'toc-content';
     tocCard.appendChild(tocContent);
 
+    // Dynamic Reading Time & Reading Progress Meter
+    const totalWords = (studyMain.innerText || '').trim().split(/\s+/).filter(Boolean).length;
+    const readMinutes = Math.max(1, Math.ceil(totalWords / 200));
+
+    const progressWrapper = document.createElement('div');
+    progressWrapper.className = 'toc-progress-wrapper';
+    progressWrapper.innerHTML = `
+        <div class="toc-stats-row">
+            <span class="toc-read-time-badge">⏱️ ${readMinutes} min read</span>
+            <span class="toc-percent-label" id="toc-percent-label">0% read</span>
+        </div>
+        <div class="toc-progress-track">
+            <div class="toc-progress-fill" id="toc-progress-fill"></div>
+        </div>
+    `;
+    tocContent.appendChild(progressWrapper);
+
     const tocList = document.createElement('ul');
     tocList.className = 'toc-list';
     tocContent.appendChild(tocList);
+
+    // Scroll listener for reading progress bar
+    let progressRaf = null;
+    window.addEventListener('scroll', () => {
+        if (progressRaf) cancelAnimationFrame(progressRaf);
+        progressRaf = requestAnimationFrame(() => {
+            const rect = studyMain.getBoundingClientRect();
+            const totalScrollable = studyMain.offsetHeight - window.innerHeight;
+            let pct = 0;
+            if (totalScrollable > 0) {
+                pct = Math.min(100, Math.max(0, Math.round((-rect.top / totalScrollable) * 100)));
+            } else if (rect.top <= 0) {
+                pct = 100;
+            }
+            const fill = document.getElementById('toc-progress-fill');
+            const label = document.getElementById('toc-percent-label');
+            if (fill) fill.style.width = pct + '%';
+            if (label) label.innerText = pct + '% read';
+
+            const zenFill = document.getElementById('zen-progress-fill');
+            if (zenFill) zenFill.style.width = pct + '%';
+        });
+    }, { passive: true });
 
     // Find all h2 and h3 elements inside cards
     const headings = studyMain.querySelectorAll('h2, h3');
@@ -338,24 +507,26 @@ function initStudyLayout() {
             threshold: 0
         };
 
-        let currentActiveItem = null;
+        let currentActiveId = null;
+        let observerRaf = null;
 
         const observer = new IntersectionObserver(entries => {
-            // Find entries that are intersecting
             const visibleEntries = entries.filter(e => e.isIntersecting);
             if (visibleEntries.length > 0) {
-                // Find target ID
                 const targetId = visibleEntries[0].target.id;
-                
-                // Remove active class from all
-                tocItems.forEach(item => item.linkElement.classList.remove('active'));
-                
-                // Add to active
-                const activeItem = tocItems.find(item => item.heading.id === targetId);
-                if (activeItem) {
-                    activeItem.linkElement.classList.add('active');
-                    currentActiveItem = activeItem;
-                }
+                if (targetId === currentActiveId) return;
+                currentActiveId = targetId;
+
+                if (observerRaf) cancelAnimationFrame(observerRaf);
+                observerRaf = requestAnimationFrame(() => {
+                    tocItems.forEach(item => {
+                        if (item.heading.id === targetId) {
+                            item.linkElement.classList.add('active');
+                        } else {
+                            item.linkElement.classList.remove('active');
+                        }
+                    });
+                });
             }
         }, observerOptions);
 
@@ -389,6 +560,62 @@ window.SUBJECT_LESSON_MAP = {
         term: 'Prelim Term',
         lesson: 'Governance & Risk Management (Weeks 3–4)',
         lessonSubtitle: 'Security Policies, ISO 27001 ISMS & Quantitative Risk Analysis'
+    },
+    'cryptographyFundamentals': {
+        subject: 'Information Assurance & Security',
+        courseCode: 'BSCS 3110',
+        term: 'Midterm Term',
+        lesson: 'Cryptography Fundamentals',
+        lessonSubtitle: 'Keeping Secrets, Proving Truth, and Trusting Data (Week 7)'
+    },
+    'cryptography': {
+        subject: 'Information Assurance & Security',
+        courseCode: 'BSCS 3110',
+        term: 'Midterm Term',
+        lesson: 'Cryptography Fundamentals',
+        lessonSubtitle: 'Keeping Secrets, Proving Truth, and Trusting Data (Week 7)'
+    },
+    'statisticsFundamentals': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Midterm Term',
+        lesson: 'Statistics Fundamentals',
+        lessonSubtitle: 'From Descriptive Data to Statistical Inference'
+    },
+    'statisticsfundamental': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Midterm Term',
+        lesson: 'Statistics Fundamentals',
+        lessonSubtitle: 'From Descriptive Data to Statistical Inference'
+    },
+    'confidenceIntervalsAndHypothesisTesting': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Midterm Term',
+        lesson: 'Confidence Intervals & Hypothesis Testing',
+        lessonSubtitle: 'From Estimation to Statistical Decision Making (62-Slide Master Deck)'
+    },
+    'confidenceintervalsandhypothesistesting': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Midterm Term',
+        lesson: 'Confidence Intervals & Hypothesis Testing',
+        lessonSubtitle: 'From Estimation to Statistical Decision Making (62-Slide Master Deck)'
+    },
+    'confidenceHypothesisWorkExamples': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Midterm Term',
+        lesson: 'Confidence Intervals & Hypothesis Testing: Work Examples & Derivations',
+        lessonSubtitle: '5-Part Derivations, Problem Sets A–D & Exam Trap Defenses'
+    },
+    'confidencehypothesisworkexamples': {
+        subject: 'Data Mining & Warehousing',
+        courseCode: 'Data Mining',
+        term: 'Midterm Term',
+        lesson: 'Confidence Intervals & Hypothesis Testing: Work Examples & Derivations',
+        lessonSubtitle: '5-Part Derivations, Problem Sets A–D & Exam Trap Defenses'
     },
     'probabilityDistribution': {
         subject: 'Data Mining & Warehousing',
@@ -688,6 +915,16 @@ class QuizManager {
         // Inject Filter Bar above quiz container if not present
         this.renderFilterBar();
 
+        if (this.isDrillMode) {
+            const drillBanner = document.createElement('div');
+            drillBanner.className = 'remediation-active-banner';
+            drillBanner.innerHTML = `
+                <div>⚡ <strong>Mistake Remediation Mode:</strong> Target: 100% mastery of ${this.shuffledQuizData.length} previously missed question${this.shuffledQuizData.length > 1 ? 's' : ''}.</div>
+                <button class="btn-exit-drill" onclick="window.activeQuiz && window.activeQuiz.exitDrillMode()">✕ Exit Drill</button>
+            `;
+            this.container.appendChild(drillBanner);
+        }
+
         this.shuffledQuizData.forEach((q, idx) => {
             const card = document.createElement('div');
             card.className = 'quiz-card';
@@ -767,6 +1004,7 @@ class QuizManager {
                     <div class="quiz-filter-group">
                         <button class="quiz-filter-btn ${this.currentFilter === 'all' ? 'active' : ''}" onclick="window.activeQuiz.setFilter('all')">All (${this.shuffledQuizData.length})</button>
                         <button class="quiz-filter-btn ${this.currentFilter === 'incorrect' ? 'active' : ''}" onclick="window.activeQuiz.setFilter('incorrect')">❌ Wrong (${incorrectCount})</button>
+                        ${incorrectCount > 0 ? `<button class="quiz-filter-btn btn-drill-filter" style="background:rgba(245,158,11,0.18);color:#f59e0b;border:1px solid rgba(245,158,11,0.4);font-weight:700;" onclick="window.activeQuiz.drillMistakes()" title="Targeted practice exclusively on your incorrect questions">⚡ Drill Mistakes (${incorrectCount})</button>` : ''}
                         <button class="quiz-filter-btn ${this.currentFilter === 'correct' ? 'active' : ''}" onclick="window.activeQuiz.setFilter('correct')">✅ Correct (${this.correctCount})</button>
                         <button class="quiz-filter-btn ${this.allAnswersRevealed ? 'active' : ''}" onclick="window.activeQuiz.toggleRevealAllAnswers()">👁️ ${this.allAnswersRevealed ? 'Hide Answers' : 'Reveal All Answers'}</button>
                     </div>
@@ -920,6 +1158,10 @@ class QuizManager {
             expDiv.style.display = 'block';
         }
         
+        if (window.triggerHaptic) {
+            window.triggerHaptic(isCorrect ? 'success' : 'warning');
+        }
+
         this.updateScore();
         this.updateProgressBar();
         this.renderFilterBar();
@@ -1132,6 +1374,15 @@ class QuizManager {
         btnGroup.style.justifyContent = 'center';
         btnGroup.style.flexWrap = 'wrap';
 
+        const drillMistakesBtn = document.createElement('button');
+        drillMistakesBtn.className = 'btn btn-drill-mistakes';
+        drillMistakesBtn.id = 'modal-drill-mistakes-btn';
+        drillMistakesBtn.innerText = '⚡ Drill Missed Questions';
+        drillMistakesBtn.onclick = () => {
+            overlay.classList.remove('active');
+            this.drillMistakes();
+        };
+
         const retakeBtn = document.createElement('button');
         retakeBtn.className = 'btn';
         retakeBtn.innerText = '🔀 Reshuffle & Retake Quiz';
@@ -1154,12 +1405,10 @@ class QuizManager {
 
         const portalBtn = document.createElement('a');
         portalBtn.className = 'btn btn-secondary';
-        const isSubfolder = window.location.pathname.toLowerCase().includes('/prelim/') || 
-                            window.location.pathname.toLowerCase().includes('/midterm/') || 
-                            window.location.pathname.toLowerCase().includes('/finals/');
-        portalBtn.href = isSubfolder ? '../../../index.html' : 'index.html';
+        portalBtn.href = getRootRelativePath();
         portalBtn.innerText = 'Return to Portal';
 
+        btnGroup.appendChild(drillMistakesBtn);
         btnGroup.appendChild(retakeBtn);
         btnGroup.appendChild(reviewWrongBtn);
         btnGroup.appendChild(portalBtn);
@@ -1197,6 +1446,17 @@ class QuizManager {
         scoreVal.innerText = `${this.correctCount} / ${this.shuffledQuizData.length}`;
         pctVal.innerText = `${pct}%`;
 
+        const drillBtn = document.getElementById('modal-drill-mistakes-btn');
+        const incorrectCount = this.shuffledQuizData.length - this.correctCount;
+        if (drillBtn) {
+            if (incorrectCount > 0) {
+                drillBtn.style.display = 'inline-flex';
+                drillBtn.innerText = `⚡ Drill Missed Questions (${incorrectCount})`;
+            } else {
+                drillBtn.style.display = 'none';
+            }
+        }
+
         if (pct === 100) {
             badge.innerText = '👑';
             title.innerText = 'Flawless Victory!';
@@ -1221,6 +1481,82 @@ class QuizManager {
 
         if (overlay) {
             overlay.classList.add('active');
+        }
+    }
+
+    drillMistakes() {
+        const missedIndices = [];
+        this.shuffledQuizData.forEach((q, idx) => {
+            const ans = this.userAnswers[idx];
+            if (!ans || !ans.isCorrect) {
+                missedIndices.push(idx);
+            }
+        });
+
+        if (missedIndices.length === 0) {
+            if (window.showCustomToast) window.showCustomToast('No missed questions! 100% mastery achieved!', 'success');
+            return;
+        }
+
+        if (!this.isDrillMode) {
+            this.originalPoolBackup = {
+                shuffledQuizData: [...this.shuffledQuizData],
+                userAnswers: [...this.userAnswers],
+                answeredCount: this.answeredCount,
+                correctCount: this.correctCount,
+                orderMode: this.orderMode
+            };
+        }
+
+        this.isDrillMode = true;
+        const missedQuestions = missedIndices.map(i => this.shuffledQuizData[i]);
+
+        // Reshuffle choices for each missed question for fresh retrieval
+        this.shuffledQuizData = missedQuestions.map((item, qIdx) => {
+            const originalOptions = item.options;
+            let optionsWithIndices = originalOptions.map((opt, i) => ({ text: opt, wasCorrect: i === item.correct }));
+            for (let i = optionsWithIndices.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [optionsWithIndices[i], optionsWithIndices[j]] = [optionsWithIndices[j], optionsWithIndices[i]];
+            }
+            const newCorrectIdx = optionsWithIndices.findIndex(opt => opt.wasCorrect);
+            return {
+                ...item,
+                options: optionsWithIndices.map(o => o.text),
+                correct: newCorrectIdx,
+                originalIndex: item.originalIndex !== undefined ? item.originalIndex : qIdx
+            };
+        });
+
+        this.userAnswers = new Array(this.shuffledQuizData.length).fill(null);
+        this.answeredCount = 0;
+        this.correctCount = 0;
+        this.currentFilter = 'all';
+
+        this.render();
+        this.updateScore();
+
+        const quizHeader = document.querySelector('.quiz-header') || this.container;
+        if (quizHeader) quizHeader.scrollIntoView({ behavior: 'smooth' });
+
+        if (window.showCustomToast) {
+            window.showCustomToast(`⚡ Started targeted drill for ${missedQuestions.length} missed question${missedQuestions.length > 1 ? 's' : ''}!`, 'info');
+        }
+    }
+
+    exitDrillMode() {
+        if (this.originalPoolBackup) {
+            this.isDrillMode = false;
+            this.shuffledQuizData = this.originalPoolBackup.shuffledQuizData;
+            this.userAnswers = this.originalPoolBackup.userAnswers;
+            this.answeredCount = this.originalPoolBackup.answeredCount;
+            this.correctCount = this.originalPoolBackup.correctCount;
+            this.orderMode = this.originalPoolBackup.orderMode;
+            this.originalPoolBackup = null;
+            this.render();
+            this.restoreAnsweredStates();
+            this.updateScore();
+            if (window.showCustomToast) window.showCustomToast('Exited drill mode. Restored full quiz session.', 'info');
         }
     }
 }
@@ -1462,6 +1798,10 @@ class FocusTimerManager {
         if (path.includes('traditionaldatatechniques')) return 'traditionalDataTechniques';
         if (path.includes('probabilitydistribution')) return 'probabilitydistribution';
         if (path.includes('sets-events-bayesianinference')) return 'sets-events-bayesianinference';
+        if (path.includes('cryptography')) return 'cryptographyFundamentals';
+        if (path.includes('statisticsfundamental')) return 'statisticsFundamentals';
+        if (path.includes('confidenceintervalsandhypothesistesting')) return 'confidenceIntervalsAndHypothesisTesting';
+        if (path.includes('confidencehypothesisworkexamples')) return 'confidenceHypothesisWorkExamples';
         if (path.includes('probabilities')) return 'probabilities';
         return 'index';
     }
@@ -1469,18 +1809,19 @@ class FocusTimerManager {
         getSubjectName(key) {
         const names = {
             'index': 'General Portal',
-                                    'automataComputabilityAndComplexity': 'Automata, Computability & Complexity',
+            'automataComputabilityAndComplexity': 'Automata, Computability & Complexity',
             'introductiontoAutomataTheoryFormalLanguages': 'Intro to Automata & Formal Languages',
             'theCentralConceptsOfAutomata': 'Central Concepts of Automata',
-                        'automataComputabilityAndComplexity': 'Automata, Computability & Complexity',
-            'introductiontoAutomataTheoryFormalLanguages': 'Intro to Automata & Formal Languages',
-            'theCentralConceptsOfAutomata': 'Central Concepts of Automata',
-                    'introductionToOperatingSystems': 'Introduction to Operating Systems',
+            'introductionToOperatingSystems': 'Introduction to Operating Systems',
             'networkConfigurationInWindowsOS': 'Network Configuration in Windows OS',
             'osStructuresAndSystemCalls': 'OS Structures & System Calls',
             'accesscontrol': 'Access Control Models & Principles',
             'week1-2': 'Foundations & Threat Landscape',
             'week3-4': 'Governance & Risk Management',
+            'cryptographyFundamentals': 'Cryptography Fundamentals',
+            'statisticsFundamentals': 'Statistics Fundamentals',
+            'confidenceIntervalsAndHypothesisTesting': 'Confidence Intervals & Hypothesis Testing',
+            'confidenceHypothesisWorkExamples': 'CI & Hypothesis Work Examples',
             'introductionToDataScience': 'Introduction to Data Science',
             'probabilities': 'Probabilities',
             'probabilitydistribution': 'Probability Distributions',
@@ -1788,6 +2129,7 @@ class FocusTimerManager {
                             <option value="accesscontrol">Access Control Models & Principles</option>
                             <option value="week1-2">Foundations & Threat Landscape</option>
                             <option value="week3-4">Governance & Risk Management</option>
+                            <option value="cryptographyFundamentals">Cryptography Fundamentals (Midterm)</option>
                         </optgroup>
                         <optgroup label="Data Mining">
                             <option value="introductionToDataScience">Introduction to Data Science</option>
@@ -1795,6 +2137,9 @@ class FocusTimerManager {
                             <option value="probabilitydistribution">Probability Distributions</option>
                             <option value="sets-events-bayesianinference">Sets, Events & Bayes</option>
                             <option value="traditionalDataTechniques">Traditional Data Techniques</option>
+                            <option value="statisticsFundamentals">Statistics Fundamentals (Midterm)</option>
+                            <option value="confidenceIntervalsAndHypothesisTesting">Confidence Intervals & Hypothesis Testing (Midterm)</option>
+                            <option value="confidenceHypothesisWorkExamples">CI & Hypothesis Work Examples (Midterm)</option>
                         </optgroup>
                     </select>
 
@@ -2131,8 +2476,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ==========================================
 if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
     window.addEventListener('load', () => {
-        const swPath = window.location.pathname.includes('/subject/') ? '../../../sw.js' : './sw.js';
-        navigator.serviceWorker.register(swPath).then((reg) => {
+        const swPath = '/sw.js';
+        navigator.serviceWorker.register(swPath, { scope: '/' }).then((reg) => {
             console.log('PWA Service Worker active:', reg.scope);
             
             // Check for updates immediately on load
@@ -2463,6 +2808,10 @@ window.getSubjectDisplayName = function(key) {
             'accesscontrol': 'Access Control Models & Principles',
         'week1-2': 'Foundations & Threat Landscape',
         'week3-4': 'Governance & Risk Management',
+        'cryptographyFundamentals': 'Cryptography Fundamentals',
+        'statisticsFundamentals': 'Statistics Fundamentals',
+        'confidenceIntervalsAndHypothesisTesting': 'Confidence Intervals & Hypothesis Testing',
+        'confidenceHypothesisWorkExamples': 'CI & Hypothesis Work Examples',
         'introductionToDataScience': 'Introduction to Data Science',
         'probabilities': 'Probabilities',
         'probabilitydistribution': 'Probability Distributions',
@@ -2944,7 +3293,7 @@ window.downloadQuickReferencePDF = function() {
 
     const targetElement = targetTabId ? document.getElementById(targetTabId) : null;
     if (!targetElement) {
-        window.triggerBrowserPrint();
+        if (window.showCustomToast) window.showCustomToast('Quick Reference content not found.', 'error');
         return;
     }
 
@@ -2954,133 +3303,262 @@ window.downloadQuickReferencePDF = function() {
     const subjectName = (window.getSubjectDisplayName ? window.getSubjectDisplayName(fileKey) : fileKey).replace(/[^a-zA-Z0-9]/g, ' ');
     const filename = `${subjectName.trim().replace(/\s+/g, '_')}_QuickReference.pdf`;
 
+    if (window.showCustomToast) {
+        window.showCustomToast('⏳ Compiling crisp multi-page PDF... Please wait.', 'info');
+    }
+
     const printBtn = document.querySelector('.btn-print-ref');
     const originalText = printBtn ? printBtn.innerHTML : null;
     if (printBtn) {
-        printBtn.innerHTML = '⏳ Formatting PDF...';
+        printBtn.innerHTML = '⏳ Generating PDF...';
     }
 
-    const runHtml2Pdf = () => {
-        const opt = {
-            margin: [10, 10, 10, 10],
-            filename: filename,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, logging: false, backgroundColor: '#ffffff' },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-        };
+    const executeHtml2Pdf = () => {
+        let renderContainer = document.getElementById('active-html2pdf-export-container');
+        if (renderContainer) renderContainer.remove();
 
-        // Create a dedicated clean white container for PDF generation
-        const printWrapper = document.createElement('div');
-        printWrapper.style.backgroundColor = '#ffffff';
-        printWrapper.style.color = '#0f172a';
-        printWrapper.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
-        printWrapper.style.padding = '12px';
-        printWrapper.style.width = '780px';
-        printWrapper.style.maxWidth = '100%';
-        printWrapper.style.boxSizing = 'border-box';
+        renderContainer = document.createElement('div');
+        renderContainer.id = 'active-html2pdf-export-container';
+        renderContainer.style.position = 'absolute';
+        renderContainer.style.top = '0';
+        renderContainer.style.left = '0';
+        renderContainer.style.width = '794px'; // Standard A4 width at 96 DPI
+        renderContainer.style.backgroundColor = '#ffffff';
+        renderContainer.style.color = '#0f172a';
+        renderContainer.style.fontFamily = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+        renderContainer.style.padding = '24px';
+        renderContainer.style.boxSizing = 'border-box';
+        renderContainer.style.zIndex = '9999999';
+        renderContainer.style.boxShadow = '0 0 20px rgba(0,0,0,0.2)';
 
         // Add Header Banner
         const banner = document.createElement('div');
-        banner.style.borderBottom = '2px solid #0d9488';
-        banner.style.paddingBottom = '8px';
-        banner.style.marginBottom = '16px';
+        banner.style.borderBottom = '2.5px solid #0d9488';
+        banner.style.paddingBottom = '10px';
+        banner.style.marginBottom = '18px';
         banner.innerHTML = `
-            <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
                 <div>
-                    <h1 style="margin:0; font-size:18px; color:#0f172a; font-weight:800;">${subjectName}</h1>
+                    <h1 style="margin:0; font-size:20px; color:#0f172a; font-weight:800; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">${subjectName}</h1>
                     <p style="margin:4px 0 0 0; font-size:12px; color:#64748b;">Comprehensive Academic Quick Reference & Master Formula Guide</p>
                 </div>
-                <div style="text-align:right; font-size:10px; color:#94a3b8;">
+                <div style="text-align:right; font-size:11px; font-weight:700; color:#0d9488;">
                     Computer Engineering Reviewer
                 </div>
             </div>
         `;
-        printWrapper.appendChild(banner);
+        renderContainer.appendChild(banner);
 
         // Clone and sanitize content
         const clone = targetElement.cloneNode(true);
-        clone.querySelectorAll('.btn-print-ref, .calc-card, .calc-grid, .calc-field, input, button, select, textarea').forEach(el => el.remove());
+        clone.querySelectorAll('.btn-print-ref, .btn-print-cheat, .calc-card, .calc-grid, .calc-btn, .calc-field, input, button, select, textarea, script').forEach(el => el.remove());
 
-        // Apply clean styles across all elements inside the clone
+        // Format all elements inside clone with explicit high-contrast colors
+        clone.querySelectorAll('*').forEach(el => {
+            el.style.boxShadow = 'none';
+            el.style.textShadow = 'none';
+            if (!el.classList.contains('formula-text') && 
+                !el.classList.contains('formula-badge') && 
+                !el.classList.contains('def-badge') && 
+                !el.classList.contains('badge') && 
+                !el.classList.contains('prob-read-badge')) {
+                el.style.color = '#0f172a';
+            }
+        });
+
         clone.querySelectorAll('.card').forEach(c => {
             c.style.backgroundColor = '#ffffff';
             c.style.color = '#0f172a';
-            c.style.border = '1px solid #cbd5e1';
-            c.style.borderRadius = '6px';
-            c.style.boxShadow = 'none';
-            c.style.padding = '14px';
-            c.style.marginBottom = '14px';
+            c.style.border = 'none';
+            c.style.padding = '0';
+            c.style.margin = '0 0 16px 0';
+        });
+
+        clone.querySelectorAll('.table-container').forEach(tc => {
+            tc.style.overflow = 'visible';
+            tc.style.width = '100%';
+            tc.style.maxWidth = '100%';
+            tc.style.margin = '8px 0 14px 0';
+            tc.style.border = 'none';
         });
 
         clone.querySelectorAll('table').forEach(t => {
             t.style.width = '100%';
             t.style.borderCollapse = 'collapse';
-            t.style.margin = '10px 0';
+            t.style.margin = '6px 0';
             t.style.backgroundColor = '#ffffff';
             t.style.color = '#0f172a';
+            t.style.tableLayout = 'auto';
         });
 
-        clone.querySelectorAll('th, td').forEach(td => {
-            td.style.border = '1px solid #cbd5e1';
-            td.style.padding = '6px 8px';
-            td.style.fontSize = '12px';
-            td.style.color = '#0f172a';
-        });
-
-        clone.querySelectorAll('th, thead tr').forEach(th => {
+        clone.querySelectorAll('th').forEach(th => {
             th.style.backgroundColor = '#f1f5f9';
             th.style.color = '#0f172a';
-            th.style.fontWeight = 'bold';
+            th.style.fontWeight = '700';
+            th.style.border = '1px solid #94a3b8';
+            th.style.padding = '7px 8px';
+            th.style.fontSize = '11px';
+            th.style.textAlign = 'left';
+            th.style.wordBreak = 'normal';
+            th.style.overflowWrap = 'break-word';
         });
 
-        clone.querySelectorAll('.formula-card, .slide-formula-sheet-container').forEach(fc => {
+        clone.querySelectorAll('td').forEach(td => {
+            td.style.backgroundColor = '#ffffff';
+            td.style.color = '#0f172a';
+            td.style.border = '1px solid #cbd5e1';
+            td.style.padding = '6px 8px';
+            td.style.fontSize = '10.5px';
+            td.style.lineHeight = '1.4';
+            td.style.wordBreak = 'normal';
+            td.style.overflowWrap = 'break-word';
+        });
+
+        clone.querySelectorAll('tr').forEach(tr => {
+            tr.style.pageBreakInside = 'avoid';
+            tr.style.breakInside = 'avoid';
+        });
+
+        clone.querySelectorAll('.def-badge, .badge, .keyword-badge').forEach(b => {
+            b.style.backgroundColor = '#e0f2fe';
+            b.style.color = '#0369a1';
+            b.style.border = '1px solid #bae6fd';
+            b.style.fontWeight = '700';
+            b.style.padding = '2px 6px';
+            b.style.fontSize = '9.5px';
+            b.style.borderRadius = '4px';
+            b.style.display = 'inline-block';
+        });
+
+        clone.querySelectorAll('.formula-card').forEach(fc => {
             fc.style.backgroundColor = '#f8fafc';
             fc.style.border = '1.5px solid #0d9488';
+            fc.style.borderLeft = '4px solid #0d9488';
             fc.style.borderRadius = '6px';
-            fc.style.padding = '10px';
+            fc.style.padding = '10px 12px';
             fc.style.margin = '10px 0';
             fc.style.color = '#0f172a';
-            fc.style.boxShadow = 'none';
+            fc.style.pageBreakInside = 'avoid';
+            fc.style.breakInside = 'avoid';
         });
 
         clone.querySelectorAll('.formula-text').forEach(ft => {
             ft.style.color = '#0f766e';
-            ft.style.fontWeight = 'bold';
+            ft.style.fontWeight = '800';
             ft.style.fontSize = '13px';
+        });
+
+        clone.querySelectorAll('.formula-badge').forEach(fb => {
+            fb.style.backgroundColor = '#ccfbf1';
+            fb.style.color = '#0f766e';
+            fb.style.border = '1px solid #0d9488';
+            fb.style.fontWeight = '700';
+            fb.style.padding = '2px 6px';
+            fb.style.fontSize = '9.5px';
+            fb.style.borderRadius = '4px';
+            fb.style.display = 'inline-block';
         });
 
         clone.querySelectorAll('.formula-explain').forEach(fe => {
             fe.style.color = '#334155';
-            fe.style.fontSize = '11px';
+            fe.style.fontSize = '10.5px';
+            fe.style.marginTop = '4px';
+        });
+
+        clone.querySelectorAll('.prob-read-english-box').forEach(box => {
+            box.style.backgroundColor = '#f0fdfa';
+            box.style.border = '1px solid #99f6e4';
+            box.style.borderLeft = '4px solid #0d9488';
+            box.style.borderRadius = '6px';
+            box.style.padding = '8px 10px';
+            box.style.margin = '8px 0';
+            box.style.color = '#0f172a';
+            box.style.fontSize = '10.5px';
+            box.style.lineHeight = '1.4';
+            box.style.pageBreakInside = 'avoid';
+            box.style.breakInside = 'avoid';
+        });
+
+        clone.querySelectorAll('.prob-read-badge').forEach(prb => {
+            prb.style.backgroundColor = '#ccfbf1';
+            prb.style.color = '#0f766e';
+            prb.style.fontWeight = '800';
+            prb.style.fontSize = '9px';
+            prb.style.padding = '2px 5px';
+            prb.style.borderRadius = '3px';
+        });
+
+        clone.querySelectorAll('.prob-read-text').forEach(prt => {
+            prt.style.color = '#1e293b';
+            prt.style.fontStyle = 'italic';
+        });
+
+        clone.querySelectorAll('code').forEach(cd => {
+            cd.style.backgroundColor = '#f1f5f9';
+            cd.style.color = '#0f172a';
+            cd.style.border = '1px solid #cbd5e1';
+            cd.style.padding = '1px 4px';
+            cd.style.borderRadius = '3px';
+            cd.style.fontSize = '10px';
+            cd.style.fontFamily = 'Consolas, Monaco, monospace';
         });
 
         clone.querySelectorAll('h2').forEach(h => {
-            h.style.color = '#0f172a';
-            h.style.fontSize = '15px';
-            h.style.borderBottom = '1.5px solid #0d9488';
+            h.style.color = '#0d9488';
+            h.style.fontSize = '16px';
+            h.style.borderBottom = '2px solid #0d9488';
             h.style.paddingBottom = '4px';
-            h.style.marginTop = '12px';
+            h.style.marginTop = '16px';
             h.style.marginBottom = '8px';
         });
 
         clone.querySelectorAll('h3').forEach(h => {
-            h.style.color = '#0f172a';
+            h.style.color = '#0f766e';
             h.style.fontSize = '13px';
-            h.style.marginTop = '10px';
-            h.style.marginBottom = '4px';
+            h.style.marginTop = '12px';
+            h.style.marginBottom = '6px';
         });
 
-        printWrapper.appendChild(clone);
+        renderContainer.appendChild(clone);
+        document.body.appendChild(renderContainer);
 
-        html2pdf().set(opt).from(printWrapper).save().then(() => {
+        const opt = {
+            margin: [8, 8, 8, 8],
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2, 
+                useCORS: true, 
+                logging: false, 
+                backgroundColor: '#ffffff',
+                windowWidth: 794,
+                scrollY: 0,
+                scrollX: 0
+            },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            pagebreak: { mode: ['css', 'legacy'], avoid: ['tr', '.formula-card', '.prob-read-english-box'] }
+        };
+
+        html2pdf().set(opt).from(renderContainer).save().then(() => {
+            if (renderContainer && renderContainer.parentNode) {
+                renderContainer.remove();
+            }
             if (printBtn && originalText) {
                 printBtn.innerHTML = originalText;
             }
+            if (window.showCustomToast) {
+                window.showCustomToast('✅ PDF downloaded successfully!', 'success');
+            }
         }).catch(err => {
             console.error("html2pdf generation error:", err);
+            if (renderContainer && renderContainer.parentNode) {
+                renderContainer.remove();
+            }
             if (printBtn && originalText) {
                 printBtn.innerHTML = originalText;
+            }
+            if (window.showCustomToast) {
+                window.showCustomToast('Direct PDF export failed. Opening print dialog...', 'warning');
             }
             window.triggerBrowserPrint();
         });
@@ -3088,17 +3566,23 @@ window.downloadQuickReferencePDF = function() {
 
     if (typeof html2pdf === 'undefined') {
         const script = document.createElement('script');
-        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
-        script.onload = () => runHtml2Pdf();
+        script.src = '/js/html2pdf.bundle.min.js';
+        script.onload = () => executeHtml2Pdf();
         script.onerror = () => {
-            if (printBtn && originalText) {
-                printBtn.innerHTML = originalText;
-            }
-            window.triggerBrowserPrint();
+            const fallbackScript = document.createElement('script');
+            fallbackScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+            fallbackScript.onload = () => executeHtml2Pdf();
+            fallbackScript.onerror = () => {
+                if (printBtn && originalText) {
+                    printBtn.innerHTML = originalText;
+                }
+                window.triggerBrowserPrint();
+            };
+            document.head.appendChild(fallbackScript);
         };
         document.head.appendChild(script);
     } else {
-        runHtml2Pdf();
+        executeHtml2Pdf();
     }
 };
 
@@ -3106,6 +3590,19 @@ window.triggerBrowserPrint = function() {
     const modal = document.getElementById('export-pdf-modal-overlay');
     if (modal) modal.classList.remove('active');
     
+    const wasDark = document.documentElement.classList.contains('dark');
+    if (wasDark) {
+        document.documentElement.classList.remove('dark');
+    }
+
+    const restoreTheme = () => {
+        if (wasDark) {
+            document.documentElement.classList.add('dark');
+        }
+        window.removeEventListener('afterprint', restoreTheme);
+    };
+    window.addEventListener('afterprint', restoreTheme);
+
     const validTabs = ['quick-ref', 'formulas', 'summary'];
     const targetTab = validTabs.find(t => document.getElementById(t));
     if (targetTab && window.switchTab) {
@@ -3113,6 +3610,7 @@ window.triggerBrowserPrint = function() {
     }
     setTimeout(() => {
         window.print();
+        setTimeout(restoreTheme, 1500);
     }, 150);
 };
 
@@ -4293,11 +4791,16 @@ document.addEventListener('click', (e) => {
     function injectScript() {
         const script = document.createElement('script');
         script.id = 'ai-study-chatbot-script';
-        const loc = window.location.pathname.toLowerCase();
-        let prefix = '/';
-        if (loc.includes('/subject/')) {
-            const depth = (loc.match(/\/subject\//) ? (loc.split('/').length - 2) : 1);
-            prefix = depth > 1 ? '../'.repeat(depth) : '../../../';
+        
+        let prefix = './';
+        const globalScript = document.querySelector('script[src*="global.js"]');
+        if (globalScript) {
+            const src = globalScript.getAttribute('src');
+            prefix = src.substring(0, src.lastIndexOf('global.js'));
+            if (!prefix) prefix = './';
+        } else {
+            const loc = window.location.pathname.toLowerCase();
+                prefix = getRootRelativePath().replace('index.html', '');
         }
         script.src = prefix + 'chatbot.js';
         script.async = true;
@@ -4372,8 +4875,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Any probability must be between <strong>0</strong> (impossible event) and <strong>1</strong> (certain event). It can never be negative, and it can never be greater than 1.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎲 Worked Example: Rolling a Standard 6-Sided Die</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎲 Worked Example: Rolling a Standard 6-Sided Die</div>
                             <p class="prob-scenario-desc">Rolling a standard 6-sided die to get an even number {2, 4, 6}.</p>
                             <div style="font-size:0.86rem; color:var(--text-muted-color);">
                                 • Total possible outcomes: <strong>n(S) = 6</strong><br>
@@ -4411,8 +4914,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> The probability that event A will <strong>not happen</strong> is equal to <strong>1 minus the probability that it does happen</strong>.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🌧️ Worked Example: Probability of Rain</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🌧️ Worked Example: Probability of Rain</div>
                             <p class="prob-scenario-desc">The probability that it will rain tomorrow is <strong>P(Rain) = 0.35</strong>. Find the probability that it will not rain.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4449,8 +4952,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Used to find the probability of <strong>A or B</strong> occurring when both events can happen at the same time. You subtract the overlap <strong>P(A &cap; B)</strong> so it is not counted twice.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎓 Worked Example: Student Subject Preferences</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎓 Worked Example: Student Subject Preferences</div>
                             <p class="prob-scenario-desc">In a class of 100 students: 40 students like Math (P(Math) = 40/100 = 0.40), 30 like Science (P(Science) = 30/100 = 0.30), and 10 like both (P(Math &cap; Science) = 10/100 = 0.10).</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4486,8 +4989,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Used when two events <strong>cannot happen at the same time</strong> (P(A &cap; B) = 0). Since there is zero intersection, no subtraction is needed.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎲 Worked Example: Rolling a 2 or a 5 on a Die</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎲 Worked Example: Rolling a 2 or a 5 on a Die</div>
                             <p class="prob-scenario-desc">Rolling a single 6-sided die. What is the probability of rolling a 2 or a 5?</p>
                             <div style="font-size:0.86rem; color:var(--text-muted-color);">
                                 • P(2) = 1/6<br>
@@ -4525,8 +5028,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Used when the first event A <strong>directly affects the chance</strong> of the second event B (such as drawing items without replacement).
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🔴 Worked Example: Drawing Marbles Without Replacement</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🔴 Worked Example: Drawing Marbles Without Replacement</div>
                             <p class="prob-scenario-desc">A box contains 3 red marbles and 2 blue marbles (5 total). You draw 2 marbles one after another without replacement. Find the probability that both marbles are red.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4566,8 +5069,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Used when event A has <strong>no effect whatsoever</strong> on event B.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🪙 Worked Example: Coin Flip &amp; Die Roll</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🪙 Worked Example: Coin Flip &amp; Die Roll</div>
                             <p class="prob-scenario-desc">Flipping a fair coin and rolling a fair 6-sided die. Find the probability of getting Heads and rolling a 4.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4609,8 +5112,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> The long-term average outcome calculated by multiplying each value (x<sub>i</sub>) by its probability (P(x<sub>i</sub>)) and adding them all together.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎡 Worked Example: Prize Wheel Payout</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎡 Worked Example: Prize Wheel Payout</div>
                             <p class="prob-scenario-desc">A prize wheel gives: \$10 with probability 0.20, \$5 with probability 0.50, and \$0 with probability 0.30.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4653,8 +5156,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Probability based strictly on actual real-world experiment results rather than theoretical formulas.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🪙 Worked Example: Coin Flip Experiment</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🪙 Worked Example: Coin Flip Experiment</div>
                             <p class="prob-scenario-desc">You flip a coin 50 times in total, and it lands on Heads 28 times.</p>
                             <div style="font-size:0.86rem; color:var(--text-muted-color);">
                                 • Successful Trials = 28<br>
@@ -4691,8 +5194,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> If you add the probabilities of all possible mutually exclusive outcomes in a complete sample space, the sum must <strong>always equal exactly 1 (100%)</strong>.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎯 Worked Example: Spinner Color Outcomes</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎯 Worked Example: Spinner Color Outcomes</div>
                             <p class="prob-scenario-desc">A spinner has 3 colored sections: Red, Blue, and Green. P(Red) = 0.45, P(Blue) = 0.35, and P(Green) = 0.20.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4724,8 +5227,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Use Case (When to use it):</strong> Use this when you are arranging <strong>all</strong> items in a specific order, and each item can only be used once. <strong>Order matters</strong>.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">📚 Worked Example: Arranging Books on a Shelf</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">📚 Worked Example: Arranging Books on a Shelf</div>
                             <p class="prob-scenario-desc">Arranging <strong>n = 4</strong> different books on a bookshelf.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4767,8 +5270,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Use Case (When to use it):</strong> Use this when you have a set of <strong>n items</strong>, and you want to select and rank/order only <strong>p</strong> of them. <strong>Order matters</strong>, and items cannot be reused.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🏃 Worked Example: Race Podium Placements</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🏃 Worked Example: Race Podium Placements</div>
                             <p class="prob-scenario-desc">A race has <strong>n = 5</strong> runners. How many ways can <strong>p = 3</strong> runners win 1st, 2nd, and 3rd place?</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4814,8 +5317,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Use Case (When to use it):</strong> Use this when you are filling <strong>p ordered positions</strong> from <strong>n choices</strong>, and you can repeat choices (like PIN codes, passwords, or multiple choice answers). <strong>Order matters</strong>.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🔢 Worked Example: Creating a 3-Digit PIN Code</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🔢 Worked Example: Creating a 3-Digit PIN Code</div>
                             <p class="prob-scenario-desc">Creating a <strong>p = 3</strong> digit PIN code using digits 0 to 9 (<strong>n = 10</strong> options). Digits can repeat (e.g., 777).</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4857,8 +5360,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Use Case (When to use it):</strong> Use this when you are selecting a group or committee of <strong>p items</strong> from <strong>n items</strong>, and the <strong>order of selection does NOT matter</strong>. Items cannot be repeated.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">👥 Worked Example: Choosing Student Project Teams</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">👥 Worked Example: Choosing Student Project Teams</div>
                             <p class="prob-scenario-desc">A teacher chooses a project team of <strong>p = 3</strong> students from a class of <strong>n = 5</strong> students.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -4918,8 +5421,8 @@ window.openProbabilityExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Use Case (When to use it):</strong> Use this when you are choosing <strong>p items</strong> from <strong>n categories</strong>, the <strong>order does NOT matter</strong>, and you can pick <strong>multiples of the same category</strong> (like donut flavors or ice cream scoops).
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🍩 Worked Example: Buying Donut Flavor Combinations</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🍩 Worked Example: Buying Donut Flavor Combinations</div>
                             <p class="prob-scenario-desc">Buying <strong>p = 2</strong> donuts from a bakery selling <strong>n = 3</strong> flavors (Chocolate, Glazed, Strawberry). You can choose two of the same flavor (e.g., 2 Chocolate).</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -5110,7 +5613,7 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>When to Use It:</strong> Use this for a <strong>single trial</strong> that can only end in one of two ways: <strong>Success (1)</strong> or <strong>Failure (0)</strong> (e.g., passing a test, coin landing on heads, user clicking an ad).
                         </div>
-                        <div class="prob-example-section">
+<div class="prob-example-section">
                             <div class="prob-scenario-title">🛒 Worked Example: Website Purchase Click</div>
                             <p class="prob-scenario-desc">A website visitor has a <strong>p = 0.20</strong> probability of clicking "Buy" (Success).</p>
                             <div class="prob-step-row">
@@ -5148,7 +5651,7 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>When to Use It:</strong> Use this when you repeat a Bernoulli trial <strong>n times independently</strong> and want to find the probability of getting exactly <strong>y successes</strong> (e.g., testing 10 items for defects, flipping a coin 5 times).
                         </div>
-                        <div class="prob-example-section">
+<div class="prob-example-section">
                             <div class="prob-scenario-title">💡 Worked Example: Testing Lightbulbs for Defects</div>
                             <p class="prob-scenario-desc">You test <strong>n = 3</strong> lightbulbs. Each has defect probability <strong>p = 0.10</strong>. Find <strong>P(y = 1)</strong> defective bulb, the Mean, and the Variance.</p>
                             <div class="prob-step-row">
@@ -5202,7 +5705,7 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>When to Use It:</strong> Use this when choosing from a finite set of consecutive integers from minimum <strong>a</strong> to maximum <strong>b</strong>, where every single number has an equal chance of being chosen (e.g., rolling a fair die, picking a random ticket number).
                         </div>
-                        <div class="prob-example-section">
+<div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example: Rolling a Fair 8-Sided Die</div>
                             <p class="prob-scenario-desc">Rolling a fair 8-sided die numbered from <strong>a = 1</strong> to <strong>b = 8</strong>.</p>
                             <div class="prob-step-row">
@@ -5248,7 +5751,7 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>When to Use It:</strong> Use this to count the number of times an event happens within a <strong>fixed unit of time, distance, or area</strong> (e.g., customer arrivals per hour, support tickets received per day).
                         </div>
-                        <div class="prob-example-section">
+<div class="prob-example-section">
                             <div class="prob-scenario-title">📞 Worked Example: Help Desk Call Arrivals</div>
                             <p class="prob-scenario-desc">A help desk receives an average of <strong>&lambda; = 3</strong> calls per hour. Find the probability of receiving exactly <strong>y = 2</strong> calls in an hour (given e<sup>&minus;3</sup> &approx; 0.0498).</p>
                             <div class="prob-step-row">
@@ -5293,7 +5796,7 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>When to Use It:</strong> Use this when any measurement within a continuous range <strong>[a, b]</strong> has an equal probability density (e.g., waiting time for a bus that arrives every 10 minutes).
                         </div>
-                        <div class="prob-example-section">
+<div class="prob-example-section">
                             <div class="prob-scenario-title">⏳ Worked Example: Loading Screen Duration</div>
                             <p class="prob-scenario-desc">A loading screen takes between <strong>a = 0</strong> and <strong>b = 10</strong> seconds uniformly.</p>
                             <div class="prob-step-row">
@@ -5334,7 +5837,7 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>When to Use It:</strong> Use this for continuous real-world data that clusters symmetrically around a central average with bell-curve spread (e.g., heights, test scores, measurement errors).
                         </div>
-                        <div class="prob-example-section">
+<div class="prob-example-section">
                             <div class="prob-scenario-title">🌿 Worked Example: Plant Heights Following N(50, 16)</div>
                             <p class="prob-scenario-desc">Plant heights follow <strong>N(50, 16)</strong>, where mean <strong>&mu; = 50</strong> and variance <strong>&sigma;<sup>2</sup> = 16</strong> (&sigma; = &radic;16 = 4).</p>
                             <div class="prob-step-row">
@@ -5667,8 +6170,8 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Core Concept:</strong> In any normal distribution, approximately <strong>95.45%</strong> of all observed values fall within <strong>2 standard deviations</strong> from the mean.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">📝 Worked Example: Exam Scores (&mu; = 100, &sigma; = 15)</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">📝 Worked Example: Exam Scores (&mu; = 100, &sigma; = 15)</div>
                             <p class="prob-scenario-desc">Using Mean <strong>&mu; = 100</strong> and Standard Deviation <strong>&sigma; = 15</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Lower Limit</span>
@@ -5704,8 +6207,8 @@ window.openDistributionsExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Core Concept:</strong> In a normal distribution, <strong>99.73%</strong> of data falls within 3 standard deviations. Any observation falling outside this range (<strong>&gt; 3&sigma; away from the mean</strong>) is mathematically flagged as an <strong>outlier</strong>.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎯 Worked Example: Exam Scores &amp; Outlier Check</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎯 Worked Example: Exam Scores &amp; Outlier Check</div>
                             <p class="prob-scenario-desc">Using Mean <strong>&mu; = 100</strong> and Standard Deviation <strong>&sigma; = 15</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Lower Limit</span>
@@ -5863,6 +6366,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🔢 Worked Example</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"x is an element of set A"</strong> or <strong>"x belongs to set A"</strong>.
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Let Set <strong>A = {2, 4, 6, 8}</strong>. Since the number 4 is inside the set:</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Result</span>
@@ -5891,6 +6402,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🔢 Worked Example</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"x is not an element of set A"</strong> or <strong>"x does not belong to set A"</strong>.
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Using Set <strong>A = {2, 4, 6, 8}</strong>, the number 5 is not inside the set:</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Result</span>
@@ -5919,6 +6438,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🔢 Worked Example</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"For all x in set A..."</strong> or <strong>"For every element x belonging to set A..."</strong>.
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">For Set <strong>A = {2, 4, 6}</strong>:</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Statement</span>
@@ -5947,6 +6474,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🔢 Worked Example: Numbers Greater Than 3</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The set of all x, such that the condition holds."</strong> (The colon <strong>:</strong> or vertical bar <strong>|</strong> is read as <em>"such that"</em>).
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Defining Set B of all real numbers strictly greater than 3:</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Set Builder</span>
@@ -5975,6 +6510,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🔢 Worked Example</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Set A is a subset of set B"</strong> (meaning every element in A is also inside B).
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Let <strong>A = {2, 4}</strong> and <strong>B = {1, 2, 3, 4, 5}</strong>. Since both 2 and 4 are inside B:</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Result</span>
@@ -6003,6 +6546,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The empty set (or null set) contains zero elements."</strong> (Symbol <strong>∅</strong> or <strong>{ }</strong>).
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Rolling a standard 6-sided die {1, 2, 3, 4, 5, 6} and getting a number greater than 6:</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Outcomes</span>
@@ -6034,6 +6585,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example: Rolling a 6-Sided Die</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    • <strong>A ∩ B = { x : x ∈ A and x ∈ B }:</strong> Read as <em>"A intersection B is the set of all x, such that x is in A AND x is in B."</em><br>• <strong>P(A ∩ B) = n(A ∩ B) / n(S):</strong> Read as <em>"The joint probability of A and B equals the count of shared elements in A intersection B, divided by total elements in sample space S."</em>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Sample Space <strong>S = {1, 2, 3, 4, 5, 6}</strong>.<br>
                             • Event A (Even numbers): <strong>A = {2, 4, 6}</strong><br>
                             • Event B (Numbers &ge; 4): <strong>B = {4, 5, 6}</strong></p>
@@ -6077,6 +6636,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example: Rolling a 6-Sided Die</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    • <strong>A ∪ B = { x : x ∈ A or x ∈ B }:</strong> Read as <em>"A union B is the set of all x, such that x is in A OR x is in B (or both)."</em><br>• <strong>n(A ∪ B) = n(A) + n(B) − n(A ∩ B):</strong> Read as <em>"The number of elements in A union B equals the number in A, plus the number in B, minus the number in A intersection B (to subtract the shared overlap counted twice)."</em>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Using <strong>A = {2, 4, 6}</strong> and <strong>B = {4, 5, 6}</strong> (overlap {4, 6}):</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Union Set</span>
@@ -6122,6 +6689,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example: Rolling a 6 on a Die</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    • <strong>A' = S − A:</strong> Read as <em>"The complement of A (read 'A-prime' or 'not A') is the entire sample space S minus set A."</em><br>• <strong>P(A') = 1 − P(A):</strong> Read as <em>"The probability of not A equals one minus the probability of A."</em>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Event A (Rolling a 6): <strong>A = {6}</strong>, so <strong>P(A) = 1/6</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Complement Set</span>
@@ -6163,6 +6738,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example: Rolling a 6 vs Even Number</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Set A is a subset of B implies that if event A occurs, event B is guaranteed to have occurred as well."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Event A (Rolling a 6): <strong>{6}</strong>. Event B (Rolling an Even): <strong>{2, 4, 6}</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Verification</span>
@@ -6196,6 +6779,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🎲 Worked Example: Odd vs Even Die Rolls</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"A intersection B is empty; the probability of both A and B happening together is zero."</strong> (They are disjoint / mutually exclusive).
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Event A (Odd): <strong>{1, 3, 5}</strong>. Event B (Even): <strong>{2, 4, 6}</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Result</span>
@@ -6226,6 +6817,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🃏 Worked Example: Drawing a King Given a Face Card</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The conditional probability of A given B equals the joint probability of A and B, divided by the probability of B."</strong> (The vertical bar <strong>|</strong> is read as <em>"given that"</em>).
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">In a standard 52-card deck: Total Face cards <strong>P(B) = 12/52</strong>. Cards that are both King and Face card: <strong>P(A &cap; B) = 4/52</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -6262,6 +6861,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🛍️ Worked Example: Store Visits &amp; Purchases</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The probability of both A and B occurring equals the conditional probability of A given B, multiplied by the probability of B."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">If <strong>40%</strong> of users visit a store (P(B) = 0.40), and of those visitors, <strong>50%</strong> make a purchase (P(A | B) = 0.50):</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -6292,6 +6899,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🏅 Worked Example: Sports &amp; Music Participation</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The probability of A union B (A or B occurring) equals the probability of A, plus the probability of B, minus the probability of both A and B."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">P(Sports) = 0.60, P(Music) = 0.50, and P(Both) = 0.30.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -6322,6 +6937,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🏭 Worked Example: Factory Assembly Lines Defect Rate</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The total probability of A equals the sum of the conditional probability of A given each partition B-i, multiplied by the probability of that partition B-i."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Line 1 (B<sub>1</sub>): 60% of volume (P(B<sub>1</sub>)=0.60) with 2% defect rate (P(A|B<sub>1</sub>)=0.02).<br>
                             Line 2 (B<sub>2</sub>): 40% of volume (P(B<sub>2</sub>)=0.40) with 5% defect rate (P(A|B<sub>2</sub>)=0.05).</p>
                             <div class="prob-step-row">
@@ -6359,6 +6982,14 @@ window.openBayesianExamplesModal = function() {
                         </div>
                         <div class="prob-example-section">
                             <div class="prob-scenario-title">🪙 Worked Example: Coin Flip &amp; Die Roll</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"A and B are independent: the probability of A given B equals the plain probability of A, and the joint probability of both equals P of A multiplied by P of B."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Flipping a coin (A = Heads, P(A) = 0.50) and rolling a die (B = 6, P(B) = 1/6 &approx; 0.1667).</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -6387,8 +7018,16 @@ window.openBayesianExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Updates the probability of hypothesis <strong>H</strong> after observing evidence <strong>E</strong> by multiplying the prior P(H) by the likelihood P(E|H) and dividing by marginal evidence P(E).
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🩺 Worked Example: Medical Diagnostic Test</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🩺 Worked Example: Medical Diagnostic Test</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The posterior probability of hypothesis H given evidence E equals the likelihood of evidence E given H, multiplied by the prior probability of H, all divided by the total probability of evidence E."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Prior condition probability <strong>P(H) = 0.01</strong>. Test sensitivity <strong>P(E | H) = 0.90</strong>. Total positive test rate <strong>P(E) = 0.05</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Step 1</span>
@@ -6428,8 +7067,16 @@ window.openBayesianExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Computes the total denominator probability of observing evidence E across all candidate hypotheses H<sub>i</sub>.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🧪 Worked Example: Disease vs Healthy Population Evidence</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🧪 Worked Example: Disease vs Healthy Population Evidence</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"The total marginal probability of evidence E equals the sum across all candidate hypotheses of the likelihood of E given H-i, multiplied by the prior of H-i."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Hypotheses: Has Disease (H<sub>1</sub> = 0.01, P(E|H<sub>1</sub>) = 0.90) and No Disease (H<sub>2</sub> = 0.99, P(E|H<sub>2</sub>) = 0.04 false positive).</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -6464,8 +7111,16 @@ window.openBayesianExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Converts betting / Bayesian odds into a normalized probability value between 0 and 1.
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">🎲 Worked Example: Odds of 3 (3 to 1)</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">🎲 Worked Example: Odds of 3 (3 to 1)</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Probability P equals Odds divided by one plus Odds."</strong> (e.g. Odds of 3 to 1 becomes 3 / (1 + 3) = 3/4 = 75%).
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">The odds of an event occurring are <strong>3</strong> (meaning 3 to 1 in favor).</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -6500,8 +7155,16 @@ window.openBayesianExamplesModal = function() {
                         <div class="prob-meaning-box">
                             <strong>Meaning:</strong> Updates prior odds directly into posterior odds by scaling by the Likelihood Ratio (Bayes Factor).
                         </div>
-                        <div class="prob-example-section">
-                            <div class="prob-scenario-title">⚖️ Worked Example: Odds Updating</div>
+<div class="prob-example-section">
+<div class="prob-scenario-title">⚖️ Worked Example: Odds Updating</div>
+                            <div class="prob-read-english-box">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">🗣️ How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Posterior Odds equals Prior Odds multiplied by the Likelihood Ratio (Bayes Factor)."</strong>
+                                </div>
+                            </div>
                             <p class="prob-scenario-desc">Prior Odds of an event are <strong>2</strong>, and new evidence provides a Likelihood Ratio of <strong>1.5</strong>.</p>
                             <div class="prob-step-row">
                                 <span class="prob-step-badge">Calculation</span>
@@ -7274,3 +7937,743 @@ window.toggleModalFullscreen = function(btn) {
     btn.innerHTML = isFull ? '&#128471;' : '&#x26F6;';
     btn.title = isFull ? 'Restore Window Size' : 'Maximize Window';
 };
+
+
+// ============================================================================
+// CURRICULUM PAGER, FLOATING ACTIONS & KEYBOARD NAVIGATION ENGINES
+// ============================================================================
+
+function injectCurriculumPager(currentTerm) {
+    const reviewerTab = document.getElementById('reviewer');
+    if (!reviewerTab || reviewerTab.querySelector('.lesson-curriculum-pager')) return;
+
+    const currentFile = window.location.pathname.split('/').pop();
+    const currIndex = COURSE_CURRICULUM.findIndex(item => item.filename.toLowerCase() === currentFile.toLowerCase());
+    if (currIndex === -1) return;
+
+    const currentItem = COURSE_CURRICULUM[currIndex];
+    // Filter curriculum to same subject if possible, or adjacent in course
+    const prevItem = currIndex > 0 ? COURSE_CURRICULUM[currIndex - 1] : null;
+    const nextItem = currIndex < COURSE_CURRICULUM.length - 1 ? COURSE_CURRICULUM[currIndex + 1] : null;
+
+    const pagerContainer = document.createElement('div');
+    pagerContainer.className = 'lesson-curriculum-pager';
+    const rootPrefix = getRootRelativePath().replace('index.html', '');
+
+    let prevHtml = '';
+    if (prevItem) {
+        const prevUrl = `${rootPrefix}${prevItem.url.replace(/^\//, '')}`;
+        prevHtml = `
+            <a href="${prevUrl}" class="curr-pager-card prev" title="Previous: ${prevItem.title}">
+                <span class="curr-pager-arrow">&larr;</span>
+                <div class="curr-pager-info">
+                    <span class="curr-pager-dir">Previous Lesson</span>
+                    <span class="curr-pager-title">${prevItem.title}</span>
+                </div>
+            </a>
+        `;
+    } else {
+        prevHtml = `<div></div>`;
+    }
+
+    const hubHtml = `
+        <a href="${getRootRelativePath()}#${currentTerm}" class="curr-pager-card hub" title="Return to ${currentTerm.toUpperCase()} Portal">
+            <div class="curr-pager-info" style="align-items:center;">
+                <span class="curr-pager-dir">📚 Portal Hub</span>
+                <span class="curr-pager-title">${currentTerm.charAt(0).toUpperCase() + currentTerm.slice(1)} Curriculum</span>
+            </div>
+        </a>
+    `;
+
+    let nextHtml = '';
+    if (nextItem) {
+        const nextUrl = `${rootPrefix}${nextItem.url.replace(/^\//, '')}`;
+        nextHtml = `
+            <a href="${nextUrl}" class="curr-pager-card next" title="Next: ${nextItem.title}">
+                <div class="curr-pager-info">
+                    <span class="curr-pager-dir">Next Lesson</span>
+                    <span class="curr-pager-title">${nextItem.title}</span>
+                </div>
+                <span class="curr-pager-arrow">&rarr;</span>
+            </a>
+        `;
+    } else {
+        nextHtml = `<div></div>`;
+    }
+
+    pagerContainer.innerHTML = prevHtml + hubHtml + nextHtml;
+    
+    // Append to study-main if study-layout exists, else reviewerTab
+    const studyMain = reviewerTab.querySelector('.study-main') || reviewerTab;
+    studyMain.appendChild(pagerContainer);
+}
+
+function injectBackToTopButton() {
+    if (document.getElementById('btn-back-to-top')) return;
+
+    const btn = document.createElement('button');
+    btn.id = 'btn-back-to-top';
+    btn.className = 'btn-back-to-top';
+    btn.setAttribute('aria-label', 'Back to top');
+    btn.innerHTML = '<span>↑</span> Back to Top';
+    document.body.appendChild(btn);
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    let scrollTimeout = null;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) return;
+        scrollTimeout = setTimeout(() => {
+            scrollTimeout = null;
+            if (window.scrollY > 400) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        }, 100);
+    }, { passive: true });
+}
+
+function bindKeyboardNavigation(currentTerm) {
+    window.addEventListener('keydown', (e) => {
+        // Ignore if user is typing in an input, textarea, or contentEditable
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || e.target.isContentEditable) return;
+
+        // Alt + Home or Alt + Up: Return to portal at active term
+        if (e.altKey && (e.key === 'Home' || e.key === 'ArrowUp')) {
+            e.preventDefault();
+            safeSetStorage('active_portal_term', currentTerm);
+            window.location.href = `${getRootRelativePath()}#${currentTerm}`;
+            return;
+        }
+
+        // Alt + Left: Previous Lesson
+        if (e.altKey && e.key === 'ArrowLeft') {
+            const prevLink = document.querySelector('.curr-pager-card.prev');
+            if (prevLink && prevLink.getAttribute('href')) {
+                e.preventDefault();
+                window.location.href = prevLink.getAttribute('href');
+            }
+            return;
+        }
+
+        // Alt + Right: Next Lesson
+        if (e.altKey && e.key === 'ArrowRight') {
+            const nextLink = document.querySelector('.curr-pager-card.next');
+            if (nextLink && nextLink.getAttribute('href')) {
+                e.preventDefault();
+                window.location.href = nextLink.getAttribute('href');
+            }
+            return;
+        }
+
+        // Number keys 1, 2, 3 for tab switching if on study page
+        if (!e.altKey && !e.ctrlKey && !e.metaKey) {
+            if (e.key === '1' && window.switchTab) {
+                const tab1 = document.querySelector('.nav-btn');
+                if (tab1 && tab1.getAttribute('onclick')) tab1.click();
+            } else if (e.key === '2' && window.switchTab) {
+                const navBtns = document.querySelectorAll('.nav-btn');
+                if (navBtns.length > 1) navBtns[1].click();
+            } else if (e.key === '3' && window.switchTab) {
+                const navBtns = document.querySelectorAll('.nav-btn');
+                if (navBtns.length > 2) navBtns[2].click();
+            }
+        }
+    });
+}
+
+// ==========================================================================
+// DIRECT PDF DOWNLOAD ENGINE
+// ==========================================================================
+window.downloadPdfDirect = async function(url, suggestedFilename, triggerElement) {
+    if (!url || url === '#' || url.startsWith('javascript:')) return;
+
+    // Resolve clean default filename
+    let filename = suggestedFilename;
+    if (!filename || filename === 'true' || filename === '') {
+        const rawName = url.split('/').pop().split('#')[0].split('?')[0];
+        try {
+            filename = decodeURIComponent(rawName);
+        } catch (e) {
+            filename = rawName;
+        }
+    }
+    if (!filename.toLowerCase().endsWith('.pdf')) {
+        filename += '.pdf';
+    }
+
+    // Tactile button feedback
+    let originalHtml = '';
+    let isBtn = false;
+    if (triggerElement && triggerElement.innerHTML) {
+        isBtn = true;
+        originalHtml = triggerElement.innerHTML;
+        triggerElement.innerHTML = '⏳ Downloading...';
+        triggerElement.style.pointerEvents = 'none';
+    }
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const blob = await response.blob();
+
+        // Enforce application/octet-stream so browser PDF viewers never intercept inline
+        const octetBlob = new Blob([blob], { type: 'application/octet-stream' });
+        const blobUrl = URL.createObjectURL(octetBlob);
+
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+
+        setTimeout(() => {
+            URL.revokeObjectURL(blobUrl);
+            a.remove();
+        }, 1500);
+
+        if (isBtn) {
+            triggerElement.innerHTML = '✓ Downloaded!';
+            setTimeout(() => {
+                triggerElement.innerHTML = originalHtml;
+                triggerElement.style.pointerEvents = '';
+            }, 2000);
+        }
+    } catch (err) {
+        console.warn('[PDF Download] Direct fetch failed, falling back to anchor trigger:', err);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.setAttribute('download', filename);
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => a.remove(), 500);
+
+        if (isBtn) {
+            triggerElement.innerHTML = originalHtml;
+            triggerElement.style.pointerEvents = '';
+        }
+    }
+};
+
+let directPdfDownloadsInitialized = false;
+function initDirectPdfDownloads() {
+    if (directPdfDownloadsInitialized) return;
+    directPdfDownloadsInitialized = true;
+
+    // Intercept all PDF download actions across cards and presentation overlay
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.resource-btn-download, #pdf-presentation-download-link, [data-download-pdf]');
+        if (!btn) return;
+
+        const url = btn.getAttribute('data-pdf-url') || btn.getAttribute('href');
+        if (!url || url === '#' || url.startsWith('javascript:')) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        const suggested = btn.getAttribute('data-filename') || btn.getAttribute('download') || '';
+        window.downloadPdfDirect(url, suggested, btn);
+    });
+}
+
+// ==========================================================================
+// 6. ACTIVE RECALL FLASHCARDS SYSTEM (Quick Reference Mode)
+// ==========================================================================
+function initQuickRefFlashcards() {
+    const qrContainer = document.getElementById('quick-ref') || document.getElementById('formulas');
+    if (!qrContainer) return;
+    if (qrContainer.querySelector('.qr-mode-switcher')) return;
+
+    const cardItems = [];
+
+    // 1. Collect from Pillar 1 Table Rows (Terms & Acronyms)
+    const tableRows = qrContainer.querySelectorAll('table tbody tr');
+    tableRows.forEach(tr => {
+        if (!tr.cells || tr.cells.length < 2) return;
+        const firstCell = tr.cells[0];
+        const title = firstCell.innerText.trim();
+        if (!title || title.toLowerCase().includes('term') || title.toLowerCase().includes('feature') || title.length > 70) return;
+
+        let def = '';
+        let category = 'Core Terminology';
+        let keyword = '';
+
+        if (tr.cells.length >= 4) {
+            const cell1 = tr.cells[1].innerText.trim();
+            const cell2 = tr.cells[2].innerText.trim();
+            if (cell2.length > cell1.length) {
+                category = cell1 || 'Core Terminology';
+                def = tr.cells[2].innerHTML.trim();
+                keyword = tr.cells[3] ? tr.cells[3].innerText.trim() : '';
+            } else {
+                def = tr.cells[1].innerHTML.trim();
+                category = cell2 || 'Core Terminology';
+                keyword = tr.cells[3] ? tr.cells[3].innerText.trim() : '';
+            }
+        } else {
+            def = tr.cells[1].innerHTML.trim();
+        }
+
+        if (def && def.length > 5) {
+            cardItems.push({
+                category: category,
+                frontTitle: title,
+                frontSubtitle: 'Define this concept & state its primary exam trigger',
+                frontMath: null,
+                backContent: `
+                    <div class="flashcard-details-box">${def}</div>
+                    ${keyword ? `<div style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-muted-color);"><strong>Exam Trigger:</strong> <span style="color:var(--primary-color);">${keyword}</span></div>` : ''}
+                `
+            });
+        }
+    });
+
+    // 2. Collect from .term-card
+    const termCards = qrContainer.querySelectorAll('.term-card');
+    termCards.forEach(tc => {
+        const titleEl = tc.querySelector('h3, h4, strong, .term-name');
+        const title = titleEl ? titleEl.innerText.trim() : 'Terminology Concept';
+        const bodyEl = tc.querySelector('p, .term-def') || tc;
+        let body = bodyEl.innerHTML;
+        if (titleEl && bodyEl === tc) {
+            body = body.replace(titleEl.outerHTML, '');
+        }
+        cardItems.push({
+            category: 'Core Terminology',
+            frontTitle: title,
+            frontSubtitle: 'Define this concept & state its primary purpose',
+            frontMath: null,
+            backContent: `<div class="flashcard-details-box">${body}</div>`
+        });
+    });
+
+    // 3. Collect from .prob-card, .formula-card, .crypto-card
+    const formulaCards = qrContainer.querySelectorAll('.prob-card, .formula-card, .crypto-card');
+    formulaCards.forEach(fc => {
+        const titleEl = fc.querySelector('.prob-title, .formula-title, h3, h4');
+        const title = titleEl ? titleEl.innerText.trim() : 'Formula & Metric';
+        const mathEl = fc.querySelector('.prob-formula, .formula-math, .formula-latex');
+        const math = mathEl ? mathEl.innerHTML.trim() : '';
+        const readEl = fc.querySelector('.prob-read-english-box, .formula-reading');
+        const readHtml = readEl ? readEl.outerHTML : '';
+        const whenEl = fc.querySelector('.prob-when, .prob-note, .formula-desc, p');
+        const whenHtml = whenEl ? whenEl.outerHTML : '';
+
+        cardItems.push({
+            category: 'Formula & Calculation Card',
+            frontTitle: title,
+            frontSubtitle: 'Recite formula, variables & plain English pronunciation',
+            frontMath: math || null,
+            backContent: `
+                ${readHtml ? `<div class="flashcard-reading-callout">${readHtml}</div>` : ''}
+                ${whenHtml ? `<div class="flashcard-details-box">${whenHtml}</div>` : ''}
+            `
+        });
+    });
+
+    // 4. Collect from .definition-card, .pitfall-card, .trap-card (Pillar 4 Traps)
+    const pitfallCards = qrContainer.querySelectorAll('.definition-card, .pitfall-card, .trap-card');
+    pitfallCards.forEach(pc => {
+        const titleEl = pc.querySelector('.def-badge, h3, h4, strong');
+        const title = titleEl ? titleEl.innerText.trim() : 'Common Exam Trap';
+        let body = pc.innerHTML;
+        if (titleEl) body = body.replace(titleEl.outerHTML, '');
+        cardItems.push({
+            category: 'Exam Pitfall & Fallacy',
+            frontTitle: title,
+            frontSubtitle: 'What is the trap and how to avoid losing exam points?',
+            frontMath: null,
+            backContent: `<div class="flashcard-details-box">${body}</div>`
+        });
+    });
+
+    if (cardItems.length === 0) return;
+
+    // Build Switcher Bar
+    const switcher = document.createElement('div');
+    switcher.className = 'qr-mode-switcher';
+    switcher.innerHTML = `
+        <button class="qr-mode-pill active" id="btn-qr-matrix-view">📋 Matrix & Table View</button>
+        <button class="qr-mode-pill" id="btn-qr-flashcard-view">🃏 Active Recall Flashcards (${cardItems.length})</button>
+    `;
+
+    const originalNodes = Array.from(qrContainer.children);
+    const matrixView = document.createElement('div');
+    matrixView.className = 'qr-matrix-view-pane';
+    originalNodes.forEach(node => matrixView.appendChild(node));
+
+    const flashcardStage = document.createElement('div');
+    flashcardStage.className = 'flashcard-stage-container';
+    flashcardStage.style.display = 'none';
+
+    let currentCardIndex = 0;
+    let deck = [...cardItems];
+
+    flashcardStage.innerHTML = `
+        <div class="flashcard-deck-header">
+            <span class="flashcard-counter-badge" id="fc-counter">Card 1 of ${deck.length}</span>
+            <button class="btn-flashcard" id="btn-fc-shuffle" style="padding: 0.35rem 0.85rem; min-height: 32px; font-size: 0.8rem;">🔀 Shuffle Deck</button>
+        </div>
+        <div class="flashcard-perspective-stage">
+            <div class="flashcard-card" id="fc-active-card">
+                <div class="flashcard-face flashcard-front" id="fc-front"></div>
+                <div class="flashcard-face flashcard-back" id="fc-back"></div>
+            </div>
+        </div>
+        <div class="flashcard-controls-bar">
+            <button class="btn-flashcard" id="btn-fc-prev">← Previous</button>
+            <button class="btn-flashcard btn-flashcard-flip" id="btn-fc-flip">🔄 Flip Card (Space)</button>
+            <button class="btn-flashcard" id="btn-fc-next">Next →</button>
+        </div>
+    `;
+
+    qrContainer.appendChild(switcher);
+    qrContainer.appendChild(matrixView);
+    qrContainer.appendChild(flashcardStage);
+
+    function renderCard(idx) {
+        const item = deck[idx];
+        const cardEl = document.getElementById('fc-active-card');
+        const frontEl = document.getElementById('fc-front');
+        const backEl = document.getElementById('fc-back');
+        const counterEl = document.getElementById('fc-counter');
+        if (!cardEl || !frontEl || !backEl) return;
+
+        cardEl.classList.remove('flipped');
+
+        frontEl.innerHTML = `
+            <div>
+                <div class="flashcard-category-tag">${item.category}</div>
+                <div class="flashcard-term-title">${item.frontTitle}</div>
+                <div class="flashcard-hint-row">${item.frontSubtitle}</div>
+            </div>
+            ${item.frontMath ? `<div class="flashcard-formula-display">${item.frontMath}</div>` : ''}
+            <div class="flashcard-flip-prompt"><span>👆 Click card or press [Space] to reveal answer & breakdown</span></div>
+        `;
+
+        backEl.innerHTML = `
+            <div>
+                <div class="flashcard-category-tag">${item.category} — Answer</div>
+                <div class="flashcard-term-title">${item.frontTitle}</div>
+            </div>
+            <div class="flashcard-back-body">${item.backContent}</div>
+            <div class="flashcard-flip-prompt"><span>👆 Click card or press [Space] to flip back</span></div>
+        `;
+
+        if (counterEl) counterEl.textContent = `Card ${idx + 1} of ${deck.length}`;
+
+        if (window.renderMathInElement) {
+            try {
+                window.renderMathInElement(frontEl, { delimiters: [{left: "$$", right: "$$", display: true}, {left: "$", right: "$", display: false}] });
+                window.renderMathInElement(backEl, { delimiters: [{left: "$$", right: "$$", display: true}, {left: "$", right: "$", display: false}] });
+            } catch(e) {}
+        }
+    }
+
+    renderCard(0);
+
+    const btnMatrix = document.getElementById('btn-qr-matrix-view');
+    const btnFlash = document.getElementById('btn-qr-flashcard-view');
+    btnMatrix.onclick = () => {
+        btnMatrix.classList.add('active');
+        btnFlash.classList.remove('active');
+        matrixView.style.display = 'block';
+        flashcardStage.style.display = 'none';
+    };
+    btnFlash.onclick = () => {
+        btnFlash.classList.add('active');
+        btnMatrix.classList.remove('active');
+        matrixView.style.display = 'none';
+        flashcardStage.style.display = 'block';
+        renderCard(currentCardIndex);
+    };
+
+    const activeCard = document.getElementById('fc-active-card');
+    if (activeCard) {
+        activeCard.onclick = () => {
+            activeCard.classList.toggle('flipped');
+            if (window.triggerHaptic) window.triggerHaptic('tick');
+        };
+    }
+    const btnFlip = document.getElementById('btn-fc-flip');
+    if (btnFlip) {
+        btnFlip.onclick = () => {
+            if (activeCard) activeCard.classList.toggle('flipped');
+            if (window.triggerHaptic) window.triggerHaptic('tick');
+        };
+    }
+
+    const btnPrev = document.getElementById('btn-fc-prev');
+    const btnNext = document.getElementById('btn-fc-next');
+    const btnShuffle = document.getElementById('btn-fc-shuffle');
+
+    if (btnPrev) {
+        btnPrev.onclick = () => {
+            currentCardIndex = (currentCardIndex - 1 + deck.length) % deck.length;
+            renderCard(currentCardIndex);
+            if (window.triggerHaptic) window.triggerHaptic('tick');
+        };
+    }
+    if (btnNext) {
+        btnNext.onclick = () => {
+            currentCardIndex = (currentCardIndex + 1) % deck.length;
+            renderCard(currentCardIndex);
+            if (window.triggerHaptic) window.triggerHaptic('tick');
+        };
+    }
+    if (btnShuffle) {
+        btnShuffle.onclick = () => {
+            for (let i = deck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [deck[i], deck[j]] = [deck[j], deck[i]];
+            }
+            currentCardIndex = 0;
+            renderCard(0);
+            if (window.showCustomToast) window.showCustomToast('Deck shuffled!', 'info');
+        };
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (flashcardStage.style.display !== 'none' && !e.target.matches('input, textarea')) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (activeCard) activeCard.classList.toggle('flipped');
+                if (window.triggerHaptic) window.triggerHaptic('tick');
+            } else if (e.code === 'ArrowRight' || e.code === 'KeyD') {
+                e.preventDefault();
+                if (btnNext) btnNext.click();
+            } else if (e.code === 'ArrowLeft' || e.code === 'KeyA') {
+                e.preventDefault();
+                if (btnPrev) btnPrev.click();
+            } else if (e.code === 'KeyS') {
+                e.preventDefault();
+                if (btnShuffle) btnShuffle.click();
+            }
+        }
+    });
+}
+
+// ==========================================================================
+// 7. MOBILE TOUCH GESTURES & HAPTIC ENGINE
+// ==========================================================================
+function initMobileGestures() {
+    window.triggerHaptic = function(type = 'tick') {
+        if ('vibrate' in navigator) {
+            try {
+                if (type === 'tick') navigator.vibrate(8);
+                else if (type === 'success') navigator.vibrate([10, 35, 15]);
+                else if (type === 'warning') navigator.vibrate(25);
+            } catch(e) {}
+        }
+    };
+
+    let startX = 0;
+    let startY = 0;
+    let startTime = 0;
+
+    window.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            startTime = Date.now();
+        }
+    }, { passive: true });
+
+    window.addEventListener('touchend', (e) => {
+        if (e.changedTouches.length === 1) {
+            const deltaX = e.changedTouches[0].clientX - startX;
+            const deltaY = e.changedTouches[0].clientY - startY;
+            const duration = Date.now() - startTime;
+
+            if (Math.abs(deltaX) > 75 && Math.abs(deltaY) < 55 && duration < 500) {
+                const target = e.target;
+                if (target && (target.closest('.table-container') || target.closest('.flashcard-perspective-stage') || target.closest('pre') || target.closest('canvas'))) {
+                    return;
+                }
+
+                const navTabs = Array.from(document.querySelectorAll('.nav-tabs .nav-btn'));
+                if (navTabs.length > 1) {
+                    const activeIdx = navTabs.findIndex(b => b.classList.contains('active'));
+                    if (activeIdx !== -1) {
+                        if (deltaX < 0 && activeIdx < navTabs.length - 1) {
+                            navTabs[activeIdx + 1].click();
+                            window.triggerHaptic('tick');
+                        } else if (deltaX > 0 && activeIdx > 0) {
+                            navTabs[activeIdx - 1].click();
+                            window.triggerHaptic('tick');
+                        }
+                    }
+                }
+            }
+        }
+    }, { passive: true });
+}
+
+// ==========================================================================
+// 8. ZEN / FOCUS READING MODE
+// ==========================================================================
+function initZenMode() {
+    window.toggleZenMode = function() {
+        const isZen = document.body.classList.toggle('zen-mode');
+        let exitPill = document.getElementById('zen-exit-pill');
+        let zenBar = document.getElementById('zen-progress-bar');
+
+        if (isZen) {
+            if (!zenBar) {
+                zenBar = document.createElement('div');
+                zenBar.id = 'zen-progress-bar';
+                zenBar.className = 'zen-progress-bar';
+                zenBar.innerHTML = '<div class="zen-progress-fill" id="zen-progress-fill"></div>';
+                document.body.appendChild(zenBar);
+            }
+            if (!exitPill) {
+                exitPill = document.createElement('button');
+                exitPill.id = 'zen-exit-pill';
+                exitPill.className = 'zen-exit-pill';
+                exitPill.innerHTML = '<span>✕ Exit Focus Mode</span> <kbd style="font-size:0.75rem;opacity:0.7;padding:2px 5px;background:rgba(255,255,255,0.15);border-radius:4px;">Shift+Z</kbd>';
+                exitPill.onclick = () => window.toggleZenMode();
+                document.body.appendChild(exitPill);
+            }
+            if (window.showCustomToast) window.showCustomToast('🧘 Entered Zen Focus Mode. Press Shift+Z or Esc to exit.', 'info');
+        } else {
+            if (exitPill) exitPill.remove();
+            if (zenBar) zenBar.remove();
+            if (window.showCustomToast) window.showCustomToast('Exited Focus Mode.', 'info');
+        }
+    };
+
+    const navRight = document.querySelector('nav.sticky-nav > div:last-child');
+    if (navRight && !navRight.querySelector('#btn-toggle-zen')) {
+        const zenBtn = document.createElement('button');
+        zenBtn.id = 'btn-toggle-zen';
+        zenBtn.className = 'btn-zen-nav';
+        zenBtn.title = 'Distraction-Free Focus Mode (Shift + Z)';
+        zenBtn.innerHTML = '<span>🧘</span><span>Focus</span>';
+        zenBtn.onclick = () => window.toggleZenMode();
+        navRight.insertBefore(zenBtn, navRight.firstChild);
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.shiftKey && (e.key === 'Z' || e.key === 'z') && !e.target.matches('input, textarea')) {
+            e.preventDefault();
+            window.toggleZenMode();
+        } else if (e.key === 'Escape' && document.body.classList.contains('zen-mode')) {
+            window.toggleZenMode();
+        }
+    });
+}
+
+// ==========================================================================
+// 9. ENHANCED OMNI-COMMAND PALETTE (Ctrl+K / Cmd+K)
+// ==========================================================================
+function initEnhancedCommandPalette() {
+    let palette = document.getElementById('omni-command-palette');
+    if (palette) return;
+
+    palette = document.createElement('div');
+    palette.id = 'omni-command-palette';
+    palette.className = 'custom-confirm-overlay';
+    palette.style.zIndex = '999999';
+
+    const modal = document.createElement('div');
+    modal.className = 'custom-confirm-modal';
+    modal.style.maxWidth = '560px';
+    modal.style.padding = '1.25rem';
+    modal.style.textAlign = 'left';
+
+    modal.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem;">
+            <div style="font-weight:700;font-size:0.95rem;color:var(--text-color);display:flex;align-items:center;gap:0.45rem;">
+                <span>⚡</span> <strong>Omni-Command Palette</strong>
+            </div>
+            <span style="font-size:0.75rem;color:var(--text-muted-color);">[Esc] to close</span>
+        </div>
+        <div style="position:relative;margin-bottom:0.75rem;">
+            <input type="text" id="omni-search-input" placeholder="Type a command or search topic... (e.g. > focus, > quiz, > theme)" 
+                   style="width:100%;box-sizing:border-box;padding:0.75rem 1rem;border-radius:10px;border:1px solid var(--border-color);background:rgba(0,0,0,0.25);color:var(--text-color);font-size:0.95rem;outline:none;">
+        </div>
+        <div id="omni-results-list" style="max-height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:0.35rem;"></div>
+    `;
+
+    palette.appendChild(modal);
+    document.body.appendChild(palette);
+
+    const input = document.getElementById('omni-search-input');
+    const results = document.getElementById('omni-results-list');
+
+    const commands = [
+        { label: 'Toggle Dark / Light Theme', action: () => window.toggleTheme && window.toggleTheme(), icon: '🌓', shortcut: 'Theme' },
+        { label: 'Toggle Zen Focus Mode', action: () => window.toggleZenMode && window.toggleZenMode(), icon: '🧘', shortcut: 'Shift+Z' },
+        { label: 'Switch to Study Guide Tab', action: () => window.switchTab && window.switchTab('reviewer'), icon: '📖', shortcut: '1' },
+        { label: 'Switch to Quick Reference Tab', action: () => window.switchTab && (window.switchTab('formulas') || window.switchTab('quick-ref')), icon: '📋', shortcut: '3' },
+        { label: 'Switch to Interactive Quiz', action: () => window.switchTab && window.switchTab('quiz'), icon: '📝', shortcut: '2' },
+        { label: 'Drill Missed Questions (Quiz)', action: () => { window.switchTab && window.switchTab('quiz'); window.activeQuiz && window.activeQuiz.drillMistakes(); }, icon: '⚡', shortcut: 'Mistakes' },
+        { label: 'Open Whiteboard Canvas', action: () => window.open(getRootRelativePath().replace('index.html', 'whiteboard.html'), '_blank'), icon: '📝', shortcut: 'Draw' },
+        { label: 'Print / Export PDF', action: () => window.print && window.print(), icon: '🖨️', shortcut: 'Ctrl+P' },
+        { label: 'Return to Portal Dashboard', action: () => {
+            const term = detectCurrentTerm() || 'prelim';
+            window.location.href = `${getRootRelativePath()}#${term}`;
+        }, icon: '🏠', shortcut: 'Alt+Home' }
+    ];
+
+    function renderOptions(filter = '') {
+        results.innerHTML = '';
+        const q = filter.trim().toLowerCase().replace(/^>/, '').trim();
+        const filtered = commands.filter(c => c.label.toLowerCase().includes(q) || c.shortcut.toLowerCase().includes(q));
+
+        if (filtered.length === 0) {
+            results.innerHTML = '<div style="padding:1rem;text-align:center;color:var(--text-muted-color);font-size:0.85rem;">No matching commands found.</div>';
+            return;
+        }
+
+        filtered.forEach((cmd) => {
+            const item = document.createElement('div');
+            item.className = 'omni-cmd-item';
+            item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:0.6rem 0.85rem;border-radius:8px;cursor:pointer;transition:background 0.15s ease;';
+            item.innerHTML = `
+                <div style="display:flex;align-items:center;gap:0.55rem;color:var(--text-color);font-size:0.88rem;">
+                    <span>${cmd.icon}</span> <span>${cmd.label}</span>
+                </div>
+                <kbd style="font-size:0.75rem;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,0.08);color:var(--text-muted-color);">${cmd.shortcut}</kbd>
+            `;
+            item.onmouseenter = () => item.style.background = 'rgba(13, 148, 136, 0.15)';
+            item.onmouseleave = () => item.style.background = 'transparent';
+            item.onclick = () => {
+                palette.classList.remove('active');
+                cmd.action();
+            };
+            results.appendChild(item);
+        });
+    }
+
+    window.openOmniPalette = function() {
+        palette.classList.add('active');
+        input.value = '';
+        renderOptions();
+        setTimeout(() => input.focus(), 50);
+    };
+
+    input.addEventListener('input', () => renderOptions(input.value));
+    palette.onclick = (e) => {
+        if (e.target === palette) palette.classList.remove('active');
+    };
+
+    window.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+            e.preventDefault();
+            if (palette.classList.contains('active')) {
+                palette.classList.remove('active');
+            } else {
+                window.openOmniPalette();
+            }
+        } else if (e.key === 'Escape' && palette.classList.contains('active')) {
+            palette.classList.remove('active');
+        }
+    });
+}

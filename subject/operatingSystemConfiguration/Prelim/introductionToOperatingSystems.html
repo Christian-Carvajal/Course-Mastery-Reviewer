@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,491 +18,791 @@
             }
         })();
     </script>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
- <title>Introduction to Operating Systems | Complete Reviewer & Quiz</title>
- <link rel="stylesheet" href="../../../global.css">
- <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Introduction to Operating Systems | Complete Reviewer &amp; Quiz</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
- <header class="app-header">
- <h1>Operating System Configuration</h1>
- <p>Introduction to Operating Systems — Evolution, Core Functions, OS Types & 88-Question Mastery Quiz</p>
- </header>
-
- <nav class="sticky-nav">
- <div class="nav-left">
- <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
- <span class="nav-title">Introduction to Operating Systems</span>
- </div>
- <div class="nav-tabs">
- <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
- <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
- <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
- </div>
- <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
- </nav>
-
- <div class="container">
-
- <!-- TAB 1: REVIEWER TEXT -->
- <div id="reviewer" class="tab-content active">
- <div class="card">
- <h2 id="sec-1-outcomes">1. Learning Outcomes & Agenda</h2>
-
- <h3>Knowledge</h3>
- <ul>
- <li>✔ Define an Operating System.</li>
- <li>✔ Describe the functions of an Operating System.</li>
- <li>✔ Identify the components of an Operating System.</li>
- </ul>
-
- <h3>Skills</h3>
- <ul>
- <li>✔ Differentiate various Operating Systems.</li>
- <li>✔ Classify Operating Systems according to their purpose.</li>
- </ul>
-
- <h3>Learning Agenda</h3>
- <ul>
- <li>What is an Operating System?</li>
- <li>History of Operating Systems</li>
- <li>Functions of an OS</li>
- <li>Components of an OS</li>
- <li>Types of Operating Systems</li>
- <li>Examples of Modern Operating Systems</li>
- <li>Interactive Activity</li>
- <li>Seatwork</li>
- <li>Quiz</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-2-what-is-os">2. What is an Operating System?</h2>
- <div class="definition-card">
- <span class="def-badge">Definition</span>
- <p>An <strong>Operating System (OS)</strong> is system software that acts as an interface between the computer hardware and the user.</p>
- </div>
-
- <h3>It Manages:</h3>
- <ul>
- <li>CPU</li>
- <li>Memory</li>
- <li>Storage</li>
- <li>Input devices</li>
- <li>Output devices</li>
- <li>Software applications</li>
- </ul>
- <p><strong>The Operating System is the manager of the entire computer system.</strong></p>
-
- <h3>Why is an Operating System Important?</h3>
- <table>
- <thead>
- <tr>
- <th>Without an OS...</th>
- <th>With an OS...</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td>
- ❌ Computer cannot run programs<br>
- ❌ No file management<br>
- ❌ No internet browsing<br>
- ❌ No printing<br>
+<header class="app-header">
+<h1>Operating System Configuration</h1>
+<p>Introduction to Operating Systems — Evolution, Core Functions, OS Types &amp; 88-Question Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Introduction to Operating Systems</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2 id="sec-1-outcomes">1. Learning Outcomes &amp; Agenda</h2>
+<h3>Knowledge</h3>
+<ul>
+<li>✔ Define an Operating System.</li>
+<li>✔ Describe the functions of an Operating System.</li>
+<li>✔ Identify the components of an Operating System.</li>
+</ul>
+<h3>Skills</h3>
+<ul>
+<li>✔ Differentiate various Operating Systems.</li>
+<li>✔ Classify Operating Systems according to their purpose.</li>
+</ul>
+<h3>Learning Agenda</h3>
+<ul>
+<li>What is an Operating System?</li>
+<li>History of Operating Systems</li>
+<li>Functions of an OS</li>
+<li>Components of an OS</li>
+<li>Types of Operating Systems</li>
+<li>Examples of Modern Operating Systems</li>
+<li>Interactive Activity</li>
+<li>Seatwork</li>
+<li>Quiz</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-2-what-is-os">2. What is an Operating System?</h2>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p>An <strong>Operating System (OS)</strong> is system software that acts as an interface between the computer hardware and the user.</p>
+</div>
+<h3>It Manages:</h3>
+<ul>
+<li>CPU</li>
+<li>Memory</li>
+<li>Storage</li>
+<li>Input devices</li>
+<li>Output devices</li>
+<li>Software applications</li>
+</ul>
+<p><strong>The Operating System is the manager of the entire computer system.</strong></p>
+<h3>Why is an Operating System Important?</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Without an OS...</th>
+<th>With an OS...</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+ ❌ Computer cannot run programs<br/>
+ ❌ No file management<br/>
+ ❌ No internet browsing<br/>
+ ❌ No printing<br/>
  ❌ No multitasking
  </td>
- <td>
+<td>
  ✔ Everything works together.
  </td>
- </tr>
- </tbody>
- </table>
- </div>
-
- <div class="card">
- <h2 id="sec-3-history-evolution">3. History & Evolution of Operating Systems</h2>
- <table>
- <thead>
- <tr>
- <th>Generation</th>
- <th>Period</th>
- <th>Major Innovation</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>First</strong></td>
- <td>1940s1950s</td>
- <td>No Operating System</td>
- </tr>
- <tr>
- <td><strong>Second</strong></td>
- <td>1950s1960s</td>
- <td>Batch Processing</td>
- </tr>
- <tr>
- <td><strong>Third</strong></td>
- <td>1960s1970s</td>
- <td>Multiprogramming & Time Sharing</td>
- </tr>
- <tr>
- <td><strong>Fourth</strong></td>
- <td>1980sPresent</td>
- <td>GUI-Based Operating Systems</td>
- </tr>
- <tr>
- <td><strong>Modern</strong></td>
- <td>2000sPresent</td>
- <td>Cloud, Virtualization, Mobile OS, AI</td>
- </tr>
- </tbody>
- </table>
- </div>
-
- <div class="card">
- <h2 id="sec-4-core-functions">4. Main Functions of an Operating System</h2>
- <p>The Operating System performs several important tasks:</p>
-
- <h3>Process Management</h3>
- <ul>
- <li>Runs programs</li>
- <li>Allocates CPU</li>
- <li>Schedules processes</li>
- </ul>
-
- <h3>Memory Management</h3>
- <ul>
- <li>Allocates RAM</li>
- <li>Protects memory</li>
- <li>Shares memory</li>
- </ul>
-
- <h3>File Management</h3>
- <ul>
- <li>Stores files</li>
- <li>Creates folders</li>
- <li>Deletes files</li>
- <li>Retrieves data</li>
- </ul>
-
- <h3>Device Management</h3>
- <ul>
- <li>Keyboard</li>
- <li>Mouse</li>
- <li>Printer</li>
- <li>USB</li>
- <li>Monitor</li>
- </ul>
-
- <h3>Security</h3>
- <ul>
- <li>User Accounts</li>
- <li>Passwords</li>
- <li>Permissions</li>
- <li>Encryption</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-5-os-types">5. Types of Operating Systems</h2>
- <p>The PDF categorizes the following types of Operating Systems:</p>
- <ul>
- <li>Batch OS</li>
- <li>Time Sharing OS</li>
- <li>Distributed OS</li>
- <li>Network OS</li>
- <li>Real-Time OS</li>
- <li>Embedded OS</li>
- <li>Mobile OS</li>
- <li>Desktop OS</li>
- <li>Server OS</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-6-modern-os">6. Desktop & Modern Operating Systems</h2>
-
- <h3>Desktop Operating Systems</h3>
- <ul>
- <li>
- <strong>Windows:</strong> Most popular desktop OS. Used in: Schools, Businesses, Homes.
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card">
+<h2 id="sec-3-history-evolution">3. History &amp; Evolution of Operating Systems</h2>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Generation</th>
+<th>Period</th>
+<th>Major Innovation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>First</strong></td>
+<td>1940s1950s</td>
+<td>No Operating System</td>
+</tr>
+<tr>
+<td><strong>Second</strong></td>
+<td>1950s1960s</td>
+<td>Batch Processing</td>
+</tr>
+<tr>
+<td><strong>Third</strong></td>
+<td>1960s1970s</td>
+<td>Multiprogramming &amp; Time Sharing</td>
+</tr>
+<tr>
+<td><strong>Fourth</strong></td>
+<td>1980sPresent</td>
+<td>GUI-Based Operating Systems</td>
+</tr>
+<tr>
+<td><strong>Modern</strong></td>
+<td>2000sPresent</td>
+<td>Cloud, Virtualization, Mobile OS, AI</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card">
+<h2 id="sec-4-core-functions">4. Main Functions of an Operating System</h2>
+<p>The Operating System performs several important tasks:</p>
+<h3>Process Management</h3>
+<ul>
+<li>Runs programs</li>
+<li>Allocates CPU</li>
+<li>Schedules processes</li>
+</ul>
+<h3>Memory Management</h3>
+<ul>
+<li>Allocates RAM</li>
+<li>Protects memory</li>
+<li>Shares memory</li>
+</ul>
+<h3>File Management</h3>
+<ul>
+<li>Stores files</li>
+<li>Creates folders</li>
+<li>Deletes files</li>
+<li>Retrieves data</li>
+</ul>
+<h3>Device Management</h3>
+<ul>
+<li>Keyboard</li>
+<li>Mouse</li>
+<li>Printer</li>
+<li>USB</li>
+<li>Monitor</li>
+</ul>
+<h3>Security</h3>
+<ul>
+<li>User Accounts</li>
+<li>Passwords</li>
+<li>Permissions</li>
+<li>Encryption</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-5-os-types">5. Types of Operating Systems</h2>
+<p>The PDF categorizes the following types of Operating Systems:</p>
+<ul>
+<li>Batch OS</li>
+<li>Time Sharing OS</li>
+<li>Distributed OS</li>
+<li>Network OS</li>
+<li>Real-Time OS</li>
+<li>Embedded OS</li>
+<li>Mobile OS</li>
+<li>Desktop OS</li>
+<li>Server OS</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-6-modern-os">6. Desktop &amp; Modern Operating Systems</h2>
+<h3>Desktop Operating Systems</h3>
+<ul>
+<li>
+<strong>Windows:</strong> Most popular desktop OS. Used in: Schools, Businesses, Homes.
  </li>
- <li>
- <strong>macOS:</strong> Developed by Apple. Known for: Security, Performance, Creativity.
+<li>
+<strong>macOS:</strong> Developed by Apple. Known for: Security, Performance, Creativity.
  </li>
- <li>
- <strong>Linux:</strong> Open Source. Popular among: Servers, Programmers, Cybersecurity Professionals.
+<li>
+<strong>Linux:</strong> Open Source. Popular among: Servers, Programmers, Cybersecurity Professionals.
  </li>
- </ul>
-
- <h3>Comparison of Popular Operating Systems</h3>
- <table>
- <thead>
- <tr>
- <th>Operating System</th>
- <th>Windows</th>
- <th>Linux</th>
- <th>macOS</th>
- <th>Android</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Developer / Origin</strong></td>
- <td>Microsoft</td>
- <td>Open Source</td>
- <td>Apple</td>
- <td>Google</td>
- </tr>
- <tr>
- <td><strong>User Interface</strong></td>
- <td>GUI</td>
- <td>CLI + GUI</td>
- <td>GUI</td>
- <td>Touch</td>
- </tr>
- <tr>
- <td><strong>Primary Platform</strong></td>
- <td>PC</td>
- <td>Server</td>
- <td>Mac</td>
- <td>Mobile</td>
- </tr>
- </tbody>
- </table>
- </div>
- </div>
-
- <!-- TAB 2: INTERACTIVE QUIZ -->
- <div id="quiz" class="tab-content">
- <div class="quiz-header">
- <div class="score-display" id="score-display">Score: 0 / 88</div>
- <div class="btn-group">
- <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
- <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
- </div>
- </div>
-
- <div id="quiz-container">
- <!-- Quiz questions dynamically rendered here -->
- </div>
- </div>
-
-
- <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
- <div id="formulas" class="tab-content">
- <div class="card">
- <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem; gap:0.5rem;">
- <h2 style="margin:0;">Quick Reference: Operating System Generations & Core Functions Matrix</h2>
- <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
- </div>
-
- <!-- 1. OS Evolution Matrix Table -->
- <h3 style="color:var(--primary-color); margin-top:1rem;">1. Operating System Historical Evolution (1st to Modern Gen)</h3>
- <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
- <thead>
- <tr style="background:var(--primary-color); color:white;">
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Generation & Era</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Hardware Technology</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Major Innovation / Breakthrough</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Operating Paradigm</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">1st Gen (1940s–1950s)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Vacuum Tubes & Plugboards</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">No OS (Direct Hardware Coding)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Manual setup via punch cards & wire patch panels; single-user reservation.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">2nd Gen (1950s–1960s)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Transistors & Magnetic Tape</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Batch Processing Systems</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Jobs collected into batches on magnetic tape; single job in memory at a time.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">3rd Gen (1960s–1970s)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Integrated Circuits (ICs)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Multiprogramming & Time Sharing</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Multiple jobs in memory concurrently; CPU time slicing enables interactive terminals (UNIX).</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">4th Gen (1980s–Present)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Microprocessors & VLSI</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Personal Computers & GUIs</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">User-friendly graphical interfaces (Windows, macOS); distributed network connections.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Modern Gen (2000s–Present)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Multi-Core CPUs & Mobile SoCs</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color); color:var(--primary-color); font-weight:700;">Cloud, Mobile, Virtualization & AI</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Hypervisors, mobile touch OS (Android/iOS), distributed cloud microservices & AI acceleration.</td>
- </tr>
- </tbody>
- </table>
- </div>
-
- <!-- 2. Core OS Functions Matrix -->
- <div class="card" style="margin-top:1.5rem;">
- <h2>2. The 5 Core Operating System Management Functions</h2>
- <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
- 
- <div class="formula-card" style="border-left:4px solid #0284c7;">
- <span class="formula-badge" style="background:#0284c7;">1. Process Management</span>
- <div class="formula-text" style="font-size:1.05rem; color:#0284c7;">CPU Scheduling & Concurrency</div>
- <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
- <li><strong>Runs Software:</strong> Executes user applications & background services.</li>
- <li><strong>Allocates CPU:</strong> Assigns CPU burst time using scheduling algorithms.</li>
- <li><strong>Schedules Processes:</strong> Context switches between active process threads.</li>
- </ul>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #0d9488;">
- <span class="formula-badge" style="background:#0d9488;">2. Memory Management</span>
- <div class="formula-text" style="font-size:1.05rem; color:#0d9488;">RAM Allocation & Protection</div>
- <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
- <li><strong>Allocates RAM:</strong> Dynamically assigns primary memory space to active programs.</li>
- <li><strong>Protects Memory:</strong> Prevents processes from overwriting each other's memory blocks.</li>
- <li><strong>Shares Memory:</strong> Coordinates shared memory buffers for inter-process communication.</li>
- </ul>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #f59e0b;">
- <span class="formula-badge" style="background:#f59e0b;">3. File Management</span>
- <div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">Hierarchical Storage & I/O</div>
- <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
- <li><strong>Stores & Organizes:</strong> Manages directories, folder paths, and file tables (NTFS, ext4).</li>
- <li><strong>Creates & Deletes:</strong> Allocates disk blocks for new files and reclaims deleted sectors.</li>
- <li><strong>Retrieves Data:</strong> Reads byte streams accurately from secondary storage drives.</li>
- </ul>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #8b5cf6;">
- <span class="formula-badge" style="background:#8b5cf6;">4. Device Management</span>
- <div class="formula-text" style="font-size:1.05rem; color:#8b5cf6;">Peripheral Drivers & Buffering</div>
- <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
- <li><strong>Device Drivers:</strong> Communicates with hardware controllers (Keyboard, Mouse, GPU).</li>
- <li><strong>I/O Buffering:</strong> Smooths speed mismatches between fast CPU and slow peripherals.</li>
- <li><strong>Port Coordination:</strong> Manages USB, PCIe, Monitor output, and Printer spoolers.</li>
- </ul>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #dc2626;">
- <span class="formula-badge" style="background:#dc2626;">5. Security & Protection</span>
- <div class="formula-text" style="font-size:1.05rem; color:#dc2626;">Authentication & Access Control</div>
- <ul style="font-size:0.85rem; margin-left:1rem; margin-top:0.4rem;">
- <li><strong>User Accounts:</strong> Manages unique credentials, identities, and admin groups.</li>
- <li><strong>Authentication:</strong> Validates passwords, biometric scans, and MFA tokens.</li>
- <li><strong>Permissions & Crypto:</strong> Enforces read/write/execute rights and encrypts storage.</li>
- </ul>
- </div>
-
- </div>
- </div>
-
- <!-- 3. Types of OS Matrix -->
- <div class="card" style="margin-top:1.5rem;">
- <h2>3. Operating System Typology & Comparison Matrix</h2>
- <table style="width:100%; border-collapse:collapse; margin-top:0.75rem;">
- <thead>
- <tr style="background:var(--primary-color); color:white;">
- <th style="padding:0.75rem; border:1px solid var(--border-color);">OS Type</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Definition & Behavior</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Characteristics</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Real-World Example</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Batch OS</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Groups similar jobs into batches and executes sequentially without manual user intervention.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">High throughput for bulk data; zero interactive debugging during run.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">IBM OS/360, Payroll processing</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Time-Sharing OS</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Allocates rapid CPU time slices (quanta) among multiple simultaneous users.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Fast response time; multi-user interactive terminal support.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Multics, UNIX, Linux servers</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Distributed OS</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Coordinates a cluster of autonomous computers over a network to act as a single system.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Resource sharing, fault tolerance, horizontal scalability.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Apache Hadoop, Amoeba, Plan 9</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Network OS (NOS)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Provides specialized services (DNS, DHCP, Active Directory, file sharing) over a LAN.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Centralized user management, print serving, robust security.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Windows Server, Novell NetWare</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Real-Time OS (RTOS)</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Guarantees task completion within strict, deterministic time deadlines.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Hard RTOS (missed deadline = catastrophe) vs. Soft RTOS (degraded QoS).</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">VxWorks, QNX, FreeRTOS (Medical/Aerospace)</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Mobile OS</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Optimized for portable handheld touchscreens with power and thermal constraints.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Touch UI, sensors (GPS/Gyro), cellular radios, aggressive battery management.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Android (Google), iOS (Apple)</td>
- </tr>
- </tbody>
- </table>
- </div>
-
- <!-- 4. Interactive Academic Tool: Process Lifecycle & State Machine Simulator -->
- <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid var(--primary-color);">
- <div class="calc-title">🔄 Live Process State Transition & CPU Allocation Simulator</div>
- <div class="calc-desc">Explore how the Operating System's Process Management and CPU Scheduler coordinate state transitions across the 5 canonical process states (New &rarr; Ready &rarr; Running &rarr; Waiting &rarr; Terminated).</div>
- 
- <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
- <div class="calc-field">
- <label class="calc-label" for="sim-process-name">Process Identifier:</label>
- <input type="text" id="sim-process-name" class="calc-input" value="chrome.exe (PID 4120)" oninput="simulateProcessState()">
- </div>
- <div class="calc-field">
- <label class="calc-label" for="sim-event-trigger">Scheduler / Hardware Event:</label>
- <select id="sim-event-trigger" class="calc-input" onchange="simulateProcessState()" style="font-weight:600;">
- <option value="admit">1. Process Creation (Admission to RAM)</option>
- <option value="dispatch" selected>2. CPU Dispatch (Assigned to CPU Core)</option>
- <option value="interrupt">3. Timer Interrupt (Time Quantum Expired)</option>
- <option value="io_wait">4. I/O / Event Request (Disk/Network Wait)</option>
- <option value="io_done">5. I/O Completion (Disk Ready Signal)</option>
- <option value="terminate">6. Process Exit (Release All Resources)</option>
- </select>
- </div>
- </div>
-
- <div class="calc-result-box" style="margin-top:1.25rem;">
- <div class="calc-result-header">
- <span style="font-weight:700; font-size:0.95rem;">Current Active State:</span>
- <span class="calc-result-val" id="sim-state-val" style="color:var(--primary-color);">RUNNING (State Bit: Active on Core 0)</span>
- </div>
- <div class="calc-math-steps" id="sim-state-steps">
- <strong>Kernel Architectural Trace:</strong><br>
- <div class="step-line">• <strong>Previous State:</strong> READY Queue &rarr; <strong>New State:</strong> RUNNING</div>
- <div class="step-line">• <strong>OS Component:</strong> Short-Term CPU Scheduler & Dispatcher</div>
- <div class="step-line">• <strong>Action:</strong> Restores CPU registers from Process Control Block (PCB) and switches CPU to User Mode to execute program instructions.</div>
- <div class="step-line">• <strong>RAM & Resource Status:</strong> Process pages loaded in RAM; CPU Program Counter actively advancing.</div>
- </div>
- </div>
- </div>
-
- </div>
-
-
- </div>
-
- <script>
+</ul>
+<h3>Comparison of Popular Operating Systems</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Operating System</th>
+<th>Windows</th>
+<th>Linux</th>
+<th>macOS</th>
+<th>Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Developer / Origin</strong></td>
+<td>Microsoft</td>
+<td>Open Source</td>
+<td>Apple</td>
+<td>Google</td>
+</tr>
+<tr>
+<td><strong>User Interface</strong></td>
+<td>GUI</td>
+<td>CLI + GUI</td>
+<td>GUI</td>
+<td>Touch</td>
+</tr>
+<tr>
+<td><strong>Primary Platform</strong></td>
+<td>PC</td>
+<td>Server</td>
+<td>Mac</td>
+<td>Mobile</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 88</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Quiz questions dynamically rendered here -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+<div class="tab-content" id="formulas">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem; gap:0.5rem; border-bottom:1px solid var(--border-color); padding-bottom:1rem;">
+<div>
+<h2 style="margin:0; font-size:1.6rem; color:var(--primary-color);">Quick Reference &amp; Exam Summary Architecture</h2>
+<p style="margin:0.25rem 0 0 0; font-size:0.9rem; opacity:0.85;">Four-Pillar High-Yield Review for Introduction to Operating Systems &amp; Architectural Evolution</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID                          -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:1.5rem;">
+<span>🏛️</span> Pillar 1: Core Terminology &amp; Keyword Recall Grid
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">High-entropy definitions and exact keyword associations tested on standardized and departmental examinations.</p>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Term / Concept</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Category</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:45%;">Exact Academic Definition</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Exam Trigger / High-Yield Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Operating System (OS)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">System Core</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">System software acting as an intermediary/interface between user applications and computer hardware, functioning as an overall resource allocator and control program.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Hardware-software interface, Resource Manager, Control Program</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Kernel</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Core Engine</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The foundational heart of the OS that remains resident in main memory (RAM) at all times, executing in privileged supervisor mode with complete hardware control.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Always resident in RAM, Ring 0, Core OS supervisor</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">User Mode (Ring 3)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Security / CPU</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Unprivileged CPU execution state (Mode Bit = 1) where user programs and applications run with restricted memory access and no direct hardware instruction access.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Mode Bit = 1, Unprivileged, Traps on direct I/O</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Kernel Mode (Ring 0)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Security / CPU</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Privileged CPU execution state (Mode Bit = 0) where the OS kernel executes privileged instructions, accesses all memory ranges, and manages hardware controllers directly.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Mode Bit = 0, Supervisor Mode, Privileged execution</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Privileged Instruction</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Hardware</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Machine-level CPU instructions capable of modifying hardware state, clearing interrupts, or changing MMU registers, executable strictly when the CPU is in Kernel Mode.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">CLI/STI, HALT, Direct I/O; illegal in User Mode</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Process Control Block (PCB)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Process Mgmt</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The primary kernel data structure representing an active process, storing Process ID (PID), program counter, CPU register values, memory allocations, and open file tables.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Task Control Block, Manifest of active process, Context switch unit</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Context Switch</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Scheduling</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The atomic procedure of saving the CPU register state of the running process to its PCB and restoring the saved register state of another process to resume execution.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Pure computational overhead; no useful work performed during switch</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Multiprogramming</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Evolution</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Technique of holding multiple jobs simultaneously in main memory so the CPU can immediately switch to another job when the current one performs I/O, maximizing CPU utilization.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Single CPU, Maximizes CPU busy time, Overlaps CPU &amp; I/O</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Time-Sharing (Multitasking)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Evolution</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Logical extension of multiprogramming where CPU switches between active processes so rapidly via time slices (quanta) that users can interactively control applications in real time.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Time slicing, Interactive response, Multiple terminal users</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Spooling</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">I/O Mgmt</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Simultaneous Peripheral Operations On-Line: technique using high-speed magnetic disk storage as a massive buffer to queue print jobs and batch files for slow peripherals.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Disk-based queuing buffer, Printer spooler, Overlaps batch jobs</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Hard Real-Time OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Typology</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Operating system guaranteeing that critical tasks complete strictly within deterministic deadline bounds; a single missed deadline constitutes catastrophic system failure.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Deterministic deadlines, Catastrophic failure on miss, Pacemakers/Flight controls</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Soft Real-Time OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Typology</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Operating system where real-time tasks receive priority scheduling over background jobs, but a missed deadline results only in degraded Quality of Service (QoS) rather than failure.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Prioritized tasks, Degraded QoS on miss, Video streaming/Gaming</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Hypervisor (VMM)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Virtualization</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Virtual Machine Monitor software/firmware that abstracts physical hardware to instantiate and run multiple isolated guest operating systems concurrently on a single physical host.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Type 1 (Bare-metal ESXi/KVM) vs Type 2 (Hosted VirtualBox)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">System Call</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Interface</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The programmatic API interface invoked by a user application via a software interrupt (trap) to request privileged hardware or kernel services from the operating system.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Software trap, User-to-Kernel gateway, POSIX API</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS                           -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>🧮</span> Pillar 2: Formula &amp; Calculation Reference Cards
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Mathematical metrics, operational ratios, and performance equations with plain English verbalizations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+<!-- Formula 1: CPU Utilization -->
+<div class="formula-card" style="border-left:4px solid #0284c7;">
+<span class="formula-badge" style="background:#0284c7;">CPU Efficiency</span>
+<div class="formula-text" style="font-size:1.15rem; color:#0284c7;">
+						CPU Utilization (%) = ( T<sub>busy</sub> / T<sub>total</sub> ) × 100%
+					</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>T<sub>busy</sub></code>: Total duration CPU is actively executing user code or kernel tasks.<br/>
+						• <code>T<sub>total</sub></code>: Total wall-clock elapsed observation period (T<sub>busy</sub> + T<sub>idle</sub>).<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The proportion of total elapsed operating time during which the processor is actively computing instructions rather than idling in a no-operation state."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"CPU Utilization is the percentage of total elapsed time the processor is busy executing active work versus sitting idle."</strong>
+</div>
+</div></div>
+<!-- Formula 2: System Throughput -->
+<div class="formula-card" style="border-left:4px solid #0d9488;">
+<span class="formula-badge" style="background:#0d9488;">System Performance</span>
+<div class="formula-text" style="font-size:1.15rem; color:#0d9488;">
+						Throughput (S) = N<sub>completed</sub> / Δt
+					</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>N<sub>completed</sub></code>: Total number of processes that successfully finish execution.<br/>
+						• <code>Δt</code>: Time interval over which the processes completed (seconds or hours).<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The rate of process completion, defined as the count of fully terminated jobs divided by the total measurement time frame."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Throughput is the number of completed process jobs divided by elapsed time interval."</strong>
+</div>
+</div></div>
+<!-- Formula 3: Turnaround Time -->
+<div class="formula-card" style="border-left:4px solid #f59e0b;">
+<span class="formula-badge" style="background:#f59e0b;">Process Scheduling</span>
+<div class="formula-text" style="font-size:1.15rem; color:#f59e0b;">
+						T<sub>turnaround</sub> = T<sub>completion</sub> - T<sub>submission</sub>
+</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>T<sub>completion</sub></code>: Exact clock timestamp when the process terminates.<br/>
+						• <code>T<sub>submission</sub></code>: Timestamp when the process first entered the Ready/Job queue.<br/>
+						• <code>T<sub>turnaround</sub></code> = T<sub>wait</sub> + T<sub>burst</sub> + T<sub>I/O</sub>.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The total elapsed lifespan of a job in the operating system, spanning from the instant of arrival to final resource deallocation."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Turnaround time is the total duration from job submission until complete execution finishes."</strong>
+</div>
+</div></div>
+<!-- Formula 4: Waiting Time -->
+<div class="formula-card" style="border-left:4px solid #8b5cf6;">
+<span class="formula-badge" style="background:#8b5cf6;">Scheduling Latency</span>
+<div class="formula-text" style="font-size:1.15rem; color:#8b5cf6;">
+						T<sub>wait</sub> = T<sub>turnaround</sub> - T<sub>burst</sub>
+</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>T<sub>turnaround</sub></code>: Total lifespan of the process.<br/>
+						• <code>T<sub>burst</sub></code>: Actual CPU execution service time demanded by the process.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The cumulative duration a process spent sitting passively in the Ready Queue waiting to be allocated the CPU."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Waiting time is the total time a process spends waiting in the ready queue for CPU allocation."</strong>
+</div>
+</div></div>
+<!-- Formula 5: Response Time -->
+<div class="formula-card" style="border-left:4px solid #ec4899;">
+<span class="formula-badge" style="background:#ec4899;">Interactive Latency</span>
+<div class="formula-text" style="font-size:1.15rem; color:#ec4899;">
+						T<sub>response</sub> = T<sub>first_output</sub> - T<sub>submission</sub>
+</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>T<sub>first_output</sub></code>: Timestamp when the system yields its very first response to the user.<br/>
+						• <code>T<sub>submission</sub></code>: Timestamp when the user triggered or submitted the command.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The delay between user request submission and the initial visible feedback or response, the core metric for time-sharing systems."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Response time is the duration from request submission until the first visual feedback or output is produced."</strong>
+</div>
+</div></div>
+<!-- Formula 6: Context Switch Overhead -->
+<div class="formula-card" style="border-left:4px solid #dc2626;">
+<span class="formula-badge" style="background:#dc2626;">Time Quantum Trade-off</span>
+<div class="formula-text" style="font-size:1.15rem; color:#dc2626;">
+						Overhead Ratio (η) = S / ( q + S )
+					</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>S</code>: Time required for hardware context switch (saving/restoring PCB).<br/>
+						• <code>q</code>: Time quantum allotted to each process in Round-Robin scheduling.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The fraction of CPU capacity wasted on context switches: as quantum q becomes very small, switching overhead approaches 100%; as q becomes large, scheduling degrades to FCFS."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The context switch overhead ratio eta equals context switch time S divided by the sum of time quantum q and context switch time S."</strong>
+</div>
+</div></div>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES                                   -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>📊</span> Pillar 3: Comparative Analysis Matrices
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Side-by-side matrices contrasting OS typologies, modern platforms, concurrency paradigms, and historical generations.</p>
+<!-- Matrix 1: 9-Typology Master Matrix -->
+<h4 style="color:var(--accent-color); margin-top:1.25rem; margin-bottom:0.5rem;">A. 9-Typology Master Operating System Classification Matrix</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">OS Typology</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:25%;">Primary Design Objective</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:25%;">Scheduling &amp; Execution Model</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Key Constraints &amp; Trade-Offs</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Canonical Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1. Batch OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Maximize batch throughput and automate sequential job queues.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Non-interactive; jobs grouped by similar resource requirements into tape/disk batches.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Zero user interactivity; debugging requires offline memory dumps.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">IBM OS/360, Payroll batch engines</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">2. Time-Sharing OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Minimize response time and enable simultaneous interactive multi-user sessions.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Round-Robin time slicing (quanta); rapid preemption among concurrent users.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Frequent context switch overhead; complex memory swapping requirements.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">UNIX, Multics, Linux multi-user</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">3. Distributed OS (DOS)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Present a loose cluster of independent networked nodes as a single unified system.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Distributed process scheduling, RPC message passing, shared global file space.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Network latency dependencies; distributed deadlock detection complexity.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Amoeba, Plan 9, Apache Hadoop</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">4. Network OS (NOS)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Provide centralized network services, security policies, and resource sharing across a LAN.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Client-server architecture; manages directory services, DHCP, DNS, and access control.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Each client node retains its own independent local operating system.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Windows Server, Novell NetWare</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">5. Hard Real-Time OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Guarantee deterministic execution completion within strict physical deadlines.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Priority-driven preemptive scheduling with bounded worst-case interrupt latency.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Missing a single deadline causes total, fatal system failure; no virtual memory swapping.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">VxWorks, QNX, RTLinux (Flight controls)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">6. Soft Real-Time OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Ensure time-critical multimedia/interactive tasks receive preferential scheduling.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Priority scheduling where critical tasks retain CPU over normal background threads.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Missed deadlines cause degraded Quality of Service (QoS), dropped frames, not death.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Commercial Linux, Android media stack</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">7. Embedded OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Operate dedicated microcontrollers with minimal memory footprint and extreme power efficiency.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Stripped-down microkernel or monolithic kernel tailored to fixed dedicated hardware ROM.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Extremely constrained RAM/ROM (kilobytes); limited or no graphical user interface.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">FreeRTOS, TinyOS, Embedded Linux</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">8. Desktop / Client OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Deliver responsive, rich graphical user experience for single-user personal computing.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Dynamic priority multi-level feedback queue favoring foreground interactive applications.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Broad hardware device driver compatibility required; large storage/memory footprint.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Windows 11, macOS Sonoma, Ubuntu Desktop</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">9. Server OS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Maximize network I/O throughput, concurrent request handling, and long-term uptime.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Multi-threaded worker pools, NUMA-aware memory management, headless CLI operation.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Sacrifices interactive GUI responsiveness in favor of background daemon performance.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Red Hat Enterprise Linux (RHEL), Windows Server</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: Modern OS Comparative Matrix -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">B. Modern Operating System Platforms Deep Matrix</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Feature / Dimension</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Microsoft Windows</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">GNU / Linux</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Apple macOS</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Google Android</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Developer / Origin</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Microsoft Corporation</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Linus Torvalds &amp; Open Source</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Apple Inc.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Google / Open Handset Alliance</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Kernel Architecture</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Hybrid Kernel (NTOSKRNL.EXE)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Monolithic + Loadable Modules (LKM)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Hybrid (XNU: Mach + BSD)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Modified Monolithic Linux Kernel</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Source License Model</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Proprietary / Closed Source</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Open Source (GNU GPL v2)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Proprietary UI (Open Darwin Core)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Open Source (AOSP) + Google Services</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Primary User Interface</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Graphical (Explorer GUI) + CLI (PowerShell)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">CLI (Bash/Zsh) + Modular GUI (GNOME/KDE)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Graphical (Aqua GUI) + Unix CLI (Terminal)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Touchscreen (Material You / Gesture UI)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Default File System</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">NTFS / ReFS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">ext4, Btrfs, XFS</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">APFS (Apple File System)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">ext4, F2FS (Flash-Friendly FS)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Primary Target Market</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Consumer PCs, Enterprise Desktops &amp; Servers</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Web Servers, Supercomputers, Cloud, IoT</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Mac Laptops, Workstations, Creative Media</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Smartphones, Tablets, Smart TVs, Wearables</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: Concurrency Paradigms Matrix -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">C. Concurrency &amp; Parallelism Execution Paradigms</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Paradigm</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Required CPU Hardware</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Switching Trigger</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Core Optimization Objective</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Key Distinction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Multiprogramming</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Single CPU Core (or more)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">I/O blocking wait or job yield</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Maximize CPU Utilization</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Keeps CPU busy by switching during I/O delays; no time-slice guarantee.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Multitasking (Time-Sharing)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Single CPU Core (or more)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Periodic Timer Interrupt (Quantum expiration)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Minimize User Response Time</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Preempts active process on timer expiry to give illusion of simultaneous execution.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Multiprocessing</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">Multiple Physical CPUs / Cores</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">True simultaneous hardware clock execution</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Maximize Absolute Processing Speed</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Executes multiple distinct machine instructions at the exact same physical instant.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Multithreading</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Single or Multi-Core CPU</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Thread scheduler / synchronization locks</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Improve Intra-Process Responsiveness</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Multiple lightweight threads of execution share the identical process address space and PCB.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES                                -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>⚠️</span> Pillar 4: Common Exam Pitfalls &amp; Fallacies
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Crucial theoretical traps, conceptual confusions, and false assumptions frequently tested on prelim examinations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
+<div class="card" style="border-left:4px solid #ef4444; margin-bottom:0; background:rgba(239, 68, 68, 0.04);">
+<div style="font-weight:700; color:#ef4444; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 1: Multiprogramming ≠ Multiprocessing
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Assuming multiprogramming requires multiple CPU processors.<br/>
+<strong>The Truth:</strong> Multiprogramming requires only <strong>one single CPU</strong>. It achieves concurrency by holding multiple jobs in RAM and switching CPU control whenever the current job blocks on I/O. Multiprocessing strictly mandates <strong>two or more physical CPU cores</strong> running instructions in true physical parallel.
+					</p>
+</div>
+<div class="card" style="border-left:4px solid #f59e0b; margin-bottom:0; background:rgba(245, 158, 11, 0.04);">
+<div style="font-weight:700; color:#f59e0b; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 2: Hard RTOS Does NOT Mean "Super-Fast"
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Believing a Hard Real-Time OS is simply a standard OS tuned to have faster peak throughput.<br/>
+<strong>The Truth:</strong> Hard RTOS is defined by <strong>predictable determinism</strong>, not raw benchmark speed. It guarantees a bounded worst-case response time. A missed deadline in Hard RTOS constitutes catastrophic system failure (e.g. flight controls, pacemakers).
+					</p>
+</div>
+<div class="card" style="border-left:4px solid #3b82f6; margin-bottom:0; background:rgba(59, 130, 246, 0.04);">
+<div style="font-weight:700; color:#3b82f6; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 3: Spooling vs Buffering Storage Media
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Confusing the memory boundary of Spooling vs Buffering.<br/>
+<strong>The Truth:</strong> <strong>Buffering</strong> holds data in <strong>main memory (RAM)</strong> to bridge speed mismatches within a single device transfer. <strong>Spooling</strong> buffers entire print/batch jobs on <strong>secondary storage (Magnetic Disk / SSD)</strong>, allowing overlapping of multiple independent jobs across different processes.
+					</p>
+</div>
+<div class="card" style="border-left:4px solid #8b5cf6; margin-bottom:0; background:rgba(139, 92, 246, 0.04);">
+<div style="font-weight:700; color:#8b5cf6; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 4: Context Switch Is Pure Computational Waste
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Believing that having the smallest possible time quantum always improves system throughput.<br/>
+<strong>The Truth:</strong> The CPU performs <strong>zero user work</strong> during a context switch. Setting time quantum <code>q</code> too small causes the CPU to spend nearly 100% of its clock cycles saving and loading PCB registers (thrashing), destroying system throughput.
+					</p>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- INTERACTIVE ACADEMIC SIMULATOR: PROCESS STATE MACHINE                     -->
+<!-- ========================================================================= -->
+<div class="calc-card" style="margin-top:2rem; border-left:4px solid var(--primary-color);">
+<div class="calc-title">🔄 Live Process State Transition &amp; CPU Allocation Simulator</div>
+<div class="calc-desc">Explore how the Operating System's Process Management and CPU Scheduler coordinate state transitions across the 5 canonical process states (New → Ready → Running → Waiting → Terminated).</div>
+<div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+<div class="calc-field">
+<label class="calc-label" for="sim-process-name">Process Identifier:</label>
+<input class="calc-input" id="sim-process-name" oninput="simulateProcessState()" type="text" value="chrome.exe (PID 4120)"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="sim-event-trigger">Scheduler / Hardware Event:</label>
+<select class="calc-input" id="sim-event-trigger" onchange="simulateProcessState()" style="font-weight:600;">
+<option value="admit">1. Process Creation (Admission to RAM)</option>
+<option selected="" value="dispatch">2. CPU Dispatch (Assigned to CPU Core)</option>
+<option value="interrupt">3. Timer Interrupt (Time Quantum Expired)</option>
+<option value="io_wait">4. I/O / Event Request (Disk/Network Wait)</option>
+<option value="io_done">5. I/O Completion (Disk Ready Signal)</option>
+<option value="terminate">6. Process Exit (Release All Resources)</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box" style="margin-top:1.25rem;">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Current Active State:</span>
+<span class="calc-result-val" id="sim-state-val" style="color:var(--primary-color);">RUNNING (State Bit: Active on Core 0)</span>
+</div>
+<div class="calc-math-steps" id="sim-state-steps">
+<strong>Kernel Architectural Trace:</strong><br/>
+<div class="step-line">• <strong>Previous State:</strong> READY Queue → <strong>New State:</strong> RUNNING</div>
+<div class="step-line">• <strong>OS Component:</strong> Short-Term CPU Scheduler &amp; Dispatcher</div>
+<div class="step-line">• <strong>Action:</strong> Restores CPU registers from Process Control Block (PCB) and switches CPU to User Mode to execute program instructions.</div>
+<div class="step-line">• <strong>RAM &amp; Resource Status:</strong> Process pages loaded in RAM; CPU Program Counter actively advancing.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
  // ==========================================
  // Process State Machine Simulation Logic
  // ==========================================
@@ -1746,6 +2047,5 @@
  simulateProcessState();
  });
  </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

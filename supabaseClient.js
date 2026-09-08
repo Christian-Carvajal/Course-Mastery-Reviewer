@@ -11,8 +11,8 @@
     }
 
     // Default Project Credentials
-    const DEFAULT_SUPABASE_URL = 'https://YOUR_SUPABASE_PROJECT_ID.supabase.co';
-    const DEFAULT_SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
+    const DEFAULT_SUPABASE_URL = 'https://fqwyvxzczfcxbfhrrqrw.supabase.co';
+    const DEFAULT_SUPABASE_KEY = 'sb_publishable_pbVqrkYlkg651zOWEW_1Dw_7RApgx0h';
 
     // Helper: Safe LocalStorage Access
     function getStored(key) {

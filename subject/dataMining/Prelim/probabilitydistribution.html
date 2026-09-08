@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,583 +18,917 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Probability Distributions | University Study Guide</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Probability Distributions | University Study Guide</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<meta content="#0d9488" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Data Mining</h1>
-        <p>Probability Distributions — University Course Study Guide</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Probability Distributions</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-            <button class="nav-btn" onclick="window.openDistributionsExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-            
-            <div class="card">
-                <h2>PART 1: Foundations: What a Distribution Is</h2>
-                <p>Before studying specific distributions, we need the shared language: notation, mean, variance, standard deviation, and the difference between discrete and continuous data.</p>
-                
-                <h3 id="what-is-distribution">1.1 What Is a Probability Distribution?</h3>
-                <div class="definition-card"><span class="def-badge">Definition</span><p>A probability distribution shows the possible values a variable can take and how frequently they occur.</p></div>
-                
-                <h3>Notation You Will Use Everywhere</h3>
-                <ul>
-                    <li><strong>Uppercase Y:</strong> the actual outcome of an event (the random variable).</li>
-                    <li><strong>Lowercase y:</strong> one specific possible outcome.</li>
-                    <li><strong>P(Y=y) or simply P(y):</strong> the probability that the outcome equals a particular value y. This is called the probability function.</li>
-                </ul>
-
-                <div class="example-card"><span class="example-badge">Example</span><p>Let Y be the number of red marbles drawn from a bag. Then the probability of drawing exactly five red marbles is written P(Y=5), or just P(5).</p></div>
-
-                <h3>How Probabilities Are Constructed</h3>
-                <p>With a finite number of outcomes, we record the frequency of each unique value and divide by the total number of elements in the sample space.</p>
-                <p>With infinitely many outcomes, this is impossible—there are too many values to count.</p>
-                <p><em>Example:</em> the time it takes for code to run. Any measurement (seconds, milliseconds, nanoseconds) can always be split in half for more precision, so no smallest unit exists. This is why continuous distributions need different tools, which we cover in Part 3.</p>
-
-                <h3 id="mean-and-variance">1.2 The Two Defining Characteristics: Mean and Variance</h3>
-                <p>Every distribution—finite or infinite—is defined using two characteristics:</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Characteristic</th>
-                            <th>Meaning</th>
-                            <th>Population symbol</th>
-                            <th>Sample symbol</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mean</td>
-                            <td>The average value of the distribution</td>
-                            <td>&mu; (mu)</td>
-                            <td>x-bar</td>
-                        </tr>
-                        <tr>
-                            <td>Variance</td>
-                            <td>How spread out the data is—measured by how far values sit from the mean</td>
-                            <td>&sigma;&sup2; (sigma-squared)</td>
-                            <td>s&sup2;</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>POPULATION VS SAMPLE</h3>
-                <p>Population data = all the data. Sample data = just a part of it. The same data set can be both: surveying one whole department gives population data for the department, but only a sample of the whole company. Sample data uses different notation (x-bar and s&sup2;).</p>
-
-                <h3>Standard Deviation: Making Variance Interpretable</h3>
-                <p>Variance has one flaw: it is measured in squared units (seconds&sup2;, kg&sup2;, and so on), which usually has no direct interpretation. The fix is a third characteristic:</p>
-                <div class="definition-card"><span class="def-badge">Definition</span><p>Standard deviation is the positive square root of variance. Symbols: &sigma; for a population, s for a sample. It is measured in the same units as the mean, so we can interpret it directly—which is why it is often preferred.</p></div>
-                <p>A key idea used throughout the course: any value between &mu;-&sigma; and &mu;+&sigma; falls within one standard deviation of the mean. The more congested the middle of the distribution, the more data falls inside that interval. The less data inside it, the more dispersed the data is.</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">σ² = E[(Y - μ)²] = E(Y²) - μ²</span>
-                    <div class="formula-explain">Variance (σ²) = Expected value of squared deviations from the mean (μ) = Expected value of Y² minus squared mean</div>
-                </div>
-                <p>The constant relationship between mean and variance, valid for any distribution. Specific distributions give us much more precise shortcut formulas.</p>
-
-                <h3 id="discrete-vs-continuous">1.3 Discrete vs Continuous: The Big Split</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Discrete</th>
-                            <th>Continuous</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Outcomes</td>
-                            <td>Finitely many distinct outcomes</td>
-                            <td>Infinitely many consecutive outcomes</td>
-                        </tr>
-                        <tr>
-                            <td>Examples</td>
-                            <td>Rolling a die, picking a card</td>
-                            <td>Time and distance in track and field</td>
-                        </tr>
-                        <tr>
-                            <td>Represented by</td>
-                            <td>Table, graph, or formula</td>
-                            <td>Graph of a curve (PDF)—a table is impossible</td>
-                        </tr>
-                        <tr>
-                            <td>Graph looks like</td>
-                            <td>Separate, unconnected bars</td>
-                            <td>A smooth curve</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>Defining a Distribution: Standard Notation</h3>
-                <p>We write the variable name, then the tilde sign (~), then a capital letter for the distribution type, and finally the key characteristics in parentheses (usually mean and variance, but this varies by type).</p>
-                <div class="example-card"><span class="example-badge">Example</span><p>X ~ N(&mu;, &sigma;&sup2;) reads as: "Variable X follows a normal distribution with mean &mu; and variance &sigma;&sup2;."</p></div>
-
-                <h3>Working With Discrete Distributions</h3>
-                <ul>
-                    <li>Every unique outcome must have a probability assigned to it (think of a dartboard—each region's probability depends on how big its interval is).</li>
-                    <li>To find the probability of an interval, simply add up the probabilities of all values inside it. Example: P(three spades or fewer) = P(0) + P(1) + P(2) + P(3).</li>
-                    <li>A useful peculiarity of discrete events: P(Y &le; y) = P(Y &lt; y+1). "Three spades or fewer" is exactly the same as "fewer than four spades."</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>PART 2: Discrete Distributions</h2>
-                <p>Four key distributions for events with countable outcomes: Uniform, Bernoulli, Binomial, and Poisson.</p>
-
-                <h3 id="uniform-distribution">2.1 Uniform Distribution: All Outcomes Equally Likely</h3>
-                <p><strong>NOTATION:</strong> X ~ U(a,b)—for example, X ~ U(3,7) reads "X follows a discrete uniform distribution ranging from 3 to 7."</p>
-                <p><strong>When it applies:</strong> events where all outcomes have equal probability (also called equiprobable outcomes).</p>
-                <div class="example-card"><span class="example-badge">Examples</span><p>Rolling a standard six-sided die—every value from 1 to 6 has probability 1/6, so the graph is six equally tall bars. Also: many gambling events, or choosing between three identical chocolate bars a friend offers you.</p></div>
-                <p><strong>KEY LIMITATION:</strong> Because all outcomes are equally likely, the mean and variance are uninterpretable and have no predictive power. For a die, the mean is 3.5 and the variance is 105/36—but neither value tells you anything useful about what will happen next.</p>
-
-                <h3 id="bernoulli-distribution">2.2 Bernoulli Distribution: One Trial, Two Outcomes</h3>
-                <p><strong>NOTATION:</strong> X ~ Bern(p)—"X follows a Bernoulli distribution with probability of success equal to p."</p>
-                <p><strong>When it applies:</strong> any event with one trial and exactly two possible outcomes—a coin flip, a single true/false quiz question, a two-party vote. Any two-outcome event can be transformed into a Bernoulli event by assigning one outcome to be "true" and the other "false," even if the outcomes are not equally likely.</p>
-                <p><strong>Conventions:</strong></p>
-                <ul>
-                    <li>The graph is just two bars: one rising to p, the other to 1-p.</li>
-                    <li>We usually denote the higher probability as p, and assign the value 1 to that favored outcome. That way the expected value expresses the likelihood of the favored event.</li>
-                    <li>Expected Value: E(X) = p</li>
-                    <li>Variance: &sigma;&sup2; = p(1-p)</li>
-                </ul>
-                <div class="example-card"><span class="example-badge">Worked Example: THE UNFAIR COIN</span><p>A weighted coin lands on tails 60% of the time. Assign tails = 1, so p = 0.6. Expected value: E(X) = 0.6. Variance: 0.6 &times; 0.4 = 0.24.</p></div>
-
-                <h3 id="binomial-distribution">2.3 Binomial Distribution: Repeating the Bernoulli Trial</h3>
-                <p><strong>NOTATION:</strong> X ~ B(n,p)—for example, B(10,0.6) reads "X follows a binomial distribution with 10 trials and a 0.6 likelihood of success on each individual trial." A Bernoulli distribution is simply a binomial with a single trial: Bern(p) = B(1,p).</p>
-                <p><strong>The core idea:</strong> binomial events are a sequence of identical Bernoulli events.</p>
-                <p><strong>INTUITION:</strong> A surprise pop quiz has 10 true/false questions you haven't prepared for. Guessing one question is a Bernoulli event. Guessing the entire quiz is a binomial event. The Bernoulli expected value tells you which outcome to expect on a single trial; the binomial expected value tells you how many times to expect that outcome over all trials.</p>
-                <p>The graph: for n trials, there are n+1 bars—one for each possible count from 0 to n. (Two flips of a coin &rarr; three bars: 0, 1, or 2 tails.)</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(y) = C(n, y) · p<sup>y</sup> · (1 - p)<sup>n - y</sup></span>
-                    <div class="formula-explain">
-                        Binomial Probability of y successes in n trials:<br>
-                        • <strong>C(n, y)</strong> = Combinations (ways to choose y successes out of n trials)<br>
-                        • <strong>p<sup>y</sup></strong> = Probability of success raised to power of successes<br>
+<header class="app-header">
+<h1>Data Mining</h1>
+<p>Probability Distributions — University Course Study Guide</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Probability Distributions</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+<button class="nav-btn" onclick="window.openDistributionsExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2>PART 1: Foundations: What a Distribution Is</h2>
+<p>Before studying specific distributions, we need the shared language: notation, mean, variance, standard deviation, and the difference between discrete and continuous data.</p>
+<h3 id="what-is-distribution">1.1 What Is a Probability Distribution?</h3>
+<div class="definition-card"><span class="def-badge">Definition</span><p>A probability distribution shows the possible values a variable can take and how frequently they occur.</p></div>
+<h3>Notation You Will Use Everywhere</h3>
+<ul>
+<li><strong>Uppercase Y:</strong> the actual outcome of an event (the random variable).</li>
+<li><strong>Lowercase y:</strong> one specific possible outcome.</li>
+<li><strong>P(Y=y) or simply P(y):</strong> the probability that the outcome equals a particular value y. This is called the probability function.</li>
+</ul>
+<div class="example-card"><span class="example-badge">Example</span><p>Let Y be the number of red marbles drawn from a bag. Then the probability of drawing exactly five red marbles is written P(Y=5), or just P(5).</p></div>
+<h3>How Probabilities Are Constructed</h3>
+<p>With a finite number of outcomes, we record the frequency of each unique value and divide by the total number of elements in the sample space.</p>
+<p>With infinitely many outcomes, this is impossible—there are too many values to count.</p>
+<p><em>Example:</em> the time it takes for code to run. Any measurement (seconds, milliseconds, nanoseconds) can always be split in half for more precision, so no smallest unit exists. This is why continuous distributions need different tools, which we cover in Part 3.</p>
+<h3 id="mean-and-variance">1.2 The Two Defining Characteristics: Mean and Variance</h3>
+<p>Every distribution—finite or infinite—is defined using two characteristics:</p>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Characteristic</th>
+<th>Meaning</th>
+<th>Population symbol</th>
+<th>Sample symbol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mean</td>
+<td>The average value of the distribution</td>
+<td>μ (mu)</td>
+<td>x-bar</td>
+</tr>
+<tr>
+<td>Variance</td>
+<td>How spread out the data is—measured by how far values sit from the mean</td>
+<td>σ² (sigma-squared)</td>
+<td>s²</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>POPULATION VS SAMPLE</h3>
+<p>Population data = all the data. Sample data = just a part of it. The same data set can be both: surveying one whole department gives population data for the department, but only a sample of the whole company. Sample data uses different notation (x-bar and s²).</p>
+<h3>Standard Deviation: Making Variance Interpretable</h3>
+<p>Variance has one flaw: it is measured in squared units (seconds², kg², and so on), which usually has no direct interpretation. The fix is a third characteristic:</p>
+<div class="definition-card"><span class="def-badge">Definition</span><p>Standard deviation is the positive square root of variance. Symbols: σ for a population, s for a sample. It is measured in the same units as the mean, so we can interpret it directly—which is why it is often preferred.</p></div>
+<p>A key idea used throughout the course: any value between μ-σ and μ+σ falls within one standard deviation of the mean. The more congested the middle of the distribution, the more data falls inside that interval. The less data inside it, the more dispersed the data is.</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">σ² = E[(Y - μ)²] = E(Y²) - μ²</span>
+<div class="formula-explain">Variance (σ²) = Expected value of squared deviations from the mean (μ) = Expected value of Y² minus squared mean</div>
+</div>
+<p>The constant relationship between mean and variance, valid for any distribution. Specific distributions give us much more precise shortcut formulas.</p>
+<h3 id="discrete-vs-continuous">1.3 Discrete vs Continuous: The Big Split</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Discrete</th>
+<th>Continuous</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Outcomes</td>
+<td>Finitely many distinct outcomes</td>
+<td>Infinitely many consecutive outcomes</td>
+</tr>
+<tr>
+<td>Examples</td>
+<td>Rolling a die, picking a card</td>
+<td>Time and distance in track and field</td>
+</tr>
+<tr>
+<td>Represented by</td>
+<td>Table, graph, or formula</td>
+<td>Graph of a curve (PDF)—a table is impossible</td>
+</tr>
+<tr>
+<td>Graph looks like</td>
+<td>Separate, unconnected bars</td>
+<td>A smooth curve</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Defining a Distribution: Standard Notation</h3>
+<p>We write the variable name, then the tilde sign (~), then a capital letter for the distribution type, and finally the key characteristics in parentheses (usually mean and variance, but this varies by type).</p>
+<div class="example-card"><span class="example-badge">Example</span><p>X ~ N(μ, σ²) reads as: "Variable X follows a normal distribution with mean μ and variance σ²."</p></div>
+<h3>Working With Discrete Distributions</h3>
+<ul>
+<li>Every unique outcome must have a probability assigned to it (think of a dartboard—each region's probability depends on how big its interval is).</li>
+<li>To find the probability of an interval, simply add up the probabilities of all values inside it. Example: P(three spades or fewer) = P(0) + P(1) + P(2) + P(3).</li>
+<li>A useful peculiarity of discrete events: P(Y ≤ y) = P(Y &lt; y+1). "Three spades or fewer" is exactly the same as "fewer than four spades."</li>
+</ul>
+</div>
+<div class="card">
+<h2>PART 2: Discrete Distributions</h2>
+<p>Four key distributions for events with countable outcomes: Uniform, Bernoulli, Binomial, and Poisson.</p>
+<h3 id="uniform-distribution">2.1 Uniform Distribution: All Outcomes Equally Likely</h3>
+<p><strong>NOTATION:</strong> X ~ U(a,b)—for example, X ~ U(3,7) reads "X follows a discrete uniform distribution ranging from 3 to 7."</p>
+<p><strong>When it applies:</strong> events where all outcomes have equal probability (also called equiprobable outcomes).</p>
+<div class="example-card"><span class="example-badge">Examples</span><p>Rolling a standard six-sided die—every value from 1 to 6 has probability 1/6, so the graph is six equally tall bars. Also: many gambling events, or choosing between three identical chocolate bars a friend offers you.</p></div>
+<p><strong>KEY LIMITATION:</strong> Because all outcomes are equally likely, the mean and variance are uninterpretable and have no predictive power. For a die, the mean is 3.5 and the variance is 105/36—but neither value tells you anything useful about what will happen next.</p>
+<h3 id="bernoulli-distribution">2.2 Bernoulli Distribution: One Trial, Two Outcomes</h3>
+<p><strong>NOTATION:</strong> X ~ Bern(p)—"X follows a Bernoulli distribution with probability of success equal to p."</p>
+<p><strong>When it applies:</strong> any event with one trial and exactly two possible outcomes—a coin flip, a single true/false quiz question, a two-party vote. Any two-outcome event can be transformed into a Bernoulli event by assigning one outcome to be "true" and the other "false," even if the outcomes are not equally likely.</p>
+<p><strong>Conventions:</strong></p>
+<ul>
+<li>The graph is just two bars: one rising to p, the other to 1-p.</li>
+<li>We usually denote the higher probability as p, and assign the value 1 to that favored outcome. That way the expected value expresses the likelihood of the favored event.</li>
+<li>Expected Value: E(X) = p</li>
+<li>Variance: σ² = p(1-p)</li>
+</ul>
+<div class="example-card"><span class="example-badge">Worked Example: THE UNFAIR COIN</span><p>A weighted coin lands on tails 60% of the time. Assign tails = 1, so p = 0.6. Expected value: E(X) = 0.6. Variance: 0.6 × 0.4 = 0.24.</p></div>
+<h3 id="binomial-distribution">2.3 Binomial Distribution: Repeating the Bernoulli Trial</h3>
+<p><strong>NOTATION:</strong> X ~ B(n,p)—for example, B(10,0.6) reads "X follows a binomial distribution with 10 trials and a 0.6 likelihood of success on each individual trial." A Bernoulli distribution is simply a binomial with a single trial: Bern(p) = B(1,p).</p>
+<p><strong>The core idea:</strong> binomial events are a sequence of identical Bernoulli events.</p>
+<p><strong>INTUITION:</strong> A surprise pop quiz has 10 true/false questions you haven't prepared for. Guessing one question is a Bernoulli event. Guessing the entire quiz is a binomial event. The Bernoulli expected value tells you which outcome to expect on a single trial; the binomial expected value tells you how many times to expect that outcome over all trials.</p>
+<p>The graph: for n trials, there are n+1 bars—one for each possible count from 0 to n. (Two flips of a coin → three bars: 0, 1, or 2 tails.)</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(y) = C(n, y) · p<sup>y</sup> · (1 - p)<sup>n - y</sup></span>
+<div class="formula-explain">
+                        Binomial Probability of y successes in n trials:<br/>
+                        • <strong>C(n, y)</strong> = Combinations (ways to choose y successes out of n trials)<br/>
+                        • <strong>p<sup>y</sup></strong> = Probability of success raised to power of successes<br/>
                         • <strong>(1 - p)<sup>n - y</sup></strong> = Probability of failure raised to power of failures
                     </div>
-                </div>
-                <p>C(n,y) = the number of combinations of picking y elements out of n. This is why combinatorics is a fundamental part of probability.</p>
-                <div class="example-card"><span class="example-badge">Worked Example: THE STOCK PRICE</span><p>You own one General Motors stock. Historically, there is a 60% chance the price goes up on any given day and 40% it drops. What is the probability of exactly 3 increases in a 5-day work week?</p></div>
-                <p>Plug in y = 3, n = 5, p = 0.6: P(3) = C(5,3) &times; 0.6&sup3; &times; 0.4&sup2; = 10 &times; 0.216 &times; 0.16 = 0.3456 (34.56%).</p>
-                <p>E(X) = n &middot; p | Variance: &sigma;&sup2; = n &middot; p &middot; (1-p)</p>
-
-                <h3 id="poisson-distribution">2.4 Poisson Distribution: How Often in an Interval?</h3>
-                <p><strong>NOTATION:</strong> Y ~ Po(&lambda;)—"Y follows a Poisson distribution with lambda equal to 4." Lambda (&lambda;) is the single parameter.</p>
-                <p><strong>When it applies:</strong> when we know how often an event occurs on average over a specific interval of time or distance, and we want the likelihood of a particular frequency. It answers: "how unusual is this frequency for this interval?"</p>
-                <div class="example-card"><span class="example-badge">Examples</span><p>A firefly lights up 3 times per 10 seconds on average—how likely is it to light up 8 times in 20 seconds? Or: a basketball player averages 35 points per game—how likely is he to score exactly 12 points in the first quarter?</p></div>
-                <p>The graph: starts from zero (an event can't happen a negative number of times) but has no upper cap on how many times it could occur.</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(y) = (λ<sup>y</sup> · e<sup>-λ</sup>) / y!</span>
-                    <div class="formula-explain">
-                        Poisson Probability of y occurrences in an interval:<br>
-                        • <strong>λ (lambda)</strong> = Average rate of occurrence per interval<br>
-                        • <strong>e</strong> = Euler's constant (≈ 2.71828)<br>
+</div>
+<p>C(n,y) = the number of combinations of picking y elements out of n. This is why combinatorics is a fundamental part of probability.</p>
+<div class="example-card"><span class="example-badge">Worked Example: THE STOCK PRICE</span><p>You own one General Motors stock. Historically, there is a 60% chance the price goes up on any given day and 40% it drops. What is the probability of exactly 3 increases in a 5-day work week?</p></div>
+<p>Plug in y = 3, n = 5, p = 0.6: P(3) = C(5,3) × 0.6³ × 0.4² = 10 × 0.216 × 0.16 = 0.3456 (34.56%).</p>
+<p>E(X) = n · p | Variance: σ² = n · p · (1-p)</p>
+<h3 id="poisson-distribution">2.4 Poisson Distribution: How Often in an Interval?</h3>
+<p><strong>NOTATION:</strong> Y ~ Po(λ)—"Y follows a Poisson distribution with lambda equal to 4." Lambda (λ) is the single parameter.</p>
+<p><strong>When it applies:</strong> when we know how often an event occurs on average over a specific interval of time or distance, and we want the likelihood of a particular frequency. It answers: "how unusual is this frequency for this interval?"</p>
+<div class="example-card"><span class="example-badge">Examples</span><p>A firefly lights up 3 times per 10 seconds on average—how likely is it to light up 8 times in 20 seconds? Or: a basketball player averages 35 points per game—how likely is he to score exactly 12 points in the first quarter?</p></div>
+<p>The graph: starts from zero (an event can't happen a negative number of times) but has no upper cap on how many times it could occur.</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(y) = (λ<sup>y</sup> · e<sup>-λ</sup>) / y!</span>
+<div class="formula-explain">
+                        Poisson Probability of y occurrences in an interval:<br/>
+                        • <strong>λ (lambda)</strong> = Average rate of occurrence per interval<br/>
+                        • <strong>e</strong> = Euler's constant (≈ 2.71828)<br/>
                         • <strong>y!</strong> = Factorial of y (e.g. 3! = 3 × 2 × 1 = 6)
                     </div>
-                </div>
-                <div class="example-card"><span class="example-badge">Worked Example: STUDENT QUESTIONS</span><p>Your online course usually gets about 4 questions per day (&lambda;=4). Yesterday students asked 7. How likely was that exact number?</p></div>
-                <p>P(7) = 4&sup7; &times; e&supmin;&sup4; / 7! = 16,384 &times; 0.0183 / 5,040 &approx; 0.06 (6%).</p>
-                <p>E(Y) = &lambda; | Variance: &sigma;&sup2; = &lambda;</p>
-            </div>
-
-            <div class="card">
-                <h2>PART 3: Continuous Distributions</h2>
-                <p>When outcomes are infinite, we switch from bars to curves and from sums to areas. PDF, CDF, and the five key continuous distributions.</p>
-
-                <h3>3.1 PDF and CDF: The New Toolkit</h3>
-                <p><strong>Probability Density Function (PDF):</strong> Written f(y), depicts the associated probability density for every possible value y. Its value is always &ge; 0. Its graph is the probability distribution curve.</p>
-                <p><strong>Why Individual Values Have Probability Zero:</strong> With an infinite sample space, the denominator becomes enormous so the probability of any single exact value is essentially zero. Consequence: For continuous variables, P(Y &gt; x) = P(Y &ge; x).</p>
-                <p><strong>Cumulative Distribution Function (CDF):</strong> Written F(y) (capital F), represents the probability of the variable being less than or equal to a specific value: F(y) = P(Y &le; y). Boundary values: F(-&infin;) = 0 and F(+&infin;) = 1.</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Direction</th>
-                            <th>Operation</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>PDF &rarr; CDF</td>
-                            <td>Integrate the PDF from -&infin; to y</td>
-                        </tr>
-                        <tr>
-                            <td>CDF &rarr; PDF</td>
-                            <td>Take the first derivative of the CDF with respect to y</td>
-                        </tr>
-                        <tr>
-                            <td>Probability of interval [A, B]</td>
-                            <td>Area under the PDF curve from A to B</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <p>Expected value = integral of y &middot; f(y) over the interval from -&infin; to +&infin;.</p>
-                <p>Variance = &sigma;&sup2; = E(Y&sup2;) - [E(Y)]&sup2;.</p>
-
-                <h3 id="normal-distribution">3.2 Normal Distribution: Nature's Favorite</h3>
-                <p><strong>NOTATION:</strong> X ~ N(&mu;, &sigma;&sup2;)</p>
-                <p><strong>When it applies:</strong> Natural phenomena and everyday life (e.g., weight of adult male lions averaging 150-250 kg).</p>
-                <p><strong>Key Characteristics:</strong> Bell-shaped graph, symmetric about the mean, E(X) = &mu;.</p>
-                <p><strong>The 68-95-99.7 Law:</strong> 68% within 1 SD, 95% within 2 SD, 99.7% within 3 SD.</p>
-
-                <h3>3.3 Standardizing the Normal Distribution</h3>
-                <p>A transformation alters every element to get a new distribution with similar characteristics.</p>
-                <ul>
-                    <li>Add constant: shifts graph right</li>
-                    <li>Subtract constant: shifts graph left</li>
-                    <li>Multiply by constant &gt; 1: graph shrinks (tighter)</li>
-                    <li>Divide by constant &gt; 1: graph expands (wider)</li>
-                </ul>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">Z = (Y - μ) / σ</span>
-                    <div class="formula-explain">Standardizing Z-score = (Value - Mean) / Standard Deviation. Transformed distribution has Mean = 0, Variance = 1.</div>
-                </div>
-                <p><strong>WHEN NORMAL FAILS:</strong> With fewer than 30 entries, avoid assuming normality—use Student's T distribution instead.</p>
-
-                <h3 id="students-t-distribution">3.4 Student's T Distribution: Normal's Small-Sample Cousin</h3>
-                <p><strong>NOTATION:</strong> Y ~ t(k) where k is degrees of freedom.</p>
-                <p>Bell-shaped and symmetric, but with fatter tails. Expected Value: E(Y) = μ (for k ≥ 2).</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">Variance = s² · [ k / (k - 2) ]</span>
-                    <div class="formula-explain">Student's T Variance = Sample Variance × [ Degrees of Freedom / (Degrees of Freedom - 2) ], for degrees of freedom k > 2.</div>
-                </div>
-
-                <h3 id="chi-squared-distribution">3.5 Chi-Squared Distribution: The Statistician's Tool</h3>
-                <p><strong>NOTATION:</strong> Y ~ &chi;&sup2;(k)</p>
-                <p>Non-negative values only (starts from zero on left), highly skewed to the right.</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">E(Y) = k  |  Variance = 2k</span>
-                    <div class="formula-explain">Expected Value = Degrees of Freedom (k), Variance = 2 × Degrees of Freedom.</div>
-                </div>
-                <p><strong>ACCURACY NOTE:</strong> Squaring a standard normal variable gives a chi-squared with 1 degree of freedom.</p>
-
-                <h3 id="exponential-distribution">3.6 Exponential Distribution: Fast Early, Then Fading</h3>
-                <p><strong>NOTATION:</strong> X ~ Exp(&lambda;)</p>
-                <p>Starts high, drops sharply, then plateaus (e.g., YouTube views).</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">E(X) = 1 / λ  |  Variance = 1 / λ²</span>
-                    <div class="formula-explain">Expected value (average time between events) = 1 / λ, Variance = 1 / λ².</div>
-                </div>
-                <p><strong>THE LOG TRANSFORM:</strong> Taking the natural logarithm of exponential data makes it closer to normal and suitable for linear regressions.</p>
-
-                <h3 id="logistic-distribution">3.7 Logistic Distribution: Forecasting a Cutoff</h3>
-                <p><strong>NOTATION:</strong> Y ~ Logistic(&mu;, s) where &mu; is location (mean) and s is scale parameter.</p>
-                <p>Determines how continuous inputs affect a binary outcome (e.g., tennis serve speed vs point outcome). CDF is S-shaped.</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">Variance = s² · π² / 3</span>
-                    <div class="formula-explain">Logistic Variance = scale² (s²) × π² / 3.</div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 id="fifa-19-case-study">PART 4: Case Study: FIFA 19</h2>
-                <ul>
-                    <li><strong>4.1 Game Balance (Normal Distribution):</strong> Overall player ratings (1-100) form a bell-shaped normal curve, confirming game balance.</li>
-                    <li><strong>4.2 Small Sample (Student's T):</strong> First 30 players show fatter tails, following Student's T distribution.</li>
-                    <li><strong>4.3 Two Peaks (Bimodal Graph):</strong> Shot power shows two peaks due to goalkeepers having drastically different stats from outfield players.</li>
-                    <li><strong>4.4 Player Ages (Poisson Distribution):</strong> Age starts at a minimum of 16 (youngest pro contract) and is right-skewed.</li>
-                    <li><strong>4.5 Video Views (Exponential Distribution):</strong> Weekly promo views start at ~100k, drop to 20k, then plateau.</li>
-                    <li><strong>4.6 Premium Club Buyers (Logistic Distribution):</strong> Premium membership uptake shows a sharp cutoff near age 34 (financial stability).</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / ...</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Quiz questions dynamically rendered here -->
-            </div>
-        </div>
-
-        <!-- TAB 3: QUICK REFERENCE -->
-        <div id="formulas" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2 style="margin:0;">Quick Reference</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-
-                <h2>Quick Reference: Complete Probability Distributions Summary Matrix</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Distribution</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Type</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Mean (μ / E[X])</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Variance (σ²)</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Parameters & Use Case</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Bernoulli</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Discrete</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">p</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">p(1-p)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Single trial, binary outcome (Success = 1, Failure = 0). Single parameter p.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Binomial</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Discrete</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">np</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">np(1-p)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">n independent Bernoulli trials: P(y) = C(n,y)·pʸ·(1-p)ⁿ⁻ʸ. Coin tosses, defect testing.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Discrete Uniform</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Discrete</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">(a + b) / 2</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">[(b-a+1)² - 1] / 12</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">k equally likely outcomes over range [a, b]. E.g. Fair 6-sided die roll.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Poisson</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Discrete</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">λ</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">λ</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Event frequency in fixed time/space interval: P(y) = (λʸ·e⁻λ)/y!. Call center arrivals, customer questions.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Continuous Uniform</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">(a + b) / 2</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">(b - a)² / 12</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Constant rectangular probability density f(x) = 1/(b-a) over interval [a, b].</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Normal N(μ, σ²)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">μ</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">σ²</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Symmetric bell curve. Empirical Rule: 68% within 1σ, 95% within 2σ, 99.7% within 3σ.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Student's t</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">0 (for k > 1)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">s² &times; k / (k - 2)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Small samples (n < 30) with unknown σ. Heavier tails than Normal. Approaches Normal as degrees of freedom k &rarr; &infin;. Standard form uses s = 1.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Chi-Squared χ²(k)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">k</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">2k</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Sum of k squared independent standard normal variables. Non-negative, right-skewed. Goodness-of-fit tests.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Exponential</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">1 / λ</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">1 / λ²</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous time elapsed between independent Poisson arrivals. Memoryless property. Hardware failure time.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Logistic</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Continuous</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">μ</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">s²π² / 3</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">S-shaped cumulative sigmoid curve. Heavier tails than Normal. Classification cutoff thresholds.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- PDF vs CDF & Z-Score Reference Card -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: PDF vs CDF & Empirical Rule Reference Matrix</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="formula-card">
-                        <span class="formula-badge">PDF vs CDF Operations</span>
-                        <p>• <strong>PDF f(x):</strong> Curve height (density). Area under entire curve = 1. P(X = x) = 0.<br>
-                        • <strong>CDF F(x):</strong> Cumulative P(X &le; x) = &int; f(t) dt from -&infin; to x.<br>
-                        • <strong>Interval P(A &le; X &le; B):</strong> F(B) - F(A) = Area from A to B.</p>
-                    </div>
-                    <div class="formula-card">
-                        <span class="formula-badge">The Empirical 68-95-99.7 Rule</span>
-                        <p>• <strong>μ &plusmn; 1σ:</strong> Exactly ~<strong>68.27%</strong> of all data.<br>
-                        • <strong>μ &plusmn; 2σ:</strong> Exactly ~<strong>95.45%</strong> of all data.<br>
-                        • <strong>μ &plusmn; 3σ:</strong> Exactly ~<strong>99.73%</strong> of all data (&gt;3σ is an outlier).</p>
-                    </div>
-                </div>
-            </div>
-                
-            <!-- ==========================================
+</div>
+<div class="example-card"><span class="example-badge">Worked Example: STUDENT QUESTIONS</span><p>Your online course usually gets about 4 questions per day (λ=4). Yesterday students asked 7. How likely was that exact number?</p></div>
+<p>P(7) = 4&amp;sup7 × e&amp;supmin&amp;sup4 / 7! = 16,384 × 0.0183 / 5,040 ≈ 0.06 (6%).</p>
+<p>E(Y) = λ | Variance: σ² = λ</p>
+</div>
+<div class="card">
+<h2>PART 3: Continuous Distributions</h2>
+<p>When outcomes are infinite, we switch from bars to curves and from sums to areas. PDF, CDF, and the five key continuous distributions.</p>
+<h3>3.1 PDF and CDF: The New Toolkit</h3>
+<p><strong>Probability Density Function (PDF):</strong> Written f(y), depicts the associated probability density for every possible value y. Its value is always ≥ 0. Its graph is the probability distribution curve.</p>
+<p><strong>Why Individual Values Have Probability Zero:</strong> With an infinite sample space, the denominator becomes enormous so the probability of any single exact value is essentially zero. Consequence: For continuous variables, P(Y &gt; x) = P(Y ≥ x).</p>
+<p><strong>Cumulative Distribution Function (CDF):</strong> Written F(y) (capital F), represents the probability of the variable being less than or equal to a specific value: F(y) = P(Y ≤ y). Boundary values: F(-∞) = 0 and F(+∞) = 1.</p>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Direction</th>
+<th>Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PDF → CDF</td>
+<td>Integrate the PDF from -∞ to y</td>
+</tr>
+<tr>
+<td>CDF → PDF</td>
+<td>Take the first derivative of the CDF with respect to y</td>
+</tr>
+<tr>
+<td>Probability of interval [A, B]</td>
+<td>Area under the PDF curve from A to B</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Expected value = integral of y · f(y) over the interval from -∞ to +∞.</p>
+<p>Variance = σ² = E(Y²) - [E(Y)]².</p>
+<h3 id="normal-distribution">3.2 Normal Distribution: Nature's Favorite</h3>
+<p><strong>NOTATION:</strong> X ~ N(μ, σ²)</p>
+<p><strong>When it applies:</strong> Natural phenomena and everyday life (e.g., weight of adult male lions averaging 150-250 kg).</p>
+<p><strong>Key Characteristics:</strong> Bell-shaped graph, symmetric about the mean, E(X) = μ.</p>
+<p><strong>The 68-95-99.7 Law:</strong> 68% within 1 SD, 95% within 2 SD, 99.7% within 3 SD.</p>
+<h3>3.3 Standardizing the Normal Distribution</h3>
+<p>A transformation alters every element to get a new distribution with similar characteristics.</p>
+<ul>
+<li>Add constant: shifts graph right</li>
+<li>Subtract constant: shifts graph left</li>
+<li>Multiply by constant &gt; 1: graph shrinks (tighter)</li>
+<li>Divide by constant &gt; 1: graph expands (wider)</li>
+</ul>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">Z = (Y - μ) / σ</span>
+<div class="formula-explain">Standardizing Z-score = (Value - Mean) / Standard Deviation. Transformed distribution has Mean = 0, Variance = 1.</div>
+</div>
+<p><strong>WHEN NORMAL FAILS:</strong> With fewer than 30 entries, avoid assuming normality—use Student's T distribution instead.</p>
+<h3 id="students-t-distribution">3.4 Student's T Distribution: Normal's Small-Sample Cousin</h3>
+<p><strong>NOTATION:</strong> Y ~ t(k) where k is degrees of freedom.</p>
+<p>Bell-shaped and symmetric, but with fatter tails. Expected Value: E(Y) = μ (for k ≥ 2).</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">Variance = s² · [ k / (k - 2) ]</span>
+<div class="formula-explain">Student's T Variance = Sample Variance × [ Degrees of Freedom / (Degrees of Freedom - 2) ], for degrees of freedom k &gt; 2.</div>
+</div>
+<h3 id="chi-squared-distribution">3.5 Chi-Squared Distribution: The Statistician's Tool</h3>
+<p><strong>NOTATION:</strong> Y ~ χ²(k)</p>
+<p>Non-negative values only (starts from zero on left), highly skewed to the right.</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">E(Y) = k  |  Variance = 2k</span>
+<div class="formula-explain">Expected Value = Degrees of Freedom (k), Variance = 2 × Degrees of Freedom.</div>
+</div>
+<p><strong>ACCURACY NOTE:</strong> Squaring a standard normal variable gives a chi-squared with 1 degree of freedom.</p>
+<h3 id="exponential-distribution">3.6 Exponential Distribution: Fast Early, Then Fading</h3>
+<p><strong>NOTATION:</strong> X ~ Exp(λ)</p>
+<p>Starts high, drops sharply, then plateaus (e.g., YouTube views).</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">E(X) = 1 / λ  |  Variance = 1 / λ²</span>
+<div class="formula-explain">Expected value (average time between events) = 1 / λ, Variance = 1 / λ².</div>
+</div>
+<p><strong>THE LOG TRANSFORM:</strong> Taking the natural logarithm of exponential data makes it closer to normal and suitable for linear regressions.</p>
+<h3 id="logistic-distribution">3.7 Logistic Distribution: Forecasting a Cutoff</h3>
+<p><strong>NOTATION:</strong> Y ~ Logistic(μ, s) where μ is location (mean) and s is scale parameter.</p>
+<p>Determines how continuous inputs affect a binary outcome (e.g., tennis serve speed vs point outcome). CDF is S-shaped.</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">Variance = s² · π² / 3</span>
+<div class="formula-explain">Logistic Variance = scale² (s²) × π² / 3.</div>
+</div>
+</div>
+<div class="card">
+<h2 id="fifa-19-case-study">PART 4: Case Study: FIFA 19</h2>
+<ul>
+<li><strong>4.1 Game Balance (Normal Distribution):</strong> Overall player ratings (1-100) form a bell-shaped normal curve, confirming game balance.</li>
+<li><strong>4.2 Small Sample (Student's T):</strong> First 30 players show fatter tails, following Student's T distribution.</li>
+<li><strong>4.3 Two Peaks (Bimodal Graph):</strong> Shot power shows two peaks due to goalkeepers having drastically different stats from outfield players.</li>
+<li><strong>4.4 Player Ages (Poisson Distribution):</strong> Age starts at a minimum of 16 (youngest pro contract) and is right-skewed.</li>
+<li><strong>4.5 Video Views (Exponential Distribution):</strong> Weekly promo views start at ~100k, drop to 20k, then plateau.</li>
+<li><strong>4.6 Premium Club Buyers (Logistic Distribution):</strong> Premium membership uptake shows a sharp cutoff near age 34 (financial stability).</li>
+</ul>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / ...</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Quiz questions dynamically rendered here -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE -->
+<div class="tab-content" id="formulas">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.25rem;">
+<div>
+<h2 style="margin:0; font-size:1.4rem;">⚡ Quick Reference &amp; Exam Mastery Architecture</h2>
+<p style="margin:0.25rem 0 0 0; color:var(--text-muted-color); font-size:0.88rem;">Four-Pillar Synthesis: 10 Distributions, PMF/PDF/CDF Calculus, Moments &amp; High-Yield Pitfalls</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ==========================================
+                     PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:1rem;">
+                    🏛️ Pillar 1: Core Terminology &amp; Keyword Recall Grid
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="definition-card">
+<span class="def-badge">Random Variable (Y vs y)</span>
+<p><strong>Random Variable (Y):</strong> The rule or function mapping experimental outcomes to real numbers (uppercase).<br/>
+<strong>Realized Value (y):</strong> The specific numerical value observed in a single trial (lowercase). P(Y = y).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Parameters vs Statistics</span>
+<p><strong>Population Parameters (Greek):</strong> Mean μ, Variance σ², Standard Deviation σ (Fixed true population constants).<br/>
+<strong>Sample Statistics (Latin):</strong> Sample Mean x̄, Sample Variance s², Sample StdDev s (Estimators from data).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">PMF vs PDF vs CDF</span>
+<p><strong>PMF P(Y = y):</strong> Probability mass for discrete countable values (Σ P(y) = 1).<br/>
+<strong>PDF f(y):</strong> Continuous density height (Area = ∫ f(y)dy = 1). Exact point P(Y=y) = 0.<br/>
+<strong>CDF F(y):</strong> Cumulative probability F(y) = P(Y ≤ y).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Discrete vs Continuous</span>
+<p><strong>Discrete RV:</strong> Countable isolated values with distinct gaps (e.g. coin flips, goals scored, calls received).<br/>
+<strong>Continuous RV:</strong> Uncountably infinite values along a continuum (e.g. height, weight, time, temperature).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">4 Discrete Distributions</span>
+<p><strong>1. Bernoulli:</strong> 1 trial, 2 outcomes (p).<br/>
+<strong>2. Binomial:</strong> n independent Bernoulli trials.<br/>
+<strong>3. Discrete Uniform:</strong> k equal outcomes in [a, b].<br/>
+<strong>4. Poisson:</strong> Event counts in fixed interval (rate λ).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">5 Continuous Distributions</span>
+<p><strong>1. Continuous Uniform:</strong> Constant density 1/(b−a).<br/>
+<strong>2. Normal N(μ, σ²):</strong> Symmetric bell curve.<br/>
+<strong>3. Student's t:</strong> Small samples (n &lt; 30), fat tails.<br/>
+<strong>4. Chi-Squared χ²(k):</strong> Non-negative, right-skewed.<br/>
+<strong>5. Exponential / Logistic:</strong> Memoryless wait times / Sigmoid S-curve.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Standard Normal Z-Score</span>
+<p>Standardized measurement: Z = (Y − μ) ÷ σ. Measures the signed number of standard deviations an observation sits from the population mean μ.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Empirical Rule (68-95-99.7)</span>
+<p>For symmetric normal distributions:<br/>
+                        • μ ± 1σ contains ~<strong>68.27%</strong> of data.<br/>
+                        • μ ± 2σ contains ~<strong>95.45%</strong> of data.<br/>
+                        • μ ± 3σ contains ~<strong>99.73%</strong> of data.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Degrees of Freedom (k)</span>
+<p>The number of independent values or quantities which can be assigned to a statistical distribution. As k → ∞, Student's t converges to the Standard Normal.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Memoryless Property</span>
+<p>P(T &gt; s + t | T &gt; s) = P(T &gt; t). The future probability of an event does not depend on how much time has already passed (Unique to Exponential distribution).</p>
+</div>
+</div>
+<!-- ==========================================
+                     PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    📐 Pillar 2: Formula &amp; Calculation Reference Cards
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="formula-card">
+<span class="formula-badge">General Variance Identity</span>
+<div class="formula-text">σ² = Var(Y) = E[(Y − μ)²] = E[Y²] − μ²</div>
+<div class="formula-explain">
+<strong>Standard Deviation:</strong> σ = √Var(Y).<br/>
+<strong>Plain English Reading:</strong> "Variance equals the expected value of squared outcomes minus the square of the population mean."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Variance sigma squared equals the expected value of squared deviations from the mean: E of Y-squared minus the squared mean mu."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Discrete vs Continuous Mean E[Y]</span>
+<div class="formula-text">Discrete: E[Y] = Σ [y × P(y)] | Continuous: E[Y] = ∫ y × f(y) dy</div>
+<div class="formula-explain">
+<strong>Calculus Operator:</strong> Summation Σ for countable mass vs Definite Integral ∫ across real line (-∞ to +∞).<br/>
+<strong>Plain English Reading:</strong> "Expected value is the probability-weighted center of mass of the distribution."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Discrete mean sums outcomes times their probabilities; continuous mean integrates y times the probability density function f(y) dy."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Standard Normal Z-Score &amp; Normalization</span>
+<div class="formula-text">Z = (Y − μ) ÷ σ → N(0, 1)</div>
+<div class="formula-explain">
+<strong>Standard Normal Parameters:</strong> Standard Normal distribution has Mean μ = 0 and Variance σ² = 1.<br/>
+<strong>Plain English Reading:</strong> "Standardizing subtracts the mean and divides by standard deviation, centering the distribution at 0."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Z-score equals raw value Y minus mean mu, divided by standard deviation sigma, standardizing to a standard normal distribution N(0, 1)."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">PDF to CDF Calculus Operations</span>
+<div class="formula-text">F(y) = ∫ f(t) dt ⇔ f(y) = dF(y)/dy | P(a ≤ Y ≤ b) = F(b) − F(a)</div>
+<div class="formula-explain">
+<strong>Area under curve:</strong> Total area = ∫ f(y)dy = 1. Sub-interval probability equals difference between CDF endpoints.<br/>
+<strong>Plain English Reading:</strong> "Cumulative distribution F(y) is the integral of density f(y); the interval chance is F(b) minus F(a)."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The probability that continuous variable Y falls between a and b equals CDF at b minus CDF at a."</strong>
+</div>
+</div></div>
+</div>
+<!-- 10 Distributions Master Equations Sheet -->
+<div style="margin-top:1.5rem;">
+<h4 style="color:var(--primary-color); margin-bottom:0.75rem;">📚 Mathematical Moments for All 10 Curriculum Distributions</h4>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+<div class="formula-card">
+<span class="formula-badge">1. Bernoulli B(1, p)</span>
+<div class="formula-text">E[Y] = p | Var(Y) = p(1 − p)</div>
+<div class="formula-explain">Single trial: P(Y=1) = p, P(Y=0) = 1−p.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"A single binary trial with success probability p has mean p and variance p times one minus p."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">2. Binomial B(n, p)</span>
+<div class="formula-text">E[Y] = np | Var(Y) = np(1 − p)</div>
+<div class="formula-explain">P(y) = C(n, y) × pʸ × (1−p)ⁿ⁻ʸ.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Number of successes in n independent trials has mean n times p and variance n times p times one minus p."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">3. Discrete Uniform U(a, b)</span>
+<div class="formula-text">E[Y] = (a + b) / 2 | Var = [(b − a + 1)² − 1] / 12</div>
+<div class="formula-explain">k = b − a + 1 equally likely outcomes.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Discrete mean sums outcomes times their probabilities; continuous mean integrates y times the probability density function f(y) dy."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">4. Poisson Poisson(λ)</span>
+<div class="formula-text">E[Y] = λ | Var(Y) = λ (StdDev = √λ)</div>
+<div class="formula-explain">P(y) = (λʸ × e⁻λ) ÷ y! Rare event counts.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"In a Poisson process, both the expected mean and the variance are equal to rate parameter lambda."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">5. Continuous Uniform U(a, b)</span>
+<div class="formula-text">E[Y] = (a + b) / 2 | Var = (b − a)² / 12</div>
+<div class="formula-explain">f(y) = 1 / (b − a) over [a, b].</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Uniform distribution on interval [a, b] has midpoint mean (a + b)/2 and variance (b - a) squared divided by 12."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">6. Normal N(μ, σ²)</span>
+<div class="formula-text">E[Y] = μ | Var(Y) = σ²</div>
+<div class="formula-explain">Symmetric bell curve with inflection points at μ ± σ.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Z-score equals raw value Y minus mean mu, divided by standard deviation sigma, standardizing to a standard normal distribution N(0, 1)."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">7. Student's t t(k)</span>
+<div class="formula-text">E[Y] = 0 (k &gt; 1) | Var = s² × k / (k − 2) (k &gt; 2)</div>
+<div class="formula-explain">Heavier tails than normal; standard form s = 1.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"7. Student's t t(k): E[Y] = 0 (k &gt; 1) | Var = s² × k / (k − 2) (k &gt; 2)"</strong>.
+    </div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">8. Chi-Squared χ²(k)</span>
+<div class="formula-text">E[Y] = k | Var(Y) = 2k</div>
+<div class="formula-explain">Sum of k squared standard normals. Non-negative.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"8. Chi-Squared χ²(k): E[Y] = k | Var(Y) = 2k"</strong>.
+    </div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">9. Exponential Exp(λ)</span>
+<div class="formula-text">E[Y] = 1 / λ | Var(Y) = 1 / λ²</div>
+<div class="formula-explain">f(y) = λe⁻λʸ. Continuous wait time between Poisson arrivals.</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"In a Poisson process, both the expected mean and the variance are equal to rate parameter lambda."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">10. Logistic Log(μ, s)</span>
+<div class="formula-text">E[Y] = μ | Var(Y) = s²π² / 3</div>
+<div class="formula-explain">Sigmoid cumulative CDF: F(y) = 1 / (1 + e⁻ʸ).</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"10. Logistic Log(μ, s): E[Y] = μ | Var(Y) = s²π² / 3"</strong>.
+    </div>
+</div></div>
+</div>
+</div>
+<!-- ==========================================
+                     PILLAR 3: COMPARATIVE ANALYSIS MATRICES
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    📊 Pillar 3: Comparative Analysis Matrices
+                </h3>
+<!-- Matrix 1: Discrete vs Continuous Master Comparison -->
+<h4 style="margin:1rem 0 0.5rem 0; color:var(--text-color);">1. Discrete vs Continuous Random Variables Master Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Feature / Dimension</th>
+<th>Discrete Random Variable</th>
+<th>Continuous Random Variable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Domain &amp; Values</strong></td>
+<td>Countable isolated values (integers: 0, 1, 2, 3...) with distinct gaps.</td>
+<td>Uncountable infinite continuum of real numbers (intervals: [a, b]).</td>
+</tr>
+<tr>
+<td><strong>Exact Point Probability P(Y = y)</strong></td>
+<td><span style="color:#10b981; font-weight:700;">Can be strictly positive (0 &lt; P(Y=y) ≤ 1)</span></td>
+<td><span style="color:#ef4444; font-weight:700;">Strictly zero: P(Y = 5.000) = 0</span></td>
+</tr>
+<tr>
+<td><strong>Probability Function</strong></td>
+<td><strong>PMF: Probability Mass Function</strong> P(Y = y)</td>
+<td><strong>PDF: Probability Density Function</strong> f(y) (Curve height)</td>
+</tr>
+<tr>
+<td><strong>Cumulative Function CDF</strong></td>
+<td>Step function: F(y) = Σ_{t ≤ y} P(t)</td>
+<td>Smooth continuous curve: F(y) = ∫_{-∞}^y f(t) dt</td>
+</tr>
+<tr>
+<td><strong>Inequality Property</strong></td>
+<td>P(Y ≤ y) = P(Y &lt; y + 1) ≠ P(Y &lt; y) (Endpoints matter!)</td>
+<td>P(Y ≤ y) = P(Y &lt; y) (Endpoints have zero probability mass)</td>
+</tr>
+<tr>
+<td><strong>Real-World Examples</strong></td>
+<td>Number of web clicks, defect counts, customer arrivals.</td>
+<td>Customer session duration, server latency (ms), revenue ($).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: Master 10-Distributions Architecture -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">2. Master 10-Distributions Curriculum Architecture Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Distribution</th>
+<th>Type</th>
+<th>Parameters</th>
+<th>Mean E[Y]</th>
+<th>Variance Var(Y)</th>
+<th>Core Exam Use Case / Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bernoulli</strong></td>
+<td>Discrete</td>
+<td>p (success probability)</td>
+<td><strong>p</strong></td>
+<td><strong>p(1 − p)</strong></td>
+<td>Single binary trial (1 = Success, 0 = Failure). Coin toss, single email spam check.</td>
+</tr>
+<tr>
+<td><strong>Binomial</strong></td>
+<td>Discrete</td>
+<td>n (trials), p (prob)</td>
+<td><strong>np</strong></td>
+<td><strong>np(1 − p)</strong></td>
+<td>Number of successes in n fixed independent Bernoulli trials (e.g. 8 defects in 50 chips).</td>
+</tr>
+<tr>
+<td><strong>Discrete Uniform</strong></td>
+<td>Discrete</td>
+<td>a (min), b (max)</td>
+<td><strong>(a + b) / 2</strong></td>
+<td><strong>[(b−a+1)² − 1] / 12</strong></td>
+<td>Equal chance across k distinct discrete outcomes (e.g. fair 6-sided die: E=3.5, Var=35/12).</td>
+</tr>
+<tr>
+<td><strong>Poisson</strong></td>
+<td>Discrete</td>
+<td>λ (average rate)</td>
+<td><strong>λ</strong></td>
+<td><strong>λ</strong></td>
+<td>Counting rare event occurrences in fixed time/space interval (e.g. 5 call center queries/min).</td>
+</tr>
+<tr>
+<td><strong>Continuous Uniform</strong></td>
+<td>Continuous</td>
+<td>a (lower), b (upper)</td>
+<td><strong>(a + b) / 2</strong></td>
+<td><strong>(b − a)² / 12</strong></td>
+<td>Flat constant density f(x) = 1/(b−a) across continuous range [a, b]. Equal probability per unit length.</td>
+</tr>
+<tr>
+<td><strong>Normal N(μ, σ²)</strong></td>
+<td>Continuous</td>
+<td>μ (mean), σ² (var)</td>
+<td><strong>μ</strong></td>
+<td><strong>σ²</strong></td>
+<td>Symmetric bell-curve modeling physical measurements, exam scores, and CLT asymptotic sums.</td>
+</tr>
+<tr>
+<td><strong>Student's t</strong></td>
+<td>Continuous</td>
+<td>k (deg of freedom), s</td>
+<td><strong>0 (for k &gt; 1)</strong></td>
+<td><strong>s² × k / (k − 2)</strong></td>
+<td>Hypothesis testing with small samples (n &lt; 30) when population σ is unknown. Heavy tails.</td>
+</tr>
+<tr>
+<td><strong>Chi-Squared χ²(k)</strong></td>
+<td>Continuous</td>
+<td>k (deg of freedom)</td>
+<td><strong>k</strong></td>
+<td><strong>2k</strong></td>
+<td>Sum of k squared independent standard normals. Goodness-of-fit and variance tests. Strictly ≥ 0.</td>
+</tr>
+<tr>
+<td><strong>Exponential</strong></td>
+<td>Continuous</td>
+<td>λ (rate parameter)</td>
+<td><strong>1 / λ</strong></td>
+<td><strong>1 / λ²</strong></td>
+<td>Time elapsed between Poisson event arrivals. Memoryless property (hardware lifespan).</td>
+</tr>
+<tr>
+<td><strong>Logistic</strong></td>
+<td>Continuous</td>
+<td>μ (location), s (scale)</td>
+<td><strong>μ</strong></td>
+<td><strong>s²π² / 3</strong></td>
+<td>Symmetric curve with heavier tails than Normal. Underlying cumulative curve for Logistic Regression.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: Normal vs Student's t vs Logistic -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">3. Normal vs Student's t vs Logistic Tail &amp; Shape Comparison</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Distribution</th>
+<th>Shape &amp; Symmetry</th>
+<th>Tail Behavior</th>
+<th>Minimum Sample Condition</th>
+<th>Degrees of Freedom Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Normal N(μ, σ²)</strong></td>
+<td>Symmetric bell curve centered at μ.</td>
+<td>Exponentially tapering thin tails (68–95–99.7 rule).</td>
+<td>Standard for large samples (n ≥ 30) or known σ.</td>
+<td>Fixed shape; no degrees of freedom parameter.</td>
+</tr>
+<tr>
+<td><strong>Student's t</strong></td>
+<td>Symmetric bell curve centered at 0.</td>
+<td><span style="color:#ef4444; font-weight:700;">Heavy / Fat tails (higher extreme value chance).</span></td>
+<td>Mandatory when n &lt; 30 and population σ is unknown.</td>
+<td>As df k → ∞, t-distribution converges into the Standard Normal.</td>
+</tr>
+<tr>
+<td><strong>Logistic</strong></td>
+<td>Symmetric bell curve centered at μ.</td>
+<td><span style="color:#3b82f6; font-weight:700;">Heavier tails than Normal, lighter than low-df t.</span></td>
+<td>Used in binary classification and logit modeling.</td>
+<td>Scale parameter s governs spread; variance is s²π²/3.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ==========================================
+                     PILLAR 4: COMMON EXAM PITFALLS & FALLACIES
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    ⚠️ Pillar 4: Common Exam Pitfalls &amp; Fallacies
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="example-card" style="border-left:4px solid #ef4444;">
+<span class="example-badge" style="background:#ef4444;">Pitfall 1: Continuous Point Probability Zero</span>
+<p><strong>Exam Trap:</strong> Computing P(X = 5.0) for a continuous variable and getting a non-zero probability.<br/>
+<strong>Correct Reality:</strong> For any continuous distribution, <strong>P(X = exact constant) = 0</strong> because an exact point has zero area under the PDF curve. Probability is strictly defined over intervals: P(a ≤ X ≤ b) = ∫ₐᵇ f(x)dx.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #f59e0b;">
+<span class="example-badge" style="background:#f59e0b;">Pitfall 2: Continuous vs Discrete Endpoints</span>
+<p><strong>Exam Trap:</strong> Treating P(X ≤ x) differently from P(X &lt; x) in continuous distributions.<br/>
+<strong>Correct Reality:</strong> In <strong>continuous distributions</strong>, P(X ≤ x) is IDENTICAL to P(X &lt; x). However, in <strong>discrete distributions</strong>, endpoints matter: P(Y ≤ 3) includes P(Y=3) whereas P(Y &lt; 3) stops at 2.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #10b981;">
+<span class="example-badge" style="background:#10b981;">Pitfall 3: Poisson Mean &amp; Variance Equality</span>
+<p><strong>Exam Trap:</strong> Searching for a separate variance formula for a Poisson distribution.<br/>
+<strong>Correct Reality:</strong> For a Poisson distribution, <strong>Mean AND Variance BOTH equal λ</strong> (E[Y] = λ, Var(Y) = λ). The Standard Deviation is always √λ.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #6366f1;">
+<span class="example-badge" style="background:#6366f1;">Pitfall 4: Student's t Small Sample Rule</span>
+<p><strong>Exam Trap:</strong> Using the Normal Z-table when sample size n = 15 and population standard deviation σ is unknown.<br/>
+<strong>Correct Reality:</strong> You MUST use the <strong>Student's t-distribution</strong> with k = n − 1 degrees of freedom to account for the additional sampling uncertainty in estimated sample variance s².</p>
+</div>
+<div class="example-card" style="border-left:4px solid #8b5cf6;">
+<span class="example-badge" style="background:#8b5cf6;">Pitfall 5: Chi-Squared Non-Negativity</span>
+<p><strong>Exam Trap:</strong> Expecting a Chi-Squared distribution to be symmetric or contain negative values.<br/>
+<strong>Correct Reality:</strong> Chi-Squared χ² is the sum of squared values (Z²), so it is <strong>strictly non-negative (χ² ≥ 0) and right-skewed</strong>. It only becomes approximately bell-shaped at very large degrees of freedom k.</p>
+</div>
+</div>
+</div>
+<!-- ==========================================
                  Interactive Academic Calculators Section
                  ========================================== -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Interactive Academic Calculators (Live Distribution & Moments Engines)</h2>
-                
-                <!-- Calculator 1: Z-Score Engine -->
-                <div class="calc-card">
-                    <div class="calc-title">🧮 Part 3.3: Standardizing the Normal Distribution (Z = (X - μ) ÷ σ) & Empirical Rule (68–95–99.7%)</div>
-                    <div class="calc-desc">Input a raw observation X, population mean μ, and standard deviation σ to compute the standardized Z-Score, cumulative bell-curve percentile, and position within the Empirical Rule.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="z-x">Raw Observation Value (X):</label>
-                            <input type="number" id="z-x" class="calc-input" value="115" step="1" oninput="calculateZScore()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="z-mean">Population Mean (μ):</label>
-                            <input type="number" id="z-mean" class="calc-input" value="100" step="1" oninput="calculateZScore()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="z-sd">Standard Deviation (σ):</label>
-                            <input type="number" id="z-sd" class="calc-input" value="15" min="0.001" step="0.5" oninput="calculateZScore()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Standardized Z-Score & Percentile:</span>
-                            <span class="calc-result-val" id="z-result-val">Z = +1.000 (84.13th Percentile)</span>
-                        </div>
-                        <div class="calc-math-steps" id="z-math-steps">
-                            <strong>Step-by-Step Normal Distribution Calculation:</strong><br>
-                            <div class="step-line">• <strong>Standardization Formula:</strong> Z = (X - μ) ÷ σ = (115 - 100) ÷ 15 = 15 ÷ 15 = <strong>+1.000</strong></div>
-                            <div class="step-line">• <strong>Cumulative Percentile:</strong> P(Z ≤ 1.00) = <strong>0.8413 (84.13%)</strong> | Tail Probability P(Z > 1.00) = <strong>0.1587 (15.87%)</strong></div>
-                            <div class="step-line">• <strong>Empirical Rule Benchmark:</strong> Observation lies exactly <strong>1.00 standard deviation above the mean</strong> (falls within the central 68.27% bell-curve band).</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 2: 10 Distributions Explorer -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 1.2, 2 & 3: Mean & Variance (Theoretical Moments) Explorer for 10 Distributions</div>
-                    <div class="calc-desc">Select any of the 10 core probability distributions from the curriculum to dynamically compute Expected Value E[X], Variance Var(X), and full mathematical properties.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="param-dist-select">Choose Distribution:</label>
-                            <select id="param-dist-select" class="calc-input" onchange="updateDistributionExplorer()">
-                                <option value="bernoulli">1. Bernoulli Distribution B(1, p)</option>
-                                <option value="binomial" selected>2. Binomial Distribution B(n, p)</option>
-                                <option value="uniform_disc">3. Discrete Uniform Distribution U(a, b)</option>
-                                <option value="poisson">4. Poisson Distribution Poisson(λ)</option>
-                                <option value="uniform_cont">5. Continuous Uniform Distribution U(a, b)</option>
-                                <option value="normal">6. Normal Distribution N(μ, σ²)</option>
-                                <option value="student_t">7. Student's t-Distribution t(k)</option>
-                                <option value="chi_sq">8. Chi-Squared Distribution χ²(k)</option>
-                                <option value="exponential">9. Exponential Distribution Exp(λ)</option>
-                                <option value="logistic">10. Logistic Distribution Log(μ, s)</option>
-                            </select>
-                        </div>
-                        <div class="calc-field" id="field-param1">
-                            <label class="calc-label" id="label-param1" for="input-param1">Number of Trials (n):</label>
-                            <input type="number" id="input-param1" class="calc-input" value="20" step="1" oninput="calculateDistributionMoments()">
-                        </div>
-                        <div class="calc-field" id="field-param2">
-                            <label class="calc-label" id="label-param2" for="input-param2">Success Probability (p):</label>
-                            <input type="number" id="input-param2" class="calc-input" value="0.25" step="0.05" min="0" max="1" oninput="calculateDistributionMoments()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Theoretical Moments (Mean & Variance):</span>
-                            <span class="calc-result-val" id="moment-result-val">E[X] = 5.000 | Var(X) = 3.750</span>
-                        </div>
-                        <div class="calc-math-steps" id="moment-math-steps">
-                            <strong>Theoretical Moments Breakdown:</strong><br>
-                            <div class="step-line">• <strong>Distribution Model:</strong> Binomial Distribution B(n = 20, p = 0.25)</div>
-                            <div class="step-line">• <strong>Expected Value E[X]:</strong> n × p = 20 × 0.25 = <strong>5.000</strong></div>
-                            <div class="step-line">• <strong>Variance Var(X):</strong> n × p × (1 - p) = 20 × 0.25 × 0.75 = <strong>3.750</strong> (StdDev σ = 1.936)</div>
-                            <div class="step-line">• <strong>Core Property:</strong> Counts the number of successes in 20 independent Bernoulli trials with constant success probability p.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: Continuous Uniform Calculator -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 3.1: Continuous Uniform Distribution U(a, b) Interval Probability & Density Calculator</div>
-                    <div class="calc-desc">Calculate constant probability density f(x) and exact sub-interval probability P(x₁ ≤ X ≤ x₂) for a continuous uniform random variable defined on [a, b].</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="u-a">Lower Bound (a):</label>
-                            <input type="number" id="u-a" class="calc-input" value="10" step="1" oninput="calculateContinuousUniform()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="u-b">Upper Bound (b):</label>
-                            <input type="number" id="u-b" class="calc-input" value="50" step="1" oninput="calculateContinuousUniform()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="u-x1">Sub-Interval Start (x₁):</label>
-                            <input type="number" id="u-x1" class="calc-input" value="20" step="1" oninput="calculateContinuousUniform()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="u-x2">Sub-Interval End (x₂):</label>
-                            <input type="number" id="u-x2" class="calc-input" value="35" step="1" oninput="calculateContinuousUniform()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Interval Probability:</span>
-                            <span class="calc-result-val" id="u-result-val">P(20 ≤ X ≤ 35) = 0.3750 (37.50%)</span>
-                        </div>
-                        <div class="calc-math-steps" id="u-math-steps">
-                            <strong>Continuous Uniform Derivation:</strong><br>
-                            <div class="step-line">• <strong>Probability Density:</strong> f(x) = 1 ÷ (b - a) = 1 ÷ (50 - 10) = 1 ÷ 40 = <strong>0.0250</strong></div>
-                            <div class="step-line">• <strong>Sub-Interval Probability:</strong> P(20 ≤ X ≤ 35) = (x₂ - x₁) ÷ (b - a) = (35 - 20) ÷ 40 = 15 ÷ 40 = <strong>0.3750 (37.50%)</strong></div>
-                            <div class="step-line">• <strong>Mean & Variance:</strong> E[X] = (10 + 50) ÷ 2 = <strong>30.000</strong> | Var(X) = (50 - 10)² ÷ 12 = 1600 ÷ 12 = <strong>133.333</strong> (StdDev σ = 11.547)</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-            </div>
-        
-            
-            <script>
+<div class="card" style="margin-top:1.5rem;">
+<h2>Interactive Academic Calculators (Live Distribution &amp; Moments Engines)</h2>
+<!-- Calculator 1: Z-Score Engine -->
+<div class="calc-card">
+<div class="calc-title">🧮 Part 3.3: Standardizing the Normal Distribution (Z = (X - μ) ÷ σ) &amp; Empirical Rule (68–95–99.7%)</div>
+<div class="calc-desc">Input a raw observation X, population mean μ, and standard deviation σ to compute the standardized Z-Score, cumulative bell-curve percentile, and position within the Empirical Rule.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="z-x">Raw Observation Value (X):</label>
+<input class="calc-input" id="z-x" oninput="calculateZScore()" step="1" type="number" value="115"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="z-mean">Population Mean (μ):</label>
+<input class="calc-input" id="z-mean" oninput="calculateZScore()" step="1" type="number" value="100"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="z-sd">Standard Deviation (σ):</label>
+<input class="calc-input" id="z-sd" min="0.001" oninput="calculateZScore()" step="0.5" type="number" value="15"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Standardized Z-Score &amp; Percentile:</span>
+<span class="calc-result-val" id="z-result-val">Z = +1.000 (84.13th Percentile)</span>
+</div>
+<div class="calc-math-steps" id="z-math-steps">
+<strong>Step-by-Step Normal Distribution Calculation:</strong><br/>
+<div class="step-line">• <strong>Standardization Formula:</strong> Z = (X - μ) ÷ σ = (115 - 100) ÷ 15 = 15 ÷ 15 = <strong>+1.000</strong></div>
+<div class="step-line">• <strong>Cumulative Percentile:</strong> P(Z ≤ 1.00) = <strong>0.8413 (84.13%)</strong> | Tail Probability P(Z &gt; 1.00) = <strong>0.1587 (15.87%)</strong></div>
+<div class="step-line">• <strong>Empirical Rule Benchmark:</strong> Observation lies exactly <strong>1.00 standard deviation above the mean</strong> (falls within the central 68.27% bell-curve band).</div>
+</div>
+</div>
+</div>
+<!-- Calculator 2: 10 Distributions Explorer -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 1.2, 2 &amp; 3: Mean &amp; Variance (Theoretical Moments) Explorer for 10 Distributions</div>
+<div class="calc-desc">Select any of the 10 core probability distributions from the curriculum to dynamically compute Expected Value E[X], Variance Var(X), and full mathematical properties.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="param-dist-select">Choose Distribution:</label>
+<select class="calc-input" id="param-dist-select" onchange="updateDistributionExplorer()">
+<option value="bernoulli">1. Bernoulli Distribution B(1, p)</option>
+<option selected="" value="binomial">2. Binomial Distribution B(n, p)</option>
+<option value="uniform_disc">3. Discrete Uniform Distribution U(a, b)</option>
+<option value="poisson">4. Poisson Distribution Poisson(λ)</option>
+<option value="uniform_cont">5. Continuous Uniform Distribution U(a, b)</option>
+<option value="normal">6. Normal Distribution N(μ, σ²)</option>
+<option value="student_t">7. Student's t-Distribution t(k)</option>
+<option value="chi_sq">8. Chi-Squared Distribution χ²(k)</option>
+<option value="exponential">9. Exponential Distribution Exp(λ)</option>
+<option value="logistic">10. Logistic Distribution Log(μ, s)</option>
+</select>
+</div>
+<div class="calc-field" id="field-param1">
+<label class="calc-label" for="input-param1" id="label-param1">Number of Trials (n):</label>
+<input class="calc-input" id="input-param1" oninput="calculateDistributionMoments()" step="1" type="number" value="20"/>
+</div>
+<div class="calc-field" id="field-param2">
+<label class="calc-label" for="input-param2" id="label-param2">Success Probability (p):</label>
+<input class="calc-input" id="input-param2" max="1" min="0" oninput="calculateDistributionMoments()" step="0.05" type="number" value="0.25"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Theoretical Moments (Mean &amp; Variance):</span>
+<span class="calc-result-val" id="moment-result-val">E[X] = 5.000 | Var(X) = 3.750</span>
+</div>
+<div class="calc-math-steps" id="moment-math-steps">
+<strong>Theoretical Moments Breakdown:</strong><br/>
+<div class="step-line">• <strong>Distribution Model:</strong> Binomial Distribution B(n = 20, p = 0.25)</div>
+<div class="step-line">• <strong>Expected Value E[X]:</strong> n × p = 20 × 0.25 = <strong>5.000</strong></div>
+<div class="step-line">• <strong>Variance Var(X):</strong> n × p × (1 - p) = 20 × 0.25 × 0.75 = <strong>3.750</strong> (StdDev σ = 1.936)</div>
+<div class="step-line">• <strong>Core Property:</strong> Counts the number of successes in 20 independent Bernoulli trials with constant success probability p.</div>
+</div>
+</div>
+</div>
+<!-- Calculator 3: Continuous Uniform Calculator -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 3.1: Continuous Uniform Distribution U(a, b) Interval Probability &amp; Density Calculator</div>
+<div class="calc-desc">Calculate constant probability density f(x) and exact sub-interval probability P(x₁ ≤ X ≤ x₂) for a continuous uniform random variable defined on [a, b].</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="u-a">Lower Bound (a):</label>
+<input class="calc-input" id="u-a" oninput="calculateContinuousUniform()" step="1" type="number" value="10"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="u-b">Upper Bound (b):</label>
+<input class="calc-input" id="u-b" oninput="calculateContinuousUniform()" step="1" type="number" value="50"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="u-x1">Sub-Interval Start (x₁):</label>
+<input class="calc-input" id="u-x1" oninput="calculateContinuousUniform()" step="1" type="number" value="20"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="u-x2">Sub-Interval End (x₂):</label>
+<input class="calc-input" id="u-x2" oninput="calculateContinuousUniform()" step="1" type="number" value="35"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Interval Probability:</span>
+<span class="calc-result-val" id="u-result-val">P(20 ≤ X ≤ 35) = 0.3750 (37.50%)</span>
+</div>
+<div class="calc-math-steps" id="u-math-steps">
+<strong>Continuous Uniform Derivation:</strong><br/>
+<div class="step-line">• <strong>Probability Density:</strong> f(x) = 1 ÷ (b - a) = 1 ÷ (50 - 10) = 1 ÷ 40 = <strong>0.0250</strong></div>
+<div class="step-line">• <strong>Sub-Interval Probability:</strong> P(20 ≤ X ≤ 35) = (x₂ - x₁) ÷ (b - a) = (35 - 20) ÷ 40 = 15 ÷ 40 = <strong>0.3750 (37.50%)</strong></div>
+<div class="step-line">• <strong>Mean &amp; Variance:</strong> E[X] = (10 + 50) ÷ 2 = <strong>30.000</strong> | Var(X) = (50 - 10)² ÷ 12 = 1600 ÷ 12 = <strong>133.333</strong> (StdDev σ = 11.547)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
 
         // ==========================================
         // Interactive Distribution Calculators Logic
@@ -1751,6 +2086,5 @@
 
         const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

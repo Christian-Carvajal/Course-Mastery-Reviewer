@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var isDark = savedTheme === 'dark' || (!savedTheme && prefersDark) || savedTheme === null;
+                if (isDark && savedTheme !== 'light') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch(e) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <title>Information Assurance &amp; Security Resources | University Study Guide</title>
+    <link href="../../../global.css" rel="stylesheet"/>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link href="../../../manifest.json" rel="manifest"/>
+    <meta content="#0d9488" name="theme-color"/>
+    <meta content="yes" name="mobile-web-app-capable"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%A1%EF%B8%8F%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+</head>
+<body>
+    <header class="app-header">
+        <h1>🛡️ Information Assurance &amp; Security</h1>
+        <p>Prelim Course Resources &amp; Lecture Slides</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+            <button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+            <span class="nav-title">IAS Prelim Resources</span>
+        </div>
+        <button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+    </nav>
+
+    <div class="container">
+        <div class="resources-page-container">
+            <!-- Term Isolation Switcher -->
+            <div class="resources-term-switcher">
+                <span class="term-tab-pill active">📘 Prelim (3 PDFs)</span>
+                <a href="midterm/resources.html" class="term-tab-pill">📙 Midterm (1 PDF) →</a>
+            </div>
+
+            <!-- Prelim Term Section -->
+            <section class="resources-term-section" id="prelim">
+                <h2><span class="term-icon">📘</span> Prelim Term Slide Decks &amp; Notes</h2>
+                <div class="resources-grid">
+                    <!-- PDF Card: Access Control -->
+                    <div class="resource-file-card">
+                        <div class="resource-file-icon">📄</div>
+                        <div class="resource-file-info">
+                            <h3 class="resource-file-title">Access Control Models &amp; Principles</h3>
+                            <div class="resource-file-meta">
+                                <span class="resource-file-size">💾 20 KB</span>
+                            </div>
+                        </div>
+                        <div class="resource-file-actions">
+                            <button type="button" class="resource-btn-view" onclick="openPdfViewer('prelim/accessControl.pdf', 'Access Control Models &amp; Principles')" title="Present Fullscreen">🖥️ Present Fullscreen</button>
+                            <a href="prelim/accessControl.pdf" download="accessControl.pdf" data-filename="accessControl.pdf" data-pdf-url="prelim/accessControl.pdf" class="resource-btn-download" title="Download PDF">⬇️ Download</a>
+                        </div>
+                    </div>
+
+                    <!-- PDF Card: Foundations & Threat Landscape (Weeks 1-2) -->
+                    <div class="resource-file-card">
+                        <div class="resource-file-icon">📄</div>
+                        <div class="resource-file-info">
+                            <h3 class="resource-file-title">Foundations &amp; Threat Landscape (Weeks 1-2)</h3>
+                            <div class="resource-file-meta">
+                                <span class="resource-file-size">💾 1.03 MB</span>
+                            </div>
+                        </div>
+                        <div class="resource-file-actions">
+                            <button type="button" class="resource-btn-view" onclick="openPdfViewer('prelim/iasWeeks1And2.pdf', 'Foundations &amp; Threat Landscape (Weeks 1-2)')" title="Present Fullscreen">🖥️ Present Fullscreen</button>
+                            <a href="prelim/iasWeeks1And2.pdf" download="iasWeeks1And2.pdf" data-filename="iasWeeks1And2.pdf" data-pdf-url="prelim/iasWeeks1And2.pdf" class="resource-btn-download" title="Download PDF">⬇️ Download</a>
+                        </div>
+                    </div>
+
+                    <!-- PDF Card: Governance & Risk Management (Weeks 3-4) -->
+                    <div class="resource-file-card">
+                        <div class="resource-file-icon">📄</div>
+                        <div class="resource-file-info">
+                            <h3 class="resource-file-title">Governance &amp; Risk Management (Weeks 3-4)</h3>
+                            <div class="resource-file-meta">
+                                <span class="resource-file-size">💾 0.91 MB</span>
+                            </div>
+                        </div>
+                        <div class="resource-file-actions">
+                            <button type="button" class="resource-btn-view" onclick="openPdfViewer('prelim/iasWeeks3And4.pdf', 'Governance &amp; Risk Management (Weeks 3-4)')" title="Present Fullscreen">🖥️ Present Fullscreen</button>
+                            <a href="prelim/iasWeeks3And4.pdf" download="iasWeeks3And4.pdf" data-filename="iasWeeks3And4.pdf" data-pdf-url="prelim/iasWeeks3And4.pdf" class="resource-btn-download" title="Download PDF">⬇️ Download</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Fullscreen PDF Presentation Overlay -->
+    <div class="pdf-presentation-overlay" id="pdf-presentation-overlay" style="display:none;">
+        <div class="pdf-presentation-topbar">
+            <div class="pdf-presentation-info">
+                <div class="pdf-present-icon">🖥️</div>
+                <div>
+                    <h2 id="pdf-presentation-title" class="pdf-presentation-heading">PDF Presentation</h2>
+                    <div class="pdf-presentation-sub">
+                        <span class="pdf-presentation-pill">Presentation Mode</span>
+                        <span class="pdf-presentation-hint">Press <kbd>Esc</kbd> to exit • <kbd>F</kbd> for native fullscreen</span>
+                    </div>
+                </div>
+            </div>
+            <div class="pdf-presentation-toolbar">
+                <button type="button" class="pdf-tool-btn" onclick="toggleNativeFullscreen()" title="Toggle Fullscreen (F)">
+                    <span id="fs-icon">⛶</span> <span class="tool-label">Fullscreen</span>
+                </button>
+                <a id="pdf-presentation-tab-link" href="#" target="_blank" class="pdf-tool-btn" title="Open in new browser tab">
+                    ↗ <span class="tool-label">New Tab</span>
+                </a>
+                <a id="pdf-presentation-download-link" href="#" download class="pdf-tool-btn" title="Download this PDF">
+                    ⬇️ <span class="tool-label">Download</span>
+                </a>
+                <button type="button" class="pdf-tool-btn pdf-tool-close" onclick="closePdfViewer()" title="Exit Presentation (Esc)">
+                    ✕ <span class="tool-label">Close</span>
+                </button>
+            </div>
+        </div>
+        <div class="pdf-presentation-canvas">
+            <iframe id="pdf-viewer-iframe" class="pdf-presentation-iframe" src="" title="PDF Document Presentation" allow="fullscreen"></iframe>
+        </div>
+    </div>
+
+    <script>
+        let currentViewerOpen = false;
+
+        function openPdfViewer(pdfPath, title) {
+            const overlay = document.getElementById('pdf-presentation-overlay');
+            const iframe = document.getElementById('pdf-viewer-iframe');
+            const titleEl = document.getElementById('pdf-presentation-title');
+            const downloadBtn = document.getElementById('pdf-presentation-download-link');
+            const tabBtn = document.getElementById('pdf-presentation-tab-link');
+
+            iframe.src = pdfPath;
+            titleEl.textContent = title;
+            if (downloadBtn) {
+                downloadBtn.href = pdfPath;
+                downloadBtn.setAttribute('data-pdf-url', pdfPath);
+                const safeName = (title || 'document').replace(/[^a-zA-Z0-9_\-\.\s]/g, '').trim();
+                downloadBtn.setAttribute('data-filename', safeName.endsWith('.pdf') ? safeName : safeName + '.pdf');
+            }
+            if (tabBtn) tabBtn.href = pdfPath;
+
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            currentViewerOpen = true;
+        }
+
+        function closePdfViewer() {
+            const overlay = document.getElementById('pdf-presentation-overlay');
+            const iframe = document.getElementById('pdf-viewer-iframe');
+            
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
+
+            iframe.src = '';
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+            currentViewerOpen = false;
+        }
+
+        function toggleNativeFullscreen() {
+            const overlay = document.getElementById('pdf-presentation-overlay');
+            if (!document.fullscreenElement) {
+                if (overlay.requestFullscreen) {
+                    overlay.requestFullscreen();
+                } else if (overlay.webkitRequestFullscreen) {
+                    overlay.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (!currentViewerOpen) return;
+            if (e.key === 'Escape') {
+                closePdfViewer();
+            } else if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) return;
+                toggleNativeFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

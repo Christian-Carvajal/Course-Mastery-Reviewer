@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,474 +18,809 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Governance & Risk Management | University Study Guide</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Governance &amp; Risk Management | University Study Guide</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<meta content="#0d9488" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Information Assurance & Security</h1>
-        <p>Governance & Risk Management — Security Policies, ISO 27001, Risk Management & 78-Question Mastery Quiz</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Governance & Risk Management</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-
-            <!-- PART 1: GOVERNANCE, POLICIES & STANDARDS -->
-            <div class="card">
-                <h2>PART 1: Information Security Governance, Policies & ISO 27001</h2>
-
-                <h3>1.1 What is Information Security Governance?</h3>
-                <p>Security governance is the system by which an organization directs, controls, and oversees its information security strategy. It ensures that security activities align with organizational goals, comply with laws, and manage risks responsibly.</p>
-                
-                <div class="definition-card">
-                    <span class="def-title">Governance vs Management</span>
-                    <ul>
-                        <li><strong>Governance (Leadership & Direction):</strong> Executive leadership sets security objectives, defines risk appetite, allocates resources, and evaluates oversight.</li>
-                        <li><strong>Management (Execution & Operations):</strong> Security teams plan, build, run, and monitor security controls to achieve executive direction.</li>
-                    </ul>
-                </div>
-
-                <h3>1.2 The Document Hierarchy: Policy, Standard, Guideline, Procedure</h3>
-                <p>Organizations govern security through a structured hierarchy of four distinct document types:</p>
-
-                <div class="definition-card">
-                    <span class="def-title">1. Information Security Policy (Mandatory, High-Level)</span>
-                    <p>Executive management's formal statement of intent, rules, and direction regarding security.</p>
-                    <ul>
-                        <li><strong>Characteristics:</strong> Concise, high-level, technology-neutral, mandatory across the organization.</li>
-                        <li><strong>Example:</strong> "All organizational data must be protected against unauthorized access, loss, or disclosure."</li>
-                    </ul>
-                </div>
-
-                <div class="definition-card">
-                    <span class="def-title">2. Standards (Mandatory, Specific)</span>
-                    <p>Mandatory, measurable requirements and baseline rules supporting security policies.</p>
-                    <ul>
-                        <li><strong>Characteristics:</strong> Specific, measurable, enforceable, technology-focused.</li>
-                        <li><strong>Example:</strong> "User passwords must be at least 12 characters, include 3 character classes, and expire every 90 days."</li>
-                    </ul>
-                </div>
-
-                <div class="definition-card">
-                    <span class="def-title">3. Guidelines (Discretionary, Advisory)</span>
-                    <p>Recommended best practices and advisory suggestions that assist with compliance.</p>
-                    <ul>
-                        <li><strong>Characteristics:</strong> Non-mandatory, flexible, advisory context.</li>
-                        <li><strong>Example:</strong> "It is recommended to use password manager software to generate random passphrases."</li>
-                    </ul>
-                </div>
-
-                <div class="definition-card">
-                    <span class="def-title">4. Procedures & Work Instructions (Mandatory, Step-by-Step)</span>
-                    <p>Detailed step-by-step instructions describing exactly how to perform specific tasks or operational processes.</p>
-                    <ul>
-                        <li><strong>Characteristics:</strong> Highly detailed, step-by-step SOPs, operational focus.</li>
-                        <li><strong>Example:</strong> "Step 1: Open AWS IAM Console. Step 2: Click Create User. Step 3: Attach MFA policy..."</li>
-                    </ul>
-                </div>
-
-                <h3>1.3 The ISO/IEC 27001 Framework</h3>
-                <p>ISO/IEC 27001 is the international benchmark standard for establishing, implementing, maintaining, and continually improving an <strong>Information Security Management System (ISMS)</strong>.</p>
-
-                <div class="example-card">
-                    <span class="example-title">Key ISO 27001 Components</span>
-                    <ul>
-                        <li><strong>ISMS Clauses (4 to 10):</strong> Mandatory requirements covering leadership commitment, risk assessment, planning, support, operation, performance evaluation, and continual improvement.</li>
-                        <li><strong>Annex A Controls (93 Controls in ISO 27001:2022):</strong> A comprehensive catalog of security controls organized into 4 themes: Organizational, People, Physical, and Technological.</li>
-                        <li><strong>Statement of Applicability (SoA):</strong> A mandatory document declaring which Annex A controls apply to the organization, which are excluded, and the technical justification for each decision.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- PART 2: RISK MANAGEMENT PROCESS -->
-            <div class="card">
-                <h2>PART 2: Risk Management & Decision-Making Frameworks</h2>
-
-                <h3>2.1 The Risk Management Cycle (ISO 27005)</h3>
-                <p>Risk management is an ongoing, iterative process rather than a one-time audit checklist:</p>
-
-                <div class="formula-card">
-                    <span class="formula-badge">5-Step Risk Management Cycle</span><br>
-                    <span class="formula-text">IDENTIFY &rarr; ANALYZE &rarr; EVALUATE &rarr; TREAT &rarr; MONITOR</span>
-                    <div class="formula-explain">
-                        1. <strong>Context & Identification:</strong> Catalog assets, threats, existing controls, and vulnerabilities.<br>
-                        2. <strong>Risk Analysis:</strong> Determine likelihood and potential impact to calculate risk magnitude.<br>
-                        3. <strong>Risk Evaluation:</strong> Compare calculated risk against organizational risk appetite and tolerance thresholds.<br>
-                        4. <strong>Risk Treatment:</strong> Select and implement treatment strategies (Avoid, Mitigate, Transfer, Accept).<br>
-                        5. <strong>Monitoring & Review:</strong> Continuously monitor residual risks, control effectiveness, and emerging threats.
+<header class="app-header">
+<h1>Information Assurance &amp; Security</h1>
+<p>Governance &amp; Risk Management — Security Policies, ISO 27001, Risk Management &amp; 78-Question Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Governance &amp; Risk Management</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<!-- PART 1: GOVERNANCE, POLICIES & STANDARDS -->
+<div class="card">
+<h2>PART 1: Information Security Governance, Policies &amp; ISO 27001</h2>
+<h3>1.1 What is Information Security Governance?</h3>
+<p>Security governance is the system by which an organization directs, controls, and oversees its information security strategy. It ensures that security activities align with organizational goals, comply with laws, and manage risks responsibly.</p>
+<div class="definition-card">
+<span class="def-title">Governance vs Management</span>
+<ul>
+<li><strong>Governance (Leadership &amp; Direction):</strong> Executive leadership sets security objectives, defines risk appetite, allocates resources, and evaluates oversight.</li>
+<li><strong>Management (Execution &amp; Operations):</strong> Security teams plan, build, run, and monitor security controls to achieve executive direction.</li>
+</ul>
+</div>
+<h3>1.2 The Document Hierarchy: Policy, Standard, Guideline, Procedure</h3>
+<p>Organizations govern security through a structured hierarchy of four distinct document types:</p>
+<div class="definition-card">
+<span class="def-title">1. Information Security Policy (Mandatory, High-Level)</span>
+<p>Executive management's formal statement of intent, rules, and direction regarding security.</p>
+<ul>
+<li><strong>Characteristics:</strong> Concise, high-level, technology-neutral, mandatory across the organization.</li>
+<li><strong>Example:</strong> "All organizational data must be protected against unauthorized access, loss, or disclosure."</li>
+</ul>
+</div>
+<div class="definition-card">
+<span class="def-title">2. Standards (Mandatory, Specific)</span>
+<p>Mandatory, measurable requirements and baseline rules supporting security policies.</p>
+<ul>
+<li><strong>Characteristics:</strong> Specific, measurable, enforceable, technology-focused.</li>
+<li><strong>Example:</strong> "User passwords must be at least 12 characters, include 3 character classes, and expire every 90 days."</li>
+</ul>
+</div>
+<div class="definition-card">
+<span class="def-title">3. Guidelines (Discretionary, Advisory)</span>
+<p>Recommended best practices and advisory suggestions that assist with compliance.</p>
+<ul>
+<li><strong>Characteristics:</strong> Non-mandatory, flexible, advisory context.</li>
+<li><strong>Example:</strong> "It is recommended to use password manager software to generate random passphrases."</li>
+</ul>
+</div>
+<div class="definition-card">
+<span class="def-title">4. Procedures &amp; Work Instructions (Mandatory, Step-by-Step)</span>
+<p>Detailed step-by-step instructions describing exactly how to perform specific tasks or operational processes.</p>
+<ul>
+<li><strong>Characteristics:</strong> Highly detailed, step-by-step SOPs, operational focus.</li>
+<li><strong>Example:</strong> "Step 1: Open AWS IAM Console. Step 2: Click Create User. Step 3: Attach MFA policy..."</li>
+</ul>
+</div>
+<h3>1.3 The ISO/IEC 27001 Framework</h3>
+<p>ISO/IEC 27001 is the international benchmark standard for establishing, implementing, maintaining, and continually improving an <strong>Information Security Management System (ISMS)</strong>.</p>
+<div class="example-card">
+<span class="example-title">Key ISO 27001 Components</span>
+<ul>
+<li><strong>ISMS Clauses (4 to 10):</strong> Mandatory requirements covering leadership commitment, risk assessment, planning, support, operation, performance evaluation, and continual improvement.</li>
+<li><strong>Annex A Controls (93 Controls in ISO 27001:2022):</strong> A comprehensive catalog of security controls organized into 4 themes: Organizational, People, Physical, and Technological.</li>
+<li><strong>Statement of Applicability (SoA):</strong> A mandatory document declaring which Annex A controls apply to the organization, which are excluded, and the technical justification for each decision.</li>
+</ul>
+</div>
+</div>
+<!-- PART 2: RISK MANAGEMENT PROCESS -->
+<div class="card">
+<h2>PART 2: Risk Management &amp; Decision-Making Frameworks</h2>
+<h3>2.1 The Risk Management Cycle (ISO 27005)</h3>
+<p>Risk management is an ongoing, iterative process rather than a one-time audit checklist:</p>
+<div class="formula-card">
+<span class="formula-badge">5-Step Risk Management Cycle</span><br/>
+<span class="formula-text">IDENTIFY → ANALYZE → EVALUATE → TREAT → MONITOR</span>
+<div class="formula-explain">
+                        1. <strong>Context &amp; Identification:</strong> Catalog assets, threats, existing controls, and vulnerabilities.<br/>
+                        2. <strong>Risk Analysis:</strong> Determine likelihood and potential impact to calculate risk magnitude.<br/>
+                        3. <strong>Risk Evaluation:</strong> Compare calculated risk against organizational risk appetite and tolerance thresholds.<br/>
+                        4. <strong>Risk Treatment:</strong> Select and implement treatment strategies (Avoid, Mitigate, Transfer, Accept).<br/>
+                        5. <strong>Monitoring &amp; Review:</strong> Continuously monitor residual risks, control effectiveness, and emerging threats.
                     </div>
-                </div>
-
-                <h3>2.2 The 4 Risk Treatment Options</h3>
-                <div class="definition-card">
-                    <span class="def-title">Selecting Risk Response Strategies</span>
-                    <ul>
-                        <li><strong>1. Risk Mitigation (Reduction):</strong> Implementing security controls (firewalls, encryption, MFA, patching) to reduce vulnerability or impact.</li>
-                        <li><strong>2. Risk Avoidance:</strong> Eliminating the risk entirely by choosing not to engage in the risky activity or retiring a vulnerable system.</li>
-                        <li><strong>3. Risk Transfer (Sharing):</strong> Shifting financial or operational impact to a third party (e.g., purchasing cybersecurity insurance or outsourcing to a managed vendor with SLA indemnification).</li>
-                        <li><strong>4. Risk Acceptance:</strong> Formally deciding to carry the risk without additional controls when the risk falls within tolerance or mitigation costs exceed potential loss. Must be signed off by a named Risk Owner.</li>
-                    </ul>
-                </div>
-
-                <h3>2.3 Inherent Risk vs Residual Risk</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Risk Equation</span><br>
-                    <span class="formula-text">RESIDUAL RISK = INHERENT RISK - CONTROLS</span>
-                    <div class="formula-explain">
-                        • <strong>Inherent Risk:</strong> The raw level of risk present before any security controls or safeguards are applied.<br>
-                        • <strong>Residual Risk:</strong> The remaining risk that exists <em>after</em> security controls have been implemented.<br>
+</div>
+<h3>2.2 The 4 Risk Treatment Options</h3>
+<div class="definition-card">
+<span class="def-title">Selecting Risk Response Strategies</span>
+<ul>
+<li><strong>1. Risk Mitigation (Reduction):</strong> Implementing security controls (firewalls, encryption, MFA, patching) to reduce vulnerability or impact.</li>
+<li><strong>2. Risk Avoidance:</strong> Eliminating the risk entirely by choosing not to engage in the risky activity or retiring a vulnerable system.</li>
+<li><strong>3. Risk Transfer (Sharing):</strong> Shifting financial or operational impact to a third party (e.g., purchasing cybersecurity insurance or outsourcing to a managed vendor with SLA indemnification).</li>
+<li><strong>4. Risk Acceptance:</strong> Formally deciding to carry the risk without additional controls when the risk falls within tolerance or mitigation costs exceed potential loss. Must be signed off by a named Risk Owner.</li>
+</ul>
+</div>
+<h3>2.3 Inherent Risk vs Residual Risk</h3>
+<div class="formula-card">
+<span class="formula-badge">Risk Equation</span><br/>
+<span class="formula-text">RESIDUAL RISK = INHERENT RISK - CONTROLS</span>
+<div class="formula-explain">
+                        • <strong>Inherent Risk:</strong> The raw level of risk present before any security controls or safeguards are applied.<br/>
+                        • <strong>Residual Risk:</strong> The remaining risk that exists <em>after</em> security controls have been implemented.<br/>
                         • <strong>Goal:</strong> Reduce Residual Risk until it is equal to or below the organization's Risk Tolerance threshold.
                     </div>
-                </div>
-
-                <h3>2.4 Risk Matrix & Qualitative vs Quantitative Analysis</h3>
-                <ul>
-                    <li><strong>Qualitative Risk Analysis:</strong> Rates likelihood and impact using subjective scales (High, Medium, Low) on a Risk Matrix grid. Fast and intuitive for prioritizing risks.</li>
-                    <li><strong>Quantitative Risk Analysis:</strong> Assigns numerical monetary values to risk components using financial metrics:
+</div>
+<h3>2.4 Risk Matrix &amp; Qualitative vs Quantitative Analysis</h3>
+<ul>
+<li><strong>Qualitative Risk Analysis:</strong> Rates likelihood and impact using subjective scales (High, Medium, Low) on a Risk Matrix grid. Fast and intuitive for prioritizing risks.</li>
+<li><strong>Quantitative Risk Analysis:</strong> Assigns numerical monetary values to risk components using financial metrics:
                         <ul>
-                            <li><strong>Single Loss Expectancy (SLE):</strong> Asset Value (&times;) Exposure Factor.</li>
-                            <li><strong>Annualized Rate of Occurrence (ARO):</strong> Estimated frequency of occurrence per year.</li>
-                            <li><strong>Annualized Loss Expectancy (ALE):</strong> SLE (&times;) ARO.</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / 79</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Dynamically rendered quiz questions -->
-            </div>
-        </div>
-
-        <!-- TAB 3: QUICK REFERENCE -->
-        <div id="formulas" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2 style="margin:0;">Quick Reference</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-
-                <h2>Quick Reference: Security Governance Documents Hierarchy</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Document Type</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Enforceability</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Level of Detail</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Purpose & Example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Policy</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">High-Level Overview</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Executive management direction & rules (e.g., Information Security Policy, AUP).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Standard</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Specific Metrics</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Measurable baseline requirements (e.g., 12-char password minimum, AES-256 encryption).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Guideline</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Discretionary / Advisory</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Flexible Guidance</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Recommended best practices and advice (e.g., password manager recommendations).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Procedure (SOP)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Step-by-Step Instructions</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Detailed operational steps for performing a specific task (e.g., Firewall Rule Change SOP).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: The 4 Risk Treatment Strategies</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Strategy</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Action Taken</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Real-World Example</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Executive Sign-Off</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Mitigation (Reduction)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Implement controls to shrink likelihood or impact</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Deploying firewalls, MFA, and automated backups.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Security Team / IT Dept</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Avoidance</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Eliminate risk entirely by stopping the risky activity</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Canceling a dangerous software feature or refusing high-risk vendor integrations.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Executive Leadership</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Transfer (Sharing)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Shift financial liability to a third party</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Purchasing Cyber Insurance or establishing vendor SLA penalties.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">CFO / Legal Counsel</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Acceptance</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Formally carry residual risk without adding controls</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Documenting and approving a low-impact legacy system risk.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Named Risk Owner (CISO/CEO)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Quantitative Risk Analysis Formulas</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="formula-card">
-                        <span class="formula-badge">Single Loss Expectancy</span>
-                        <div class="formula-text">SLE = Asset Value (AV) × Exposure Factor (EF)</div>
-                        <div class="formula-explain">Monetary loss incurred each time a single threat event takes place.</div>
-                    </div>
-                    <div class="formula-card">
-                        <span class="formula-badge">Annualized Loss Expectancy</span>
-                        <div class="formula-text">ALE = SLE × Annualized Rate of Occurrence (ARO)</div>
-                        <div class="formula-explain">Total estimated financial loss expected per year for a specific risk.</div>
-                    </div>
-                    <div class="formula-card">
-                        <span class="formula-badge">Qualitative Risk Rank</span>
-                        <div class="formula-text">Risk Exposure = Likelihood × Impact</div>
-                        <div class="formula-explain">Position on a Risk Matrix grid (Red=Critical, Yellow=Moderate, Green=Low).</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: ISO Standards Family & NIST CSF 5 Core Functions</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Framework / Standard</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Focus Area</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Components & Details</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27001:2022</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">ISMS Certification Standard</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Specifies ISMS requirements; 93 Annex A controls in 4 themes (Organizational, People, Physical, Technological). Statement of Applicability (SoA) required.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27002:2022</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Code of Practice / Implementation</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Provides detailed practical guidance and implementation steps for controls listed in Annex A.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27005</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Risk Management Guidelines</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Outlines the 5-step risk cycle: Context/Identify, Analyze, Evaluate, Treat, Monitor.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>NIST CSF</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">5 Core Functions Framework</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Identify</strong> (Asset Management), <strong>Protect</strong> (Access Control, Safeguards), <strong>Detect</strong> (SIEM, Anomalies), <strong>Respond</strong> (Containment, Mitigation), <strong>Recover</strong> (Resilience).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: BCP/DRP Metrics & Regulatory Compliance Framework</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="definition-card">
-                        <span class="def-badge">RTO vs RPO</span>
-                        <p><strong>RTO (Recovery Time Objective):</strong> Max acceptable downtime after disruption.<br><strong>RPO (Recovery Point Objective):</strong> Max acceptable data loss volume measured in time.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">Compliance Standards</span>
-                        <p><strong>PCI-DSS:</strong> Credit card transaction security.<br><strong>HIPAA:</strong> Protected Health Information (PHI).<br><strong>GDPR:</strong> EU personal data privacy rights.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- ==========================================
+<li><strong>Single Loss Expectancy (SLE):</strong> Asset Value (×) Exposure Factor.</li>
+<li><strong>Annualized Rate of Occurrence (ARO):</strong> Estimated frequency of occurrence per year.</li>
+<li><strong>Annualized Loss Expectancy (ALE):</strong> SLE (×) ARO.</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 79</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Dynamically rendered quiz questions -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE -->
+<div class="tab-content" id="formulas">
+<!-- HEADER BAR -->
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+<div>
+<h2 style="margin:0; font-size:1.5rem;">Quick Reference &amp; Summary Matrix</h2>
+<p style="margin:0.25rem 0 0 0; color:var(--text-muted); font-size:0.9rem;">Governance &amp; Risk Management • Four-Pillar Exam-Ready Review Sheet</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+</div>
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>🏛️ Pillar 1:</span> Core Terminology &amp; Keyword Recall Grid
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Essential governance definitions, risk management vocabulary, ISO/NIST standards, and compliance frameworks.</p>
+<div class="table-container" style="overflow-x:auto; margin-top:1rem;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:22%;">Term / Acronym</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:48%;">Exact Domain Definition</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Classification</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Exam Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Security Governance</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The strategic system by which executive leadership directs, controls, oversees, and monitors an organization's security strategy and compliance.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(20,184,166,0.15); color:var(--primary-color); padding:2px 6px; border-radius:4px;">Executive Oversight</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strategic Direction</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Security Management</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The operational and tactical execution layer responsible for designing, deploying, running, and maintaining security controls to achieve governance goals.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(59,130,246,0.15); color:#3b82f6; padding:2px 6px; border-radius:4px;">Operational Execution</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tactical Implementation</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ISMS</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Information Security Management System; a holistic framework of policies, procedures, and controls for managing sensitive enterprise information assets.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">ISO Standard</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">ISO 27001 ISMS</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Policy</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Executive management's concise, high-level, technology-neutral, and <strong>mandatory</strong> statement of intent, security direction, and behavioral rules.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">High-Level Intent</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Standard</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Mandatory</strong>, specific, measurable baseline requirements and technical specifications that enforce policy compliance (e.g., 12-char password minimum).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Measurable Baseline</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Guideline</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Discretionary / Advisory</strong> suggestions and recommended best practices that provide flexible assistance to staff and users.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Discretionary</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Recommended Advice</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Procedure (SOP)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Mandatory</strong>, step-by-step operational instructions describing exactly how to execute a specific operational workflow or configuration task.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Step-by-Step SOP</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Statement of Applicability (SoA)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A formal ISO 27001 document declaring which of the 93 Annex A controls apply, which are excluded, and the technical justification for each.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">ISO 27001 Artifact</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Control Justification</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Inherent Risk</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The baseline raw exposure level present in an organization or process before any safeguards or controls are implemented.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Risk State</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Raw Unmitigated Risk</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Residual Risk</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The remaining risk exposure that persists <em>after</em> defensive security controls and countermeasures have been applied.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Risk State</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Post-Control Risk</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Risk Appetite vs Tolerance</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Appetite:</strong> The broad level of risk leadership is willing to pursue for growth. <strong>Tolerance:</strong> The maximum allowable deviation from target risk levels.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Governance Threshold</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Appetite vs Boundary</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Risk Owner</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A named senior executive or business leader with formal accountability and authority for accepting, mitigating, or financing a specific organizational risk.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Accountability</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Formal Sign-Off</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Recovery Time Objective (RTO)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The maximum allowable duration of clock time a system or business function can remain offline before catastrophic consequences occur.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">BCP/DRP Metric</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">Downtime Duration</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Recovery Point Objective (RPO)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The maximum acceptable age or volume of data loss resulting from an outage, measured as elapsed time between the last valid backup and the incident.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">BCP/DRP Metric</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">Data Loss Volume/Age</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Maximum Tolerable Downtime (MTD)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The absolute upper limit of outage duration an organization can survive without irreparable financial, operational, or reputational death.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">BCP/DRP Metric</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Absolute Survival Limit</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>NIST CSF</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">NIST Cybersecurity Framework structured into 5 continuous Core Functions: <strong>Identify</strong>, <strong>Protect</strong>, <strong>Detect</strong>, <strong>Respond</strong>, and <strong>Recover</strong>.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Framework</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">5 Core Functions</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>📐 Pillar 2:</span> Formula &amp; Calculation Reference Cards
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Quantitative risk valuation formulas, Cost-Benefit Analysis (CBA), ROSI, and BCP downtime equations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem;">
+<!-- CARD 1: SLE -->
+<div class="formula-card">
+<span class="formula-badge">Single Loss Expectancy (SLE)</span>
+<div class="formula-text" style="font-size:1.2rem; margin:0.6rem 0;">
+                            SLE = Asset Value (AV) × Exposure Factor (EF)
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>Asset Value (AV):</strong> Total replacement cost, IP value, and revenue impact of the asset in dollars ($).</li>
+<li><strong>Exposure Factor (EF):</strong> Percentage (0.0 to 1.0) of the asset destroyed or compromised in a single incident.</li>
+</ul>
+<strong>Plain English Reading:</strong> "The dollar loss incurred every single time a specific threat successfully strikes the asset."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+<strong>Worked Example:</strong> Server AV = $100,000; EF = 50% → <span style="font-weight:700;">SLE = $100,000 × 0.50 = $50,000.00</span> per incident.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Single Loss Expectancy is the dollar loss per incident, equal to Asset Value multiplied by Exposure Factor."</strong>
+</div>
+</div></div>
+<!-- CARD 2: ALE -->
+<div class="formula-card">
+<span class="formula-badge">Annualized Loss Expectancy (ALE)</span>
+<div class="formula-text" style="font-size:1.2rem; margin:0.6rem 0;">
+                            ALE = SLE × Annualized Rate of Occurrence (ARO)
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>SLE:</strong> Monetary loss per individual threat occurrence ($).</li>
+<li><strong>ARO:</strong> Estimated frequency or probability of occurrence per year (e.g., 2.0 = twice a year; 0.1 = once every 10 years).</li>
+</ul>
+<strong>Plain English Reading:</strong> "The total expected financial loss from a specific risk annualized over a 12-month period."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+<strong>Worked Example:</strong> SLE = $50,000; ARO = 2.0 events/yr → <span style="font-weight:700; color:#dc2626;">ALE = $50,000 × 2.0 = $100,000.00 / year</span>.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Annualized Loss Expectancy is the yearly risk cost, equal to SLE multiplied by Annualized Rate of Occurrence (ARO)."</strong>
+</div>
+</div></div>
+<!-- CARD 3: CBA & ROSI -->
+<div class="formula-card">
+<span class="formula-badge">Cost-Benefit Analysis (CBA) &amp; ROSI</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            CBA = (ALE<sub>prior</sub> - ALE<sub>post</sub>) - Annual Safeguard Cost
+                        </div>
+<div class="formula-explain">
+<strong>Return on Security Investment (ROSI):</strong>
+<div style="font-size:0.95rem; font-weight:700; margin:0.35rem 0; color:var(--primary-color);">
+                                ROSI = (CBA Net Benefit ÷ Annual Safeguard Cost) × 100%
+                            </div>
+<strong>Plain English Reading:</strong> "A security safeguard is financially justified if the annual risk loss reduction exceeds the annual operational cost of maintaining the control (CBA &gt; $0)."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid #16a34a; border-radius:4px; font-size:0.825rem;">
+<strong>Worked Example:</strong> ALE<sub>prior</sub> = $100,000; ALE<sub>post</sub> = $5,000; Safeguard = $15,000/yr → <span style="font-weight:700; color:#16a34a;">CBA = ($100k - $5k) - $15k = +$80,000/yr (ROSI = +533.3%)</span>.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"A security safeguard is financially viable if annual risk reduction (ALE before minus ALE after) exceeds the safeguard's annual cost."</strong>
+</div>
+</div></div>
+<!-- CARD 4: BCP RESILIENCE METRICS -->
+<div class="formula-card">
+<span class="formula-badge">BCP / DRP Resilience &amp; Buffer Equations</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Tolerability Buffer = MTD - RTO ≥ 0
+                        </div>
+<div class="formula-explain">
+<strong>Data Loss Volume Equation:</strong>
+<div style="font-size:0.95rem; font-weight:700; margin:0.35rem 0; color:var(--primary-color);">
+                                Lost Transactions = RPO (hours) × Transaction Processing Rate (/hr)
+                            </div>
+<strong>Plain English Reading:</strong> "System recovery must complete inside the Maximum Tolerable Downtime (RTO ≤ MTD). RPO dictates the maximum number of transactions lost between backup cycles."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid #dc2626; border-radius:4px; font-size:0.825rem;">
+<strong>Golden BCP Rule:</strong> If <span style="font-weight:700; color:#dc2626;">RTO &gt; MTD</span>, business failure is guaranteed.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Recovery Time Objective (RTO) must always be less than Maximum Tolerable Downtime (MTD) to prevent business ruin."</strong>
+</div>
+</div></div>
+</div>
+</div>
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>📊 Pillar 3:</span> Comparative Analysis Matrices
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Multi-attribute comparison tables contrasting governance hierarchies, treatment strategies, risk models, and standards.</p>
+<!-- MATRIX 1: DOCUMENT HIERARCHY -->
+<h3 style="margin-top:1.25rem; font-size:1.05rem;">1. Security Document Hierarchy: Policy vs. Standard vs. Guideline vs. Procedure</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Document Type</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Enforceability</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Level of Detail</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Change Frequency</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Author &amp; Audience</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Real-World Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Policy</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">High-Level / Abstract</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Rarely (Annual review)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Board / CISO → All Staff</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Acceptable Use Policy (AUP), Corporate InfoSec Policy.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Standard</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Specific &amp; Measurable</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Periodic (Tech updates)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Architects → Engineers</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Password Standard: ≥12 chars, AES-256 cipher required.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Guideline</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Discretionary / Advisory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Flexible / Contextual</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dynamic / Frequent</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Champions → Users</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Recommended password manager tools; remote work best practices.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Procedure (SOP)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Step-by-Step Instructions</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Frequent (Tool changes)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Operations Leads → Sysadmins</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Firewall Rule Change SOP; User Offboarding Checklist.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 2: THE 4 RISK TREATMENT STRATEGIES -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">2. The 4 Risk Treatment Strategies Master Matrix</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Treatment Strategy</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Action Taken</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Target Risk Component</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Real-World Example</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Sign-Off Authority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>1. Mitigation (Reduction)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Deploy administrative, technical, or physical controls.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Reduces Likelihood or Severity</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Installing WAF, enforcing MFA, encrypting databases, patching bugs.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Team / IT Dept</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>2. Avoidance</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Completely discontinue or refuse the high-risk business activity.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Eliminates Exposure entirely</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Canceling a dangerous product feature or shutting down legacy insecure servers.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Executive Leadership</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>3. Transfer (Sharing)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Shift financial or operational impact to an external third party.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Transfers Financial Impact</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Purchasing Cyber Insurance; outsourcing hosting to AWS with SLA liability clauses.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">CFO / Legal Counsel</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>4. Acceptance</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Formally acknowledge and carry the residual risk without adding controls.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Retains Residual Risk</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Documenting and approving a low-impact risk where control cost &gt; potential loss.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Named Executive Risk Owner</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 3: QUALITATIVE VS QUANTITATIVE -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">3. Qualitative vs. Quantitative Risk Analysis</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Attribute</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Qualitative Risk Analysis</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Quantitative Risk Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Primary Methodology</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Subjective rating scales (High / Medium / Low; 1 to 5) mapped to a Risk Matrix.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Mathematical, dollar-denominated calculations (AV, EF, SLE, ARO, ALE).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Speed &amp; Effort</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Fast, intuitive, low resource cost</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">Time-consuming, data-intensive, requires financial history</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Accuracy &amp; Objectivity</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Subjective; prone to human bias and opinion differences.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Objective and verifiable; directly translates to executive budgets.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Best Use Case</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Initial risk triaging, broad risk registers, non-financial asset assessments.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Cost-Benefit Analysis (CBA), insurance valuation, high-capital infrastructure decisions.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 4: BCP/DRP METRICS -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">4. BCP / DRP Resilience Metrics (RTO vs. RPO vs. MTD vs. WRT)</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Resilience Metric</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Dimension Measured</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Core Question Answered</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Target Zero-Loss Cost Impact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>RTO (Recovery Time Objective)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">System Downtime Duration</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"How many hours until the systems are back online?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Requires hot site failover clusters &amp; auto-scaling.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>RPO (Recovery Point Objective)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Loss Volume &amp; Age</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"How many hours of transactional data can we afford to lose permanently?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">RPO = 0 requires real-time synchronous DB replication.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>MTD (Max Tolerable Downtime)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Organizational Survival Limit</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"What is the maximum outage duration before the company collapses?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Absolute threshold benchmark; non-negotiable.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>WRT (Work Recovery Time)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Operational Testing &amp; Catch-Up</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"How long to verify data integrity and resume normal business operations?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Manual data re-entry and QA integrity checks.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 5: FRAMEWORKS COMPARISON -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">5. Security Frameworks &amp; Regulatory Compliance Reference</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Framework / Law</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Governing Domain</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Key Structural Elements</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Compliance Mandate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ISO/IEC 27001:2022</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Global ISMS Management</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Clauses 4–10 (ISMS core), 93 Annex A controls in 4 themes (Organizational, People, Physical, Technological), SoA.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Voluntary third-party certification standard.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>NIST CSF</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Critical Infrastructure / Risk</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">5 Core Functions: Identify, Protect, Detect, Respond, Recover.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Flexible voluntary framework for cybersecurity posture.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>PCI-DSS</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Payment Card Industry</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">12 security requirements covering network segmentation, encryption of cardholder data, and vulnerability scanning.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Mandatory for merchants processing card transactions.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>HIPAA</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Healthcare / PHI (USA)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Privacy Rule, Security Rule (Administrative, Physical, Technical Safeguards), Breach Notification Rule.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Federal legal requirement for covered healthcare entities.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>GDPR</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Personal Data Privacy (EU)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">User consent, right to erasure ("right to be forgotten"), 72-hour breach reporting, up to €20M or 4% global turnover fines.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Strict international legal compliance.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:#dc2626; display:flex; align-items:center; gap:0.5rem;">
+<span>⚠️ Pillar 4:</span> Common Exam Pitfalls &amp; Fallacies
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Crucial exam distinctions regarding governance enforceability, risk treatment assignments, and BCP math.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 1: Standard vs. Guideline Enforceability</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Treating guidelines as mandatory rules or standards as optional.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Standard:</strong> Strictly <strong>MANDATORY</strong> and measurable (auditable compliance).</li>
+<li><strong>Guideline:</strong> Strictly <strong>DISCRETIONARY / ADVISORY</strong> best practices.</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 2: Risk Transfer vs. Risk Avoidance</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Believing purchasing cyber insurance eliminates or avoids risk.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Cyber Insurance:</strong> Is Risk <strong>TRANSFER / SHARING</strong> (shifts financial payout, but operational risk remains).</li>
+<li><strong>Risk Avoidance:</strong> Requires <strong>completely halting</strong> the risky activity.</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 3: Risk Acceptance Governance Rule</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Believing risk acceptance means ignoring a problem or letting developers decide.<br/>
+<strong>The Reality:</strong> Risk acceptance requires formal documented sign-off from a named executive <strong>Risk Owner</strong> (e.g., CISO or Business Unit VP). Risks can never be informally ignored.
+                        </p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 4: SLE vs. ALE Time Horizons</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Confusing single-incident loss with annualized risk expenditure.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>SLE:</strong> Loss incurred per <em>single</em> occurrence.</li>
+<li><strong>ALE:</strong> Total financial loss accumulated across an entire <em>1-year</em> timeframe (SLE × ARO).</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 5: RTO vs. RPO Metric Units</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Confusing downtime duration with lost data volume.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>RTO:</strong> Measures system <em>downtime duration</em> (hours/days offline).</li>
+<li><strong>RPO:</strong> Measures acceptable <em>data loss age/volume</em> (time between last backup and crash).</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 6: MTD Exceeded Failure</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Assuming a system can remain down past MTD as long as backups exist.<br/>
+<strong>The Reality:</strong> If total recovery time exceeds <strong>Maximum Tolerable Downtime (MTD)</strong>, the organization suffers irreparable business death or legal insolvency.
+                        </p>
+</div>
+</div>
+</div>
+<!-- ==========================================
                  Interactive Academic Calculators Section
                  ========================================== -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Interactive Academic Calculators (Live Quantitative Risk & BCP Engines)</h2>
-                
-                <!-- Calculator 1: Quantitative Risk & CBA -->
-                <div class="calc-card">
-                    <div class="calc-title">🧮 Part 2 (2.4): Quantitative Risk Analysis (SLE & ALE) and Cost-Benefit Analysis (CBA / ROSI)</div>
-                    <div class="calc-desc">Calculate Single Loss Expectancy (SLE), Annualized Loss Expectancy (ALE), and evaluate if a security countermeasure is financially justified via Cost-Benefit Analysis.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-av">Asset Value ($):</label>
-                            <input type="number" id="risk-av" class="calc-input" value="100000" step="5000" min="0" oninput="calculateRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-ef-pre">Prior Exposure Factor [%]:</label>
-                            <input type="number" id="risk-ef-pre" class="calc-input" value="50" step="5" min="0" max="100" oninput="calculateRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-aro-pre">Prior Annual Occurrence (ARO):</label>
-                            <input type="number" id="risk-aro-pre" class="calc-input" value="2" step="0.1" min="0" oninput="calculateRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-cost">Annual Safeguard Cost ($):</label>
-                            <input type="number" id="risk-cost" class="calc-input" value="15000" step="500" min="0" oninput="calculateRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-ef-post">Post-Control Exposure Factor [%]:</label>
-                            <input type="number" id="risk-ef-post" class="calc-input" value="10" step="5" min="0" max="100" oninput="calculateRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-aro-post">Post-Control Occurrence (ARO):</label>
-                            <input type="number" id="risk-aro-post" class="calc-input" value="0.5" step="0.1" min="0" oninput="calculateRisk()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Cost-Benefit Analysis (CBA) & ROSI:</span>
-                            <span class="calc-result-val" id="risk-result-val">+$80,000.00 / yr (533.3% ROSI)</span>
-                        </div>
-                        <div class="calc-math-steps" id="risk-math-steps">
-                            <strong>Financial Risk Analysis:</strong><br>
-                            <div class="step-line">• <strong>Pre-Control Loss:</strong> SLE = $100,000 × 50% = $50,000 | <strong>ALE (Prior)</strong> = $50,000 × 2.0 = <strong>$100,000.00 / yr</strong></div>
-                            <div class="step-line">• <strong>Post-Control Loss:</strong> SLE = $100,000 × 10% = $10,000 | <strong>ALE (Post)</strong> = $10,000 × 0.5 = <strong>$5,000.00 / yr</strong></div>
-                            <div class="step-line">• <strong>Annual Risk Reduction:</strong> $100,000 - $5,000 = <strong>$95,000.00 / yr</strong></div>
-                            <div class="step-line">• <strong>CBA Net Benefit:</strong> ALE(prior) - ALE(post) - Cost = $100,000 - $5,000 - $15,000 = <strong style="color:#16a34a;">+$80,000.00 / yr (✓ Cost-Justified)</strong></div>
-                            <div class="step-line">• <strong>Return on Security Investment (ROSI):</strong> ($80,000 ÷ $15,000) × 100% = <strong>+533.33%</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 2: BCP/DRP Outage Loss -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 BCP / DRP Metrics: Outage Downtime Cost, RTO vs. MTD Tolerability Buffer & RPO Data Loss</div>
-                    <div class="calc-desc">Calculate total financial downtime exposure and compare Recovery Time Objective (RTO) against Maximum Tolerable Downtime (MTD) and Recovery Point Objective (RPO).</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="bcp-loss-rate">Hourly Downtime Cost ($/hr):</label>
-                            <input type="number" id="bcp-loss-rate" class="calc-input" value="25000" step="1000" min="0" oninput="calculateBCPMetrics()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bcp-rto">Recovery Time Objective - RTO (hrs):</label>
-                            <input type="number" id="bcp-rto" class="calc-input" value="4" step="0.5" min="0.1" oninput="calculateBCPMetrics()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bcp-mtd">Max Tolerable Downtime - MTD (hrs):</label>
-                            <input type="number" id="bcp-mtd" class="calc-input" value="12" step="1" min="0.1" oninput="calculateBCPMetrics()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bcp-rpo">Recovery Point Objective - RPO (hrs):</label>
-                            <input type="number" id="bcp-rpo" class="calc-input" value="1" step="0.25" min="0" oninput="calculateBCPMetrics()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bcp-tx-rate">Transactions Processed / hr:</label>
-                            <input type="number" id="bcp-tx-rate" class="calc-input" value="1200" step="100" min="0" oninput="calculateBCPMetrics()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Outage Cost & Tolerability Status:</span>
-                            <span class="calc-result-val" id="bcp-result-val">Total Loss: $100,000.00 | Tolerable (+8.0h Buffer)</span>
-                        </div>
-                        <div class="calc-math-steps" id="bcp-math-steps">
-                            <strong>BCP/DRP Resilience Assessment:</strong><br>
-                            <div class="step-line">• <strong>Total Outage Cost:</strong> 4.0 hrs (RTO) × $25,000 / hr = <strong>$100,000.00</strong></div>
-                            <div class="step-line">• <strong>Tolerability Margin (MTD - RTO):</strong> 12.0 hrs (MTD) - 4.0 hrs (RTO) = <strong style="color:#16a34a;">+8.0 hrs Buffer</strong> (✓ RTO within MTD limits)</div>
-                            <div class="step-line">• <strong>Data Loss Exposure (RPO):</strong> 1.0 hr × 1,200 tx/hr = <strong>1,200 transactions</strong> at risk of permanent data loss between backup intervals.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: Inherent vs Residual Risk -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 2 (2.3): Inherent Risk vs. Residual Risk & Control Mitigation Efficiency Calculator</div>
-                    <div class="calc-desc">Quantify baseline inherent risk exposure before controls and calculate the final residual risk remaining after security control implementation.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="inh-av">Asset Replacement Value ($):</label>
-                            <input type="number" id="inh-av" class="calc-input" value="250000" step="10000" min="1000" oninput="calculateInherentResidualRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="inh-score">Inherent Threat Severity (1-10):</label>
-                            <input type="number" id="inh-score" class="calc-input" value="8" step="1" min="1" max="10" oninput="calculateInherentResidualRisk()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="ctrl-eff">Control Mitigation Efficiency (%):</label>
-                            <input type="number" id="ctrl-eff" class="calc-input" value="85" step="5" min="0" max="100" oninput="calculateInherentResidualRisk()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Residual Risk & Mitigation Value:</span>
-                            <span class="calc-result-val" id="inh-result-val">Residual Risk: $30,000.00 (85% Mitigated)</span>
-                        </div>
-                        <div class="calc-math-steps" id="inh-math-steps">
-                            <strong>Inherent & Residual Risk Breakdown:</strong><br>
-                            <div class="step-line">• <strong>Inherent Financial Exposure:</strong> $250,000 × (8 ÷ 10) = <strong>$200,000.00</strong> (Raw risk without controls)</div>
-                            <div class="step-line">• <strong>Mitigated Risk Value:</strong> $200,000 × 85% = <strong>$170,000.00 reduction</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
+<div class="card" style="margin-top:1.5rem;">
+<h2>Interactive Academic Calculators (Live Quantitative Risk &amp; BCP Engines)</h2>
+<!-- Calculator 1: Quantitative Risk & CBA -->
+<div class="calc-card">
+<div class="calc-title">🧮 Part 2 (2.4): Quantitative Risk Analysis (SLE &amp; ALE) and Cost-Benefit Analysis (CBA / ROSI)</div>
+<div class="calc-desc">Calculate Single Loss Expectancy (SLE), Annualized Loss Expectancy (ALE), and evaluate if a security countermeasure is financially justified via Cost-Benefit Analysis.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="risk-av">Asset Value ($):</label>
+<input class="calc-input" id="risk-av" min="0" oninput="calculateRisk()" step="5000" type="number" value="100000"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-ef-pre">Prior Exposure Factor [%]:</label>
+<input class="calc-input" id="risk-ef-pre" max="100" min="0" oninput="calculateRisk()" step="5" type="number" value="50"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-aro-pre">Prior Annual Occurrence (ARO):</label>
+<input class="calc-input" id="risk-aro-pre" min="0" oninput="calculateRisk()" step="0.1" type="number" value="2"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-cost">Annual Safeguard Cost ($):</label>
+<input class="calc-input" id="risk-cost" min="0" oninput="calculateRisk()" step="500" type="number" value="15000"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-ef-post">Post-Control Exposure Factor [%]:</label>
+<input class="calc-input" id="risk-ef-post" max="100" min="0" oninput="calculateRisk()" step="5" type="number" value="10"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-aro-post">Post-Control Occurrence (ARO):</label>
+<input class="calc-input" id="risk-aro-post" min="0" oninput="calculateRisk()" step="0.1" type="number" value="0.5"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Cost-Benefit Analysis (CBA) &amp; ROSI:</span>
+<span class="calc-result-val" id="risk-result-val">+$80,000.00 / yr (533.3% ROSI)</span>
+</div>
+<div class="calc-math-steps" id="risk-math-steps">
+<strong>Financial Risk Analysis:</strong><br/>
+<div class="step-line">• <strong>Pre-Control Loss:</strong> SLE = $100,000 × 50% = $50,000 | <strong>ALE (Prior)</strong> = $50,000 × 2.0 = <strong>$100,000.00 / yr</strong></div>
+<div class="step-line">• <strong>Post-Control Loss:</strong> SLE = $100,000 × 10% = $10,000 | <strong>ALE (Post)</strong> = $10,000 × 0.5 = <strong>$5,000.00 / yr</strong></div>
+<div class="step-line">• <strong>Annual Risk Reduction:</strong> $100,000 - $5,000 = <strong>$95,000.00 / yr</strong></div>
+<div class="step-line">• <strong>CBA Net Benefit:</strong> ALE(prior) - ALE(post) - Cost = $100,000 - $5,000 - $15,000 = <strong style="color:#16a34a;">+$80,000.00 / yr (✓ Cost-Justified)</strong></div>
+<div class="step-line">• <strong>Return on Security Investment (ROSI):</strong> ($80,000 ÷ $15,000) × 100% = <strong>+533.33%</strong></div>
+</div>
+</div>
+</div>
+<!-- Calculator 2: BCP/DRP Outage Loss -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 BCP / DRP Metrics: Outage Downtime Cost, RTO vs. MTD Tolerability Buffer &amp; RPO Data Loss</div>
+<div class="calc-desc">Calculate total financial downtime exposure and compare Recovery Time Objective (RTO) against Maximum Tolerable Downtime (MTD) and Recovery Point Objective (RPO).</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="bcp-loss-rate">Hourly Downtime Cost ($/hr):</label>
+<input class="calc-input" id="bcp-loss-rate" min="0" oninput="calculateBCPMetrics()" step="1000" type="number" value="25000"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bcp-rto">Recovery Time Objective - RTO (hrs):</label>
+<input class="calc-input" id="bcp-rto" min="0.1" oninput="calculateBCPMetrics()" step="0.5" type="number" value="4"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bcp-mtd">Max Tolerable Downtime - MTD (hrs):</label>
+<input class="calc-input" id="bcp-mtd" min="0.1" oninput="calculateBCPMetrics()" step="1" type="number" value="12"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bcp-rpo">Recovery Point Objective - RPO (hrs):</label>
+<input class="calc-input" id="bcp-rpo" min="0" oninput="calculateBCPMetrics()" step="0.25" type="number" value="1"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bcp-tx-rate">Transactions Processed / hr:</label>
+<input class="calc-input" id="bcp-tx-rate" min="0" oninput="calculateBCPMetrics()" step="100" type="number" value="1200"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Outage Cost &amp; Tolerability Status:</span>
+<span class="calc-result-val" id="bcp-result-val">Total Loss: $100,000.00 | Tolerable (+8.0h Buffer)</span>
+</div>
+<div class="calc-math-steps" id="bcp-math-steps">
+<strong>BCP/DRP Resilience Assessment:</strong><br/>
+<div class="step-line">• <strong>Total Outage Cost:</strong> 4.0 hrs (RTO) × $25,000 / hr = <strong>$100,000.00</strong></div>
+<div class="step-line">• <strong>Tolerability Margin (MTD - RTO):</strong> 12.0 hrs (MTD) - 4.0 hrs (RTO) = <strong style="color:#16a34a;">+8.0 hrs Buffer</strong> (✓ RTO within MTD limits)</div>
+<div class="step-line">• <strong>Data Loss Exposure (RPO):</strong> 1.0 hr × 1,200 tx/hr = <strong>1,200 transactions</strong> at risk of permanent data loss between backup intervals.</div>
+</div>
+</div>
+</div>
+<!-- Calculator 3: Inherent vs Residual Risk -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 2 (2.3): Inherent Risk vs. Residual Risk &amp; Control Mitigation Efficiency Calculator</div>
+<div class="calc-desc">Quantify baseline inherent risk exposure before controls and calculate the final residual risk remaining after security control implementation.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="inh-av">Asset Replacement Value ($):</label>
+<input class="calc-input" id="inh-av" min="1000" oninput="calculateInherentResidualRisk()" step="10000" type="number" value="250000"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="inh-score">Inherent Threat Severity (1-10):</label>
+<input class="calc-input" id="inh-score" max="10" min="1" oninput="calculateInherentResidualRisk()" step="1" type="number" value="8"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="ctrl-eff">Control Mitigation Efficiency (%):</label>
+<input class="calc-input" id="ctrl-eff" max="100" min="0" oninput="calculateInherentResidualRisk()" step="5" type="number" value="85"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Residual Risk &amp; Mitigation Value:</span>
+<span class="calc-result-val" id="inh-result-val">Residual Risk: $30,000.00 (85% Mitigated)</span>
+</div>
+<div class="calc-math-steps" id="inh-math-steps">
+<strong>Inherent &amp; Residual Risk Breakdown:</strong><br/>
+<div class="step-line">• <strong>Inherent Financial Exposure:</strong> $250,000 × (8 ÷ 10) = <strong>$200,000.00</strong> (Raw risk without controls)</div>
+<div class="step-line">• <strong>Mitigated Risk Value:</strong> $200,000 × 85% = <strong>$170,000.00 reduction</strong></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
 
         // ==========================================
         // Interactive Quantitative Risk & BCP Logic
@@ -1567,6 +1903,5 @@
 
         const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

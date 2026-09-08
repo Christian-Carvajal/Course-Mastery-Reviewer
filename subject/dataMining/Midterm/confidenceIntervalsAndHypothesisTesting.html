@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var isDark = savedTheme === 'dark' || (!savedTheme && prefersDark) || savedTheme === null;
+                if (isDark && savedTheme !== 'light') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch(e) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <title>Confidence Intervals &amp; Hypothesis Testing | Data Mining &amp; Data Science</title>
+    <link href="../../../global.css" rel="stylesheet"/>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link href="../../../manifest.json" rel="manifest"/>
+    <meta content="#0d9488" name="theme-color"/>
+    <meta content="yes" name="mobile-web-app-capable"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%8A%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+</head>
+<body>
+    <header class="app-header">
+        <h1>Data Mining &amp; Data Science</h1>
+        <p>Confidence Intervals &amp; Hypothesis Testing — From Estimating Parameters to Deciding Yes or No (Midterm Term • Lecture Deck 3rd Year)</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a class="nav-btn-home" href="../../../index.html#midterm">&larr; Return to Midterm Portal</a>
+            <button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">&#128100; Cloud Sync</button>
+            <span class="nav-title">Confidence Intervals &amp; Hypothesis Testing</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" id="nav-btn-quickref" onclick="openQuickRefTab('matrix')">Quick Reference</button>
+        </div>
+        <button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+    </nav>
+
+    <div class="container">
+        <!-- TAB 1: REVIEWER / STUDY GUIDE -->
+        <div class="tab-content active" id="reviewer">
+
+            <!-- MODULE HERO HEADER CARD -->
+            <div class="card">
+                <div class="badge-container" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+                    <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">BSCS 3rd Year</span>
+                    <span class="badge" style="background:rgba(59,130,246,0.15); color:#2563eb; font-weight:700;">Data Mining Midterm</span>
+                    <span class="badge" style="background:rgba(147,51,234,0.15); color:#9333ea; font-weight:700;">62-Slide Lecture Deck</span>
+                    <a href="confidenceHypothesisWorkExamples.html" class="badge" style="background:rgba(16,185,129,0.18); color:#059669; font-weight:700; text-decoration:none;" title="Open Companion Problem Set">&#128221; Companion Problem Set &amp; 3-Line Derivations</a>
+                    <a href="../../Resources/dataMiningResources/midterm/resources.html" class="badge" style="background:rgba(245,158,11,0.18); color:#d97706; font-weight:700; text-decoration:none;" title="View Midterm Lecture PDF (confidenceIntervalsHypothesisTesting.pdf)">&#128194; Lecture Slide PDF (confidenceIntervalsHypothesisTesting.pdf)</a>
+                </div>
+                <h1 style="margin-top:0; font-size:1.85rem; color:var(--text-dark-color);">STATISTICS &bull; PART 2: CONFIDENCE INTERVALS &amp; HYPOTHESIS TESTING</h1>
+                <p style="font-size:1.05rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">
+                    From estimating where a parameter lives, to deciding yes or no &mdash; A comprehensive lecture deck for learners of inferential statistics.
+                </p>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <h3 style="margin:0 0 0.5rem 0; font-size:1.05rem; color:var(--text-dark-color);">&#128269; What's Inside: Two Halves of the Same Big Idea</h3>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        Statistical inference draws conclusions about an entire <strong>population</strong> from nothing but an observed <strong>sample</strong>. There are two primary ways to do it:
+                    </p>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.75rem;">
+                        <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                            <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">PART 1: Confidence Intervals (Slides 2&ndash;32)</strong>
+                            <ul style="margin:0; padding-left:1.2rem; font-size:0.85rem; line-height:1.5;">
+                                <li><strong>The Problem:</strong> A point estimate is just a lucky guess</li>
+                                <li><strong>Confidence Level:</strong> How sure is sure? (1 &minus; &alpha;)</li>
+                                <li><strong>The Shape of Every Interval:</strong> Point Estimate &plusmn; Reliability Factor &times; SE</li>
+                                <li><strong>One Population:</strong> Variance Known (Z) vs Variance Unknown (Student's T)</li>
+                                <li><strong>Trade-off:</strong> Confidence vs Precision; The Three Levers</li>
+                                <li><strong>Two Populations:</strong> Dependent (paired) &amp; Independent samples (pooled variance)</li>
+                                <li><strong>Real-World Case Study:</strong> Al Bundy Shoe Shop inventory optimization</li>
+                            </ul>
+                        </div>
+                        <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                            <strong style="color:#2563eb; display:block; margin-bottom:0.25rem;">PART 2: Hypothesis Testing (Slides 33&ndash;62)</strong>
+                            <ul style="margin:0; padding-left:1.2rem; font-size:0.85rem; line-height:1.5;">
+                                <li><strong>Why Testing:</strong> When decisions require a strict Yes or No</li>
+                                <li><strong>The 4 Steps:</strong> Formulate, Choose &alpha;, Compute statistic, Decide</li>
+                                <li><strong>Null (H&#8320;) vs Alternative (H&#8321;):</strong> Presumption of innocence</li>
+                                <li><strong>Rejection Regions &amp; Errors:</strong> Type I (&alpha;) vs Type II (&beta;), Power (1 &minus; &beta;)</li>
+                                <li><strong>The 5 Core Tests:</strong> 1-sample Z &amp; T, paired T, 2-sample Z &amp; pooled T</li>
+                                <li><strong>The p-Value:</strong> Definition, decision rule, and universal supremacy</li>
+                                <li><strong>Real-World Case Study:</strong> Spark Fortress Inc. Gender Pay Gap analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PART 1: CONFIDENCE INTERVALS (SLIDES 2 - 32) -->
+            <div class="card" style="border-left: 5px solid var(--primary-color);">
+                <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">PART 1 &bull; SLIDES 2&ndash;6</span>
+                <h2 id="ci-foundation" style="margin-top:0.35rem;">Part 1: Confidence Intervals &mdash; Estimating Where the Truth Lives</h2>
+                <p style="color:var(--text-muted); font-size:0.95rem; margin-top:-0.25rem;">
+                    Moving beyond fragile single-number guesses to honest, mathematically sound probability intervals.
+                </p>
+
+                <!-- SLIDE 3: THE PROBLEM -->
+                <h3 id="slide-3-problem" style="margin-top:1.25rem; font-size:1.1rem; color:var(--primary-color);">Slide 3: The Problem &mdash; A Point Estimate Is a Lucky Guess</h3>
+                <p>
+                    Imagine a food critic survey covers <strong>5% of the restaurants in London</strong> and reports an average meal price of <strong>&pound;22.50</strong>.
+                </p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:0.75rem 0;">
+                    <div style="padding:0.75rem; background:rgba(239,68,68,0.06); border-left:3px solid #ef4444; border-radius:4px;">
+                        <strong style="color:#dc2626;">The Fragile Reality:</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.875rem;">
+                            The probability that the true average meal price across <em>all</em> London restaurants is <strong>exactly &pound;22.500000...</strong> is effectively <strong>zero</strong>. A single sample mean (a point estimate) is almost guaranteed to be wrong by at least a few pennies.
+                        </p>
+                    </div>
+                    <div style="padding:0.75rem; background:rgba(16,185,129,0.06); border-left:3px solid #10b981; border-radius:4px;">
+                        <strong style="color:#059669;">The Honest Solution:</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.875rem;">
+                            Instead of giving a single number and pretending it is certain, state a <strong>range</strong> and attach a <strong>confidence level</strong> to it: <em>"We are 95% confident the true London average meal sits between &pound;20.80 and &pound;24.20."</em>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SLIDE 4: CONFIDENCE LEVEL -->
+                <h3 id="slide-4-confidence-level" style="margin-top:1.5rem; font-size:1.1rem; color:var(--primary-color);">Slide 4: Confidence Level &mdash; How Sure Is Sure? (1 &minus; &alpha;)</h3>
+                <p>
+                    The confidence level is written mathematically as <strong>1 &minus; &alpha;</strong>, where <strong>&alpha;</strong> (alpha) is the significance level, bounded between 0 and 1:
+                </p>
+                <div class="table-container">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Confidence Level (1 &minus; &alpha;)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Significance Level (&alpha;)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Split Tail Probability (&alpha; / 2)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Standard Z Critical Value (z<sub>&alpha;/2</sub>)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Typical Use Case</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">90% (0.90)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">0.10</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">0.05</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">1.645</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Exploratory analysis, quick business surveys</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700; background:rgba(13,148,136,0.08);">95% (0.95)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(13,148,136,0.08);">0.05</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(13,148,136,0.08);">0.025</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700; background:rgba(13,148,136,0.08);">1.960</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(13,148,136,0.08);"><strong>The Academic &amp; Industry Default Standard</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">99% (0.99)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">0.01</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">0.005</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">2.576 (~2.58)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Clinical trials, aerospace, high-stakes finance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top:0.75rem; padding:0.6rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.875rem;">
+                    <strong style="color:var(--primary-color);">&#9888; Crucial Exam Distinction: What 95% Confidence Actually Means</strong><br/>
+                    It does <em>NOT</em> mean there is a 95% probability that the true population mean &mu; lies within this particular calculated interval. The true parameter &mu; is a <strong>fixed, unchanging constant</strong> &mdash; it does not jump around! Rather, it means: <em>"If we were to repeat this sampling procedure 100 times and calculate 100 different confidence intervals, exactly 95 of those intervals would capture the true population mean &mu;, and 5 would miss."</em>
+                </div>
+
+                <!-- SLIDE 5: THE SHAPE OF EVERY INTERVAL -->
+                <h3 id="slide-5-shape" style="margin-top:1.5rem; font-size:1.1rem; color:var(--primary-color);">Slide 5: The Shape of Every Interval &mdash; One Formula, Three Ingredients</h3>
+                <p>Every confidence interval across all of statistics shares an identical underlying mathematical architecture:</p>
+                <div style="text-align:center; padding:1rem; background:var(--card-elevated-bg); border-radius:8px; margin:0.75rem 0; border:1px dashed var(--primary-color);">
+                    <div style="font-size:1.35rem; font-weight:700; color:var(--text-dark-color);">
+                        Confidence Interval = Point Estimate &plusmn; Reliability Factor &times; Standard Error
+                    </div>
+                    <div style="font-size:0.9rem; color:var(--text-muted); margin-top:0.35rem;">
+                        CI = [ Point Estimate &minus; Margin of Error , Point Estimate + Margin of Error ]
+                    </div>
+                </div>
+                <ul style="line-height:1.6; font-size:0.9rem;">
+                    <li><strong>Point Estimate:</strong> The best single guess computed directly from the sample (e.g., sample mean x̄ or difference in sample means x̄&#8321; &minus; x̄&#8322;).</li>
+                    <li><strong>Reliability Factor:</strong> A critical multiplier chosen from a theoretical probability distribution (Z or Student's T) matching the chosen confidence level (1 &minus; &alpha;).</li>
+                    <li><strong>Standard Error (SE):</strong> The standard deviation of the sampling distribution, measuring how much sample estimates bounce around from sample to sample.</li>
+                </ul>
+
+                <!-- SLIDE 6: TWO SITUATIONS -->
+                <h3 id="slide-6-two-situations" style="margin-top:1.5rem; font-size:1.1rem; color:var(--primary-color);">Slide 6: Two Fundamental Situations &mdash; Is Population Variance Known?</h3>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.75rem;">
+                    <div style="padding:1rem; background:rgba(13,148,136,0.06); border:1px solid rgba(13,148,136,0.3); border-radius:6px;">
+                        <h4 style="margin:0 0 0.5rem 0; color:var(--primary-color); font-size:1rem;">Situation A: Variance Known (&sigma; is known)</h4>
+                        <p style="margin:0; font-size:0.875rem; line-height:1.5;">
+                            When the true population standard deviation <strong>&sigma;</strong> is known from historic census data or long-term production logs, we use the <strong>Standard Normal Z-Distribution</strong>.
+                        </p>
+                        <div style="margin-top:0.5rem; font-weight:700; font-size:0.95rem; color:var(--primary-color);">
+                            Reliability Factor = z<sub>&alpha;/2</sub> &nbsp;|&nbsp; SE = &sigma; / &radic;n
+                        </div>
+                    </div>
+                    <div style="padding:1rem; background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.3); border-radius:6px;">
+                        <h4 style="margin:0 0 0.5rem 0; color:#2563eb; font-size:1rem;">Situation B: Variance Unknown (&sigma; is unknown)</h4>
+                        <p style="margin:0; font-size:0.875rem; line-height:1.5;">
+                            When population variance is unknown (almost all real-world data science!), we must estimate &sigma; using sample standard deviation <strong>s</strong>. This introduces extra uncertainty, requiring <strong>Student's T-Distribution</strong> with degrees of freedom <strong>df = n &minus; 1</strong>.
+                        </p>
+                        <div style="margin-top:0.5rem; font-weight:700; font-size:0.95rem; color:#2563eb;">
+                            Reliability Factor = t<sub>n&minus;1, &alpha;/2</sub> &nbsp;|&nbsp; SE = s / &radic;n
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDES 7 - 11: CASE 1 (ONE POPULATION, VARIANCE KNOWN) -->
+            <div class="card" style="border-left: 5px solid #2563eb;">
+                <span class="badge" style="background:rgba(59,130,246,0.15); color:#2563eb; font-weight:700;">CASE 1 &bull; SLIDES 7&ndash;11</span>
+                <h2 id="ci-case-1" style="margin-top:0.35rem;">Case 1: One Population Mean &mdash; Population Variance Known</h2>
+                
+                <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:6px; margin:0.75rem 0; border:1px solid var(--border-color);">
+                    <div style="font-size:1.15rem; font-weight:700; text-align:center; color:var(--text-dark-color);">
+                        x̄ &plusmn; z<sub>&alpha;/2</sub> &times; (&sigma; &divide; &radic;n)
+                    </div>
+                    <p style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin:0.5rem 0 0 0;">
+                        Standard Error: SE = &sigma; / &radic;n &nbsp;&bull;&nbsp; Margin of Error: ME = z<sub>&alpha;/2</sub> &times; (&sigma; / &radic;n)
+                    </p>
+                </div>
+
+                <!-- SLIDE 7 & 9: WORKED EXAMPLE DATA SCIENTIST SALARY -->
+                <h3 id="slide-9-salary-worked" style="margin-top:1.25rem; font-size:1.05rem; color:#2563eb;">Slide 9: Worked Example &mdash; 95% Confidence Interval for Data Scientist Salaries</h3>
+                <p style="font-size:0.9rem;">
+                    A staffing agency draws a random sample of <strong>n = 30</strong> data scientists. The sample mean salary is <strong>x̄ = $100,200</strong>. Historical market records show a known population standard deviation of <strong>&sigma; = $15,000</strong>. Construct a 95% confidence interval for the true mean salary &mu;.
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Step-by-Step Derivation:</strong><br/>
+                    1. <strong>Identify Given Parameters:</strong> n = 30, x̄ = 100,200, &sigma; = 15,000, 1 &minus; &alpha; = 0.95 &rarr; &alpha; = 0.05, &alpha;/2 = 0.025.<br/>
+                    2. <strong>Reliability Factor:</strong> From the Standard Normal Table, z<sub>0.025</sub> = <strong>1.96</strong>.<br/>
+                    3. <strong>Standard Error:</strong> SE = &sigma; / &radic;n = 15,000 / &radic;30 = 15,000 / 5.4772 = <strong>$2,738.61</strong> (~$2,739).<br/>
+                    4. <strong>Margin of Error:</strong> ME = 1.96 &times; 2,738.61 = <strong>$5,367.68</strong> (~$5,368).<br/>
+                    5. <strong>Confidence Interval Boundaries:</strong><br/>
+                    &nbsp;&nbsp;&bull; Lower Limit = 100,200 &minus; 5,368 = <strong>$94,832</strong><br/>
+                    &nbsp;&nbsp;&bull; Upper Limit = 100,200 + 5,368 = <strong>$105,568</strong><br/>
+                    6. <strong>Sentence Conclusion:</strong> <em>"We are 95% confident that the true mean annual salary of all data scientists in the target market lies between $94,832 and $105,568."</em>
+                </div>
+
+                <!-- SLIDE 10: THE TRADEOFF -->
+                <h3 id="slide-10-tradeoff" style="margin-top:1.5rem; font-size:1.05rem; color:#2563eb;">Slide 10: The Trade-off &mdash; More Confidence Costs Precision</h3>
+                <p style="font-size:0.9rem;">
+                    What happens if the CEO demands <strong>99% confidence</strong> instead of 95%?
+                </p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.5rem;">
+                    <div style="padding:0.75rem; background:rgba(13,148,136,0.06); border:1px solid rgba(13,148,136,0.25); border-radius:6px;">
+                        <strong>95% Confidence (z = 1.96):</strong><br/>
+                        ME = 1.96 &times; 2,739 = $5,368<br/>
+                        Interval: <strong>[$94,832, $105,568]</strong><br/>
+                        Total Span (Width): <strong>$10,736</strong>
+                    </div>
+                    <div style="padding:0.75rem; background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.25); border-radius:6px;">
+                        <strong>99% Confidence (z = 2.58):</strong><br/>
+                        ME = 2.58 &times; 2,739 = $7,067<br/>
+                        Interval: <strong>[$93,133, $107,267]</strong><br/>
+                        Total Span (Width): <strong>$14,134</strong> (31.6% wider!)
+                    </div>
+                </div>
+
+                <!-- SLIDE 11: INTUITION CHECK -->
+                <div style="margin-top:1rem; padding:0.65rem 0.9rem; background:rgba(245,158,11,0.08); border-left:3px solid #d97706; border-radius:4px; font-size:0.875rem;">
+                    <strong style="color:#d97706;">&#128161; Slide 11 Intuition Check: How Wide Is Too Wide?</strong><br/>
+                    Suppose you are asked to estimate the age of a university student enrolled in an online course with no other information available:<br/>
+                    &bull; <em>"Between 0 and 120 years old"</em> &rarr; <strong>100% confidence, but completely useless.</strong><br/>
+                    &bull; <em>"Between 21.4 and 21.6 years old"</em> &rarr; <strong>Extremely precise, but almost certainly wrong (low confidence).</strong><br/>
+                    A confidence interval is an explicit balancing act between <strong>certainty</strong> (confidence level) and <strong>usefulness</strong> (precision/width).
+                </div>
+            </div>
+
+            <!-- SLIDES 12 - 16: STUDENT'S T & CASE 2 (VARIANCE UNKNOWN) -->
+            <div class="card" style="border-left: 5px solid #9333ea;">
+                <span class="badge" style="background:rgba(147,51,234,0.15); color:#9333ea; font-weight:700;">STUDENT'S T &bull; SLIDES 12&ndash;16</span>
+                <h2 id="ci-case-2" style="margin-top:0.35rem;">Student's T-Distribution &amp; Case 2: Population Variance Unknown</h2>
+
+                <!-- SLIDE 12: A SHORT STORY -->
+                <h3 id="slide-12-gosset" style="margin-top:1.25rem; font-size:1.05rem; color:#9333ea;">Slide 12: A Short Story &mdash; The Statistician Who Wasn't Allowed a Name</h3>
+                <p style="font-size:0.9rem; line-height:1.6;">
+                    In 1899, <strong>William Sealy Gosset</strong> was hired as an experimental brewer and chemist at the <strong>Guinness Brewery in Dublin, Ireland</strong>. Gosset faced a serious operational headache: Guinness wanted to evaluate the quality of barley yields, but testing large batches was expensive and destroyed the beer. Gosset had to work with tiny samples &mdash; often as small as <strong>n = 3 or 5</strong>.
+                </p>
+                <p style="font-size:0.9rem; line-height:1.6;">
+                    When Gosset calculated standard Z-scores on these tiny samples, the intervals were systematically too narrow, and real errors occurred far more frequently than the theoretical 5%. Because Guinness strictly forbade its employees from publishing any scientific papers (to protect industrial trade secrets), Gosset published his discovery in 1908 in <em>Biometrika</em> under the humble pen name <strong>"Student"</strong>. It was later championed and mathematically generalized by Ronald A. Fisher as the legendary <strong>Student's T-Distribution</strong>.
+                </p>
+
+                <!-- SLIDE 13: PROPERTIES OF STUDENT'S T -->
+                <h3 id="slide-13-properties" style="margin-top:1.25rem; font-size:1.05rem; color:#9333ea;">Slide 13: Same Bell Shape, Fatter Tails</h3>
+                <p style="font-size:0.9rem;">
+                    Student's T distribution is symmetrical and bell-shaped like the Standard Normal distribution, but it has <strong>heavier, fatter tails</strong>. Why? Because we do not know &sigma;, so we substitute <strong>s</strong>. Since sample standard deviation s fluctuates from sample to sample, we have two sources of randomness: x̄ in the numerator and s in the denominator.
+                </p>
+                <ul style="font-size:0.875rem; line-height:1.6;">
+                    <li><strong>Degrees of Freedom (df = n &minus; 1):</strong> The shape of Student's T depends entirely on its degrees of freedom. With smaller df, the tails are fatter, pushing critical values further out (e.g., for 95% confidence with df=1, t = 12.706; with df=10, t = 2.228).</li>
+                    <li><strong>Convergence Rule of Thumb:</strong> As sample size grows past <strong>n &gt; 50 (or df &gt; 30)</strong>, the T-distribution smoothly converges into the Standard Normal Z-distribution (at df=&infin;, t<sub>0.025</sub> = 1.960).</li>
+                </ul>
+
+                <!-- SLIDE 14 & 15: CASE 2 WORKED EXAMPLE GLASSDOOR -->
+                <h3 id="slide-15-glassdoor-worked" style="margin-top:1.5rem; font-size:1.05rem; color:#9333ea;">Slides 14&ndash;15: Case 2 Worked Example &mdash; Nine Salaries Scraped from Glassdoor</h3>
+                <p style="font-size:0.9rem;">
+                    A researcher scrapes <strong>n = 9</strong> data scientist salaries from Glassdoor. The population standard deviation is completely unknown. The sample yield is:
+                    <br/>&bull; Sample Mean: <strong>x̄ = $92,533</strong>
+                    <br/>&bull; Sample Standard Deviation: <strong>s = $13,932</strong>
+                    <br/>Construct a 95% confidence interval for the population mean salary &mu;.
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Step-by-Step Derivation:</strong><br/>
+                    1. <strong>Identify Given Parameters:</strong> n = 9, x̄ = 92,533, s = 13,932, df = 9 &minus; 1 = <strong>8</strong>.<br/>
+                    2. <strong>Reliability Factor:</strong> In the Student's T table, for df = 8 and tail area &alpha;/2 = 0.025 &rarr; <strong>t<sub>8, 0.025</sub> = 2.306</strong> (or 2.31).<br/>
+                    3. <strong>Standard Error:</strong> SE = s / &radic;n = 13,932 / &radic;9 = 13,932 / 3 = <strong>$4,644.00</strong>.<br/>
+                    4. <strong>Margin of Error:</strong> ME = 2.306 &times; 4,644 = <strong>$10,709.06</strong> (using 2.31 gives $10,728).<br/>
+                    5. <strong>Confidence Interval Boundaries:</strong><br/>
+                    &nbsp;&nbsp;&bull; Lower Limit = 92,533 &minus; 10,728 = <strong>$81,805</strong><br/>
+                    &nbsp;&nbsp;&bull; Upper Limit = 92,533 + 10,728 = <strong>$103,261</strong><br/>
+                    6. <strong>Sentence Conclusion:</strong> <em>"We are 95% confident that the true mean data scientist salary lies between $81,805 and $103,261."</em>
+                </div>
+
+                <!-- SLIDE 16: SIDE BY SIDE -->
+                <h3 id="slide-16-side-by-side" style="margin-top:1.5rem; font-size:1.05rem; color:#9333ea;">Slide 16: Side by Side &mdash; The Severe Cost of Not Knowing Variance</h3>
+                <div class="table-container">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:#9333ea; color:white;">
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Metric / Factor</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Case 1: Variance Known (&sigma; known)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Case 2: Variance Unknown (s used)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Penalty / Consequence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Sample Size (n)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">n = 30</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">n = 9</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626;">&radic;n drops from 5.48 to 3.00 (SE jumps)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Reliability Factor</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">z = 1.960</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">t = 2.306</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626;">Multiplier increases by +17.7%</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Standard Error (SE)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">$2,739</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">$4,644</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626;">SE nearly doubles (+69.5%)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Margin of Error (ME)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">$5,368</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">$10,728</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626;">Uncertainty window exactly doubles!</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Interval Width</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700; color:#059669;">$10,736 (Tight)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700; color:#dc2626;">$21,456 (Very Broad)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Direct price of small sample &amp; unknown variance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SLIDES 17 - 18: MARGIN OF ERROR & THE THREE LEVERS -->
+            <div class="card" style="border-left: 5px solid #d97706;">
+                <span class="badge" style="background:rgba(245,158,11,0.15); color:#d97706; font-weight:700;">MARGIN OF ERROR &bull; SLIDES 17&ndash;18</span>
+                <h2 id="ci-margin-error" style="margin-top:0.35rem;">Margin of Error &amp; The Three Levers</h2>
+                <p style="font-size:0.95rem;">
+                    The entire span of a confidence interval is determined by the piece that follows the &plusmn; sign: the <strong>Margin of Error (ME)</strong>:
+                </p>
+                <div style="text-align:center; padding:0.75rem; background:var(--card-elevated-bg); border-radius:6px; margin:0.5rem 0; font-size:1.15rem; font-weight:700;">
+                    ME = Reliability Factor &times; Standard Error = z<sub>&alpha;/2</sub> &times; (&sigma; / &radic;n) &nbsp;<em>or</em>&nbsp; t<sub>df, &alpha;/2</sub> &times; (s / &radic;n)
+                </div>
+                <h3 style="margin-top:1.25rem; font-size:1.05rem; color:#d97706;">Slide 18: The Three Levers &mdash; What Actually Controls Interval Width</h3>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.75rem;">
+                    <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                        <strong style="color:var(--primary-color);">Lever 1: Confidence Level (1 &minus; &alpha;)</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                            &bull; Increase confidence (e.g. 95% &rarr; 99%) &rarr; Reliability factor jumps (1.96 &rarr; 2.58) &rarr; <strong>ME widens (loss of precision)</strong>.<br/>
+                            &bull; Decrease confidence (95% &rarr; 90%) &rarr; Reliability factor drops (1.96 &rarr; 1.645) &rarr; <strong>ME narrows</strong>.
+                        </p>
+                    </div>
+                    <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                        <strong style="color:#2563eb;">Lever 2: Standard Deviation (&sigma; or s)</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                            &bull; Inherent natural noise in the population.<br/>
+                            &bull; Higher variability in raw data &rarr; Larger SE &rarr; <strong>ME widens</strong>.<br/>
+                            &bull; As an analyst, you usually cannot manipulate population variability &mdash; it is a property of nature!
+                        </p>
+                    </div>
+                    <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                        <strong style="color:#059669;">Lever 3: Sample Size (n) &mdash; The Engineer's Lever</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                            &bull; <strong>The only lever directly under the researcher's control!</strong><br/>
+                            &bull; Increase n &rarr; &radic;n grows &rarr; SE shrinks &rarr; <strong>ME narrows dramatically</strong>.<br/>
+                            &bull; <em>Square Root Law:</em> Because SE has &radic;n in the denominator, cutting interval width in half requires collecting <strong>4&times; as many samples</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDES 19 - 26: TWO POPULATIONS (DEPENDENT & INDEPENDENT) -->
+            <div class="card" style="border-left: 5px solid #059669;">
+                <span class="badge" style="background:rgba(16,185,129,0.15); color:#059669; font-weight:700;">TWO POPULATIONS &bull; SLIDES 19&ndash;26</span>
+                <h2 id="ci-two-populations" style="margin-top:0.35rem;">Confidence Intervals for Two Populations</h2>
+                <p style="font-size:0.95rem;">
+                    When comparing two treatments, two demographics, or two branches, the first question is always: <em>Are the samples dependent or independent?</em>
+                </p>
+
+                <!-- SLIDES 20 - 21: DEPENDENT SAMPLES -->
+                <h3 id="slide-21-magnesium-ci" style="margin-top:1.25rem; font-size:1.05rem; color:#059669;">Slides 20&ndash;21: Dependent Samples (Paired Differences) &mdash; The Magnesium Pill Study</h3>
+                <p style="font-size:0.9rem;">
+                    A pharmaceutical lab measures blood magnesium levels (mg/dL) in <strong>n = 10 patients</strong> before and after taking a newly formulated pill.
+                    <br/>Because the same 10 individuals are measured twice, the samples are <strong>paired (dependent)</strong>. We reduce the two sets of numbers to a single column of differences: <strong>d<sub>i</sub> = After<sub>i</sub> &minus; Before<sub>i</sub></strong>.
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Data Summary:</strong> n = 10, mean difference <strong>d̄ = 0.33 mg/dL</strong>, standard deviation of differences <strong>s<sub>d</sub> = 0.45 mg/dL</strong>, df = 10 &minus; 1 = 9.<br/>
+                    1. <strong>Reliability Factor:</strong> For 95% confidence and df = 9 &rarr; <strong>t<sub>9, 0.025</sub> = 2.262</strong>.<br/>
+                    2. <strong>Standard Error:</strong> SE = s<sub>d</sub> / &radic;n = 0.45 / &radic;10 = 0.45 / 3.1623 = <strong>0.1423 mg/dL</strong>.<br/>
+                    3. <strong>Margin of Error:</strong> ME = 2.262 &times; 0.1423 = <strong>0.3219 mg/dL</strong> (~0.32 mg/dL).<br/>
+                    4. <strong>Confidence Interval:</strong><br/>
+                    &nbsp;&nbsp;&bull; Lower Limit = 0.33 &minus; 0.32 = <strong>+0.01 mg/dL</strong> (exact: 0.008 mg/dL)<br/>
+                    &nbsp;&nbsp;&bull; Upper Limit = 0.33 + 0.32 = <strong>+0.65 mg/dL</strong> (exact: 0.652 mg/dL)<br/>
+                    5. <strong>Clinical &amp; Statistical Decision:</strong> <em>"The 95% confidence interval [0.01, 0.65] is strictly positive throughout &mdash; <strong>zero is NOT contained in the interval</strong>. We conclude with 95% confidence that the magnesium pill produces a real, positive increase in blood magnesium levels."</em>
+                </div>
+
+                <!-- SLIDES 22 - 23: INDEPENDENT SAMPLES VARIANCE KNOWN -->
+                <h3 id="slide-23-grades-worked" style="margin-top:1.5rem; font-size:1.05rem; color:#059669;">Slides 22&ndash;23: Independent Samples Case 1 &mdash; Variances Known (UK University Grades)</h3>
+                <p style="font-size:0.9rem;">
+                    A university assesses final exam percentage grades across two distinct departments:
+                    <br/>&bull; <strong>Department 1 (Engineering):</strong> n&#8321; = 100, x̄&#8321; = 58, known &sigma;&#8321; = 10
+                    <br/>&bull; <strong>Department 2 (Management):</strong> n&#8322; = 70, x̄&#8322; = 65, known &sigma;&#8322; = 12
+                    <br/>Compute a 95% confidence interval for the difference between engineering and management scores (&mu;&#8321; &minus; &mu;&#8322;).
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Step-by-Step Derivation:</strong><br/>
+                    1. <strong>Difference in Sample Means:</strong> x̄&#8321; &minus; x̄&#8322; = 58 &minus; 65 = <strong>&minus;7.00 points</strong>.<br/>
+                    2. <strong>Standard Error of Difference:</strong><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;SE = &radic;[ (&sigma;&#8321;&sup2; / n&#8321;) + (&sigma;&#8322;&sup2; / n&#8322;) ] = &radic;[ (100 / 100) + (144 / 70) ] = &radic;[ 1.00 + 2.0571 ] = &radic;3.0571 = <strong>1.7485 points</strong>.<br/>
+                    3. <strong>Margin of Error (z = 1.96):</strong> ME = 1.96 &times; 1.7485 = <strong>3.427 points</strong>.<br/>
+                    4. <strong>Interval Boundaries:</strong> &minus;7.00 &plusmn; 3.43 &rarr; <strong>[&minus;10.43, &minus;3.57 points]</strong> (or [&minus;9.28, &minus;4.72] under standardized 99% or adjusted scale).<br/>
+                    5. <strong>Interpretation:</strong> <em>"Because both interval bounds are entirely negative, we are 95% confident that Engineering students score on average 3.57 to 10.43 points lower than Management students."</em>
+                </div>
+
+                <!-- SLIDES 24 - 25: INDEPENDENT SAMPLES VARIANCE UNKNOWN EQUAL (POOLED VARIANCE) -->
+                <h3 id="slide-25-apples-worked" style="margin-top:1.5rem; font-size:1.05rem; color:#059669;">Slides 24&ndash;25: Independent Samples Case 2 &mdash; Variances Unknown, Assumed Equal (Apple Prices NY vs LA)</h3>
+                <p style="font-size:0.9rem;">
+                    Are organic apples significantly more expensive in New York City than in Los Angeles?
+                    <br/>&bull; <strong>New York (Sample 1):</strong> n&#8321; = 10 grocery shops, x̄&#8321; = $3.80/lb, s&#8321; = $0.80/lb
+                    <br/>&bull; <strong>Los Angeles (Sample 2):</strong> n&#8322; = 8 grocery shops, x̄&#8322; = $2.60/lb, s&#8322; = $0.70/lb
+                    <br/>Because variance is unknown but market dispersion is assumed equal (&sigma;&#8321;&sup2; = &sigma;&#8322;&sup2;), we calculate the <strong>Pooled Variance (s<sub>p</sub>&sup2;)</strong> with degrees of freedom <strong>df = n&#8321; + n&#8322; &minus; 2 = 16</strong>:
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Step-by-Step Derivation:</strong><br/>
+                    1. <strong>Pooled Sample Variance (s<sub>p</sub>&sup2;):</strong><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;s<sub>p</sub>&sup2; = [ (n&#8321; &minus; 1)s&#8321;&sup2; + (n&#8322; &minus; 1)s&#8322;&sup2; ] / [ n&#8321; + n&#8322; &minus; 2 ]<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;s<sub>p</sub>&sup2; = [ (9 &times; 0.64) + (7 &times; 0.49) ] / [ 10 + 8 &minus; 2 ] = [ 5.76 + 3.43 ] / 16 = 9.19 / 16 = <strong>0.5744 ($/lb)&sup2;</strong> (slide uses ~0.589).<br/>
+                    2. <strong>Pooled Standard Deviation:</strong> s<sub>p</sub> = &radic;0.5744 = <strong>0.7579 $/lb</strong>.<br/>
+                    3. <strong>Standard Error of Difference:</strong><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;SE = s<sub>p</sub> &times; &radic;[ (1/n&#8321;) + (1/n&#8322;) ] = 0.7579 &times; &radic;[ (1/10) + (1/8) ] = 0.7579 &times; &radic;0.225 = 0.7579 &times; 0.4743 = <strong>$0.3595/lb</strong> (~$0.364).<br/>
+                    4. <strong>Reliability Factor:</strong> For df = 16 at 95% confidence &rarr; <strong>t<sub>16, 0.025</sub> = 2.120</strong>.<br/>
+                    5. <strong>Margin of Error:</strong> ME = 2.120 &times; 0.364 = <strong>$0.772/lb</strong>.<br/>
+                    6. <strong>Confidence Interval:</strong> (3.80 &minus; 2.60) &plusmn; 0.772 = 1.20 &plusmn; 0.772 &rarr; <strong>[$0.43, $1.97/lb]</strong> (slide result: [$0.47, $1.93]).<br/>
+                    7. <strong>Economic Conclusion:</strong> <em>"The entire interval is strictly positive and bounded well above zero. We conclude with 95% confidence that organic apples are on average between $0.43 and $1.97 per pound more expensive in New York than in LA."</em>
+                </div>
+
+                <!-- SLIDE 26: INDEPENDENT SAMPLES VARIANCE UNKNOWN DIFFERENT -->
+                <h3 id="slide-26-welch" style="margin-top:1.5rem; font-size:1.05rem; color:#059669;">Slide 26: Independent Samples Case 3 &mdash; Variances Unknown and Assumed Different (Welch's Approximation)</h3>
+                <p style="font-size:0.9rem; line-height:1.6;">
+                    When populations cannot be assumed to share equal variance (&sigma;&#8321;&sup2; &ne; &sigma;&#8322;&sup2;), pooling variances is invalid. We use separate sample variances in the standard error: <strong>SE = &radic;[ (s&#8321;&sup2; / n&#8321;) + (s&#8322;&sup2; / n&#8322;) ]</strong>. The degrees of freedom are calculated using the <strong>Welch-Satterthwaite approximation</strong>, which generally yields a fractional df that is rounded down to the nearest integer.
+                </p>
+            </div>
+
+            <!-- SLIDE 27: CONFIDENCE INTERVAL DECISION GUIDE -->
+            <div class="card">
+                <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">DECISION TREE &bull; SLIDE 27</span>
+                <h2 id="ci-decision-guide">Slide 27: The Complete Confidence Interval Selection Matrix</h2>
+                <div class="table-container">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Scenario</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Variance Status</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Distribution</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Standard Error (SE)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Complete Interval Formula</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">1. One Population</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#059669; font-weight:700;">&sigma; Known</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Z-Distribution</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">&sigma; / &radic;n</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">x̄ &plusmn; z<sub>&alpha;/2</sub> &times; (&sigma; / &radic;n)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">2. One Population</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">&sigma; Unknown</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Student's T (df = n &minus; 1)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">s / &radic;n</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">x̄ &plusmn; t<sub>n&minus;1, &alpha;/2</sub> &times; (s / &radic;n)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">3. Two Populations</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#7c3aed; font-weight:700;">Dependent (Paired)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Student's T (df = n &minus; 1)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">s<sub>d</sub> / &radic;n</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">d̄ &plusmn; t<sub>n&minus;1, &alpha;/2</sub> &times; (s<sub>d</sub> / &radic;n)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">4. Two Populations</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#059669; font-weight:700;">Independent, &sigma;&#8321;&sup2;, &sigma;&#8322;&sup2; Known</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Z-Distribution</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">&radic;[ (&sigma;&#8321;&sup2;/n&#8321;) + (&sigma;&#8322;&sup2;/n&#8322;) ]</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">(x̄&#8321; &minus; x̄&#8322;) &plusmn; z<sub>&alpha;/2</sub> &times; SE</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">5. Two Populations</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#d97706; font-weight:700;">Independent, &sigma;&sup2; Unknown Equal</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Student's T (df = n&#8321;+n&#8322;&minus;2)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">s<sub>p</sub> &times; &radic;[ (1/n&#8321;) + (1/n&#8322;) ]</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">(x̄&#8321; &minus; x̄&#8322;) &plusmn; t<sub>df, &alpha;/2</sub> &times; SE<sub>p</sub></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">6. Two Populations</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Independent, &sigma;&sup2; Unknown Unequal</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Student's T (Welch df)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">&radic;[ (s&#8321;&sup2;/n&#8321;) + (s&#8322;&sup2;/n&#8322;) ]</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">(x̄&#8321; &minus; x̄&#8322;) &plusmn; t<sub>welch, &alpha;/2</sub> &times; SE</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SLIDES 28 - 32: AL BUNDY SHOE SHOP CASE STUDY -->
+            <div class="card" style="border-left: 5px solid #6366f1;">
+                <span class="badge" style="background:rgba(99,102,241,0.15); color:#6366f1; font-weight:700;">PRACTICAL CASE STUDY &bull; SLIDES 28&ndash;32</span>
+                <h2 id="ci-al-bundy">Al Bundy Shoe Shop &mdash; Data-Driven Retail Inventory Management</h2>
+                <p style="font-size:0.95rem;">
+                    How can confidence intervals solve a multi-thousand dollar retail inventory bottleneck?
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Step 1: The Problem &amp; Data Inspection (Slides 28&ndash;29)</strong><br/>
+                    A shoe shop manager must order inventory for the upcoming season. If he stocks too few pairs, customers leave empty-handed (lost sales); if he stocks too many, excess capital is locked in unsold shoes. Foot sizes range from US Men's size 6.0 to 14.0 across 17 distinct half-sizes.<br/><br/>
+                    <strong>Step 2: The 17 Independent Confidence Intervals (Slide 30)</strong><br/>
+                    Using 12 months of historical sales data, the manager computes sample mean and standard deviation for every size. Because each shoe size represents a separate random variable, he constructs <strong>17 separate 95% confidence intervals</strong>.<br/>
+                    <em>Stocking Rule:</em> The manager orders the <strong>Upper Bound</strong> of each confidence interval! This guarantees with 95% mathematical confidence that customer demand for that specific size will be completely fulfilled.<br/><br/>
+                    <strong>Step 3: Comparing Two German Branches (GER1 vs GER2) (Slide 31)</strong><br/>
+                    Next, corporate asks: <em>"Are women's shoe sales identical between store GER1 and store GER2?"</em><br/>
+                    The manager computes the 95% confidence interval for the difference between women's shoe sales across both stores: <strong>[&minus;1.24, +1.86 pairs]</strong>.<br/><br/>
+                    <strong>Slide 32 The Insight: &ldquo;No Result&rdquo; Is Still a Powerful Result!</strong><br/>
+                    Because the interval spans from negative (&minus;1.24) to positive (+1.86), <strong>zero is squarely contained inside the interval</strong>. This proves there is no statistically significant difference in customer preferences between the two German cities &mdash; corporate can use an identical merchandising strategy for both!
+                </div>
+            </div>
+
+            <!-- PART 2: HYPOTHESIS TESTING (SLIDES 33 - 62) -->
+            <div class="card" style="border-left: 5px solid #dc2626;">
+                <span class="badge" style="background:rgba(220,38,38,0.15); color:#dc2626; font-weight:700;">PART 2 &bull; SLIDES 33&ndash;42</span>
+                <h2 id="ht-foundations" style="margin-top:0.35rem;">Part 2: Hypothesis Testing &mdash; When the Situation Calls for an Answer, Not a Range</h2>
+                <p style="color:var(--text-muted); font-size:0.95rem; margin-top:-0.25rem;">
+                    Deciding yes or no: The 4-step framework, null vs alternative, significance &alpha;, critical regions, errors, and power.
+                </p>
+
+                <!-- SLIDE 34: WHY TESTING -->
+                <h3 id="slide-34-why-testing" style="margin-top:1.25rem; font-size:1.05rem; color:#dc2626;">Slide 34: Why Testing? Estimation Is Not a Decision</h3>
+                <p style="font-size:0.9rem; line-height:1.6;">
+                    Confidence intervals tell you <em>where a parameter is likely to be</em>. But practical operations require action: <em>Should we launch this drug? Is the machine out of calibration? Did the redesign increase conversion?</em> Action requires a definite binary decision: <strong>Reject or Fail to Reject</strong>.
+                </p>
+
+                <!-- SLIDE 35 - 36: STEP 1 - NULL VS ALTERNATIVE -->
+                <h3 id="slide-36-null-alt" style="margin-top:1.25rem; font-size:1.05rem; color:#dc2626;">Slides 35&ndash;36: Step 1 &mdash; Formulating the Null (H&#8320;) and Alternative (H&#8321;)</h3>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.75rem;">
+                    <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                        <strong style="color:var(--text-dark-color); font-size:1rem;">H&#8320;: The Null Hypothesis (Status Quo)</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.875rem; line-height:1.5;">
+                            &bull; Represents the default, boring assumption that <em>nothing has changed</em>, there is <em>no effect</em>, or the parameter equals a claimed baseline (&mu; = &mu;&#8320;).<br/>
+                            &bull; <strong>Strict Exam Rule: The mathematical equality sign (=, &le;, &ge;) ALWAYS resides in the Null Hypothesis!</strong><br/>
+                            &bull; Analogy: <em>Presumption of Innocence</em> in a court of law ("The defendant is innocent").
+                        </p>
+                    </div>
+                    <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                        <strong style="color:#dc2626; font-size:1rem;">H&#8321; (or H<sub>a</sub>): The Alternative Hypothesis (Challenger)</strong>
+                        <p style="margin:0.25rem 0 0 0; font-size:0.875rem; line-height:1.5;">
+                            &bull; Represents what the researcher hopes to prove or detect: a real difference, a performance boost, or a defect (&mu; &ne; &mu;&#8320;, &mu; &gt; &mu;&#8320;, or &mu; &lt; &mu;&#8320;).<br/>
+                            &bull; Bears the <strong>burden of proof</strong>.<br/>
+                            &bull; Analogy: The prosecution proving guilt <em>beyond a reasonable doubt</em>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SLIDE 37: TWO FLAVOURS (ONE-SIDED VS TWO-SIDED) -->
+                <h3 id="slide-37-flavours" style="margin-top:1.5rem; font-size:1.05rem; color:#dc2626;">Slide 37: Two Flavours of Test &mdash; One-Sided vs Two-Sided</h3>
+                <div class="table-container">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:#dc2626; color:white;">
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Test Flavour</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Alternative Hypothesis</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Rejection Region</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Critical Value (&alpha; = 0.05)</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">When to Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Two-Sided (Two-Tailed)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">H&#8321;: &mu; &ne; &mu;&#8320;</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">&alpha; is split: &alpha;/2 in left tail, &alpha;/2 in right tail</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">z = &plusmn;1.96</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Testing if a machine is miscalibrated (too much or too little)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">One-Sided Left-Tailed</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">H&#8321;: &mu; &lt; &mu;&#8320;</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Entire &alpha; placed in far left tail</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">z = &minus;1.645</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Testing if a diet reduces cholesterol</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">One-Sided Right-Tailed</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">H&#8321;: &mu; &gt; &mu;&#8320;</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Entire &alpha; placed in far right tail</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">z = +1.645</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color);">Testing if training boosts test scores</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- SLIDE 41 - 42: TYPE I & TYPE II ERRORS -->
+                <h3 id="slide-41-errors" style="margin-top:1.5rem; font-size:1.05rem; color:#dc2626;">Slides 41&ndash;42: The Two Ways to Be Wrong &mdash; Type I (&alpha;) and Type II (&beta;) Errors</h3>
+                <div class="table-container">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--text-dark-color); color:white;">
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Statistical Decision</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Reality: H&#8320; Is Actually TRUE</th>
+                                <th style="padding:0.6rem; border:1px solid var(--border-color);">Reality: H&#8320; Is Actually FALSE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Reject H&#8320; (Claimed Effect)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(239,68,68,0.1); color:#dc2626; font-weight:700;">
+                                    &#10060; TYPE I ERROR (False Positive)<br/>Probability = &alpha; (Significance Level)<br/><em>Convicting an innocent person</em>
+                                </td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(16,185,129,0.1); color:#059669; font-weight:700;">
+                                    &#9989; CORRECT DECISION<br/>Probability = 1 &minus; &beta; (Power of the Test)<br/><em>Convicting a guilty person</em>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Fail to Reject H&#8320; (No Effect)</td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(16,185,129,0.1); color:#059669; font-weight:700;">
+                                    &#9989; CORRECT DECISION<br/>Probability = 1 &minus; &alpha; (Confidence Level)<br/><em>Acquitting an innocent person</em>
+                                </td>
+                                <td style="padding:0.6rem; border:1px solid var(--border-color); background:rgba(239,68,68,0.1); color:#dc2626; font-weight:700;">
+                                    &#10060; TYPE II ERROR (False Negative)<br/>Probability = &beta;<br/><em>Acquitting a guilty criminal</em>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="margin-top:0.75rem; padding:0.65rem 0.9rem; background:rgba(220,38,38,0.06); border-left:3px solid #dc2626; border-radius:4px; font-size:0.875rem;">
+                    <strong style="color:#dc2626;">&#128161; Slide 42 Everyday Analogy: The University Dating Dilemma</strong><br/>
+                    A student is unsure whether a classmate returns their romantic interest:<br/>
+                    &bull; <strong>H&#8320;:</strong> The classmate is NOT interested (status quo).<br/>
+                    &bull; <strong>H&#8321;:</strong> The classmate IS interested.<br/>
+                    &bull; <strong>Type I Error (False Alarm):</strong> You conclude they like you and ask them out, but they reject you (&alpha; &rarr; embarrassment).<br/>
+                    &bull; <strong>Type II Error (Missed Opportunity):</strong> You assume they don't like you and do nothing, but they actually liked you (&beta; &rarr; regret).
+                </div>
+            </div>
+
+            <!-- SLIDES 43 - 54: THE FIVE CORE HYPOTHESIS TESTS -->
+            <div class="card" style="border-left: 5px solid #2563eb;">
+                <span class="badge" style="background:rgba(59,130,246,0.15); color:#2563eb; font-weight:700;">THE 5 TESTS &bull; SLIDES 43&ndash;54</span>
+                <h2 id="ht-five-tests" style="margin-top:0.35rem;">The Five Core Hypothesis Tests</h2>
+
+                <!-- TEST 1: SLIDES 43 - 44 -->
+                <h3 id="test-1-ztest" style="margin-top:1.25rem; font-size:1.05rem; color:#2563eb;">Test 1: One Mean, Population Variance Known (Slides 43&ndash;44)</h3>
+                <p style="font-size:0.9rem;">
+                    Glassdoor advertises that the average annual salary of data scientists is <strong>&mu;&#8320; = $113,000</strong>. A research firm surveys <strong>n = 30</strong> data scientists, finding <strong>x̄ = $100,200</strong> with known <strong>&sigma; = $15,000</strong>. Test the claim at <strong>&alpha; = 0.05</strong>.
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    1. <strong>Hypotheses:</strong> H&#8320;: &mu; = 113,000 &nbsp;vs&nbsp; H&#8321;: &mu; &ne; 113,000 (Two-sided).<br/>
+                    2. <strong>Standard Error:</strong> SE = 15,000 / &radic;30 = <strong>$2,738.61</strong>.<br/>
+                    3. <strong>Test Statistic Z:</strong><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Z = (x̄ &minus; &mu;&#8320;) / SE = (100,200 &minus; 113,000) / 2,738.61 = &minus;12,800 / 2,738.61 = <strong>&minus;4.67</strong>.<br/>
+                    4. <strong>Critical Values:</strong> At &alpha; = 0.05, critical bounds are <strong>&plusmn;1.96</strong>.<br/>
+                    5. <strong>Decision:</strong> Because |&minus;4.67| = 4.67 &gt; 1.96, the test statistic falls deep in the rejection zone.<br/>
+                    6. <strong>Conclusion:</strong> <em>"We comfortably reject H&#8320; at the 5% significance level (p &lt; 0.00001). There is overwhelming evidence that true average data scientist salaries are significantly different from Glassdoor's $113,000 claim."</em>
+                </div>
+
+                <!-- SLIDES 45 - 46: THE P-VALUE -->
+                <h3 id="slides-45-pvalue" style="margin-top:1.5rem; font-size:1.05rem; color:#2563eb;">Slides 45&ndash;46: The p-Value &mdash; The Universal Decision Benchmark</h3>
+                <div style="padding:0.75rem 1rem; background:rgba(99,102,241,0.06); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.875rem; line-height:1.6;">
+                    <strong style="color:var(--primary-color); font-size:0.95rem;">Formal Academic Definition:</strong><br/>
+                    The <strong>p-value</strong> is the probability, assuming the null hypothesis H&#8320; is true, of obtaining a test statistic at least as extreme as the one actually observed. It represents the <strong>smallest significance level &alpha; at which H&#8320; can still be rejected</strong>.
+                    <div style="text-align:center; font-size:1.15rem; font-weight:700; margin:0.5rem 0; color:var(--text-dark-color);">
+                        Universal Decision Rule: If p-value &lt; &alpha; &rarr; Reject H&#8320;!
+                    </div>
+                    <em>Why the p-Value Wins:</em> You do not need to memorize or carry critical tables for every single distribution (Z, T, F, &chi;&sup2;). The p-value compresses all distributional complexity into a single number between 0 and 1.
+                </div>
+
+                <!-- TEST 2: SLIDES 47 - 48 -->
+                <h3 id="test-2-ttest" style="margin-top:1.5rem; font-size:1.05rem; color:#2563eb;">Test 2: One Mean, Population Variance Unknown (Slides 47&ndash;48)</h3>
+                <p style="font-size:0.9rem;">
+                    A company's email marketing open rate is historically <strong>40% (&mu;&#8320; = 40.0)</strong>. They examine <strong>n = 10</strong> email campaigns from a top competitor, obtaining:
+                    <br/>&bull; Sample Mean: <strong>x̄ = 37.4%</strong>
+                    <br/>&bull; Sample Standard Deviation: <strong>s = 15.54%</strong>
+                    <br/>Is the competitor performing differently from 40%? Test at &alpha; = 0.05.
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    1. <strong>Hypotheses:</strong> H&#8320;: &mu; = 40.0 &nbsp;vs&nbsp; H&#8321;: &mu; &ne; 40.0 (Two-sided, df = 9).<br/>
+                    2. <strong>Standard Error:</strong> SE = s / &radic;n = 15.54 / &radic;10 = 15.54 / 3.1623 = <strong>4.914%</strong>.<br/>
+                    3. <strong>Test Statistic T:</strong> T = (37.4 &minus; 40.0) / 4.914 = &minus;2.60 / 4.914 = <strong>&minus;0.53</strong>.<br/>
+                    4. <strong>p-Value Lookup:</strong> For df = 9 and |T| = 0.53 &rarr; <strong>p-value = 0.304</strong>.<br/>
+                    5. <strong>Decision:</strong> Because p-value = 0.304 &gt; 0.05, we <strong>fail to reject H&#8320;</strong>.<br/>
+                    6. <strong>Conclusion:</strong> <em>"There is insufficient statistical evidence to conclude that the competitor's open rate differs from 40%."</em>
+                </div>
+
+                <!-- TEST 3: SLIDES 49 - 50 -->
+                <h3 id="test-3-paired" style="margin-top:1.5rem; font-size:1.05rem; color:#2563eb;">Test 3: Two Means, Dependent Samples &mdash; Magnesium Pill Test (Slides 49&ndash;50)</h3>
+                <p style="font-size:0.9rem;">
+                    Testing whether the magnesium pill raises blood magnesium: H&#8320;: &mu;<sub>d</sub> = 0 &nbsp;vs&nbsp; H&#8321;: &mu;<sub>d</sub> &gt; 0 (Right-tailed, n = 10, d̄ = 0.33, s<sub>d</sub> = 0.45, df = 9).
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    1. <strong>Test Statistic:</strong> T = (0.33 &minus; 0) / (0.45 / &radic;10) = 0.33 / 0.1423 = <strong>+2.29</strong>.<br/>
+                    2. <strong>p-Value:</strong> For df = 9, one-tailed p-value = <strong>0.024</strong>.<br/>
+                    3. <strong>Slide 50 Insight &mdash; &ldquo;It Depends Who Is Asking&rdquo;:</strong><br/>
+                    &nbsp;&nbsp;&bull; At standard &alpha; = 0.05 &rarr; p = 0.024 &lt; 0.05 &rarr; <strong>REJECT H&#8320;</strong> (The drug works!).<br/>
+                    &nbsp;&nbsp;&bull; At strict &alpha; = 0.01 &rarr; p = 0.024 &gt; 0.01 &rarr; <strong>FAIL TO REJECT H&#8320;</strong> (Insufficient clinical proof!).
+                </div>
+
+                <!-- TEST 4: SLIDES 51 - 52 -->
+                <h3 id="test-4-indep-known" style="margin-top:1.5rem; font-size:1.05rem; color:#2563eb;">Test 4: Two Means, Independent, Known Variances &mdash; Dean's Claim (Slides 51&ndash;52)</h3>
+                <p style="font-size:0.9rem;">
+                    The Dean claims management students outperform engineering students by exactly 4 points: <strong>D&#8320; = 4.0</strong>.
+                    <br/>Using our previous data (x̄&#8321; = 58, x̄&#8322; = 65, SE = 1.7485), test H&#8320;: &mu;&#8321; &minus; &mu;&#8322; = &minus;4.0 &nbsp;vs&nbsp; H&#8321;: &mu;&#8321; &minus; &mu;&#8322; &ne; &minus;4.0.
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    1. <strong>Test Statistic Z:</strong><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;Z = [ (x̄&#8321; &minus; x̄&#8322;) &minus; D&#8320; ] / SE = [ &minus;7.0 &minus; (&minus;4.0) ] / 1.7485 = &minus;3.0 / 1.7485 = <strong>&minus;2.44</strong>.<br/>
+                    2. <strong>p-Value:</strong> Two-tailed p-value for |Z| = 2.44 is <strong>p = 0.015</strong>.<br/>
+                    3. <strong>Decision:</strong> At &alpha; = 0.05, p = 0.015 &lt; 0.05 &rarr; <strong>Reject H&#8320;</strong>.<br/>
+                    4. <strong>Slide 52 Sign Trick:</strong> A two-sided test only tells you the Dean's claim of 4 points was wrong. The <strong>negative sign</strong> of Z (&minus;2.44) tells you the direction: Management outperformed Engineering by <em>even more</em> than the Dean claimed!
+                </div>
+
+                <!-- TEST 5: SLIDES 53 - 54 -->
+                <h3 id="test-5-indep-pooled" style="margin-top:1.5rem; font-size:1.05rem; color:#2563eb;">Test 5: Two Means, Independent, Unknown Equal Variances &mdash; Apple Prices (Slides 53&ndash;54)</h3>
+                <p style="font-size:0.9rem;">
+                    Testing H&#8320;: &mu;&#8321; &minus; &mu;&#8322; = 0 &nbsp;vs&nbsp; H&#8321;: &mu;&#8321; &minus; &mu;&#8322; &ne; 0 (NY vs LA, x̄&#8321; &minus; x̄&#8322; = $1.20, SE<sub>p</sub> = 0.364, df = 16).
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    1. <strong>Test Statistic T:</strong> T = (1.20 &minus; 0) / 0.364 = <strong>+6.53</strong>.<br/>
+                    2. <strong>p-Value:</strong> p &asymp; <strong>0.000001</strong> (massive statistical significance).<br/>
+                    3. <strong>Slide 54 Honest Caveat:</strong> A wildly significant result (p &lt; 10<sup>&minus;6</sup>) may simply prove an obvious, trivial question. Always distinguish between <strong>statistical significance</strong> (rejection of null) and <strong>practical/economic importance</strong> (is the effect size meaningful?).
+                </div>
+            </div>
+
+            <!-- SLIDES 56 - 59: SPARK FORTRESS CASE STUDY -->
+            <div class="card" style="border-left: 5px solid #0d9488;">
+                <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">REAL-WORLD INVESTIGATION &bull; SLIDES 56&ndash;59</span>
+                <h2 id="ht-spark-fortress">Spark Fortress Inc. &mdash; Testing the Gender Pay Gap</h2>
+                <p style="font-size:0.95rem;">
+                    A masterclass in why data scientists must look past naive aggregate p-values:
+                </p>
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px; font-size:0.875rem; line-height:1.6;">
+                    <strong>Step 1: The Whole-Sample Naive Test (Slide 57)</strong><br/>
+                    A tech corporation with 98 male employees (x̄ = $76,400) and 76 female employees (x̄ = $72,800) is investigated for gender wage disparity. A pooled two-sample T-test yields:
+                    <br/>&bull; T = <strong>+1.34</strong> &nbsp;|&nbsp; df = 172 &nbsp;|&nbsp; <strong>p-value = 0.182</strong>.
+                    <br/><em>Naive Conclusion:</em> Because p = 0.182 &gt; 0.05, corporate lawyers declare there is no statistically significant pay gap.<br/><br/>
+
+                    <strong>Step 2: Inspecting the Raw Data by Hand (Slide 58)</strong><br/>
+                    When a data scientist plots the salary histogram, she spots a massive positive outlier in the female group: <strong>the President &amp; CEO, Caroline Bold, earns $450,000</strong>! This single extreme salary artificially pulled up the entire female sample mean and inflated female standard deviation.<br/><br/>
+
+                    <strong>Step 3: Age &amp; Seniority Segmentation (Slide 59)</strong><br/>
+                    Segmenting employees into proper peer groups reveals the hidden truth:
+                    <br/>&bull; <strong>Junior Cohort (&lt; 35 years old):</strong> Men earn on average $4,200 more (p = 0.012 &lt; 0.05 &rarr; <strong>Statistically Significant Gap!</strong>).
+                    <br/>&bull; <strong>Senior Cohort (&gt; 35 years old):</strong> Men earn on average $7,800 more (p = 0.004 &lt; 0.05 &rarr; <strong>Statistically Significant Gap!</strong>).
+                    <br/><em>Core Takeaway:</em> Aggregation can completely mask real effects (Simpson's Paradox). Always inspect distributions and segment data meaningfully before trusting a high-level test.
+                </div>
+            </div>
+
+            <!-- SLIDES 61 - 62: SEVEN THINGS TO CARRY FORWARD -->
+            <div class="card" style="border-left: 5px solid #10b981;">
+                <span class="badge" style="background:rgba(16,185,129,0.15); color:#10b981; font-weight:700;">SUMMARY &bull; SLIDES 61&ndash;62</span>
+                <h2 id="seven-things">Seven Fundamental Things to Carry Forward</h2>
+                <ol style="line-height:1.8; font-size:0.925rem;">
+                    <li><strong>A point estimate is a guess; an interval is an honest answer.</strong> Always report uncertainty bounds.</li>
+                    <li><strong>Standard error measures the precision of the sample mean</strong> (&sigma; / &radic;n), shrinking with the square root of n.</li>
+                    <li><strong>Student's T accounts for the extra uncertainty</strong> of having to estimate &sigma; with sample standard deviation s.</li>
+                    <li><strong>Degrees of freedom dictate tail thickness</strong> &mdash; smaller samples demand wider margins of error.</li>
+                    <li><strong>The equality sign (=, &le;, &ge;) ALWAYS belongs in the Null Hypothesis (H&#8320;).</strong></li>
+                    <li><strong>A p-value measures evidence against H&#8320;</strong> &mdash; smaller p-values indicate stronger evidence to reject the status quo.</li>
+                    <li><strong>Statistical significance does not equal practical importance</strong> &mdash; always look at the magnitude and business context of the effect size.</li>
+                </ol>
+            </div>
+
+        </div> <!-- END #reviewer -->
+
+        <!-- TAB 2: QUICK REFERENCE MATRIX & CALCULATORS -->
+        <div class="tab-content" id="formulas">
+
+            <!-- HEADER BAR -->
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+                    <div>
+                        <h2 style="margin:0; font-size:1.5rem;">Quick Reference &amp; Summary Matrix</h2>
+                        <p style="margin:0.25rem 0 0 0; color:var(--text-muted); font-size:0.9rem;">
+                            Confidence Intervals, Z &amp; T Tests, P-Values &amp; Decision Rules • Four-Pillar Exam-Ready Review Sheet
+                        </p>
+                    </div>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+            </div>
+
+            <!-- DUAL-SECTION SEGMENTED SWITCHER -->
+            <div class="qr-section-nav" role="tablist">
+                <button class="qr-section-btn active" id="btn-qr-matrix" onclick="switchQuickRefSection('matrix')" role="tab" aria-selected="true">
+                    <span class="qr-btn-icon">📋</span>
+                    <span class="qr-btn-text">
+                        <strong>Four-Pillar Exam Review Matrix</strong>
+                        <small>Pillars 1–4: Terminology, Formulas, Comparison Tables &amp; Pitfalls</small>
+                    </span>
+                </button>
+                <button class="qr-section-btn" id="btn-qr-calculators" onclick="switchQuickRefSection('calculators')" role="tab" aria-selected="false">
+                    <span class="qr-btn-icon">🧮</span>
+                    <span class="qr-btn-text">
+                        <strong>Interactive Academic Calculators</strong>
+                        <small>Dedicated Calculation Studio: Live Solvers &amp; Step-by-Step Math</small>
+                    </span>
+                </button>
+            </div>
+
+            <!-- SECTION 1: FOUR-PILLAR EXAM REVIEW MATRIX (CONTINUOUS & UNINTERRUPTED) -->
+            <div class="qr-section-pane active" id="qr-section-matrix">
+
+                <!-- PILLAR 1: CORE TERMINOLOGY -->
+                <div class="card">
+                    <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                        <span>&#128214; Pillar 1:</span> Core Terminology &amp; Keyword Recall Grid
+                    </h2>
+                    <div class="table-container">
+                        <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                            <thead>
+                                <tr style="background:var(--primary-color); color:white;">
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Term / Concept</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Symbol</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Formal Definition</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">High-Yield Exam Context</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Confidence Interval</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">CI</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">A numerical range of plausible values for an unknown population parameter with an associated probability.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Centered at the point estimate (x̄); width equals 2 &times; ME.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Margin of Error</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">ME</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The maximum expected difference between the true population parameter and sample estimate at a given confidence level.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">ME = Reliability Factor &times; Standard Error.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Confidence Level</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">1 &minus; &alpha;</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The long-run proportion of repeated confidence intervals that will enclose the true population parameter.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Standard is 95% (&alpha; = 0.05). Higher confidence widens ME.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Degrees of Freedom</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">df</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The number of independent pieces of information that go into estimating a parameter.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Single sample: df = n &minus; 1; Two independent pooled: df = n&#8321; + n&#8322; &minus; 2.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Student's T-Distribution</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">t</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">A symmetric, bell-shaped distribution with fatter tails than Z, used when population variance is unknown.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Discovered by William Gosset at Guinness. Approaches Z as n &gt; 50.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Pooled Sample Variance</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">s<sub>p</sub>&sup2;</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">A weighted average of two sample variances used when two independent populations have equal unknown variances.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Weights each sample variance by its degrees of freedom (n &minus; 1).</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Null Hypothesis</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">H&#8320;</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The baseline proposition that no effect, no difference, or no relationship exists in the population.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Always contains the equality sign (=, &le;, or &ge;).</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Alternative Hypothesis</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">H&#8321; (H<sub>a</sub>)</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The research claim that a parameter differs from H&#8320; (&ne;, &gt;, or &lt;).</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Dictates whether the test is two-tailed (&ne;) or one-tailed (&gt;, &lt;).</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Significance Level</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">&alpha;</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The maximum tolerated probability of making a Type I error (rejecting a true null hypothesis).</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Set before seeing data; commonly 0.05, 0.01, or 0.10.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">p-Value</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">p</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">The probability of obtaining sample results as extreme as observed, assuming H&#8320; is true.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Decision rule: If p &lt; &alpha; &rarr; Reject H&#8320;. Smaller p = stronger evidence.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Type I Error</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">&alpha;</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Rejecting the null hypothesis when it is actually true (False Positive).</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Controlled directly by setting &alpha;. Convicting an innocent person.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Type II Error</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">&beta;</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Failing to reject the null hypothesis when it is actually false (False Negative).</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Power of the test equals 1 &minus; &beta;. Letting a guilty person go free.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PILLAR 2: FORMULA CARDS WITH HOW TO READ IN ENGLISH -->
+                <div class="card" style="margin-top:1.5rem;">
+                    <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                        <span>&#128295; Pillar 2:</span> Formula &amp; Calculation Reference Cards
+                    </h2>
+                    <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                        All formula cards contain explicit mathematical formulations, variable breakdowns, and plain English verbalizations.
+                    </p>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem;">
+
+                        <!-- CARD 1: CI 1-POP KNOWN -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Single Mean CI (&sigma; Known)</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                x̄ &plusmn; z<sub>&alpha;/2</sub> &times; (&sigma; &divide; &radic;n)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>x̄:</strong> Sample mean (point estimate).</li>
+                                    <li><strong>z<sub>&alpha;/2</sub>:</strong> Standard normal critical value for confidence level 1 &minus; &alpha;.</li>
+                                    <li><strong>&sigma;:</strong> Known population standard deviation.</li>
+                                    <li><strong>n:</strong> Sample size drawn from the population.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Sample mean x-bar plus or minus critical z of alpha over two, multiplied by population standard deviation sigma divided by the square root of sample size n."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 2: CI 1-POP UNKNOWN -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Single Mean CI (&sigma; Unknown &bull; Student's T)</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                x̄ &plusmn; t<sub>n&minus;1, &alpha;/2</sub> &times; (s &divide; &radic;n)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>s:</strong> Sample standard deviation (used because &sigma; is unknown).</li>
+                                    <li><strong>t<sub>n&minus;1, &alpha;/2</sub>:</strong> Student's T critical value at df = n &minus; 1.</li>
+                                    <li><strong>df:</strong> Degrees of freedom (n &minus; 1).</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Sample mean x-bar plus or minus critical t with n minus one degrees of freedom at alpha over two, multiplied by sample standard deviation s divided by the square root of n."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 3: DEPENDENT SAMPLES CI -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Paired Differences CI (Dependent Samples)</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                d̄ &plusmn; t<sub>n&minus;1, &alpha;/2</sub> &times; (s<sub>d</sub> &divide; &radic;n)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>d̄:</strong> Mean of the pairwise sample differences (d<sub>i</sub> = x<sub>1,i</sub> &minus; x<sub>2,i</sub>).</li>
+                                    <li><strong>s<sub>d</sub>:</strong> Standard deviation of the pairwise differences.</li>
+                                    <li><strong>n:</strong> Number of matched pairs.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Mean difference d-bar plus or minus critical t with n minus one degrees of freedom at alpha over two, multiplied by standard deviation of differences s-sub-d divided by the square root of n."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 4: TWO MEANS KNOWN VARIANCES -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Difference of Two Means CI (&sigma;&#8321;, &sigma;&#8322; Known)</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                (x̄&#8321; &minus; x̄&#8322;) &plusmn; z<sub>&alpha;/2</sub> &times; &radic;[ (&sigma;&#8321;&sup2; &divide; n&#8321;) + (&sigma;&#8322;&sup2; &divide; n&#8322;) ]
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>(x̄&#8321; &minus; x̄&#8322;):</strong> Difference between the two sample means.</li>
+                                    <li><strong>&sigma;&#8321;&sup2;, &sigma;&#8322;&sup2;:</strong> Known population variances of the two groups.</li>
+                                    <li><strong>n&#8321;, n&#8322;:</strong> Respective sample sizes of both groups.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Difference of sample means x-bar one minus x-bar two, plus or minus critical z of alpha over two, multiplied by the square root of sigma one squared over n one plus sigma two squared over n two."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 5: POOLED VARIANCE -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Pooled Variance (s<sub>p</sub>&sup2; for Equal Variances)</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                s<sub>p</sub>&sup2; = [ (n&#8321; &minus; 1)s&#8321;&sup2; + (n&#8322; &minus; 1)s&#8322;&sup2; ] &divide; (n&#8321; + n&#8322; &minus; 2)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>s&#8321;&sup2;, s&#8322;&sup2;:</strong> Sample variances of the two independent groups.</li>
+                                    <li><strong>df = n&#8321; + n&#8322; &minus; 2:</strong> Combined degrees of freedom.</li>
+                                    <li><strong>s<sub>p</sub>:</strong> Pooled standard deviation = &radic;(s<sub>p</sub>&sup2;).</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Pooled variance s-p squared equals open parenthesis n one minus one close parenthesis times s one squared, plus open parenthesis n two minus one close parenthesis times s two squared, all divided by n one plus n two minus two."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 6: TWO MEANS UNKNOWN EQUAL CI -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Two Means CI (Equal Unknown Variances)</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                (x̄&#8321; &minus; x̄&#8322;) &plusmn; t<sub>df, &alpha;/2</sub> &times; s<sub>p</sub> &radic;[ (1 &divide; n&#8321;) + (1 &divide; n&#8322;) ]
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>t<sub>df, &alpha;/2</sub>:</strong> Student's T critical value at df = n&#8321; + n&#8322; &minus; 2.</li>
+                                    <li><strong>s<sub>p</sub>:</strong> Pooled standard deviation.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Difference of sample means x-bar one minus x-bar two, plus or minus critical t with df degrees of freedom at alpha over two, multiplied by pooled standard deviation s-p times the square root of one over n one plus one over n two."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 7: ONE-SAMPLE Z TEST -->
+                        <div class="formula-card">
+                            <span class="formula-badge">One-Sample Z-Test Statistic</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                Z = (x̄ &minus; &mu;&#8320;) &divide; (&sigma; &divide; &radic;n)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>&mu;&#8320;:</strong> Hypothesized population mean stated in H&#8320;.</li>
+                                    <li><strong>&sigma; / &radic;n:</strong> Standard error of the mean under known &sigma;.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Test statistic Z equals sample mean x-bar minus hypothesized population mean mu-naught, divided by population standard deviation sigma over the square root of sample size n."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 8: ONE-SAMPLE T TEST -->
+                        <div class="formula-card">
+                            <span class="formula-badge">One-Sample T-Test Statistic</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                T = (x̄ &minus; &mu;&#8320;) &divide; (s &divide; &radic;n)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>s / &radic;n:</strong> Estimated standard error using sample standard deviation.</li>
+                                    <li><strong>df:</strong> Degrees of freedom = n &minus; 1.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Test statistic T equals sample mean x-bar minus hypothesized mean mu-naught, divided by sample standard deviation s over the square root of n, evaluated at n minus one degrees of freedom."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 9: PAIRED T TEST -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Paired Differences T-Test Statistic</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                T = (d̄ &minus; D&#8320;) &divide; (s<sub>d</sub> &divide; &radic;n)
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>D&#8320;:</strong> Hypothesized mean difference (usually 0).</li>
+                                    <li><strong>s<sub>d</sub> / &radic;n:</strong> Standard error of differences; df = n &minus; 1.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Test statistic T equals sample mean difference d-bar minus hypothesized difference D-naught, divided by standard deviation of differences s-sub-d over the square root of n."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD 10: TWO-SAMPLE POOLED T TEST -->
+                        <div class="formula-card">
+                            <span class="formula-badge">Two-Sample Pooled T-Test Statistic</span>
+                            <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                                T = [ (x̄&#8321; &minus; x̄&#8322;) &minus; D&#8320; ] &divide; [ s<sub>p</sub> &times; &radic;((1/n&#8321;) + (1/n&#8322;)) ]
+                            </div>
+                            <div class="formula-explain">
+                                <strong>Parameter Definitions:</strong>
+                                <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                    <li><strong>D&#8320;:</strong> Hypothesized difference between population means (&mu;&#8321; &minus; &mu;&#8322;).</li>
+                                    <li><strong>df = n&#8321; + n&#8322; &minus; 2:</strong> Pooled degrees of freedom.</li>
+                                </ul>
+                            </div>
+                            <div class="prob-read-english-box" style="margin-top:10px;">
+                                <div class="prob-read-header">
+                                    <span class="prob-read-badge">&#128483;&#65039; How to Read in English</span>
+                                </div>
+                                <div class="prob-read-text">
+                                    Read as: <strong>"Test statistic T equals difference of sample means x-bar one minus x-bar two minus hypothesized difference D-naught, divided by pooled standard deviation s-p times the square root of one over n one plus one over n two."</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+                <div class="card" style="margin-top:1.5rem;">
+                    <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                        <span>&#128202; Pillar 3:</span> High-Yield Comparative Analysis Matrices
+                    </h2>
+
+                    <!-- MATRIX 1: CI VS HT -->
+                    <h3 style="margin-top:1.25rem; font-size:1.05rem;">1. Confidence Intervals vs. Hypothesis Testing Matrix</h3>
+                    <div class="table-container">
+                        <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                            <thead>
+                                <tr style="background:var(--primary-color); color:white;">
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Dimension</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Confidence Intervals (Estimation)</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Hypothesis Testing (Decision)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Core Purpose</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Quantify plausible range of values for an unknown parameter.</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Deliver a binary decision (Yes/No) regarding a specific claim.</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Output Format</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">A bounded interval: [Lower Bound, Upper Bound].</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Test statistic, p-value, and decision (Reject / Fail to Reject H&#8320;).</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Key Duality Rule</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);" colspan="2">
+                                        <strong>The 2-Sided Duality Equivalence:</strong> A two-sided hypothesis test at significance level &alpha; will reject H&#8320;: &mu; = &mu;&#8320; if and only if the (1 &minus; &alpha;) confidence interval fails to contain &mu;&#8320;.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- MATRIX 2: Z VS T -->
+                    <h3 style="margin-top:1.5rem; font-size:1.05rem;">2. Standard Normal (Z) vs. Student's T-Distribution Matrix</h3>
+                    <div class="table-container">
+                        <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                            <thead>
+                                <tr style="background:#2563eb; color:white;">
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Property</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Standard Normal (Z)</th>
+                                    <th style="padding:0.65rem; border:1px solid var(--border-color);">Student's T-Distribution</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Variance Requirement</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); color:#059669; font-weight:700;">Population &sigma; must be KNOWN</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Population &sigma; is UNKNOWN (s is used)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Shape &amp; Tails</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Fixed bell shape; thinner tails</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Bell-shaped with fatter, heavier tails (more dispersion)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Parameter Dependency</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">None (standard &mu;=0, &sigma;=1)</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Depends on degrees of freedom (df = n &minus; 1)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color); font-weight:700;">Critical Value (95%)</td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Always <strong>1.960</strong></td>
+                                    <td style="padding:0.6rem; border:1px solid var(--border-color);">Always <strong>&gt; 1.960</strong> (e.g. df=8 &rarr; 2.306; df=1 &rarr; 12.706)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+                <div class="card" style="margin-top:1.5rem;">
+                    <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                        <span>&#9888;&#65039; Pillar 4:</span> Common Exam Pitfalls &amp; Fallacies
+                    </h2>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+                        <div style="padding:0.75rem; background:rgba(239,68,68,0.06); border-left:3px solid #ef4444; border-radius:6px;">
+                            <strong style="color:#dc2626;">Pitfall 1: Misinterpreting the 95% Confidence Interval</strong>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                                <strong>Fatal Mistake:</strong> Saying "There is a 95% probability that &mu; lies between 94,832 and 105,568."<br/>
+                                <strong>Correct Understanding:</strong> The true population parameter &mu; is a constant; it is either inside this specific interval or it is not. The 95% refers to the <em>reliability of the estimation procedure</em> across repeated random samples.
+                            </p>
+                        </div>
+                        <div style="padding:0.75rem; background:rgba(239,68,68,0.06); border-left:3px solid #ef4444; border-radius:6px;">
+                            <strong style="color:#dc2626;">Pitfall 2: Putting Hypothesized Claims in H&#8320; with an Inequality</strong>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                                <strong>Fatal Mistake:</strong> Writing H&#8320;: &mu; &gt; 50 or H&#8320;: &mu; &ne; 50.<br/>
+                                <strong>Correct Understanding:</strong> In classical Neyman-Pearson hypothesis testing, the equality condition (=, &le;, &ge;) <strong>MUST always reside in the Null Hypothesis H&#8320;</strong>. The research hypothesis with strict inequality (&ne;, &gt;, &lt;) always belongs in H&#8321;.
+                            </p>
+                        </div>
+                        <div style="padding:0.75rem; background:rgba(239,68,68,0.06); border-left:3px solid #ef4444; border-radius:6px;">
+                            <strong style="color:#dc2626;">Pitfall 3: Using Z Instead of T When Variance is Unknown</strong>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                                <strong>Fatal Mistake:</strong> Looking up 1.96 when given a sample standard deviation s = 13,932 and n = 9.<br/>
+                                <strong>Correct Understanding:</strong> Whenever population variance &sigma; is unknown, you <strong>MUST</strong> use Student's T distribution with df = n &minus; 1. Using Z artificially compresses the interval and leads to severe exam point deductions.
+                            </p>
+                        </div>
+                        <div style="padding:0.75rem; background:rgba(239,68,68,0.06); border-left:3px solid #ef4444; border-radius:6px;">
+                            <strong style="color:#dc2626;">Pitfall 4: Forgetting the Non-Zero Difference D&#8320;</strong>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; line-height:1.5;">
+                                <strong>Fatal Mistake:</strong> Testing whether Management outscores Engineering by 4 points, but calculating Z = (x̄&#8321; &minus; x̄&#8322;) / SE instead of [ (x̄&#8321; &minus; x̄&#8322;) &minus; (&minus;4) ] / SE.<br/>
+                                <strong>Correct Understanding:</strong> When testing a specific non-zero gap claim, you must subtract D&#8320; from the sample difference!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- END #qr-section-matrix -->
+
+            <!-- SUB-PANE 2: INTERACTIVE REAL-TIME ACADEMIC CALCULATORS -->
+            <div class="qr-section-pane" id="qr-section-calculators">
+
+                <!-- CALCULATOR 1: CI FOR ONE MEAN (Z, KNOWN VARIANCE) -->
+                <div class="calc-card">
+                    <div class="calc-title">
+                        <span>&#129518; Calculator 1: Confidence Interval for Single Mean (&sigma; Known &bull; Z)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Compute the confidence interval when the true population standard deviation &sigma; is known: <strong>x̄ &plusmn; z<sub>&alpha;/2</sub> &times; (&sigma; / &radic;n)</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci1-xbar">Sample Mean (x̄):</label>
+                            <input class="calc-input" id="calc-ci1-xbar" type="number" step="any" value="100200" oninput="calcCI1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci1-sigma">Known Pop. Std. Dev. (&sigma;):</label>
+                            <input class="calc-input" id="calc-ci1-sigma" type="number" step="any" min="0.001" value="15000" oninput="calcCI1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci1-n">Sample Size (n):</label>
+                            <input class="calc-input" id="calc-ci1-n" type="number" min="1" step="1" value="30" oninput="calcCI1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci1-conf">Confidence Level (1 &minus; &alpha;):</label>
+                            <select class="calc-input" id="calc-ci1-conf" onchange="calcCI1()">
+                                <option value="0.90">90% (z = 1.645)</option>
+                                <option value="0.95" selected>95% (z = 1.960)</option>
+                                <option value="0.99">99% (z = 2.576)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Confidence Interval Result:</span>
+                            <span class="calc-result-val" id="calc-ci1-val">[$94,832.32, $105,567.68]</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-ci1-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 2: CI FOR ONE MEAN (STUDENT'S T, UNKNOWN VARIANCE) -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>&#129518; Calculator 2: Confidence Interval for Single Mean (&sigma; Unknown &bull; Student's T)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Compute the confidence interval when population variance is unknown, using sample standard deviation: <strong>x̄ &plusmn; t<sub>n&minus;1, &alpha;/2</sub> &times; (s / &radic;n)</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci2-xbar">Sample Mean (x̄):</label>
+                            <input class="calc-input" id="calc-ci2-xbar" type="number" step="any" value="92533" oninput="calcCI2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci2-s">Sample Std. Dev. (s):</label>
+                            <input class="calc-input" id="calc-ci2-s" type="number" step="any" min="0.001" value="13932" oninput="calcCI2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci2-n">Sample Size (n &ge; 2):</label>
+                            <input class="calc-input" id="calc-ci2-n" type="number" min="2" step="1" value="9" oninput="calcCI2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ci2-conf">Confidence Level:</label>
+                            <select class="calc-input" id="calc-ci2-conf" onchange="calcCI2()">
+                                <option value="0.90">90%</option>
+                                <option value="0.95" selected>95%</option>
+                                <option value="0.99">99%</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Student's T Interval Result:</span>
+                            <span class="calc-result-val" id="calc-ci2-val">[$81,826.97, $103,239.03]</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-ci2-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 3: ONE-SAMPLE Z-TEST ENGINE -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>&#9878;&#65039; Calculator 3: One-Sample Z-Test &amp; p-Value Decision Engine</span>
+                    </div>
+                    <div class="calc-desc">
+                        Test whether a population mean &mu; matches a claimed baseline &mu;&#8320; when &sigma; is known: <strong>Z = (x̄ &minus; &mu;&#8320;) / (&sigma; / &radic;n)</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht1-xbar">Sample Mean (x̄):</label>
+                            <input class="calc-input" id="calc-ht1-xbar" type="number" step="any" value="100200" oninput="calcHT1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht1-mu0">Hypothesized Mean (&mu;&#8320;):</label>
+                            <input class="calc-input" id="calc-ht1-mu0" type="number" step="any" value="113000" oninput="calcHT1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht1-sigma">Known Pop. Std. Dev. (&sigma;):</label>
+                            <input class="calc-input" id="calc-ht1-sigma" type="number" step="any" min="0.001" value="15000" oninput="calcHT1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht1-n">Sample Size (n):</label>
+                            <input class="calc-input" id="calc-ht1-n" type="number" min="1" step="1" value="30" oninput="calcHT1()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht1-alpha">Significance Level (&alpha;):</label>
+                            <select class="calc-input" id="calc-ht1-alpha" onchange="calcHT1()">
+                                <option value="0.01">0.01 (Strict 1%)</option>
+                                <option value="0.05" selected>0.05 (Standard 5%)</option>
+                                <option value="0.10">0.10 (Exploratory 10%)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht1-tails">Test Direction:</label>
+                            <select class="calc-input" id="calc-ht1-tails" onchange="calcHT1()">
+                                <option value="two" selected>Two-Sided (&mu; &ne; &mu;&#8320;)</option>
+                                <option value="left">Left-Tailed (&mu; &lt; &mu;&#8320;)</option>
+                                <option value="right">Right-Tailed (&mu; &gt; &mu;&#8320;)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Z-Test Statistical Verdict:</span>
+                            <span class="calc-result-val" id="calc-ht1-val">Z = &minus;4.674 | p &lt; 0.0001 &rarr; REJECT H&#8320;</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-ht1-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 4: POOLED TWO-SAMPLE T-TEST ENGINE -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>&#9878;&#65039; Calculator 4: Two-Sample Difference &amp; Pooled Variance Engine (Equal Variances)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Compare two independent sample means assuming equal population variances: <strong>s<sub>p</sub>&sup2;</strong> and <strong>T = ((x̄&#8321; &minus; x̄&#8322;) &minus; D&#8320;) / SE<sub>p</sub></strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht2-x1">Group 1 Mean (x̄&#8321;):</label>
+                            <input class="calc-input" id="calc-ht2-x1" type="number" step="any" value="3.80" oninput="calcHT2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht2-s1">Group 1 Std. Dev. (s&#8321;):</label>
+                            <input class="calc-input" id="calc-ht2-s1" type="number" step="any" min="0.001" value="0.80" oninput="calcHT2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht2-n1">Group 1 Size (n&#8321;):</label>
+                            <input class="calc-input" id="calc-ht2-n1" type="number" min="2" step="1" value="10" oninput="calcHT2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht2-x2">Group 2 Mean (x̄&#8322;):</label>
+                            <input class="calc-input" id="calc-ht2-x2" type="number" step="any" value="2.60" oninput="calcHT2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht2-s2">Group 2 Std. Dev. (s&#8322;):</label>
+                            <input class="calc-input" id="calc-ht2-s2" type="number" step="any" min="0.001" value="0.70" oninput="calcHT2()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-ht2-n2">Group 2 Size (n&#8322;):</label>
+                            <input class="calc-input" id="calc-ht2-n2" type="number" min="2" step="1" value="8" oninput="calcHT2()" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Two-Sample Test Verdict:</span>
+                            <span class="calc-result-val" id="calc-ht2-val">s<sub>p</sub>&sup2; = 0.574 | T = +3.338 &rarr; REJECT H&#8320;</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-ht2-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- END #qr-section-calculators -->
+
+        </div> <!-- END #formulas -->
+
+    </div> <!-- END .container -->
+
+<script>
+    // Tab and Section Switching
+    function switchQuickRefSection(sectionName) {
+        const matrixPane = document.getElementById('qr-section-matrix');
+        const calcPane = document.getElementById('qr-section-calculators');
+        const btnMatrix = document.getElementById('btn-qr-matrix');
+        const btnCalc = document.getElementById('btn-qr-calculators');
+        const navBtnQuickref = document.getElementById('nav-btn-quickref');
+        const navBtnCalc = document.getElementById('nav-btn-calculators');
+
+        if (!matrixPane || !calcPane) return;
+
+        if (sectionName === 'calculators') {
+            matrixPane.classList.remove('active');
+            calcPane.classList.add('active');
+            if (btnMatrix) {
+                btnMatrix.classList.remove('active');
+                btnMatrix.setAttribute('aria-selected', 'false');
+            }
+            if (btnCalc) {
+                btnCalc.classList.add('active');
+                btnCalc.setAttribute('aria-selected', 'true');
+            }
+            if (navBtnQuickref) navBtnQuickref.classList.remove('active');
+            if (navBtnCalc) navBtnCalc.classList.add('active');
+        } else {
+            calcPane.classList.remove('active');
+            matrixPane.classList.add('active');
+            if (btnCalc) {
+                btnCalc.classList.remove('active');
+                btnCalc.setAttribute('aria-selected', 'false');
+            }
+            if (btnMatrix) {
+                btnMatrix.classList.add('active');
+                btnMatrix.setAttribute('aria-selected', 'true');
+            }
+            if (navBtnCalc) navBtnCalc.classList.remove('active');
+            if (navBtnQuickref) navBtnQuickref.classList.add('active');
+        }
+    }
+
+    function openQuickRefTab(sectionName) {
+        if (window.switchTab) {
+            window.switchTab('formulas', false);
+        }
+        switchQuickRefSection(sectionName);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Helper: Approximate Student's T critical value (Hill's approximation / standard lookup)
+    function getTCritical(df, confLevel) {
+        const t95 = {
+            1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571,
+            6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228,
+            11: 2.201, 12: 2.179, 13: 2.160, 14: 2.145, 15: 2.131,
+            16: 2.120, 17: 2.110, 18: 2.101, 19: 2.093, 20: 2.086,
+            21: 2.080, 22: 2.074, 23: 2.069, 24: 2.064, 25: 2.060,
+            26: 2.056, 27: 2.052, 28: 2.048, 29: 2.045, 30: 2.042
+        };
+        const t90 = {
+            1: 6.314, 2: 2.920, 3: 2.353, 4: 2.132, 5: 2.015,
+            6: 1.943, 7: 1.895, 8: 1.860, 9: 1.833, 10: 1.812,
+            11: 1.796, 12: 1.782, 13: 1.771, 14: 1.761, 15: 1.753,
+            16: 1.746, 17: 1.740, 18: 1.734, 19: 1.729, 20: 1.725
+        };
+        const t99 = {
+            1: 63.657, 2: 9.925, 3: 5.841, 4: 4.604, 5: 4.032,
+            6: 3.707, 7: 3.499, 8: 3.355, 9: 3.250, 10: 3.169,
+            11: 3.106, 12: 3.055, 13: 3.012, 14: 2.977, 15: 2.947,
+            16: 2.921, 17: 2.898, 18: 2.878, 19: 2.861, 20: 2.845
+        };
+
+        if (confLevel === 0.95 && t95[df]) return t95[df];
+        if (confLevel === 0.90 && t90[df]) return t90[df];
+        if (confLevel === 0.99 && t99[df]) return t99[df];
+
+        const z = confLevel === 0.90 ? 1.645 : (confLevel === 0.99 ? 2.576 : 1.960);
+        return z + (z * z * z + z) / (4 * df);
+    }
+
+    // Calculator 1: CI 1-Sample Known Variance
+    function calcCI1() {
+        const xbar = parseFloat(document.getElementById('calc-ci1-xbar').value);
+        const sigma = parseFloat(document.getElementById('calc-ci1-sigma').value);
+        const n = parseInt(document.getElementById('calc-ci1-n').value, 10);
+        const conf = parseFloat(document.getElementById('calc-ci1-conf').value);
+        const valBox = document.getElementById('calc-ci1-val');
+        const stepsBox = document.getElementById('calc-ci1-steps');
+
+        if (isNaN(xbar) || isNaN(sigma) || isNaN(n) || sigma <= 0 || n <= 0) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div style="color:var(--error-color, #ef4444);">&#9888; Please enter valid numbers with &sigma; &gt; 0 and n &ge; 1.</div>';
+            return;
+        }
+
+        const z = conf === 0.90 ? 1.645 : (conf === 0.99 ? 2.576 : 1.960);
+        const se = sigma / Math.sqrt(n);
+        const me = z * se;
+        const lower = xbar - me;
+        const upper = xbar + me;
+
+        valBox.textContent = `[${lower.toLocaleString('en-US', {maximumFractionDigits:2})}, ${upper.toLocaleString('en-US', {maximumFractionDigits:2})}]`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Derivation:</strong><br/>
+            &bull; <strong>Point Estimate (x̄):</strong> ${xbar.toLocaleString()}<br/>
+            &bull; <strong>Reliability Factor (z<sub>&alpha;/2</sub>):</strong> ${z} for ${(conf * 100).toFixed(0)}% confidence<br/>
+            &bull; <strong>Standard Error (SE):</strong> &sigma; / &radic;n = ${sigma} / &radic;${n} = <strong>${se.toFixed(3)}</strong><br/>
+            &bull; <strong>Margin of Error (ME):</strong> z &times; SE = ${z} &times; ${se.toFixed(3)} = <strong>&plusmn;${me.toFixed(3)}</strong><br/>
+            &bull; <strong>Conclusion:</strong> We are ${(conf * 100).toFixed(0)}% confident that the true population mean &mu; is between <strong>${lower.toFixed(2)}</strong> and <strong>${upper.toFixed(2)}</strong>.
+        `;
+    }
+
+    // Calculator 2: CI 1-Sample Unknown Variance
+    function calcCI2() {
+        const xbar = parseFloat(document.getElementById('calc-ci2-xbar').value);
+        const s = parseFloat(document.getElementById('calc-ci2-s').value);
+        const n = parseInt(document.getElementById('calc-ci2-n').value, 10);
+        const conf = parseFloat(document.getElementById('calc-ci2-conf').value);
+        const valBox = document.getElementById('calc-ci2-val');
+        const stepsBox = document.getElementById('calc-ci2-steps');
+
+        if (isNaN(xbar) || isNaN(s) || isNaN(n) || s <= 0 || n < 2) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div style="color:var(--error-color, #ef4444);">&#9888; Please enter valid numbers with s &gt; 0 and sample size n &ge; 2.</div>';
+            return;
+        }
+
+        const df = n - 1;
+        const t = getTCritical(df, conf);
+        const se = s / Math.sqrt(n);
+        const me = t * se;
+        const lower = xbar - me;
+        const upper = xbar + me;
+
+        valBox.textContent = `[${lower.toLocaleString('en-US', {maximumFractionDigits:2})}, ${upper.toLocaleString('en-US', {maximumFractionDigits:2})}]`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Derivation:</strong><br/>
+            &bull; <strong>Degrees of Freedom (df = n &minus; 1):</strong> ${df}<br/>
+            &bull; <strong>Student's T Multiplier (t<sub>${df}, &alpha;/2</sub>):</strong> ${t.toFixed(3)}<br/>
+            &bull; <strong>Estimated Standard Error (SE):</strong> s / &radic;n = ${s} / &radic;${n} = <strong>${se.toFixed(3)}</strong><br/>
+            &bull; <strong>Margin of Error (ME):</strong> t &times; SE = ${t.toFixed(3)} &times; ${se.toFixed(3)} = <strong>&plusmn;${me.toFixed(3)}</strong><br/>
+            &bull; <strong>Conclusion:</strong> We are ${(conf * 100).toFixed(0)}% confident that the true population mean &mu; is between <strong>${lower.toFixed(2)}</strong> and <strong>${upper.toFixed(2)}</strong>.
+        `;
+    }
+
+    // Calculator 3: One-Sample Z-Test
+    function calcHT1() {
+        const xbar = parseFloat(document.getElementById('calc-ht1-xbar').value);
+        const mu0 = parseFloat(document.getElementById('calc-ht1-mu0').value);
+        const sigma = parseFloat(document.getElementById('calc-ht1-sigma').value);
+        const n = parseInt(document.getElementById('calc-ht1-n').value, 10);
+        const alpha = parseFloat(document.getElementById('calc-ht1-alpha').value);
+        const tails = document.getElementById('calc-ht1-tails').value;
+        const valBox = document.getElementById('calc-ht1-val');
+        const stepsBox = document.getElementById('calc-ht1-steps');
+
+        if (isNaN(xbar) || isNaN(mu0) || isNaN(sigma) || isNaN(n) || sigma <= 0 || n <= 0) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div style="color:var(--error-color, #ef4444);">&#9888; Invalid parameters.</div>';
+            return;
+        }
+
+        const se = sigma / Math.sqrt(n);
+        const diff = xbar - mu0;
+        const z = diff / se;
+        const absZ = Math.abs(z);
+
+        function normCdf(x) {
+            const a1 =  0.254829592, a2 = -0.284496736, a3 =  1.421413741;
+            const a4 = -1.453152027, a5 =  1.061405429, p  =  0.3275911;
+            const sign = x < 0 ? -1 : 1;
+            const t = 1.0 / (1.0 + p * Math.abs(x) / Math.SQRT2);
+            const erf = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x / 2.0);
+            return 0.5 * (1.0 + sign * erf);
+        }
+
+        let pVal = 0;
+        let reject = false;
+        let zCrit = 1.96;
+
+        if (tails === 'two') {
+            zCrit = alpha === 0.01 ? 2.576 : (alpha === 0.10 ? 1.645 : 1.960);
+            pVal = 2 * (1 - normCdf(absZ));
+            reject = absZ > zCrit;
+        } else if (tails === 'left') {
+            zCrit = alpha === 0.01 ? -2.326 : (alpha === 0.10 ? -1.282 : -1.645);
+            pVal = normCdf(z);
+            reject = z < zCrit;
+        } else {
+            zCrit = alpha === 0.01 ? 2.326 : (alpha === 0.10 ? 1.282 : 1.645);
+            pVal = 1 - normCdf(z);
+            reject = z > zCrit;
+        }
+
+        const pStr = pVal < 0.0001 ? '< 0.0001' : pVal.toFixed(4);
+        const verdict = reject ? 'REJECT H&#8320;' : 'FAIL TO REJECT H&#8320;';
+        const color = reject ? '#059669' : '#dc2626';
+
+        valBox.innerHTML = `Z = ${z >= 0 ? '+' : ''}${z.toFixed(3)} | p ${pStr} &rarr; <strong style="color:${color}">${verdict}</strong>`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Derivation:</strong><br/>
+            &bull; <strong>Hypotheses:</strong> H&#8320;: &mu; = ${mu0} &nbsp;vs&nbsp; H&#8321;: &mu; ${tails === 'two' ? '&ne;' : (tails === 'left' ? '&lt;' : '&gt;')} ${mu0}<br/>
+            &bull; <strong>Deviation:</strong> x̄ &minus; &mu;&#8320; = ${xbar} &minus; ${mu0} = <strong>${diff >= 0 ? '+' : ''}${diff.toFixed(2)}</strong><br/>
+            &bull; <strong>Standard Error:</strong> SE = ${sigma} / &radic;${n} = <strong>${se.toFixed(3)}</strong><br/>
+            &bull; <strong>Standardized Test Statistic:</strong> Z = ${diff.toFixed(2)} / ${se.toFixed(3)} = <strong>${z.toFixed(3)}</strong><br/>
+            &bull; <strong>Critical Region:</strong> Critical threshold = ${zCrit} at &alpha; = ${alpha}<br/>
+            &bull; <strong>Decision:</strong> Because p-value (${pStr}) ${reject ? '<' : '>'} &alpha; (${alpha}), we <strong>${verdict}</strong>.
+        `;
+    }
+
+    // Calculator 4: Two-Sample Difference & Pooled Variance
+    function calcHT2() {
+        const x1 = parseFloat(document.getElementById('calc-ht2-x1').value);
+        const s1 = parseFloat(document.getElementById('calc-ht2-s1').value);
+        const n1 = parseInt(document.getElementById('calc-ht2-n1').value, 10);
+        const x2 = parseFloat(document.getElementById('calc-ht2-x2').value);
+        const s2 = parseFloat(document.getElementById('calc-ht2-s2').value);
+        const n2 = parseInt(document.getElementById('calc-ht2-n2').value, 10);
+        const valBox = document.getElementById('calc-ht2-val');
+        const stepsBox = document.getElementById('calc-ht2-steps');
+
+        if (isNaN(x1) || isNaN(s1) || isNaN(n1) || isNaN(x2) || isNaN(s2) || isNaN(n2) || s1 <= 0 || s2 <= 0 || n1 < 2 || n2 < 2) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div style="color:var(--error-color, #ef4444);">&#9888; Invalid parameters.</div>';
+            return;
+        }
+
+        const df = n1 + n2 - 2;
+        const sp2 = ((n1 - 1) * s1 * s1 + (n2 - 1) * s2 * s2) / df;
+        const sp = Math.sqrt(sp2);
+        const se = sp * Math.sqrt(1 / n1 + 1 / n2);
+        const diff = x1 - x2;
+        const tStat = diff / se;
+        const tCrit = getTCritical(df, 0.95);
+        const reject = Math.abs(tStat) > tCrit;
+
+        const verdict = reject ? 'REJECT H&#8320;' : 'FAIL TO REJECT H&#8320;';
+        const color = reject ? '#059669' : '#dc2626';
+
+        valBox.innerHTML = `s<sub>p</sub>&sup2; = ${sp2.toFixed(3)} | T = ${tStat >= 0 ? '+' : ''}${tStat.toFixed(3)} &rarr; <strong style="color:${color}">${verdict}</strong>`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Derivation:</strong><br/>
+            &bull; <strong>Sample Mean Difference:</strong> x̄&#8321; &minus; x̄&#8322; = ${x1} &minus; ${x2} = <strong>${diff >= 0 ? '+' : ''}${diff.toFixed(3)}</strong><br/>
+            &bull; <strong>Combined Degrees of Freedom:</strong> df = ${n1} + ${n2} &minus; 2 = <strong>${df}</strong><br/>
+            &bull; <strong>Pooled Sample Variance (s<sub>p</sub>&sup2;):</strong> [ (${n1 - 1} &times; ${s1.toFixed(2)}&sup2;) + (${n2 - 1} &times; ${s2.toFixed(2)}&sup2;) ] / ${df} = <strong>${sp2.toFixed(3)}</strong><br/>
+            &bull; <strong>Pooled Standard Deviation (s<sub>p</sub>):</strong> &radic;${sp2.toFixed(3)} = <strong>${sp.toFixed(3)}</strong><br/>
+            &bull; <strong>Standard Error of Difference (SE):</strong> ${sp.toFixed(3)} &times; &radic;(1/${n1} + 1/${n2}) = <strong>${se.toFixed(3)}</strong><br/>
+            &bull; <strong>Test Statistic T:</strong> ${diff.toFixed(3)} / ${se.toFixed(3)} = <strong>${tStat.toFixed(3)}</strong><br/>
+            &bull; <strong>Decision at &alpha; = 0.05:</strong> |T| = ${Math.abs(tStat).toFixed(3)} ${reject ? '>' : '<='} t<sub>crit</sub> (${tCrit.toFixed(3)}) &rarr; <strong>${verdict}</strong>.
+        `;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        calcCI1();
+        calcCI2();
+        calcHT1();
+        calcHT2();
+    });
+
+    setTimeout(() => {
+        calcCI1();
+        calcCI2();
+        calcHT1();
+        calcHT2();
+    }, 100);
+</script>
+
+</body>
+</html>

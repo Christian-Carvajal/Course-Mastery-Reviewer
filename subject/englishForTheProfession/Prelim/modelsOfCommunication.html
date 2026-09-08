@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var isDark = savedTheme === 'dark' || (!savedTheme && prefersDark) || savedTheme === null;
+                if (isDark && savedTheme !== 'light') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch(e) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <title>Models of Communication, Types &amp; The Writing Process | English for the Profession</title>
+    <link href="../../../global.css" rel="stylesheet"/>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link href="../../../manifest.json" rel="manifest"/>
+    <meta content="#0d9488" name="theme-color"/>
+    <meta content="yes" name="mobile-web-app-capable"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%A1%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+</head>
+<body>
+    <header class="app-header">
+        <h1>English for the Profession</h1>
+        <p>Models of Communication, Types of Communication &amp; Stages of Writing — Theoretical Frameworks &amp; 70-Question Mastery Quiz</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+            <button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+            <span class="nav-title">Models, Types &amp; Writing Process</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+        </div>
+        <button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+    </nav>
+
+    <div class="container">
+        <!-- TAB 1: REVIEWER / STUDY GUIDE -->
+        <div class="tab-content active" id="reviewer">
+
+            <!-- MODULE OVERVIEW CARD -->
+            <div class="card" id="card-efp2-overview">
+                <div class="badge-container" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+                    <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">English for the Profession</span>
+                    <span class="badge" style="background:rgba(2,132,199,0.15); color:#0284c7; font-weight:700;">Prelim Term</span>
+                    <span class="badge" style="background:rgba(168,85,247,0.15); color:#a855f7; font-weight:700;">Lesson 2</span>
+                </div>
+                <h2>1. Learning Objectives &amp; Workplace Case Study</h2>
+                <p>Effective professional communication requires understanding the theoretical architectures that govern how messages travel, how receivers decode meaning, and how organizations eliminate ambiguity. This module analyzes foundational communication models, contrasts communication modes, and introduces the systematic stages of the business writing process.</p>
+                
+                <h3>Core Learning Objectives</h3>
+                <ul>
+                    <li><strong>Analyze Communication Models:</strong> Deconstruct and contrast the Linear (Shannon-Weaver), Interactive (Osgood-Schramm), and Transactional (Barnlund) models.</li>
+                    <li><strong>Differentiate Communication Types:</strong> Evaluate verbal, nonverbal, and visual communication, identifying mixed signals in high-stakes workplace settings.</li>
+                    <li><strong>Apply the Writing Process:</strong> Master prewriting, drafting, revising, editing, and publishing for professional deliverables.</li>
+                    <li><strong>Engineer Concise Sentences &amp; Coherent Paragraphs:</strong> Apply active voice principles and the <strong>MEAL Framework</strong> (Main Idea, Evidence, Analysis, Lead-Out).</li>
+                    <li><strong>Structure Professional Cover Letters:</strong> Draft compelling, customized employment documents that showcase qualifications and persuade employers.</li>
+                </ul>
+
+                <div class="definition-card" style="margin-top:1.25rem;">
+                    <span class="def-badge">Case Study: Workplace Breakdown vs. Professional Standard</span>
+                    <p><strong>Scenario:</strong> John is a newly hired administrative assistant. His supervisor requested that he inform the marketing team about a rescheduled monthly meeting.</p>
+                    <div style="background:rgba(239,68,68,0.1); border-left:4px solid #ef4444; padding:0.75rem 1rem; border-radius:6px; margin:0.75rem 0;">
+                        <strong style="color:#ef4444;">❌ Ineffective Email:</strong><br>
+                        <em>Subject: Meeting<br>
+                        Hi everyone,<br>
+                        The meeting is moved. Please come later because the boss changed it. Bring the stuff we talked about. Don't be late this time because we really need everything finished ASAP.<br>
+                        Thanks.</em>
+                    </div>
+                    <p><strong>What went wrong?</strong> Confusion over date and time, lack of concrete clarity, missing documentation details, and an accusatory, unprofessional tone.</p>
+                    <div style="background:rgba(16,185,129,0.1); border-left:4px solid #10b981; padding:0.75rem 1rem; border-radius:6px; margin:0.75rem 0;">
+                        <strong style="color:#10b981;">✓ Professional Revision:</strong><br>
+                        <em>Subject: Rescheduled Marketing Team Meeting - July 31, 2026, at 3:00 PM<br>
+                        Dear Marketing Team,<br>
+                        Please be informed that our monthly marketing meeting has been rescheduled to Friday, July 31, 2026, at 3:00 PM in the Conference Room. Kindly bring your monthly sales reports and campaign updates for discussion. We would appreciate your punctuality to ensure that we complete the meeting on schedule.<br>
+                        If you have any questions, please let me know.<br>
+                        Thank you.<br>
+                        Best regards,<br>
+                        John Cruz | Administrative Assistant</em>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DEFINITION & IMPORTANCE OF COMMUNICATION MODELS -->
+            <div class="card" id="card-efp2-definition">
+                <h2>2. Communication Fundamentals &amp; The Value of Models</h2>
+                <p><strong>Communication</strong> is the systematic exchange of information, ideas, instructions, and sentiments to achieve mutual understanding among participants.</p>
+                
+                <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="background:rgba(13,148,136,0.08); padding:1rem; border-radius:10px; border:1px solid rgba(13,148,136,0.25);">
+                        <strong style="color:var(--primary-color);">Key Communication Components</strong>
+                        <ul style="margin:0.5rem 0 0 1.25rem; font-size:0.9rem;">
+                            <li><strong>Sender (Source):</strong> Initiates message and encodes ideas into symbols.</li>
+                            <li><strong>Message:</strong> The verbal, written, or nonverbal content transmitted.</li>
+                            <li><strong>Channel:</strong> Medium used (email, video, speech, memo, chat).</li>
+                            <li><strong>Receiver:</strong> Decodes and extracts meaning from symbols.</li>
+                            <li><strong>Feedback:</strong> Receiver's response signaling understanding or confusion.</li>
+                            <li><strong>Context:</strong> Physical, cultural, social, and psychological setting.</li>
+                            <li><strong>Noise:</strong> Any interference distorting transmission or decoding.</li>
+                        </ul>
+                    </div>
+                    <div style="background:rgba(2,132,199,0.08); padding:1rem; border-radius:10px; border:1px solid rgba(2,132,199,0.25);">
+                        <strong style="color:#0284c7;">Why Study Communication Models?</strong>
+                        <ul style="margin:0.5rem 0 0 1.25rem; font-size:0.9rem;">
+                            <li><strong>Visualize Information Flow:</strong> Models map how ideas travel from origin to destination across corporate hierarchies.</li>
+                            <li><strong>Diagnose Transmission Failures:</strong> Pinpoint exact points where noise, cultural bias, or channel limits corrupt data.</li>
+                            <li><strong>Select Optimal Media:</strong> Determine when one-way announcements suffice versus when real-time dialogue is mandatory.</li>
+                            <li><strong>Refine Articulation:</strong> Enhance clarity, empathy, and persuasive impact in high-stakes professional exchanges.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- THE THREE FOUNDATIONAL COMMUNICATION MODELS -->
+            <div class="card" id="card-efp2-models">
+                <h2>3. The Three Foundational Communication Models</h2>
+                <p>Communication science categorizes message exchange into three distinct structural paradigms:</p>
+
+                <!-- 1. LINEAR: SHANNON-WEAVER -->
+                <div class="formula-card" id="card-shannon-weaver" style="margin:1.25rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(13,148,136,0.3); background:var(--card-bg-color);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <h3 style="margin:0; color:var(--primary-color);">1. Linear Model: The Shannon-Weaver Model (1949)</h3>
+                        <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">Claude Shannon &amp; Warren Weaver</span>
+                    </div>
+                    <p style="margin:0.75rem 0 0.5rem;">Originally developed for telecommunication engineering, this foundational model illustrates communication as a <strong>one-way transmission pipeline</strong> moving sequentially from source to destination.</p>
+                    
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:1rem; border-radius:8px; font-family:monospace; margin:0.75rem 0;">
+                        [Information Source] ──&gt; (Message) ──&gt; [Transmitter / Encode] ──&gt; (Signal) ──&gt; [CHANNEL + Noise Source] ──&gt; (Received Signal) ──&gt; [Receiver / Decode] ──&gt; (Message) ──&gt; [Destination]
+                    </div>
+
+                    <div class="prob-read-english-box" style="margin:0.75rem 0; padding:0.75rem; border-left:3px solid var(--primary-color); background:rgba(13,148,136,0.05); font-size:0.9rem;">
+                        <strong>🗣️ How to Read &amp; Understand:</strong> Information begins at the source, is encoded into a transmission signal by a transmitter, travels through a physical or digital channel where noise may corrupt it, is received and decoded back into a message by the receiver, and reaches the final destination.
+                    </div>
+
+                    <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:0.75rem; margin-top:0.75rem; font-size:0.9rem;">
+                        <div>
+                            <strong>Core Characteristics:</strong>
+                            <ul style="margin:0.25rem 0 0 1.25rem;">
+                                <li>Unidirectional flow with no real-time interactive feedback.</li>
+                                <li>Emphasizes technical transmission accuracy and noise interference.</li>
+                                <li>Best suited for mass broadcasting, company announcements, policy memos, and recorded lectures.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>Operational Limitations:</strong>
+                            <ul style="margin:0.25rem 0 0 1.25rem;">
+                                <li>Sender cannot verify whether the message was accurately interpreted.</li>
+                                <li>Treats the receiver as a passive target rather than an active participant.</li>
+                                <li>Fails to account for nonverbal cues, cultural background, or relational dynamics.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. INTERACTIVE: OSGOOD-SCHRAMM -->
+                <div class="formula-card" id="card-osgood-schramm" style="margin:1.25rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(2,132,199,0.3); background:var(--card-bg-color);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <h3 style="margin:0; color:#0284c7;">2. Interactive Model: The Osgood-Schramm Model (1954)</h3>
+                        <span class="badge" style="background:rgba(2,132,199,0.15); color:#0284c7;">Charles Osgood &amp; Wilbur Schramm</span>
+                    </div>
+                    <p style="margin:0.75rem 0 0.5rem;">Replaces linear progression with a <strong>circular, reciprocal feedback loop</strong>. Both parties actively alternate roles, continuously decoding, interpreting, and encoding messages.</p>
+
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:1rem; border-radius:8px; font-family:monospace; margin:0.75rem 0;">
+                        Participant A: [Encoder / Interpreter / Decoder] ──(Message)──&gt; Participant B: [Decoder / Interpreter / Encoder]<br>
+                        Participant A: [Decoder / Interpreter / Encoder] &lt;──(Feedback)── Participant B: [Encoder / Interpreter / Decoder]
+                    </div>
+
+                    <div class="prob-read-english-box" style="margin:0.75rem 0; padding:0.75rem; border-left:3px solid #0284c7; background:rgba(2,132,199,0.05); font-size:0.9rem;">
+                        <strong>🗣️ How to Read &amp; Understand:</strong> Communication is a continuous circular loop where sender and receiver switch roles cyclically. The receiver interprets the message and generates feedback, allowing mutual verification and reducing misinterpretation.
+                    </div>
+
+                    <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:0.75rem; margin-top:0.75rem; font-size:0.9rem;">
+                        <div>
+                            <strong>Core Characteristics:</strong>
+                            <ul style="margin:0.25rem 0 0 1.25rem;">
+                                <li>Two-way communication with deliberate feedback loops.</li>
+                                <li>Interpretation phase highlights individual cognitive processing.</li>
+                                <li>Examples: Customer-support Q&amp;A, classroom question-response, email inquiries with replies.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong>Operational Limitations:</strong>
+                            <ul style="margin:0.25rem 0 0 1.25rem;">
+                                <li>Assumes turns are sequential (turn-taking) rather than simultaneous.</li>
+                                <li>Understates the immediate impact of nonverbal cues during live face-to-face exchanges.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. TRANSACTIONAL: BARNLUND -->
+                <div class="formula-card" id="card-barnlund" style="margin:1.25rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(168,85,247,0.3); background:var(--card-bg-color);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                        <h3 style="margin:0; color:#a855f7;">3. Transactional Model: Barnlund's Transactional Model (1970)</h3>
+                        <span class="badge" style="background:rgba(168,85,247,0.15); color:#a855f7;">Dean Barnlund</span>
+                    </div>
+                    <p style="margin:0.75rem 0 0.5rem;">Views communication as a <strong>continuous, simultaneous, and irreversible transaction</strong> where both communicators send and receive verbal and nonverbal messages at the exact same moment within shared physical and cultural contexts.</p>
+
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:1rem; border-radius:8px; font-family:monospace; margin:0.75rem 0;">
+                        Communicator A &lt;═════[Simultaneous Multi-Channel Exchange + Noise]═════&gt; Communicator B<br>
+                        (Encodes &amp; Decodes concurrently | Regulated by Public, Private &amp; Behavioral Cues)
+                    </div>
+
+                    <div class="prob-read-english-box" style="margin:0.75rem 0; padding:0.75rem; border-left:3px solid #a855f7; background:rgba(168,85,247,0.05); font-size:0.9rem;">
+                        <strong>🗣️ How to Read &amp; Understand:</strong> Communication is not turn-based; both individuals are simultaneous communicators. While speaking, Communicator A reads Communicator B's facial reactions, adjusting speech instantly. Both decode private internal thoughts and public environmental stimuli continuously.
+                    </div>
+
+                    <div style="margin-top:0.75rem;">
+                        <strong>Barnlund's Behavioral &amp; Environmental Cues:</strong>
+                        <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:0.5rem; margin-top:0.5rem; font-size:0.88rem;">
+                            <div style="background:rgba(0,0,0,0.03); padding:0.6rem; border-radius:6px;">
+                                <strong>Public Cues (Cpu):</strong> Environmental/physical stimuli available to everyone (room temperature, lighting, background noise, office layout).
+                            </div>
+                            <div style="background:rgba(0,0,0,0.03); padding:0.6rem; border-radius:6px;">
+                                <strong>Private Cues (Cpr):</strong> Internal cognitive stimuli unique to the individual (memories, emotions, personal biases, physical fatigue).
+                            </div>
+                            <div style="background:rgba(0,0,0,0.03); padding:0.6rem; border-radius:6px;">
+                                <strong>Verbal Behavioral Cues (Cbeh-v):</strong> Spoken or written words consciously chosen by the communicator.
+                            </div>
+                            <div style="background:rgba(0,0,0,0.03); padding:0.6rem; border-radius:6px;">
+                                <strong>Nonverbal Behavioral Cues (Cbeh-nv):</strong> Gestures, micro-expressions, posture, pitch, and vocal cadence expressed during interaction.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODEL COMPARISON MATRIX TABLE -->
+                <h3>Communication Models Comparative Matrix</h3>
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Dimension</th>
+                                <th>Linear (Shannon-Weaver)</th>
+                                <th>Interactive (Osgood-Schramm)</th>
+                                <th>Transactional (Barnlund)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Direction of Flow</strong></td>
+                                <td>One-way (unidirectional)</td>
+                                <td>Two-way (cyclical alternation)</td>
+                                <td>Simultaneous (multidirectional)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Role of Participants</strong></td>
+                                <td>Separate Sender and Receiver</td>
+                                <td>Alternating Sender and Receiver</td>
+                                <td>Simultaneous Communicators</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Role of Feedback</strong></td>
+                                <td>Absent or delayed</td>
+                                <td>Essential, cyclical feedback loop</td>
+                                <td>Instantaneous, continuous, nonverbal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Context &amp; Environment</strong></td>
+                                <td>Limited to physical noise in channel</td>
+                                <td>Individual interpretation &amp; experience</td>
+                                <td>Social, cultural, relational &amp; environmental</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ideal Workplace Scenarios</strong></td>
+                                <td>Company-wide memos, mass broadcasts, pre-recorded lectures</td>
+                                <td>Customer support tickets, asynchronous email inquiries, Q&amp;A sessions</td>
+                                <td>Live board meetings, salary negotiations, job interviews, crisis debates</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SITUATIONAL CLASSIFICATION EXAMPLES -->
+            <div class="card" id="card-efp2-scenarios">
+                <h2>4. Real-World Situational Classification (Mastery Scenarios)</h2>
+                <p>Test your ability to classify authentic workplace communication scenarios into their correct theoretical models:</p>
+                
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Workplace Communication Scenario</th>
+                                <th>Model Classification</th>
+                                <th>Theoretical Rationale &amp; Key Clues</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>The CEO delivers a prerecorded video announcing new workplace policies to all employees.</td>
+                                <td><span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">Linear</span></td>
+                                <td>Unidirectional broadcast; viewers cannot provide immediate feedback or alter transmission.</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>A customer asks a sales representative about product features, and the representative immediately answers.</td>
+                                <td><span class="badge" style="background:rgba(2,132,199,0.15); color:#0284c7;">Interactive</span></td>
+                                <td>Turn-taking Q&amp;A with discrete messages and clarifying feedback.</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Two project managers discuss deadlines while actively observing each other's tone of voice and facial expressions.</td>
+                                <td><span class="badge" style="background:rgba(168,85,247,0.15); color:#a855f7;">Transactional</span></td>
+                                <td>Simultaneous exchange; participants continuously encode words while decoding nonverbal cues.</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>A professor records an asynchronous lecture and uploads it to the LMS for students to view later.</td>
+                                <td><span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">Linear</span></td>
+                                <td>Delayed consumption with zero live interactive feedback channel during delivery.</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>During a job interview, the applicant and panel exchange questions, answers, and posture cues concurrently.</td>
+                                <td><span class="badge" style="background:rgba(168,85,247,0.15); color:#a855f7;">Transactional</span></td>
+                                <td>Real-time interpersonal transaction shaped by professional power dynamics and continuous nonverbal cues.</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>A corporation distributes an email newsletter without requiring or expecting reader replies.</td>
+                                <td><span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">Linear</span></td>
+                                <td>One-to-many broadcast without established feedback mechanism.</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Two coworkers brainstorm a marketing campaign, rapidly building on each other's ideas in real time.</td>
+                                <td><span class="badge" style="background:rgba(168,85,247,0.15); color:#a855f7;">Transactional</span></td>
+                                <td>Fluid, concurrent collaborative generation with continuous verbal and nonverbal resonance.</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>A radio station broadcasts morning traffic and weather reports to thousands of commuters.</td>
+                                <td><span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">Linear</span></td>
+                                <td>Mass media transmission where recipients cannot respond back through the broadcast channel.</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>A supervisor asks for a project progress update; the employee submits data and receives further instructions.</td>
+                                <td><span class="badge" style="background:rgba(2,132,199,0.15); color:#0284c7;">Interactive</span></td>
+                                <td>Two-step sequential exchange focused on feedback and instruction refinement.</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>A flight attendant demonstrates aircraft safety procedures before takeoff while passengers watch silently.</td>
+                                <td><span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">Linear</span></td>
+                                <td>Standardized one-way demonstration delivered to a passive audience without reciprocal dialogue.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- TYPES OF COMMUNICATION & MIXED SIGNALS -->
+            <div class="card" id="card-efp2-types">
+                <h2>5. Types of Communication &amp; The Threat of Mixed Signals</h2>
+                <p>Professional communication leverages three complementary modalities:</p>
+
+                <div class="grid-3-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="background:rgba(13,148,136,0.08); padding:1rem; border-radius:10px; border:1px solid rgba(13,148,136,0.25);">
+                        <strong style="color:var(--primary-color);">1. Verbal Communication</strong>
+                        <p style="margin:0.5rem 0 0; font-size:0.9rem;">Encompasses both <strong>spoken</strong> (meetings, presentations, phone calls) and <strong>written</strong> words (emails, memos, formal proposals). Demands precise diction, grammatical correctness, and tailored tone.</p>
+                    </div>
+                    <div style="background:rgba(2,132,199,0.08); padding:1rem; border-radius:10px; border:1px solid rgba(2,132,199,0.25);">
+                        <strong style="color:#0284c7;">2. Nonverbal Communication</strong>
+                        <p style="margin:0.5rem 0 0; font-size:0.9rem;">Transmits cues through facial expressions, body posture, gestures, eye contact, spatial distance (proxemics), and vocal characteristics (paralanguage: pitch, tone, pace, volume).</p>
+                    </div>
+                    <div style="background:rgba(168,85,247,0.08); padding:1rem; border-radius:10px; border:1px solid rgba(168,85,247,0.25);">
+                        <strong style="color:#a855f7;">3. Visual Communication</strong>
+                        <p style="margin:0.5rem 0 0; font-size:0.9rem;">Employs charts, tables, infographics, diagrams, screenshots, and dashboards to synthesize complex quantitative and conceptual data into rapid visual comprehension.</p>
+                    </div>
+                </div>
+
+                <div class="definition-card" style="margin-top:1rem;">
+                    <span class="def-badge">Critical Concept: Mixed Signals &amp; Nonverbal Primacy</span>
+                    <p>A <strong>mixed signal</strong> occurs when an individual's verbal statement conflicts directly with their nonverbal demeanor. In psychological and communication research (e.g., Albert Mehrabian's communication model), when words and nonverbal cues contradict, <strong>human beings almost universally believe the nonverbal cues</strong>.</p>
+                    <p><em>Example:</em> An employee states, &ldquo;I'm completely fine with taking on this project,&rdquo; while sighing heavily, avoiding eye contact, crossing arms, and maintaining a rigid facial expression. The receiver immediately deduces that the employee is overwhelmed, frustrated, or reluctant.</p>
+                </div>
+            </div>
+
+            <!-- THE STAGES OF THE WRITING PROCESS -->
+            <div class="card" id="card-efp2-writing-process">
+                <h2>6. The Stages of the Professional Writing Process</h2>
+                <p>Writing is a disciplined, recursive cognitive workflow rather than a single spontaneous act. High-performing professionals follow a structured multi-stage pipeline:</p>
+
+                <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:1rem; border-radius:8px; font-family:monospace; margin:0.75rem 0; text-align:center;">
+                    Prewriting ──&gt; Drafting ──&gt; Revising ──&gt; Editing ──&gt; Publishing
+                </div>
+
+                <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+                    <div style="background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:8px; padding:1rem;">
+                        <h3 style="margin-top:0; color:var(--primary-color);">Stage 1: Prewriting (Planning &amp; Analysis)</h3>
+                        <p style="font-size:0.9rem;">The foundational phase where writers establish the message architecture before composing sentences:</p>
+                        <ul style="font-size:0.88rem; margin:0.5rem 0 0 1.25rem;">
+                            <li><strong>Determine Purpose:</strong> Define the primary goal (inform, instruct, persuade, request authorization).</li>
+                            <li><strong>Analyze Audience:</strong> Identify reader demographics, background knowledge, organizational rank, and potential objections.</li>
+                            <li><strong>Brainstorm &amp; Gather Data:</strong> Collect metrics, historical records, citations, and customer feedback.</li>
+                            <li><strong>Outline Structure:</strong> Organize arguments into logical hierarchies (direct vs indirect approach).</li>
+                        </ul>
+                    </div>
+
+                    <div style="background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:8px; padding:1rem;">
+                        <h3 style="margin-top:0; color:#0284c7;">Stage 2: Drafting (Content Generation)</h3>
+                        <p style="font-size:0.9rem;">Translating conceptual outlines into continuous text with an emphasis on <strong>speed and idea generation over perfection</strong>:</p>
+                        <ul style="font-size:0.88rem; margin:0.5rem 0 0 1.25rem;">
+                            <li>Embrace imperfection: First drafts are meant to capture concepts, not showcase polished prose.</li>
+                            <li>Silence the inner critic: Avoid halting momentum to check minor spelling or punctuation errors.</li>
+                            <li>Follow the outline: Ensure all required technical specifications and arguments are captured.</li>
+                        </ul>
+                    </div>
+
+                    <div style="background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:8px; padding:1rem;">
+                        <h3 style="margin-top:0; color:#a855f7;">Stage 3: Revising (Structural &amp; Idea Refinement)</h3>
+                        <p style="font-size:0.9rem;">Substantively reorganizing and elevating the content to maximize clarity and persuasion:</p>
+                        <ul style="font-size:0.88rem; margin:0.5rem 0 0 1.25rem;">
+                            <li><strong>Evaluate Clarity &amp; Logic:</strong> Does each paragraph flow logically into the next?</li>
+                            <li><strong>Trim Fluff &amp; Redundancies:</strong> Eliminate corporate jargon, repetitive arguments, and wordy preambles.</li>
+                            <li><strong>Strengthen Evidence:</strong> Replace vague assertions with concrete metrics and verifiable facts.</li>
+                            <li><strong>Sharpen Tone:</strong> Adjust formality to suit professional executive expectations.</li>
+                        </ul>
+                    </div>
+
+                    <div style="background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:8px; padding:1rem;">
+                        <h3 style="margin-top:0; color:#f59e0b;">Stage 4: Editing &amp; Publishing (Mechanics &amp; Delivery)</h3>
+                        <p style="font-size:0.9rem;">Surgically polishing the surface mechanics and preparing the document for formal release:</p>
+                        <ul style="font-size:0.88rem; margin:0.5rem 0 0 1.25rem;">
+                            <li><strong>Grammar &amp; Syntax:</strong> Fix fragments, run-ons, comma splices, and subject-verb disagreements.</li>
+                            <li><strong>Punctuation &amp; Spelling:</strong> Verify names, numerical figures, email addresses, and date formatting.</li>
+                            <li><strong>Formatting:</strong> Apply consistent typography, margins, bullet points, and headers.</li>
+                            <li><strong>Publishing:</strong> Export to PDF, transmit via email, print physical copies, or submit through corporate portals.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CRAFTING CLEAR AND CONCISE SENTENCES -->
+            <div class="card" id="card-efp2-sentences">
+                <h2>7. Crafting Clear &amp; Concise Sentences (Active Voice Principles)</h2>
+                <p>Professional writing prizes brisk, authoritative phrasing. Compare these authentic workplace transformations:</p>
+
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Context</th>
+                                <th>Ineffective (Wordy / Passive)</th>
+                                <th>Effective (Concise / Active)</th>
+                                <th>Grammatical &amp; Rhetorical Rationale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Executive Updates</strong></td>
+                                <td><em>&ldquo;An investigation into the data breach is currently being conducted by our security personnel, and updates will be provided as they become available.&rdquo;</em></td>
+                                <td><strong>&ldquo;Our security team is investigating the data breach and will share updates soon.&rdquo;</strong></td>
+                                <td>Eliminates passive construction (<em>&ldquo;is being conducted by&rdquo;</em>) and places the active agent (<em>&ldquo;security team&rdquo;</em>) as the grammatical subject.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Client Pitch &amp; Sales</strong></td>
+                                <td><em>&ldquo;Our product is utilized by clients for the purpose of achieving an optimization of their daily workflow schedules.&rdquo;</em></td>
+                                <td><strong>&ldquo;Our software optimizes daily workflows.&rdquo;</strong></td>
+                                <td>Cuts multi-word corporate bloat (<em>&ldquo;utilized for the purpose of achieving an optimization of&rdquo;</em>) down to a singular, forceful action verb (<em>&ldquo;optimizes&rdquo;</em>).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Internal Team Request</strong></td>
+                                <td><em>&ldquo;It would be greatly appreciated if you could review the attached financial report and give your approval by the end of the day.&rdquo;</em></td>
+                                <td><strong>&ldquo;Please review and approve the attached financial report by 5:00 PM.&rdquo;</strong></td>
+                                <td>Replaces passive hesitation with a polite, authoritative directive paired with an exact actionable deadline (<em>&ldquo;5:00 PM&rdquo;</em> vs vague <em>&ldquo;end of the day&rdquo;</em>).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- THE MEAL PARAGRAPH FRAMEWORK -->
+            <div class="card" id="card-efp2-meal">
+                <h2>8. Paragraph Architecture: The MEAL Framework</h2>
+                <p>A disorganized paragraph rambles across disconnected thoughts. To construct coherent, persuasive business paragraphs, master the <strong>MEAL Framework</strong>:</p>
+
+                <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="background:rgba(13,148,136,0.08); padding:1rem; border-radius:8px; border-left:4px solid var(--primary-color);">
+                        <strong style="color:var(--primary-color); font-size:1.1rem;">M — Main Idea</strong>
+                        <p style="margin:0.25rem 0 0; font-size:0.9rem;">State the central argument or claim of the paragraph directly in your opening topic sentence.</p>
+                    </div>
+                    <div style="background:rgba(2,132,199,0.08); padding:1rem; border-radius:8px; border-left:4px solid #0284c7;">
+                        <strong style="color:#0284c7; font-size:1.1rem;">E — Evidence</strong>
+                        <p style="margin:0.25rem 0 0; font-size:0.9rem;">Provide verifiable data, metrics, user research, financial statistics, or real-world operational examples.</p>
+                    </div>
+                    <div style="background:rgba(168,85,247,0.08); padding:1rem; border-radius:8px; border-left:4px solid #a855f7;">
+                        <strong style="color:#a855f7; font-size:1.1rem;">A — Analysis</strong>
+                        <p style="margin:0.25rem 0 0; font-size:0.9rem;">Interpret the evidence, explaining why the data matters and how it justifies your proposed solution.</p>
+                    </div>
+                    <div style="background:rgba(245,158,11,0.08); padding:1rem; border-radius:8px; border-left:4px solid #f59e0b;">
+                        <strong style="color:#f59e0b; font-size:1.1rem;">L — Lead-Out</strong>
+                        <p style="margin:0.25rem 0 0; font-size:0.9rem;">Conclude the argument and bridge smoothly into the subsequent paragraph or recommended action.</p>
+                    </div>
+                </div>
+
+                <div class="definition-card">
+                    <span class="def-badge">MEAL Paradigm in Action</span>
+                    <p><strong>Poor Disorganized Draft:</strong><br>
+                    <em>&ldquo;Our team needs to improve customer satisfaction scores next quarter because they dropped by 15%. We also need to look into new software tools because the current CRM is slow. John thinks we should hire more support staff, but HR says the budget is frozen. Customers are complaining about long hold times on the phone. We should also update our training manual soon.&rdquo;</em></p>
+                    <p style="margin-top:0.5rem;"><strong>MEAL-Engineered Revision:</strong><br>
+                    <span style="color:var(--primary-color); font-weight:700;">[M]</span> <em>To reverse last quarter's 15% drop in customer satisfaction, we must immediately reduce phone hold times.</em> <span style="color:#0284c7; font-weight:700;">[E]</span> <em>Support telemetry indicates that customers cite wait times exceeding eight minutes as their primary operational frustration.</em> <span style="color:#a855f7; font-weight:700;">[A]</span> <em>By reallocating two tier-one specialists to peak inbound hours, we can clear the inquiry queue before customer dissatisfaction escalates.</em> <span style="color:#f59e0b; font-weight:700;">[L]</span> <em>Streamlining this initial touchpoint will stabilize our satisfaction metrics while management evaluates comprehensive CRM software upgrades.</em></p>
+                </div>
+            </div>
+
+            <!-- COVER LETTERS & ASSESSMENT RUBRIC -->
+            <div class="card" id="card-efp2-cover-letters">
+                <h2>9. Professional Cover Letters &amp; Evaluation Standards</h2>
+                <p>A <strong>cover letter</strong> is a one-page professional document submitted alongside a r&eacute;sum&eacute; or curriculum vitae. While a r&eacute;sum&eacute; lists historical qualifications, a cover letter crafts the persuasive narrative explaining why your specific capabilities align with the employer's immediate needs.</p>
+
+                <h3>Anatomy of a High-Impact Cover Letter</h3>
+                <div class="grid-2-col" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="background:rgba(0,0,0,0.02); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+                        <strong style="color:var(--primary-color);">1. Header &amp; Personalized Greeting</strong>
+                        <p style="font-size:0.88rem; margin:0.25rem 0 0;">Include complete contact info for both sender and employer. Always research the hiring manager's name (e.g., <em>&ldquo;Dear Ms. Vance:&rdquo;</em>). Strictly avoid obsolete phrases like <em>&ldquo;To Whom It May Concern&rdquo;</em> or <em>&ldquo;Dear Sir/Madam&rdquo;</em>.</p>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.02); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+                        <strong style="color:#0284c7;">2. The Opening Paragraph</strong>
+                        <p style="font-size:0.88rem; margin:0.25rem 0 0;">State the specific role you are seeking, how you learned of the opportunity, and deliver an engaging hook highlighting your primary value proposition.</p>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.02); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+                        <strong style="color:#a855f7;">3. The Body Paragraphs (Value Proof)</strong>
+                        <p style="font-size:0.88rem; margin:0.25rem 0 0;">Provide 1–2 structured paragraphs citing concrete achievements. Integrate keywords from the job description and articulate how past experience directly solves the company's challenges.</p>
+                    </div>
+                    <div style="background:rgba(0,0,0,0.02); padding:1rem; border-radius:8px; border:1px solid var(--border-color);">
+                        <strong style="color:#f59e0b;">4. Closing &amp; Professional Sign-Off</strong>
+                        <p style="font-size:0.88rem; margin:0.25rem 0 0;">Express enthusiasm, issue a proactive call to action requesting an interview, thank the reader for their consideration, and conclude with a formal sign-off (<em>&ldquo;Sincerely,&rdquo;</em> followed by your name).</p>
+                    </div>
+                </div>
+
+                <h3>Assessment Rubric for Professional Writing</h3>
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Evaluation Criterion</th>
+                                <th>Exemplary Performance (Target Standard)</th>
+                                <th>Needs Revision</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Format &amp; Layout</strong></td>
+                                <td>Standard 1-inch margins, clean business typography, consistent spacing, and structured visual hierarchy.</td>
+                                <td>Inconsistent fonts, irregular margins, walls of unbroken text, or cluttered visual layout.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Content &amp; Persuasion</strong></td>
+                                <td>Directly answers prompt, offers tailored evidence, maintains audience focus, and demonstrates clear business value.</td>
+                                <td>Generic template text, missing key qualifications, self-centered tone without reader empathy.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grammar &amp; Mechanics</strong></td>
+                                <td>Flawless syntax, zero sentence errors (fragments/comma splices), precise active verbs, and accurate punctuation.</td>
+                                <td>Multiple sentence run-ons, comma splices, typos, incorrect capitalization, or awkward passive phrasing.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /#reviewer -->
+
+                <!-- TAB 2: INTERACTIVE QUIZ -->
+        <div class="tab-content" id="quiz">
+            <div class="quiz-header">
+                <div class="score-display" id="score-display">Score: 0 / 70</div>
+                <div class="btn-group">
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+                </div>
+            </div>
+            <div id="quiz-container"></div>
+        </div>
+
+        <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+         & SUMMARY MATRIX -->
+        <div class="tab-content" id="formulas">
+            <div class="card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                <div>
+                    <h2 style="margin:0;">Four-Pillar Exam Quick Reference Matrix</h2>
+                    <p style="margin:0.25rem 0 0; color:var(--text-color);">High-yield theoretical architectures, communication models, sentence polishing rules, and exam trap checklists.</p>
+                </div>
+                <button class="nav-btn" onclick="window.print()" style="background:var(--primary-color); color:white; border:none; padding:0.6rem 1.25rem; border-radius:6px; font-weight:600; cursor:pointer;">🖨️ Print / Export PDF</button>
+            </div>
+
+            <!-- PILLAR 1: CORE TERMINOLOGY & RECALL GRID -->
+            <div class="card">
+                <h2>Pillar 1: Core Terminology &amp; Domain Definitions</h2>
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Term / Concept</th>
+                                <th>Core Academic Definition</th>
+                                <th>Operational Role &amp; Application</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Sender (Source)</strong></td>
+                                <td>The initiator who conceives the message and translates cognitive thoughts into symbols.</td>
+                                <td>Responsible for audience analysis, appropriate channel selection, and encoding clarity.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Encoding</strong></td>
+                                <td>The process of converting ideas, thoughts, and intent into words, gestures, symbols, or code.</td>
+                                <td>Translates abstract ideas into a transmissible signal suitable for a specific channel.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Channel</strong></td>
+                                <td>The physical or digital pathway through which an encoded message moves to the destination.</td>
+                                <td>Medium choice (email, voice, video, letter) dictates message richness and feedback speed.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Decoding</strong></td>
+                                <td>The cognitive interpretation of received symbols into meaningful thoughts and concepts.</td>
+                                <td>Performed by the receiver; influenced by language proficiency, mental bias, and field of experience.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Noise (Interference)</strong></td>
+                                <td>Any psychological, physical, physiological, or semantic barrier that corrupts the signal.</td>
+                                <td>Distorts meaning; examples include acoustic loud noise, typos, ambiguous phrasing, and bias.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Feedback Loop</strong></td>
+                                <td>The verbal and nonverbal reaction sent by the receiver back to the original source.</td>
+                                <td>Validates comprehension, triggers clarification, and transforms linear flow into circular dialogue.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Public Cues (Barnlund)</strong></td>
+                                <td>Environmental, natural, or man-made stimuli perceptible to all participants in a setting.</td>
+                                <td>Physical room temperature, architectural layout, ambient lighting, and corporate dress code.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Private Cues (Barnlund)</strong></td>
+                                <td>Internal cognitive and physiological states experienced exclusively by a single individual.</td>
+                                <td>Personal emotional anxieties, background memories, physical exhaustion, and cultural worldview.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>MEAL Framework</strong></td>
+                                <td>Four-tier paragraph structure consisting of Main Idea, Evidence, Analysis, and Lead-Out.</td>
+                                <td>Standardizes corporate writing to guarantee unity, evidentiary backing, and logical flow.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PILLAR 2: FORMULA & ARCHITECTURE REFERENCE CARDS -->
+            <div class="card">
+                <h2>Pillar 2: Communication Models &amp; Framework Architectures</h2>
+
+                <!-- CARD 1: SHANNON-WEAVER -->
+                <div class="formula-card" style="margin:1rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(13,148,136,0.3); background:var(--card-bg-color);">
+                    <h3 style="color:var(--primary-color); margin-top:0;">Shannon-Weaver Linear Pipeline (1949)</h3>
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:0.75rem; border-radius:6px; font-family:monospace;">
+                        Source ──&gt; [Transmitter / Encode] ──&gt; (Signal) ──&gt; [Channel + Noise] ──&gt; [Receiver / Decode] ──&gt; Destination
+                    </div>
+                    <div class="prob-read-english-box" style="margin:0.5rem 0; padding:0.5rem; border-left:3px solid var(--primary-color); background:rgba(13,148,136,0.05); font-size:0.88rem;">
+                        <strong>🗣️ How to Read in English:</strong> A linear, one-way progression where an information source is encoded into a transmission signal, passes through an imperfect channel with potential noise, is decoded by a receiver, and is delivered to a destination without immediate feedback.
+                    </div>
+                </div>
+
+                <!-- CARD 2: OSGOOD-SCHRAMM -->
+                <div class="formula-card" style="margin:1rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(2,132,199,0.3); background:var(--card-bg-color);">
+                    <h3 style="color:#0284c7; margin-top:0;">Osgood-Schramm Circular Reciprocal Loop (1954)</h3>
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:0.75rem; border-radius:6px; font-family:monospace;">
+                        Party A: [Encode ──&gt; Interpret ──&gt; Decode] ⇄ (Message / Feedback) ⇄ Party B: [Decode ──&gt; Interpret ──&gt; Encode]
+                    </div>
+                    <div class="prob-read-english-box" style="margin:0.5rem 0; padding:0.5rem; border-left:3px solid #0284c7; background:rgba(2,132,199,0.05); font-size:0.88rem;">
+                        <strong>🗣️ How to Read in English:</strong> A continuous circular model where communication partners switch roles between sender and receiver in turns, continually decoding received messages, interpreting them through personal experience, and encoding feedback.
+                    </div>
+                </div>
+
+                <!-- CARD 3: BARNLUND -->
+                <div class="formula-card" style="margin:1rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(168,85,247,0.3); background:var(--card-bg-color);">
+                    <h3 style="color:#a855f7; margin-top:0;">Barnlund's Transactional Simultaneous Model (1970)</h3>
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:0.75rem; border-radius:6px; font-family:monospace;">
+                        Communicator A &lt;═════[Simultaneous Multi-Layer Transaction]═════&gt; Communicator B<br>
+                        Governed by: Public Cues (Cpu) + Private Cues (Cpr) + Behavioral Cues (Cbeh)
+                    </div>
+                    <div class="prob-read-english-box" style="margin:0.5rem 0; padding:0.5rem; border-left:3px solid #a855f7; background:rgba(168,85,247,0.05); font-size:0.88rem;">
+                        <strong>🗣️ How to Read in English:</strong> A simultaneous, multidirectional transaction where both participants continuously act as both senders and receivers at the same time, instantly adapting to nonverbal reactions and environmental cues in a dynamic social context.
+                    </div>
+                </div>
+
+                <!-- CARD 4: MEAL FRAMEWORK -->
+                <div class="formula-card" style="margin:1rem 0; padding:1.25rem; border-radius:10px; border:1px solid rgba(245,158,11,0.3); background:var(--card-bg-color);">
+                    <h3 style="color:#f59e0b; margin-top:0;">The MEAL Paragraph Formula</h3>
+                    <div class="prob-math-display" style="background:rgba(0,0,0,0.04); padding:0.75rem; border-radius:6px; font-family:monospace;">
+                        Paragraph Architecture = [M: Main Idea] + [E: Concrete Evidence] + [A: Critical Analysis] + [L: Lead-Out Transition]
+                    </div>
+                    <div class="prob-read-english-box" style="margin:0.5rem 0; padding:0.5rem; border-left:3px solid #f59e0b; background:rgba(245,158,11,0.05); font-size:0.88rem;">
+                        <strong>🗣️ How to Read in English:</strong> To build an airtight paragraph, state the main claim upfront in the topic sentence, support it with empirical evidence or statistics, analyze the significance of the data to prove the claim, and lead out to smoothly transition to the next concept.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+            <div class="card">
+                <h2>Pillar 3: Comparative Analysis Matrices</h2>
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Comparison Dimension</th>
+                                <th>Revising (Stage 3)</th>
+                                <th>Editing (Stage 4)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Primary Objective</strong></td>
+                                <td>Substantive improvement of logic, argument flow, and idea clarity.</td>
+                                <td>Mechanical correction of surface errors, punctuation, and grammar.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Scope of Changes</strong></td>
+                                <td>Macro-level: Paragraph restructuring, deleting redundant sections, adding proof.</td>
+                                <td>Micro-level: Word spelling, comma splices, verb tenses, capitalization.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Guiding Question</strong></td>
+                                <td><em>&ldquo;Is the reasoning persuasive, logical, and audience-focused?&rdquo;</em></td>
+                                <td><em>&ldquo;Is every sentence mechanically correct and free of typos?&rdquo;</em></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Execution Sequence</strong></td>
+                                <td>Occurs BEFORE editing (never polish sentences before structural integrity is fixed).</td>
+                                <td>Occurs AFTER revising and directly before final publishing/dispatch.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+            <div class="card">
+                <h2>Pillar 4: Common Exam Pitfalls &amp; Traps</h2>
+                <div class="table-container">
+                    <table class="matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Exam Trap / Fallacy</th>
+                                <th>Common Student Misconception</th>
+                                <th>Verified Academic Truth</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>The Linear vs. Transactional Confusion</strong></td>
+                                <td>Assuming any face-to-face conversation is Linear because one person speaks at a time.</td>
+                                <td>Face-to-face interaction is <strong>Transactional</strong> because listeners send continuous nonverbal cues (nods, eye contact, expressions) simultaneously while the speaker speaks.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>The "Revising = Editing" Fallacy</strong></td>
+                                <td>Believing that running a spell checker constitutes revising your draft.</td>
+                                <td>Spell check is <strong>Editing</strong> (mechanical). <strong>Revising</strong> requires re-evaluating arguments, organizational logic, evidence strength, and paragraph unity.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>The "To Whom It May Concern" Trap</strong></td>
+                                <td>Using generic traditional salutations to seem polite in modern job applications.</td>
+                                <td>Modern business etiquette regards <em>&ldquo;To Whom It May Concern&rdquo;</em> as lazy and impersonal. Always address a specific hiring manager or department lead.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Verbal Superiority Fallacy</strong></td>
+                                <td>Assuming the spoken word always overrides contradictory body language.</td>
+                                <td>Under Albert Mehrabian's communication rule, when verbal words and nonverbal cues clash, <strong>receivers trust nonverbal signals overwhelmingly</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>The Drafting Perfectionism Trap</strong></td>
+                                <td>Constantly pausing during first-draft generation to fix minor punctuation errors.</td>
+                                <td>Drafting requires maintaining creative momentum. Premature editing throttles cognitive flow and weakens comprehensive argumentation.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div><!-- /#formulas -->
+    </div><!-- /.container -->
+
+        <script>
+        const quizData = [
+        {
+                "q": "What is the primary academic definition of communication in professional contexts?",
+                "options": [
+                        "The transmission of complex vocabulary to impress corporate executives and managers",
+                        "The exchange of information to achieve mutual understanding among individuals",
+                        "The unilateral delivery of commands from senior managers to subordinates",
+                        "The automated routing of digital records across computer network nodes"
+                ],
+                "correct": 1,
+                "exp": "Communication is defined as the exchange of information, ideas, and feelings to achieve mutual understanding among individuals.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "In communication theory, which component is responsible for initiating the message and translating ideas into symbolic form?",
+                "options": [
+                        "The physical communication transmission channel",
+                        "The receiver decoding the symbols",
+                        "The sender acting as information source",
+                        "The feedback loop from the audience"
+                ],
+                "correct": 2,
+                "exp": "The sender (or information source) originates the message and encodes internal thoughts into transmissible symbols.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "What cognitive process occurs when a sender converts thoughts, ideas, or intentions into words, gestures, or visual symbols?",
+                "options": [
+                        "Encoding",
+                        "Decoding",
+                        "Filtering",
+                        "Feedback"
+                ],
+                "correct": 0,
+                "exp": "Encoding is the process where the source converts cognitive concepts into symbolic representations for transmission.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "Which component refers to the actual physical or digital medium through which an encoded message travels?",
+                "options": [
+                        "The context",
+                        "The channel",
+                        "The feedback",
+                        "The stimulus"
+                ],
+                "correct": 1,
+                "exp": "The channel is the physical or digital vehicle (e.g., email, telephone, face-to-face airwaves) carrying the message.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "What essential function does the receiver perform upon receiving an encoded message from a sender?",
+                "options": [
+                        "Transmitting interference back to source",
+                        "Eliminating environmental background cues",
+                        "Decoding symbols to derive meaning",
+                        "Altering the medium to prevent noise"
+                ],
+                "correct": 2,
+                "exp": "The receiver decodes the transmitted symbols, interpreting them into cognitive thoughts and operational meaning.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "In communication theory, what term designates any unwanted interference or distortion that degrades message fidelity?",
+                "options": [
+                        "Noise",
+                        "Syntax",
+                        "Channel",
+                        "Medium"
+                ],
+                "correct": 0,
+                "exp": "Noise encompasses any physical, psychological, semantic, or technological disturbance that distorts message transmission.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "Why is studying theoretical models of communication valuable for aspiring workplace professionals?",
+                "options": [
+                        "It eliminates the necessity for written technical documentation in business",
+                        "It guarantees that all recipients share identical psychological worldviews",
+                        "It helps diagnose transmission barriers and enhances message articulation",
+                        "It forces corporate organizations to abandon interpersonal meeting channels"
+                ],
+                "correct": 2,
+                "exp": "Communication models help professionals visualize message flow, identify operational barriers, and refine communication strategy.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "In what year was the landmark Shannon-Weaver Mathematical Model of Communication introduced?",
+                "options": [
+                        "1935",
+                        "1949",
+                        "1968",
+                        "1982"
+                ],
+                "correct": 1,
+                "exp": "Claude Shannon and Warren Weaver published 'The Mathematical Theory of Communication' in 1949.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "What primary engineering industry inspired Claude Shannon's formulation of the Shannon-Weaver model?",
+                "options": [
+                        "Automotive assembly and factory manufacturing plants",
+                        "Telecommunications and signal transmission",
+                        "Maritime cargo logistics systems",
+                        "Aviation passenger ticketing engines"
+                ],
+                "correct": 1,
+                "exp": "Claude Shannon was a mathematician at Bell Telephone Laboratories analyzing technical signal fidelity in electronic circuits.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "Which flow characteristic fundamentally defines the Shannon-Weaver communication model?",
+                "options": [
+                        "Simultaneous multi-channel collaboration",
+                        "Unidirectional linear progression",
+                        "Continuous circular reciprocal dialogue",
+                        "Unstructured informal social gossip"
+                ],
+                "correct": 1,
+                "exp": "The Shannon-Weaver model is fundamentally a linear, one-way model mapping message transmission from source to destination.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "In the Shannon-Weaver linear pipeline, what element operates between the information source and the channel?",
+                "options": [
+                        "The ultimate target destination",
+                        "The transmitter (encoder)",
+                        "The final receiver",
+                        "The feedback sensor"
+                ],
+                "correct": 1,
+                "exp": "The transmitter encodes the message from the information source into an electronic or physical signal suitable for the channel.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "Where does noise interference physically enter the communication process in the Shannon-Weaver model diagram?",
+                "options": [
+                        "Inside the information source mind",
+                        "Within the transmission channel",
+                        "After final receipt at destination",
+                        "During cognitive feedback review"
+                ],
+                "correct": 1,
+                "exp": "In the Shannon-Weaver diagram, the noise source directly acts upon and interferes with the signal inside the transmission channel.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "A manager transmits an urgent email to an employee, but poor office Wi-Fi delays delivery for hours. What model element failed?",
+                "options": [
+                        "The information source's intent",
+                        "The physical transmission channel",
+                        "The receiver's cognitive decoding",
+                        "The cultural context alignment"
+                ],
+                "correct": 1,
+                "exp": "The Wi-Fi network is the transmission channel, and connectivity failure represents channel noise disrupting signal delivery.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "What major operational limitation characterizes linear communication models in organizational management?",
+                "options": [
+                        "They demand excessive face-to-face dialogue time",
+                        "They lack immediate mechanisms for verifying receiver comprehension",
+                        "They fail to specify the identity of the original information source",
+                        "They require sophisticated digital computing hardware for all tasks"
+                ],
+                "correct": 1,
+                "exp": "Linear models flow in one direction without immediate feedback, preventing the sender from confirming whether the message was understood.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "In John's poorly written email scenario, what made his subject line 'Meeting' highly ineffective?",
+                "options": [
+                        "It contained excessive technical corporate jargon",
+                        "It was too formal for internal colleagues",
+                        "It was overly vague and lacked essential context",
+                        "It violated company email encryption rules"
+                ],
+                "correct": 2,
+                "exp": "The subject line 'Meeting' gave no indication of purpose, date, or urgency, making it vague and uninformative.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "How did John's revised email solve the confusion created by his original draft?",
+                "options": [
+                        "It demanded immediate disciplinary administrative penalties for late employees",
+                        "It specified the exact date, time, location, agenda, and materials",
+                        "It transferred all meeting responsibilities entirely to HR staff",
+                        "It replaced written text with informal audio voice recordings"
+                ],
+                "correct": 1,
+                "exp": "The professional revision specified Friday, July 31, 2026, at 3:00 PM, Conference Room, and requested specific sales reports.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "A flight attendant demonstrates safety equipment before takeoff while passengers watch silently. What model fits best?",
+                "options": [
+                        "Interactive model",
+                        "Transactional model",
+                        "Linear model",
+                        "Informal grape-vine"
+                ],
+                "correct": 2,
+                "exp": "The safety demonstration is a one-way, linear broadcast from flight attendant to passive passengers without reciprocal dialogue.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "A corporation broadcasts its annual financial results via a public radio station to listeners. Why is this a linear model?",
+                "options": [
+                        "Listeners immediately submit real-time audio feedback to the radio host",
+                        "The radio channel transmits one-way data without listener feedback",
+                        "Both listeners and broadcasters encode messages simultaneously",
+                        "The broadcast relies entirely on nonverbal cues and eye contact"
+                ],
+                "correct": 1,
+                "exp": "Radio broadcasting is a classic linear model because the signal travels in one direction to a mass audience without return feedback.",
+                "section": "Part 1: Communication Fundamentals & Shannon-Weaver Linear Model"
+        },
+        {
+                "q": "Which communication model first introduced the circular feedback loop, treating participants as equal partners in communication?",
+                "options": [
+                        "Shannon-Weaver Linear Model",
+                        "Osgood-Schramm Interactive Model",
+                        "Lasswell's Surveillance Paradigm",
+                        "Aristotle's Rhetorical Triangle"
+                ],
+                "correct": 1,
+                "exp": "The Osgood-Schramm model (1954) established the circular interactive loop where parties alternate encoding, interpreting, and decoding.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "In the Osgood-Schramm model, what three continuous cognitive functions are performed by each participant?",
+                "options": [
+                        "Filtering, storing, and ignoring",
+                        "Encoding, interpreting, and decoding",
+                        "Speaking, shouting, and listening",
+                        "Drafting, printing, and distributing"
+                ],
+                "correct": 1,
+                "exp": "Each participant in the Osgood-Schramm model continuously functions as an encoder, interpreter, and decoder.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "What is the primary operational role of feedback in the Osgood-Schramm interactive model?",
+                "options": [
+                        "To prove the sender holds superior executive authority",
+                        "To verify comprehension and clarify ambiguous points",
+                        "To convert digital signals into analog sound waves",
+                        "To permanently terminate interpersonal collaboration"
+                ],
+                "correct": 1,
+                "exp": "Feedback allows participants to clarify meaning, confirm accurate decoding, and adapt ongoing communication.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "A customer submits a technical question to support, and the support specialist sends back instructions. What model is this?",
+                "options": [
+                        "Linear model",
+                        "Interactive model",
+                        "Transactional model",
+                        "Passive sensory model"
+                ],
+                "correct": 1,
+                "exp": "This is an Interactive communication model because it involves sequential turn-taking and a discrete feedback response loop.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Who formulated the Transactional Model of Communication in 1970?",
+                "options": [
+                        "Claude Shannon",
+                        "Wilbur Schramm",
+                        "Dean Barnlund",
+                        "Marshall McLuhan"
+                ],
+                "correct": 2,
+                "exp": "Dean Barnlund introduced the Transactional Model of Communication in 1970.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "What fundamental premise differentiates Barnlund's Transactional Model from earlier communication frameworks?",
+                "options": [
+                        "Participants communicate strictly through written text documents",
+                        "Participants act as senders and receivers simultaneously in real time",
+                        "Feedback occurs only after an official cooling-off delay period",
+                        "Only one individual is permitted to transmit signals per conversation"
+                ],
+                "correct": 1,
+                "exp": "Barnlund's model emphasizes simultaneity: individuals send and receive verbal and nonverbal cues concurrently.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "According to Barnlund's Transactional Model, what type of cues originate from the external physical environment?",
+                "options": [
+                        "Private cues (Cpr)",
+                        "Public cues (Cpu)",
+                        "Internal bias cues",
+                        "Hidden semantic cues"
+                ],
+                "correct": 1,
+                "exp": "Public cues (Cpu) are environmental or artificial stimuli present in the physical surroundings available to all participants.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "In Barnlund's framework, an individual's personal memories, current fatigue, and emotional prejudices represent which cues?",
+                "options": [
+                        "Public environmental cues",
+                        "Private internal cues",
+                        "Verbal behavioral cues",
+                        "Channel technical cues"
+                ],
+                "correct": 1,
+                "exp": "Private cues (Cpr) reside inside the individual, comprising private memories, physiological states, and subconscious feelings.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Which example represents a Nonverbal Behavioral Cue (Cbeh-nv) within Barnlund's Transactional Model?",
+                "options": [
+                        "A spoken explanation of budget figures",
+                        "A printed formal operational memorandum on executive letterhead",
+                        "A furrowed brow and defensive posture during negotiation",
+                        "An electronic spreadsheet attached to an email"
+                ],
+                "correct": 2,
+                "exp": "A furrowed brow, crossed arms, and shifting posture are classic nonverbal behavioral cues displayed during interaction.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Two managers negotiate project deadlines while observing each other's voice tone and expressions. What model does this represent?",
+                "options": [
+                        "Linear model",
+                        "Interactive model",
+                        "Transactional model",
+                        "Unilateral directive"
+                ],
+                "correct": 2,
+                "exp": "This is Transactional communication because both participants send and receive verbal and nonverbal cues simultaneously.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "During a job interview, the applicant answers questions while noticing the interviewer nodding and taking notes. What model fits best?",
+                "options": [
+                        "Transactional model",
+                        "Linear broadcast model",
+                        "Asynchronous delay model",
+                        "Mechanical sensory model"
+                ],
+                "correct": 0,
+                "exp": "A live job interview is Transactional; both parties read instantaneous verbal and nonverbal signals and adapt continuously.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Two marketing coworkers brainstorm campaign ideas, spontaneously building upon each other's proposals. What model is depicted?",
+                "options": [
+                        "Linear transmission model",
+                        "Transactional model",
+                        "Interactive model",
+                        "One-way broadcast"
+                ],
+                "correct": 1,
+                "exp": "Live spontaneous brainstorming is Transactional because ideas and cues are exchanged dynamically and simultaneously.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "A professor pre-records a lecture video and posts it on the campus LMS for asynchronous viewing. Which model fits best?",
+                "options": [
+                        "Linear model",
+                        "Interactive model",
+                        "Transactional model",
+                        "Bilateral dialogue"
+                ],
+                "correct": 0,
+                "exp": "Recorded asynchronous lectures are Linear; the transmission is one-way from instructor to viewer without concurrent interaction.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "A company sends a monthly digital newsletter to staff with no expectation of responses. What model is demonstrated?",
+                "options": [
+                        "Linear model",
+                        "Interactive model",
+                        "Transactional model",
+                        "Circular model"
+                ],
+                "correct": 0,
+                "exp": "An informational email newsletter delivered to employees without feedback expectations is a Linear communication model.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "A supervisor asks an employee for a project update; the employee submits metrics, and the supervisor issues new directives. What model is this?",
+                "options": [
+                        "Linear model",
+                        "Interactive model",
+                        "Transactional model",
+                        "Grapevine model"
+                ],
+                "correct": 1,
+                "exp": "This is an Interactive model because it follows a turn-taking exchange of request, submission, and subsequent instruction.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Why is Barnlund's Transactional Model considered irreversible in interpersonal communication theory?",
+                "options": [
+                        "Because digital records and database messages can never be permanently expunged from enterprise servers",
+                        "Because once a verbal or nonverbal cue is perceived, its social impact cannot be unexperienced",
+                        "Because participants are legally forbidden from altering written contracts",
+                        "Because communication channels become permanently disabled after each session"
+                ],
+                "correct": 1,
+                "exp": "Communication is irreversible because once an utterance or nonverbal cue is perceived, its cognitive and relational impact cannot be recalled.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Which communication model places the highest emphasis on social context, cultural norms, and shared relational history?",
+                "options": [
+                        "Shannon-Weaver Linear Engineering Model",
+                        "Lasswell's Formula",
+                        "Barnlund's Transactional Model",
+                        "Electronic Telegraph Model"
+                ],
+                "correct": 2,
+                "exp": "Barnlund's model emphasizes that meaning is co-created within cultural, social, and relational environmental contexts.",
+                "section": "Part 2: Osgood-Schramm, Barnlund Transactional Model & Cue Analysis"
+        },
+        {
+                "q": "Which type of communication utilizes spoken or written words to convey meaning?",
+                "options": [
+                        "Nonverbal communication",
+                        "Visual communication",
+                        "Verbal communication",
+                        "Kinesthetic communication"
+                ],
+                "correct": 2,
+                "exp": "Verbal communication encompasses all communication expressed through words, whether spoken aloud or written on paper/screens.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Which workplace artifact is a formal manifestation of verbal communication?",
+                "options": [
+                        "A corporate organizational departmental hierarchy chart",
+                        "A written project status report to stakeholders",
+                        "A color-coded financial dashboard infographic",
+                        "A firm handshake upon greeting a client"
+                ],
+                "correct": 1,
+                "exp": "A written report consists of verbal communication expressed in text, whereas charts are visual and handshakes are nonverbal.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "What category of communication involves facial expressions, body posture, gestures, and eye movements?",
+                "options": [
+                        "Verbal communication",
+                        "Nonverbal communication",
+                        "Asynchronous communication",
+                        "Syntactic communication"
+                ],
+                "correct": 1,
+                "exp": "Nonverbal communication encompasses physical cues including facial expressions, postures, gestures, and eye contact.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "What vocal dimension is classified under paralanguage in nonverbal communication analysis?",
+                "options": [
+                        "The specific academic dictionary definitions of words spoken aloud",
+                        "Tone of voice, pitch, speaking pace, and volume",
+                        "The grammatical syntax of complex sentences",
+                        "The written spelling conventions used in emails"
+                ],
+                "correct": 1,
+                "exp": "Paralanguage involves the vocal delivery characteristics (tone, pitch, pacing, volume) that accompany spoken verbal words.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Which tool represents visual communication in an executive business presentation?",
+                "options": [
+                        "A printed policy manual without illustrations",
+                        "A bar graph illustrating quarterly revenue growth",
+                        "An oral keynote address delivered from memory",
+                        "A voicemail message left on a client's phone"
+                ],
+                "correct": 1,
+                "exp": "Bar graphs, charts, and diagrams are visual communication tools designed to convey data rapidly through graphics.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "What psychological phenomenon occurs when a communicator's spoken words directly contradict their body language?",
+                "options": [
+                        "A mixed signal",
+                        "A linear transmission",
+                        "A semantic agreement",
+                        "An objective consensus"
+                ],
+                "correct": 0,
+                "exp": "A mixed signal occurs when verbal utterances and nonverbal cues convey conflicting, contradictory messages.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "When a colleague says 'I am fine' while crossing their arms, scowling, and looking down, which signal do listeners believe?",
+                "options": [
+                        "The verbal statement that they are fine",
+                        "The nonverbal cues indicating distress or anger",
+                        "Neither, listeners ignore both signals completely",
+                        "Only the message confirmed in a later email"
+                ],
+                "correct": 1,
+                "exp": "Human beings instinctively trust nonverbal cues over verbal words when contradictions occur (Albert Mehrabian's rule).",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Why is professional writing skill considered essential for career advancement in modern corporate environments?",
+                "options": [
+                        "It completely replaces the operational necessity for interpersonal verbal meetings",
+                        "It builds professional credibility, prevents costly errors, and fosters trust",
+                        "It guarantees that all team members receive identical performance bonuses",
+                        "It eliminates the need for software engineering and technical design"
+                ],
+                "correct": 1,
+                "exp": "Clear business writing establishes personal credibility, minimizes operational errors, and creates advancement opportunities.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Consider: 'An investigation into the breach is currently being conducted by our security personnel.' Why is this sentence ineffective?",
+                "options": [
+                        "It uses overly casual, ambiguous, and unprofessional workplace slang",
+                        "It uses passive voice and buries the active subject at the end",
+                        "It reveals classified technical network vulnerabilities",
+                        "It contains multiple run-on clauses and missing commas"
+                ],
+                "correct": 1,
+                "exp": "The sentence relies on passive phrasing ('is being conducted by') and delays the active doer ('security personnel').",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "What is the most effective and concise revision of the passive sentence about the security breach investigation?",
+                "options": [
+                        "Routine investigation of breaches is what our security team handles when they are formally mandated.",
+                        "Our security team is investigating the data breach and will share updates soon.",
+                        "There is a data breach investigation currently happening by security staff.",
+                        "It is believed by staff that updates on the breach will come in due time."
+                ],
+                "correct": 1,
+                "exp": "'Our security team is investigating the data breach and will share updates soon' uses active voice and names the team upfront.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Consider: 'Our product is utilized by clients for the purpose of achieving an optimization of daily workflows.' What is wrong?",
+                "options": [
+                        "It uses excessive corporate wordiness instead of a strong action verb",
+                        "It contains severe grammatical subject-verb disagreement errors across clauses",
+                        "It is written in an overly casual, disrespectful tone",
+                        "It fails to explain whether the product is digital or physical"
+                ],
+                "correct": 0,
+                "exp": "'Utilized by clients for the purpose of achieving an optimization of' is wordy filler that should be replaced with 'optimizes'.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "What is the crispest, most persuasive revision of the wordy client pitch sentence?",
+                "options": [
+                        "Our software makes clients do workflows better every single business day.",
+                        "Clients utilize software because optimization is an important purpose.",
+                        "Our software optimizes daily workflows.",
+                        "In order to optimize schedules, our software can be used by company clients."
+                ],
+                "correct": 2,
+                "exp": "'Our software optimizes daily workflows' eliminates 13 unnecessary words, focusing directly on the active verb 'optimizes'.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Consider: 'It would be greatly appreciated if you could review the attached report and give approval by end of day.' What is the flaw?",
+                "options": [
+                        "It is overly aggressive and threatens team members",
+                        "It is timid, wordy, and provides a vague deadline",
+                        "It contains misspelled financial terminology",
+                        "It forgets to attach the referenced financial files"
+                ],
+                "correct": 1,
+                "exp": "The sentence is timid, padded with wordy preambles ('It would be greatly appreciated'), and gives an imprecise deadline ('end of day').",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "How should a professional rephrase the internal team request to be polite, authoritative, and time-specific?",
+                "options": [
+                        "Review this document whenever you get some spare time tomorrow morning.",
+                        "Please review and approve the attached financial report by 5:00 PM.",
+                        "Hey, look over the attached sheet or we will miss our executive schedule.",
+                        "It is required by management that you approve the financial data today."
+                ],
+                "correct": 1,
+                "exp": "'Please review and approve the attached financial report by 5:00 PM' provides a polite directive with an exact, unambiguous time.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Which wordiness trap replaces concise verbs with lengthy noun phrases (e.g., 'make an examination of' instead of 'examine')?",
+                "options": [
+                        "Nominalization",
+                        "Syntactic Alliteration",
+                        "Contraction",
+                        "Coordination"
+                ],
+                "correct": 0,
+                "exp": "Nominalization turns lively action verbs into sluggish nouns (e.g., 'reach a decision' vs 'decide', 'give approval' vs 'approve').",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "In business writing, what is the recommended practice regarding the use of active voice versus passive voice?",
+                "options": [
+                        "Use passive voice exclusively to sound significantly more sophisticated and academic",
+                        "Use active voice predominantly to ensure directness, clarity, and accountability",
+                        "Alternate between active and passive voice randomly in every sentence",
+                        "Avoid active voice whenever writing to senior executive managers"
+                ],
+                "correct": 1,
+                "exp": "Active voice is standard in business writing because it specifies who acts, shortens sentences, and improves vigor and clarity.",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "Under what specific professional circumstance is passive voice ethically or strategically acceptable?",
+                "options": [
+                        "When writing marketing slogans for brand awareness",
+                        "When tactfully delivering bad news without assigning personal blame",
+                        "When providing instructions on how to operate heavy factory machinery",
+                        "When summarizing key metrics in an executive dashboard"
+                ],
+                "correct": 1,
+                "exp": "Passive voice is tactically useful when delivering bad news (e.g., 'The payment was not received' vs 'You failed to pay').",
+                "section": "Part 3: Types of Communication, Mixed Signals & Active Phrasing"
+        },
+        {
+                "q": "What is the first formal stage of the professional writing process?",
+                "options": [
+                        "Drafting",
+                        "Prewriting",
+                        "Revising",
+                        "Publishing"
+                ],
+                "correct": 1,
+                "exp": "Prewriting is the initial planning phase where writers define purpose, analyze audience, and gather data.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "Which action is an essential activity conducted during the prewriting stage?",
+                "options": [
+                        "Systematically fixing minor comma splices, typographical errors, and misspellings",
+                        "Brainstorming ideas, determining purpose, and profiling the audience",
+                        "Formatting page margins and setting font sizes for printing",
+                        "Submitting final document copies to the executive board"
+                ],
+                "correct": 1,
+                "exp": "Prewriting entails brainstorming, identifying the primary objective, analyzing reader needs, and outlining structure.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What should be a writer's primary focus during the drafting stage?",
+                "options": [
+                        "Achieving mechanical perfection and flawless comma placement",
+                        "Generating ideas and translating outlines into continuous text",
+                        "Printing professional hardcover copies for distribution",
+                        "Cross-referencing legal liability clauses with corporate attorneys"
+                ],
+                "correct": 1,
+                "exp": "Drafting focuses on content creation and momentum. Writers should embrace imperfection and avoid premature editing.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What is the primary difference between the revising stage and the editing stage?",
+                "options": [
+                        "Revising corrects minor typographical typos, while editing restructures major executive paragraphs",
+                        "Revising improves structure and arguments, while editing corrects grammar and mechanics",
+                        "Revising is performed by computers, while editing is done exclusively by authors",
+                        "Revising occurs after publication, while editing occurs prior to drafting"
+                ],
+                "correct": 1,
+                "exp": "Revising focuses on macro-level content, logic, and paragraph unity. Editing addresses micro-level mechanics, spelling, and grammar.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "Which question should a business writer ask during the substantive revising phase?",
+                "options": [
+                        "Is every single comma placed before a coordinating conjunction?",
+                        "Is the central argument clear, logical, and supported by evidence?",
+                        "Are the document margins set to exactly 1.0 inch on all sides?",
+                        "Does the printer have sufficient color toner for final distribution?"
+                ],
+                "correct": 1,
+                "exp": "Revising evaluates whether the thesis is clear, ideas flow logically, and assertions are validated with solid evidence.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "In the MEAL paragraph framework, what does the letter 'M' represent?",
+                "options": [
+                        "Main Idea (Topic Sentence)",
+                        "Mandatory Empirical Evidence",
+                        "Mechanical Editing",
+                        "Measurement Metric"
+                ],
+                "correct": 0,
+                "exp": "'M' stands for Main Idea, which articulates the central claim or focus of the paragraph in the opening topic sentence.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What component of the MEAL framework provides objective facts, statistics, or concrete real-world data?",
+                "options": [
+                        "M (Main Idea)",
+                        "E (Evidence)",
+                        "A (Analysis)",
+                        "L (Lead-Out)"
+                ],
+                "correct": 1,
+                "exp": "'E' represents Evidence, supplying verifiable statistics, operational metrics, or concrete examples that support the main idea.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "In MEAL paragraph architecture, what is the specific function of the 'A' (Analysis) component?",
+                "options": [
+                        "Listing raw unformatted numerical tables without providing any explanatory text",
+                        "Explaining why the evidence matters and connecting it to the main idea",
+                        "Formatting the visual typography of the surrounding margins",
+                        "Greeting the reader with an informal personal anecdote"
+                ],
+                "correct": 1,
+                "exp": "Analysis explains the significance of the evidence, interpreting data and demonstrating how it substantiates the main idea.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What is the strategic purpose of the 'L' (Lead-Out) sentence in a MEAL-structured paragraph?",
+                "options": [
+                        "Introducing brand new, completely unrelated technical arguments without contextual framing",
+                        "Summarizing the core thought and transitioning smoothly to the next paragraph",
+                        "Listing external academic bibliographic references in APA format",
+                        "Repeating the opening topic sentence verbatim word for word"
+                ],
+                "correct": 1,
+                "exp": "The Lead-Out concludes the paragraph's thought and creates a logical transition bridging to the subsequent topic.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "Why was the draft paragraph about customer satisfaction scores and software tools considered defective?",
+                "options": [
+                        "It contained an excessive quantity of complex mathematical calculations and statistical percentages",
+                        "It lacked unity, jumping erratically between software, staffing, hold times, and manuals",
+                        "It was written in foreign languages unfamiliar to staff members",
+                        "It was too brief to convey any actionable workplace information"
+                ],
+                "correct": 1,
+                "exp": "The original paragraph lacked unity; it threw together software issues, HR hiring freezes, hold times, and training manuals without focus.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What is the primary document purpose of a professional job application cover letter?",
+                "options": [
+                        "Duplicating every single historical accomplishment bullet point from the applicant's formal résumé",
+                        "Telling the persuasive story behind qualifications and highlighting organizational fit",
+                        "Demanding a specific starting salary and guaranteed paid vacation time",
+                        "Providing a comprehensive autobiography of childhood achievements"
+                ],
+                "correct": 1,
+                "exp": "A cover letter provides the narrative context behind qualifications, explaining why the applicant is uniquely suited for the position.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What traditional salutation is now widely considered outdated and impersonal in professional cover letters?",
+                "options": [
+                        "Dear Hiring Manager:",
+                        "To Whom It May Concern:",
+                        "Dear Dr. Watson:",
+                        "Dear Selection Committee:"
+                ],
+                "correct": 1,
+                "exp": "'To Whom It May Concern' is impersonal and reveals a failure to research the specific recipient or department leader.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What should the opening paragraph of a high-impact cover letter immediately accomplish?",
+                "options": [
+                        "Provide detailed descriptions of college coursework syllabi",
+                        "Identify the target position and present an engaging value hook",
+                        "List personal references and their direct home phone numbers",
+                        "Criticize previous employers to demonstrate technical superiority"
+                ],
+                "correct": 1,
+                "exp": "The opening paragraph states the specific position sought, mentions how you found the role, and hooks the reader with core strengths.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "How should an applicant tailor the body paragraphs of a cover letter to a specific job opening?",
+                "options": [
+                        "By incorporating keywords and requirements directly from the posted job description",
+                        "By submitting an identical generic template to hundreds of different companies",
+                        "By boasting about unrelated hobbies and athletic achievements",
+                        "By writing five single-spaced pages detailing personal philosophy"
+                ],
+                "correct": 0,
+                "exp": "Tailoring requires aligning experience with the job posting, using exact keywords and demonstrating solutions to employer needs.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What is the recommended approach for the closing paragraph of a professional cover letter?",
+                "options": [
+                        "Express appreciation, request an interview opportunity, and provide contact details",
+                        "Assume the job has already been secured and inquire about initial orientation dates",
+                        "Express doubts regarding personal readiness to elicit sympathy from recruiters",
+                        "Demand an immediate telephone callback within twenty-four hours"
+                ],
+                "correct": 0,
+                "exp": "The closing paragraph politely expresses gratitude, issues an interview call to action, and restates contact availability.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "Under the professional writing assessment rubric, what does the 'Content & Persuasion' criterion evaluate?",
+                "options": [
+                        "Whether standard 1-inch margins, line leading, and conventional typography rules were rigorously observed",
+                        "Relevance, comprehensive coverage of requirements, and clear value justification",
+                        "The total number of semicolons and commas utilized across sentences",
+                        "The physical weight of the cardstock paper used for printed submissions"
+                ],
+                "correct": 1,
+                "exp": "'Content & Persuasion' assesses whether the document answers the prompt, offers strong evidence, and demonstrates business value.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "Which mechanical error directly undermines professional credibility under the 'Grammar & Mechanics' rubric criterion?",
+                "options": [
+                        "Using structured bulleted lists to organize complex quantitative project specifications",
+                        "Submitting documents containing sentence fragments, comma splices, or typos",
+                        "Employing active voice verbs in executive summary paragraphs",
+                        "Addressing the hiring manager directly by their verified surname"
+                ],
+                "correct": 1,
+                "exp": "Sentence fragments, comma splices, and spelling errors violate basic mechanics, eroding the writer's credibility and authority.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        },
+        {
+                "q": "What is the final stage of the professional writing process before readers access the document?",
+                "options": [
+                        "Revising",
+                        "Prewriting",
+                        "Drafting",
+                        "Publishing"
+                ],
+                "correct": 3,
+                "exp": "Publishing is the culmination of the writing pipeline, delivering the finalized, polished document to its intended audience.",
+                "section": "Part 4: Writing Stages, MEAL Framework & Cover Letter Architecture"
+        }
+];
+
+        const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
+    </script>
+</body>
+</html>

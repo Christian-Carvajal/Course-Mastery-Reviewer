@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,546 +18,734 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Traditional Data Techniques | University Study Guide</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Traditional Data Techniques | University Study Guide</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<meta content="#0d9488" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Data Mining</h1>
-        <p>Traditional Data Techniques  Data Collection, Pre-processing & 91-Question Mastery Quiz</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Traditional Data Techniques</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-            <button class="nav-btn" onclick="window.openTraditionalExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-
-            <!-- PART 1: TRADITIONAL DATA -->
-            <div class="card">
-                <h2>PART 1: Traditional Data Foundations & Pre-Processing</h2>
-
-                <h3>1.1 Where Traditional Data Sits on the Map</h3>
-                <p>Five columns, one timeline. Everything in this deck lives in the very first column (Traditional Data).</p>
-
-                <h3>1.2 What Exactly Is "Data"?</h3>
-                <p>One word, three different meanings:</p>
-                <ul>
-                    <li><strong>Raw facts:</strong> Untouched facts sitting on your server that cannot be analyzed yet.</li>
-                    <li><strong>Processed data:</strong> Cleaned data converted into a usable format.</li>
-                    <li><strong>Information:</strong> Meaningful output people can make decisions from.</li>
-                </ul>
-                <p><em>All three answers are correct, and that is the problem. Splitting the term apart is what makes the techniques easy to place.</em></p>
-
-                <h3>1.3 The Data Pipeline</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Pipeline Steps</span><br>
-                    <span class="formula-text">RAW DATA &rarr; PRE-PROCESSING &rarr; PROCESSING &rarr; INFORMATION</span>
-                    <div class="formula-explain">
-                        • <strong>Raw Data:</strong> Untouched facts sitting on your server. Cannot be analyzed yet.<br>
-                        • <strong>Pre-processing:</strong> Convert raw data into a usable, understandable format.<br>
-                        • <strong>Processing:</strong> Run the analysis on data that is now trustworthy.<br>
-                        • <strong>Information:</strong> Meaningful output people can make decisions from.<br>
-                        • <strong>Gathering Step:</strong> Data collection.<br>
+<header class="app-header">
+<h1>Data Mining</h1>
+<p>Traditional Data Techniques  Data Collection, Pre-processing &amp; 91-Question Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Traditional Data Techniques</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+<button class="nav-btn" onclick="window.openTraditionalExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<!-- PART 1: TRADITIONAL DATA -->
+<div class="card">
+<h2>PART 1: Traditional Data Foundations &amp; Pre-Processing</h2>
+<h3>1.1 Where Traditional Data Sits on the Map</h3>
+<p>Five columns, one timeline. Everything in this deck lives in the very first column (Traditional Data).</p>
+<h3>1.2 What Exactly Is "Data"?</h3>
+<p>One word, three different meanings:</p>
+<ul>
+<li><strong>Raw facts:</strong> Untouched facts sitting on your server that cannot be analyzed yet.</li>
+<li><strong>Processed data:</strong> Cleaned data converted into a usable format.</li>
+<li><strong>Information:</strong> Meaningful output people can make decisions from.</li>
+</ul>
+<p><em>All three answers are correct, and that is the problem. Splitting the term apart is what makes the techniques easy to place.</em></p>
+<h3>1.3 The Data Pipeline</h3>
+<div class="formula-card">
+<span class="formula-badge">Pipeline Steps</span><br/>
+<span class="formula-text">RAW DATA → PRE-PROCESSING → PROCESSING → INFORMATION</span>
+<div class="formula-explain">
+                        • <strong>Raw Data:</strong> Untouched facts sitting on your server. Cannot be analyzed yet.<br/>
+                        • <strong>Pre-processing:</strong> Convert raw data into a usable, understandable format.<br/>
+                        • <strong>Processing:</strong> Run the analysis on data that is now trustworthy.<br/>
+                        • <strong>Information:</strong> Meaningful output people can make decisions from.<br/>
+                        • <strong>Gathering Step:</strong> Data collection.<br/>
                         • <strong>Clean-up Step:</strong> Data pre-processing.
                     </div>
-                </div>
-
-                <h3>1.4 Raw Data, in Plain Terms</h3>
-                <p>Three names for the same thing: <strong>raw data = raw facts = primary data</strong>. Three facts that define it:</p>
-                <ol>
-                    <li><strong>Cannot be analysed straight away:</strong> Nothing has been checked, corrected, or labeled yet. Running an analysis on it now would just produce confident nonsense.</li>
-                    <li><strong>It sits on your server, untouched:</strong> Data accumulated and stored exactly as it arrived, in whatever shape the source handed it to you.</li>
-                    <li><strong>Gathering it is called data collection:</strong> That is the very first step, happening before a single pre-processing operation runs.</li>
-                </ol>
-
-                <h3>1.5 Step 1  Data Collection</h3>
-                <p>Two everyday ways companies accumulate raw facts:</p>
-                <ul>
-                    <li><strong>Manual (Surveys):</strong> Ask people directly (e.g., rate product/experience on scale 1-10). You control the questions, but people answer selectively.</li>
-                    <li><strong>Automatic (Cookies):</strong> Collected without anyone typing anything. Cookies hand companies detailed info about user website activity. Huge volume, but messy and full of surprises.</li>
-                </ul>
-
-                <h3>1.6 Why Pre-process? Because Raw Data Lies</h3>
-                <p>Real examples of errors in customer data:</p>
-                <ul>
-                    <li><strong>AGE = 932:</strong> Someone mistyped or a system wrote garbage into the field.</li>
-                    <li><strong>NAME = United Kingdom:</strong> Country value landed in the wrong column.</li>
-                </ul>
-                <p>Data like this must be marked as invalid or corrected before analysis. Data pre-processing is a group of operations that fixes the problems data gathering inevitably creates.</p>
-
-                <h3>1.7 Technique 1  Class Labeling</h3>
-                <p>Label each data point with its correct type, or arrange data by category:</p>
-                <ul>
-                    <li><strong>Numerical:</strong> Numbers that can be manipulated mathematically. <em>Examples:</em> Number of goods sold daily, Average goods sold per day/month. Arithmetic means something.</li>
-                    <li><strong>Categorical:</strong> Information that cannot have mathematical manipulations applied to it. <em>Examples:</em> A person's profession, place of birth, product category.</li>
-                    <li><strong>The Test:</strong> The test is never how the value looks. It is whether the arithmetic means anything. <em>Example:</em> Customer ID (1001) looks like a number, but an average customer ID tells you nothing, making it categorical. Complaints filed (3) is numerical.</li>
-                </ul>
-
-                <h3>1.8 Technique 2  Data Cleansing</h3>
-                <p>Also called data cleaning or data scrubbing. Goal: deal with inconsistent data.</p>
-                <ul>
-                    <li><strong>1. Inconsistent values:</strong> Misspelled US states must be corrected before anything else.</li>
-                    <li><strong>2. Missing values:</strong> e.g., customer gives name and occupation, but no age.
+</div>
+<h3>1.4 Raw Data, in Plain Terms</h3>
+<p>Three names for the same thing: <strong>raw data = raw facts = primary data</strong>. Three facts that define it:</p>
+<ol>
+<li><strong>Cannot be analysed straight away:</strong> Nothing has been checked, corrected, or labeled yet. Running an analysis on it now would just produce confident nonsense.</li>
+<li><strong>It sits on your server, untouched:</strong> Data accumulated and stored exactly as it arrived, in whatever shape the source handed it to you.</li>
+<li><strong>Gathering it is called data collection:</strong> That is the very first step, happening before a single pre-processing operation runs.</li>
+</ol>
+<h3>1.5 Step 1  Data Collection</h3>
+<p>Two everyday ways companies accumulate raw facts:</p>
+<ul>
+<li><strong>Manual (Surveys):</strong> Ask people directly (e.g., rate product/experience on scale 1-10). You control the questions, but people answer selectively.</li>
+<li><strong>Automatic (Cookies):</strong> Collected without anyone typing anything. Cookies hand companies detailed info about user website activity. Huge volume, but messy and full of surprises.</li>
+</ul>
+<h3>1.6 Why Pre-process? Because Raw Data Lies</h3>
+<p>Real examples of errors in customer data:</p>
+<ul>
+<li><strong>AGE = 932:</strong> Someone mistyped or a system wrote garbage into the field.</li>
+<li><strong>NAME = United Kingdom:</strong> Country value landed in the wrong column.</li>
+</ul>
+<p>Data like this must be marked as invalid or corrected before analysis. Data pre-processing is a group of operations that fixes the problems data gathering inevitably creates.</p>
+<h3>1.7 Technique 1  Class Labeling</h3>
+<p>Label each data point with its correct type, or arrange data by category:</p>
+<ul>
+<li><strong>Numerical:</strong> Numbers that can be manipulated mathematically. <em>Examples:</em> Number of goods sold daily, Average goods sold per day/month. Arithmetic means something.</li>
+<li><strong>Categorical:</strong> Information that cannot have mathematical manipulations applied to it. <em>Examples:</em> A person's profession, place of birth, product category.</li>
+<li><strong>The Test:</strong> The test is never how the value looks. It is whether the arithmetic means anything. <em>Example:</em> Customer ID (1001) looks like a number, but an average customer ID tells you nothing, making it categorical. Complaints filed (3) is numerical.</li>
+</ul>
+<h3>1.8 Technique 2  Data Cleansing</h3>
+<p>Also called data cleaning or data scrubbing. Goal: deal with inconsistent data.</p>
+<ul>
+<li><strong>1. Inconsistent values:</strong> Misspelled US states must be corrected before anything else.</li>
+<li><strong>2. Missing values:</strong> e.g., customer gives name and occupation, but no age.
                         <ul>
-                            <li><em>Option A:</em> Disregard the customer's entire record.</li>
-                            <li><em>Option B:</em> Enter the average age of remaining customers.</li>
-                        </ul>
-                        <em>Neither answer is automatic. Both cleansing and missing values must be resolved before processing.</em>
-                    </li>
-                </ul>
-
-                <h3>1.9 Case-Specific Approaches</h3>
-                <ul>
-                    <li><strong>Balancing:</strong> When one group dominates the sample (e.g., 80% female / 20% male survey), trends lean toward women. Fix: take equal numbers from each group so ratio becomes 50-50.</li>
-                    <li><strong>Data Shuffling:</strong> Shuffling observations ensures any 100 consecutive entries are random and representative, improving predictive performance and avoiding misleading results.</li>
-                </ul>
-
-                <h3>1.10 How Traditional Databases Are Pictured & At a Glance</h3>
-                <ul>
-                    <li><strong>Entity Relationship Diagram (ERD):</strong> Complex, theoretical architecture illustration. Entities, relationships, attributes.</li>
-                    <li><strong>Relational Schema:</strong> Each rectangle is one data table, each line shows relationships (Customers, Orders, Products).</li>
-                    <li><strong>At a Glance:</strong> When: Beginning; Tools: R, Python, SQL, MATLAB, Excel, IBM SPSS; Roles: Data architect, Data engineer, Database administrator.</li>
-                    <li><strong>Misconception:</strong> 200,000 lines of data is not necessarily big data. Volume alone does not make it big; variety, variability, velocity, veracity matter too.</li>
-                </ul>
-            </div>
-
-            <!-- PART 2: BIG DATA -->
-            <div class="card">
-                <h2>PART 2: Big Data Techniques</h2>
-
-                <h3>2.1 Same Backbone, More Variety</h3>
-                <p>Big data does not throw the pipeline awayit stretches every step. What changes:</p>
-                <ul>
-                    <li>Far more data types than numerical and categorical.</li>
-                    <li>Much wider range of cleansing methods.</li>
-                    <li>Missing values become a far bigger problem.</li>
-                    <li>New case-specific techniques: text data mining, data masking.</li>
-                </ul>
-
-                <h3>2.2 Class Labeling & Cleansing in Big Data</h3>
-                <ul>
-                    <li><strong>Class Labeling Expansion:</strong> Green (Numerical, Categorical) + Orange (Text data, Digital image data, Digital video data, Digital audio data).</li>
-                    <li><strong>Image & Audio Cleansing:</strong> Verification that image observations are ready; confirming audio quality adequacy.</li>
-                    <li><strong>Text Data Mining:</strong> Process of deriving valuable unstructured data from text across academic papers, blogs, online platforms, private Excel files.</li>
-                    <li><strong>Data Masking:</strong> Analyzes info without exposing private details by concealing original data with random/false data. (e.g. Anna Kruger / a.kruger@example.com / 4519 8823 0067 &rarr; Q7RTX Vbnm / x8k2@masked.local / **** **** 0067).</li>
-                </ul>
-
-                <h3>2.3 Visualizations & Where Big Data Shows Up</h3>
-                <ul>
-                    <li><strong>Rule of Thumb:</strong> A large number of intersecting lines almost always means you are looking at big data.</li>
-                    <li><strong>Social Platforms:</strong> 2 billion+ users (Volume), text/images/video/audio (Variety), real-time reporting/velocity.</li>
-                    <li><strong>Financial Trading:</strong> Daily close = 1 obs/day (traditional). Every 5 seconds = 4,680 obs/day (big data). Every second = 23,400 obs/day (big data).</li>
-                </ul>
-            </div>
-
-            <!-- PART 3: BUSINESS INTELLIGENCE -->
-            <div class="card">
-                <h2>PART 3: Business Intelligence (BI)</h2>
-
-                <h3>3.1 Explaining the Past</h3>
-                <p>Pre-processing is done. BI combines data skills with business knowledge to explain past performance. Asks: What happened? When? How many units sold? Which region sold most?</p>
-
-                <h3>3.2 The Chain: Observations &rarr; Measures &rarr; Metrics &rarr; KPIs</h3>
-                <ol>
-                    <li><strong>01 Observations:</strong> Single recorded facts (e.g., 1 month revenue, 1 new customer).</li>
-                    <li><strong>02 Measures:</strong> Observations accumulated together to show info (Quantification: representing observations as numbers). e.g., Q1 measure = $350 revenue, 50 customers.</li>
-                    <li><strong>03 Metrics:</strong> Values derived from measures with business meaning attached (e.g., Average quarterly revenue per new customer = $350 / 50 = $7). Exist for comparison.</li>
-                    <li><strong>04 KPIs:</strong> The few metrics tied tightly to main business objectives. Metric = page traffic from any user; KPI = traffic from users who clicked ad link.</li>
-                </ol>
-
-                <h3>3.3 Dashboard Filtering & Real-World Applications</h3>
-                <ul>
-                    <li><strong>KPI Dashboards:</strong> Keep executives and managers focused on main business objectives.</li>
-                    <li><strong>Price Optimization:</strong> Raise room rates when demand is high; drop rates to attract visitors when demand falls. Real-time vs historical comparison.</li>
-                    <li><strong>Inventory Management:</strong> Avoid Oversupply (stock nobody buys, waste, storage cost, cash tied up) and Undersupply (lost sales, customers go elsewhere). Uses seasonality patterns, over/under-stocked months, peak day/hour.</li>
-                </ul>
-            </div>
-
-            <!-- PART 4: TRADITIONAL METHODS -->
-            <div class="card">
-                <h2>PART 4: Traditional Methods (Predictive Analytics)</h2>
-
-                <h3>4.1 From Analysis to Analytics</h3>
-                <p>When using info to predict future values, you switch from analysis to analytics. Predictive analytics splits into Traditional Methods (classical stats) and Machine Learning (AI-driven).</p>
-
-                <h3>4.2 Key Traditional Techniques</h3>
-                <ul>
-                    <li><strong>Regression:</strong> Quantifies causal relationships among variables (<strong>Y = B &times; X</strong>). Straight line sits as close to all dots as possible.</li>
-                    <li><strong>Logistic Regression:</strong> Non-linear model where vertical values are ones and zeros joined by an S-curve. Candidate screening: 1 = prob > 50%, 0 = at/below 50%.</li>
-                    <li><strong>Cluster Analysis:</strong> Groups observations that behave alike. e.g., House size vs price in 3 clusters (Small/expensive city centre, Big/cheaper far from city, Big/expensive nice neighbourhood).</li>
-                    <li><strong>Explanatory Variable Names:</strong> Four names for the same thing: Explanatory variable, Regressor, Independent variable, Predictor variable (<strong>X</strong> side).</li>
-                    <li><strong>Factor Analysis:</strong> Groups explanatory variables together (e.g., 100 survey questions collapse 3 animal attitude questions into 1 factor &rarr; ~10 factors).</li>
-                    <li><strong>Distinction:</strong> <em>Clustering groups observations together. Factor analysis groups explanatory variables together.</em></li>
-                    <li><strong>Time Series:</strong> Follows development of values over time. Rule: Time ALWAYS goes on horizontal line because time is independent of every other variable.</li>
-                    <li><strong>Applications:</strong> UX survey (4 continental clusters = 4 separate tests), A/B Testing (A/B/n multivariate testing), Sales Forecasting (Time series holds it up, ML sharpens accuracy).</li>
-                </ul>
-            </div>
-
-            <!-- PART 5: MACHINE LEARNING -->
-            <div class="card">
-                <h2>PART 5: Machine Learning (ML) & Generative AI</h2>
-
-                <h3>5.1 Core ML Concepts & 4 Ingredients</h3>
-                <p>ML is a trial-and-error process where each consecutive trial is at least as good as the one before it. You hand it ONE final goal, not a rulebook. Four ingredients (Robot Archer analogy):</p>
-                <ol>
-                    <li><strong>01 Data:</strong> Values model trains on (Quiver of arrows).</li>
-                    <li><strong>02 Model:</strong> Thing learned/refined (Bow usage).</li>
-                    <li><strong>03 Objective function:</strong> Measure of how wrong you currently are (Average distance from target).</li>
-                    <li><strong>04 Optimization algorithm:</strong> Mechanics that reduce error (Adjusting posture, grip, draw strength).</li>
-                </ol>
-                <p><em>The Loop:</em> Fire arrows &rarr; Measure error &rarr; Adjust technique &rarr; Fire again closer. Training stops when good enough or after chosen arrows. Unseen inputs cause model to struggle.</p>
-
-                <h3>5.2 The Three Major Types of Machine Learning</h3>
-                <ul>
-                    <li><strong>Supervised Learning:</strong> Known target for every arrow before shot (Labelled data). Approaches: SVMs, Neural networks, Deep learning, Random forest, Bayesian networks.</li>
-                    <li><strong>Unsupervised Learning:</strong> No targets provided (Unlabelled data); divides arrows into clusters/heaps. Approaches: K-means (most common), Neural networks, Deep learning.</li>
-                    <li><strong>Reinforcement Learning:</strong> Maximises a reward instead of minimising error (Positive reinforcement).</li>
-                    <li><strong>Deep Learning:</strong> Conceptually different, state-of-the-art, sits in both supervised and unsupervised due to broad scope and high accuracy.</li>
-                </ul>
-
-                <h3>5.3 NLP, Self-Supervised Learning & LLMs</h3>
-                <ul>
-                    <li><strong>Natural Language Processing (NLP):</strong> Subfield for written/spoken human language (Siri, chatbots, translators). Hybrid supervised/unsupervised.</li>
-                    <li><strong>Self-Supervised Learning:</strong> Unlabelled data &rarr; generates own labels &rarr; learns from them. Cornerstone of LLMs (ChatGPT, Gemini). Core trick: predicting the missing word using preceding context.</li>
-                    <li><strong>LLM Lineage:</strong> N-grams &rarr; RNNs &rarr; LSTMs &rarr; Transformers (2017 architecture using Attention / Self-attention mechanism).</li>
-                    <li><strong>GPT Unpacked:</strong> G = Generative, P = Pre-trained, T = Transformer.</li>
-                    <li><strong>Other GenAI Families:</strong> Diffusion models (images/video), GANs (two algorithms: generator & evaluator), NeRF (3D modelling), Hybrid models.</li>
-                </ul>
-
-                <h3>5.4 Real-World Applications</h3>
-                <ul>
-                    <li><strong>Fraud Detection:</strong> Bank card transactions with labels (Legitimate vs Fraudulent) = Supervised learning flagging theft in real time.</li>
-                    <li><strong>Client Retention:</strong> Large chains automate shop owner instinct by passing labelled data to model to identify likely buyers, lowering costs.</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <!-- TAB 2
+<li><em>Option A:</em> Disregard the customer's entire record.</li>
+<li><em>Option B:</em> Enter the average age of remaining customers.</li>
+</ul>
+<em>Neither answer is automatic. Both cleansing and missing values must be resolved before processing.</em>
+</li>
+</ul>
+<h3>1.9 Case-Specific Approaches</h3>
+<ul>
+<li><strong>Balancing:</strong> When one group dominates the sample (e.g., 80% female / 20% male survey), trends lean toward women. Fix: take equal numbers from each group so ratio becomes 50-50.</li>
+<li><strong>Data Shuffling:</strong> Shuffling observations ensures any 100 consecutive entries are random and representative, improving predictive performance and avoiding misleading results.</li>
+</ul>
+<h3>1.10 How Traditional Databases Are Pictured &amp; At a Glance</h3>
+<ul>
+<li><strong>Entity Relationship Diagram (ERD):</strong> Complex, theoretical architecture illustration. Entities, relationships, attributes.</li>
+<li><strong>Relational Schema:</strong> Each rectangle is one data table, each line shows relationships (Customers, Orders, Products).</li>
+<li><strong>At a Glance:</strong> When: Beginning; Tools: R, Python, SQL, MATLAB, Excel, IBM SPSS; Roles: Data architect, Data engineer, Database administrator.</li>
+<li><strong>Misconception:</strong> 200,000 lines of data is not necessarily big data. Volume alone does not make it big; variety, variability, velocity, veracity matter too.</li>
+</ul>
+</div>
+<!-- PART 2: BIG DATA -->
+<div class="card">
+<h2>PART 2: Big Data Techniques</h2>
+<h3>2.1 Same Backbone, More Variety</h3>
+<p>Big data does not throw the pipeline awayit stretches every step. What changes:</p>
+<ul>
+<li>Far more data types than numerical and categorical.</li>
+<li>Much wider range of cleansing methods.</li>
+<li>Missing values become a far bigger problem.</li>
+<li>New case-specific techniques: text data mining, data masking.</li>
+</ul>
+<h3>2.2 Class Labeling &amp; Cleansing in Big Data</h3>
+<ul>
+<li><strong>Class Labeling Expansion:</strong> Green (Numerical, Categorical) + Orange (Text data, Digital image data, Digital video data, Digital audio data).</li>
+<li><strong>Image &amp; Audio Cleansing:</strong> Verification that image observations are ready; confirming audio quality adequacy.</li>
+<li><strong>Text Data Mining:</strong> Process of deriving valuable unstructured data from text across academic papers, blogs, online platforms, private Excel files.</li>
+<li><strong>Data Masking:</strong> Analyzes info without exposing private details by concealing original data with random/false data. (e.g. Anna Kruger / a.kruger@example.com / 4519 8823 0067 → Q7RTX Vbnm / x8k2@masked.local / **** **** 0067).</li>
+</ul>
+<h3>2.3 Visualizations &amp; Where Big Data Shows Up</h3>
+<ul>
+<li><strong>Rule of Thumb:</strong> A large number of intersecting lines almost always means you are looking at big data.</li>
+<li><strong>Social Platforms:</strong> 2 billion+ users (Volume), text/images/video/audio (Variety), real-time reporting/velocity.</li>
+<li><strong>Financial Trading:</strong> Daily close = 1 obs/day (traditional). Every 5 seconds = 4,680 obs/day (big data). Every second = 23,400 obs/day (big data).</li>
+</ul>
+</div>
+<!-- PART 3: BUSINESS INTELLIGENCE -->
+<div class="card">
+<h2>PART 3: Business Intelligence (BI)</h2>
+<h3>3.1 Explaining the Past</h3>
+<p>Pre-processing is done. BI combines data skills with business knowledge to explain past performance. Asks: What happened? When? How many units sold? Which region sold most?</p>
+<h3>3.2 The Chain: Observations → Measures → Metrics → KPIs</h3>
+<ol>
+<li><strong>01 Observations:</strong> Single recorded facts (e.g., 1 month revenue, 1 new customer).</li>
+<li><strong>02 Measures:</strong> Observations accumulated together to show info (Quantification: representing observations as numbers). e.g., Q1 measure = $350 revenue, 50 customers.</li>
+<li><strong>03 Metrics:</strong> Values derived from measures with business meaning attached (e.g., Average quarterly revenue per new customer = $350 / 50 = $7). Exist for comparison.</li>
+<li><strong>04 KPIs:</strong> The few metrics tied tightly to main business objectives. Metric = page traffic from any user; KPI = traffic from users who clicked ad link.</li>
+</ol>
+<h3>3.3 Dashboard Filtering &amp; Real-World Applications</h3>
+<ul>
+<li><strong>KPI Dashboards:</strong> Keep executives and managers focused on main business objectives.</li>
+<li><strong>Price Optimization:</strong> Raise room rates when demand is high; drop rates to attract visitors when demand falls. Real-time vs historical comparison.</li>
+<li><strong>Inventory Management:</strong> Avoid Oversupply (stock nobody buys, waste, storage cost, cash tied up) and Undersupply (lost sales, customers go elsewhere). Uses seasonality patterns, over/under-stocked months, peak day/hour.</li>
+</ul>
+</div>
+<!-- PART 4: TRADITIONAL METHODS -->
+<div class="card">
+<h2>PART 4: Traditional Methods (Predictive Analytics)</h2>
+<h3>4.1 From Analysis to Analytics</h3>
+<p>When using info to predict future values, you switch from analysis to analytics. Predictive analytics splits into Traditional Methods (classical stats) and Machine Learning (AI-driven).</p>
+<h3>4.2 Key Traditional Techniques</h3>
+<ul>
+<li><strong>Regression:</strong> Quantifies causal relationships among variables (<strong>Y = B × X</strong>). Straight line sits as close to all dots as possible.</li>
+<li><strong>Logistic Regression:</strong> Non-linear model where vertical values are ones and zeros joined by an S-curve. Candidate screening: 1 = prob &gt; 50%, 0 = at/below 50%.</li>
+<li><strong>Cluster Analysis:</strong> Groups observations that behave alike. e.g., House size vs price in 3 clusters (Small/expensive city centre, Big/cheaper far from city, Big/expensive nice neighbourhood).</li>
+<li><strong>Explanatory Variable Names:</strong> Four names for the same thing: Explanatory variable, Regressor, Independent variable, Predictor variable (<strong>X</strong> side).</li>
+<li><strong>Factor Analysis:</strong> Groups explanatory variables together (e.g., 100 survey questions collapse 3 animal attitude questions into 1 factor → ~10 factors).</li>
+<li><strong>Distinction:</strong> <em>Clustering groups observations together. Factor analysis groups explanatory variables together.</em></li>
+<li><strong>Time Series:</strong> Follows development of values over time. Rule: Time ALWAYS goes on horizontal line because time is independent of every other variable.</li>
+<li><strong>Applications:</strong> UX survey (4 continental clusters = 4 separate tests), A/B Testing (A/B/n multivariate testing), Sales Forecasting (Time series holds it up, ML sharpens accuracy).</li>
+</ul>
+</div>
+<!-- PART 5: MACHINE LEARNING -->
+<div class="card">
+<h2>PART 5: Machine Learning (ML) &amp; Generative AI</h2>
+<h3>5.1 Core ML Concepts &amp; 4 Ingredients</h3>
+<p>ML is a trial-and-error process where each consecutive trial is at least as good as the one before it. You hand it ONE final goal, not a rulebook. Four ingredients (Robot Archer analogy):</p>
+<ol>
+<li><strong>01 Data:</strong> Values model trains on (Quiver of arrows).</li>
+<li><strong>02 Model:</strong> Thing learned/refined (Bow usage).</li>
+<li><strong>03 Objective function:</strong> Measure of how wrong you currently are (Average distance from target).</li>
+<li><strong>04 Optimization algorithm:</strong> Mechanics that reduce error (Adjusting posture, grip, draw strength).</li>
+</ol>
+<p><em>The Loop:</em> Fire arrows → Measure error → Adjust technique → Fire again closer. Training stops when good enough or after chosen arrows. Unseen inputs cause model to struggle.</p>
+<h3>5.2 The Three Major Types of Machine Learning</h3>
+<ul>
+<li><strong>Supervised Learning:</strong> Known target for every arrow before shot (Labelled data). Approaches: SVMs, Neural networks, Deep learning, Random forest, Bayesian networks.</li>
+<li><strong>Unsupervised Learning:</strong> No targets provided (Unlabelled data); divides arrows into clusters/heaps. Approaches: K-means (most common), Neural networks, Deep learning.</li>
+<li><strong>Reinforcement Learning:</strong> Maximises a reward instead of minimising error (Positive reinforcement).</li>
+<li><strong>Deep Learning:</strong> Conceptually different, state-of-the-art, sits in both supervised and unsupervised due to broad scope and high accuracy.</li>
+</ul>
+<h3>5.3 NLP, Self-Supervised Learning &amp; LLMs</h3>
+<ul>
+<li><strong>Natural Language Processing (NLP):</strong> Subfield for written/spoken human language (Siri, chatbots, translators). Hybrid supervised/unsupervised.</li>
+<li><strong>Self-Supervised Learning:</strong> Unlabelled data → generates own labels → learns from them. Cornerstone of LLMs (ChatGPT, Gemini). Core trick: predicting the missing word using preceding context.</li>
+<li><strong>LLM Lineage:</strong> N-grams → RNNs → LSTMs → Transformers (2017 architecture using Attention / Self-attention mechanism).</li>
+<li><strong>GPT Unpacked:</strong> G = Generative, P = Pre-trained, T = Transformer.</li>
+<li><strong>Other GenAI Families:</strong> Diffusion models (images/video), GANs (two algorithms: generator &amp; evaluator), NeRF (3D modelling), Hybrid models.</li>
+</ul>
+<h3>5.4 Real-World Applications</h3>
+<ul>
+<li><strong>Fraud Detection:</strong> Bank card transactions with labels (Legitimate vs Fraudulent) = Supervised learning flagging theft in real time.</li>
+<li><strong>Client Retention:</strong> Large chains automate shop owner instinct by passing labelled data to model to identify likely buyers, lowering costs.</li>
+</ul>
+</div>
+</div>
+<!-- TAB 2
 
         <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / 91</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Quiz questions dynamically rendered here -->
-            </div>
-        </div>
-
-        <!-- TAB 3: FORMULAS / QUICK REFERENCE -->
-        <!-- TAB 3: QUICK REFERENCE -->
-        <div id="formulas" class="tab-content">
-            <!-- PART 1 & 2: DATA PIPELINE & PRE-PROCESSING MATRIX -->
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2 style="margin:0;">Quick Reference: Traditional & Big Data Pre-Processing Matrix</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Pipeline Stage / Concept</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Definition & Mechanics</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Rules & Examples</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>The Data Pipeline</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">RAW DATA &rarr; PRE-PROCESSING &rarr; PROCESSING &rarr; INFORMATION</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Collection</strong> = Gathering raw facts. <strong>Pre-processing</strong> = Clean-up. <strong>Processing</strong> = Analysis. <strong>Information</strong> = Actionable output.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Raw Data (Primary Data)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Untouched facts sitting on the server; cannot be analyzed immediately.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Collected via <strong>Manual</strong> (Surveys, high control) or <strong>Automatic</strong> (Cookies, huge volume).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Class Labeling: The Arithmetic Test</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Numerical:</strong> Arithmetic is meaningful.<br><strong>Categorical:</strong> Arithmetic is meaningless.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <em>Complaints (3)</em> = Numerical<br>• <em>Customer ID (1001)</em> = Categorical (average ID is meaningless)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Data Cleansing & Missing Values</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Fixes invalid values (Age=932, Country in Name field). Resolves NaN entries.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Option A:</strong> Disregard record entirely.<br>• <strong>Option B:</strong> Impute with average of remaining observations.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Balancing & Shuffling</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Balancing:</strong> Adjust sample to 50/50 ratio.<br><strong>Shuffling:</strong> Randomizes sequence.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Prevents dominant group bias and ensures any consecutive slice is representative.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Big Data Expansions</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Adds Orange Types (Text, Images, Video, Audio) to Green Types (Numeric/Categoric).</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Text Mining:</strong> Derives unstructured info.<br>• <strong>Data Masking:</strong> Conceals PII with false/random tokens.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- PART 3: BUSINESS INTELLIGENCE (BI) HIERARCHY -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Business Intelligence (BI) Metrics Hierarchy</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="definition-card">
-                        <span class="def-badge">01. Observations</span>
-                        <p><strong>Raw Recorded Facts:</strong> Single isolated data points.<br><em>Example:</em> 1 month's revenue, 1 single customer transaction.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">02. Measures</span>
-                        <p><strong>Quantified Aggregation:</strong> Observations accumulated as numbers.<br><em>Example:</em> Q1 Total Revenue = $350, Total Customers = 50.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">03. Metrics</span>
-                        <p><strong>Business Meaning Ratio:</strong> Values derived for comparison.<br><em>Example:</em> Revenue / Customer = $350 / 50 = <strong>$7</strong>.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">04. KPIs</span>
-                        <p><strong>Strategic Targets:</strong> The critical metrics tied directly to main business goals.<br><em>Example:</em> Conversion rate of users clicking promotional ads.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PART 4 & 5: PREDICTIVE ANALYTICS & MACHINE LEARNING -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Predictive Analytics & Machine Learning Framework</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Methodology / Model</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Function & Mathematical Purpose</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Rules & Synonyms</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Linear Regression</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Y = B &times; X + &epsilon;</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Quantifies causal relationships. Explanatory variable synonyms: <strong>Regressor, Independent, Predictor</strong>.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Logistic Regression</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Non-linear S-curve bounding probabilities between 0 and 1.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Binary classification cutoff: 1 = Probability &gt; 50%, 0 = Probability &le; 50%.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Clustering vs Factor Analysis</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Cluster Analysis:</strong> Groups observations that behave alike.<br>• <strong>Factor Analysis:</strong> Groups explanatory variables together.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Clustering = Groups rows (customers). Factor Analysis = Groups columns (100 survey questions &rarr; 10 factors).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Time Series Analysis</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Tracks variable progression strictly across chronological intervals.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Universal Rule:</strong> Time is always plotted on the <strong>horizontal X-axis</strong> because time is independent.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ML: The 4 Ingredients (Robot Archer)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">1. <strong>Data</strong> (Quiver of arrows)<br>2. <strong>Model</strong> (Bow usage)<br>3. <strong>Objective Function</strong> (Distance from target)<br>4. <strong>Optimization Algorithm</strong> (Adjusting posture/grip)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Trial-and-error cycle: Fire &rarr; Measure Error &rarr; Optimize Mechanics &rarr; Fire closer.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>The 3 ML Paradigms</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">• <strong>Supervised:</strong> Labeled targets (SVM, Random Forest, NN).<br>• <strong>Unsupervised:</strong> Unlabeled grouping (K-Means, NN).<br>• <strong>Reinforcement:</strong> Reward maximization.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Deep Learning</strong> spans both Supervised and Unsupervised learning.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Self-Supervised & LLMs</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Predicting missing words from context. Lineage: N-grams &rarr; RNNs &rarr; LSTMs &rarr; Transformers (Self-Attention).</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>GPT:</strong> <strong>G</strong>enerative <strong>P</strong>re-trained <strong>T</strong>ransformer.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            
-            <!-- ==========================================
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 91</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Quiz questions dynamically rendered here -->
+</div>
+</div>
+<!-- TAB 3: FORMULAS / QUICK REFERENCE -->
+<!-- TAB 3: QUICK REFERENCE -->
+<div class="tab-content" id="formulas">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.25rem;">
+<div>
+<h2 style="margin:0; font-size:1.4rem;">⚡ Quick Reference &amp; Exam Mastery Architecture</h2>
+<p style="margin:0.25rem 0 0 0; color:var(--text-muted-color); font-size:0.88rem;">Four-Pillar Synthesis: Data Pipeline, BI Metrics, ML Architecture, Comparative Matrices &amp; High-Yield Pitfalls</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ==========================================
+                     PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:1rem;">
+                    🏛️ Pillar 1: Core Terminology &amp; Keyword Recall Grid
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="definition-card">
+<span class="def-badge">The Data Pipeline</span>
+<p><strong>4-Stage Linear Flow:</strong> Raw Data (Primary) → Pre-Processing → Processing (Analysis) → Information (Actionable Insights).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Arithmetic Meaningfulness Test</span>
+<p><strong>Numerical Data:</strong> Arithmetic calculations (averages, sums) are logically meaningful.<br/>
+<strong>Categorical Data:</strong> Arithmetic is meaningless (e.g. Average Customer ID or Zipcode is nonsense).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Pre-Processing Operations</span>
+<p><strong>Data Cleansing:</strong> Resolves invalid/NaN records (Disregard row or Impute with Mean).<br/>
+<strong>Balancing:</strong> Equalizes minority class ratio (50/50).<br/>
+<strong>Shuffling:</strong> Randomizes record sequence to prevent ordering bias.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">BI Metrics Hierarchy (4 Levels)</span>
+<p><strong>1. Observation:</strong> Single raw fact (1 transaction).<br/>
+<strong>2. Measure:</strong> Aggregated number ($50k sales).<br/>
+<strong>3. Metric:</strong> Contextual ratio ($50/user).<br/>
+<strong>4. KPI:</strong> Strategic target tied to high-level goals.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Linear Regression Terms</span>
+<p><strong>Dependent (Y):</strong> Outcome / Target / Explained variable.<br/>
+<strong>Independent (X):</strong> Regressor / Predictor / Explanatory feature.<br/>
+<strong>Coefficients:</strong> β₀ (Intercept) and β₁ (Slope rate of change).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Logistic Regression Sigmoid</span>
+<p>Non-linear S-curve modeling bounded probabilities [0, 1]. Converts log-odds score z into P = 1 / (1 + e⁻ᶻ) with standard binary cutoff at P = 0.50 (50%).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Cluster vs Factor Analysis</span>
+<p><strong>Cluster Analysis:</strong> Groups observations (<strong>ROWS</strong>) that behave alike.<br/>
+<strong>Factor Analysis:</strong> Reduces explanatory features (<strong>COLUMNS</strong>) into latent factors.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Time Series Universal Rule</span>
+<p>Chronological variable progression. <strong>Universal Law:</strong> Time is strictly plotted on the <strong>horizontal X-axis</strong> because time is independent and unidirectional.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">ML: 4 Ingredients (Robot Archer)</span>
+<p><strong>1. Data:</strong> Quiver of practice arrows.<br/>
+<strong>2. Model:</strong> Bow aiming mechanics.<br/>
+<strong>3. Objective Function:</strong> Distance from bullseye.<br/>
+<strong>4. Optimization Algorithm:</strong> Posture/grip adjustment loop.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">NLP Evolutionary Lineage</span>
+<p>Evolutionary path: N-grams → RNNs → LSTMs → Transformers (Self-Attention) → GPT (Generative Pre-trained Transformer).</p>
+</div>
+</div>
+<!-- ==========================================
+                     PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    📐 Pillar 2: Formula &amp; Calculation Reference Cards
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="formula-card">
+<span class="formula-badge">Min-Max Normalization Formula</span>
+<div class="formula-text">X_norm = (X − X_min) ÷ (X_max − X_min)</div>
+<div class="formula-explain">
+<strong>Bounded Range:</strong> Strictly maps all feature values into the range [0.0, 1.0].<br/>
+<strong>Plain English Reading:</strong> "Subtract the feature minimum from the raw value and divide by the total range."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Normalized value equals raw value minus minimum divided by range (max minus min), scaling numbers strictly between 0 and 1."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Z-Score Feature Standardization</span>
+<div class="formula-text">Z = (X − μ) ÷ σ</div>
+<div class="formula-explain">
+<strong>Standardized Parameters:</strong> Produces a zero-centered feature with Mean = 0 and Variance = 1.<br/>
+<strong>Plain English Reading:</strong> "Standardizing centers the variable around its mean in units of standard deviations."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Standardized feature equals raw value minus feature mean, divided by standard deviation, giving mean zero and variance one."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Simple Linear Regression Equation</span>
+<div class="formula-text">Y = β₀ + β₁ × X + ε</div>
+<div class="formula-explain">
+<strong>Components:</strong> β₀ = Y-intercept, β₁ = Slope (rate of change per unit X), ε = Random error term.<br/>
+<strong>Plain English Reading:</strong> "The dependent outcome Y equals the baseline intercept plus slope times predictor X, plus residual error."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Dependent variable Y equals intercept beta-zero plus slope beta-one times predictor X, plus residual error epsilon."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Logistic Regression Sigmoid Equation</span>
+<div class="formula-text">P(Y = 1 | X) = 1 ÷ [ 1 + e^−(β₀ + β₁X) ]</div>
+<div class="formula-explain">
+<strong>Log-Odds (Logit):</strong> ln[ P / (1 − P) ] = β₀ + β₁X.<br/>
+<strong>Plain English Reading:</strong> "Passes the linear predictor through a logistic sigmoid function to bound predicted outcomes between 0% and 100% probability."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The probability of positive class equals one divided by one plus e raised to the negative linear equation."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Classification Confusion Matrix Metrics</span>
+<div class="formula-text">Accuracy = (TP + TN) / Total | Precision = TP / (TP + FP) | Recall = TP / (TP + FN)</div>
+<div class="formula-explain">
+<strong>F1 Score Harmonic Mean:</strong> F1 = 2 × (Precision × Recall) ÷ (Precision + Recall).<br/>
+<strong>Plain English Reading:</strong> "Precision measures positive prediction purity; Recall measures actual target capture rate; F1 balances both."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Accuracy is correct predictions over total; Precision is true positives over predicted positives; Recall (Sensitivity) is true positives over actual positives."</strong>
+</div>
+</div></div>
+</div>
+<!-- ==========================================
+                     PILLAR 3: COMPARATIVE ANALYSIS MATRICES
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    📊 Pillar 3: Comparative Analysis Matrices
+                </h3>
+<!-- Matrix 1: Raw Data vs Processed Data vs Information -->
+<h4 style="margin:1rem 0 0.5rem 0; color:var(--text-color);">1. Raw Data vs Processed Data vs Information Transformation Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Dimension</th>
+<th>Raw Data (Primary)</th>
+<th>Processed Data</th>
+<th>Information (Actionable)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>State &amp; Cleanliness</strong></td>
+<td>Untouched, noisy, unorganized, potential NaNs and errors.</td>
+<td>Cleaned, normalized, transformed, structured into relational tables.</td>
+<td>Synthesized, contextualized, business-ready insight.</td>
+</tr>
+<tr>
+<td><strong>Actionability</strong></td>
+<td><span style="color:#ef4444; font-weight:700;">Zero direct actionability (cannot guide decisions).</span></td>
+<td>Intermediate operational state ready for algorithms.</td>
+<td><span style="color:#10b981; font-weight:700;">High strategic actionability (drives business decisions).</span></td>
+</tr>
+<tr>
+<td><strong>Concrete Example</strong></td>
+<td>Raw server log string: <code>2026-08-24 10:14:02 POST /order 200 48ms</code></td>
+<td>Clean table: <code>OrderID=8192, Amount=$48.00, Time=Morning</code></td>
+<td>Executive Metric: <em>"Morning mobile checkouts increased 24% YoY."</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: Numerical vs Categorical & Arithmetic Test -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">2. Numerical vs Categorical Data &amp; The Arithmetic Test</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Data Type</th>
+<th>Sub-Types</th>
+<th>Arithmetic Meaningfulness Test</th>
+<th>Legitimate Exam Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Numerical Data</strong></td>
+<td>Continuous (Height, Revenue) vs Discrete (App Downloads, Complaints)</td>
+<td><span style="color:#10b981; font-weight:700;">MEANINGFUL:</span> Computing average, sum, and standard deviation yields valid real-world insights.</td>
+<td>Salary ($85,000), Age (28 yrs), Test Score (94%), Number of Support Tickets (3).</td>
+</tr>
+<tr>
+<td><strong>Categorical Data</strong></td>
+<td>Nominal (Gender, Country) vs Ordinal (Ratings: Low, Med, High)</td>
+<td><span style="color:#ef4444; font-weight:700;">MEANINGLESS:</span> Computing average numbers produces mathematical nonsense.</td>
+<td>Customer ID (1042), Postal Zip Code (90210), Phone Number, Credit Card Number.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: Cluster Analysis vs Factor Analysis -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">3. Cluster Analysis vs Factor Analysis (Rows vs Columns) Comparison</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Dimension</th>
+<th>Cluster Analysis</th>
+<th>Factor Analysis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target Dimension</strong></td>
+<td><span style="color:#3b82f6; font-weight:700;">Groups Observations / Records (ROWS)</span></td>
+<td><span style="color:#8b5cf6; font-weight:700;">Groups Explanatory Variables (COLUMNS)</span></td>
+</tr>
+<tr>
+<td><strong>Primary Objective</strong></td>
+<td>Customer segmentation and behavioral grouping.</td>
+<td>Dimensionality reduction (condensing 100 features into 5 latent factors).</td>
+</tr>
+<tr>
+<td><strong>Mathematical Basis</strong></td>
+<td>Distance metrics (Euclidean, Manhattan) in feature space.</td>
+<td>Correlation / Covariance matrix decomposition (Eigenvalues).</td>
+</tr>
+<tr>
+<td><strong>Real-World Use Case</strong></td>
+<td>Dividing 100,000 shoppers into 4 purchasing personas.</td>
+<td>Compressing 50 satisfaction survey questions into 3 core driver factors.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 4: Linear vs Logistic Regression -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">4. Linear Regression vs Logistic Regression Comparative Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Feature / Dimension</th>
+<th>Linear Regression</th>
+<th>Logistic Regression</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target Variable (Y)</strong></td>
+<td>Continuous numerical value (e.g. House Price, Revenue, Temperature).</td>
+<td>Binary categorical outcome (e.g. Churn [1/0], Spam [1/0], Default [1/0]).</td>
+</tr>
+<tr>
+<td><strong>Mathematical Function</strong></td>
+<td>Straight linear equation: Y = β₀ + β₁X + ε.</td>
+<td>Non-linear Sigmoid curve: P = 1 / (1 + e^−z).</td>
+</tr>
+<tr>
+<td><strong>Output Range</strong></td>
+<td>Unbounded: (−∞, +∞).</td>
+<td>Strictly bounded probability: [0.0, 1.0].</td>
+</tr>
+<tr>
+<td><strong>Classification Decision</strong></td>
+<td>Not suitable for binary classification (can output values &lt;0 or &gt;1).</td>
+<td>Class 1 if P &gt; 0.50; Class 0 if P ≤ 0.50.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 5: The 3 ML Paradigms Master Matrix -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">5. The 3 Machine Learning Paradigms Master Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Paradigm</th>
+<th>Ground-Truth Labels Required?</th>
+<th>Core Learning Mechanism</th>
+<th>Canonical Algorithms</th>
+<th>Deep Learning Position</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Supervised Learning</strong></td>
+<td><span style="color:#10b981; font-weight:700;">YES (Target Y provided for every row)</span></td>
+<td>Minimizing error between model prediction ŷ and true label y.</td>
+<td>Linear/Logistic Regression, Decision Trees, SVM, Random Forest.</td>
+<td>Deep Neural Networks, CNNs (Image Classification).</td>
+</tr>
+<tr>
+<td><strong>Unsupervised Learning</strong></td>
+<td><span style="color:#ef4444; font-weight:700;">NO (Unlabeled data)</span></td>
+<td>Discovering latent clusters, patterns, and natural data distributions.</td>
+<td>K-Means Clustering, PCA, Factor Analysis, DBSCAN.</td>
+<td>Autoencoders, GANs, Self-Organizing Maps.</td>
+</tr>
+<tr>
+<td><strong>Reinforcement Learning</strong></td>
+<td><span style="color:#f59e0b; font-weight:700;">NO (Trial-and-error environmental feedback)</span></td>
+<td>Agent takes actions in environment to maximize cumulative scalar reward.</td>
+<td>Q-Learning, Policy Gradient, Actor-Critic.</td>
+<td>Deep Q-Networks (DQN), AlphaGo, Robotics locomotion.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ==========================================
+                     PILLAR 4: COMMON EXAM PITFALLS & FALLACIES
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    ⚠️ Pillar 4: Common Exam Pitfalls &amp; Fallacies
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="example-card" style="border-left:4px solid #ef4444;">
+<span class="example-badge" style="background:#ef4444;">Pitfall 1: Arithmetic Test on ID &amp; Postal Numbers</span>
+<p><strong>Exam Trap:</strong> Labeling Customer IDs, Zip codes, or Phone numbers as "Numerical" variables because they contain digits.<br/>
+<strong>Correct Reality:</strong> Always apply the <strong>Arithmetic Meaningfulness Test</strong>. A Customer ID of 1004 is a <strong>Categorical</strong> label because calculating the average customer ID produces meaningless nonsense.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #f59e0b;">
+<span class="example-badge" style="background:#f59e0b;">Pitfall 2: Cluster vs Factor Analysis Dimension Inversion</span>
+<p><strong>Exam Trap:</strong> Believing Cluster Analysis reduces columns and Factor Analysis groups rows.<br/>
+<strong>Correct Reality:</strong> <strong>Cluster Analysis groups ROWS (observations/customers)</strong> based on shared behavior. <strong>Factor Analysis groups COLUMNS (features/questions)</strong> to reduce dimensionality.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #10b981;">
+<span class="example-badge" style="background:#10b981;">Pitfall 3: Time Series Axis Inversion</span>
+<p><strong>Exam Trap:</strong> Plotting time on the vertical Y-axis in time series questions.<br/>
+<strong>Correct Reality:</strong> In time series analysis, <strong>Time is ALWAYS plotted on the horizontal X-axis</strong> because time is independent and progresses forward continuously.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #6366f1;">
+<span class="example-badge" style="background:#6366f1;">Pitfall 4: Data Masking vs Data Encryption</span>
+<p><strong>Exam Trap:</strong> Confusing data masking with cryptographic encryption.<br/>
+<strong>Correct Reality:</strong> <strong>Data Masking</strong> replaces confidential PII (e.g. SSNs) with realistic fake tokens so models can train safely without exposing real personal data. Encryption mathematically scrambles data for secure transmission requiring a decryption key.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #8b5cf6;">
+<span class="example-badge" style="background:#8b5cf6;">Pitfall 5: Deep Learning as a "Fourth Paradigm"</span>
+<p><strong>Exam Trap:</strong> Listing Deep Learning as a separate 4th paradigm alongside Supervised, Unsupervised, and Reinforcement.<br/>
+<strong>Correct Reality:</strong> Deep Learning is NOT a mutually exclusive paradigm. It is an architectural approach using multi-layer neural networks that <strong>operates across Supervised, Unsupervised, and Reinforcement learning</strong>.</p>
+</div>
+</div>
+</div>
+<!-- ==========================================
                  Interactive Academic Calculators Section
                  ========================================== -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Interactive Academic Calculators (Live Data Preprocessing & Modeling Engines)</h2>
-                
-                <!-- Calculator 1: Preprocessing Scaling Engine -->
-                <div class="calc-card">
-                    <div class="calc-title">🧮 Part 1 (1.8): Data Cleansing — Min-Max Normalization & Z-Score Standardization</div>
-                    <div class="calc-desc">Input a raw observation value X alongside feature distribution bounds to compute bounded Min-Max scaling X_norm in [0, 1] and Z-Score standardization Z = (X - μ) ÷ σ.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="scale-x">Raw Feature Value (X):</label>
-                            <input type="number" id="scale-x" class="calc-input" value="75" step="1" oninput="calculatePreprocessingScaling()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="scale-min">Observed Minimum (X_min):</label>
-                            <input type="number" id="scale-min" class="calc-input" value="50" step="1" oninput="calculatePreprocessingScaling()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="scale-max">Observed Maximum (X_max):</label>
-                            <input type="number" id="scale-max" class="calc-input" value="150" step="1" oninput="calculatePreprocessingScaling()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="scale-mean">Population Mean (μ):</label>
-                            <input type="number" id="scale-mean" class="calc-input" value="80" step="1" oninput="calculatePreprocessingScaling()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="scale-sd">Standard Deviation (σ):</label>
-                            <input type="number" id="scale-sd" class="calc-input" value="20" step="0.5" min="0.001" oninput="calculatePreprocessingScaling()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Transformed Values:</span>
-                            <span class="calc-result-val" id="scale-result-val">X_norm = 0.2500 | Z = -0.2500</span>
-                        </div>
-                        <div class="calc-math-steps" id="scale-math-steps">
-                            <strong>Mathematical Transformation Steps:</strong><br>
-                            <div class="step-line">• <strong>Min-Max Scaling Formula:</strong> X_norm = (X - X_min) ÷ (X_max - X_min) = (75 - 50) ÷ (150 - 50) = 25 ÷ 100 = <strong>0.2500</strong> (Bounded strictly in [0, 1])</div>
-                            <div class="step-line">• <strong>Z-Score Standardization:</strong> Z = (X - μ) ÷ σ = (75 - 80) ÷ 20 = -5 ÷ 20 = <strong>-0.2500</strong> (0.25 standard deviations below population mean)</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 2: Linear Regression Engine -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 4 (4.2): Traditional Methods — Simple Linear Regression (Ŷ = β₀ + β₁X) & Residual Error Estimator</div>
-                    <div class="calc-desc">Model bivariate causal relationships where X is the explanatory independent variable and Ŷ is the predicted dependent continuous response.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="reg-b0">Y-Intercept (β₀):</label>
-                            <input type="number" id="reg-b0" class="calc-input" value="15000" step="1000" oninput="calculateRegressionResponse()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="reg-b1">Slope Coefficient (β₁):</label>
-                            <input type="number" id="reg-b1" class="calc-input" value="250" step="10" oninput="calculateRegressionResponse()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="reg-x">Independent Variable X (e.g. Ad Spend $):</label>
-                            <input type="number" id="reg-x" class="calc-input" value="120" step="5" oninput="calculateRegressionResponse()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="reg-actual">Actual Observed Y (for Residual):</label>
-                            <input type="number" id="reg-actual" class="calc-input" value="46500" step="500" oninput="calculateRegressionResponse()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Predicted Response Ŷ & Residual Error:</span>
-                            <span class="calc-result-val" id="reg-result-val">Ŷ = 45,000.00 | Residual e = +1,500.00</span>
-                        </div>
-                        <div class="calc-math-steps" id="reg-math-steps">
-                            <strong>Linear Model Interpretation:</strong><br>
-                            <div class="step-line">• <strong>Regression Formula:</strong> Ŷ = β₀ + (β₁ × X) = 15,000 + (250 × 120) = 15,000 + 30,000 = <strong>45,000.00</strong></div>
-                            <div class="step-line">• <strong>Residual Error e:</strong> Y_actual - Ŷ_predicted = 46,500 - 45,000 = <strong>+1,500.00</strong> (Model underestimated actual value by $1,500)</div>
-                            <div class="step-line">• <strong>Causal Interpretation:</strong> Every 1 unit increase in X produces an expected <strong>250.00 unit increase</strong> in Y.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: Logistic Regression Sigmoid -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 4 (4.2): Traditional Methods — Logistic Regression Sigmoid Probability (P = 1 ÷ (1 + e⁻ᶻ)) & Cutoff</div>
-                    <div class="calc-desc">Calculate non-linear classification probability P(Y = 1) using the logistic sigmoid S-curve P = 1 ÷ (1 + e⁻ᶻ) with a 50% decision boundary.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="log-z">Linear Score z (β₀ + β₁X):</label>
-                            <input type="number" id="log-z" class="calc-input" value="1.386" step="0.1" oninput="calculateLogisticSigmoid()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="log-cutoff">Decision Cutoff Threshold (%):</label>
-                            <input type="number" id="log-cutoff" class="calc-input" value="50" step="5" min="1" max="99" oninput="calculateLogisticSigmoid()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Sigmoid Probability & Classification:</span>
-                            <span class="calc-result-val" id="log-result-val">P(Y = 1) = 80.00% &rarr; Predicted Class: 1 (Positive)</span>
-                        </div>
-                        <div class="calc-math-steps" id="log-math-steps">
-                            <strong>Logistic Classification Derivation:</strong><br>
-                            <div class="step-line">• <strong>Sigmoid Function:</strong> P(Y = 1) = 1 ÷ (1 + e<sup>-z</sup>) = 1 ÷ (1 + e<sup>-1.386</sup>) = 1 ÷ (1 + 0.2501) = <strong>0.8000 (80.00%)</strong></div>
-                            <div class="step-line">• <strong>Classification Decision:</strong> Since 80.00% ≥ 50.00% cutoff, observation is classified as <strong>Class 1 (Positive Outcome)</strong>.</div>
-                            <div class="step-line">• <strong>Log-Odds (Logit):</strong> ln[P ÷ (1 - P)] = ln(0.80 ÷ 0.20) = ln(4.0) = <strong>+1.386</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 4: BI Metric Hierarchy -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 3 (3.2): Business Intelligence (BI) — The Chain: Measures, Metrics (ARPU) & KPI Growth Rate</div>
-                    <div class="calc-desc">Transform raw observations into aggregated measures, derive comparative unit metrics (ARPU), and calculate strategic performance KPI growth rates.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="bi-rev">Current Period Revenue ($):</label>
-                            <input type="number" id="bi-rev" class="calc-input" value="35000" step="1000" oninput="calculateBIMetrics()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bi-cust">Total Active Customers (N):</label>
-                            <input type="number" id="bi-cust" class="calc-input" value="500" step="25" min="1" oninput="calculateBIMetrics()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bi-prev">Previous Period Revenue ($):</label>
-                            <input type="number" id="bi-prev" class="calc-input" value="28000" step="1000" min="1" oninput="calculateBIMetrics()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Derived Metric & Strategic KPI:</span>
-                            <span class="calc-result-val" id="bi-result-val">ARPU = $70.00 | Growth = +25.00%</span>
-                        </div>
-                        <div class="calc-math-steps" id="bi-math-steps">
-                            <strong>BI Hierarchy Hierarchy Breakdown:</strong><br>
-                            <div class="step-line">• <strong>Aggregated Measure (02):</strong> Revenue = $35,000 | Customers = 500</div>
-                            <div class="step-line">• <strong>Derived Metric (03):</strong> Average Revenue Per User (ARPU) = $35,000 ÷ 500 = <strong>$70.00 / customer</strong></div>
-                            <div class="step-line">• <strong>Strategic Growth KPI (04):</strong> Growth Rate = [($35,000 - $28,000) ÷ $28,000] × 100% = $7,000 ÷ $28,000 × 100% = <strong>+25.00%</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
+<div class="card" style="margin-top:1.5rem;">
+<h2>Interactive Academic Calculators (Live Data Preprocessing &amp; Modeling Engines)</h2>
+<!-- Calculator 1: Preprocessing Scaling Engine -->
+<div class="calc-card">
+<div class="calc-title">🧮 Part 1 (1.8): Data Cleansing — Min-Max Normalization &amp; Z-Score Standardization</div>
+<div class="calc-desc">Input a raw observation value X alongside feature distribution bounds to compute bounded Min-Max scaling X_norm in [0, 1] and Z-Score standardization Z = (X - μ) ÷ σ.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="scale-x">Raw Feature Value (X):</label>
+<input class="calc-input" id="scale-x" oninput="calculatePreprocessingScaling()" step="1" type="number" value="75"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="scale-min">Observed Minimum (X_min):</label>
+<input class="calc-input" id="scale-min" oninput="calculatePreprocessingScaling()" step="1" type="number" value="50"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="scale-max">Observed Maximum (X_max):</label>
+<input class="calc-input" id="scale-max" oninput="calculatePreprocessingScaling()" step="1" type="number" value="150"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="scale-mean">Population Mean (μ):</label>
+<input class="calc-input" id="scale-mean" oninput="calculatePreprocessingScaling()" step="1" type="number" value="80"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="scale-sd">Standard Deviation (σ):</label>
+<input class="calc-input" id="scale-sd" min="0.001" oninput="calculatePreprocessingScaling()" step="0.5" type="number" value="20"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Transformed Values:</span>
+<span class="calc-result-val" id="scale-result-val">X_norm = 0.2500 | Z = -0.2500</span>
+</div>
+<div class="calc-math-steps" id="scale-math-steps">
+<strong>Mathematical Transformation Steps:</strong><br/>
+<div class="step-line">• <strong>Min-Max Scaling Formula:</strong> X_norm = (X - X_min) ÷ (X_max - X_min) = (75 - 50) ÷ (150 - 50) = 25 ÷ 100 = <strong>0.2500</strong> (Bounded strictly in [0, 1])</div>
+<div class="step-line">• <strong>Z-Score Standardization:</strong> Z = (X - μ) ÷ σ = (75 - 80) ÷ 20 = -5 ÷ 20 = <strong>-0.2500</strong> (0.25 standard deviations below population mean)</div>
+</div>
+</div>
+</div>
+<!-- Calculator 2: Linear Regression Engine -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 4 (4.2): Traditional Methods — Simple Linear Regression (Ŷ = β₀ + β₁X) &amp; Residual Error Estimator</div>
+<div class="calc-desc">Model bivariate causal relationships where X is the explanatory independent variable and Ŷ is the predicted dependent continuous response.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="reg-b0">Y-Intercept (β₀):</label>
+<input class="calc-input" id="reg-b0" oninput="calculateRegressionResponse()" step="1000" type="number" value="15000"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="reg-b1">Slope Coefficient (β₁):</label>
+<input class="calc-input" id="reg-b1" oninput="calculateRegressionResponse()" step="10" type="number" value="250"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="reg-x">Independent Variable X (e.g. Ad Spend $):</label>
+<input class="calc-input" id="reg-x" oninput="calculateRegressionResponse()" step="5" type="number" value="120"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="reg-actual">Actual Observed Y (for Residual):</label>
+<input class="calc-input" id="reg-actual" oninput="calculateRegressionResponse()" step="500" type="number" value="46500"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Predicted Response Ŷ &amp; Residual Error:</span>
+<span class="calc-result-val" id="reg-result-val">Ŷ = 45,000.00 | Residual e = +1,500.00</span>
+</div>
+<div class="calc-math-steps" id="reg-math-steps">
+<strong>Linear Model Interpretation:</strong><br/>
+<div class="step-line">• <strong>Regression Formula:</strong> Ŷ = β₀ + (β₁ × X) = 15,000 + (250 × 120) = 15,000 + 30,000 = <strong>45,000.00</strong></div>
+<div class="step-line">• <strong>Residual Error e:</strong> Y_actual - Ŷ_predicted = 46,500 - 45,000 = <strong>+1,500.00</strong> (Model underestimated actual value by $1,500)</div>
+<div class="step-line">• <strong>Causal Interpretation:</strong> Every 1 unit increase in X produces an expected <strong>250.00 unit increase</strong> in Y.</div>
+</div>
+</div>
+</div>
+<!-- Calculator 3: Logistic Regression Sigmoid -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 4 (4.2): Traditional Methods — Logistic Regression Sigmoid Probability (P = 1 ÷ (1 + e⁻ᶻ)) &amp; Cutoff</div>
+<div class="calc-desc">Calculate non-linear classification probability P(Y = 1) using the logistic sigmoid S-curve P = 1 ÷ (1 + e⁻ᶻ) with a 50% decision boundary.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="log-z">Linear Score z (β₀ + β₁X):</label>
+<input class="calc-input" id="log-z" oninput="calculateLogisticSigmoid()" step="0.1" type="number" value="1.386"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="log-cutoff">Decision Cutoff Threshold (%):</label>
+<input class="calc-input" id="log-cutoff" max="99" min="1" oninput="calculateLogisticSigmoid()" step="5" type="number" value="50"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Sigmoid Probability &amp; Classification:</span>
+<span class="calc-result-val" id="log-result-val">P(Y = 1) = 80.00% → Predicted Class: 1 (Positive)</span>
+</div>
+<div class="calc-math-steps" id="log-math-steps">
+<strong>Logistic Classification Derivation:</strong><br/>
+<div class="step-line">• <strong>Sigmoid Function:</strong> P(Y = 1) = 1 ÷ (1 + e<sup>-z</sup>) = 1 ÷ (1 + e<sup>-1.386</sup>) = 1 ÷ (1 + 0.2501) = <strong>0.8000 (80.00%)</strong></div>
+<div class="step-line">• <strong>Classification Decision:</strong> Since 80.00% ≥ 50.00% cutoff, observation is classified as <strong>Class 1 (Positive Outcome)</strong>.</div>
+<div class="step-line">• <strong>Log-Odds (Logit):</strong> ln[P ÷ (1 - P)] = ln(0.80 ÷ 0.20) = ln(4.0) = <strong>+1.386</strong></div>
+</div>
+</div>
+</div>
+<!-- Calculator 4: BI Metric Hierarchy -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 3 (3.2): Business Intelligence (BI) — The Chain: Measures, Metrics (ARPU) &amp; KPI Growth Rate</div>
+<div class="calc-desc">Transform raw observations into aggregated measures, derive comparative unit metrics (ARPU), and calculate strategic performance KPI growth rates.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="bi-rev">Current Period Revenue ($):</label>
+<input class="calc-input" id="bi-rev" oninput="calculateBIMetrics()" step="1000" type="number" value="35000"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bi-cust">Total Active Customers (N):</label>
+<input class="calc-input" id="bi-cust" min="1" oninput="calculateBIMetrics()" step="25" type="number" value="500"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bi-prev">Previous Period Revenue ($):</label>
+<input class="calc-input" id="bi-prev" min="1" oninput="calculateBIMetrics()" step="1000" type="number" value="28000"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Derived Metric &amp; Strategic KPI:</span>
+<span class="calc-result-val" id="bi-result-val">ARPU = $70.00 | Growth = +25.00%</span>
+</div>
+<div class="calc-math-steps" id="bi-math-steps">
+<strong>BI Hierarchy Hierarchy Breakdown:</strong><br/>
+<div class="step-line">• <strong>Aggregated Measure (02):</strong> Revenue = $35,000 | Customers = 500</div>
+<div class="step-line">• <strong>Derived Metric (03):</strong> Average Revenue Per User (ARPU) = $35,000 ÷ 500 = <strong>$70.00 / customer</strong></div>
+<div class="step-line">• <strong>Strategic Growth KPI (04):</strong> Growth Rate = [($35,000 - $28,000) ÷ $28,000] × 100% = $7,000 ÷ $28,000 × 100% = <strong>+25.00%</strong></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
 
         // ==========================================
         // Interactive Traditional Data Calculators
@@ -575,12 +764,12 @@
             const resVal = document.getElementById('scale-result-val');
             const resSteps = document.getElementById('scale-math-steps');
 
-            if (resVal) resVal.innerHTML = `X_norm =</strong>{xNorm.toFixed(4)} | Z = ${zScore.toFixed(4)}`;
+            if (resVal) resVal.innerHTML = `X_norm = ${xNorm.toFixed(4)} | Z = ${zScore.toFixed(4)}`;
             if (resSteps) {
                 resSteps.innerHTML = `
                     <strong>Mathematical Transformation Steps:</strong><br>
-                    <div class="step-line">• <strong>Min-Max Scaling Formula:</strong> X_norm = ${x} - ${min}) ÷ ${max} - ${min}) = <strong>${xNorm.toFixed(4)}</strong> (Bounded strictly in [0, 1])</div>
-                    <div class="step-line">• <strong>Z-Score Standardization:</strong> Z = ${x} - ${mean}) ÷ ${sd} = <strong>${zScore.toFixed(4)}</strong> ${Math.abs(zScore).toFixed(2)} standard deviations ${zScore >= 0 ? 'above' : 'below'} population mean)</div>
+                    <div class="step-line">• <strong>Min-Max Scaling Formula:</strong> X_norm = (${x} - ${min}) ÷ (${max} - ${min}) = <strong>${xNorm.toFixed(4)}</strong> (Bounded strictly in [0, 1])</div>
+                    <div class="step-line">• <strong>Z-Score Standardization:</strong> Z = (${x} - ${mean}) ÷ ${sd} = <strong>${zScore.toFixed(4)}</strong> (${Math.abs(zScore).toFixed(2)} standard deviations ${zScore >= 0 ? 'above' : 'below'} population mean)</div>
                 `;
             }
         }
@@ -602,7 +791,7 @@
             if (resSteps) {
                 resSteps.innerHTML = `
                     <strong>Linear Model Interpretation:</strong><br>
-                    <div class="step-line">• <strong>Regression Formula:</strong> Ŷ = β₀ + (β₁ × X) = ${b0.toLocaleString()} + ${b1} × ${x}) = <strong>${yHat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
+                    <div class="step-line">• <strong>Regression Formula:</strong> Ŷ = β₀ + (β₁ × X) = ${b0.toLocaleString()} + (${b1} × ${x}) = <strong>${yHat.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
                     <div class="step-line">• <strong>Residual Error e:</strong> Y_actual - Ŷ_predicted = ${actual.toLocaleString()} - ${yHat.toLocaleString()} = <strong>${resSign}${residual.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong></div>
                     <div class="step-line">• <strong>Causal Interpretation:</strong> Every 1 unit increase in X produces an expected <strong>${b1.toFixed(2)} unit increase</strong> in response Y.</div>
                 `;
@@ -623,7 +812,7 @@
             if (resSteps) {
                 resSteps.innerHTML = `
                     <strong>Logistic Classification Derivation:</strong><br>
-                    <div class="step-line">• <strong>Sigmoid Function:</strong> P(Y = 1) = 1 ÷ (1 + e<sup>-${z}</sup>) = <strong>${prob.toFixed(4)} ${(prob * 100).toFixed(2)}%)</strong></div>
+                    <div class="step-line">• <strong>Sigmoid Function:</strong> P(Y = 1) = 1 ÷ (1 + e<sup>-${z}</sup>) = <strong>${prob.toFixed(4)} (${(prob * 100).toFixed(2)}%)</strong></div>
                     <div class="step-line">• <strong>Classification Decision:</strong> Since ${(prob * 100).toFixed(2)}% ${isClass1 ? '≥' : '<'} ${(cutoff * 100).toFixed(0)}% cutoff, observation is classified as <strong>Class ${isClass1 ? '1 (Positive Outcome)' : '0 (Negative Outcome)'}</strong>.</div>
                     <div class="step-line">• <strong>Log-Odds (Logit):</strong> z = β₀ + β₁X = <strong>${z.toFixed(3)}</strong></div>
                 `;
@@ -648,7 +837,7 @@
                     <strong>BI Hierarchy Breakdown:</strong><br>
                     <div class="step-line">• <strong>Aggregated Measure (02):</strong> Revenue = $${rev.toLocaleString()} | Customers = ${cust.toLocaleString()}</div>
                     <div class="step-line">• <strong>Derived Metric (03):</strong> Average Revenue Per User (ARPU) = $${rev.toLocaleString()} ÷ ${cust} = <strong>$${arpu.toFixed(2)}</strong></div>
-                    <div class="step-line">• <strong>Strategic Growth KPI (04):</strong> Growth Rate = [$${rev.toLocaleString()} - $${prev.toLocaleString()}) ÷ $${prev.toLocaleString()}] × 100% = <strong>${growthSign}${growth.toFixed(2)}%</strong></div>
+                    <div class="step-line">• <strong>Strategic Growth KPI (04):</strong> Growth Rate = [($${rev.toLocaleString()} - $${prev.toLocaleString()}) ÷ $${prev.toLocaleString()}] × 100% = <strong>${growthSign}${growth.toFixed(2)}%</strong></div>
                 `;
             }
         }
@@ -1757,6 +1946,5 @@
 
         const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

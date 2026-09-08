@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,732 +18,835 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Sets, Events & Bayesian Inference | University Study Guide</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Sets, Events &amp; Bayesian Inference | University Study Guide</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<meta content="#0d9488" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Data Mining</h1>
-        <p>Sets, Events & Bayesian Inference — University Course Study Guide</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Sets, Events & Bayesian Inference</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('quick-ref')">Quick Reference</button>
-            <button class="nav-btn" onclick="window.openBayesianExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-            
-            <div class="card">
-                <h2>How to Use This Handout</h2>
-                <p>This document covers one continuous arc: from the basic notation for describing events, through the rules that govern how probabilities combine, and finally to Bayes' theorem and Bayesian inference. Each idea depends on the one before it. Bayes' theorem is not a standalone trick. It is what you get when you take conditional probability and the multiplication rule and rearrange them.</p>
-                <ul>
-                    <li><strong>Part I:</strong> Sets and Events. How to describe events, draw them, and combine them.</li>
-                    <li><strong>Part II:</strong> The Rules of Probability. How probabilities behave when events interact.</li>
-                    <li><strong>Part III:</strong> Bayes and Bayesian Inference. How to update what you believe when evidence arrives.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2>PART I - SETS AND EVENTS</h2>
-                <h3 id="events-as-sets">1. Events as Sets</h3>
-                <p>Every event has a set of outcomes that satisfy it. These are the favorable outcomes. For example, if the event is "rolling an even number," the set of values consists of 2, 4, 6, and so on. The values in a set do not have to be numerical.</p>
-                <p><strong>Notation convention:</strong></p>
-                <ul>
-                    <li>Uppercase letters denote sets: A, B, X.</li>
-                    <li>Lowercase letters denote individual elements: a, b, x.</li>
-                </ul>
-                <p><strong>Empty and non-empty sets:</strong></p>
-                <ul>
-                    <li>If it contains no values at all, we call it the empty set or null set, written &Oslash;.</li>
-                    <li>Non-empty sets are either finite or infinite, depending on how many elements they hold.</li>
-                </ul>
-
-                <h3 id="set-notation">2. Set Notation</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Symbol</th>
-                            <th>Read as</th>
-                            <th>Meaning</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>x &in; A</td>
-                            <td>"x is an element of A" or "x in A"</td>
-                            <td>The value x belongs to set A</td>
-                        </tr>
-                        <tr>
-                            <td>A &ni; x</td>
-                            <td>"A contains x"</td>
-                            <td>Same statement, written from the set's side</td>
-                        </tr>
-                        <tr>
-                            <td>x &notin; A</td>
-                            <td>"x is not in A"</td>
-                            <td>The value x does not belong to A</td>
-                        </tr>
-                        <tr>
-                            <td>A &not;&ni; x</td>
-                            <td>"A does not contain x"</td>
-                            <td>Same statement, flipped</td>
-                        </tr>
-                        <tr>
-                            <td>&forall;</td>
-                            <td>"for all" or "for any"</td>
-                            <td>A capital A turned upside down</td>
-                        </tr>
-                        <tr>
-                            <td>:</td>
-                            <td>"such that"</td>
-                            <td>Narrows a statement to a specific group</td>
-                        </tr>
-                        <tr>
-                            <td>&sube;</td>
-                            <td>"is a subset of"</td>
-                            <td>Every element of the first set is in the second</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p><strong>Rule to remember:</strong> Every set contains at least two subsets, itself and the null set.</p>
-
-                <h3>3. Visualizing Events</h3>
-                <p>We draw the set of values satisfying an event as a circle. One circle per event. There are three possible relationships between circles:</p>
-                <ul>
-                    <li><strong>Case 1: The circles never touch.</strong> The two events can never happen at the same time (e.g., drawing a diamond and a heart).</li>
-                    <li><strong>Case 2: The circles intersect.</strong> The two events can occur at the same time (e.g., drawing a diamond and a queen -> Queen of Diamonds).</li>
-                    <li><strong>Case 3: One circle completely contains the other.</strong> One event can only ever occur if the other one does as well (e.g., drawing a red card vs drawing a diamond). If an outcome is not part of a set, it cannot be part of any of its subsets.</li>
-                </ul>
-
-                <h3 id="intersections">4. Intersections</h3>
-                <p>When we want both A and B to happen at the same time, we talk about their intersection (A &cap; B).</p>
-                <ul>
-                    <li>Circles do not touch: A &cap; B = &Oslash;.</li>
-                    <li>Circles intersect: A &cap; B holds whatever they share.</li>
-                    <li>One circle inside the other: A &cap; B = B (the smaller set).</li>
-                </ul>
-
-                <h3 id="unions">5. Unions</h3>
-                <p>When we only require one of them to occur, regardless which, we talk about the union (A &cup; B).</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">A ∪ B = A + B - (A ∩ B)</span>
-                    <div class="formula-explain">Union (A or B) = Set A + Set B - Intersection (shared overlap)</div>
-                </div>
-                <ul>
-                    <li>Circles do not touch: Union is the plain sum of the two sets.</li>
-                    <li>Circles intersect: Union is sum minus intersection (to prevent double-counting).</li>
-                    <li>One circle inside the other: Union is simply the larger set.</li>
-                </ul>
-
-                <h3>6. Mutually Exclusive Sets and Complements</h3>
-                <div class="definition-card">
-            <span class="def-badge">Definition</span>
-            <p><strong>Mutually exclusive sets:</strong> Sets that have no overlapping elements (A &cap; B = &Oslash;). Their union is simply the sum of individual sets.</p>
-        </div>
-                <div class="definition-card">
-            <span class="def-badge">Definition</span>
-            <p><strong>Complements:</strong> All values that are part of the sample space but not part of the set.</p>
-        </div>
-                <p><em>Key Distinction:</em> Complements are always mutually exclusive. But not all mutually exclusive sets are complements.</p>
-            </div>
-
-            <div class="card">
-                <h2>PART II - THE RULES OF PROBABILITY</h2>
-                <h3 id="independent-dependent-events">7. Independent and Dependent Events</h3>
-                <div class="definition-card">
-            <span class="def-badge">Definition</span>
-            <p><strong>Independent events:</strong> Theoretical probabilities remain unaffected by other events (e.g., coin flip always 50% tails).</p>
-        </div>
-                <div class="definition-card">
-            <span class="def-badge">Definition</span>
-            <p><strong>Dependent events:</strong> Probabilities vary as conditions change (e.g., drawing queen of spades drops sample space from 52 to 13 to 4).</p>
-        </div>
-                <p><strong>Notation:</strong> P(A|B) reads "P of A given B" (conditional probability).</p>
-
-                <h3 id="conditional-probability">8. Computing Conditional Probability</h3>
-                <p><strong>Independence Test:</strong> P(A) = P(A|B). If knowing B changes nothing about A, the events are independent.</p>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(A|B) = P(A ∩ B) / P(B)</span>
-                    <div class="formula-explain">Conditional Probability of A given B = (Probability of both A and B occurring) / (Probability of B)</div>
-                </div>
-                <p><em>Order matters:</em> P(A|B) is NOT the same as P(B|A), even when numeric values match.</p>
-
-                <h3 id="total-probability">9. The Law of Total Probability</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(A) = P(A|B₁)P(B₁) + P(A|B₂)P(B₂) + ...</span>
-                    <div class="formula-explain">Total Probability = Sum of conditional probabilities across all partition groups (B_i)</div>
-                </div>
-                <p>The probability of A is the sum of all conditional probabilities of A given B, each multiplied by the probability of that B.</p>
-
-                <h3>10. The Additive Law</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</span><br>
-                    <span class="formula-text">P(A ∩ B) = P(A) + P(B) - P(A ∪ B)</span>
-                    <div class="formula-explain">
-                        Addition & Overlap Rules:<br>
-                        • Union (A or B) = Probability of A + Probability of B - Intersection (A and B)<br>
+<header class="app-header">
+<h1>Data Mining</h1>
+<p>Sets, Events &amp; Bayesian Inference — University Course Study Guide</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Sets, Events &amp; Bayesian Inference</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('quick-ref')">Quick Reference</button>
+<button class="nav-btn" onclick="window.openBayesianExamplesModal()" style="color:var(--primary-color); font-weight:700;">💡 Worked Examples</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2>How to Use This Handout</h2>
+<p>This document covers one continuous arc: from the basic notation for describing events, through the rules that govern how probabilities combine, and finally to Bayes' theorem and Bayesian inference. Each idea depends on the one before it. Bayes' theorem is not a standalone trick. It is what you get when you take conditional probability and the multiplication rule and rearrange them.</p>
+<ul>
+<li><strong>Part I:</strong> Sets and Events. How to describe events, draw them, and combine them.</li>
+<li><strong>Part II:</strong> The Rules of Probability. How probabilities behave when events interact.</li>
+<li><strong>Part III:</strong> Bayes and Bayesian Inference. How to update what you believe when evidence arrives.</li>
+</ul>
+</div>
+<div class="card">
+<h2>PART I - SETS AND EVENTS</h2>
+<h3 id="events-as-sets">1. Events as Sets</h3>
+<p>Every event has a set of outcomes that satisfy it. These are the favorable outcomes. For example, if the event is "rolling an even number," the set of values consists of 2, 4, 6, and so on. The values in a set do not have to be numerical.</p>
+<p><strong>Notation convention:</strong></p>
+<ul>
+<li>Uppercase letters denote sets: A, B, X.</li>
+<li>Lowercase letters denote individual elements: a, b, x.</li>
+</ul>
+<p><strong>Empty and non-empty sets:</strong></p>
+<ul>
+<li>If it contains no values at all, we call it the empty set or null set, written Ø.</li>
+<li>Non-empty sets are either finite or infinite, depending on how many elements they hold.</li>
+</ul>
+<h3 id="set-notation">2. Set Notation</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Read as</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x ∈ A</td>
+<td>"x is an element of A" or "x in A"</td>
+<td>The value x belongs to set A</td>
+</tr>
+<tr>
+<td>A ∋ x</td>
+<td>"A contains x"</td>
+<td>Same statement, written from the set's side</td>
+</tr>
+<tr>
+<td>x ∉ A</td>
+<td>"x is not in A"</td>
+<td>The value x does not belong to A</td>
+</tr>
+<tr>
+<td>A ¬∋ x</td>
+<td>"A does not contain x"</td>
+<td>Same statement, flipped</td>
+</tr>
+<tr>
+<td>∀</td>
+<td>"for all" or "for any"</td>
+<td>A capital A turned upside down</td>
+</tr>
+<tr>
+<td>:</td>
+<td>"such that"</td>
+<td>Narrows a statement to a specific group</td>
+</tr>
+<tr>
+<td>⊆</td>
+<td>"is a subset of"</td>
+<td>Every element of the first set is in the second</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Rule to remember:</strong> Every set contains at least two subsets, itself and the null set.</p>
+<h3>3. Visualizing Events</h3>
+<p>We draw the set of values satisfying an event as a circle. One circle per event. There are three possible relationships between circles:</p>
+<ul>
+<li><strong>Case 1: The circles never touch.</strong> The two events can never happen at the same time (e.g., drawing a diamond and a heart).</li>
+<li><strong>Case 2: The circles intersect.</strong> The two events can occur at the same time (e.g., drawing a diamond and a queen -&gt; Queen of Diamonds).</li>
+<li><strong>Case 3: One circle completely contains the other.</strong> One event can only ever occur if the other one does as well (e.g., drawing a red card vs drawing a diamond). If an outcome is not part of a set, it cannot be part of any of its subsets.</li>
+</ul>
+<h3 id="intersections">4. Intersections</h3>
+<p>When we want both A and B to happen at the same time, we talk about their intersection (A ∩ B).</p>
+<ul>
+<li>Circles do not touch: A ∩ B = Ø.</li>
+<li>Circles intersect: A ∩ B holds whatever they share.</li>
+<li>One circle inside the other: A ∩ B = B (the smaller set).</li>
+</ul>
+<h3 id="unions">5. Unions</h3>
+<p>When we only require one of them to occur, regardless which, we talk about the union (A ∪ B).</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">A ∪ B = A + B - (A ∩ B)</span>
+<div class="formula-explain">Union (A or B) = Set A + Set B - Intersection (shared overlap)</div>
+</div>
+<ul>
+<li>Circles do not touch: Union is the plain sum of the two sets.</li>
+<li>Circles intersect: Union is sum minus intersection (to prevent double-counting).</li>
+<li>One circle inside the other: Union is simply the larger set.</li>
+</ul>
+<h3>6. Mutually Exclusive Sets and Complements</h3>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p><strong>Mutually exclusive sets:</strong> Sets that have no overlapping elements (A ∩ B = Ø). Their union is simply the sum of individual sets.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p><strong>Complements:</strong> All values that are part of the sample space but not part of the set.</p>
+</div>
+<p><em>Key Distinction:</em> Complements are always mutually exclusive. But not all mutually exclusive sets are complements.</p>
+</div>
+<div class="card">
+<h2>PART II - THE RULES OF PROBABILITY</h2>
+<h3 id="independent-dependent-events">7. Independent and Dependent Events</h3>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p><strong>Independent events:</strong> Theoretical probabilities remain unaffected by other events (e.g., coin flip always 50% tails).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p><strong>Dependent events:</strong> Probabilities vary as conditions change (e.g., drawing queen of spades drops sample space from 52 to 13 to 4).</p>
+</div>
+<p><strong>Notation:</strong> P(A|B) reads "P of A given B" (conditional probability).</p>
+<h3 id="conditional-probability">8. Computing Conditional Probability</h3>
+<p><strong>Independence Test:</strong> P(A) = P(A|B). If knowing B changes nothing about A, the events are independent.</p>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(A|B) = P(A ∩ B) / P(B)</span>
+<div class="formula-explain">Conditional Probability of A given B = (Probability of both A and B occurring) / (Probability of B)</div>
+</div>
+<p><em>Order matters:</em> P(A|B) is NOT the same as P(B|A), even when numeric values match.</p>
+<h3 id="total-probability">9. The Law of Total Probability</h3>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(A) = P(A|B₁)P(B₁) + P(A|B₂)P(B₂) + ...</span>
+<div class="formula-explain">Total Probability = Sum of conditional probabilities across all partition groups (B_i)</div>
+</div>
+<p>The probability of A is the sum of all conditional probabilities of A given B, each multiplied by the probability of that B.</p>
+<h3>10. The Additive Law</h3>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(A ∪ B) = P(A) + P(B) - P(A ∩ B)</span><br/>
+<span class="formula-text">P(A ∩ B) = P(A) + P(B) - P(A ∪ B)</span>
+<div class="formula-explain">
+                        Addition &amp; Overlap Rules:<br/>
+                        • Union (A or B) = Probability of A + Probability of B - Intersection (A and B)<br/>
                         • Intersection (A and B) = Probability of A + Probability of B - Union (A or B)
                     </div>
-                </div>
-
-                <h3>11. The Multiplication Rule</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(A ∩ B) = P(A|B) × P(B) = P(B|A) × P(A)</span>
-                    <div class="formula-explain">Multiplication Rule (Both occur) = Conditional Probability × Given Probability</div>
-                </div>
-                <p>Taking a fraction of a fraction. For two draws without replacement (no spade first, spade second): P(A &cap; B) = 0.255 &times; 0.75 = 0.191 (19.1%).</p>
-            </div>
-
-            <div class="card">
-                <h2>PART III - BAYES AND BAYESIAN INFERENCE</h2>
-                <h3 id="bayes-theorem">12. Bayes' Theorem</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(A|B) = [ P(B|A) × P(A) ] / P(B)</span>
-                    <div class="formula-explain">Bayes' Theorem: Probability of A given B = [ Likelihood of B given A × Prior of A ] / Marginal probability of B</div>
-                </div>
-                <p>Bayes' theorem lets you find the relationship between two different conditional probabilities of a pair of events. Very often one direction is easy to measure and the other is what you care about.</p>
-
-                <h3>13. From Formula to Way of Thinking</h3>
-                <p>In Bayesian Inference:</p>
-                <ul>
-                    <li><strong>H = Hypothesis:</strong> Something you are unsure about.</li>
-                    <li><strong>E = Evidence:</strong> Something you actually observed.</li>
-                </ul>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">P(H|E) = [ P(E|H) × P(H) ] / P(E)</span>
-                    <div class="formula-explain">Bayesian Inference: Probability of Hypothesis given Evidence = [ Likelihood of Evidence given Hypothesis × Prior of Hypothesis ] / Total probability of Evidence</div>
-                </div>
-
-                <h3>14. The Four Ingredients</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Part</th>
-                            <th>Symbol</th>
-                            <th>Plain Meaning</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Prior</strong></td>
-                            <td>P(H)</td>
-                            <td>What you believed before seeing the evidence</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Likelihood</strong></td>
-                            <td>P(E|H)</td>
-                            <td>If the hypothesis were true, how likely is this evidence?</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Evidence</strong></td>
-                            <td>P(E)</td>
-                            <td>How likely is this evidence overall, under any hypothesis?</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Posterior</strong></td>
-                            <td>P(H|E)</td>
-                            <td>What you believe after seeing the evidence</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3 id="medical-test-example">15. Worked Example: Medical Test</h3>
-                <div class="example-card">
-        <span class="example-badge">Worked Example: Medical Test</span>
-        <p><strong>Prevalence P(H)</strong> = 0.01; <strong>Sensitivity P(E|H)</strong> = 0.99; <strong>False Positive P(E|not H)</strong> = 0.05.</p>
-        <p><strong>Evidence P(E)</strong> = (0.99 &times; 0.01) + (0.05 &times; 0.99) = 0.0594.</p>
-        <p><strong>Posterior P(H|E)</strong> = (0.99 &times; 0.01) / 0.0594 = 0.167 (16.7%).</p>
-    </div>
-                <p><strong>Base Rate Fallacy:</strong> Ignoring the prior when condition is rare leads to swamping true positives with false positives.</p>
-
-                <h3 id="spam-filter">16. Spam Filter & 17. Sequential Updating</h3>
-                <div class="example-card">
-        <span class="example-badge">Worked Example: Spam Filter</span>
-        <p><strong>Spam prior P(S)</strong> = 0.4; <strong>FREE in spam</strong> = 0.3; <strong>FREE in ham</strong> = 0.02</p>
-        <p><strong>Posterior P(S|FREE)</strong> = 0.12 / 0.132 = 0.909 (90.9%).</p>
-    </div>
-                <div class="definition-card">
-        <span class="def-badge">Core Method</span>
-        <p><strong>Sequential Updating Rule:</strong> <em>"Today's posterior becomes tomorrow's prior."</em> Updating with second word "WINNER" raises belief to 99.7%.</p>
-    </div>
-
-                <h3 id="odds-form">18. The Odds Form</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Formula</span><br>
-                    <span class="formula-text">Odds(H) = P(H) / P(Hᶜ)</span><br>
-                    <span class="formula-text">Posterior Odds = Prior Odds × Likelihood Ratio</span><br>
-                    <span class="formula-text">Likelihood Ratio (LR) = P(E|H) / P(E|Hᶜ)</span>
-                    <div class="formula-explain">
-                        Bayes' Theorem in Odds Form:<br>
-                        • <strong>Odds(H)</strong> = Probability of Hypothesis / Probability of Complement (not H)<br>
+</div>
+<h3>11. The Multiplication Rule</h3>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(A ∩ B) = P(A|B) × P(B) = P(B|A) × P(A)</span>
+<div class="formula-explain">Multiplication Rule (Both occur) = Conditional Probability × Given Probability</div>
+</div>
+<p>Taking a fraction of a fraction. For two draws without replacement (no spade first, spade second): P(A ∩ B) = 0.255 × 0.75 = 0.191 (19.1%).</p>
+</div>
+<div class="card">
+<h2>PART III - BAYES AND BAYESIAN INFERENCE</h2>
+<h3 id="bayes-theorem">12. Bayes' Theorem</h3>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(A|B) = [ P(B|A) × P(A) ] / P(B)</span>
+<div class="formula-explain">Bayes' Theorem: Probability of A given B = [ Likelihood of B given A × Prior of A ] / Marginal probability of B</div>
+</div>
+<p>Bayes' theorem lets you find the relationship between two different conditional probabilities of a pair of events. Very often one direction is easy to measure and the other is what you care about.</p>
+<h3>13. From Formula to Way of Thinking</h3>
+<p>In Bayesian Inference:</p>
+<ul>
+<li><strong>H = Hypothesis:</strong> Something you are unsure about.</li>
+<li><strong>E = Evidence:</strong> Something you actually observed.</li>
+</ul>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">P(H|E) = [ P(E|H) × P(H) ] / P(E)</span>
+<div class="formula-explain">Bayesian Inference: Probability of Hypothesis given Evidence = [ Likelihood of Evidence given Hypothesis × Prior of Hypothesis ] / Total probability of Evidence</div>
+</div>
+<h3>14. The Four Ingredients</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Symbol</th>
+<th>Plain Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prior</strong></td>
+<td>P(H)</td>
+<td>What you believed before seeing the evidence</td>
+</tr>
+<tr>
+<td><strong>Likelihood</strong></td>
+<td>P(E|H)</td>
+<td>If the hypothesis were true, how likely is this evidence?</td>
+</tr>
+<tr>
+<td><strong>Evidence</strong></td>
+<td>P(E)</td>
+<td>How likely is this evidence overall, under any hypothesis?</td>
+</tr>
+<tr>
+<td><strong>Posterior</strong></td>
+<td>P(H|E)</td>
+<td>What you believe after seeing the evidence</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="medical-test-example">15. Worked Example: Medical Test</h3>
+<div class="example-card">
+<span class="example-badge">Worked Example: Medical Test</span>
+<p><strong>Prevalence P(H)</strong> = 0.01; <strong>Sensitivity P(E|H)</strong> = 0.99; <strong>False Positive P(E|not H)</strong> = 0.05.</p>
+<p><strong>Evidence P(E)</strong> = (0.99 × 0.01) + (0.05 × 0.99) = 0.0594.</p>
+<p><strong>Posterior P(H|E)</strong> = (0.99 × 0.01) / 0.0594 = 0.167 (16.7%).</p>
+</div>
+<p><strong>Base Rate Fallacy:</strong> Ignoring the prior when condition is rare leads to swamping true positives with false positives.</p>
+<h3 id="spam-filter">16. Spam Filter &amp; 17. Sequential Updating</h3>
+<div class="example-card">
+<span class="example-badge">Worked Example: Spam Filter</span>
+<p><strong>Spam prior P(S)</strong> = 0.4; <strong>FREE in spam</strong> = 0.3; <strong>FREE in ham</strong> = 0.02</p>
+<p><strong>Posterior P(S|FREE)</strong> = 0.12 / 0.132 = 0.909 (90.9%).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Core Method</span>
+<p><strong>Sequential Updating Rule:</strong> <em>"Today's posterior becomes tomorrow's prior."</em> Updating with second word "WINNER" raises belief to 99.7%.</p>
+</div>
+<h3 id="odds-form">18. The Odds Form</h3>
+<div class="formula-card">
+<span class="formula-badge">Formula</span><br/>
+<span class="formula-text">Odds(H) = P(H) / P(Hᶜ)</span><br/>
+<span class="formula-text">Posterior Odds = Prior Odds × Likelihood Ratio</span><br/>
+<span class="formula-text">Likelihood Ratio (LR) = P(E|H) / P(E|Hᶜ)</span>
+<div class="formula-explain">
+                        Bayes' Theorem in Odds Form:<br/>
+                        • <strong>Odds(H)</strong> = Probability of Hypothesis / Probability of Complement (not H)<br/>
                         • <strong>Likelihood Ratio (LR)</strong> = Likelihood of Evidence with Hypothesis / Likelihood of Evidence without Hypothesis
                     </div>
-                </div>
-
-                <h3 id="three-mistakes">19. Three Mistakes to Avoid</h3>
-                <ol>
-                    <li>Confusing P(H|E) with P(E|H) (Prosecutor's fallacy).</li>
-                    <li>Ignoring the base rate.</li>
-                    <li>Treating the posterior as final.</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / ...</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Dynamically Populated -->
-            </div>
-        </div>
-
-        <!-- TAB 3: QUICK REFERENCE -->
-        <div id="quick-ref" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2 style="margin:0;">Quick Reference & Summary Matrix</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-
-                <h3>Set Notation & Symbols</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Symbol</th>
-                            <th>Meaning</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>x &in; A</td><td>x is an element of A</td></tr>
-                        <tr><td>x &notin; A</td><td>x is not an element of A</td></tr>
-                        <tr><td>&forall;</td><td>for all</td></tr>
-                        <tr><td>:</td><td>such that</td></tr>
-                        <tr><td>A &sube; B</td><td>A is a subset of B</td></tr>
-                        <tr><td>&Oslash;</td><td>the empty set</td></tr>
-                    </tbody>
-                </table>
-
-                <h3>Combining Events</h3>
-                <ul>
-                    <li><strong>Intersection (A &cap; B):</strong> Both A and B occur.</li>
-                    <li><strong>Union (A &cup; B):</strong> Either A or B occurs.</li>
-                    <li><strong>Union Formula:</strong> A &cup; B = A + B - (A &cap; B)</li>
-                    <li><strong>Mutually Exclusive:</strong> A &cap; B = &Oslash;</li>
-                </ul>
-
-                <h3>Probability Rules</h3>
-                <ul>
-                    <li><strong>Conditional Probability:</strong> P(A|B) = P(A &cap; B) / P(B) [P(B) > 0]</li>
-                    <li><strong>Multiplication Rule:</strong> P(A &cap; B) = P(A|B) &times; P(B)</li>
-                    <li><strong>Additive Law:</strong> P(A &cup; B) = P(A) + P(B) - P(A &cap; B)</li>
-                    <li><strong>Law of Total Probability:</strong> P(A) = &sum; P(A|B_i) &times; P(B_i)</li>
-                    <li><strong>Independence Condition:</strong> P(A) = P(A|B) and P(A &cap; B) = P(A) &times; P(B)</li>
-                </ul>
-
-                <h3>Bayesian Inference Formulas</h3>
-                <ul>
-                    <li><strong>Bayes' Rule:</strong> P(H|E) = [P(E|H) &times; P(H)] / P(E)</li>
-                    <li><strong>Evidence P(E):</strong> P(E) = &sum; P(E|H_i) &times; P(H_i)</li>
-                    <li><strong>Odds Formula:</strong> P = Odds / (1 + Odds)</li>
-                    <li><strong>Posterior Odds:</strong> Posterior Odds = Prior Odds &times; Likelihood Ratio</li>
-                    <li><strong>One-sentence summary:</strong> Start with what you already believed, multiply by how well the new evidence fits, normalize, and that is your updated belief.</li>
-                </ul>
-            </div>
-        
-
-            <div class="card">
-                <h2>Quick Reference: Set Theory Operators & Notation Matrix</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Operator / Concept</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Symbol</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Definition</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Probability Meaning</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Intersection</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">A ∩ B</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Elements belonging to BOTH A AND B.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Joint Probability P(A ∩ B).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Union</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">A ∪ B</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Elements belonging to A OR B OR both.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Combined Probability P(A ∪ B).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Complement</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">A' or Aᶜ</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">All elements NOT in A.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">P(A') = 1 - P(A).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Subset</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">A ⊆ B</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Every element of A is also in B.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Event A implies Event B.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 52-Card Deck Breakdown & Probability Reference Matrix -->
-            <div class="card" style="margin-top:1.5rem;">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:0.5rem;">
-                    <h2 style="margin:0;">🃏 Quick Reference: Standard 52-Card Deck Breakdown & Probability Reference</h2>
-                    <span class="quiz-subject-pill" style="font-size:0.75rem;">Sample Space Reference Guide</span>
-                </div>
-                <p style="color:var(--text-muted-color); font-size:0.9rem; margin-top:0.3rem;">A standard international playing card deck contains exactly <strong>52 cards</strong> (excluding Jokers), divided into 2 colors, 4 suits, and 13 ranks.</p>
-
-                <!-- Visual Deck Breakdown Grid -->
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin:1rem 0;">
-                    <div style="background:var(--bg-color); border:1px solid var(--border-color); border-left:4px solid #ef4444; border-radius:8px; padding:0.85rem;">
-                        <div style="font-weight:700; color:#ef4444; font-size:1rem; margin-bottom:0.3rem;">🔴 RED CARDS (26 Total = 1/2 = 50%)</div>
-                        <ul style="margin:0.25rem 0 0 1.1rem; padding:0; font-size:0.85rem; line-height:1.5;">
-                            <li><strong>♥️ Hearts (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
-                            <li><strong>♦️ Diamonds (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
-                            <li><strong>Red Face Cards:</strong> 6 (3 Hearts + 3 Diamonds)</li>
-                            <li><strong>Red Aces:</strong> 2 (Ace of Hearts, Ace of Diamonds)</li>
-                        </ul>
-                    </div>
-                    <div style="background:var(--bg-color); border:1px solid var(--border-color); border-left:4px solid #0d9488; border-radius:8px; padding:0.85rem;">
-                        <div style="font-weight:700; color:var(--primary-color); font-size:1rem; margin-bottom:0.3rem;">⚫ BLACK CARDS (26 Total = 1/2 = 50%)</div>
-                        <ul style="margin:0.25rem 0 0 1.1rem; padding:0; font-size:0.85rem; line-height:1.5;">
-                            <li><strong>♠️ Spades (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
-                            <li><strong>♣️ Clubs (13):</strong> Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King</li>
-                            <li><strong>Black Face Cards:</strong> 6 (3 Spades + 3 Clubs)</li>
-                            <li><strong>Black Aces:</strong> 2 (Ace of Spades, Ace of Clubs)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Master Breakdown Table -->
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Category / Feature</th>
-                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Cards Included</th>
-                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Count (Total: 52)</th>
-                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Probability Formula P(E)</th>
-                            <th style="padding:0.65rem; border:1px solid var(--border-color);">Fraction & Decimal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Any Color (Red or Black)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Red (♥️, ♦️) or Black (♠️, ♣️)</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">26 cards</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">26 / 52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/2 = 0.50 (50%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Any Specific Suit</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Hearts (♥️), Diamonds (♦️), Spades (♠️), or Clubs (♣️)</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">13 cards each</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">13 / 52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/4 = 0.25 (25%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Any Specific Rank (e.g. Ace, King, 7)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">1 per suit (e.g. 4 Aces: ♥️A, ♦️A, ♠️A, ♣️A)</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">4 cards per rank</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 / 52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/13 ≈ 0.0769 (7.69%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Face Cards (Court Cards: J, Q, K)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 Jacks, 4 Queens, 4 Kings (6 Red, 6 Black)</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">12 cards total</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">12 / 52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">3/13 ≈ 0.2308 (23.08%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Number / Pip Cards (2 through 10)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Cards 2, 3, 4, 5, 6, 7, 8, 9, 10 across 4 suits</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">36 cards total</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">36 / 52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">9/13 ≈ 0.6923 (69.23%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Specific Single Card (e.g. Ace of Spades)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">Unique individual card</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1 card</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">1 / 52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">1/52 ≈ 0.01923 (1.92%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Ace OR King (Mutually Exclusive Events)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 Aces + 4 Kings (No overlap: P(Ace ∩ King) = 0)</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">8 cards</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">P(A ∪ B) = 4/52 + 4/52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">8/52 = 2/13 ≈ 0.1538 (15.38%)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);"><strong>Ace OR Spade (Overlapping Events)</strong></td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">4 Aces + 13 Spades − 1 Ace of Spades</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">16 cards</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color);">P(A ∪ B) = 4/52 + 13/52 − 1/52</td>
-                            <td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">16/52 = 4/13 ≈ 0.3077 (30.77%)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Bayes' Theorem Formula & 4 Core Ingredients</h2>
-                <div class="formula-card">
-                    <span class="formula-badge">Bayes' Theorem Formula</span>
-                    <div class="formula-text">P(A|B) = [ P(B|A) × P(A) ] / P(B)</div>
-                    <div class="formula-explain">Updates prior belief P(A) using new evidence B to compute posterior P(A|B).</div>
-                </div>
-
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="definition-card">
-                        <span class="def-badge">1. Prior P(A)</span>
-                        <p>Initial probability of hypothesis A before seeing evidence B.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">2. Likelihood P(B|A)</span>
-                        <p>Probability of observing evidence B given hypothesis A is true.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">3. Marginal P(B)</span>
-                        <p>Total probability of observing evidence B across all states.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">4. Posterior P(A|B)</span>
-                        <p>Updated probability of hypothesis A after incorporating evidence B.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Common Bayesian Fallacies & Mistakes</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Fallacy Name</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Common Mistake</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Correct Bayesian Rule</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Base Rate Fallacy</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ignoring the initial prior P(A) when evaluating positive test results.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Always multiply likelihood by prior base rate P(A).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Transposed Conditional</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Assuming P(A|B) is equal to P(B|A).</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">P(A|B) and P(B|A) are fundamentally different conditionals.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            
-            <!-- ==========================================
+</div>
+<h3 id="three-mistakes">19. Three Mistakes to Avoid</h3>
+<ol>
+<li>Confusing P(H|E) with P(E|H) (Prosecutor's fallacy).</li>
+<li>Ignoring the base rate.</li>
+<li>Treating the posterior as final.</li>
+</ol>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / ...</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Dynamically Populated -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE -->
+<div class="tab-content" id="quick-ref">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.25rem;">
+<div>
+<h2 style="margin:0; font-size:1.4rem;">⚡ Quick Reference &amp; Exam Mastery Architecture</h2>
+<p style="margin:0.25rem 0 0 0; color:var(--text-muted-color); font-size:0.88rem;">Four-Pillar Synthesis: Set Algebra, Bayes' Theorem, Odds Forms, Comparative Matrices &amp; High-Yield Pitfalls</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ==========================================
+                     PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:1rem;">
+                    🏛️ Pillar 1: Core Terminology &amp; Keyword Recall Grid
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="definition-card">
+<span class="def-badge">Set &amp; Universal Set (S)</span>
+<p><strong>Set:</strong> A well-defined collection of distinct objects or elements (x ∈ A).<br/>
+<strong>Universal Set (S):</strong> The comprehensive set containing all possible elements under consideration.<br/>
+<strong>Empty Set (∅):</strong> The null set containing zero elements (|∅| = 0).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Intersection &amp; Union</span>
+<p><strong>Intersection (A ∩ B):</strong> Elements belonging to BOTH A AND B (Logical AND, joint overlap).<br/>
+<strong>Union (A ∪ B):</strong> Elements belonging to A OR B OR BOTH (Logical OR, combined coverage).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Complement &amp; Subset</span>
+<p><strong>Complement (A' or Aᶜ):</strong> All elements in universal set S not in A: P(A') = 1 − P(A).<br/>
+<strong>Subset (A ⊆ B):</strong> Every element in A is also in B (Event A implies Event B).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Conditional Probability</span>
+<p><strong>P(A|B):</strong> Probability of event A occurring given that event B has already occurred: P(A|B) = P(A ∩ B) ÷ P(B). Restricts sample space from S down to B.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Law of Total Probability</span>
+<p>If {B₁, B₂, ..., Bₙ} form an exhaustive partition of S, then P(A) = Σ [P(A|Bᵢ) × P(Bᵢ)]. Deconstructs complex marginal probabilities into weighted conditional components.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">The 4 Bayes Ingredients</span>
+<p><strong>1. Prior P(H):</strong> Baseline belief before seeing new evidence.<br/>
+<strong>2. Likelihood P(E|H):</strong> Chance of evidence given hypothesis.<br/>
+<strong>3. Marginal Evidence P(E):</strong> Total chance of evidence.<br/>
+<strong>4. Posterior P(H|E):</strong> Updated belief after incorporating evidence.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Sensitivity &amp; Specificity</span>
+<p><strong>Sensitivity (True Positive Rate):</strong> P(E|H) = Chance positive test given diseased.<br/>
+<strong>Specificity (True Negative Rate):</strong> P(¬E|¬H) = Chance negative test given healthy.<br/>
+<strong>False Positive Rate:</strong> P(E|¬H) = 1 − Specificity.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Odds &amp; Likelihood Ratio</span>
+<p><strong>Odds(H):</strong> P(H) ÷ [1 − P(H)].<br/>
+<strong>Likelihood Ratio (LR):</strong> P(E|H) ÷ P(E|¬H) (Bayes Factor).<br/>
+<strong>Odds Form:</strong> Posterior Odds = Prior Odds × Likelihood Ratio.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Sequential Updating Rule</span>
+<p><em>"Today's posterior becomes tomorrow's prior."</em> As successive independent evidence signals arrive, the updated posterior from stage t serves as the prior for stage t+1.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Base Rate / Prevalence</span>
+<p>The baseline natural frequency or prior probability P(H) of a condition in the general population. In rare events, low base rates dominate positive test results.</p>
+</div>
+</div>
+<!-- ==========================================
+                     PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    📐 Pillar 2: Formula &amp; Calculation Reference Cards
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="formula-card">
+<span class="formula-badge">General Set Union Formula</span>
+<div class="formula-text">|A ∪ B| = |A| + |B| − |A ∩ B| ⇔ P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</div>
+<div class="formula-explain">
+<strong>Conditions:</strong> Applies to any two overlapping sets or events.<br/>
+<strong>Plain English Reading:</strong> "To find the total elements in A or B, add the sizes of both sets and subtract the intersection so overlapping items are not double-counted."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The count of A union B equals count of A plus count of B minus count of A intersect B (to subtract the overlap counted twice)."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Conditional Probability &amp; Multiplication Rule</span>
+<div class="formula-text">P(A|B) = P(A ∩ B) ÷ P(B) ⇔ P(A ∩ B) = P(B) × P(A|B)</div>
+<div class="formula-explain">
+<strong>Requirements:</strong> P(B) &gt; 0. For independent events, P(A|B) = P(A).<br/>
+<strong>Plain English Reading:</strong> "The probability of A given B equals the joint intersection divided by the probability of the conditioning event B."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The conditional probability of A given B equals the joint probability of A and B divided by probability of B."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Law of Total Probability (Binary Partition)</span>
+<div class="formula-text">P(E) = P(E|H) × P(H) + P(E|¬H) × P(¬H)</div>
+<div class="formula-explain">
+<strong>Partitions:</strong> True Positives contribution + False Positives contribution.<br/>
+<strong>Plain English Reading:</strong> "Total marginal evidence equals the evidence likelihood from the target condition plus the false-alarm evidence from the non-target population."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The total probability of evidence E equals the probability of E given hypothesis H times prior of H, plus probability of E given not-H times prior of not-H."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Bayes' Theorem Standard Form</span>
+<div class="formula-text">P(H|E) = [ P(E|H) × P(H) ] ÷ [ P(E|H)·P(H) + P(E|¬H)·P(¬H) ]</div>
+<div class="formula-explain">
+<strong>Posterior Formula:</strong> [ Likelihood × Prior ] ÷ Marginal Evidence P(E).<br/>
+<strong>Plain English Reading:</strong> "The updated probability of hypothesis H given evidence E equals the likelihood times prior belief, divided by total evidence across all states."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Posterior probability of hypothesis H given evidence E equals likelihood P(E|H) times prior P(H), all divided by total evidence P(E)."</strong>
+</div>
+</div></div>
+<div class="formula-card">
+<span class="formula-badge">Bayes' Theorem Multiplicative Odds Form</span>
+<div class="formula-text">Posterior Odds = Prior Odds × Likelihood Ratio where LR = P(E|H) ÷ P(E|¬H)</div>
+<div class="formula-explain">
+<strong>Odds Conversions:</strong> Odds = P ÷ (1 − P) ⇔ P = Odds ÷ (1 + Odds).<br/>
+<strong>Plain English Reading:</strong> "To update odds without complex denominators, multiply initial prior odds by the Likelihood Ratio (Bayes Factor) of the evidence."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Posterior Odds equals Prior Odds multiplied by the Likelihood Ratio (Bayes Factor)."</strong>
+</div>
+</div></div>
+</div>
+<!-- ==========================================
+                     PILLAR 3: COMPARATIVE ANALYSIS MATRICES
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    📊 Pillar 3: Comparative Analysis Matrices
+                </h3>
+<!-- Matrix 1: 3 Venn Diagram Cases -->
+<h4 style="margin:1rem 0 0.5rem 0; color:var(--text-color);">1. The 3 Canonical Venn Diagram Cases Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Case / Scenario</th>
+<th>Visual Structure</th>
+<th>Intersection A ∩ B</th>
+<th>Union A ∪ B</th>
+<th>Joint Probability P(A ∩ B)</th>
+<th>Example Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Case 1: Disjoint / Mutually Exclusive</strong></td>
+<td>Two completely separate circles with zero overlap.</td>
+<td><strong>A ∩ B = ∅</strong> (Empty Set)</td>
+<td>|A ∪ B| = |A| + |B|</td>
+<td><strong>P(A ∩ B) = 0</strong></td>
+<td>Rolling an Even number (2,4,6) vs Odd number (1,3,5) on a single die roll.</td>
+</tr>
+<tr>
+<td><strong>Case 2: Intersecting / Overlapping</strong></td>
+<td>Two overlapping circles sharing a common central lens.</td>
+<td><strong>A ∩ B ≠ ∅</strong></td>
+<td>|A ∪ B| = |A| + |B| − |A ∩ B|</td>
+<td><strong>P(A ∩ B) &gt; 0</strong></td>
+<td>Drawing an Ace (4 cards) vs drawing a Spade (13 cards); overlap is the Ace of Spades.</td>
+</tr>
+<tr>
+<td><strong>Case 3: Subset / Containment</strong></td>
+<td>Circle A is completely enclosed inside larger circle B (A ⊆ B).</td>
+<td><strong>A ∩ B = A</strong></td>
+<td>|A ∪ B| = |B|</td>
+<td><strong>P(A ∩ B) = P(A)</strong></td>
+<td>Drawing a King of Hearts (A) vs drawing any Heart (B); all Kings of Hearts are Hearts.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: Mutually Exclusive vs Complements vs Independent -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">2. Mutually Exclusive vs Complements vs Independent Events 3-Way Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Relationship</th>
+<th>Can They Occur Together?</th>
+<th>Must One of Them Occur?</th>
+<th>Joint Formula P(A ∩ B)</th>
+<th>Union Formula P(A ∪ B)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mutually Exclusive (Disjoint)</strong></td>
+<td><span style="color:#ef4444; font-weight:700;">NO</span></td>
+<td>Not necessarily (A and B can both fail to occur).</td>
+<td><strong>P(A ∩ B) = 0</strong></td>
+<td>P(A ∪ B) = P(A) + P(B)</td>
+</tr>
+<tr>
+<td><strong>Complementary Events (A &amp; Aᶜ)</strong></td>
+<td><span style="color:#ef4444; font-weight:700;">NO</span></td>
+<td><span style="color:#10b981; font-weight:700;">YES (Exhaustive: P(A) + P(Aᶜ) = 1.0)</span></td>
+<td><strong>P(A ∩ Aᶜ) = 0</strong></td>
+<td>P(A ∪ Aᶜ) = 1.0 (Certainty)</td>
+</tr>
+<tr>
+<td><strong>Independent Events</strong></td>
+<td><span style="color:#10b981; font-weight:700;">YES (freely co-occur)</span></td>
+<td>Not necessarily.</td>
+<td><strong>P(A ∩ B) = P(A) × P(B)</strong></td>
+<td>P(A ∪ B) = P(A) + P(B) − P(A)P(B)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: The 4 Ingredients of Bayes' Theorem -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">3. The 4 Ingredients of Bayes' Theorem Master Application Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Ingredient</th>
+<th>Notation</th>
+<th>Mathematical Role</th>
+<th>Medical Diagnostic Example</th>
+<th>Email Spam Filter Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Prior</strong></td>
+<td><strong>P(H)</strong></td>
+<td>Baseline probability before new evidence is observed.</td>
+<td>Disease prevalence in general population (e.g. 1% = 0.01).</td>
+<td>Overall fraction of incoming emails that are spam (e.g. 40% = 0.40).</td>
+</tr>
+<tr>
+<td><strong>2. Likelihood</strong></td>
+<td><strong>P(E|H)</strong></td>
+<td>Probability of observing evidence given hypothesis is TRUE.</td>
+<td>Test sensitivity: P(Positive | Diseased) = 95% (0.95).</td>
+<td>P("FREE" | Spam) = 30% of spam emails contain "FREE".</td>
+</tr>
+<tr>
+<td><strong>3. Marginal Evidence</strong></td>
+<td><strong>P(E)</strong></td>
+<td>Total probability of observing evidence across all states.</td>
+<td>P(Positive) = P(Pos|Dis)P(Dis) + P(Pos|Hlth)P(Hlth) = 0.059.</td>
+<td>P("FREE") = P("FREE"|Spam)P(Spam) + P("FREE"|Ham)P(Ham).</td>
+</tr>
+<tr>
+<td><strong>4. Posterior</strong></td>
+<td><strong>P(H|E)</strong></td>
+<td>Updated probability of hypothesis AFTER seeing evidence.</td>
+<td>P(Diseased | Positive Test) = 0.0095 ÷ 0.059 = <strong>16.10%</strong>.</td>
+<td>P(Spam | contains "FREE") = <strong>90.91%</strong>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 4: Probability vs Odds -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">4. Probability vs Odds Master Conversion Matrix</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Dimension</th>
+<th>Probability P</th>
+<th>Odds</th>
+<th>Conversion Formula</th>
+<th>Worked Calculation Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition</strong></td>
+<td>Favorable outcomes divided by TOTAL outcomes.</td>
+<td>Favorable outcomes divided by UNFAVORABLE outcomes.</td>
+<td><strong>Odds = P ÷ (1 − P)</strong></td>
+<td>If P = 0.80 → Odds = 0.80 ÷ 0.20 = <strong>4.0 (4 to 1)</strong></td>
+</tr>
+<tr>
+<td><strong>Mathematical Range</strong></td>
+<td>Bounded strictly between <strong>[0, 1]</strong> (0% to 100%).</td>
+<td>Open positive range <strong>[0, ∞)</strong>.</td>
+<td><strong>P = Odds ÷ (1 + Odds)</strong></td>
+<td>If Odds = 2.0 → P = 2.0 ÷ (1 + 2.0) = <strong>2/3 ≈ 0.6667 (66.7%)</strong></td>
+</tr>
+<tr>
+<td><strong>Multiplicative Updating</strong></td>
+<td>Requires recalculating denominator P(E) at each stage.</td>
+<td>Direct multiplication: <strong>Posterior Odds = Prior Odds × LR</strong>.</td>
+<td>LR = P(E|H) ÷ P(E|¬H)</td>
+<td>Prior Odds = 1:4 (0.25), LR = 8.0 → Posterior Odds = 0.25 × 8 = <strong>2.0 (66.7%)</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 5: Frequentist vs Bayesian Philosophy -->
+<h4 style="margin:1.25rem 0 0.5rem 0; color:var(--text-color);">5. Frequentist (Classical) vs Bayesian Inference Philosophy</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th>Dimension</th>
+<th>Frequentist / Classical Statistics</th>
+<th>Bayesian Inference</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definition of Probability</strong></td>
+<td>Long-run relative frequency of repeatable events across infinite trials.</td>
+<td>Subjective degree of belief or state of knowledge given available evidence.</td>
+</tr>
+<tr>
+<td><strong>Population Parameters (μ, θ)</strong></td>
+<td>Fixed, unknown true constants that do not have probability distributions.</td>
+<td>Random variables described by probability distributions (Priors &amp; Posteriors).</td>
+</tr>
+<tr>
+<td><strong>Handling of Prior Knowledge</strong></td>
+<td>Excluded; inferences rely strictly on current empirical sample data.</td>
+<td>Explicitly modeled via Prior distributions P(H) and updated via Bayes' rule.</td>
+</tr>
+<tr>
+<td><strong>Updating Mechanism</strong></td>
+<td>Requires re-running tests or hypothesis tests from scratch.</td>
+<td>Sequential updating: Today's posterior becomes tomorrow's prior.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ==========================================
+                     PILLAR 4: COMMON EXAM PITFALLS & FALLACIES
+                     ========================================== -->
+<h3 style="color:var(--primary-color); border-bottom:2px solid var(--primary-color); padding-bottom:0.4rem; margin-top:2rem;">
+                    ⚠️ Pillar 4: Common Exam Pitfalls &amp; Fallacies
+                </h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="example-card" style="border-left:4px solid #ef4444;">
+<span class="example-badge" style="background:#ef4444;">Pitfall 1: The Prosecutor's Fallacy (Transposed Conditional)</span>
+<p><strong>Exam Trap:</strong> Equating P(Evidence | Innocent) with P(Innocent | Evidence).<br/>
+<strong>Correct Reality:</strong> <strong>P(E|H) ≠ P(H|E)</strong>. A DNA match error rate of 1 in 1,000,000 does NOT mean there is only a 1 in 1,000,000 chance the defendant is innocent, because in a city of 10,000,000 people, 10 innocent people will match by chance.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #f59e0b;">
+<span class="example-badge" style="background:#f59e0b;">Pitfall 2: The Base Rate Fallacy (Base Rate Neglect)</span>
+<p><strong>Exam Trap:</strong> Assuming a 95% accurate medical test means a positive patient has a 95% chance of being sick.<br/>
+<strong>Correct Reality:</strong> When a disease is rare (e.g. 1% prevalence), <strong>false positives from the 99% healthy population swamp the true positives</strong>, resulting in a true posterior probability of only ~16.10%.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #10b981;">
+<span class="example-badge" style="background:#10b981;">Pitfall 3: Forgetting the False Positive Partition in P(E)</span>
+<p><strong>Exam Trap:</strong> Calculating marginal evidence P(E) as simply P(E|H) × P(H).<br/>
+<strong>Correct Reality:</strong> Marginal evidence P(E) MUST sum across ALL partitions: P(E) = P(E|H)P(H) + <strong>P(E|¬H)P(¬H)</strong>. Omitting the false-positive branch yields an invalid posterior &gt; 100%.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #6366f1;">
+<span class="example-badge" style="background:#6366f1;">Pitfall 4: Posterior Non-Finality Fallacy</span>
+<p><strong>Exam Trap:</strong> Treating the posterior probability as an immutable final answer.<br/>
+<strong>Correct Reality:</strong> In Bayesian inference, <strong>the posterior is never final</strong>. It serves as the baseline prior for the next piece of incoming evidence in continuous sequential updating.</p>
+</div>
+<div class="example-card" style="border-left:4px solid #8b5cf6;">
+<span class="example-badge" style="background:#8b5cf6;">Pitfall 5: Independent vs Mutually Exclusive Distinction</span>
+<p><strong>Exam Trap:</strong> Claiming two non-empty events that cannot occur together are independent.<br/>
+<strong>Correct Reality:</strong> Mutually exclusive events are <strong>maximally dependent</strong>: knowing event A occurred gives 100% certainty that event B DID NOT occur (P(B|A) = 0 ≠ P(B)).</p>
+</div>
+</div>
+</div>
+<!-- ==========================================
                  Interactive Academic Calculators Section
                  ========================================== -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Interactive Academic Calculators (Live Bayesian & Set Theory Engines)</h2>
-                
-                <!-- Calculator 1: Bayes Theorem Engine -->
-                <div class="calc-card">
-                    <div class="calc-title">🧮 Part III (12–15): Bayes' Theorem, The Four Ingredients & Medical Diagnostic Test Worked Example</div>
-                    <div class="calc-desc">Calculate the true posterior probability P(H|E) of a condition given its baseline prior prevalence and diagnostic test accuracy (Sensitivity and False Positive rate).</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="bayes-prior">Prior Probability P(H) [Base Rate]:</label>
-                            <input type="number" id="bayes-prior" class="calc-input" value="0.01" step="0.005" min="0.0001" max="1" oninput="calculateBayes()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bayes-sens">True Positive Rate P(E|H) [Sensitivity]:</label>
-                            <input type="number" id="bayes-sens" class="calc-input" value="0.95" step="0.01" min="0" max="1" oninput="calculateBayes()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="bayes-fp">False Positive Rate P(E|¬H):</label>
-                            <input type="number" id="bayes-fp" class="calc-input" value="0.05" step="0.01" min="0" max="1" oninput="calculateBayes()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Posterior Probability P(H|E):</span>
-                            <span class="calc-result-val" id="bayes-result-val">P(H|E) = 16.10%</span>
-                        </div>
-                        <div class="calc-math-steps" id="bayes-math-steps">
-                            <strong>Step-by-Step Bayesian Derivation:</strong><br>
-                            <div class="step-line">• <strong>The 4 Ingredients:</strong> Prior P(H) = 0.0100 | Sensitivity P(E|H) = 0.9500 | False Positive P(E|¬H) = 0.0500 | Complement Prior P(¬H) = 0.9900</div>
-                            <div class="step-line">• <strong>Marginal Evidence P(E):</strong> [P(E|H) × P(H)] + [P(E|¬H) × P(¬H)] = (0.95 × 0.01) + (0.05 × 0.99) = 0.0095 + 0.0495 = <strong>0.0590</strong></div>
-                            <div class="step-line">• <strong>Posterior Probability P(H|E):</strong> [P(E|H) × P(H)] ÷ P(E) = 0.0095 ÷ 0.0590 = <strong>0.1610 (16.10%)</strong></div>
-                            <div class="step-line">• <strong>Base Rate Fallacy Warning:</strong> Even with a 95% accurate test, an individual testing positive has only a <strong>16.10% true probability</strong> of possessing the rare condition because false positives swamp true positives in low-prevalence populations.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 2: Sequential Bayesian Updating Engine -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part III (16–17): Sequential Updating & Spam Filter ("Today's Posterior Becomes Tomorrow's Prior")</div>
-                    <div class="calc-desc">Observe the sequential updating rule in action: 'Today's posterior becomes tomorrow's prior' as multiple independent diagnostic signals or keywords arrive.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="seq-prior">Initial Prior P(Spam):</label>
-                            <input type="number" id="seq-prior" class="calc-input" value="0.40" step="0.05" min="0.01" max="0.99" oninput="calculateSequentialBayes()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="seq-w1-spam">Word 1 'FREE' in Spam P(W₁|S):</label>
-                            <input type="number" id="seq-w1-spam" class="calc-input" value="0.30" step="0.05" min="0" max="1" oninput="calculateSequentialBayes()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="seq-w1-ham">Word 1 'FREE' in Ham P(W₁|H):</label>
-                            <input type="number" id="seq-w1-ham" class="calc-input" value="0.02" step="0.01" min="0" max="1" oninput="calculateSequentialBayes()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="seq-w2-spam">Word 2 'WINNER' in Spam P(W₂|S):</label>
-                            <input type="number" id="seq-w2-spam" class="calc-input" value="0.45" step="0.05" min="0" max="1" oninput="calculateSequentialBayes()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="seq-w2-ham">Word 2 'WINNER' in Ham P(W₂|H):</label>
-                            <input type="number" id="seq-w2-ham" class="calc-input" value="0.01" step="0.005" min="0" max="1" oninput="calculateSequentialBayes()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Sequential Updating Progression:</span>
-                            <span class="calc-result-val" id="seq-result-val">Final Posterior: 99.78% Spam</span>
-                        </div>
-                        <div class="calc-math-steps" id="seq-math-steps">
-                            <strong>Multi-Stage Evidence Progression:</strong><br>
-                            <div class="step-line">• <strong>Stage 1 (Observing 'FREE'):</strong> Prior = 40.00% &rarr; Evidence P(W₁) = (0.30×0.40) + (0.02×0.60) = 0.1320 &rarr; <strong>Stage 1 Posterior = 90.91%</strong></div>
-                            <div class="step-line">• <strong>Stage 2 (Observing 'WINNER'):</strong> Stage 1 Posterior becomes Stage 2 Prior (90.91%) &rarr; Evidence P(W₂) = (0.45×0.9091) + (0.01×0.0909) = 0.4100 &rarr; <strong>Final Posterior = 99.78%</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: Odds Form & Likelihood Ratio -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part III (18): The Odds Form & Likelihood Ratio (LR) Calculator</div>
-                    <div class="calc-desc">Calculate how diagnostic evidence shifts belief using the multiplicative Odds Rule: Posterior Odds = Prior Odds × Likelihood Ratio (LR).</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="odds-prior">Prior Probability P(H):</label>
-                            <input type="number" id="odds-prior" class="calc-input" value="0.20" step="0.05" min="0.01" max="0.99" oninput="calculateOddsForm()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="odds-lr">Likelihood Ratio (LR = P(E|H) ÷ P(E|¬H)):</label>
-                            <input type="number" id="odds-lr" class="calc-input" value="8.0" step="0.5" min="0.1" oninput="calculateOddsForm()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Posterior Odds & Probability:</span>
-                            <span class="calc-result-val" id="odds-result-val">Posterior Odds = 2.000 (66.67%)</span>
-                        </div>
-                        <div class="calc-math-steps" id="odds-math-steps">
-                            <strong>Odds Formulation Steps:</strong><br>
-                            <div class="step-line">• <strong>Prior Odds:</strong> P(H) ÷ [1 - P(H)] = 0.20 ÷ 0.80 = <strong>0.250 (1 to 4)</strong></div>
-                            <div class="step-line">• <strong>Posterior Odds:</strong> Prior Odds × LR = 0.250 × 8.00 = <strong>2.000 (2 to 1)</strong></div>
-                            <div class="step-line">• <strong>Converted Posterior Probability:</strong> Odds ÷ (1 + Odds) = 2.000 ÷ (1 + 2.000) = 2.000 ÷ 3.000 = <strong>0.6667 (66.67%)</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 4: Set Cardinality & Venn Diagram -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part I & II (4–10): Set Cardinality (|A ∪ B|), Unions, Intersections & Conditional Probability P(A|B)</div>
-                    <div class="calc-desc">Input element counts for sample space S, set A, set B, and intersection A ∩ B to compute unions, exclusive differences, and conditional probabilities.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="set-s">Universal Set |S|:</label>
-                            <input type="number" id="set-s" class="calc-input" value="100" min="1" step="5" oninput="calculateSetOperations()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="set-a">Set A Size |A|:</label>
-                            <input type="number" id="set-a" class="calc-input" value="40" min="0" step="5" oninput="calculateSetOperations()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="set-b">Set B Size |B|:</label>
-                            <input type="number" id="set-b" class="calc-input" value="30" min="0" step="5" oninput="calculateSetOperations()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="set-ab">Intersection |A ∩ B|:</label>
-                            <input type="number" id="set-ab" class="calc-input" value="12" min="0" step="1" oninput="calculateSetOperations()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Union & Conditional Probabilities:</span>
-                            <span class="calc-result-val" id="set-result-val">|A ∪ B| = 58 | P(A|B) = 40.00%</span>
-                        </div>
-                        <div class="calc-math-steps" id="set-math-steps">
-                            <strong>Set Theory & Probability Breakdown:</strong><br>
-                            <div class="step-line">• <strong>Union Cardinality |A ∪ B|:</strong> |A| + |B| - |A ∩ B| = 40 + 30 - 12 = <strong>58 elements</strong> (P(A ∪ B) = 0.5800)</div>
-                            <div class="step-line">• <strong>Exclusive Subsets:</strong> Only in A (|A \ B|) = 40 - 12 = <strong>28</strong> | Only in B (|B \ A|) = 30 - 12 = <strong>18</strong></div>
-                            <div class="step-line">• <strong>Universal Complement |(A ∪ B)'|:</strong> |S| - |A ∪ B| = 100 - 58 = <strong>42 elements outside both sets</strong></div>
-                            <div class="step-line">• <strong>Conditional Probabilities:</strong> P(A|B) = |A ∩ B| ÷ |B| = 12 ÷ 30 = <strong>0.4000 (40.00%)</strong> | P(B|A) = 12 ÷ 40 = <strong>0.3000 (30.00%)</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>// ==========================================
+<div class="card" style="margin-top:1.5rem;">
+<h2>Interactive Academic Calculators (Live Bayesian &amp; Set Theory Engines)</h2>
+<!-- Calculator 1: Bayes Theorem Engine -->
+<div class="calc-card">
+<div class="calc-title">🧮 Part III (12–15): Bayes' Theorem, The Four Ingredients &amp; Medical Diagnostic Test Worked Example</div>
+<div class="calc-desc">Calculate the true posterior probability P(H|E) of a condition given its baseline prior prevalence and diagnostic test accuracy (Sensitivity and False Positive rate).</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="bayes-prior">Prior Probability P(H) [Base Rate]:</label>
+<input class="calc-input" id="bayes-prior" max="1" min="0.0001" oninput="calculateBayes()" step="0.005" type="number" value="0.01"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bayes-sens">True Positive Rate P(E|H) [Sensitivity]:</label>
+<input class="calc-input" id="bayes-sens" max="1" min="0" oninput="calculateBayes()" step="0.01" type="number" value="0.95"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="bayes-fp">False Positive Rate P(E|¬H):</label>
+<input class="calc-input" id="bayes-fp" max="1" min="0" oninput="calculateBayes()" step="0.01" type="number" value="0.05"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Posterior Probability P(H|E):</span>
+<span class="calc-result-val" id="bayes-result-val">P(H|E) = 16.10%</span>
+</div>
+<div class="calc-math-steps" id="bayes-math-steps">
+<strong>Step-by-Step Bayesian Derivation:</strong><br/>
+<div class="step-line">• <strong>The 4 Ingredients:</strong> Prior P(H) = 0.0100 | Sensitivity P(E|H) = 0.9500 | False Positive P(E|¬H) = 0.0500 | Complement Prior P(¬H) = 0.9900</div>
+<div class="step-line">• <strong>Marginal Evidence P(E):</strong> [P(E|H) × P(H)] + [P(E|¬H) × P(¬H)] = (0.95 × 0.01) + (0.05 × 0.99) = 0.0095 + 0.0495 = <strong>0.0590</strong></div>
+<div class="step-line">• <strong>Posterior Probability P(H|E):</strong> [P(E|H) × P(H)] ÷ P(E) = 0.0095 ÷ 0.0590 = <strong>0.1610 (16.10%)</strong></div>
+<div class="step-line">• <strong>Base Rate Fallacy Warning:</strong> Even with a 95% accurate test, an individual testing positive has only a <strong>16.10% true probability</strong> of possessing the rare condition because false positives swamp true positives in low-prevalence populations.</div>
+</div>
+</div>
+</div>
+<!-- Calculator 2: Sequential Bayesian Updating Engine -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part III (16–17): Sequential Updating &amp; Spam Filter ("Today's Posterior Becomes Tomorrow's Prior")</div>
+<div class="calc-desc">Observe the sequential updating rule in action: 'Today's posterior becomes tomorrow's prior' as multiple independent diagnostic signals or keywords arrive.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="seq-prior">Initial Prior P(Spam):</label>
+<input class="calc-input" id="seq-prior" max="0.99" min="0.01" oninput="calculateSequentialBayes()" step="0.05" type="number" value="0.40"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="seq-w1-spam">Word 1 'FREE' in Spam P(W₁|S):</label>
+<input class="calc-input" id="seq-w1-spam" max="1" min="0" oninput="calculateSequentialBayes()" step="0.05" type="number" value="0.30"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="seq-w1-ham">Word 1 'FREE' in Ham P(W₁|H):</label>
+<input class="calc-input" id="seq-w1-ham" max="1" min="0" oninput="calculateSequentialBayes()" step="0.01" type="number" value="0.02"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="seq-w2-spam">Word 2 'WINNER' in Spam P(W₂|S):</label>
+<input class="calc-input" id="seq-w2-spam" max="1" min="0" oninput="calculateSequentialBayes()" step="0.05" type="number" value="0.45"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="seq-w2-ham">Word 2 'WINNER' in Ham P(W₂|H):</label>
+<input class="calc-input" id="seq-w2-ham" max="1" min="0" oninput="calculateSequentialBayes()" step="0.005" type="number" value="0.01"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Sequential Updating Progression:</span>
+<span class="calc-result-val" id="seq-result-val">Final Posterior: 99.78% Spam</span>
+</div>
+<div class="calc-math-steps" id="seq-math-steps">
+<strong>Multi-Stage Evidence Progression:</strong><br/>
+<div class="step-line">• <strong>Stage 1 (Observing 'FREE'):</strong> Prior = 40.00% → Evidence P(W₁) = (0.30×0.40) + (0.02×0.60) = 0.1320 → <strong>Stage 1 Posterior = 90.91%</strong></div>
+<div class="step-line">• <strong>Stage 2 (Observing 'WINNER'):</strong> Stage 1 Posterior becomes Stage 2 Prior (90.91%) → Evidence P(W₂) = (0.45×0.9091) + (0.01×0.0909) = 0.4100 → <strong>Final Posterior = 99.78%</strong></div>
+</div>
+</div>
+</div>
+<!-- Calculator 3: Odds Form & Likelihood Ratio -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part III (18): The Odds Form &amp; Likelihood Ratio (LR) Calculator</div>
+<div class="calc-desc">Calculate how diagnostic evidence shifts belief using the multiplicative Odds Rule: Posterior Odds = Prior Odds × Likelihood Ratio (LR).</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="odds-prior">Prior Probability P(H):</label>
+<input class="calc-input" id="odds-prior" max="0.99" min="0.01" oninput="calculateOddsForm()" step="0.05" type="number" value="0.20"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="odds-lr">Likelihood Ratio (LR = P(E|H) ÷ P(E|¬H)):</label>
+<input class="calc-input" id="odds-lr" min="0.1" oninput="calculateOddsForm()" step="0.5" type="number" value="8.0"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Posterior Odds &amp; Probability:</span>
+<span class="calc-result-val" id="odds-result-val">Posterior Odds = 2.000 (66.67%)</span>
+</div>
+<div class="calc-math-steps" id="odds-math-steps">
+<strong>Odds Formulation Steps:</strong><br/>
+<div class="step-line">• <strong>Prior Odds:</strong> P(H) ÷ [1 - P(H)] = 0.20 ÷ 0.80 = <strong>0.250 (1 to 4)</strong></div>
+<div class="step-line">• <strong>Posterior Odds:</strong> Prior Odds × LR = 0.250 × 8.00 = <strong>2.000 (2 to 1)</strong></div>
+<div class="step-line">• <strong>Converted Posterior Probability:</strong> Odds ÷ (1 + Odds) = 2.000 ÷ (1 + 2.000) = 2.000 ÷ 3.000 = <strong>0.6667 (66.67%)</strong></div>
+</div>
+</div>
+</div>
+<!-- Calculator 4: Set Cardinality & Venn Diagram -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part I &amp; II (4–10): Set Cardinality (|A ∪ B|), Unions, Intersections &amp; Conditional Probability P(A|B)</div>
+<div class="calc-desc">Input element counts for sample space S, set A, set B, and intersection A ∩ B to compute unions, exclusive differences, and conditional probabilities.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="set-s">Universal Set |S|:</label>
+<input class="calc-input" id="set-s" min="1" oninput="calculateSetOperations()" step="5" type="number" value="100"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="set-a">Set A Size |A|:</label>
+<input class="calc-input" id="set-a" min="0" oninput="calculateSetOperations()" step="5" type="number" value="40"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="set-b">Set B Size |B|:</label>
+<input class="calc-input" id="set-b" min="0" oninput="calculateSetOperations()" step="5" type="number" value="30"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="set-ab">Intersection |A ∩ B|:</label>
+<input class="calc-input" id="set-ab" min="0" oninput="calculateSetOperations()" step="1" type="number" value="12"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Union &amp; Conditional Probabilities:</span>
+<span class="calc-result-val" id="set-result-val">|A ∪ B| = 58 | P(A|B) = 40.00%</span>
+</div>
+<div class="calc-math-steps" id="set-math-steps">
+<strong>Set Theory &amp; Probability Breakdown:</strong><br/>
+<div class="step-line">• <strong>Union Cardinality |A ∪ B|:</strong> |A| + |B| - |A ∩ B| = 40 + 30 - 12 = <strong>58 elements</strong> (P(A ∪ B) = 0.5800)</div>
+<div class="step-line">• <strong>Exclusive Subsets:</strong> Only in A (|A \ B|) = 40 - 12 = <strong>28</strong> | Only in B (|B \ A|) = 30 - 12 = <strong>18</strong></div>
+<div class="step-line">• <strong>Universal Complement |(A ∪ B)'|:</strong> |S| - |A ∪ B| = 100 - 58 = <strong>42 elements outside both sets</strong></div>
+<div class="step-line">• <strong>Conditional Probabilities:</strong> P(A|B) = |A ∩ B| ÷ |B| = 12 ÷ 30 = <strong>0.4000 (40.00%)</strong> | P(B|A) = 12 ÷ 40 = <strong>0.3000 (30.00%)</strong></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>// ==========================================
         function calculateBayes() {
             const prior = parseFloat(document.getElementById('bayes-prior').value) || 0;
             const sens = parseFloat(document.getElementById('bayes-sens').value) || 0;
@@ -1802,6 +1906,5 @@
 
         const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

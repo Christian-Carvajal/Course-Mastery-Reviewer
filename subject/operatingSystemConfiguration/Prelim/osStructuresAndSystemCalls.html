@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,418 +18,731 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>OS Structures and System Calls | Complete Reviewer & Quiz</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>OS Structures and System Calls | Complete Reviewer &amp; Quiz</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Operating System Configuration</h1>
-        <p>OS Structures & System Calls — Monolithic vs Microkernel, Dual-Mode Execution & 91-Question Mastery Quiz</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">OS Structures & System Calls</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-            <div class="card">
-                <h2 id="sec-1-outcomes">1. Learning Outcomes</h2>
-                <h3>Attitude</h3>
-                <ul>
-                    <li>Appreciate the importance of structured and modular operating system design in developing reliable and efficient software.</li>
-                </ul>
-
-                <h3>Knowledge</h3>
-                <ul>
-                    <li>Explain the architecture of monolithic and microkernel operating systems.</li>
-                    <li>Describe the concept of a system call.</li>
-                    <li>Explain the transition between User Mode and Kernel Mode.</li>
-                </ul>
-
-                <h3>Skills</h3>
-                <ul>
-                    <li>Draw and compare monolithic and microkernel operating system architectures.</li>
-                    <li>Trace the execution flow of a system call such as open().</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2 id="sec-2-what-is-os-structure">2. What is an OS Structure?</h2>
-                <div class="definition-card">
-                    <span class="def-badge">Definition</span>
-                    <p>An <strong>OS Structure</strong> refers to the way an operating system is organized into different components or layers and how these components interact to manage computer hardware and software resources.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 id="sec-3-main-structures">3. The 5 Main OS Structures (Simple, Layered, Microkernel, Modular, Hybrid)</h2>
-                <ol>
-                    <li>
-                        <strong>Simple Structure</strong>
+<header class="app-header">
+<h1>Operating System Configuration</h1>
+<p>OS Structures &amp; System Calls — Monolithic vs Microkernel, Dual-Mode Execution &amp; 91-Question Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">OS Structures &amp; System Calls</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2 id="sec-1-outcomes">1. Learning Outcomes</h2>
+<h3>Attitude</h3>
+<ul>
+<li>Appreciate the importance of structured and modular operating system design in developing reliable and efficient software.</li>
+</ul>
+<h3>Knowledge</h3>
+<ul>
+<li>Explain the architecture of monolithic and microkernel operating systems.</li>
+<li>Describe the concept of a system call.</li>
+<li>Explain the transition between User Mode and Kernel Mode.</li>
+</ul>
+<h3>Skills</h3>
+<ul>
+<li>Draw and compare monolithic and microkernel operating system architectures.</li>
+<li>Trace the execution flow of a system call such as open().</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-2-what-is-os-structure">2. What is an OS Structure?</h2>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p>An <strong>OS Structure</strong> refers to the way an operating system is organized into different components or layers and how these components interact to manage computer hardware and software resources.</p>
+</div>
+</div>
+<div class="card">
+<h2 id="sec-3-main-structures">3. The 5 Main OS Structures (Simple, Layered, Microkernel, Modular, Hybrid)</h2>
+<ol>
+<li>
+<strong>Simple Structure</strong>
+<ul>
+<li>The operating system is written as a single large program.</li>
+<li>All components can communicate directly.</li>
+<li>Easy to design but difficult to maintain.</li>
+<li><strong>Example:</strong> MS-DOS.</li>
+</ul>
+</li>
+<li>
+<strong>Layered Structure</strong>
+<ul>
+<li>The OS is divided into layers.</li>
+<li>Each layer performs specific functions and communicates only with the adjacent layers.</li>
+<li>Each layer only communicates with the layer directly above or below it.</li>
+<li>This layered design makes the operating system easier to develop, debug, maintain, and secure because each layer has a specific responsibility.</li>
+<li><strong>Example:</strong> THE Operating System.</li>
+</ul>
+</li>
+<li>
+<strong>Microkernel Structure</strong>
+<ul>
+<li>Only essential services (such as process management and memory management) run in the kernel.</li>
+<li>Other services (file system, device drivers) run in user space.</li>
+<li>More secure and reliable but may have slightly lower performance.</li>
+<li><strong>Example:</strong> Minix, QNX.</li>
+</ul>
+</li>
+<li>
+<strong>Modular Structure</strong>
+<ul>
+<li>The OS consists of separate modules that can be loaded or unloaded as needed.</li>
+<li>Provides flexibility and better performance.</li>
+<li><strong>Example:</strong> Linux.</li>
+</ul>
+</li>
+<li>
+<strong>Hybrid Structure</strong>
+<ul>
+<li>Combines features of monolithic and microkernel designs.</li>
+<li>Balances performance and modularity.</li>
+<li><strong>Example:</strong> Windows, macOS.</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="card">
+<h2 id="sec-4-components-layers">4. Operating System Components &amp; Layers</h2>
+<h3>Operating System Structure Layers (Diagram Order)</h3>
+<ul>
+<li><strong>Applications</strong></li>
+<li><strong>System Libraries</strong></li>
+<li><strong>System Call Interface</strong></li>
+<li><strong>Hardware</strong></li>
+</ul>
+<h3>Component Definitions</h3>
+<ul>
+<li>
+<strong>User Applications:</strong> Programs used by end users, such as web browsers, Microsoft Office, media players, and games.
+                    </li>
+<li>
+<strong>System Programs:</strong> Utilities and software that help users interact with the operating system, such as command-line shells, compilers, and file managers.
+                    </li>
+<li>
+<strong>System Call Interface:</strong> Acts as the communication bridge between user programs and the operating system kernel.
+                        <br/><em>Example system calls:</em> <code>open()</code>, <code>read()</code>, <code>write()</code>, <code>fork()</code>, and <code>exit()</code>.
+                    </li>
+<li>
+<strong>Operating System Kernel:</strong> The core of the operating system. Responsible for:
                         <ul>
-                            <li>The operating system is written as a single large program.</li>
-                            <li>All components can communicate directly.</li>
-                            <li>Easy to design but difficult to maintain.</li>
-                            <li><strong>Example:</strong> MS-DOS.</li>
-                        </ul>
+<li>Process Management</li>
+<li>Memory Management</li>
+<li>File Management</li>
+<li>Device Management</li>
+<li>Security and Protection</li>
+</ul>
+</li>
+<li>
+<strong>Hardware:</strong> The physical components of the computer, including the CPU, memory (RAM), storage devices, keyboard, mouse, monitor, printers, and network devices.
                     </li>
-                    <li>
-                        <strong>Layered Structure</strong>
-                        <ul>
-                            <li>The OS is divided into layers.</li>
-                            <li>Each layer performs specific functions and communicates only with the adjacent layers.</li>
-                            <li>Each layer only communicates with the layer directly above or below it.</li>
-                            <li>This layered design makes the operating system easier to develop, debug, maintain, and secure because each layer has a specific responsibility.</li>
-                            <li><strong>Example:</strong> THE Operating System.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Microkernel Structure</strong>
-                        <ul>
-                            <li>Only essential services (such as process management and memory management) run in the kernel.</li>
-                            <li>Other services (file system, device drivers) run in user space.</li>
-                            <li>More secure and reliable but may have slightly lower performance.</li>
-                            <li><strong>Example:</strong> Minix, QNX.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Modular Structure</strong>
-                        <ul>
-                            <li>The OS consists of separate modules that can be loaded or unloaded as needed.</li>
-                            <li>Provides flexibility and better performance.</li>
-                            <li><strong>Example:</strong> Linux.</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Hybrid Structure</strong>
-                        <ul>
-                            <li>Combines features of monolithic and microkernel designs.</li>
-                            <li>Balances performance and modularity.</li>
-                            <li><strong>Example:</strong> Windows, macOS.</li>
-                        </ul>
-                    </li>
-                </ol>
-            </div>
-
-            <div class="card">
-                <h2 id="sec-4-components-layers">4. Operating System Components & Layers</h2>
-                
-                <h3>Operating System Structure Layers (Diagram Order)</h3>
-                <ul>
-                    <li><strong>Applications</strong></li>
-                    <li><strong>System Libraries</strong></li>
-                    <li><strong>System Call Interface</strong></li>
-                    <li><strong>Hardware</strong></li>
-                </ul>
-
-                <h3>Component Definitions</h3>
-                <ul>
-                    <li>
-                        <strong>User Applications:</strong> Programs used by end users, such as web browsers, Microsoft Office, media players, and games.
-                    </li>
-                    <li>
-                        <strong>System Programs:</strong> Utilities and software that help users interact with the operating system, such as command-line shells, compilers, and file managers.
-                    </li>
-                    <li>
-                        <strong>System Call Interface:</strong> Acts as the communication bridge between user programs and the operating system kernel.
-                        <br><em>Example system calls:</em> <code>open()</code>, <code>read()</code>, <code>write()</code>, <code>fork()</code>, and <code>exit()</code>.
-                    </li>
-                    <li>
-                        <strong>Operating System Kernel:</strong> The core of the operating system. Responsible for:
-                        <ul>
-                            <li>Process Management</li>
-                            <li>Memory Management</li>
-                            <li>File Management</li>
-                            <li>Device Management</li>
-                            <li>Security and Protection</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Hardware:</strong> The physical components of the computer, including the CPU, memory (RAM), storage devices, keyboard, mouse, monitor, printers, and network devices.
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2 id="sec-5-major-structures">5. Major Operating System Structures: Monolithic Kernel In-Depth</h2>
-                <p>The two major operating system structures highlighted are:</p>
-                <ol>
-                    <li><strong>Monolithic Architecture</strong></li>
-                    <li><strong>Microkernel Architecture</strong></li>
-                </ol>
-
-                <h3>Monolithic Architecture</h3>
-                <p>A Monolithic Architecture is an operating system design where all OS services run together in a single large kernel operating in kernel mode. All components can directly communicate with each other because they share the same memory space.</p>
-                <p>A Monolithic Architecture is an OS structure where all operating system services execute within one large kernel and directly interact with each other to manage system resources efficiently.</p>
-
-                <h3>How It Works</h3>
-                <ol>
-                    <li>User applications request services through system calls.</li>
-                    <li>The request enters the kernel.</li>
-                    <li>Kernel components communicate directly with each other.</li>
-                    <li>The kernel accesses the hardware and returns the result to the application.</li>
-                </ol>
-
-                <h3>Monolithic Characteristics</h3>
-                <ul>
-                    <li>Single large kernel</li>
-                    <li>All services run in kernel space</li>
-                    <li>Components communicate directly</li>
-                    <li>High performance due to fewer communication overheads</li>
-                    <li>Easier access to hardware resources</li>
-                </ul>
-
-                <h3>Advantages</h3>
-                <ul>
-                    <li>Fast execution and high performance</li>
-                    <li>Efficient communication between components</li>
-                    <li>Simple design for smaller systems</li>
-                </ul>
-
-                <h3>Disadvantages</h3>
-                <ul>
-                    <li>Large and complex kernel</li>
-                    <li>Difficult to maintain and debug</li>
-                    <li>An error in one component can crash the entire system</li>
-                    <li>Lower security because all services run with full privileges</li>
-                </ul>
-
-                <h3>Examples of Monolithic Operating Systems</h3>
-                <ul>
-                    <li><strong>Linux</strong> (traditional monolithic kernel with modular support)</li>
-                    <li><strong>UNIX</strong></li>
-                    <li><strong>MS-DOS</strong></li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2 id="sec-6-monolithic-vs-microkernel">6. Monolithic Kernel vs. Microkernel Comparison Matrix</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Monolithic Kernel</th>
-                            <th>Microkernel</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Size</strong></td>
-                            <td>Large</td>
-                            <td>Small</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Performance</strong></td>
-                            <td>Faster</td>
-                            <td>Slightly slower</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Security</strong></td>
-                            <td>Lower</td>
-                            <td>Higher</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Reliability</strong></td>
-                            <td>Lower</td>
-                            <td>Higher</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Services</strong></td>
-                            <td>Inside kernel</td>
-                            <td>Mostly outside kernel</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / 91</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Quiz questions dynamically rendered here -->
-            </div>
-        </div>
-
-
-        <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
-        <div id="formulas" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem; gap:0.5rem;">
-                    <h2 style="margin:0;">Quick Reference: OS Structures, System Calls & Kernel Architectures</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-
-                <!-- 1. Monolithic vs Microkernel Master Comparison -->
-                <h3 style="color:var(--primary-color); margin-top:1rem;">1. Monolithic Kernel vs. Microkernel Comparison Matrix</h3>
-                <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Architectural Factor</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Monolithic Kernel</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Microkernel</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Kernel Footprint / Size</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Large (Megabytes)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Minimal / Small (Kilobytes)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Execution Performance</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Fast (Direct memory function calls)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#d97706; font-weight:700;">Slightly Slower (IPC message passing overhead)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Security & Privilege Isolation</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Lower (All drivers run in privileged Ring 0)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Higher (Non-essential services run in User Space)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Reliability & Fault Tolerance</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Lower (A driver crash crashes the entire OS)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Higher (Service crashes in user space are isolated and restartable)</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Service Locations</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">All services (FS, VMM, Drivers, Scheduler) in Kernel Space.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Only Core IPC, Scheduling, Low-level Memory in Kernel; FS & Drivers in User Space.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Canonical Examples</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:600;">Linux, Traditional UNIX, MS-DOS</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:600;">MINIX, QNX (Automotive/Medical), L4, Mach</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- 2. Dual-Mode Operation & System Call Categories -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>2. Dual-Mode CPU Operation & System Call Lifecycle</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
-                    
-                    <div class="formula-card" style="border-left:4px solid #0284c7;">
-                        <span class="formula-badge" style="background:#0284c7;">User Mode (Ring 3)</span>
-                        <div class="formula-text" style="font-size:1.05rem; color:#0284c7;">Mode Bit = 1</div>
-                        <p style="font-size:0.85rem; margin:0.4rem 0;">• Runs user applications (Word, Chrome, games).<br>
-                        • Cannot directly access physical hardware or privileged CPU instructions.<br>
-                        • Must issue a <strong>System Call</strong> (software trap) to request OS services.</p>
-                    </div>
-
-                    <div class="formula-card" style="border-left:4px solid #16a34a;">
-                        <span class="formula-badge" style="background:#16a34a;">Kernel Mode (Ring 0)</span>
-                        <div class="formula-text" style="font-size:1.05rem; color:#16a34a;">Mode Bit = 0</div>
-                        <p style="font-size:0.85rem; margin:0.4rem 0;">• Runs the core OS kernel and device drivers.<br>
-                        • Has unrestricted access to all CPU instructions, memory registers, and hardware peripherals.<br>
-                        • Switches Mode Bit back to 1 before returning control to user app.</p>
-                    </div>
-
-                    <div class="formula-card" style="border-left:4px solid #f59e0b;">
-                        <span class="formula-badge" style="background:#f59e0b;">Core POSIX System Calls</span>
-                        <div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">API Primitives</div>
-                        <p style="font-size:0.85rem; margin:0.4rem 0;">
-                        • <code>fork()</code>: Creates a child process clone.<br>
-                        • <code>open() / read() / write()</code>: File descriptor I/O operations.<br>
-                        • <code>exit()</code>: Terminates calling process and returns status.</p>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- 3. Interactive Academic Tool: System Call Execution Flow Simulator -->
-            <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid var(--primary-color);">
-                <div class="calc-title">⚡ Live System Call & Dual-Mode Execution Flow Simulator</div>
-                <div class="calc-desc">Trace the exact 5-step hardware and kernel execution path when a user application executes a privileged system call (e.g. opening a file or spawning a child process).</div>
-                
-                <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-                    <div class="calc-field" style="grid-column: 1 / -1;">
-                        <label class="calc-label" for="sim-syscall-select">Select System Call to Trace:</label>
-                        <select id="sim-syscall-select" class="calc-input" onchange="simulateSyscallFlow()" style="font-weight:600;">
-                            <option value="open" selected>open("notes.txt", O_RDONLY) — File Descriptor Allocation</option>
-                            <option value="read">read(fd, buffer, 1024) — Secondary Storage Disk Read</option>
-                            <option value="write">write(fd, "Data", 4) — Buffer Flush to Device Controller</option>
-                            <option value="fork">fork() — Process Control Block Duplication</option>
-                            <option value="exit">exit(0) — Process Termination & Memory Deallocation</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="calc-result-box" style="margin-top:1.25rem;">
-                    <div class="calc-result-header">
-                        <span style="font-weight:700; font-size:0.95rem;">System Call Execution Flow:</span>
-                        <span class="calc-result-val" id="sim-syscall-val" style="color:var(--primary-color);">open() &rarr; Mode Bit 1 to 0 &rarr; Kernel Routine</span>
-                    </div>
-                    <div class="calc-math-steps" id="sim-syscall-steps">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- 4. Interactive OS Architecture Property Evaluator -->
-            <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid #8b5cf6;">
-                <div class="calc-title">🏛️ OS Structural Architecture Property & Trade-Off Evaluator</div>
-                <div class="calc-desc">Select any of the 5 canonical structural models to evaluate how its organization impacts performance, security, isolation, and real-world system complexity.</div>
-                
-                <div class="calc-grid" style="grid-template-columns: 1fr;">
-                    <div class="calc-field">
-                        <label class="calc-label" for="sim-arch-select">Select Structural Model:</label>
-                        <select id="sim-arch-select" class="calc-input" onchange="evaluateArchitecture()" style="font-weight:600;">
-                            <option value="monolithic" selected>1. Monolithic Architecture (Linux, Traditional Unix)</option>
-                            <option value="microkernel">2. Microkernel Architecture (MINIX, QNX, L4)</option>
-                            <option value="layered">3. Layered Structure Architecture (THE Multiprogramming System)</option>
-                            <option value="modular">4. Modular / Loadable Kernel Modules Architecture (Solaris, Modern Linux LKM)</option>
-                            <option value="hybrid">5. Hybrid Structure Architecture (Windows NT, macOS XNU)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="calc-result-box" style="margin-top:1.25rem;">
-                    <div class="calc-result-header">
-                        <span style="font-weight:700; font-size:0.95rem;">Architectural Properties:</span>
-                        <span class="calc-result-val" id="sim-arch-val">Monolithic: High Speed, Low Fault Isolation</span>
-                    </div>
-                    <div class="calc-math-steps" id="sim-arch-steps">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-    </div>
-
-    <script>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-5-major-structures">5. Major Operating System Structures: Monolithic Kernel In-Depth</h2>
+<p>The two major operating system structures highlighted are:</p>
+<ol>
+<li><strong>Monolithic Architecture</strong></li>
+<li><strong>Microkernel Architecture</strong></li>
+</ol>
+<h3>Monolithic Architecture</h3>
+<p>A Monolithic Architecture is an operating system design where all OS services run together in a single large kernel operating in kernel mode. All components can directly communicate with each other because they share the same memory space.</p>
+<p>A Monolithic Architecture is an OS structure where all operating system services execute within one large kernel and directly interact with each other to manage system resources efficiently.</p>
+<h3>How It Works</h3>
+<ol>
+<li>User applications request services through system calls.</li>
+<li>The request enters the kernel.</li>
+<li>Kernel components communicate directly with each other.</li>
+<li>The kernel accesses the hardware and returns the result to the application.</li>
+</ol>
+<h3>Monolithic Characteristics</h3>
+<ul>
+<li>Single large kernel</li>
+<li>All services run in kernel space</li>
+<li>Components communicate directly</li>
+<li>High performance due to fewer communication overheads</li>
+<li>Easier access to hardware resources</li>
+</ul>
+<h3>Advantages</h3>
+<ul>
+<li>Fast execution and high performance</li>
+<li>Efficient communication between components</li>
+<li>Simple design for smaller systems</li>
+</ul>
+<h3>Disadvantages</h3>
+<ul>
+<li>Large and complex kernel</li>
+<li>Difficult to maintain and debug</li>
+<li>An error in one component can crash the entire system</li>
+<li>Lower security because all services run with full privileges</li>
+</ul>
+<h3>Examples of Monolithic Operating Systems</h3>
+<ul>
+<li><strong>Linux</strong> (traditional monolithic kernel with modular support)</li>
+<li><strong>UNIX</strong></li>
+<li><strong>MS-DOS</strong></li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-6-monolithic-vs-microkernel">6. Monolithic Kernel vs. Microkernel Comparison Matrix</h2>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Monolithic Kernel</th>
+<th>Microkernel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Size</strong></td>
+<td>Large</td>
+<td>Small</td>
+</tr>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Faster</td>
+<td>Slightly slower</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>Lower</td>
+<td>Higher</td>
+</tr>
+<tr>
+<td><strong>Reliability</strong></td>
+<td>Lower</td>
+<td>Higher</td>
+</tr>
+<tr>
+<td><strong>Services</strong></td>
+<td>Inside kernel</td>
+<td>Mostly outside kernel</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 91</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Quiz questions dynamically rendered here -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+<div class="tab-content" id="formulas">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem; gap:0.5rem; border-bottom:1px solid var(--border-color); padding-bottom:1rem;">
+<div>
+<h2 style="margin:0; font-size:1.6rem; color:var(--primary-color);">Quick Reference &amp; Exam Summary Architecture</h2>
+<p style="margin:0.25rem 0 0 0; font-size:0.9rem; opacity:0.85;">Four-Pillar High-Yield Review for OS Structural Architectures, Dual-Mode Operations &amp; System Calls</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID                          -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:1.5rem;">
+<span>🏛️</span> Pillar 1: Core Terminology &amp; Keyword Recall Grid
+                </h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Crucial structural terms, kernel rings, and dual-mode execution primitives for rapid exam retrieval.</p>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Term / Concept</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Category</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:45%;">Exact Academic Definition</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Exam Trigger / High-Yield Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">OS Structure</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Architecture</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The internal organizational layout, component relationships, and boundary partitioning of software modules that manage hardware and provide services to user programs.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Component organization, Layer interaction, Kernel partitioning</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Monolithic Kernel</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Kernel Model</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">An operating system architecture where all core services (VMM, scheduler, file systems, IPC, device drivers) execute inside a single large shared kernel address space in Ring 0.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Single address space, High performance, Crash vulnerability</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Microkernel</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Kernel Model</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A minimalist kernel architecture retaining only essential primitives (low-level memory, thread scheduling, IPC) in Ring 0, while moving file systems, networking, and drivers into User Space servers (Ring 3).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Minimal kernel, User space servers, IPC message passing, Fault isolation</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Layered Structure</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Architecture</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A modular design partitioning the OS into hierarchical layers (Layer 0 = Hardware up to Layer N = User Interface), where each layer i communicates solely with adjacent layers (i-1 and i+1).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Strict N-layer hierarchy, Adjacent communication only, THE OS</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Loadable Kernel Module (LKM)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Modularity</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">An object file containing code that can dynamically extend the running kernel's capabilities (e.g. device drivers, network protocols) on demand at runtime without rebooting.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Dynamic runtime insertion, No kernel recompile/reboot, Linux modules</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Hybrid Architecture</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Architecture</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A composite design combining the raw execution speed of monolithic kernels with the modular structure and user subsystem isolation of microkernels (e.g. Windows NT, macOS XNU).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Monolithic speed + Microkernel modularity, Windows NT, macOS XNU</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Dual-Mode Operation</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">CPU Hardware</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A hardware-enforced protection mechanism using a hardware mode bit to separate unprivileged user program execution from privileged operating system kernel execution.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Hardware mode bit, Protects kernel from user crashes, Ring 0 vs Ring 3</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Mode Bit</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">CPU Register</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A physical hardware bit in the CPU status register: <strong>Mode Bit = 1</strong> designates User Mode; <strong>Mode Bit = 0</strong> designates Kernel / Supervisor Mode.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">1 = User Mode, 0 = Kernel Mode (Exam trap: 0 is privileged!)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Trap (Software Interrupt)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Interrupts</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A software-generated CPU interrupt invoked deliberately by an instruction (e.g. <code>syscall</code>, <code>int 0x80</code>) or accidentally by an exception (e.g. divide by zero, page fault), triggering a mode switch to Kernel Mode.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Software interrupt, Synchronous, Switches Mode Bit 1 to 0</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">System Call Table</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Kernel Core</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">An indexed array of function pointers maintained by the kernel dispatch table that maps each system call number/opcode to its corresponding kernel service routine address.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Interrupt vector table, Opcode mapping, sys_call_table</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">File Descriptor (fd)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">I/O Handling</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A non-negative integer handle representing an open file or I/O stream in a process's file table. Standard descriptors: <code>0 = stdin</code>, <code>1 = stdout</code>, <code>2 = stderr</code>.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">0=stdin, 1=stdout, 2=stderr, newly opened files get fd ≥ 3</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Inter-Process Communication (IPC)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Concurrence</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Mechanisms provided by the OS enabling distinct processes to exchange data and synchronize actions, implemented either via Shared Memory or Message Passing.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Message Passing vs Shared Memory, Core foundation of microkernels</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS                           -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>🧮</span> Pillar 2: Formula &amp; Calculation Reference Cards
+                </h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Hardware state transitions, execution latency equations, and IPC overhead formulas with plain English verbalizations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+<!-- Formula 1: Dual-Mode State Transition -->
+<div class="formula-card" style="border-left:4px solid #0284c7;">
+<span class="formula-badge" style="background:#0284c7;">Dual-Mode Lifecycle</span>
+<div class="formula-text" style="font-size:1.1rem; color:#0284c7;">
+                            Mode Bit = 1 &amp;xrightarrow<sup>Trap / Syscall</sup> Mode Bit = 0 &amp;xrightarrow<sup>IRET / Return</sup> Mode Bit = 1
+                        </div>
+<div class="formula-explain">
+<strong>State Transition Steps:</strong><br/>
+                            • <strong>1. User Execution:</strong> CPU Mode Bit = 1 (Ring 3).<br/>
+                            • <strong>2. Software Trap:</strong> Syscall instruction forces CPU to set Mode Bit = 0 (Ring 0).<br/>
+                            • <strong>3. Kernel Execution:</strong> Privileged handler completes service request.<br/>
+                            • <strong>4. Return From Trap:</strong> Hardware atomically restores Mode Bit = 1.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"User applications run unprivileged in Mode Bit 1; invoking a system call generates a hardware trap flipping the bit to 0 for privileged kernel execution, returning safely back to Mode Bit 1."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"User code runs in User Mode (bit 1). Making a system call traps to Kernel Mode (bit 0); completion restores User Mode (bit 1)."</strong>
+</div>
+</div></div>
+<!-- Formula 2: Total System Call Latency -->
+<div class="formula-card" style="border-left:4px solid #0d9488;">
+<span class="formula-badge" style="background:#0d9488;">Performance Cost</span>
+<div class="formula-text" style="font-size:1.05rem; color:#0d9488;">
+                            T<sub>syscall</sub> = T<sub>prep</sub> + T<sub>trap</sub> + T<sub>mode_switch</sub> + T<sub>kernel_exec</sub> + T<sub>return</sub>
+</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+                            • <code>T<sub>prep</sub></code>: Register marshalling time in user library.<br/>
+                            • <code>T<sub>trap</sub> + T<sub>mode_switch</sub></code>: Hardware state save and privilege transition.<br/>
+                            • <code>T<sub>kernel_exec</sub></code>: Actual execution time of kernel driver / subsystem.<br/>
+                            • <code>T<sub>return</sub></code>: Register restore and switch back to Ring 3.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The cumulative elapsed time of a system call includes parameter marshalling, trap generation, hardware privilege switching, kernel execution, and returning control to user space."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Total system call overhead is the sum of parameter marshalling, interrupt trapping, mode switching, kernel execution, and return."</strong>
+</div>
+</div></div>
+<!-- Formula 3: Microkernel IPC Overhead -->
+<div class="formula-card" style="border-left:4px solid #f59e0b;">
+<span class="formula-badge" style="background:#f59e0b;">IPC Overhead</span>
+<div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">
+                            T<sub>micro_IPC</sub> = 2 × ( T<sub>mode_switch</sub> + T<sub>context_switch</sub> ) + T<sub>msg_copy</sub>
+</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+                            • <code>T<sub>mode_switch</sub></code>: Privilege switch time (Ring 3 ↔ Ring 0).<br/>
+                            • <code>T<sub>context_switch</sub></code>: CPU register save/restore between client and server.<br/>
+                            • <code>T<sub>msg_copy</sub></code>: Kernel memory buffer copy overhead between address spaces.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"Microkernel client-server communication incurs a double penalty: requesting a service requires two full mode switches, two context switches, and memory copying through the kernel buffer."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Microkernel IPC overhead requires two mode switches, two context switches, and message buffer copying between user services."</strong>
+</div>
+</div></div>
+<!-- Formula 4: POSIX File Descriptors Allocation -->
+<div class="formula-card" style="border-left:4px solid #8b5cf6;">
+<span class="formula-badge" style="background:#8b5cf6;">Standard Descriptors</span>
+<div class="formula-text" style="font-size:1.1rem; color:#8b5cf6;">
+                            fd<sub>in</sub> = 0, fd<sub>out</sub> = 1, fd<sub>err</sub> = 2, fd<sub>new</sub> ≥ 3
+                        </div>
+<div class="formula-explain">
+<strong>Constant Mapping:</strong><br/>
+                            • <code>0 (STDIN_FILENO)</code>: Standard keyboard input stream.<br/>
+                            • <code>1 (STDOUT_FILENO)</code>: Standard terminal display output stream.<br/>
+                            • <code>2 (STDERR_FILENO)</code>: Standard unbuffered error logging stream.<br/>
+                            • <code>≥ 3</code>: Dynamically allocated file descriptor index for <code>open()</code> or <code>socket()</code>.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"Every process automatically inherits file descriptors 0, 1, and 2 at creation; any newly opened files or network sockets receive the lowest available integer index ≥ 3."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"File descriptor 0 is standard input, 1 is standard output, 2 is standard error, and 3 onwards are opened files."</strong>
+</div>
+</div></div>
+<!-- Formula 5: fork() Return Value Mapping -->
+<div class="formula-card" style="border-left:4px solid #dc2626;">
+<span class="formula-badge" style="background:#dc2626;">Process Creation</span>
+<div class="formula-text" style="font-size:1.05rem; color:#dc2626;">
+                            Return(fork()) = { &gt; 0 (Parent: Child PID), 0 (Child), -1 (Failure) }
+                        </div>
+<div class="formula-explain">
+<strong>Return Value Cases:</strong><br/>
+                            • <code>PID &gt; 0</code>: Returned strictly to the caller parent process.<br/>
+                            • <code>0</code>: Returned strictly to the newly instantiated child process.<br/>
+                            • <code>-1</code>: Returned on system error (e.g. process table full).<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"A single fork() system call returns twice: the parent process receives the positive PID of the new child, while the newly created child process receives 0 to identify its child role."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"fork() returns child PID to parent, 0 to child process, and -1 on failure."</strong>
+</div>
+</div></div>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES                                   -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>📊</span> Pillar 3: Comparative Analysis Matrices
+                </h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Structural architecture trade-offs, system call categories, and programming layer comparisons.</p>
+<!-- Matrix 1: 5 Major OS Structural Architectures -->
+<h4 style="color:var(--accent-color); margin-top:1.25rem; margin-bottom:0.5rem;">A. 5 Major Operating System Structural Architectures Master Matrix</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Architecture</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Kernel Space Scope</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Fault Isolation &amp; Security</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Execution Speed</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Extensibility</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Real-World Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1. Simple Structure</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">No dual-mode boundary; applications directly access BIOS and device hardware.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Zero Isolation (User bug can overwrite OS memory).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Very Fast (No mode switch overhead).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Poor (Monolithic binary without abstractions).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">MS-DOS, Original UNIX</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">2. Layered Structure</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Divided into N strict concentric layers (Layer 0 = Hardware to Layer N = User).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Modular debugging layer-by-layer).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Slow (Traverses multiple intermediary layers).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Moderate (Rigid dependency tree).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">THE Multiprogramming System</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">3. Monolithic Kernel</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">All OS components (VMM, scheduler, FS, IPC, device drivers) reside in Ring 0.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Low (A bug in any driver can panic the entire system).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Maximum Speed (Direct memory function calls).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Moderate (Requires dynamic module support).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Linux, Traditional UNIX, BSD</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">4. Microkernel</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Minimal Ring 0 core (IPC, basic scheduling, low-level memory); FS/Drivers in Ring 3.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Maximum Isolation (Crashed user servers simply restart).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#f59e0b; font-weight:700;">Slower (High IPC message passing overhead).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Add user servers without kernel recompile).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">MINIX, QNX, L4, Mach</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">5. Hybrid Architecture</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Monolithic core with critical subsystems in Ring 0 + modular user subsystems in Ring 3.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Protects kernel core while maintaining speed).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High Speed (Direct kernel execution of graphics/FS).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Dynamic driver loading and subsystem isolation).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Windows NT, Apple macOS (XNU)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: 6 System Call Categories -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">B. 6 Canonical System Call Categories &amp; API Mappings</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">System Call Category</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:30%;">Core Purpose &amp; Operational Scope</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:25%;">POSIX / Linux System Calls</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:25%;">Win32 API Functions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1. Process Control</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Create, execute, terminate, wait for, and allocate memory to processes.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">fork(), execve(), exit(), wait(), brk()</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">CreateProcess(), ExitProcess(), WaitForSingleObject()</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">2. File Manipulation</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Create, open, read, write, seek, reposition, and close files on storage devices.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">open(), read(), write(), lseek(), close()</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">CreateFile(), ReadFile(), WriteFile(), CloseHandle()</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">3. Device Management</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Request, release, read, write, and configure hardware device controllers.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">ioctl(), read(), write()</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">DeviceIoControl(), SetConsoleMode()</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">4. Information Maintenance</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Get/set system time, date, process PID, system configuration, and performance metrics.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">getpid(), time(), alarm(), sysinfo()</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">GetCurrentProcessId(), GetSystemTime(), SetTimer()</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">5. Communications / IPC</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Create connections, transfer messages, share memory, and synchronize between processes.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">pipe(), shmget(), socket(), send(), recv()</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">CreatePipe(), CreateFileMapping(), MapViewOfFile()</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">6. Protection &amp; Security</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Set and check file permissions, allocate Access Control Lists (ACLs), lock resources.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">chmod(), umask(), chown()</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">SetNamedSecurityInfo(), InitializeSecurityDescriptor()</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: System Call vs Library Function vs Privileged Instruction -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">C. System Call vs Library Function vs Privileged Instruction</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Dimension</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">System Call (Syscall)</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Library Function (e.g. C Standard)</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Privileged Machine Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Execution Privilege</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Initiated in User (1), runs in Kernel (0)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Executes entirely in User Mode (1)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Executes strictly in Kernel Mode (0)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Invocation Mechanism</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Software interrupt / trap (<code>syscall</code>, <code>int 0x80</code>)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Standard assembly <code>CALL</code> / user stack branch</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Direct CPU instruction pipeline execution</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Direct Hardware Access</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Yes (Via kernel device driver dispatch)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">No (Must issue underlying syscall to access hardware)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Yes (Direct register/port manipulation)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Concrete Example</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">write(1, buffer, len)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">printf("Hello %s", name)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">CLI, STI, HLT, LIDT, IN, OUT</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES                                -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>⚠️</span> Pillar 4: Common Exam Pitfalls &amp; Fallacies
+                </h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Frequent exam traps regarding CPU mode bits, microkernel IPC overhead, library wrappers, and fork return semantics.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
+<div class="card" style="border-left:4px solid #ef4444; margin-bottom:0; background:rgba(239, 68, 68, 0.04);">
+<div style="font-weight:700; color:#ef4444; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 1: The Mode Bit Inversion Trap
+                        </div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Assuming Mode Bit = 1 means Kernel/Privileged mode and Mode Bit = 0 means User mode.<br/>
+<strong>The Truth:</strong> In hardware architectures, <strong>Mode Bit = 1 is USER Mode</strong> (unprivileged) and <strong>Mode Bit = 0 is KERNEL Mode</strong> (privileged supervisor). Writing 0 to the mode bit can only be executed by privileged instructions in Kernel Mode.
+                        </p>
+</div>
+<div class="card" style="border-left:4px solid #f59e0b; margin-bottom:0; background:rgba(245, 158, 11, 0.04);">
+<div style="font-weight:700; color:#f59e0b; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 2: Microkernel Performance Fallacy
+                        </div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Assuming that because microkernels have smaller footprints, they must execute faster than monolithic kernels.<br/>
+<strong>The Truth:</strong> Microkernels are <strong>slower in raw execution</strong>. Every service request (file read, network packet) must travel across user-kernel-user boundaries via IPC message passing, inducing multiple mode switches and context switches.
+                        </p>
+</div>
+<div class="card" style="border-left:4px solid #3b82f6; margin-bottom:0; background:rgba(59, 130, 246, 0.04);">
+<div style="font-weight:700; color:#3b82f6; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 3: printf() vs write() Misconception
+                        </div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Answering that <code>printf()</code> or <code>scanf()</code> is a system call.<br/>
+<strong>The Truth:</strong> <code>printf()</code> is a <strong>C standard library function</strong> executing in User Mode that performs string formatting and internal stream buffering. It only issues the raw <code>write()</code> system call when the buffer flushes.
+                        </p>
+</div>
+<div class="card" style="border-left:4px solid #8b5cf6; margin-bottom:0; background:rgba(139, 92, 246, 0.04);">
+<div style="font-weight:700; color:#8b5cf6; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 4: fork() Dual Return Semantics
+                        </div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Expecting <code>fork()</code> to return only the child's PID to both processes.<br/>
+<strong>The Truth:</strong> <code>fork()</code> returns <strong>two distinct values</strong> in two separate address spaces: it returns the <strong>child's positive PID to the parent process</strong>, but returns <strong>0 to the newly created child process</strong>, enabling the code to branch based on process role.
+                        </p>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- INTERACTIVE ACADEMIC SIMULATORS: SYSCALL FLOW & ARCH EVALUATOR            -->
+<!-- ========================================================================= -->
+<div class="calc-card" style="margin-top:2rem; border-left:4px solid var(--primary-color);">
+<div class="calc-title">⚡ Live System Call &amp; Dual-Mode Execution Flow Simulator</div>
+<div class="calc-desc">Trace the exact 5-step hardware and kernel execution path when a user application executes a privileged system call (e.g. opening a file or spawning a child process).</div>
+<div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+<div class="calc-field" style="grid-column: 1 / -1;">
+<label class="calc-label" for="sim-syscall-select">Select System Call to Trace:</label>
+<select class="calc-input" id="sim-syscall-select" onchange="simulateSyscallFlow()" style="font-weight:600;">
+<option selected="" value="open">open("notes.txt", O_RDONLY) — File Descriptor Allocation</option>
+<option value="read">read(fd, buffer, 1024) — Secondary Storage Disk Read</option>
+<option value="write">write(fd, "Data", 4) — Buffer Flush to Device Controller</option>
+<option value="fork">fork() — Process Control Block Duplication</option>
+<option value="exit">exit(0) — Process Termination &amp; Memory Deallocation</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box" style="margin-top:1.25rem;">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">System Call Execution Flow:</span>
+<span class="calc-result-val" id="sim-syscall-val" style="color:var(--primary-color);">open() → Mode Bit 1 to 0 → Kernel Routine</span>
+</div>
+<div class="calc-math-steps" id="sim-syscall-steps">
+<!-- Populated dynamically by simulateSyscallFlow() -->
+</div>
+</div>
+</div>
+<div class="calc-card" style="margin-top:1.5rem; border-left:4px solid #8b5cf6;">
+<div class="calc-title">🏛️ OS Structural Architecture Property &amp; Trade-Off Evaluator</div>
+<div class="calc-desc">Select any of the 5 canonical structural models to evaluate how its organization impacts performance, security, isolation, and real-world system complexity.</div>
+<div class="calc-grid" style="grid-template-columns: 1fr;">
+<div class="calc-field">
+<label class="calc-label" for="sim-arch-select">Select Structural Model:</label>
+<select class="calc-input" id="sim-arch-select" onchange="evaluateArchitecture()" style="font-weight:600;">
+<option selected="" value="monolithic">1. Monolithic Architecture (Linux, Traditional Unix)</option>
+<option value="microkernel">2. Microkernel Architecture (MINIX, QNX, L4)</option>
+<option value="layered">3. Layered Structure Architecture (THE Multiprogramming System)</option>
+<option value="modular">4. Modular / Loadable Kernel Modules Architecture (Solaris, Modern Linux LKM)</option>
+<option value="hybrid">5. Hybrid Structure Architecture (Windows NT, macOS XNU)</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box" style="margin-top:1.25rem;">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Architectural Properties:</span>
+<span class="calc-result-val" id="sim-arch-val">Monolithic: High Speed, Low Fault Isolation</span>
+</div>
+<div class="calc-math-steps" id="sim-arch-steps">
+<!-- Populated dynamically by evaluateArchitecture() -->
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
         // ==========================================
         // System Call Lifecycle Simulator Logic
         // ==========================================
@@ -1778,6 +2092,5 @@
             evaluateArchitecture();
         });
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

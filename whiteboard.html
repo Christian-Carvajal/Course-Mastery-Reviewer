@@ -361,6 +361,47 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:'Inte
 .wb-cs-size-btn:hover{background:#334155;color:#fff}
 .wb-cs-size-btn.active{background:#0d9488;color:#fff;border-color:#14b8a6}
 
+
+/* Academic Term Filter Bar & Headers */
+.wb-cs-term-bar{
+  display:flex;gap:6px;overflow-x:auto;padding:8px 16px;background:#090d16;
+  border-bottom:1px solid #1e293b;scrollbar-width:thin;scrollbar-color:#334155 #090d16;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+}
+.wb-cs-term-bar::-webkit-scrollbar{height:4px;display:block}
+.wb-cs-term-bar::-webkit-scrollbar-track{background:#090d16}
+.wb-cs-term-bar::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+.wb-cs-term-bar::-webkit-scrollbar-thumb:hover{background:#3b82f6}
+
+.wb-cs-term-tab{
+  padding:5px 12px;border-radius:16px;background:#1e293b;border:1px solid #334155;
+  color:#94a3b8;font-size:.74rem;font-weight:600;cursor:pointer;white-space:nowrap;
+  transition:all .15s;font-family:inherit;flex-shrink:0;user-select:none;display:inline-flex;align-items:center;gap:5px;
+}
+.wb-cs-term-tab:hover{color:#f8fafc;background:#334155}
+.wb-cs-term-tab.active{background:#2563eb;color:#fff;border-color:#3b82f6;box-shadow:0 0 10px rgba(59,130,246,.35)}
+
+.wb-cs-term-header{
+  padding:10px 14px;margin:12px 0 6px;font-size:.82rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:.05em;border-radius:8px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.wb-cs-term-header.prelim{background:rgba(16,185,129,.12);color:#10b981;border-left:3px solid #10b981}
+.wb-cs-term-header.midterm{background:rgba(59,130,246,.12);color:#3b82f6;border-left:3px solid #3b82f6}
+.wb-cs-term-header.finals{background:rgba(245,158,11,.12);color:#f59e0b;border-left:3px solid #f59e0b}
+.wb-cs-term-badge-count{
+  font-size:.68rem;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.1);
+  font-weight:600;letter-spacing:normal;text-transform:none;
+}
+
+.wb-cs-card-term{
+  font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:10px;
+  letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;
+}
+.wb-cs-card-term.term-prelim{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.3)}
+.wb-cs-card-term.term-midterm{background:rgba(59,130,246,.15);color:#3b82f6;border:1px solid rgba(59,130,246,.3)}
+.wb-cs-card-term.term-finals{background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3)}
+
 .wb-cs-tabs{
   display:flex;gap:6px;overflow-x:auto;padding:8px 16px 10px;background:#0f172a;
   border-bottom:1px solid #1e293b;scrollbar-width:thin;scrollbar-color:#334155 #0f172a;
@@ -677,8 +718,8 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:'Inte
       <span id="wb-collab-count">👤 1 Online</span>
     </div>
 
-    <button class="wb-action-btn" id="btn-cheatsheet" title="Subject Formulas & Academic Reference Guide (F)">📚 <span class="lb">Formula Guide</span></button>
-    <button class="wb-action-btn" id="btn-ai-tutor-wb" title="100% Offline AI Study Assistant & Quiz Tutor">🤖 <span class="lb">AI Tutor</span></button>
+    <button class="wb-action-btn" id="btn-cheatsheet" title="Subject Formulas & Academic Reference Guide (F)" onclick="if(window.openCheatsheetDrawer)window.openCheatsheetDrawer()">📚 <span class="lb">Formula Guide</span></button>
+    <button class="wb-action-btn" id="btn-ai-tutor-wb" title="100% Offline AI Study Assistant & Quiz Tutor" onclick="if(window.triggerStudyChatbot)window.triggerStudyChatbot()">🤖 <span class="lb">AI Tutor</span></button>
     <button class="wb-action-btn share" id="btn-share-modal" title="Share Whiteboard & Real-Time Collaboration">🔗 <span class="lb">Share</span></button>
     <button class="wb-action-btn" id="btn-undo" title="Undo (Ctrl+Z)">↩️</button>
     <button class="wb-action-btn" id="btn-redo" title="Redo (Ctrl+Y)">↪️</button>
@@ -723,15 +764,14 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:'Inte
 <div class="wb-modal-overlay" id="wb-mobile-menu-modal">
   <div class="wb-modal">
     <h3><span>⚙️</span> Whiteboard Actions</h3>
-      <button class="wb-acc-btn" id="mob-btn-ai-tutor"><span>🤖 Ask AI Tutor & Quizzes</span> <span>➜</span></button>
-      <button class="wb-acc-btn" id="mob-btn-cheatsheet"><span>📚 Subject Formulas & Reference</span> <span>➜</span></button>
-      <button class="wb-acc-btn" id="mob-btn-undo"><span>↩️ Undo Drawing</span> <span>Ctrl+Z</span></button>
-      <button class="wb-acc-btn" id="mob-btn-redo"><span>↪️ Redo Drawing</span> <span>Ctrl+Y</span></button>
-      <button class="wb-acc-btn" id="mob-btn-export"><span>💾 Export High-Res PNG</span> <span>➜</span></button>
-      <button class="wb-acc-btn" id="mob-btn-new"><span>➕ Start New Whiteboard</span> <span>➜</span></button>
-      <button class="wb-acc-btn" id="mob-btn-boards"><span>📂 Saved Boards Library</span> <span>➜</span></button>
-      <button class="wb-acc-btn" id="mob-btn-account"><span>👤 Account & Cloud Storage</span> <span>➜</span></button>
-    </div>
+    <button class="wb-acc-btn" id="mob-btn-ai-tutor" onclick="if(window.triggerStudyChatbot)window.triggerStudyChatbot()"><span>🤖 Ask AI Tutor & Quizzes</span> <span>➜</span></button>
+    <button class="wb-acc-btn" id="mob-btn-cheatsheet" onclick="if(window.openCheatsheetDrawer)window.openCheatsheetDrawer()"><span>📚 Subject Formulas & Reference</span> <span>➜</span></button>
+    <button class="wb-acc-btn" id="mob-btn-undo"><span>↩️ Undo Drawing</span> <span>Ctrl+Z</span></button>
+    <button class="wb-acc-btn" id="mob-btn-redo"><span>↪️ Redo Drawing</span> <span>Ctrl+Y</span></button>
+    <button class="wb-acc-btn" id="mob-btn-export"><span>💾 Export High-Res PNG</span> <span>➜</span></button>
+    <button class="wb-acc-btn" id="mob-btn-new"><span>➕ Start New Whiteboard</span> <span>➜</span></button>
+    <button class="wb-acc-btn" id="mob-btn-boards"><span>📂 Saved Boards Library</span> <span>➜</span></button>
+    <button class="wb-acc-btn" id="mob-btn-account"><span>👤 Account & Cloud Storage</span> <span>➜</span></button>
     <div class="wb-modal-btns" style="margin-top:16px">
       <button class="btn-secondary" id="mob-menu-close" style="width:100%">Close</button>
     </div>
@@ -866,11 +906,11 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:'Inte
 </div>
 
 <!-- SUBJECT FORMULAS & ACADEMIC REFERENCE GUIDE DRAWER -->
-<div class="wb-panel-overlay" id="wb-cs-overlay"></div>
+<div class="wb-panel-overlay" id="wb-cs-overlay" onclick="if(window.closeCheatsheetDrawer)window.closeCheatsheetDrawer()"></div>
 <div class="wb-cs-drawer" id="wb-cs-drawer">
   <div class="wb-cs-head">
     <h3><span>📚</span> Subject Formulas & Reference Guide</h3>
-    <button class="wb-cs-close" id="wb-cs-close" title="Close Drawer">&times;</button>
+    <button class="wb-cs-close" id="wb-cs-close" title="Close Drawer" onclick="if(window.closeCheatsheetDrawer)window.closeCheatsheetDrawer()">&times;</button>
   </div>
   
   <div class="wb-cs-search-box">
@@ -887,12 +927,21 @@ html,body{width:100%;height:100%;height:100dvh;overflow:hidden;font-family:'Inte
     </div>
   </div>
 
-  <div class="wb-cs-tabs" id="wb-cs-tabs">
+  
+  <!-- ACADEMIC TERM SELECTOR (Prelim, Midterm, Finals) -->
+  <div class="wb-cs-term-bar" id="wb-cs-term-bar">
+    <button class="wb-cs-term-tab active" data-term="all">📚 All Terms (<span id="wb-term-count-all">42</span>)</button>
+    <button class="wb-cs-term-tab" data-term="prelim">🌱 Prelim (<span id="wb-term-count-prelim">31</span>)</button>
+    <button class="wb-cs-term-tab" data-term="midterm">⚡ Midterm (<span id="wb-term-count-midterm">11</span>)</button>
+    <button class="wb-cs-term-tab" data-term="finals">🏆 Finals (<span id="wb-term-count-finals">0</span>)</button>
+  </div>
+<div class="wb-cs-tabs" id="wb-cs-tabs">
     <button class="wb-cs-tab active" data-subject="all">All Subjects</button>
     <button class="wb-cs-tab" data-subject="dm">📊 Data Mining</button>
     <button class="wb-cs-tab" data-subject="at">🤖 Automata Theory</button>
     <button class="wb-cs-tab" data-subject="ias">🔒 IAS & Security</button>
     <button class="wb-cs-tab" data-subject="os">💻 OS & Systems</button>
+    <button class="wb-cs-tab" data-subject="efp">✍️ English for Profession</button>
   </div>
 
   <div class="wb-cs-topic-pills" id="wb-cs-topic-pills">
@@ -1076,6 +1125,20 @@ document.getElementById('btn-mobile-more').onclick = function() {
 document.getElementById('mob-menu-close').onclick = function() {
     mobileMenuModal.classList.remove('open');
 };
+var mobAiBtn = document.getElementById('mob-btn-ai-tutor');
+if (mobAiBtn) {
+    mobAiBtn.onclick = function() {
+        mobileMenuModal.classList.remove('open');
+        if (typeof window.triggerStudyChatbot === 'function') window.triggerStudyChatbot();
+    };
+}
+var mobCsBtn = document.getElementById('mob-btn-cheatsheet');
+if (mobCsBtn) {
+    mobCsBtn.onclick = function() {
+        mobileMenuModal.classList.remove('open');
+        if (typeof window.openCheatsheetDrawer === 'function') window.openCheatsheetDrawer();
+    };
+}
 document.getElementById('mob-btn-undo').onclick = function() {
     mobileMenuModal.classList.remove('open');
     document.getElementById('btn-undo').click();
@@ -1560,16 +1623,22 @@ function getActiveShareUrl() {
     return origin + '/whiteboard.html?room=' + encodeURIComponent(code);
 }
 
+function safeReplaceState(data, title, url) {
+    if (window.location.protocol !== 'file:' && window.history && typeof window.history.replaceState === 'function') {
+        try {
+            window.history.replaceState(data, title, url);
+        } catch(e) {}
+    }
+}
+
 function updateShareLinkDisplay() {
     var fullUrl = getActiveShareUrl();
     if (shareLinkInput) {
         shareLinkInput.value = fullUrl;
     }
-    try {
-        if (currentShareCode && (!window.location.search || !window.location.search.includes(currentShareCode))) {
-            window.history.replaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
-        }
-    } catch(e){}
+    if (currentShareCode && (!window.location.search || !window.location.search.includes(currentShareCode))) {
+        safeReplaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
+    }
 }
 
 document.getElementById('btn-share-modal').onclick = async function() {
@@ -1592,9 +1661,7 @@ document.getElementById('btn-share-modal').onclick = async function() {
                 currentShareCode = res.share_code;
                 currentSharePermission = res.share_permission;
                 updateShareLinkDisplay();
-                try {
-                    window.history.replaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
-                } catch(e){}
+                safeReplaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
                 setupRealtimeCollaboration(currentShareCode);
             }
         }
@@ -1623,9 +1690,7 @@ document.getElementById('share-copy-btn').onclick = async function() {
             if (res && res.success) {
                 currentShareCode = res.share_code;
                 currentSharePermission = res.share_permission;
-                try {
-                    window.history.replaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
-                } catch(e){}
+                safeReplaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
                 setupRealtimeCollaboration(currentShareCode);
             }
         }
@@ -1692,11 +1757,8 @@ document.getElementById('share-modal-save').onclick = async function() {
         currentSharePermission = res.share_permission;
         currentSharePassword = pass;
         updateShareLinkDisplay();
-        
-        try {
-            var newUrl = window.location.pathname + '?room=' + currentShareCode;
-            window.history.replaceState(null, '', newUrl);
-        } catch(e){}
+        var newUrl = window.location.pathname + '?room=' + currentShareCode;
+        safeReplaceState(null, '', newUrl);
 
         setupRealtimeCollaboration(currentShareCode);
         toast('✅ Live Collaboration Room Activated: <strong>' + res.share_code + '</strong>');
@@ -1743,9 +1805,7 @@ function handleRoomTerminated(reason) {
     currentBoardId = null;
     currentBoardTitle = 'Untitled Board';
     updateTitleDisplay();
-    try {
-        window.history.replaceState(null, '', window.location.pathname);
-    } catch(e){}
+    safeReplaceState(null, '', window.location.pathname);
     saveLocalDraftImmediate();
     scheduleRender();
 
@@ -1884,7 +1944,7 @@ document.getElementById('wb-profile-btn').onclick = function() {
     var s = getSession();
     if (!s) {
         if (typeof window.openAuthModal === 'function') window.openAuthModal('signin');
-        else window.location.href = '/';
+        else window.location.href = './index.html';
         return;
     }
     accountModal.classList.add('open');
@@ -2219,9 +2279,7 @@ document.getElementById('btn-new-board').onclick = function() {
         currentShareCode = 'WB-' + Date.now().toString(36).toUpperCase().slice(-4) + Math.random().toString(36).toUpperCase().slice(2, 6);
         currentBoardTitle = 'Untitled Board';
         updateTitleDisplay();
-        try {
-            window.history.replaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
-        } catch(e){}
+        safeReplaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
         setupRealtimeCollaboration(currentShareCode);
         updateShareLinkDisplay();
         saveLocalDraftImmediate();
@@ -3980,9 +4038,7 @@ async function loadBoard(id) {
     selectedObjType = null;
     selectedObjId = null;
 
-    try {
-        window.history.replaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
-    } catch(e){}
+    safeReplaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
     setupRealtimeCollaboration(currentShareCode);
     updateShareLinkDisplay();
 
@@ -4030,9 +4086,7 @@ function deleteBoard(id, title) {
                 currentShareCode = 'WB-' + Date.now().toString(36).toUpperCase().slice(-4) + Math.random().toString(36).toUpperCase().slice(2, 6);
                 currentBoardTitle = 'Untitled Board';
                 updateTitleDisplay();
-                try {
-                    window.history.replaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
-                } catch(e){}
+                safeReplaceState(null, '', window.location.pathname + '?room=' + currentShareCode);
                 setupRealtimeCollaboration(currentShareCode);
                 updateShareLinkDisplay();
                 saveLocalDraftImmediate();
@@ -4059,7 +4113,8 @@ var subjectFormulas = [
         "where": "P(A) = Probability of event A (0 ≤ P(A) ≤ 1) | n(A) = Count of favorable outcomes | n(S) = Sample space size",
         "whenToUse": "Use when all outcomes in a finite sample space are equally likely (e.g. rolling dice, drawing cards, coin tosses). Look for keywords: 'What is the probability of...', 'Find the chance of rolling/drawing...'.",
         "example": "Rolling an even number on a fair 6-sided die:\nSample space S = {1, 2, 3, 4, 5, 6} (n(S) = 6)\nFavorable event A = {2, 4, 6} (n(A) = 3)\n\n        3\nP(A) = ─── = 0.50  (50% probability)\n        6",
-        "stampText": "📊 CLASSICAL PROBABILITY DEFINITION\n\n         n(A)       Number of Favorable Outcomes\nP(A) = ──────── = ─────────────────────────────────\n         n(S)      Total Possible Outcomes in Space\n\n• P(A): Probability of event A (0 ≤ P(A) ≤ 1)\n• n(A): Favorable outcomes count\n• n(S): Total sample space outcomes\n\n🎯 When to Use / Question Clues:\nUse when all outcomes in sample space are equally likely.\nKeywords: 'Find probability of...', 'Chance of outcome...'\n\n💡 Worked Example:\nRolling an even number on a 6-sided die:\nS = {1, 2, 3, 4, 5, 6} (n=6),  A = {2, 4, 6} (n=3)\nP(Even) = 3 / 6 = 0.50 (50%)"
+        "stampText": "📊 CLASSICAL PROBABILITY DEFINITION\n\n         n(A)       Number of Favorable Outcomes\nP(A) = ──────── = ─────────────────────────────────\n         n(S)      Total Possible Outcomes in Space\n\n• P(A): Probability of event A (0 ≤ P(A) ≤ 1)\n• n(A): Favorable outcomes count\n• n(S): Total sample space outcomes\n\n🎯 When to Use / Question Clues:\nUse when all outcomes in sample space are equally likely.\nKeywords: 'Find probability of...', 'Chance of outcome...'\n\n💡 Worked Example:\nRolling an even number on a 6-sided die:\nS = {1, 2, 3, 4, 5, 6} (n=6),  A = {2, 4, 6} (n=3)\nP(Even) = 3 / 6 = 0.50 (50%)",
+        "term": "prelim"
     },
     {
         "id": "dm-prob-scale",
@@ -4072,7 +4127,8 @@ var subjectFormulas = [
         "where": "P(Impossible Event) = 0 | P(Certain Event) = 1 | P(A) expressed as decimal [0, 1] or percentage [0%, 100%]",
         "whenToUse": "Use to verify if a probability distribution is valid or to find a missing probability value. Look for questions: 'Which of the following cannot be a valid probability?', 'Find missing P(x) such that the table is valid.'",
         "example": "Given probabilities for 3 outcomes P(A) = 0.30, P(B) = 0.45:\nTo be a valid distribution:\nP(C) = 1.0 − (0.30 + 0.45) = 1.0 − 0.75 = 0.25 (25%).",
-        "stampText": "📊 PROBABILITY AXIOMS & VALIDITY SCALE\n\n0 ≤ P(A) ≤ 1.0   (0% to 100%)\n∑ P(all outcomes in S) = 1.0\nP(∅) = 0 (Impossible)  |  P(S) = 1.0 (Certain)\n\n🎯 When to Use / Question Clues:\nUse to validate distributions or solve missing probabilities.\nKeywords: 'Is this distribution valid?', 'Find missing P(x)'\n\n💡 Worked Example:\nGiven P(A) = 0.30, P(B) = 0.45:\nP(C) = 1.0 − (0.30 + 0.45) = 0.25 (25%)"
+        "stampText": "📊 PROBABILITY AXIOMS & VALIDITY SCALE\n\n0 ≤ P(A) ≤ 1.0   (0% to 100%)\n∑ P(all outcomes in S) = 1.0\nP(∅) = 0 (Impossible)  |  P(S) = 1.0 (Certain)\n\n🎯 When to Use / Question Clues:\nUse to validate distributions or solve missing probabilities.\nKeywords: 'Is this distribution valid?', 'Find missing P(x)'\n\n💡 Worked Example:\nGiven P(A) = 0.30, P(B) = 0.45:\nP(C) = 1.0 − (0.30 + 0.45) = 0.25 (25%)",
+        "term": "prelim"
     },
     {
         "id": "dm-independent-mult",
@@ -4085,7 +4141,8 @@ var subjectFormulas = [
         "where": "P(A ∩ B) = Joint probability of both A and B occurring simultaneously",
         "whenToUse": "Use when two separate trials or events have NO influence on each other (e.g. coin flip AND die roll, sampling with replacement). Look for keywords: 'independent events', 'both A and B happen', 'successive independent trials'.",
         "example": "Flipping Heads on a coin (P(A) = 0.5) AND rolling a 6 on a die (P(B) = 1/6):\n\nP(Heads ∩ 6) = 0.5 × (1/6) = 1/12 ≈ 0.0833 (8.33%).",
-        "stampText": "📊 INDEPENDENT EVENTS MULTIPLICATION RULE\n\nP(A ∩ B) = P(A) × P(B)\n\n• Occurrence of event A does not alter probability of B\n\n🎯 When to Use / Question Clues:\nUse when two events are independent / with replacement.\nKeywords: 'Independent', 'both occur', 'consecutive rolls'\n\n💡 Worked Example:\nFlipping Heads (P = 0.5) AND rolling 6 on die (P = 1/6):\nP(H ∩ 6) = 0.5 × (1/6) = 1/12 ≈ 0.0833 (8.33%)"
+        "stampText": "📊 INDEPENDENT EVENTS MULTIPLICATION RULE\n\nP(A ∩ B) = P(A) × P(B)\n\n• Occurrence of event A does not alter probability of B\n\n🎯 When to Use / Question Clues:\nUse when two events are independent / with replacement.\nKeywords: 'Independent', 'both occur', 'consecutive rolls'\n\n💡 Worked Example:\nFlipping Heads (P = 0.5) AND rolling 6 on die (P = 1/6):\nP(H ∩ 6) = 0.5 × (1/6) = 1/12 ≈ 0.0833 (8.33%)",
+        "term": "prelim"
     },
     {
         "id": "dm-complement-rule",
@@ -4098,7 +4155,8 @@ var subjectFormulas = [
         "where": "A' = Complement of event A | P(A) + P(A') = 1.0",
         "whenToUse": "Use when finding the opposite outcome is faster than summing many cases, especially on 'at least one' problems. Look for keywords: 'Probability of not...', 'At least one success', 'Probability of failing to get...'.",
         "example": "Probability of getting at least one 6 in 4 die rolls:\nP(no 6 on 1 roll) = 5/6\nP(no 6 on all 4 rolls) = (5/6)⁴ = 625/1296 ≈ 0.482\nP(at least one 6) = 1 − 0.482 = 0.518 (51.8%).",
-        "stampText": "📊 THE COMPLEMENT FORMULA\n\nP(A') = 1 − P(A)\nP(at least one) = 1 − P(none)\n\n• P(A) + P(A') = 1.0\n\n🎯 When to Use / Question Clues:\nUse for 'not A' or 'at least one' questions.\nKeywords: 'At least one', 'neither occurs', 'not A'\n\n💡 Worked Example:\nAt least one 6 in 4 die rolls:\nP(no 6 in 4 rolls) = (5/6)⁴ ≈ 0.482\nP(at least one 6) = 1 − 0.482 = 0.518 (51.8%)"
+        "stampText": "📊 THE COMPLEMENT FORMULA\n\nP(A') = 1 − P(A)\nP(at least one) = 1 − P(none)\n\n• P(A) + P(A') = 1.0\n\n🎯 When to Use / Question Clues:\nUse for 'not A' or 'at least one' questions.\nKeywords: 'At least one', 'neither occurs', 'not A'\n\n💡 Worked Example:\nAt least one 6 in 4 die rolls:\nP(no 6 in 4 rolls) = (5/6)⁴ ≈ 0.482\nP(at least one 6) = 1 − 0.482 = 0.518 (51.8%)",
+        "term": "prelim"
     },
     {
         "id": "dm-ev-categorical",
@@ -4111,7 +4169,8 @@ var subjectFormulas = [
         "where": "P(A) = Probability of category A per trial | n = Total sample / batch size",
         "whenToUse": "Use when given a percentage/rate P(A) and asked to predict the total count expected in a population or batch of size n. Look for keywords: 'How many items do you expect...', 'Expected number of defects in a batch of n'.",
         "example": "A manufacturing line has a 2% defect rate (P(A) = 0.02). In a production run of n = 5,000 units:\nExpected defects E(A) = 0.02 × 5,000 = 100 defective units.",
-        "stampText": "📊 EXPECTED VALUE E(A) (CATEGORICAL)\n\nE(A) = P(A) × n\n\n• P(A): Probability per trial\n• n: Total sample / batch size\n\n🎯 When to Use / Question Clues:\nUse when predicting count of occurrences in a batch of size n.\nKeywords: 'How many expected in a batch of n', 'Expected count'\n\n💡 Worked Example:\n2% defect rate in 5,000 units:\nE(Defects) = 0.02 × 5,000 = 100 defective units"
+        "stampText": "📊 EXPECTED VALUE E(A) (CATEGORICAL)\n\nE(A) = P(A) × n\n\n• P(A): Probability per trial\n• n: Total sample / batch size\n\n🎯 When to Use / Question Clues:\nUse when predicting count of occurrences in a batch of size n.\nKeywords: 'How many expected in a batch of n', 'Expected count'\n\n💡 Worked Example:\n2% defect rate in 5,000 units:\nE(Defects) = 0.02 × 5,000 = 100 defective units",
+        "term": "prelim"
     },
     {
         "id": "dm-ev-numerical",
@@ -4124,7 +4183,8 @@ var subjectFormulas = [
         "where": "x = Numerical payoff / value | P(x) = Probability of outcome x | ∑ P(x) = 1.0",
         "whenToUse": "Use when given a table of numerical outcomes x and their respective probabilities P(x) (e.g. lottery tickets, financial returns, insurance claims). Look for keywords: 'Expected payoff', 'Mean of random variable X', 'Long-run average'.",
         "example": "A raffle ticket pays $100 with prob 0.01, $10 with prob 0.05, and $0 with prob 0.94:\n\nE(X) = (100 × 0.01) + (10 × 0.05) + (0 × 0.94)\n     = 1.00 + 0.50 + 0 = $1.50 expected payoff.",
-        "stampText": "📊 DISCRETE RANDOM VARIABLE MEAN E(X) / μ\n\nE(X) = μ = ∑ [ x · P(x) ]\n\n• Weighted sum of outcomes × probabilities\n\n🎯 When to Use / Question Clues:\nUse for discrete payoff tables and long-run averages.\nKeywords: 'Expected return', 'Mean payoff', 'Average value of X'\n\n💡 Worked Example:\nWin $100 (P=0.01), Win $10 (P=0.05), Win $0 (P=0.94):\nE(X) = (100×0.01) + (10×0.05) + 0 = $1.50"
+        "stampText": "📊 DISCRETE RANDOM VARIABLE MEAN E(X) / μ\n\nE(X) = μ = ∑ [ x · P(x) ]\n\n• Weighted sum of outcomes × probabilities\n\n🎯 When to Use / Question Clues:\nUse for discrete payoff tables and long-run averages.\nKeywords: 'Expected return', 'Mean payoff', 'Average value of X'\n\n💡 Worked Example:\nWin $100 (P=0.01), Win $10 (P=0.05), Win $0 (P=0.94):\nE(X) = (100×0.01) + (10×0.05) + 0 = $1.50",
+        "term": "prelim"
     },
     {
         "id": "dm-variance-sd",
@@ -4137,7 +4197,8 @@ var subjectFormulas = [
         "where": "σ² = Variance | σ = Standard Deviation | E[X²] = ∑ [x² · P(x)] | E[X] = μ",
         "whenToUse": "Use to measure uncertainty, risk, or spread in a discrete probability distribution. Look for keywords: 'Find the variance of X', 'Calculate standard deviation', 'Measure volatility / dispersion around the mean'.",
         "example": "Given mean E[X] = 2 and E[X²] = 6:\nVariance Var(X) = 6 − (2)² = 6 − 4 = 2\nStandard Deviation σ = √2 ≈ 1.414.",
-        "stampText": "📊 VARIANCE (σ²) & STANDARD DEVIATION (σ)\n\nVar(X) = σ² = E[X²] − (E[X])²\nStandard Deviation: σ = √Var(X)\n\n🎯 When to Use / Question Clues:\nUse to quantify spread, risk, or dispersion around mean.\nKeywords: 'Variance', 'Standard deviation', 'Volatility of X'\n\n💡 Worked Example:\nGiven E[X]=2, E[X²]=6:\nVar(X) = 6 − 2² = 2\nStd Dev σ = √2 ≈ 1.414"
+        "stampText": "📊 VARIANCE (σ²) & STANDARD DEVIATION (σ)\n\nVar(X) = σ² = E[X²] − (E[X])²\nStandard Deviation: σ = √Var(X)\n\n🎯 When to Use / Question Clues:\nUse to quantify spread, risk, or dispersion around mean.\nKeywords: 'Variance', 'Standard deviation', 'Volatility of X'\n\n💡 Worked Example:\nGiven E[X]=2, E[X²]=6:\nVar(X) = 6 − 2² = 2\nStd Dev σ = √2 ≈ 1.414",
+        "term": "prelim"
     },
     {
         "id": "dm-permutations",
@@ -4150,7 +4211,8 @@ var subjectFormulas = [
         "where": "n = Total count of distinct objects being arranged",
         "whenToUse": "Use when arranging ALL n items into a sequence where order matters. Look for keywords: 'In how many ways can n items be arranged in a line/shelf', 'Seating all n people in a row', 'Anagrams with unique letters'.",
         "example": "Arranging 5 distinct textbooks on a bookshelf:\nP₅ = 5! = 5 × 4 × 3 × 2 × 1 = 120 unique arrangements.",
-        "stampText": "📊 PERMUTATIONS (n!)\n\nPₙ = n! = n × (n − 1) × ... × 1\n\n• Arranging ALL n items (Order Matters)\n\n🎯 When to Use / Question Clues:\nUse when ordering all n items in a line or sequence.\nKeywords: 'Arrange all items', 'Line up n people', 'Shelf order'\n\n💡 Worked Example:\nArranging 5 books on a shelf:\n5! = 5 × 4 × 3 × 2 × 1 = 120 ways"
+        "stampText": "📊 PERMUTATIONS (n!)\n\nPₙ = n! = n × (n − 1) × ... × 1\n\n• Arranging ALL n items (Order Matters)\n\n🎯 When to Use / Question Clues:\nUse when ordering all n items in a line or sequence.\nKeywords: 'Arrange all items', 'Line up n people', 'Shelf order'\n\n💡 Worked Example:\nArranging 5 books on a shelf:\n5! = 5 × 4 × 3 × 2 × 1 = 120 ways",
+        "term": "prelim"
     },
     {
         "id": "dm-variations-subsets",
@@ -4163,7 +4225,8 @@ var subjectFormulas = [
         "where": "n = Total available items | k = Number of items chosen and arranged (k ≤ n)",
         "whenToUse": "Use when selecting a subset of size k from n AND order or role assignment matters. Look for keywords: '1st, 2nd, and 3rd place podium', 'Electing President, VP, and Secretary', 'Forming a k-digit code without repetition'.",
         "example": "Selecting 1st, 2nd, and 3rd place winners from 8 race runners:\n\n          8!        8!\nV(8, 3) = ────── = ──── = 8 × 7 × 6 = 336 podium finishes.\n          (8−3)!    5!",
-        "stampText": "📊 VARIATIONS / SUBSET PERMUTATIONS V(n, k)\n\n            n!\nV(n, k) = ──────── = n × (n − 1) × ... × (n − k + 1)\n          (n − k)!\n\n• Selecting k from n (Order / Role Matters)\n\n🎯 When to Use / Question Clues:\nUse when selecting a subset with distinct positions or rankings.\nKeywords: '1st, 2nd, 3rd place', 'President, VP, Sec', 'Rankings'\n\n💡 Worked Example:\n1st, 2nd, 3rd from 8 runners:\nV(8, 3) = 8! / 5! = 8 × 7 × 6 = 336 podium finishes"
+        "stampText": "📊 VARIATIONS / SUBSET PERMUTATIONS V(n, k)\n\n            n!\nV(n, k) = ──────── = n × (n − 1) × ... × (n − k + 1)\n          (n − k)!\n\n• Selecting k from n (Order / Role Matters)\n\n🎯 When to Use / Question Clues:\nUse when selecting a subset with distinct positions or rankings.\nKeywords: '1st, 2nd, 3rd place', 'President, VP, Sec', 'Rankings'\n\n💡 Worked Example:\n1st, 2nd, 3rd from 8 runners:\nV(8, 3) = 8! / 5! = 8 × 7 × 6 = 336 podium finishes",
+        "term": "prelim"
     },
     {
         "id": "dm-combinations",
@@ -4176,7 +4239,8 @@ var subjectFormulas = [
         "where": "n = Total pool size | k = Group size selected | C(n, k) = C(n, n − k)",
         "whenToUse": "Use when selecting a group, team, committee, or hand where order does NOT matter. Look for keywords: 'Form a committee of size k', 'Select a study group of 3 from 10', 'Dealing a 5-card poker hand', 'Subsets of size k'.",
         "example": "Choosing a project committee of 3 students from a class of 10:\n\n             10!       10 × 9 × 8     720\nC(10, 3) = ──────── = ──────────── = ───── = 120 unique committees.\n           3! · 7!     3 × 2 × 1       6",
-        "stampText": "📊 COMBINATIONS C(n, k)\n\n             n!               V(n, k)\nC(n, k) = ───────────   =   ─────────\n          k! · (n−k)!           k!\n\n• Choosing k from n (Order Irrelevant)\n\n🎯 When to Use / Question Clues:\nUse for groups, teams, committees, or hands where order is irrelevant.\nKeywords: 'Committee of size k', 'Select a team', 'Card hand'\n\n💡 Worked Example:\nSelecting 3 students from 10:\nC(10, 3) = (10 × 9 × 8) / (3 × 2 × 1) = 120 committees"
+        "stampText": "📊 COMBINATIONS C(n, k)\n\n             n!               V(n, k)\nC(n, k) = ───────────   =   ─────────\n          k! · (n−k)!           k!\n\n• Choosing k from n (Order Irrelevant)\n\n🎯 When to Use / Question Clues:\nUse for groups, teams, committees, or hands where order is irrelevant.\nKeywords: 'Committee of size k', 'Select a team', 'Card hand'\n\n💡 Worked Example:\nSelecting 3 students from 10:\nC(10, 3) = (10 × 9 × 8) / (3 × 2 × 1) = 120 committees",
+        "term": "prelim"
     },
     {
         "id": "dm-additive-law",
@@ -4189,7 +4253,8 @@ var subjectFormulas = [
         "where": "P(A ∪ B) = Union (A or B) | P(A ∩ B) = Intersection (both A and B)",
         "whenToUse": "Use when finding the probability of event A OR event B occurring. Subtract the overlapping intersection P(A ∩ B) to prevent double counting. Look for keywords: 'Probability of A OR B', 'Either event occurs'.",
         "example": "Drawing a King (P(A) = 4/52) OR a Heart (P(B) = 13/52) from a 52-card deck.\nThe King of Hearts is shared (P(A ∩ B) = 1/52):\n\nP(King ∪ Heart) = 4/52 + 13/52 − 1/52 = 16/52 = 4/13 ≈ 0.3077 (30.77%).",
-        "stampText": "📊 ADDITIVE LAW OF PROBABILITY (UNION)\n\nP(A ∪ B) = P(A) + P(B) − P(A ∩ B)\n\n• Mutually Exclusive: P(A ∪ B) = P(A) + P(B)\n\n🎯 When to Use / Question Clues:\nUse for 'A OR B' questions with possible overlap.\nKeywords: 'Probability of A OR B', 'Either A or B occurs'\n\n💡 Worked Example:\nCard is King (4/52) OR Heart (13/52):\nP(King ∪ Heart) = 4/52 + 13/52 − 1/52 = 16/52 ≈ 30.77%"
+        "stampText": "📊 ADDITIVE LAW OF PROBABILITY (UNION)\n\nP(A ∪ B) = P(A) + P(B) − P(A ∩ B)\n\n• Mutually Exclusive: P(A ∪ B) = P(A) + P(B)\n\n🎯 When to Use / Question Clues:\nUse for 'A OR B' questions with possible overlap.\nKeywords: 'Probability of A OR B', 'Either A or B occurs'\n\n💡 Worked Example:\nCard is King (4/52) OR Heart (13/52):\nP(King ∪ Heart) = 4/52 + 13/52 − 1/52 = 16/52 ≈ 30.77%",
+        "term": "prelim"
     },
     {
         "id": "dm-conditional-prob",
@@ -4202,7 +4267,8 @@ var subjectFormulas = [
         "where": "P(A | B) = Read as 'Probability of A given B' | P(B) = Conditioning event",
         "whenToUse": "Use when given prior knowledge that event B has occurred. Look for keywords: 'Given that...', 'Knowing that B happened...', 'Among the subset of B, what is the probability of A?'.",
         "example": "In a university cohort, 60% take Math (P(B) = 0.60), and 30% take both Math & Physics (P(A ∩ B) = 0.30):\n\n                     0.30\nP(Physics | Math) = ────── = 0.50  (50%).\n                     0.60",
-        "stampText": "📊 CONDITIONAL PROBABILITY\n\n           P(A ∩ B)\nP(A | B) = ─────────   [where P(B) > 0]\n             P(B)\n\n• P(A | B): Probability of A given that B occurred\n\n🎯 When to Use / Question Clues:\nUse when prior condition B is known.\nKeywords: 'Given that...', 'Knowing that...', 'Conditional on'\n\n💡 Worked Example:\n60% take Math, 30% take Math & Physics:\nP(Physics | Math) = 0.30 / 0.60 = 0.50 (50%)"
+        "stampText": "📊 CONDITIONAL PROBABILITY\n\n           P(A ∩ B)\nP(A | B) = ─────────   [where P(B) > 0]\n             P(B)\n\n• P(A | B): Probability of A given that B occurred\n\n🎯 When to Use / Question Clues:\nUse when prior condition B is known.\nKeywords: 'Given that...', 'Knowing that...', 'Conditional on'\n\n💡 Worked Example:\n60% take Math, 30% take Math & Physics:\nP(Physics | Math) = 0.30 / 0.60 = 0.50 (50%)",
+        "term": "prelim"
     },
     {
         "id": "dm-total-prob-rule",
@@ -4215,7 +4281,8 @@ var subjectFormulas = [
         "where": "B₁, B₂, ... Bₙ partition sample space S such that ∑ P(Bᵢ) = 1.0",
         "whenToUse": "Use when an event A can happen via multiple distinct pathways/sources (e.g. products manufactured across 3 different factories). Look for keywords: 'Overall defect rate', 'Total probability of event A across all branches'.",
         "example": "Factory 1 produces 60% of chips with 2% defect rate; Factory 2 produces 40% with 5% defect rate:\n\nP(Defect) = (0.02 × 0.60) + (0.05 × 0.40)\n          = 0.012 + 0.020 = 0.032  (3.2% total defect rate).",
-        "stampText": "📊 LAW OF TOTAL PROBABILITY\n\nP(A) = ∑ [ P(A | Bᵢ) × P(Bᵢ) ]\n\n• Partitions sample space into disjoint branches Bᵢ\n\n🎯 When to Use / Question Clues:\nUse when calculating overall rate across multiple sources/factories.\nKeywords: 'Overall probability', 'Total defect rate across all plants'\n\n💡 Worked Example:\nPlant 1 (60% vol, 2% def), Plant 2 (40% vol, 5% def):\nP(Defect) = (0.02×0.60) + (0.05×0.40) = 0.032 (3.2%)"
+        "stampText": "📊 LAW OF TOTAL PROBABILITY\n\nP(A) = ∑ [ P(A | Bᵢ) × P(Bᵢ) ]\n\n• Partitions sample space into disjoint branches Bᵢ\n\n🎯 When to Use / Question Clues:\nUse when calculating overall rate across multiple sources/factories.\nKeywords: 'Overall probability', 'Total defect rate across all plants'\n\n💡 Worked Example:\nPlant 1 (60% vol, 2% def), Plant 2 (40% vol, 5% def):\nP(Defect) = (0.02×0.60) + (0.05×0.40) = 0.032 (3.2%)",
+        "term": "prelim"
     },
     {
         "id": "dm-bayes-rule",
@@ -4228,7 +4295,8 @@ var subjectFormulas = [
         "where": "P(H | E) = Posterior | P(E | H) = Likelihood | P(H) = Prior | P(E) = Marginal Evidence",
         "whenToUse": "Use to reverse conditional probability and update beliefs based on evidence. Look for keywords: 'A medical test is positive; what is the probability the patient actually has the disease?', 'Spam filter probability given keyword'.",
         "example": "Disease base rate P(H) = 0.01 (1%). Test sensitivity P(E|H) = 0.95, false positive rate P(E|H') = 0.05:\n\n                 0.95 × 0.01                  0.0095\nP(H | Pos) = ───────────────────────── = ──────────────── = 0.161 (16.1%).\n             (0.95×0.01) + (0.05×0.99)   0.0095 + 0.0495",
-        "stampText": "📊 BAYES' THEOREM (BAYESIAN INFERENCE)\n\n           P(E | H) · P(H)\nP(H | E) = ───────────────\n                P(E)\n\n• Posterior = (Likelihood × Prior) / Marginal Evidence\n\n🎯 When to Use / Question Clues:\nUse to calculate true positive rate after a test result.\nKeywords: 'Test is positive, what is true chance?', 'Reverse conditional'\n\n💡 Worked Example:\nPrior P(H)=0.01, Sensitivity=0.95, False Pos=0.05:\nP(H|Positive) = (0.95×0.01) / (0.0095 + 0.05×0.99) = 16.1%"
+        "stampText": "📊 BAYES' THEOREM (BAYESIAN INFERENCE)\n\n           P(E | H) · P(H)\nP(H | E) = ───────────────\n                P(E)\n\n• Posterior = (Likelihood × Prior) / Marginal Evidence\n\n🎯 When to Use / Question Clues:\nUse to calculate true positive rate after a test result.\nKeywords: 'Test is positive, what is true chance?', 'Reverse conditional'\n\n💡 Worked Example:\nPrior P(H)=0.01, Sensitivity=0.95, False Pos=0.05:\nP(H|Positive) = (0.95×0.01) / (0.0095 + 0.05×0.99) = 16.1%",
+        "term": "prelim"
     },
     {
         "id": "dm-bernoulli-dist",
@@ -4241,7 +4309,8 @@ var subjectFormulas = [
         "where": "p = Probability of success (0 ≤ p ≤ 1) | X ∈ {0, 1}",
         "whenToUse": "Use for a single yes/no, pass/fail, heads/tails experiment. Look for keywords: 'Single trial with two outcomes', 'Bernoulli trial with success rate p'.",
         "example": "A student takes a certification exam with pass probability p = 0.80:\n\nMean E(X) = 0.80\nVariance σ² = 0.80 × (1 − 0.80) = 0.80 × 0.20 = 0.16\nStandard Deviation σ = √0.16 = 0.40.",
-        "stampText": "📊 BERNOULLI DISTRIBUTION (SINGLE TRIAL)\n\nP(X = 1) = p   |   P(X = 0) = 1 − p\nMean E(X) = p  |   Variance σ² = p(1 − p)\nStd Dev σ = √[p(1 − p)]\n\n🎯 When to Use / Question Clues:\nUse for a single trial with two outcomes (Success/Failure).\nKeywords: 'Single trial', 'Two outcomes (0 or 1)', 'Pass/Fail'\n\n💡 Worked Example:\nSuccess rate p=0.80:\nMean = 0.80, Variance = 0.80 × 0.20 = 0.16, σ = 0.40"
+        "stampText": "📊 BERNOULLI DISTRIBUTION (SINGLE TRIAL)\n\nP(X = 1) = p   |   P(X = 0) = 1 − p\nMean E(X) = p  |   Variance σ² = p(1 − p)\nStd Dev σ = √[p(1 − p)]\n\n🎯 When to Use / Question Clues:\nUse for a single trial with two outcomes (Success/Failure).\nKeywords: 'Single trial', 'Two outcomes (0 or 1)', 'Pass/Fail'\n\n💡 Worked Example:\nSuccess rate p=0.80:\nMean = 0.80, Variance = 0.80 × 0.20 = 0.16, σ = 0.40",
+        "term": "prelim"
     },
     {
         "id": "dm-binomial-dist",
@@ -4254,7 +4323,8 @@ var subjectFormulas = [
         "where": "n = Total trials | k = Number of successes (k=0,1..n) | p = Success rate per trial",
         "whenToUse": "Use when repeating n independent trials with fixed success rate p, asking for probability of exactly k successes. Look for keywords: 'n independent attempts', 'exactly k successes', 'Binomial experiment'.",
         "example": "Flipping a fair coin n = 5 times (p = 0.5). Probability of exactly k = 3 Heads:\n\nP(X = 3) = C(5, 3) × (0.5)³ × (0.5)²\n         = 10 × 0.125 × 0.25 = 0.3125  (31.25%).\nExpected Heads μ = 5 × 0.5 = 2.5.",
-        "stampText": "📊 BINOMIAL DISTRIBUTION PMF\n\nP(X = k) = C(n, k) · pᵏ · (1 − p)ⁿ⁻ᵏ\nMean μ = n · p   |   Variance σ² = n · p · (1 − p)\n\n🎯 When to Use / Question Clues:\nUse for exactly k successes in n repeated independent trials.\nKeywords: 'n attempts', 'exactly k successes', 'Fixed trials n'\n\n💡 Worked Example:\n5 coin flips (p=0.5), exactly 3 Heads:\nP(X=3) = 10 × 0.5³ × 0.5² = 0.3125 (31.25%)"
+        "stampText": "📊 BINOMIAL DISTRIBUTION PMF\n\nP(X = k) = C(n, k) · pᵏ · (1 − p)ⁿ⁻ᵏ\nMean μ = n · p   |   Variance σ² = n · p · (1 − p)\n\n🎯 When to Use / Question Clues:\nUse for exactly k successes in n repeated independent trials.\nKeywords: 'n attempts', 'exactly k successes', 'Fixed trials n'\n\n💡 Worked Example:\n5 coin flips (p=0.5), exactly 3 Heads:\nP(X=3) = 10 × 0.5³ × 0.5² = 0.3125 (31.25%)",
+        "term": "prelim"
     },
     {
         "id": "dm-poisson-dist",
@@ -4267,7 +4337,8 @@ var subjectFormulas = [
         "where": "λ = Average event arrival rate per interval | e ≈ 2.71828 | k = Number of occurrences",
         "whenToUse": "Use when counting occurrences in a continuous interval of time or area with a known average rate λ. Look for keywords: 'Average arrival rate of λ per minute/hour', 'Count of events in fixed timeframe', 'Poisson process'.",
         "example": "A server receives an average of λ = 3 requests per minute. Probability of receiving exactly k = 2 requests next minute:\n\n           3² · e⁻³    9 × 0.049787\nP(X = 2) = ──────── = ───────────── = 0.224  (22.4%).\n              2!            2",
-        "stampText": "📊 POISSON DISTRIBUTION PMF\n\n           λᵏ · e⁻λ\nP(X = k) = ─────────\n              k!\nMean μ = λ   |   Variance σ² = λ\n\n🎯 When to Use / Question Clues:\nUse for counts of events in a fixed time interval or area.\nKeywords: 'Average rate λ per minute/hour', 'Count in time window'\n\n💡 Worked Example:\nAvg λ=3 hits/min, exactly k=2 hits:\nP(X=2) = (3² × e⁻³) / 2! = (9 × 0.0498) / 2 ≈ 22.4%"
+        "stampText": "📊 POISSON DISTRIBUTION PMF\n\n           λᵏ · e⁻λ\nP(X = k) = ─────────\n              k!\nMean μ = λ   |   Variance σ² = λ\n\n🎯 When to Use / Question Clues:\nUse for counts of events in a fixed time interval or area.\nKeywords: 'Average rate λ per minute/hour', 'Count in time window'\n\n💡 Worked Example:\nAvg λ=3 hits/min, exactly k=2 hits:\nP(X=2) = (3² × e⁻³) / 2! = (9 × 0.0498) / 2 ≈ 22.4%",
+        "term": "prelim"
     },
     {
         "id": "dm-zscore-dist",
@@ -4280,7 +4351,8 @@ var subjectFormulas = [
         "where": "X = Raw score | μ = Population mean | σ = Standard deviation",
         "whenToUse": "Use when standardizing values to find percentiles or probabilities on a normal bell curve. Look for keywords: 'Normally distributed with mean μ and std dev σ', 'Find the Z-score of score X', 'What proportion falls above/below X?'.",
         "example": "Exam scores are normally distributed with mean μ = 75 and σ = 10. A student scores X = 90:\n\n     90 − 75     15\nZ = ───────── = ──── = +1.50  (1.5 standard deviations above average).\n       10        10",
-        "stampText": "📊 NORMAL DISTRIBUTION Z-SCORE\n\n     X − μ\nZ = ───────\n       σ\n\n• Standardizes value into std deviations from mean\n\n🎯 When to Use / Question Clues:\nUse to compare or lookup percentiles on a normal bell curve.\nKeywords: 'Normally distributed with mean μ and σ', 'Z-score'\n\n💡 Worked Example:\nClass mean μ=75, σ=10, student score X=90:\nZ = (90 − 75) / 10 = +1.50 (1.5σ above average)"
+        "stampText": "📊 NORMAL DISTRIBUTION Z-SCORE\n\n     X − μ\nZ = ───────\n       σ\n\n• Standardizes value into std deviations from mean\n\n🎯 When to Use / Question Clues:\nUse to compare or lookup percentiles on a normal bell curve.\nKeywords: 'Normally distributed with mean μ and σ', 'Z-score'\n\n💡 Worked Example:\nClass mean μ=75, σ=10, student score X=90:\nZ = (90 − 75) / 10 = +1.50 (1.5σ above average)",
+        "term": "prelim"
     },
     {
         "id": "at-alphabets-strings",
@@ -4293,7 +4365,8 @@ var subjectFormulas = [
         "where": "Binary Σ = {0, 1} | Substring, Prefix, and Suffix definitions",
         "whenToUse": "Use when defining formal alphabets, calculating string lengths, or identifying prefixes and suffixes. Look for keywords: 'Find length |w|', 'Identify prefix/suffix', 'Binary alphabet Σ={0, 1}'.",
         "example": "Given binary alphabet Σ = {0, 1}, string w = 010100 has length |w| = 6.\nPrefixes: {ε, 0, 01, 010, 0101, 01010, 010100}\nSuffixes: {ε, 0, 00, 100, 0100, 10100, 010100}.",
-        "stampText": "🤖 ALPHABETS (Σ), STRING LENGTH (|w|) & EMPTY STRING (ε)\n\n• Alphabet Σ: Finite non-empty set of symbols\n• String Length |w|: Number of symbols in w\n• Empty String: |ε| = 0   |   wε = εw = w\n\n🎯 When to Use / Question Clues:\nUse for string properties, tokenization, and language basics.\nKeywords: 'Length of string |w|', 'Prefix/Suffix', 'Alphabet Σ'\n\n💡 Worked Example:\nFor binary Σ={0, 1}, string w=010100 has length |w|=6"
+        "stampText": "🤖 ALPHABETS (Σ), STRING LENGTH (|w|) & EMPTY STRING (ε)\n\n• Alphabet Σ: Finite non-empty set of symbols\n• String Length |w|: Number of symbols in w\n• Empty String: |ε| = 0   |   wε = εw = w\n\n🎯 When to Use / Question Clues:\nUse for string properties, tokenization, and language basics.\nKeywords: 'Length of string |w|', 'Prefix/Suffix', 'Alphabet Σ'\n\n💡 Worked Example:\nFor binary Σ={0, 1}, string w=010100 has length |w|=6",
+        "term": "prelim"
     },
     {
         "id": "at-concatenation",
@@ -4306,7 +4379,8 @@ var subjectFormulas = [
         "where": "x, y, u, v ∈ Σ* | Palindrome: String equals its own reverse",
         "whenToUse": "Use when joining strings or proving properties of string reversal. Look for keywords: 'Concatenate strings x and y', 'Find reverse of string (uv)^R', 'Palindrome condition w = w^R'.",
         "example": "Let x = 'cat' (|x| = 3) and y = 'dog' (|y| = 3):\nConcatenation xy = 'catdog' (|xy| = 3 + 3 = 6)\nReversal (xy)ᴿ = yᴿ xᴿ = 'godtac'.",
-        "stampText": "🤖 STRING CONCATENATION & REVERSAL\n\n• Concatenation: |xy| = |x| + |y|\n• Reversal: (uv)ᴿ = vᴿ uᴿ   |   (wᴿ)ᴿ = w\n• Palindrome: w = wᴿ\n\n🎯 When to Use / Question Clues:\nUse when combining or reversing strings.\nKeywords: 'Concatenation |xy|', 'Reversal (uv)^R', 'Palindrome'\n\n💡 Worked Example:\nx='cat', y='dog' ⇒ xy='catdog' (|xy|=6)\nReversal (xy)ᴿ = 'godtac'"
+        "stampText": "🤖 STRING CONCATENATION & REVERSAL\n\n• Concatenation: |xy| = |x| + |y|\n• Reversal: (uv)ᴿ = vᴿ uᴿ   |   (wᴿ)ᴿ = w\n• Palindrome: w = wᴿ\n\n🎯 When to Use / Question Clues:\nUse when combining or reversing strings.\nKeywords: 'Concatenation |xy|', 'Reversal (uv)^R', 'Palindrome'\n\n💡 Worked Example:\nx='cat', y='dog' ⇒ xy='catdog' (|xy|=6)\nReversal (xy)ᴿ = 'godtac'",
+        "term": "prelim"
     },
     {
         "id": "at-powers-alphabet",
@@ -4319,7 +4393,8 @@ var subjectFormulas = [
         "where": "Σ⁰ = {ε} | |Σ| = size of alphabet",
         "whenToUse": "Use to determine the number of strings of length k or distinguish Kleene star from positive closure. Look for keywords: 'How many strings of length k exist in Σ^k?', 'Difference between Σ* and Σ+'.",
         "example": "For binary alphabet Σ = {0, 1} (|Σ| = 2):\nNumber of strings of length 3 is |Σ³| = 2³ = 8 binary strings:\n{000, 001, 010, 011, 100, 101, 110, 111}.",
-        "stampText": "🤖 POWERS OF AN ALPHABET (Σ*, Σ⁺, Σᵏ)\n\n• Strings of length k: |Σᵏ| = |Σ|ᵏ\n• Kleene Star Σ*: {ε, all finite strings}\n• Positive Closure Σ⁺: Σ* \\ {ε}\n\n🎯 When to Use / Question Clues:\nUse to calculate string permutations or closure sets.\nKeywords: 'How many strings of length k', 'Kleene star Σ*', 'Σ+'\n\n💡 Worked Example:\nFor binary Σ={0, 1}: |Σ³| = 2³ = 8 binary strings of length 3"
+        "stampText": "🤖 POWERS OF AN ALPHABET (Σ*, Σ⁺, Σᵏ)\n\n• Strings of length k: |Σᵏ| = |Σ|ᵏ\n• Kleene Star Σ*: {ε, all finite strings}\n• Positive Closure Σ⁺: Σ* \\ {ε}\n\n🎯 When to Use / Question Clues:\nUse to calculate string permutations or closure sets.\nKeywords: 'How many strings of length k', 'Kleene star Σ*', 'Σ+'\n\n💡 Worked Example:\nFor binary Σ={0, 1}: |Σ³| = 2³ = 8 binary strings of length 3",
+        "term": "prelim"
     },
     {
         "id": "at-dfa-5tuple",
@@ -4332,7 +4407,8 @@ var subjectFormulas = [
         "where": "Q = Finite states | Σ = Alphabet | δ = Transition function | q₀ ∈ Q = Initial state | F ⊆ Q = Accept states",
         "whenToUse": "Use when formally specifying a DFA or tracing string acceptance through state transitions. Look for keywords: 'Define the 5-tuple for DFA', 'Transition function δ(q, a)', 'Language recognized by automaton L(M)'.",
         "example": "DFA accepting binary strings with even number of 0s:\nQ = {q0, q1},  Σ = {0, 1},  start = q0,  accept F = {q0}\nTransitions: δ(q0, 0) = q1,  δ(q0, 1) = q0\n             δ(q1, 0) = q0,  δ(q1, 1) = q1.",
-        "stampText": "🤖 DFA FORMAL 5-TUPLE DEFINITION\n\nM = ( Q, Σ, δ, q₀, F )\n• Q: States | Σ: Alphabet | δ: Transition | q₀: Start | F: Accept\n\n🎯 When to Use / Question Clues:\nUse for finite state machine specifications and state diagrams.\nKeywords: '5-tuple definition', 'Transition table δ', 'Accept state F'\n\n💡 Worked Example:\nEven 0s DFA: Q={q0, q1}, Σ={0, 1}, F={q0}\nTransitions: δ(q0, 0)=q1, δ(q1, 0)=q0 (flips state on '0')"
+        "stampText": "🤖 DFA FORMAL 5-TUPLE DEFINITION\n\nM = ( Q, Σ, δ, q₀, F )\n• Q: States | Σ: Alphabet | δ: Transition | q₀: Start | F: Accept\n\n🎯 When to Use / Question Clues:\nUse for finite state machine specifications and state diagrams.\nKeywords: '5-tuple definition', 'Transition table δ', 'Accept state F'\n\n💡 Worked Example:\nEven 0s DFA: Q={q0, q1}, Σ={0, 1}, F={q0}\nTransitions: δ(q0, 0)=q1, δ(q1, 0)=q0 (flips state on '0')",
+        "term": "prelim"
     },
     {
         "id": "at-computability-halting",
@@ -4345,7 +4421,8 @@ var subjectFormulas = [
         "where": "Alan Turing (1936) proved no general algorithm can decide whether arbitrary program P halts on input I.",
         "whenToUse": "Use when classifying problem complexity or limits of computation. Look for keywords: 'Tractable vs Intractable', 'Halting Problem', 'Undecidable decision problem', 'Polynomial vs exponential time'.",
         "example": "Tractable (P): MergeSort O(n log n), Binary Search O(log n).\nIntractable (NP-Hard): Traveling Salesperson Problem O(n!).\nUndecidable: Determining if arbitrary code terminates or loops forever.",
-        "stampText": "🤖 COMPUTABILITY & THE HALTING PROBLEM\n\n• Decision Problem: f: Σ* → {Yes, No}\n• Tractable (P): O(nᵏ) Polynomial time\n• Intractable: O(2ⁿ) Exponential time\n• Halting Problem: Undecidable & Noncomputable\n\n🎯 When to Use / Question Clues:\nUse to classify algorithmic limits and problem complexity.\nKeywords: 'Halting problem', 'Tractable vs Intractable', 'Undecidable'\n\n💡 Worked Example:\nTractable: MergeSort O(n log n).\nUndecidable: Determining if arbitrary program P halts or loops forever."
+        "stampText": "🤖 COMPUTABILITY & THE HALTING PROBLEM\n\n• Decision Problem: f: Σ* → {Yes, No}\n• Tractable (P): O(nᵏ) Polynomial time\n• Intractable: O(2ⁿ) Exponential time\n• Halting Problem: Undecidable & Noncomputable\n\n🎯 When to Use / Question Clues:\nUse to classify algorithmic limits and problem complexity.\nKeywords: 'Halting problem', 'Tractable vs Intractable', 'Undecidable'\n\n💡 Worked Example:\nTractable: MergeSort O(n log n).\nUndecidable: Determining if arbitrary program P halts or loops forever.",
+        "term": "prelim"
     },
     {
         "id": "ias-cia-triad",
@@ -4358,7 +4435,8 @@ var subjectFormulas = [
         "where": "Asset = Valuable resource | Threat = Potential harm | Vulnerability = Flaw/weakness",
         "whenToUse": "Use to categorize security goals, controls, vulnerabilities, and incident impacts. Look for keywords: 'Classify security objective (CIA)', 'Parkerian Hexad extension', 'Risk calculation formula'.",
         "example": "• Confidentiality: Encrypting patient database with AES-256.\n• Integrity: Using SHA-256 checksums to verify software updates.\n• Availability: Deploying redundant servers and DDoS mitigation.",
-        "stampText": "🔒 THE CIA TRIAD & PARKERIAN HEXAD\n\n• Confidentiality: Preventing unauthorized disclosure\n• Integrity: Guarding against unauthorized modification\n• Availability: Ensuring timely, reliable authorized access\n• Parkerian Hexad: CIA + Possession, Authenticity, Utility\n\n🎯 When to Use / Question Clues:\nUse to classify security controls, threats, and policy goals.\nKeywords: 'CIA objective', 'Confidentiality vs Integrity', 'Hexad'\n\n💡 Worked Example:\n• Confidentiality: AES-256 encryption\n• Integrity: SHA-256 checksum verification\n• Availability: Redundant server failover"
+        "stampText": "🔒 THE CIA TRIAD & PARKERIAN HEXAD\n\n• Confidentiality: Preventing unauthorized disclosure\n• Integrity: Guarding against unauthorized modification\n• Availability: Ensuring timely, reliable authorized access\n• Parkerian Hexad: CIA + Possession, Authenticity, Utility\n\n🎯 When to Use / Question Clues:\nUse to classify security controls, threats, and policy goals.\nKeywords: 'CIA objective', 'Confidentiality vs Integrity', 'Hexad'\n\n💡 Worked Example:\n• Confidentiality: AES-256 encryption\n• Integrity: SHA-256 checksum verification\n• Availability: Redundant server failover",
+        "term": "prelim"
     },
     {
         "id": "ias-sle-calc",
@@ -4371,7 +4449,8 @@ var subjectFormulas = [
         "where": "AV = Monetary value of asset ($) | EF = Exposure Factor (% damage, 0.0 to 1.0) | SLE in ($)",
         "whenToUse": "Use in quantitative risk assessments to compute single-incident financial loss. Look for keywords: 'Asset Value AV', 'Exposure Factor EF', 'Monetary damage for a single incident'.",
         "example": "A primary datacenter server is valued at AV = $100,000.\nA localized warehouse fire causes EF = 40% (0.40) destruction:\n\nSLE = $100,000 × 0.40 = $40,000 monetary loss per incident.",
-        "stampText": "🔒 SINGLE LOSS EXPECTANCY (SLE)\n\nSLE = Asset Value (AV) × Exposure Factor (EF)\n\n• AV: Asset monetary value ($)\n• EF: Exposure percentage (0.0 to 1.0)\n\n🎯 When to Use / Question Clues:\nUse to calculate financial loss per single incident.\nKeywords: 'Asset Value AV', 'Exposure Factor EF', 'Single incident loss'\n\n💡 Worked Example:\nServer AV = $100,000, Fire damage EF = 40% (0.40):\nSLE = $100,000 × 0.40 = $40,000 per incident"
+        "stampText": "🔒 SINGLE LOSS EXPECTANCY (SLE)\n\nSLE = Asset Value (AV) × Exposure Factor (EF)\n\n• AV: Asset monetary value ($)\n• EF: Exposure percentage (0.0 to 1.0)\n\n🎯 When to Use / Question Clues:\nUse to calculate financial loss per single incident.\nKeywords: 'Asset Value AV', 'Exposure Factor EF', 'Single incident loss'\n\n💡 Worked Example:\nServer AV = $100,000, Fire damage EF = 40% (0.40):\nSLE = $100,000 × 0.40 = $40,000 per incident",
+        "term": "prelim"
     },
     {
         "id": "ias-ale-calc",
@@ -4384,7 +4463,8 @@ var subjectFormulas = [
         "where": "SLE = Single Loss Expectancy ($) | ARO = Annualized Rate of Occurrence (events/year) | ALE in ($/year)",
         "whenToUse": "Use to project annual loss from a security risk. Look for keywords: 'Annualized Rate of Occurrence ARO', 'Expected annual loss ALE', 'Threat occurring once every n years'.",
         "example": "Data breach damage SLE = $50,000.\nThreat intelligence projects an incident once every 2 years (ARO = 0.50):\n\nALE = $50,000 × 0.50 = $25,000 projected annual loss.",
-        "stampText": "🔒 ANNUALIZED LOSS EXPECTANCY (ALE)\n\nALE = SLE × ARO = AV × EF × ARO\n\n• SLE: Single Loss Expectancy ($)\n• ARO: Annualized Rate of Occurrence (events/year)\n\n🎯 When to Use / Question Clues:\nUse to project expected monetary loss over a 1-year period.\nKeywords: 'Annualized Rate of Occurrence ARO', 'Expected annual loss'\n\n💡 Worked Example:\nBreach SLE = $50,000, ARO = 0.50 (once every 2 yrs):\nALE = $50,000 × 0.50 = $25,000 projected loss/year"
+        "stampText": "🔒 ANNUALIZED LOSS EXPECTANCY (ALE)\n\nALE = SLE × ARO = AV × EF × ARO\n\n• SLE: Single Loss Expectancy ($)\n• ARO: Annualized Rate of Occurrence (events/year)\n\n🎯 When to Use / Question Clues:\nUse to project expected monetary loss over a 1-year period.\nKeywords: 'Annualized Rate of Occurrence ARO', 'Expected annual loss'\n\n💡 Worked Example:\nBreach SLE = $50,000, ARO = 0.50 (once every 2 yrs):\nALE = $50,000 × 0.50 = $25,000 projected loss/year",
+        "term": "prelim"
     },
     {
         "id": "ias-cba-calc",
@@ -4397,7 +4477,8 @@ var subjectFormulas = [
         "where": "ALE_prior = Inherent annual loss | ALE_post = Residual annual loss | ACS = Annual Cost of Safeguard",
         "whenToUse": "Use to justify security budgets and safeguard implementations. Look for keywords: 'Is this security safeguard financially justified?', 'Cost-Benefit Analysis CBA', 'ALE reduction vs Annual Cost of Safeguard ACS'.",
         "example": "Unprotected ALE_prior = $80,000/yr. An EDR safeguard reduces risk to ALE_post = $15,000/yr. Annual subscription ACS = $20,000/yr:\n\nNet Benefit = ($80,000 − $15,000) − $20,000\n            = $65,000 − $20,000 = $45,000/yr net savings (Justified).",
-        "stampText": "🔒 SAFEGUARD COST-BENEFIT ANALYSIS (CBA)\n\nNet Benefit = (ALE_prior − ALE_post) − ACS\n\n• ALE_prior: Inherent risk | ALE_post: Residual risk\n• ACS: Annual Cost of Safeguard\n\n🎯 When to Use / Question Clues:\nUse to determine if purchasing a security control is justified.\nKeywords: 'Cost-Benefit Analysis CBA', 'Justify safeguard investment'\n\n💡 Worked Example:\nPrior ALE = $80k, Post ALE = $15k, Safeguard Cost = $20k:\nNet Benefit = ($80k − $15k) − $20k = +$45,000/year savings"
+        "stampText": "🔒 SAFEGUARD COST-BENEFIT ANALYSIS (CBA)\n\nNet Benefit = (ALE_prior − ALE_post) − ACS\n\n• ALE_prior: Inherent risk | ALE_post: Residual risk\n• ACS: Annual Cost of Safeguard\n\n🎯 When to Use / Question Clues:\nUse to determine if purchasing a security control is justified.\nKeywords: 'Cost-Benefit Analysis CBA', 'Justify safeguard investment'\n\n💡 Worked Example:\nPrior ALE = $80k, Post ALE = $15k, Safeguard Cost = $20k:\nNet Benefit = ($80k − $15k) − $20k = +$45,000/year savings",
+        "term": "prelim"
     },
     {
         "id": "ias-access-control",
@@ -4410,7 +4491,8 @@ var subjectFormulas = [
         "where": "DAC = Owner controls | MAC = Security clearances/labels | RBAC = Job roles | ABAC = Context/attributes",
         "whenToUse": "Use when designing authentication flows or selecting authorization architectures. Look for keywords: 'Four steps of IAAA', 'Multi-factor authentication (MFA)', 'Discretionary vs Mandatory vs Role-Based Access Control'.",
         "example": "Login Flow: Enter username 'alice' (Identification) → submit Password + SMS Token (2FA Authentication) → check Role='Doctor' (RBAC Authorization) → append action to audit syslog (Accountability).",
-        "stampText": "🔒 ACCESS CONTROL & IAAA FRAMEWORK\n\n• IAAA: Identification → Authentication → Authorization → Accountability\n• 3 Auth Factors: Know (Pass), Have (Token), Are (Biometric)\n• Models: DAC (Owner), MAC (Labels), RBAC (Roles), ABAC (Context)\n\n🎯 When to Use / Question Clues:\nUse for authentication design and authorization model selection.\nKeywords: 'IAAA framework', 'MFA factors', 'RBAC vs MAC vs DAC'\n\n💡 Worked Example:\nEnter email (ID) → 2FA OTP (Auth) → Doctor Role check (RBAC) → Audit log (Accountability)"
+        "stampText": "🔒 ACCESS CONTROL & IAAA FRAMEWORK\n\n• IAAA: Identification → Authentication → Authorization → Accountability\n• 3 Auth Factors: Know (Pass), Have (Token), Are (Biometric)\n• Models: DAC (Owner), MAC (Labels), RBAC (Roles), ABAC (Context)\n\n🎯 When to Use / Question Clues:\nUse for authentication design and authorization model selection.\nKeywords: 'IAAA framework', 'MFA factors', 'RBAC vs MAC vs DAC'\n\n💡 Worked Example:\nEnter email (ID) → 2FA OTP (Auth) → Doctor Role check (RBAC) → Audit log (Accountability)",
+        "term": "prelim"
     },
     {
         "id": "os-core-functions",
@@ -4423,7 +4505,8 @@ var subjectFormulas = [
         "where": "Architectures: Monolithic Kernel vs Microkernel (Mach, MINIX) vs Layered/Modular",
         "whenToUse": "Use when explaining OS architecture and privilege isolation. Look for keywords: '5 Core OS management functions', 'User Mode vs Kernel Mode', 'What happens during a system call trap?'.",
         "example": "When a web browser requests `file.read()`, CPU switches from User Mode (Ring 3) to Kernel Mode (Ring 0) via SYS_READ trap, kernel accesses SSD sectors into memory buffer, then returns control to Ring 3.",
-        "stampText": "💻 5 CORE OS FUNCTIONS & DUAL-MODE CPU\n\n• 5 Functions: Process, Memory, File, Device, Security\n• User Mode (Ring 3) ↔ Kernel Mode (Ring 0)\n• System Call Trap switches privilege modes safely\n\n🎯 When to Use / Question Clues:\nUse for OS architecture, system call traps, and kernel design.\nKeywords: '5 Core OS functions', 'User Mode Ring 3 vs Kernel Ring 0'\n\n💡 Worked Example:\nApp calls `read()`: CPU switches Ring 3 → Ring 0 via system call trap, kernel reads disk sector, switches back to Ring 3."
+        "stampText": "💻 5 CORE OS FUNCTIONS & DUAL-MODE CPU\n\n• 5 Functions: Process, Memory, File, Device, Security\n• User Mode (Ring 3) ↔ Kernel Mode (Ring 0)\n• System Call Trap switches privilege modes safely\n\n🎯 When to Use / Question Clues:\nUse for OS architecture, system call traps, and kernel design.\nKeywords: '5 Core OS functions', 'User Mode Ring 3 vs Kernel Ring 0'\n\n💡 Worked Example:\nApp calls `read()`: CPU switches Ring 3 → Ring 0 via system call trap, kernel reads disk sector, switches back to Ring 3.",
+        "term": "prelim"
     },
     {
         "id": "os-subnetting-hosts",
@@ -4436,7 +4519,8 @@ var subjectFormulas = [
         "where": "Total bits = 32 (s + h = 32 − network prefix) | Total IP Addresses = 2ʰ",
         "whenToUse": "Use when designing subnets or calculating host capacities from CIDR prefix (e.g. /26, /28). Look for keywords: 'Number of usable host addresses in /26 subnet', 'Why subtract 2 in host formula?', 'CIDR prefix calculation'.",
         "example": "Class C network 192.168.1.0/26 (Mask 255.255.255.192):\nBorrowed bits s = 2 ⇒ 2² = 4 subnets.\nHost bits h = 32 − 26 = 6 ⇒ Usable hosts = 2⁶ − 2 = 64 − 2 = 62 usable hosts per subnet.",
-        "stampText": "💻 IPv4 SUBNETTING & USABLE HOST FORMULAS\n\n• Number of Subnets = 2ˢ (s = borrowed bits)\n• Usable Hosts per Subnet = 2ʰ − 2 (h = host bits)\n• −2 Excludes: Network ID & Broadcast ID\n\n🎯 When to Use / Question Clues:\nUse to calculate subnets and usable host capacities from CIDR.\nKeywords: 'Usable hosts in /26', 'Why subtract 2?', 'Subnet capacity'\n\n💡 Worked Example:\nFor `192.168.1.0/26` (s=2, h=6):\nSubnets = 2² = 4 | Usable Hosts = 2⁶ − 2 = 62 hosts/subnet"
+        "stampText": "💻 IPv4 SUBNETTING & USABLE HOST FORMULAS\n\n• Number of Subnets = 2ˢ (s = borrowed bits)\n• Usable Hosts per Subnet = 2ʰ − 2 (h = host bits)\n• −2 Excludes: Network ID & Broadcast ID\n\n🎯 When to Use / Question Clues:\nUse to calculate subnets and usable host capacities from CIDR.\nKeywords: 'Usable hosts in /26', 'Why subtract 2?', 'Subnet capacity'\n\n💡 Worked Example:\nFor `192.168.1.0/26` (s=2, h=6):\nSubnets = 2² = 4 | Usable Hosts = 2⁶ − 2 = 62 hosts/subnet",
+        "term": "prelim"
     },
     {
         "id": "os-windows-cli",
@@ -4449,10 +4533,391 @@ var subjectFormulas = [
         "where": "ipconfig: IP, Subnet Mask, Gateway, DNS | ping: ICMP latency | tracert: Hop route | netstat: Active ports",
         "whenToUse": "Use to select the correct Windows CLI tool for network troubleshooting. Look for keywords: 'Command to view MAC address and Default Gateway', 'Test ICMP packet reachability', 'Identify failing router hop'.",
         "example": "Step-by-step outage troubleshooting:\n1. `ipconfig /all`  (check Default Gateway IP)\n2. `ping 192.168.1.1` (verify local router connectivity)\n3. `ping 8.8.8.8`   (verify internet reachability)\n4. `tracert 8.8.8.8` (pinpoint dropping router hop).",
-        "stampText": "💻 WINDOWS CLI NETWORK DIAGNOSTICS\n\n• ipconfig /all: IP, Subnet Mask, Default Gateway, DNS, MAC\n• ping <target>: ICMP reachability & packet loss test\n• tracert <target>: Hop-by-hop router path tracing\n• netstat -an: Active TCP/UDP ports & connections\n• nslookup <domain>: DNS server query & resolution\n\n🎯 When to Use / Question Clues:\nUse to choose diagnostic commands for network troubleshooting.\nKeywords: 'Check default gateway', 'Test ICMP connectivity', 'Trace hops'\n\n💡 Worked Example:\n`ipconfig /all` → `ping 192.168.1.1` → `tracert 8.8.8.8`"
+        "stampText": "💻 WINDOWS CLI NETWORK DIAGNOSTICS\n\n• ipconfig /all: IP, Subnet Mask, Default Gateway, DNS, MAC\n• ping <target>: ICMP reachability & packet loss test\n• tracert <target>: Hop-by-hop router path tracing\n• netstat -an: Active TCP/UDP ports & connections\n• nslookup <domain>: DNS server query & resolution\n\n🎯 When to Use / Question Clues:\nUse to choose diagnostic commands for network troubleshooting.\nKeywords: 'Check default gateway', 'Test ICMP connectivity', 'Trace hops'\n\n💡 Worked Example:\n`ipconfig /all` → `ping 192.168.1.1` → `tracert 8.8.8.8`",
+        "term": "prelim"
+    },
+    {
+        "id": "ias-caesar-enc",
+        "subject": "ias",
+        "subjectName": "Information Assurance & Security",
+        "topic": "Cryptography Fundamentals (Midterm Week 7)",
+        "title": "Caesar Cipher Encryption Formula",
+        "formula": "C = (P + k) mod 26",
+        "desc": "A classical symmetric substitution cipher where each letter in the plaintext is shifted forward by a fixed integer key k along the 26-letter English alphabet.",
+        "where": "C = Ciphertext character index (0–25) | P = Plaintext character index (0–25) | k = Secret shift key (1–25) | mod 26 = Modulo arithmetic (wraps Z back to A)",
+        "whenToUse": "Use when performing monoalphabetic substitution or calculating cipher shifts in classical cryptography. Look for exam clues: 'Shift key k', 'Caesar cipher encryption', 'Modular shift over 26 alphabet letters'.",
+        "example": "Encrypt plaintext \"CAT\" with key k = 3:\n• C (index 2)  : (2 + 3) mod 26  = 5  -> 'F'\n• A (index 0)  : (0 + 3) mod 26  = 3  -> 'D'\n• T (index 19) : (19 + 3) mod 26 = 22 -> 'W'\n\nPlaintext:  C   A   T\nCiphertext: F   D   W",
+        "stampText": "🔒 CAESAR CIPHER ENCRYPTION\n\nC = (P + k) mod 26\n\n• C: Ciphertext index (0–25)\n• P: Plaintext index (0–25)\n• k: Shift key (1–25)\n• mod 26: Modular wrap-around\n\n🎯 When to Use / Question Clues:\nUse for classical monoalphabetic substitution problems.\nKeywords: 'Shift key k', 'Caesar encryption', 'Modulo 26'\n\n💡 Worked Example:\nEncrypt \"CAT\" with key k = 3:\nC (2)  + 3 = 5  -> 'F'\nA (0)  + 3 = 3  -> 'D'\nT (19) + 3 = 22 -> 'W'\nCiphertext = \"FDW\"",
+        "term": "midterm"
+    },
+    {
+        "id": "ias-caesar-dec",
+        "subject": "ias",
+        "subjectName": "Information Assurance & Security",
+        "topic": "Cryptography Fundamentals (Midterm Week 7)",
+        "title": "Caesar Cipher Decryption Formula",
+        "formula": "P = (C - k + 26) mod 26",
+        "desc": "Reverses the Caesar shift cipher by moving backwards by k positions, adding 26 before the modulo to handle negative values safely.",
+        "where": "P = Recovered plaintext letter (0–25) | C = Ciphertext letter (0–25) | k = Secret shift key | +26 = Prevents negative modulo results in programming",
+        "whenToUse": "Use when decrypting Caesar cipher messages or reversing monoalphabetic shifts given a known key k. Look for exam clues: 'Decrypt ciphertext', 'Reverse Caesar shift', 'Recover original message'.",
+        "example": "Decrypt ciphertext \"FDW\" with key k = 3:\n• F (index 5)  : (5 - 3 + 26) mod 26  = 28 mod 26 = 2  -> 'C'\n• D (index 3)  : (3 - 3 + 26) mod 26  = 26 mod 26 = 0  -> 'A'\n• W (index 22) : (22 - 3 + 26) mod 26 = 45 mod 26 = 19 -> 'T'\n\nCiphertext: F   D   W\nPlaintext:  C   A   T",
+        "stampText": "🔒 CAESAR CIPHER DECRYPTION\n\nP = (C - k + 26) mod 26\n\n• P: Plaintext index (0–25)\n• C: Ciphertext index (0–25)\n• k: Shift key (1–25)\n• +26: Safe non-negative wrap\n\n🎯 When to Use / Question Clues:\nUse to reverse Caesar shift encryption given key k.\nKeywords: 'Decrypt Caesar', 'Recover plaintext', 'Minus shift k'\n\n💡 Worked Example:\nDecrypt \"FDW\" with key k = 3:\nF (5)  - 3 = 2  -> 'C'\nD (3)  - 3 = 0  -> 'A'\nW (22) - 3 = 19 -> 'T'\nPlaintext = \"CAT\"",
+        "term": "midterm"
+    },
+    {
+        "id": "ias-hash-avalanche",
+        "subject": "ias",
+        "subjectName": "Information Assurance & Security",
+        "topic": "Cryptography Fundamentals (Midterm Week 7)",
+        "title": "Cryptographic Hash One-Wayness & Avalanche Effect",
+        "formula": "h = H(m)  where  P(H(m1) == H(m2)) ≈ 2^(-256)\nAvalanche Criterion: Δm = 1 bit  =>  Δh ≈ 50% output bits flipped",
+        "desc": "A cryptographic hash function H maps arbitrary-length input m to a fixed-length digest h. It is strictly one-way (pre-image resistant) and exhibits a high-entropy avalanche effect.",
+        "where": "m = Input message | h = Fixed digest (e.g. 256 bits) | Pre-image Resistance: Given h, finding m requires 2^256 brute-force steps | Collision Resistance: Finding any m1 ≠ m2 with H(m1) = H(m2) requires 2^128 steps (Birthday Bound)",
+        "whenToUse": "Use when verifying data integrity, digital signatures, or password authentication. Look for exam clues: 'One-way function', 'Avalanche effect', 'Single bit modification flips output', 'Pre-image vs collision resistance'.",
+        "example": "SHA-256(\"password\")  = 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8\nSHA-256(\"password.\") = b109f3bbbc244eb82441917ed06d618b9008dd09b3befd1b5e07394c706a8bb980b1d7785e5976ec03c1\n(Changing a single '.' character completely scrambles ~50% of all digest bits)",
+        "stampText": "🔒 CRYPTOGRAPHIC HASH & AVALANCHE EFFECT\n\nh = H(m)\nAvalanche: Δm = 1 bit  =>  ~50% of hash bits flip\n\n• One-Way: Infeasible to compute m from h (2^256 trials)\n• Collision Resistant: Infeasible to find m1 ≠ m2 with H(m1) = H(m2)\n• Deterministic: Identical input always yields identical hash\n\n🎯 When to Use / Question Clues:\nIntegrity checks, file tampering detection, digital signatures.\nKeywords: 'Integrity proof', 'One-way function', 'Avalanche effect'\n\n💡 Worked Example:\nInput:  \"password\"  -> 5e884898...\nInput:  \"password.\" -> b109f3bb...\nA 1-character difference totally mutates the output digest!",
+        "term": "midterm"
+    },
+    {
+        "id": "ias-post-quantum",
+        "subject": "ias",
+        "subjectName": "Information Assurance & Security",
+        "topic": "Cryptography Fundamentals (Midterm Week 7)",
+        "title": "Post-Quantum Security & Key-Doubling Rule",
+        "formula": "Grover's Algorithm Attack: Effective Security = n / 2 bits\nQuantum Defense Rule     : Double Symmetric Key Size  (n >= 256 bits)\nShor's Algorithm Attack  : Completely breaks RSA & ECC (poly-time discrete log)",
+        "desc": "Quantum computers running Shor's algorithm completely break public-key crypto (RSA/ECC). Running Grover's algorithm cuts symmetric brute-force security in half, requiring AES-256 and post-quantum lattice standards (ML-KEM, ML-DSA).",
+        "where": "n = Key bit length | AES-128 provides only 64 bits of quantum security | AES-256 retains 128 bits of quantum security (NIST safe) | FIPS 203: ML-KEM | FIPS 204: ML-DSA",
+        "whenToUse": "Use when analyzing quantum cryptographic resistance and migration planning. Look for exam clues: 'Grover's algorithm speedup', 'Shor's algorithm impact on RSA', 'Double symmetric key size', 'NIST PQC standards (ML-KEM, ML-DSA)'.",
+        "example": "• Classical AES-128: 2^128 brute force trials\n• Quantum Grover:    √(2^128) = 2^64 trials  (Vulnerable!)\n• Classical AES-256: 2^256 brute force trials\n• Quantum Grover:    √(2^256) = 2^128 trials (Secure against quantum attack!)",
+        "stampText": "🔒 POST-QUANTUM CRYPTOGRAPHY & KEY DOUBLING\n\nQuantum Security = n / 2 bits (Grover's Algorithm)\nDefense: Double Symmetric Key Length (n >= 256 bits)\n\n• Shor's Algorithm: Completely destroys RSA and ECC\n• Grover's Algorithm: Square-root speedup against symmetric keys\n• NIST Standards: FIPS 203 (ML-KEM), FIPS 204 (ML-DSA)\n\n🎯 When to Use / Question Clues:\nQuantum threats, future-proofing encryption, PQC migration.\nKeywords: 'Grover speedup', 'Shor on RSA', 'Double key to 256-bit'\n\n💡 Worked Example:\nAES-128 under Grover -> 2^(128/2) = 2^64 (Breakable)\nAES-256 under Grover -> 2^(256/2) = 2^128 (Quantum Safe!)",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-sample-mean",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Sample Mean (Arithmetic Average)",
+        "formula": "         1   n          x1 + x2 + ... + xn\nx̄ = ─── ∑  xi  = ──────────────────────────\n         n  i=1                     n",
+        "desc": "The arithmetic balance point of a sample dataset, summing all observed values and dividing by the total sample size n.",
+        "where": "x̄ = Sample mean (statistic estimating population parameter μ) | xi = i-th observation | n = Sample size",
+        "whenToUse": "Use to find the central tendency of numerical data with symmetric distributions without extreme outliers. Look for exam clues: 'Find the sample mean', 'Calculate average', 'Arithmetic center of dataset'.",
+        "example": "Sample observations: {10, 15, 20, 25, 30}\nn = 5\n∑ xi = 10 + 15 + 20 + 25 + 30 = 100\n\n        100\nx̄ = ───── = 20.0\n         5",
+        "stampText": "📊 SAMPLE MEAN (ARITHMETIC AVERAGE)\n\n         1   n          ∑ xi\nx̄ = ─── ∑  xi  = ──────────\n         n  i=1           n\n\n• x̄: Sample mean (point estimate of μ)\n• ∑ xi: Sum of all observed values\n• n: Sample size\n\n🎯 When to Use / Question Clues:\nFinding central balance point of symmetric numeric data.\nKeywords: 'Sample mean', 'Average value', 'Arithmetic center'\n\n💡 Worked Example:\nData: {10, 15, 20, 25, 30}, n = 5\nSum = 100\nMean x̄ = 100 / 5 = 20.0",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-sample-variance",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Sample Variance (Bessel's Correction n - 1)",
+        "formula": "        ∑ (xi - x̄)²      (x1 - x̄)² + (x2 - x̄)² + ... + (xn - x̄)²\ns² = ───────────── = ──────────────────────────────────────────\n            n - 1                                n - 1",
+        "desc": "Measures the average squared dispersion of sample observations around the mean. Dividing by (n - 1) instead of n (Bessel's correction) removes systematic underestimation bias.",
+        "where": "s² = Sample variance | xi = Value | x̄ = Sample mean | n - 1 = Degrees of freedom | s = √s² = Sample standard deviation",
+        "whenToUse": "Use when calculating variability, spread, or dispersion for a sample rather than an entire population. Look for exam clues: 'Sample variance', 'Bessel's correction', 'Unbiased variance estimator', 'n - 1 degrees of freedom'.",
+        "example": "Dataset: {2, 4, 6}, n = 3, Mean x̄ = 4\nDeviations from mean:\n• (2 - 4)² = (-2)² = 4\n• (4 - 4)² = (0)²  = 0\n• (6 - 4)² = (2)²  = 4\nSum of squared deviations = 4 + 0 + 4 = 8\n\n        8           8\ns² = ─────── = ─── = 4.0\n       3 - 1       2\nStandard Deviation s = √4.0 = 2.0",
+        "stampText": "📊 SAMPLE VARIANCE & BESSEL'S CORRECTION\n\n        ∑ (xi - x̄)²\ns² = ─────────────\n            n - 1\n\n• s²: Sample variance (unbiased estimate of σ²)\n• (n - 1): Bessel's correction (degrees of freedom)\n• s = √s²: Sample standard deviation\n\n🎯 When to Use / Question Clues:\nMeasuring dispersion/spread of sample observations.\nKeywords: 'Sample variance', 'Divide by n - 1', 'Bessel correction'\n\n💡 Worked Example:\nData: {2, 4, 6}, Mean x̄ = 4, n = 3\nSquared deviations: (2-4)² + (4-4)² + (6-4)² = 4 + 0 + 4 = 8\ns² = 8 / (3 - 1) = 8 / 2 = 4.0\nStandard Deviation s = √4.0 = 2.0",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-coeff-var",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Coefficient of Variation (CV & Relative Risk)",
+        "formula": "           s                        σ\nCV = ───── × 100%   or   CV = ───── × 100%\n          x̄                        μ",
+        "desc": "Expresses standard deviation as a percentage of the mean. Because it is unitless, CV allows fair comparison of variability/risk between datasets with different units or scales.",
+        "where": "CV = Coefficient of Variation (%) | s = Sample SD | x̄ = Sample mean | σ = Population SD | μ = Population mean",
+        "whenToUse": "Use when comparing relative dispersion or risk between variables with different units (e.g. Dollars vs Pesos) or different magnitudes (e.g. stock priced at $10 vs $500). Look for exam clues: 'Relative risk', 'Compare volatility of two investments', 'Which dataset is more variable relative to mean'.",
+        "example": "Stock Alpha: Mean = $100, SD = $10  => CV = (10 / 100) × 100% = 10%\nStock Beta : Mean = $20,  SD = $4   => CV = (4 / 20) × 100%   = 20%\n\nStock Beta has twice the relative volatility/risk of Stock Alpha,\neven though its absolute standard deviation ($4) is much smaller!",
+        "stampText": "📊 COEFFICIENT OF VARIATION (CV)\n\n          s\nCV = ──── × 100%   (Unitless relative risk)\n         x̄\n\n• CV: Relative dispersion percentage\n• s: Standard deviation\n• x̄: Arithmetic mean\n\n🎯 When to Use / Question Clues:\nComparing variability across different units or scales.\nKeywords: 'Relative risk', 'Compare volatility', 'Unitless spread'\n\n💡 Worked Example:\nAsset 1: Mean = $100, SD = $10  -> CV = (10/100) * 100% = 10%\nAsset 2: Mean = $20,  SD = $4   -> CV = (4/20)   * 100% = 20%\nAsset 2 is 2x more volatile relative to its mean!",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-pearson-corr",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Pearson Correlation Coefficient (r)",
+        "formula": "            s_xy                  ∑ (xi - x̄)(yi - ȳ)\nr = ───────────── = ───────────────────────────────────────────\n          s_x · s_y       √[ ∑ (xi - x̄)² ] · √[ ∑ (yi - ȳ)² ]\nwhere -1.0 ≤ r ≤ +1.0",
+        "desc": "Measures the strength and direction of the linear relationship between two continuous variables. Scale: +1 (perfect positive), 0 (no linear relation), -1 (perfect negative).",
+        "where": "r = Sample correlation coefficient | s_xy = Sample covariance | s_x, s_y = Sample standard deviations of X and Y",
+        "whenToUse": "Use when evaluating linear association strength and direction between two numerical features. Look for exam clues: 'Correlation between X and Y', 'Linear dependency', 'r value interpretation (-1 to +1)'.",
+        "example": "• r = +0.92 : Strong positive linear relationship (as X rises, Y rises).\n• r = -0.78 : Strong negative linear relationship (as X rises, Y drops).\n• r = 0.04  : No linear relationship (points scattered randomly).",
+        "stampText": "📊 PEARSON CORRELATION COEFFICIENT (r)\n\n            s_xy\nr = ─────────────       (-1.0 ≤ r ≤ +1.0)\n          s_x · s_y\n\n• r = +1.0: Perfect positive linear correlation\n• r =  0.0: No linear relationship\n• r = -1.0: Perfect negative linear correlation\n\n🎯 When to Use / Question Clues:\nAssessing linear strength/direction between 2 numerical variables.\nKeywords: 'Correlation r', 'Linear association', 'Covariance ratio'\n\n💡 Worked Example:\ns_xy = +36,  s_x = 5,  s_y = 8\nr = 36 / (5 * 8) = 36 / 40 = +0.90 (Very strong positive correlation)",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-z-score",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Standardization & Z-Score Formula",
+        "formula": "         x - μ                      x - x̄\nZ = ───────────   or   Z = ───────────\n           σ                          s\nZ ~ Normal(0, 1)  with Mean = 0, Variance = 1",
+        "desc": "Standardizes any normal distribution N(μ, σ²) into the standard normal distribution Z ~ N(0, 1), counting how many standard deviations observation x lies above or below the mean.",
+        "where": "Z = Standard score | x = Raw value | μ or x̄ = Mean | σ or s = Standard deviation | |Z| > 3 indicates an extreme outlier",
+        "whenToUse": "Use to standardize values, look up normal probabilities in Z-tables, compare scores from different exams/metrics, or flag statistical outliers. Look for exam clues: 'Standardize value', 'Z-score calculation', 'How many standard deviations from mean'.",
+        "example": "Student scores x = 85 on an exam with mean μ = 70 and SD σ = 10:\n\n        85 - 70      15\nZ = ───────── = ──── = +1.50\n           10         10\n\nThe student's performance is exactly 1.50 standard deviations above the class average!",
+        "stampText": "📊 STANDARDIZATION & Z-SCORE FORMULA\n\n         x - μ\nZ = ───────────      Z ~ Normal(μ = 0, σ = 1)\n           σ\n\n• Z: Number of standard deviations x is from μ\n• Positive Z: Value is above the mean\n• Negative Z: Value is below the mean\n• |Z| > 3: Potential statistical outlier\n\n🎯 When to Use / Question Clues:\nStandardizing values, Z-table probability lookup, outlier detection.\nKeywords: 'Calculate Z-score', 'Standard normal', 'Distance from mean'\n\n💡 Worked Example:\nExam score x = 85, Mean μ = 70, SD σ = 10\nZ = (85 - 70) / 10 = 15 / 10 = +1.50\nScore is 1.5 standard deviations above the average.",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-clt",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Central Limit Theorem (CLT n ≥ 30)",
+        "formula": "For ANY population distribution with mean μ and variance σ²:\nAs n ≥ 30:   X̄  ≈  Normal( μ,  σ² / n )\nStandardized: Z = (X̄ - μ) / (σ / √n) ~ N(0, 1)",
+        "desc": "Guarantees that the sampling distribution of sample means approaches a normal bell curve as sample size n reaches 30 or more, regardless of the underlying population's shape.",
+        "where": "X̄ = Sample mean estimator | μ = Population mean | σ = Population SD | n = Sample size (rule of thumb n ≥ 30) | σ/√n = Standard Error",
+        "whenToUse": "Use when doing inferential statistics or hypothesis testing on sample means from skewed, uniform, or unknown population distributions. Look for exam clues: 'Central Limit Theorem', 'Sample size n >= 30', 'Sampling distribution of the mean approaches normal'.",
+        "example": "Skewed income population: μ = $50,000, σ = $15,000.\nWe draw random samples of n = 100 people (n ≥ 30).\nBy CLT, the sample means X̄ follow a Normal distribution:\n• Mean of means μ_X̄ = $50,000\n• Standard Error SE = 15,000 / √100 = 15,000 / 10 = $1,500",
+        "stampText": "📊 CENTRAL LIMIT THEOREM (CLT)\n\nWhen n ≥ 30:   X̄ ~ Normal( μ,  σ² / n )\n\n• Regardless of population shape (skewed, uniform, bimodal)\n• Mean of sample means equals population mean: E[X̄] = μ\n• Variance of sample means shrinks by factor of n: σ² / n\n\n🎯 When to Use / Question Clues:\nApproximating sampling distribution normality for n >= 30.\nKeywords: 'Central Limit Theorem', 'Sample size n >= 30', 'Normality of mean'\n\n💡 Worked Example:\nPopulation μ = 50, σ = 20. Sample size n = 100.\nSampling distribution is Normal(50, 20²/100) = Normal(50, 4)\nStandard Error = 20 / √100 = 2.0",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-standard-error",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Statistics Fundamentals (Midterm)",
+        "title": "Standard Error of the Mean (SE)",
+        "formula": "                     σ                         s\nSE = σ_x̄ = ────────   (or estimated by ────────)\n                    √n                        √n",
+        "desc": "Quantifies the variability or standard deviation of the sample mean X̄ across repeated random samples. Demonstrates that quadrupling sample size (4× n) halves the standard error (1/2 SE).",
+        "where": "SE = Standard Error of the mean | σ = Population standard deviation | s = Sample standard deviation | n = Sample size",
+        "whenToUse": "Use when calculating confidence intervals or Z/t statistics for sample means to measure estimation precision. Look for exam clues: 'Standard error of the mean', 'Calculate SE', 'Impact of sample size on estimator precision'.",
+        "example": "Population SD σ = 24.\n• For n = 16:  SE = 24 / √16  = 24 / 4  = 6.0\n• For n = 64:  SE = 24 / √64  = 24 / 8  = 3.0  (4x sample size halves SE!)\n• For n = 144: SE = 24 / √144 = 24 / 12 = 2.0",
+        "stampText": "📊 STANDARD ERROR OF THE MEAN (SE)\n\n             σ\nSE = ─────────       (Precision of Sample Mean)\n            √n\n\n• Measures dispersion of sample means around μ\n• As n increases, SE decreases at rate of 1/√n\n• To cut SE in half, sample size n must be quadrupled (4×)\n\n🎯 When to Use / Question Clues:\nConfidence intervals, sample mean test statistics, precision.\nKeywords: 'Standard error', 'SE = sigma / sqrt(n)', 'Estimation precision'\n\n💡 Worked Example:\nPopulation SD σ = 20.\nWith n = 25 : SE = 20 / √25  = 20 / 5  = 4.0\nWith n = 100: SE = 20 / √100 = 20 / 10 = 2.0 (Halved!)",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-ci-z-known",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Confidence Interval for Single Mean (Known Variance)",
+        "formula": "CI = x̄ ± Z_(α/2) × (σ / √n)\nMargin of Error ME = Z_(α/2) × (σ / √n)",
+        "desc": "Calculates the interval estimation for population mean μ when the population standard deviation σ is known, based on the standard normal Z-distribution.",
+        "where": "x̄ = Sample mean | Z_(α/2) = Critical Z-value (1.96 for 95%, 2.576 for 99%, 1.645 for 90%) | σ = Known population standard deviation | n = Sample size | ME = Margin of error",
+        "whenToUse": "Use when estimating a population mean and σ is given in the problem. Clues: 'Known population variance', 'Population standard deviation is known', 'Construct a 95% confidence interval'.",
+        "example": "Sample mean x̄ = 100, σ = 15, n = 36, 95% confidence (Z = 1.96):\nME = 1.96 × (15 / √36) = 1.96 × 2.5 = 4.90\nCI = [100 - 4.90, 100 + 4.90] = [95.10, 104.90]",
+        "stampText": "📊 CONFIDENCE INTERVAL (KNOWN VARIANCE)\n\nCI = x̄ ± Z_(α/2) × (σ / √n)\n\n• Z for 90% = 1.645 | 95% = 1.96 | 99% = 2.576\n• Margin of Error ME = Z × (σ / √n)\n• Higher confidence = wider interval\n• Larger sample size n = narrower interval\n\n🎯 Clues: 'Population SD known', 'Z-interval'\n💡 Example: x̄ = 100, σ = 15, n = 36, 95% CI -> [95.10, 104.90]",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-ci-t-unknown",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Confidence Interval for Single Mean (Unknown Variance, Student's t)",
+        "formula": "CI = x̄ ± t_(n-1, α/2) × (s / √n)\ndf = n - 1",
+        "desc": "Constructs a confidence interval for population mean μ when population variance σ² is unknown and estimated by sample standard deviation s. Uses Student's t-distribution with df = n - 1.",
+        "where": "x̄ = Sample mean | t_(n-1, α/2) = Critical t-value with df = n - 1 | s = Sample standard deviation | n = Sample size | df = Degrees of freedom",
+        "whenToUse": "Use when population standard deviation is unknown and replaced by sample s. Clues: 'Sample standard deviation s', 'Population SD unknown', 'Small sample size with normal population'.",
+        "example": "Sample of n = 16, x̄ = 50, s = 8, 95% confidence (df = 15, t = 2.131):\nME = 2.131 × (8 / √16) = 2.131 × 2.0 = 4.262\nCI = [50 - 4.262, 50 + 4.262] = [45.74, 54.26]",
+        "stampText": "📊 CONFIDENCE INTERVAL (UNKNOWN VARIANCE, t)\n\nCI = x̄ ± t_(n-1, α/2) × (s / √n)\nDegrees of Freedom df = n - 1\n\n• Used when σ is unknown and estimated by sample s\n• t-distribution has fatter tails than Z, accounting for uncertainty\n• As n -> ∞, t-distribution converges to standard normal Z\n\n🎯 Clues: 'Sample SD s given', 'Student t-distribution'\n💡 Example: n = 16, x̄ = 50, s = 8, 95% (t=2.131) -> [45.74, 54.26]",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-ci-two-indep-known",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Confidence Interval for Difference Between Two Independent Means (Known Variances)",
+        "formula": "CI = (x̄₁ - x̄₂) ± Z_(α/2) × √(σ₁²/n₁ + σ₂²/n₂)",
+        "desc": "Estimates the true difference between two independent population means (μ₁ - μ₂) when both population variances σ₁² and σ₂² are known.",
+        "where": "x̄₁, x̄₂ = Sample means | σ₁², σ₂² = Known population variances | n₁, n₂ = Sample sizes | Z_(α/2) = Critical Z-value",
+        "whenToUse": "Use when comparing two independent groups with known population variances. If the CI contains 0, there is no statistically significant difference between the means.",
+        "example": "Group 1: x̄₁ = 85, σ₁ = 6, n₁ = 36. Group 2: x̄₂ = 80, σ₂ = 8, n₂ = 49. 95% CI (Z = 1.96):\nDiff = 85 - 80 = 5\nSE_diff = √(36/36 + 64/49) = √(1 + 1.306) = √2.306 = 1.519\nME = 1.96 × 1.519 = 2.977\nCI = [5 - 2.977, 5 + 2.977] = [2.02, 7.98] (Does not cross 0 -> μ₁ > μ₂)",
+        "stampText": "📊 TWO INDEPENDENT MEANS CI (KNOWN VARIANCES)\n\nCI = (x̄₁ - x̄₂) ± Z_(α/2) × √(σ₁²/n₁ + σ₂²/n₂)\n\n• Evaluates difference (μ₁ - μ₂)\n• If 0 is IN the interval: No significant difference\n• If entire interval > 0: Group 1 is significantly higher\n• If entire interval < 0: Group 2 is significantly higher\n\n🎯 Clues: 'Two independent groups', 'Both population variances known'\n💡 Example: diff = 5, SE = 1.52, 95% CI -> [2.02, 7.98]",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-pooled-variance",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Pooled Variance & Two Independent Means CI (Unknown Equal Variances)",
+        "formula": "s_p² = [(n₁ - 1)s₁² + (n₂ - 1)s₂²] / [n₁ + n₂ - 2]\nCI = (x̄₁ - x̄₂) ± t_(df, α/2) × s_p × √(1/n₁ + 1/n₂)\ndf = n₁ + n₂ - 2",
+        "desc": "Calculates the pooled sample variance s_p² weighting by degrees of freedom, and constructs the CI for (μ₁ - μ₂) when population variances are unknown but assumed equal.",
+        "where": "s_p² = Pooled sample variance | s_p = Pooled standard deviation (√s_p²) | s₁², s₂² = Sample variances | n₁, n₂ = Sample sizes | df = n₁ + n₂ - 2",
+        "whenToUse": "Use when comparing two independent samples with unknown but assumed equal population variances. Clues: 'Assume equal variances', 'Homoscedasticity', 'Pooled variance'.",
+        "example": "Sample 1: n₁ = 10, s₁² = 25. Sample 2: n₂ = 12, s₂² = 30.\ns_p² = [(9 × 25) + (11 × 30)] / [10 + 12 - 2] = [225 + 330] / 20 = 555 / 20 = 27.75\ns_p = √27.75 = 5.268. df = 20.",
+        "stampText": "📊 POOLED VARIANCE & TWO-SAMPLE t-CI\n\ns_p² = [(n₁ - 1)s₁² + (n₂ - 1)s₂²] / [n₁ + n₂ - 2]\nCI = (x̄₁ - x̄₂) ± t_(df, α/2) × s_p × √(1/n₁ + 1/n₂)\ndf = n₁ + n₂ - 2\n\n• Weighted average of sample variances\n• Weight is proportional to df of each sample (n - 1)\n• Requires assumption of equal variances (σ₁² = σ₂²)\n\n🎯 Clues: 'Variances unknown but equal', 'Pooled estimator'\n💡 Example: n₁=10, s₁²=25, n₂=12, s₂²=30 -> s_p² = 27.75, df = 20",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-ci-dependent",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Confidence Interval for Paired / Dependent Samples (Difference Scores)",
+        "formula": "CI = d̄ ± t_(n-1, α/2) × (s_d / √n)\nd_i = x_1i - x_2i  |  df = n - 1",
+        "desc": "Constructs confidence interval for mean difference μ_d in paired observations (e.g. before/after measurements, matched pairs), reducing two samples to a single series of differences d_i.",
+        "where": "d̄ = Sample mean of paired differences | s_d = Standard deviation of differences | n = Number of pairs | df = n - 1",
+        "whenToUse": "Use for paired or repeated measures data. Clues: 'Before and after', 'Pre-test and post-test', 'Matched subjects', 'Difference scores'.",
+        "example": "n = 10 pairs (before vs after), d̄ = 3.5, s_d = 2.0, 95% confidence (df = 9, t = 2.262):\nME = 2.262 × (2.0 / √10) = 2.262 × 0.6325 = 1.431\nCI = [3.5 - 1.431, 3.5 + 1.431] = [2.07, 4.93] (Interval strictly positive -> statistically significant improvement!)",
+        "stampText": "📊 PAIRED / DEPENDENT SAMPLES CI\n\nCI = d̄ ± t_(n-1, α/2) × (s_d / √n)\nd_i = x_1i - x_2i    df = n - 1\n\n• Controls for subject-to-subject variability\n• Reduces 2 dependent samples to 1 single difference sample\n• If 0 is in CI: No significant treatment effect\n\n🎯 Clues: 'Before vs after', 'Same subjects measured twice'\n💡 Example: n = 10, d̄ = 3.5, s_d = 2.0, 95% CI -> [2.07, 4.93]",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-hypothesis-z",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Single Mean Hypothesis Z-Test (Known Variance)",
+        "formula": "Z = (x̄ - μ₀) / (σ / √n)\nDecision Rule: Reject H₀ if |Z| > Z_(α/2) (Two-Tailed)",
+        "desc": "Computes the standard normal test statistic Z to evaluate hypotheses regarding population mean μ when population standard deviation σ is known.",
+        "where": "x̄ = Sample mean | μ₀ = Hypothesized mean under H₀ | σ = Known population SD | n = Sample size | σ/√n = Standard error",
+        "whenToUse": "Use when testing a claim about a single population mean with known σ. Clues: 'Test at α = 0.05', 'Population standard deviation is σ', 'Null hypothesis μ = μ₀'.",
+        "example": "H₀: μ = 120 vs H₁: μ ≠ 120. n = 64, x̄ = 123.5, σ = 12, α = 0.05 (critical Z = ±1.96):\nZ = (123.5 - 120) / (12 / √64) = 3.5 / 1.5 = +2.33\nSince |+2.33| > 1.96, reject H₀! There is significant evidence that μ ≠ 120.",
+        "stampText": "📊 SINGLE MEAN HYPOTHESIS Z-TEST\n\nZ = (x̄ - μ₀) / (σ / √n)\n\n• Two-Tailed: Reject H₀ if |Z| > Z_(α/2)\n• Upper-Tailed: Reject H₀ if Z > +Z_α\n• Lower-Tailed: Reject H₀ if Z < -Z_α\n• Common Z_crit: α=0.05 two-tailed -> ±1.96; one-tailed -> 1.645\n\n🎯 Clues: 'Test hypothesis about mean', 'Population σ is known'\n💡 Example: x̄ = 123.5, μ₀ = 120, σ = 12, n = 64 -> Z = +2.33 > 1.96 -> Reject H₀",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-hypothesis-t",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Single Mean Hypothesis t-Test (Unknown Variance)",
+        "formula": "t = (x̄ - μ₀) / (s / √n)\ndf = n - 1",
+        "desc": "Calculates the Student's t test statistic for testing hypotheses on a population mean μ when population variance is unknown and estimated by sample standard deviation s.",
+        "where": "x̄ = Sample mean | μ₀ = Hypothesized mean under H₀ | s = Sample standard deviation | n = Sample size | df = n - 1",
+        "whenToUse": "Use when testing a hypothesis about a single mean when σ is unknown. Clues: 'Sample standard deviation s', 'Degrees of freedom df = n - 1', 'Student t-test'.",
+        "example": "H₀: μ = 50 vs H₁: μ > 50. n = 25, x̄ = 52.4, s = 5.0, α = 0.05 (df = 24, right-tailed t_crit = +1.711):\nt = (52.4 - 50) / (5.0 / √25) = 2.4 / 1.0 = +2.40\nSince +2.40 > +1.711, reject H₀! The mean is significantly greater than 50.",
+        "stampText": "📊 SINGLE MEAN HYPOTHESIS t-TEST\n\nt = (x̄ - μ₀) / (s / √n)\ndf = n - 1\n\n• Used when σ is unknown\n• Critical value found in t-table using df = n - 1 and α\n• Type I Error α = P(Reject H₀ | H₀ is true)\n• Type II Error β = P(Fail to reject H₀ | H₀ is false)\n\n🎯 Clues: 'Sample SD s given', 'Test single mean'\n💡 Example: n = 25, x̄ = 52.4, μ₀ = 50, s = 5.0 -> t = +2.40 > 1.711 -> Reject H₀",
+        "term": "midterm"
+    },
+    {
+        "id": "dm-hypothesis-diff",
+        "subject": "dm",
+        "subjectName": "Data Mining",
+        "topic": "Inferential Statistics & Hypothesis Testing (Midterm)",
+        "title": "Hypothesis Test for Difference Between Two Means (Z-Test & Pooled t-Test)",
+        "formula": "Z = [(x̄₁ - x̄₂) - D₀] / √(σ₁²/n₁ + σ₂²/n₂)\nt = [(x̄₁ - x̄₂) - D₀] / [s_p × √(1/n₁ + 1/n₂)]\ndf = n₁ + n₂ - 2",
+        "desc": "Calculates test statistic to test claims regarding the difference (μ₁ - μ₂ = D₀, typically D₀ = 0 for no difference, or D₀ > 0 for non-zero threshold tests).",
+        "where": "x̄₁, x̄₂ = Sample means | D₀ = Hypothesized difference (often 0) | s_p = Pooled SD | df = n₁ + n₂ - 2",
+        "whenToUse": "Use when testing whether two independent populations have equal means or differ by a specified amount D₀. Clues: 'Is there a significant difference between groups?', 'Test H₀: μ₁ - μ₂ = 0'.",
+        "example": "Testing gender wage gap: H₀: μ_m - μ_w = 0 vs H₁: μ_m - μ_w > 0. Diff = $5,000, SE_pooled = $1,800.\nt = (5000 - 0) / 1800 = +2.78. If t_crit = 1.684 at α = 0.05, reject H₀!",
+        "stampText": "📊 TWO-SAMPLE HYPOTHESIS TEST FOR DIFFERENCE\n\n• Known σ: Z = [(x̄₁ - x̄₂) - D₀] / √(σ₁²/n₁ + σ₂²/n₂)\n• Unknown equal σ: t = [(x̄₁ - x̄₂) - D₀] / [s_p × √(1/n₁ + 1/n₂)]\n• D₀ is hypothesized difference (usually D₀ = 0)\n• Reject H₀ if test statistic falls into rejection region\n\n🎯 Clues: 'Compare two means', 'Difference between groups'\n💡 Example: diff = $5,000, D₀ = 0, SE = 1800 -> t = +2.78 > 1.684 -> Reject H₀",
+        "term": "midterm"
+    }
+,
+    {
+            "id": "efp-8cs-framework",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Introduction to Business Communication & 8 Cs",
+            "title": "The 8 Cs of Effective Business Communication",
+            "formula": "Clear + Concise + Concrete + Correct + Coherent + Complete + Courteous + Considerate",
+            "desc": "Foundational communication standard defining the eight essential qualities of professional workplace messages.",
+            "where": "Clear: No ambiguity | Concise: Word economy | Concrete: Specific data | Correct: Accurate grammar | Coherent: Logical flow | Complete: All facts | Courteous: Professional tone | Considerate: Audience-centered (You-attitude)",
+            "whenToUse": "Use when composing, auditing, or revising emails, business proposals, and memoranda. Look for clues: 'What quality eliminates ambiguity?', 'Which C removes filler?'",
+            "example": "Ineffective: 'Send the thing ASAP.'\nEffective: 'Kindly submit the Q3 sales report by 3:00 PM today so we can include it in the executive agenda.'",
+            "stampText": "✍️ THE 8 Cs OF BUSINESS COMMUNICATION\n\nFramework: Clear + Concise + Concrete + Correct + Coherent + Complete + Courteous + Considerate\n\n• Clear: Unambiguous purpose\n• Concise: No fluff\n• Concrete: Exact metrics & dates\n• Correct: Flawless grammar\n• Coherent: Logical sequence\n• Complete: All required info\n• Courteous: Respectful tone\n• Considerate: You-attitude focus",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-shannon-weaver",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Models of Communication",
+            "title": "Shannon-Weaver Linear Model (1949)",
+            "formula": "[Source] ──(Message)──> [Transmitter/Encode] ──(Signal)──> [Channel + Noise] ──(Signal)──> [Receiver/Decode] ──(Message)──> [Destination]",
+            "desc": "Unidirectional linear pipeline mapping electronic or mass media transmission from source to destination without immediate feedback.",
+            "where": "Source = Initiator | Transmitter = Encoder | Channel = Medium | Noise = Signal interference | Receiver = Decoder | Destination = Final recipient",
+            "whenToUse": "Use when analyzing one-way transmissions (pre-recorded video, company newsletters, radio broadcasts, flight safety demos) where immediate interactive feedback is absent.",
+            "example": "CEO broadcasts a recorded video policy to all staff.\nSource = CEO\nTransmitter = Video recorder\nChannel = Corporate intranet\nNoise = Wi-Fi buffering\nReceiver = Employee browser\nDestination = Employee",
+            "stampText": "📡 SHANNON-WEAVER LINEAR MODEL (1949)\n\n[Source] ──> [Transmitter/Encode] ──> [Channel + Noise] ──> [Receiver/Decode] ──> [Destination]\n\n• Direction: Unidirectional (1-way)\n• Feedback: Absent or delayed\n• Interference: Channel noise\n\n🎯 When to Use:\nMass announcements, policy broadcasts, recorded lectures.",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-osgood-schramm",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Models of Communication",
+            "title": "Osgood-Schramm Interactive Model (1954)",
+            "formula": "Party A: [Encoder / Interpreter / Decoder] ⇄ (Message / Feedback Loop) ⇄ Party B: [Decoder / Interpreter / Encoder]",
+            "desc": "Circular reciprocal communication model where participants alternate roles as encoders, interpreters, and decoders via continuous feedback.",
+            "where": "Encode = Formulate message | Interpret = Cognitive comprehension | Decode = Extract meaning | Feedback = Reciprocal verification response",
+            "whenToUse": "Use for two-way, turn-taking communication (customer support tickets, Q&A sessions, asynchronous email replies) that relies on discrete feedback loops to clarify meaning.",
+            "example": "Customer inquires about product pricing via email.\nRepresentative decodes inquiry, interprets request, encodes price quote.\nCustomer receives quote and sends confirmation.",
+            "stampText": "🔄 OSGOOD-SCHRAMM INTERACTIVE MODEL (1954)\n\nParty A: [Encode/Interpret/Decode] ⇄ (Message/Feedback) ⇄ Party B: [Decode/Interpret/Encode]\n\n• Direction: Circular / Two-way\n• Dynamic: Turn-taking alternation\n• Function: Clarification via feedback loop\n\n🎯 When to Use:\nCustomer Q&A, supervisor-employee status updates, email threads.",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-barnlund-model",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Models of Communication",
+            "title": "Barnlund's Transactional Model (1970)",
+            "formula": "Communicator A <═════[Simultaneous Multi-Layer Transaction]═════> Communicator B\nGoverned by: Public Cues (Cpu) + Private Cues (Cpr) + Behavioral Cues (Cbeh-v, Cbeh-nv)",
+            "desc": "Simultaneous, continuous, and irreversible multi-channel communication where both parties send and receive verbal and nonverbal cues concurrently in shared contexts.",
+            "where": "Cpu = Public environmental cues | Cpr = Private internal thoughts/feelings | Cbeh-v = Verbal spoken words | Cbeh-nv = Nonverbal posture, gestures, facial cues",
+            "whenToUse": "Use for live, face-to-face, high-stakes interactions (job interviews, executive board meetings, live negotiations, real-time team brainstorming) with continuous nonverbal interplay.",
+            "example": "Job Interview: Applicant answers technical questions (Cbeh-v) while observing interviewer's nodding and note-taking (Cbeh-nv), adjusting tone instantly within the conference room (Cpu).",
+            "stampText": "👥 BARNLUND'S TRANSACTIONAL MODEL (1970)\n\nCommunicator A <══[Simultaneous Transaction]══> Communicator B\nCues: Public (Cpu) + Private (Cpr) + Behavioral (Cbeh)\n\n• Nature: Simultaneous & Irreversible\n• Channel: Multi-channel (Verbal + Nonverbal)\n• Dynamics: Shared cultural/environmental context\n\n🎯 When to Use:\nJob interviews, live negotiations, team brainstorming.",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-writing-process",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Business Writing",
+            "title": "The 5-Stage Professional Writing Pipeline",
+            "formula": "Prewriting ──> Drafting ──> Revising ──> Editing ──> Publishing",
+            "desc": "Structured cognitive engineering process moving from planning and outline to continuous content drafting, macro-level logic revision, micro-level grammatical editing, and final publication.",
+            "where": "Prewriting = Purpose, audience, data | Drafting = Capture ideas without self-editing | Revising = Reorganize logic & arguments | Editing = Correct grammar & mechanics | Publishing = Final layout & delivery",
+            "whenToUse": "Use when organizing, drafting, and reviewing business documents (letters, memos, technical reports, executive summaries). Clues: 'Which stage improves arguments?', 'Which stage corrects typos?'",
+            "example": "Writing a proposal: (1) Define audience & budget in Prewriting -> (2) Type fast draft -> (3) Reorganize sections in Revising -> (4) Fix comma splices in Editing -> (5) Export PDF in Publishing.",
+            "stampText": "📝 5-STAGE WRITING PROCESS\n\nPrewriting ──> Drafting ──> Revising ──> Editing ──> Publishing\n\n• Stage 1 (Prewrite): Audience, objective, outline\n• Stage 2 (Draft): Idea capture (embrace imperfection)\n• Stage 3 (Revise): Macro-level logic, structure, clarity\n• Stage 4 (Edit): Micro-level grammar, spelling, punctuation\n• Stage 5 (Publish): Final formatting & distribution",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-meal-framework",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Paragraph Development",
+            "title": "The MEAL Paragraph Architecture",
+            "formula": "Paragraph = [M: Main Idea] + [E: Concrete Evidence] + [A: Analytical Warrant] + [L: Lead-Out Transition]",
+            "desc": "Four-pillar paragraph architecture guaranteeing paragraph unity, empirical support, logical warrant analysis, and smooth inter-paragraph transition.",
+            "where": "M = Topic sentence stating main claim | E = Verifiable data, metrics, or factual examples | A = Explanation of why evidence validates claim | L = Concluding sentence bridging to next topic",
+            "whenToUse": "Use when drafting formal business reports, persuasive proposals, or cover letter body paragraphs. Clues: 'How to structure a cohesive paragraph?', 'Where does evidence go?'",
+            "example": "[M] We must reduce hold times to curb customer churn. [E] Inbound calls average 8.5 minutes of hold time. [A] Reallocating staff during peak hours will resolve inquiries before frustration peaks. [L] This immediate measure will stabilize scores while CRM upgrades proceed.",
+            "stampText": "🍔 THE MEAL PARAGRAPH FORMULA\n\nParagraph = [M: Main Idea] + [E: Evidence] + [A: Analysis] + [L: Lead-Out]\n\n• M: State central claim in opening sentence\n• E: Provide verifiable data or concrete example\n• A: Explain significance and link to main claim\n• L: Conclude thought & bridge to next paragraph",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-sentence-errors",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Sentence Construction",
+            "title": "Sentence Error Diagnostic Syntax (Fragment, Run-On, Comma Splice)",
+            "formula": "Fragment: [Dependent Clause Alone] = Error\nRun-On: [Indep Clause] + [Indep Clause] (No Punctuation) = Error\nComma Splice: [Indep Clause] + , + [Indep Clause] = Error",
+            "desc": "Diagnostic formulas identifying the three most common structural sentence errors in business writing and their verified grammatical remedies.",
+            "where": "Fragment Fix: Attach to independent clause | Run-On Fix: Separate with period, semicolon, or ', + FANBOYS' | Comma Splice Fix: Replace comma with semicolon or add coordinating conjunction",
+            "whenToUse": "Use when proofreading business correspondence or editing colleague drafts. Clues: 'Because the manager approved alone', 'Two sentences joined by only a comma'.",
+            "example": "Fragment: 'Because he approved.' -> 'Because he approved, we launched.'\nRun-On: 'She wrote it he read it.' -> 'She wrote it, and he read it.'\nComma Splice: 'The time is now, we must go.' -> 'The time is now; we must go.'",
+            "stampText": "⚠️ SENTENCE ERROR DIAGNOSTICS\n\n• Fragment: Dependent clause alone (Missing main clause)\n  Fix: Connect to an independent clause\n\n• Run-On: Two independent clauses fused without punctuation\n  Fix: Add semicolon, period, or ', + FANBOYS'\n\n• Comma Splice: Two independent clauses joined by only a comma\n  Fix: Replace comma with semicolon OR add coordinating conjunction",
+            "term": "prelim"
+    },
+    {
+            "id": "efp-sentence-variety",
+            "subject": "efp",
+            "subjectName": "English for the Profession",
+            "topic": "Sentence Construction",
+            "title": "Clause Architecture & Sentence Variety (Simple, Compound, Complex)",
+            "formula": "Simple = [1 Indep Clause]\nCompound = [Indep Clause] + [; OR , + FANBOYS] + [Indep Clause]\nComplex = [Dep Clause with Subordinator] + [,] + [Indep Clause]",
+            "desc": "Taxonomy of sentence structures used to eliminate monotony, establish professional cadence, and express complex logical relationships.",
+            "where": "Indep Clause = Subject + Predicate expressing complete thought | Dep Clause = Subordinator + Subject + Predicate (incomplete thought) | FANBOYS = For, And, Nor, But, Or, Yet, So",
+            "whenToUse": "Use when revising drafts for sentence variety and readability. Clues: 'One subject and predicate', 'Joined by coordinating conjunction', 'Dependent clause with because/although'.",
+            "example": "Simple: 'The team met the deadline.'\nCompound: 'The team met the deadline, and management praised their diligence.'\nComplex: 'Because the team met the deadline, management approved the expansion budget.'",
+            "stampText": "📐 CLAUSE ARCHITECTURE & SENTENCE VARIETY\n\n• Simple: [1 Independent Clause]\n  'The manager approved the budget.'\n\n• Compound: [Indep] + [; OR , + FANBOYS] + [Indep]\n  'The manager approved the budget, and work began.'\n\n• Complex: [Dependent] + [,] + [Independent]\n  'Because the manager approved the budget, work began.'",
+            "term": "prelim"
     }
 ];
 
+var currentCsTerm = 'all';
 var currentCsFilter = 'all';
 var currentCsTopic = 'all';
 var currentCsQuery = '';
@@ -4470,17 +4935,45 @@ function enableHorizontalWheelScroll(el) {
     }, { passive: false });
 }
 
-function renderTopicPills(filterSubject) {
+function updateTermCounts() {
+    var countAll = 0, countPrelim = 0, countMidterm = 0, countFinals = 0;
+    subjectFormulas.forEach(function(item) {
+        var matchSubj = (currentCsFilter === 'all' || item.subject === currentCsFilter);
+        if (matchSubj) {
+            countAll++;
+            if (item.term === 'midterm') countMidterm++;
+            else if (item.term === 'finals') countFinals++;
+            else countPrelim++;
+        }
+    });
+
+    var elAll = document.getElementById('wb-term-count-all');
+    var elPrelim = document.getElementById('wb-term-count-prelim');
+    var elMidterm = document.getElementById('wb-term-count-midterm');
+    var elFinals = document.getElementById('wb-term-count-finals');
+
+    if (elAll) elAll.textContent = countAll;
+    if (elPrelim) elPrelim.textContent = countPrelim;
+    if (elMidterm) elMidterm.textContent = countMidterm;
+    if (elFinals) elFinals.textContent = countFinals;
+}
+
+function renderTopicPills(filterSubject, filterTerm) {
     var pillsContainer = document.getElementById('wb-cs-topic-pills');
     if (!pillsContainer) return;
 
+    var term = filterTerm || currentCsTerm || 'all';
+    var subject = filterSubject || currentCsFilter || 'all';
+
     var relevantFormulas = subjectFormulas.filter(function(item) {
-        return (filterSubject === 'all' || item.subject === filterSubject);
+        var matchSubject = (subject === 'all' || item.subject === subject);
+        var matchTerm = (term === 'all' || item.term === term);
+        return matchSubject && matchTerm;
     });
 
     var topicsSet = [];
     relevantFormulas.forEach(function(item) {
-        if (!topicsSet.includes(item.topic)) {
+        if (item.topic && !topicsSet.includes(item.topic)) {
             topicsSet.push(item.topic);
         }
     });
@@ -4499,74 +4992,113 @@ function renderTopicPills(filterSubject) {
             pill.classList.add('active');
             pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
             currentCsTopic = pill.dataset.topic;
-            renderCheatsheetList(currentCsFilter, currentCsTopic, currentCsQuery);
+            renderCheatsheetList(currentCsTerm, currentCsFilter, currentCsTopic, currentCsQuery);
         });
     });
 
     enableHorizontalWheelScroll(pillsContainer);
 }
 
-function renderCheatsheetList(filterSubject, filterTopic, query) {
+function renderCheatsheetList(filterTerm, filterSubject, filterTopic, query) {
     var listEl = document.getElementById('wb-cs-list');
     if (!listEl) return;
 
-    var q = (query || '').toLowerCase().trim();
+    var term = filterTerm || currentCsTerm || 'all';
+    var subject = filterSubject || currentCsFilter || 'all';
+    var topic = filterTopic || currentCsTopic || 'all';
+    var q = (query || currentCsQuery || '').toLowerCase().trim();
+
     var filtered = subjectFormulas.filter(function(item) {
-        var matchSubject = (filterSubject === 'all' || item.subject === filterSubject);
+        var matchTerm = (term === 'all' || item.term === term);
+        if (!matchTerm) return false;
+
+        var matchSubject = (subject === 'all' || item.subject === subject);
         if (!matchSubject) return false;
 
-        var matchTopic = (!filterTopic || filterTopic === 'all' || item.topic === filterTopic);
+        var matchTopic = (!topic || topic === 'all' || item.topic === topic);
         if (!matchTopic) return false;
 
         if (!q) return true;
-        return item.title.toLowerCase().includes(q) ||
-               item.formula.toLowerCase().includes(q) ||
-               item.desc.toLowerCase().includes(q) ||
+        return (item.title && item.title.toLowerCase().includes(q)) ||
+               (item.formula && item.formula.toLowerCase().includes(q)) ||
+               (item.desc && item.desc.toLowerCase().includes(q)) ||
                (item.where && item.where.toLowerCase().includes(q)) ||
                (item.whenToUse && item.whenToUse.toLowerCase().includes(q)) ||
                (item.example && item.example.toLowerCase().includes(q)) ||
-               item.topic.toLowerCase().includes(q) ||
-               item.subjectName.toLowerCase().includes(q);
+               (item.topic && item.topic.toLowerCase().includes(q)) ||
+               (item.subjectName && item.subjectName.toLowerCase().includes(q)) ||
+               (item.term && item.term.toLowerCase().includes(q));
     });
 
     if (filtered.length === 0) {
-        listEl.innerHTML = '<div class="wb-panel-empty">No formulas found matching "<strong>' + escHtml(query || filterTopic) + '</strong>".<br><small style="color:#94a3b8">Try searching for Bayes, Probability, SLE, or Subnet.</small></div>';
+        if (term === 'finals') {
+            listEl.innerHTML = '<div class="wb-panel-empty">' +
+                '<div style="font-size:2.4rem;margin-bottom:8px;">🏆</div>' +
+                '<div style="font-size:1.05rem;font-weight:700;color:#f8fafc;margin-bottom:6px;">Finals Term Formulas Coming Soon</div>' +
+                '<small style="color:#94a3b8">The official course syllabus for Finals is currently in progress.<br>Check <strong>Prelim (31)</strong> and <strong>Midterm (11)</strong> for active formula cards.</small>' +
+                '</div>';
+        } else {
+            listEl.innerHTML = '<div class="wb-panel-empty">No formulas found matching "<strong>' + escHtml(q || topic) + '</strong>".<br><small style="color:#94a3b8">Try searching for Bayes, Caesar, Mean, Variance, or Subnet.</small></div>';
+        }
         return;
     }
 
-    // Group filtered formulas by topic
-    var grouped = {};
-    filtered.forEach(function(item) {
-        if (!grouped[item.topic]) grouped[item.topic] = [];
-        grouped[item.topic].push(item);
-    });
+    var termOrder = ['prelim', 'midterm', 'finals'];
+    var termMeta = {
+        'prelim': { title: '🌱 Prelim Term Formulas', css: 'prelim', badge: 'term-prelim', label: 'Prelim' },
+        'midterm': { title: '⚡ Midterm Term Formulas', css: 'midterm', badge: 'term-midterm', label: 'Midterm' },
+        'finals': { title: '🏆 Finals Term Formulas', css: 'finals', badge: 'term-finals', label: 'Finals' }
+    };
 
     var html = '';
-    Object.keys(grouped).forEach(function(topicName) {
-        html += '<div class="wb-cs-topic-header">📁 ' + escHtml(topicName) + '</div>';
-        grouped[topicName].forEach(function(item) {
-            html += '<div class="wb-cs-card" data-fid="' + item.id + '">';
-            html += '  <div class="wb-cs-card-header">';
-            html += '    <span class="wb-cs-card-subject">' + escHtml(item.subjectName) + '</span>';
-            html += '  </div>';
-            html += '  <h4 class="wb-cs-card-title">' + escHtml(item.title) + '</h4>';
-            html += '  <div class="wb-cs-formula-box">' + escHtml(item.formula) + '</div>';
-            html += '  <div class="wb-cs-card-desc">' + escHtml(item.desc) + '</div>';
-            if (item.where) {
-                html += '  <div class="wb-cs-card-where"><strong>Legend:</strong> ' + escHtml(item.where) + '</div>';
-            }
-            if (item.whenToUse) {
-                html += '  <div class="wb-cs-card-when"><strong>🎯 When to Use / Question Clues:</strong>\n' + escHtml(item.whenToUse) + '</div>';
-            }
-            if (item.example) {
-                html += '  <div class="wb-cs-card-example"><strong>💡 Worked Example:</strong>\n' + escHtml(item.example) + '</div>';
-            }
-            html += '  <div class="wb-cs-card-actions">';
-            html += '    <button class="wb-cs-btn primary btn-stamp-formula" data-id="' + item.id + '"><span>📌 Stamp on Board</span></button>';
-            html += '    <button class="wb-cs-btn secondary btn-pin-formula" data-id="' + item.id + '"><span>👁️ Pin Guide</span></button>';
-            html += '    <button class="wb-cs-btn secondary btn-copy-formula" data-id="' + item.id + '"><span>📋 Copy</span></button>';
-            html += '  </div>';
-            html += '</div>';
+
+    termOrder.forEach(function(tKey) {
+        var termItems = filtered.filter(function(it){ return it.term === tKey; });
+        if (termItems.length === 0) return;
+
+        var tMeta = termMeta[tKey] || { title: tKey.toUpperCase() + ' Term', css: 'prelim', badge: 'term-prelim', label: tKey };
+        html += '<div class="wb-cs-term-header ' + tMeta.css + '">';
+        html += '  <span>' + tMeta.title + '</span>';
+        html += '  <span class="wb-cs-term-badge-count">' + termItems.length + ' ' + (termItems.length === 1 ? 'Formula' : 'Formulas') + '</span>';
+        html += '</div>';
+
+        // Group by topic within this term
+        var grouped = {};
+        termItems.forEach(function(item) {
+            if (!grouped[item.topic]) grouped[item.topic] = [];
+            grouped[item.topic].push(item);
+        });
+
+        Object.keys(grouped).forEach(function(topicName) {
+            html += '<div class="wb-cs-topic-header">📁 ' + escHtml(topicName) + '</div>';
+            grouped[topicName].forEach(function(item) {
+                var termBadgeClass = item.term === 'midterm' ? 'term-midterm' : (item.term === 'finals' ? 'term-finals' : 'term-prelim');
+                var termBadgeText = item.term === 'midterm' ? '⚡ Midterm' : (item.term === 'finals' ? '🏆 Finals' : '🌱 Prelim');
+
+                html += '<div class="wb-cs-card" data-fid="' + item.id + '">';
+                html += '  <div class="wb-cs-card-header">';
+                html += '    <span class="wb-cs-card-subject">' + escHtml(item.subjectName) + '</span>';
+                html += '    <span class="wb-cs-card-term ' + termBadgeClass + '">' + termBadgeText + '</span>';
+                html += '  </div>';
+                html += '  <h4 class="wb-cs-card-title">' + escHtml(item.title) + '</h4>';
+                html += '  <div class="wb-cs-formula-box">' + escHtml(item.formula) + '</div>';
+                html += '  <div class="wb-cs-card-desc">' + escHtml(item.desc) + '</div>';
+                if (item.where) {
+                    html += '  <div class="wb-cs-card-where"><strong>Legend:</strong> ' + escHtml(item.where) + '</div>';
+                }
+                if (item.whenToUse) {
+                    html += '  <div class="wb-cs-card-when"><strong>🎯 When to Use / Question Clues:</strong><br>' + escHtml(item.whenToUse) + '</div>';
+                }
+                if (item.example) {
+                    html += '  <div class="wb-cs-card-example"><strong>💡 Worked Example:</strong><br>' + escHtml(item.example) + '</div>';
+                }
+                html += '  <div class="wb-cs-card-actions">';
+                html += '    <button class="wb-cs-btn primary btn-stamp-formula" data-id="' + item.id + '"><span>📌 Stamp on Board</span></button>';
+                html += '    <button class="wb-cs-btn secondary btn-pin-formula" data-id="' + item.id + '"><span>👁️ Pin Guide</span></button>';
+                html += '    <button class="wb-cs-btn secondary btn-copy-formula" data-id="' + item.id + '"><span>📋 Copy</span></button>';
+                html += '  </div>';
+                html += '</div>';
+            });
         });
     });
 
@@ -4604,12 +5136,15 @@ function renderCheatsheetList(filterSubject, filterTopic, query) {
 }
 
 function openCheatsheetDrawer() {
+    var mobModal = document.getElementById('wb-mobile-menu-modal');
+    if (mobModal) mobModal.classList.remove('open');
     var drawer = document.getElementById('wb-cs-drawer');
     var overlay = document.getElementById('wb-cs-overlay');
     if (drawer) drawer.classList.add('open');
     if (overlay) overlay.classList.add('open');
-    renderTopicPills(currentCsFilter);
-    renderCheatsheetList(currentCsFilter, currentCsTopic, currentCsQuery);
+    updateTermCounts();
+    renderTopicPills(currentCsFilter, currentCsTerm);
+    renderCheatsheetList(currentCsTerm, currentCsFilter, currentCsTopic, currentCsQuery);
     setTimeout(function() {
         var inp = document.getElementById('wb-cs-search');
         if (inp && window.innerWidth > 860) inp.focus();
@@ -4625,13 +5160,15 @@ function closeCheatsheetDrawer() {
     if (overlay) overlay.classList.remove('open');
 }
 
+window.openCheatsheetDrawer = openCheatsheetDrawer;
+window.closeCheatsheetDrawer = closeCheatsheetDrawer;
+
 function stampFormulaOnBoard(formulaObj, overrideSize) {
     if (!formulaObj) return;
 
     var headerHeight = header ? header.offsetHeight : 52;
     var centerX = window.innerWidth / 2;
     var centerY = ((window.innerHeight + headerHeight) / 2);
-    // Use s2c (screen to canvas coordinate converter)
     var worldPos = s2c(centerX, centerY);
 
     var textColor = (bg === '#ffffff' || bg === '#f8fafc') ? '#0f172a' : '#f8fafc';
@@ -4680,64 +5217,51 @@ function pinFormulaHUD(formulaObj) {
     document.getElementById('wb-hud-formula-text').textContent = formulaObj.formula;
     var detailsStr = formulaObj.desc + 
                      (formulaObj.where ? '\n• ' + formulaObj.where : '') + 
-                     (formulaObj.whenToUse ? '\n\n🎯 When to Use:\n' + formulaObj.whenToUse : '') + 
-                     (formulaObj.example ? '\n\n💡 Worked Example:\n' + formulaObj.example : '');
+                     (formulaObj.whenToUse ? '\n• When to Use: ' + formulaObj.whenToUse : '') + 
+                     (formulaObj.example ? '\n• Example: ' + formulaObj.example.replace(/\n/g, ' ') : '');
     document.getElementById('wb-hud-details-text').textContent = detailsStr;
-    applyHudFontSize();
     hud.classList.remove('minimized');
     hud.classList.add('open');
-
-    if (window.innerWidth <= 860) {
-        closeCheatsheetDrawer();
-    }
-    toast('👁️ Pinned: <strong>' + escHtml(formulaObj.title) + '</strong> reference guide');
+    toast('👁️ Pinned: <strong>' + escHtml(formulaObj.title) + '</strong> to floating Reference HUD');
 }
 
-function applyHudFontSize() {
-    var formulaEl = document.getElementById('wb-hud-formula-text');
-    var detailsEl = document.getElementById('wb-hud-details-text');
-    if (formulaEl) formulaEl.style.fontSize = (0.84 * hudFontSizeFactor) + 'rem';
-    if (detailsEl) detailsEl.style.fontSize = (0.74 * hudFontSizeFactor) + 'rem';
-}
-
-// Bind Formula Reference Drawer Events
-var btnCheatsheet = document.getElementById('btn-cheatsheet');
-if (btnCheatsheet) btnCheatsheet.onclick = openCheatsheetDrawer;
-
-var mobBtnCheatsheet = document.getElementById('mob-btn-cheatsheet');
-if (mobBtnCheatsheet) {
-    mobBtnCheatsheet.onclick = function() {
-        var mobMenu = document.getElementById('wb-mobile-menu-modal');
-        if (mobMenu) mobMenu.classList.remove('open');
-        openCheatsheetDrawer();
-    };
-}
-
-var csCloseBtn = document.getElementById('wb-cs-close');
-if (csCloseBtn) csCloseBtn.onclick = closeCheatsheetDrawer;
-
-var csOverlay = document.getElementById('wb-cs-overlay');
-if (csOverlay) csOverlay.onclick = closeCheatsheetDrawer;
-
+// Bind search input
 var csSearchInput = document.getElementById('wb-cs-search');
 if (csSearchInput) {
     csSearchInput.addEventListener('input', function() {
-        currentCsQuery = csSearchInput.value;
-        renderCheatsheetList(currentCsFilter, currentCsTopic, currentCsQuery);
+        currentCsQuery = this.value;
+        renderCheatsheetList(currentCsTerm, currentCsFilter, currentCsTopic, currentCsQuery);
     });
 }
 
-// Stamp Size Selector Buttons
-var sizeButtons = document.querySelectorAll('.wb-cs-size-btn');
-sizeButtons.forEach(function(btn) {
+// Bind font size selector pills
+document.querySelectorAll('.wb-cs-size-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
-        sizeButtons.forEach(function(b){ b.classList.remove('active'); });
+        document.querySelectorAll('.wb-cs-size-btn').forEach(function(b){ b.classList.remove('active'); });
         btn.classList.add('active');
         currentStampFontSize = parseInt(btn.dataset.sz, 10) || 18;
-        toast('🗚 Default Stamp Font Size set to <strong>' + currentStampFontSize + 'px</strong>');
+        toast('🖺 Default Stamp Font Size set to <strong>' + currentStampFontSize + 'px</strong>');
     });
 });
 
+// Bind Term Tabs (Prelim, Midterm, Finals)
+var csTermTabs = document.querySelectorAll('.wb-cs-term-tab');
+csTermTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+        csTermTabs.forEach(function(t){ t.classList.remove('active'); });
+        tab.classList.add('active');
+        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        currentCsTerm = tab.dataset.term;
+        currentCsTopic = 'all';
+        renderTopicPills(currentCsFilter, currentCsTerm);
+        renderCheatsheetList(currentCsTerm, currentCsFilter, currentCsTopic, currentCsQuery);
+    });
+});
+
+var csTermBarContainer = document.getElementById('wb-cs-term-bar');
+if (csTermBarContainer) enableHorizontalWheelScroll(csTermBarContainer);
+
+// Bind Subject Tabs
 var csTabs = document.querySelectorAll('.wb-cs-tab');
 csTabs.forEach(function(tab) {
     tab.addEventListener('click', function() {
@@ -4746,13 +5270,75 @@ csTabs.forEach(function(tab) {
         tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         currentCsFilter = tab.dataset.subject;
         currentCsTopic = 'all';
-        renderTopicPills(currentCsFilter);
-        renderCheatsheetList(currentCsFilter, currentCsTopic, currentCsQuery);
+        updateTermCounts();
+        renderTopicPills(currentCsFilter, currentCsTerm);
+        renderCheatsheetList(currentCsTerm, currentCsFilter, currentCsTopic, currentCsQuery);
     });
 });
 
 var csTabsContainer = document.getElementById('wb-cs-tabs');
 if (csTabsContainer) enableHorizontalWheelScroll(csTabsContainer);
+
+// Bind Cheatsheet Drawer Triggers
+var btnCheatsheet = document.getElementById('btn-cheatsheet');
+if (btnCheatsheet) {
+    btnCheatsheet.onclick = function(e) {
+        if (e) e.preventDefault();
+        openCheatsheetDrawer();
+    };
+}
+var mobBtnCheatsheet = document.getElementById('mob-btn-cheatsheet');
+if (mobBtnCheatsheet) {
+    mobBtnCheatsheet.onclick = function(e) {
+        if (e) e.preventDefault();
+        var mobModal = document.getElementById('wb-mobile-menu-modal');
+        if (mobModal) mobModal.classList.remove('open');
+        openCheatsheetDrawer();
+    };
+}
+var csCloseBtn = document.getElementById('wb-cs-close');
+if (csCloseBtn) {
+    csCloseBtn.onclick = function(e) {
+        if (e) e.preventDefault();
+        closeCheatsheetDrawer();
+    };
+}
+var csOverlay = document.getElementById('wb-cs-overlay');
+if (csOverlay) {
+    csOverlay.onclick = function(e) {
+        if (e) e.preventDefault();
+        closeCheatsheetDrawer();
+    };
+}
+
+// Bind AI Tutor Trigger Buttons
+function triggerStudyChatbot() {
+    if (window.StudyChatbot && typeof window.StudyChatbot.toggleModal === 'function') {
+        if (!window.StudyChatbot.isOpen) window.StudyChatbot.toggleModal();
+    } else {
+        var trigger = document.getElementById('ai-chat-trigger');
+        if (trigger) trigger.click();
+        else toast('🤖 Loading AI Study Assistant...');
+    }
+}
+window.triggerStudyChatbot = triggerStudyChatbot;
+
+var btnAiTutorWb = document.getElementById('btn-ai-tutor-wb');
+if (btnAiTutorWb) {
+    btnAiTutorWb.onclick = function(e) {
+        if (e) e.preventDefault();
+        triggerStudyChatbot();
+    };
+}
+var mobBtnAiTutor = document.getElementById('mob-btn-ai-tutor');
+if (mobBtnAiTutor) {
+    mobBtnAiTutor.onclick = function(e) {
+        if (e) e.preventDefault();
+        var mobModal = document.getElementById('wb-mobile-menu-modal');
+        if (mobModal) mobModal.classList.remove('open');
+        triggerStudyChatbot();
+    };
+}
 
 // Floating HUD controls
 var hudStampBtn = document.getElementById('wb-hud-stamp-btn');
@@ -4854,6 +5440,5 @@ updateThickness(thickness);
 
 })();
 </script>
-    <script src="./calculator.js"></script>
 </body>
 </html>

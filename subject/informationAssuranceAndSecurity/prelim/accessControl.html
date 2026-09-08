@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,420 +18,768 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Access Control Models & Principles | University Study Guide</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Access Control Models &amp; Principles | University Study Guide</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<meta content="#0d9488" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Information Assurance & Security</h1>
-        <p>Access Control Models & Principles — IAAA, 5 Auth Factors, DAC, MAC, RBAC & ABAC (71 Questions)</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Access Control Models & Principles</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-        <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-        <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-            
-            <div class="card">
-                <h2 id="why-access-control-matters">1. Why access control matters</h2>
-                <p>In the first weeks of this course you learned that information security protects the confidentiality, integrity, and availability of data. Access control is the mechanism that actually enforces those goals in day-to-day operation. It is the set of rules and technologies that decide who is allowed to do what to which resource. Without it, a policy that says "only the registrar may change grades" is just a sentence on paper.</p>
-                <p>Think of a university. A student should see their own grades but not change them. A professor should change grades for their own classes but not for another department. The registrar can correct records across the whole institution. Access control is what turns those intentions into enforced, checkable rules. When it is done well, it is invisible. When it is done badly, it is how a curious clerk reads records they should never see, or how a single stolen password exposes an entire database.</p>
-            </div>
-
-            <div class="card">
-                <h2 id="identification-authentication-authorization">2. The three steps: identification, authentication, authorization</h2>
-                <p>Every access decision moves through three steps, in order. Students often blur them together, but they answer three different questions and use different mechanisms.</p>
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Step</th>
-                            <th>The question it answers</th>
-                            <th>Everyday example</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>Identification</strong></td>
-                            <td>Who do you claim to be?</td>
-                            <td>Typing your username or student number.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Authentication</strong></td>
-                            <td>Can you prove it?</td>
-                            <td>Entering your password, a one-time code, or scanning a fingerprint.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Authorization</strong></td>
-                            <td>What are you allowed to do?</td>
-                            <td>The system checks that this account may open the grades file.</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="callout">
-                    <div class="callout-title">Key distinction to remember</div>
-                    <p>Authentication proves who you are. Authorization decides what you may do. A valid login does not automatically grant access to everything—you can be correctly authenticated and still be denied, because authorization is a separate check.</p>
-                </div>
-
-                <h3 id="authentication-factors">2.1 Factors of authentication</h3>
-                <p>Authentication relies on one or more factors. Combining factors from different categories—called multi-factor authentication (MFA)—is far stronger than any single one, because an attacker must defeat two unrelated things at once.</p>
-                <ul>
-                    <li><strong>Something you know:</strong> a password, a PIN, an answer to a security question.</li>
-                    <li><strong>Something you have:</strong> a phone that receives a code, a hardware token, an ID card.</li>
-                    <li><strong>Something you are:</strong> a fingerprint, a face scan, or another biometric trait.</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h2 id="principle-of-least-privilege">3. The Principle of Least Privilege</h2>
-                <p>The Principle of Least Privilege (PoLP) states that every user, program, or process should be given only the access it needs to do its job, and no more. A teaching assistant who only records attendance does not need permission to edit final grades. A backup script that only reads files does not need permission to delete them.</p>
-                <p>Least privilege matters because it limits the blast radius when something goes wrong. If an account is compromised, or a user makes a mistake, the damage is capped at whatever that account was allowed to touch. An over-privileged account is a single point of catastrophic failure; a least-privileged one is a contained incident.</p>
-
-                <div class="callout">
-                    <div class="callout-title">Least privilege in one sentence</div>
-                    <p>Give each account the smallest set of permissions that still lets it do its legitimate work—then a stolen password or a careless click can only reach that small set, not everything.</p>
-                </div>
-
-                <p>A closely related idea is <strong>separation of duties</strong>: no single person should control an entire sensitive process from start to finish. The person who requests a payment should not also be the one who approves it. Together, least privilege and separation of duties make both mistakes and insider abuse much harder.</p>
-            </div>
-
-            <div class="card">
-                <h2 id="access-control-models">4. Access control models</h2>
-                <p>An access control model is the overall strategy an organization uses to decide who gets access to what. The core three you must be able to compare are DAC, MAC, and RBAC; a fourth, ABAC, extends the idea and is increasingly common. They differ in one key question: <strong>who or what has the authority to grant access?</strong></p>
-
-                <h3 id="dac">4.1 Discretionary Access Control (DAC)</h3>
-                <p>In DAC, the owner of a resource decides who may access it. If you create a file, you can choose to share it, and with whom. This is the model behind file sharing on Windows, macOS, and Google Drive—the person who owns the document sets the permissions.</p>
-                <ul>
-                    <li><strong>Strength:</strong> Flexible and easy for users; access can be granted quickly by whoever owns the resource.</li>
-                    <li><strong>Weakness:</strong> Inconsistent and hard to govern at scale. Owners can grant access carelessly, and permissions sprawl over time.</li>
-                    <li><strong>Best fit:</strong> Small teams and personal or collaborative file sharing where flexibility matters more than strict control.</li>
-                </ul>
-
-                <h3 id="mac">4.2 Mandatory Access Control (MAC)</h3>
-                <p>In MAC, a central authority sets access rules based on classification labels, and individual users cannot change them. Data is labelled (for example, Confidential, Secret, Top Secret) and users are given a clearance level. Access is granted only when a user's clearance meets the data's label. This is the model used by militaries and intelligence agencies.</p>
-                <ul>
-                    <li><strong>Strength:</strong> Extremely strong and consistent; users cannot override the rules, so accidental oversharing is impossible.</li>
-                    <li><strong>Weakness:</strong> Rigid and administratively heavy; every user and resource must be labelled and maintained centrally.</li>
-                    <li><strong>Best fit:</strong> High-security environments—military, government, and anywhere data classification is legally required.</li>
-                </ul>
-
-                <h3 id="rbac">4.3 Role-Based Access Control (RBAC)</h3>
-                <p>In RBAC, access is granted to roles rather than to individuals, and users are assigned to roles based on their job. A "Registrar" role can edit grades; anyone placed in that role inherits that permission. When a person changes jobs, you simply change their role rather than re-editing dozens of individual permissions. This is the model used by most companies, universities, and cloud platforms today.</p>
-                <ul>
-                    <li><strong>Strength:</strong> Scales well and maps cleanly to how organizations actually work; onboarding and role changes are simple.</li>
-                    <li><strong>Weakness:</strong> Requires careful upfront design of roles; poorly designed roles lead to "role explosion" or over-broad access.</li>
-                    <li><strong>Best fit:</strong> Most medium-to-large organizations—the practical default for businesses and schools.</li>
-                </ul>
-
-                <h3 id="abac">4.4 Attribute-Based Access Control (ABAC)</h3>
-                <p>In ABAC, access is decided by attributes and rules rather than by ownership, labels, or a fixed role. An attribute is any fact about the user (department, clearance, job title), the resource (its classification, owner, type), or the context (time of day, location, device). Rules combine these into policies such as: "allow access if the user is in the Finance department AND the request is during office hours AND the device is company-managed." This is the model behind modern cloud platforms and zero-trust systems.</p>
-                <ul>
-                    <li><strong>Strength:</strong> Extremely fine-grained and flexible; a single policy can express conditions that would need many separate roles in RBAC.</li>
-                    <li><strong>Weakness:</strong> Complex to design and to audit; with many attributes it can be hard to predict exactly who gets access, and mistakes are easy to hide.</li>
-                    <li><strong>Best fit:</strong> Large, dynamic environments—cloud services, zero-trust networks, and systems where access must depend on context, not just identity.</li>
-                </ul>
-
-                <div class="callout">
-                    <div class="callout-title">RBAC vs. ABAC in one line</div>
-                    <p>RBAC asks "what is your role?" and grants access to that role. ABAC asks "what are the facts about you, the resource, and right now?" and evaluates a rule. ABAC can do everything RBAC does and more, at the cost of greater complexity—which is why many organizations start with RBAC and add ABAC rules only where they need context.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2 id="worked-example">5. Worked example: two organizations, two choices</h2>
-                <h3>A university registrar system</h3>
-                <p>Thousands of users fall into a handful of clear job types: students, professors, department heads, and registrar staff. Permissions should follow the job, not the person, and must stay consistent as people enrol, graduate, and change departments. RBAC fits: define roles once, assign people to them, and access stays correct as individuals come and go. DAC would be chaos at that scale; MAC's classification labels are more rigidity than a university needs.</p>
-
-                <h3>A military intelligence unit</h3>
-                <p>Data is classified by sensitivity, disclosure can be catastrophic, and no individual may be allowed to widen access on their own. Control matters far more than convenience. MAC fits: a central authority sets clearances and labels, and the system enforces them regardless of what any user wants. RBAC alone would not capture the strict clearance-versus-classification rule that this environment legally requires.</p>
-            </div>
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / ...</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Dynamically populated -->
-            </div>
-        </div>
-
-        <!-- TAB 3: QUICK REFERENCE & CALCULATORS -->
-        <div id="formulas" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2 id="matrix-and-comparison" style="margin:0;">Quick Reference: Access Control Models Comparison Matrix</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Model</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Authority / Control</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Flexibility</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Security Level</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Best Use Case</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>DAC (Discretionary)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Resource Owner</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626;">Low</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Small team file sharing, OS files (chmod), Google Drive shares.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>MAC (Mandatory)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Central Administrator (Security Labels)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626;">Low (Rigid)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Highest</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Military, defense archives, government intelligence networks.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>RBAC (Role-Based)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Administrator (Assigned Roles)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Moderate</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Enterprise corporate networks, university registrars, healthcare staff roles.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>ABAC (Attribute-Based)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Dynamic Boolean Policies</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Highest</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Highest</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Zero-Trust cloud environments, multi-factor contextual access (Time + Device + Location).</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Authentication Factors & Identity Management Reference Matrix</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="definition-card">
-                        <span class="def-badge">Factor 1: Something You Know</span>
-                        <p>Passwords, PINs, security questions, passphrases.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">Factor 2: Something You Have</span>
-                        <p>Hardware tokens, smartcards, mobile OTPs, security keys (FIDO2).</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">Factor 3: Something You Are</span>
-                        <p>Biometrics: Fingerprint, iris scan, facial recognition, voiceprint.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">Factor 4: Somewhere You Are</span>
-                        <p>Geolocation, IP address subnet, corporate network location.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Key Authorization Principles & IAAA Framework</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Principle / Concept</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Core Definition</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Security Objective</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Principle of Least Privilege (PoLP)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Users are granted only the minimum permissions necessary to perform their job.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Limits damage from compromised accounts or insider threats.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Need-to-Know</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Access to specific data is restricted unless required for authorized duties.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Protects confidentiality of sensitive files.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Separation of Duties (SoD)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Critical operations require multiple individuals to complete.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Prevents fraud and single-person compromise.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Implicit Deny / Default Deny</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Access is blocked unless explicitly permitted by policy.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensures unconfigured routes are secure by default.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        
-            
-            <!-- ==========================================
+<header class="app-header">
+<h1>Information Assurance &amp; Security</h1>
+<p>Access Control Models &amp; Principles — IAAA, 5 Auth Factors, DAC, MAC, RBAC &amp; ABAC (71 Questions)</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Access Control Models &amp; Principles</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2 id="why-access-control-matters">1. Why access control matters</h2>
+<p>In the first weeks of this course you learned that information security protects the confidentiality, integrity, and availability of data. Access control is the mechanism that actually enforces those goals in day-to-day operation. It is the set of rules and technologies that decide who is allowed to do what to which resource. Without it, a policy that says "only the registrar may change grades" is just a sentence on paper.</p>
+<p>Think of a university. A student should see their own grades but not change them. A professor should change grades for their own classes but not for another department. The registrar can correct records across the whole institution. Access control is what turns those intentions into enforced, checkable rules. When it is done well, it is invisible. When it is done badly, it is how a curious clerk reads records they should never see, or how a single stolen password exposes an entire database.</p>
+</div>
+<div class="card">
+<h2 id="identification-authentication-authorization">2. The three steps: identification, authentication, authorization</h2>
+<p>Every access decision moves through three steps, in order. Students often blur them together, but they answer three different questions and use different mechanisms.</p>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>The question it answers</th>
+<th>Everyday example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identification</strong></td>
+<td>Who do you claim to be?</td>
+<td>Typing your username or student number.</td>
+</tr>
+<tr>
+<td><strong>Authentication</strong></td>
+<td>Can you prove it?</td>
+<td>Entering your password, a one-time code, or scanning a fingerprint.</td>
+</tr>
+<tr>
+<td><strong>Authorization</strong></td>
+<td>What are you allowed to do?</td>
+<td>The system checks that this account may open the grades file.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout">
+<div class="callout-title">Key distinction to remember</div>
+<p>Authentication proves who you are. Authorization decides what you may do. A valid login does not automatically grant access to everything—you can be correctly authenticated and still be denied, because authorization is a separate check.</p>
+</div>
+<h3 id="authentication-factors">2.1 Factors of authentication</h3>
+<p>Authentication relies on one or more factors. Combining factors from different categories—called multi-factor authentication (MFA)—is far stronger than any single one, because an attacker must defeat two unrelated things at once.</p>
+<ul>
+<li><strong>Something you know:</strong> a password, a PIN, an answer to a security question.</li>
+<li><strong>Something you have:</strong> a phone that receives a code, a hardware token, an ID card.</li>
+<li><strong>Something you are:</strong> a fingerprint, a face scan, or another biometric trait.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="principle-of-least-privilege">3. The Principle of Least Privilege</h2>
+<p>The Principle of Least Privilege (PoLP) states that every user, program, or process should be given only the access it needs to do its job, and no more. A teaching assistant who only records attendance does not need permission to edit final grades. A backup script that only reads files does not need permission to delete them.</p>
+<p>Least privilege matters because it limits the blast radius when something goes wrong. If an account is compromised, or a user makes a mistake, the damage is capped at whatever that account was allowed to touch. An over-privileged account is a single point of catastrophic failure; a least-privileged one is a contained incident.</p>
+<div class="callout">
+<div class="callout-title">Least privilege in one sentence</div>
+<p>Give each account the smallest set of permissions that still lets it do its legitimate work—then a stolen password or a careless click can only reach that small set, not everything.</p>
+</div>
+<p>A closely related idea is <strong>separation of duties</strong>: no single person should control an entire sensitive process from start to finish. The person who requests a payment should not also be the one who approves it. Together, least privilege and separation of duties make both mistakes and insider abuse much harder.</p>
+</div>
+<div class="card">
+<h2 id="access-control-models">4. Access control models</h2>
+<p>An access control model is the overall strategy an organization uses to decide who gets access to what. The core three you must be able to compare are DAC, MAC, and RBAC; a fourth, ABAC, extends the idea and is increasingly common. They differ in one key question: <strong>who or what has the authority to grant access?</strong></p>
+<h3 id="dac">4.1 Discretionary Access Control (DAC)</h3>
+<p>In DAC, the owner of a resource decides who may access it. If you create a file, you can choose to share it, and with whom. This is the model behind file sharing on Windows, macOS, and Google Drive—the person who owns the document sets the permissions.</p>
+<ul>
+<li><strong>Strength:</strong> Flexible and easy for users; access can be granted quickly by whoever owns the resource.</li>
+<li><strong>Weakness:</strong> Inconsistent and hard to govern at scale. Owners can grant access carelessly, and permissions sprawl over time.</li>
+<li><strong>Best fit:</strong> Small teams and personal or collaborative file sharing where flexibility matters more than strict control.</li>
+</ul>
+<h3 id="mac">4.2 Mandatory Access Control (MAC)</h3>
+<p>In MAC, a central authority sets access rules based on classification labels, and individual users cannot change them. Data is labelled (for example, Confidential, Secret, Top Secret) and users are given a clearance level. Access is granted only when a user's clearance meets the data's label. This is the model used by militaries and intelligence agencies.</p>
+<ul>
+<li><strong>Strength:</strong> Extremely strong and consistent; users cannot override the rules, so accidental oversharing is impossible.</li>
+<li><strong>Weakness:</strong> Rigid and administratively heavy; every user and resource must be labelled and maintained centrally.</li>
+<li><strong>Best fit:</strong> High-security environments—military, government, and anywhere data classification is legally required.</li>
+</ul>
+<h3 id="rbac">4.3 Role-Based Access Control (RBAC)</h3>
+<p>In RBAC, access is granted to roles rather than to individuals, and users are assigned to roles based on their job. A "Registrar" role can edit grades; anyone placed in that role inherits that permission. When a person changes jobs, you simply change their role rather than re-editing dozens of individual permissions. This is the model used by most companies, universities, and cloud platforms today.</p>
+<ul>
+<li><strong>Strength:</strong> Scales well and maps cleanly to how organizations actually work; onboarding and role changes are simple.</li>
+<li><strong>Weakness:</strong> Requires careful upfront design of roles; poorly designed roles lead to "role explosion" or over-broad access.</li>
+<li><strong>Best fit:</strong> Most medium-to-large organizations—the practical default for businesses and schools.</li>
+</ul>
+<h3 id="abac">4.4 Attribute-Based Access Control (ABAC)</h3>
+<p>In ABAC, access is decided by attributes and rules rather than by ownership, labels, or a fixed role. An attribute is any fact about the user (department, clearance, job title), the resource (its classification, owner, type), or the context (time of day, location, device). Rules combine these into policies such as: "allow access if the user is in the Finance department AND the request is during office hours AND the device is company-managed." This is the model behind modern cloud platforms and zero-trust systems.</p>
+<ul>
+<li><strong>Strength:</strong> Extremely fine-grained and flexible; a single policy can express conditions that would need many separate roles in RBAC.</li>
+<li><strong>Weakness:</strong> Complex to design and to audit; with many attributes it can be hard to predict exactly who gets access, and mistakes are easy to hide.</li>
+<li><strong>Best fit:</strong> Large, dynamic environments—cloud services, zero-trust networks, and systems where access must depend on context, not just identity.</li>
+</ul>
+<div class="callout">
+<div class="callout-title">RBAC vs. ABAC in one line</div>
+<p>RBAC asks "what is your role?" and grants access to that role. ABAC asks "what are the facts about you, the resource, and right now?" and evaluates a rule. ABAC can do everything RBAC does and more, at the cost of greater complexity—which is why many organizations start with RBAC and add ABAC rules only where they need context.</p>
+</div>
+</div>
+<div class="card">
+<h2 id="worked-example">5. Worked example: two organizations, two choices</h2>
+<h3>A university registrar system</h3>
+<p>Thousands of users fall into a handful of clear job types: students, professors, department heads, and registrar staff. Permissions should follow the job, not the person, and must stay consistent as people enrol, graduate, and change departments. RBAC fits: define roles once, assign people to them, and access stays correct as individuals come and go. DAC would be chaos at that scale; MAC's classification labels are more rigidity than a university needs.</p>
+<h3>A military intelligence unit</h3>
+<p>Data is classified by sensitivity, disclosure can be catastrophic, and no individual may be allowed to widen access on their own. Control matters far more than convenience. MAC fits: a central authority sets clearances and labels, and the system enforces them regardless of what any user wants. RBAC alone would not capture the strict clearance-versus-classification rule that this environment legally requires.</p>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / ...</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Dynamically populated -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE & CALCULATORS -->
+<div class="tab-content" id="formulas">
+<!-- HEADER BAR -->
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+<div>
+<h2 style="margin:0; font-size:1.5rem;">Quick Reference &amp; Summary Matrix</h2>
+<p style="margin:0.25rem 0 0 0; color:var(--text-muted); font-size:0.9rem;">Access Control Models, MLS Rules &amp; Identity Governance • Four-Pillar Exam-Ready Review Sheet</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+</div>
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>🏛️ Pillar 1:</span> Core Terminology &amp; Keyword Recall Grid
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Essential access control terms, IAAA stages, multi-level security models, and identity governance metrics.</p>
+<div class="table-container" style="overflow-x:auto; margin-top:1rem;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:22%;">Term / Acronym</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:48%;">Exact Domain Definition</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Classification</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Exam Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Identification</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The initial stage where a subject claims a unique identity to a system (e.g., username, student ID, email address).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">IAAA Step 1</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Claim of Identity</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Authentication</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The process of verifying and validating the claimed identity using one or more proof factors (passwords, biometrics, hardware tokens).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">IAAA Step 2</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">Proof of Identity</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Authorization</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The process of granting or denying specific permissions and access rights to an authenticated subject based on policy or role.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">IAAA Step 3</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">Grant of Rights</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Accountability (Auditing)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tracking, logging, and attributing all system actions and events directly to an individual authenticated identity for forensic non-repudiation.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">IAAA Step 4</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Audit Logging</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Principle of Least Privilege (PoLP)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Granting subjects only the absolute minimum set of privileges and permissions necessary to execute their assigned legitimate tasks.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(20,184,166,0.15); color:var(--primary-color); padding:2px 6px; border-radius:4px;">Core Principle</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Minimum Rights / Blast Radius</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Need-to-Know</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Restricting access to specific data objects or confidential files strictly to personnel who require the data for active, authorized assignments.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(20,184,166,0.15); color:var(--primary-color); padding:2px 6px; border-radius:4px;">Core Principle</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Object Scoping</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Separation of Duties (SoD)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dividing critical business tasks across multiple distinct individuals so that no single person possesses end-to-end control to commit and conceal fraud.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(20,184,166,0.15); color:var(--primary-color); padding:2px 6px; border-radius:4px;">Core Principle</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dual Authorization</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Implicit Deny / Default Deny</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access control posture where all access requests are blocked by default unless an explicit permit rule explicitly grants access.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(20,184,166,0.15); color:var(--primary-color); padding:2px 6px; border-radius:4px;">Core Principle</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Block by Default</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Discretionary Access Control (DAC)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access model where the resource creator/owner possesses full discretion to grant or revoke read/write permissions to other users (e.g., POSIX chmod, Google Drive).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access Model</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Owner Controlled</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Mandatory Access Control (MAC)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access model where a central authority assigns fixed security labels (Top Secret, Secret) to objects and clearances to subjects; users cannot alter permissions.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access Model</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Labels &amp; Clearances</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Role-Based Access Control (RBAC)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access model where permissions are assigned to predefined job roles (e.g., Doctor, Registrar), and subjects inherit rights based on role membership.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access Model</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Role Assignment / Scalable</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Attribute-Based Access Control (ABAC)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dynamic access model evaluating Boolean policies across subject attributes, resource attributes, and environmental context (Time + Location + Device).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access Model</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Contextual / Zero-Trust</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Bell-LaPadula (BLP) Model</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Multi-Level Security (MLS) state machine model focused on <strong>Confidentiality</strong>: No Read Up (Simple Security) and No Write Down (*-Property).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">MLS Model</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#8b5cf6; font-weight:700;">Confidentiality / Military</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Biba Integrity Model</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Multi-Level Security (MLS) state machine model focused on <strong>Integrity</strong>: No Read Down (Simple Integrity) and No Write Up (*-Integrity).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">MLS Model</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#8b5cf6; font-weight:700;">Integrity / No Corruption</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Crossover Error Rate (CER / EER)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The intersection point where False Acceptance Rate (FAR) equals False Rejection Rate (FRR); the standard benchmark for biometric device accuracy (lower is better).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Biometrics Metric</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">FAR = FRR Benchmark</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>📐 Pillar 2:</span> Formula &amp; Calculation Reference Cards
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Cryptographic entropy, brute-force keyspaces, and formal Multi-Level Security (MLS) mathematical rules.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem;">
+<!-- CARD 1: PASSWORD ENTROPY -->
+<div class="formula-card">
+<span class="formula-badge">Password Shannon Information Entropy</span>
+<div class="formula-text" style="font-size:1.2rem; margin:0.6rem 0;">
+                            E = L × log<sub>2</sub>(R)
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>L:</strong> Password length in number of characters.</li>
+<li><strong>R:</strong> Character pool size (Digits: 10, Lowercase: 26, Alphanumeric: 62, Full ASCII: 94).</li>
+<li><strong>E:</strong> Total information entropy measured in bits.</li>
+</ul>
+<strong>Plain English Reading:</strong> "Entropy measures the bit-strength of a password by multiplying length by the binary logarithm of character possibilities per position."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+<strong>Worked Example:</strong> L = 12, R = 94 → E = 12 × log<sub>2</sub>(94) = 12 × 6.5546 = <span style="font-weight:700; color:#16a34a;">78.66 bits (&gt;64-bit NIST benchmark)</span>.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Password entropy in bits equals password length L multiplied by base-2 logarithm of character pool size R."</strong>
+</div>
+</div></div>
+<!-- CARD 2: BRUTE FORCE KEYSPACE -->
+<div class="formula-card">
+<span class="formula-badge">Brute Force Search Space &amp; Crack Time</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Keyspace = R<sup>L</sup>  |  Avg Crack Time = (R<sup>L</sup> ÷ 2) ÷ Hash Rate
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>R<sup>L</sup>:</strong> Total possible password combinations in the search space.</li>
+<li><strong>Hash Rate:</strong> Number of password hashes the attacker's GPU rig computes per second.</li>
+</ul>
+<strong>Plain English Reading:</strong> "On average, a brute-force attacker finds the password after searching 50% of the keyspace; crack time is that 50% divided by computational speed."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Total keyspace equals character pool R raised to length L. Average crack time equals keyspace divided by twice the testing hash rate."</strong>
+</div>
+</div></div>
+<!-- CARD 3: BELL-LAPADULA FORMAL RULES -->
+<div class="formula-card">
+<span class="formula-badge">Bell-LaPadula (BLP) Confidentiality Formal Rules</span>
+<div class="formula-text" style="font-size:1.05rem; margin:0.6rem 0; line-height:1.5;">
+                            Simple Security (ss): Read(S, O) ⇔ Clearance(S) ≥ Label(O)<br/>
+                            *-Property (Star): Write(S, O) ⇔ Clearance(S) ≤ Label(O)
+                        </div>
+<div class="formula-explain">
+<strong>Core Rules:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>No Read Up (Simple Security):</strong> A subject cannot read an object of higher classification (prevents unauthorized snooping).</li>
+<li><strong>No Write Down (*-Property):</strong> A subject cannot write to an object of lower classification (prevents declassifying secrets).</li>
+</ul>
+<strong>Plain English Reading:</strong> "You can only read at or below your clearance level, and you can only write at or above your clearance level."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Bell-LaPadula Confidentiality: No Read Up (Simple Security) and No Write Down (*-Property)."</strong>
+</div>
+</div></div>
+<!-- CARD 4: BIBA INTEGRITY FORMAL RULES -->
+<div class="formula-card">
+<span class="formula-badge">Biba Integrity Formal Rules</span>
+<div class="formula-text" style="font-size:1.05rem; margin:0.6rem 0; line-height:1.5;">
+                            Simple Integrity: Read(S, O) ⇔ Integrity(S) ≤ Integrity(O)<br/>
+                            *-Integrity: Write(S, O) ⇔ Integrity(S) ≥ Integrity(O)
+                        </div>
+<div class="formula-explain">
+<strong>Core Rules:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>No Read Down (Simple Integrity):</strong> A high-integrity subject cannot read low-integrity, untrusted data (prevents corruption).</li>
+<li><strong>No Write Up (*-Integrity):</strong> A low-integrity subject cannot write or modify high-integrity files (prevents tampering).</li>
+</ul>
+<strong>Plain English Reading:</strong> "You can only read trusted data at or above your level, and you can only write data at or below your trust level."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Biba Integrity: No Read Down (Simple Integrity) and No Write Up (*-Integrity)."</strong>
+</div>
+</div></div>
+</div>
+</div>
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>📊 Pillar 3:</span> Comparative Analysis Matrices
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Side-by-side matrices contrasting the four access control models, MLS engines, authentication factors, and IAAA phases.</p>
+<!-- MATRIX 1: 4 ACCESS CONTROL MODELS -->
+<h3 style="margin-top:1.25rem; font-size:1.05rem;">1. The 4 Access Control Models Master Matrix (DAC vs. MAC vs. RBAC vs. ABAC)</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Model</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Authority / Decision Maker</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Granularity</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Scalability</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Complexity</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Best Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>DAC (Discretionary)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Individual Resource Owner</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">High (Per-file ACLs)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Poor (Sprawl at scale)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a;">Low</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Small team file sharing, OS file systems (chmod), personal Google Drive shares.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>MAC (Mandatory)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Central Authority (Fixed Labels)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Coarse (Classification Tiers)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Moderate (Rigid overhead)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">High</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Military intelligence, defense networks, government classified archives (SELinux).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>RBAC (Role-Based)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Admin (Predefined Roles)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Moderate (Role groupings)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Enterprise standard)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Moderate</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Enterprise corporate IT, university registrars, hospitals, AWS IAM role policies.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ABAC (Attribute-Based)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dynamic Boolean Policy Engine</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Highest (Contextual)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Highest</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">Highest (Audit complexity)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Zero-Trust cloud architectures, conditional access (Time + Device + Geolocation).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 2: BELL-LAPADULA VS BIBA -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">2. Bell-LaPadula vs. Biba Multi-Level Security (MLS) Comparison</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Feature</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Bell-LaPadula (BLP) Model</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Biba Integrity Model</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Primary Security Goal</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#8b5cf6;">Confidentiality (Prevent Unauthorized Reading)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Integrity (Prevent Unauthorized Modification)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Simple Property (Read Rule)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span style="color:#dc2626; font-weight:700;">No Read Up:</span> Subject ≥ Object</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span style="color:#dc2626; font-weight:700;">No Read Down:</span> Subject ≤ Object</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>*-Property (Write Rule)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span style="color:#dc2626; font-weight:700;">No Write Down:</span> Subject ≤ Object</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span style="color:#dc2626; font-weight:700;">No Write Up:</span> Subject ≥ Object</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Information Flow Direction</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Information flows <strong>Upward only</strong> (Low to High).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Information flows <strong>Downward only</strong> (High to Low).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Exam Memory Mnemonic</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"BLP = <strong>B</strong>ig <strong>L</strong>eaks <strong>P</strong>revented" (Secrets don't leak down).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"Biba = <strong>B</strong>ad <strong>I</strong>nfo <strong>B</strong>locked <strong>A</strong>bove" (Junk cannot flow up).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Real-World Scenario</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Top Secret officer cannot paste nuclear launch codes into an Unclassified memo.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">An untrusted guest user cannot overwrite the core Linux kernel system files.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 3: 5 AUTHENTICATION FACTORS -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">3. The 5 Authentication Factors Reference Matrix</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Factor Category</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Verification Mechanism</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Theft / Replay Resistance</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">User Friction</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Example Credentials</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>1. Something You Know</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Knowledge verification against hashed store</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Low (Phishable, reusable)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Low (Memorization)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Password, PIN, security questions, passphrases.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>2. Something You Have</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Possession of cryptographic token or device</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Hardware FIDO2 / TOTP)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Moderate (Must carry device)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">FIDO2 YubiKey, Authenticator app OTP, Smartcard, RSA SecurID.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>3. Something You Are</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Inherent biological / physical trait matching</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Cannot be forgotten)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a;">Lowest (Seamless touch/scan)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Fingerprint scan, Apple FaceID, Iris scan, Voiceprint.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>4. Somewhere You Are</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Physical geolocation and network proximity</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Moderate (Can be spoofed via VPN)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a;">Invisible (Automated check)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">GPS coordinates, corporate office IP subnet, Wi-Fi geofencing.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>5. Something You Do</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dynamic behavioral biometric analysis</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High (Continuous profiling)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a;">Invisible (Continuous background)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Keystroke dynamics, mouse motion cadence, gait recognition.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 4: IAAA 4-STAGE PIPELINE -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">4. The IAAA Framework Sequential Stages Matrix</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">IAAA Stage</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Core Question Answered</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Primary Artifact Used</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Vulnerability / Failure Scenario</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Verification Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>1. Identification</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"Who do you claim to be?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Username, Badge #, Email</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">User enumeration, public account listing.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Directory lookup in active LDAP / DB.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>2. Authentication</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"Can you prove your claimed identity?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Password + FIDO2 Token / Biometrics</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Credential stuffing, password spraying, replay attack.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Cryptographic challenge-response, hash comparison.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>3. Authorization</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"What resources and actions are you permitted?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Access Matrix, RBAC Role, ABAC Token</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Privilege escalation, IDOR, over-permissive roles.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Policy Decision Point (PDP) / PEP gatekeeper.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>4. Accountability</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">"Who performed this specific action and when?"</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Immutable Audit Logs, SIEM Events</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Log clearing, shared admin accounts (root/admin).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">WORM storage, centralized syslog forwarding.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:#dc2626; display:flex; align-items:center; gap:0.5rem;">
+<span>⚠️ Pillar 4:</span> Common Exam Pitfalls &amp; Fallacies
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">High-yield test traps on MLS properties, multi-factor rules, and authorization boundaries.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 1: Authentication vs. Authorization</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Believing a valid login guarantees access to files.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Authentication:</strong> Strictly validates <strong>WHO you are</strong>.</li>
+<li><strong>Authorization:</strong> Strictly determines <strong>WHAT you can do</strong>. A successfully authenticated user can still be blocked by authorization checks.</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 2: Multi-Factor vs. Multi-Step Fallacy</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Entering a Password AND a PIN constitutes Two-Factor Authentication (2FA).<br/>
+<strong>The Reality:</strong> Both a Password and a PIN belong to the <em>same category</em> ("Something You Know"). True MFA requires ≥2 <strong>different factor categories</strong> (e.g., Knowledge + Possession).
+                        </p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 3: Bell-LaPadula *-Property Rationale</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Misunderstanding why "No Write Down" exists in Bell-LaPadula.<br/>
+<strong>The Reality:</strong> "No Write Down" prevents a user with Top-Secret clearance (or trojan malware running under their credentials) from declassifying and copying Top-Secret intelligence into an Unclassified document.
+                        </p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 4: Biba *-Property Rationale</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Inverting the write rule in Biba Integrity.<br/>
+<strong>The Reality:</strong> "No Write Up" prevents an untrusted, unvetted lower-tier subject from modifying, writing to, or injecting malicious/corrupt data into critical high-integrity files.
+                        </p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 5: Least Privilege vs. Need-to-Know</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Treating PoLP and Need-to-Know as identical concepts.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Least Privilege (PoLP):</strong> Restricts system-level <em>action rights</em> (e.g., read, write, execute, admin privileges).</li>
+<li><strong>Need-to-Know:</strong> Restricts access to specific sensitive <em>data objects</em> based on active business assignment.</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 6: Implicit Deny vs. Explicit Deny</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Thinking Implicit Deny can override an explicit Allow rule.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Implicit Deny:</strong> The default fallback state when <em>no rules match</em>.</li>
+<li><strong>Explicit Deny:</strong> An active override rule that <em>supersedes any permit/allow rule</em> regardless of evaluation order.</li>
+</ul>
+</p>
+</div>
+</div>
+</div>
+<!-- ==========================================
                  Interactive Academic Calculators Section
                  ========================================== -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Interactive Academic Calculators (Live Security Models & Policy Engines)</h2>
-                
-                <!-- Calculator 1: Bell-LaPadula & Biba MLS Simulator -->
-                <div class="calc-card">
-                    <div class="calc-title">🧮 Section 4.2: Mandatory Access Control (MAC) — Bell-LaPadula & Biba MLS Rule Simulator</div>
-                    <div class="calc-desc">Simulate Multi-Level Security (MLS) access decisions by comparing a Subject's clearance level against an Object's data classification label.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="mls-subject">Subject Clearance Level:</label>
-                            <select id="mls-subject" class="calc-input" onchange="calculateMLSDecision()">
-                                <option value="4">4 - Top Secret</option>
-                                <option value="3" selected>3 - Secret</option>
-                                <option value="2">2 - Confidential</option>
-                                <option value="1">1 - Unclassified</option>
-                            </select>
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="mls-object">Object Classification Label:</label>
-                            <select id="mls-object" class="calc-input" onchange="calculateMLSDecision()">
-                                <option value="4">4 - Top Secret</option>
-                                <option value="3">3 - Secret</option>
-                                <option value="2" selected>2 - Confidential</option>
-                                <option value="1">1 - Unclassified</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Permitted Operations:</span>
-                            <span class="calc-result-val" id="mls-result-val">BLP: Read Allowed, Write Prohibited</span>
-                        </div>
-                        <div class="calc-math-steps" id="mls-math-steps">
-                            <strong>Multi-Level Security (MLS) Rule Evaluation:</strong><br>
-                            <div class="step-line">• <strong>Bell-LaPadula Model (Confidentiality):</strong></div>
-                            <div class="step-line">&nbsp;&nbsp;- <em>Simple Security Property (No Read Up):</em> Subject (Secret = 3) ≥ Object (Confidential = 2) &rarr; <span style="color:#16a34a; font-weight:700;">✓ READ ALLOWED</span></div>
-                            <div class="step-line">&nbsp;&nbsp;- <em>*-Property (No Write Down):</em> Subject (Secret = 3) ≤ Object (Confidential = 2) &rarr; <span style="color:#dc2626; font-weight:700;">✗ WRITE DENIED</span> (Prevents declassifying secrets to lower tiers)</div>
-                            <div class="step-line">• <strong>Biba Model (Integrity):</strong></div>
-                            <div class="step-line">&nbsp;&nbsp;- <em>Simple Integrity Property (No Read Down):</em> Subject (3) ≤ Object (2) &rarr; <span style="color:#dc2626; font-weight:700;">✗ READ DENIED</span> (Prevents ingesting untrusted/corrupted data)</div>
-                            <div class="step-line">&nbsp;&nbsp;- <em>*-Integrity Property (No Write Up):</em> Subject (3) ≥ Object (2) &rarr; <span style="color:#16a34a; font-weight:700;">✓ WRITE ALLOWED</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 2: Password Entropy & Brute-Force Crack Time -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Section 2: Authentication — Password Information Entropy (E = L log₂ R) & Brute-Force Crack Time</div>
-                    <div class="calc-desc">Calculate password information entropy E = L × log₂(R) bits and estimate brute-force cracking resistance against high-performance GPU hash cracking rigs.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="pass-len">Password Length (L):</label>
-                            <input type="number" id="pass-len" class="calc-input" value="12" min="1" max="64" step="1" oninput="calculatePasswordEntropy()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="pass-pool">Character Pool (R):</label>
-                            <select id="pass-pool" class="calc-input" onchange="calculatePasswordEntropy()">
-                                <option value="10">Numbers Only (0-9) [R = 10]</option>
-                                <option value="26">Lowercase Letters Only (a-z) [R = 26]</option>
-                                <option value="52">Mixed Letters (a-z, A-Z) [R = 52]</option>
-                                <option value="62">Alphanumeric (a-z, A-Z, 0-9) [R = 62]</option>
-                                <option value="94" selected>Full ASCII + Symbols (Letters, Digits, Symbols) [R = 94]</option>
-                            </select>
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="pass-speed">Attacker Guess Speed:</label>
-                            <select id="pass-speed" class="calc-input" onchange="calculatePasswordEntropy()">
-                                <option value="10000000000" selected>High-End GPU Array (10 Billion guesses / sec)</option>
-                                <option value="100000000000">Nation-State Supercomputer (100 Billion guesses / sec)</option>
-                                <option value="1000000">Online Rate-Limited (1 Million guesses / sec)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Entropy & Crack Resistance:</span>
-                            <span class="calc-result-val" id="pass-result-val">78.66 Bits &rarr; ~750,000 Years</span>
-                        </div>
-                        <div class="calc-math-steps" id="pass-math-steps">
-                            <strong>Cryptographic Entropy Breakdown:</strong><br>
-                            <div class="step-line">• <strong>Total Keyspace:</strong> R<sup>L</sup> = 94¹² = <strong>4.76 × 10²³ possible combinations</strong></div>
-                            <div class="step-line">• <strong>Shannon Entropy Formula:</strong> E = L × log₂(R) = 12 × log₂(94) = 12 × 6.5546 = <strong>78.66 bits</strong></div>
-                            <div class="step-line">• <strong>Expected Average Crack Time:</strong> (Keyspace ÷ 2) ÷ Speed = (4.76 × 10²³ ÷ 2) ÷ 10¹⁰ guesses/sec = <strong>2.38 × 10¹³ seconds (~754,000 Years)</strong></div>
-                            <div class="step-line">• <strong>NIST Security Rating:</strong> <span style="color:#16a34a; font-weight:700;">VERY STRONG</span> (Exceeds minimum 64-bit entropy benchmark for online and offline authentication).</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: MFA Strength Calculator -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Section 2: Authentication (IAAA) — Multi-Factor Authentication (MFA) 5-Factor & NIST Assurance Assessor</div>
-                    <div class="calc-desc">Select active authentication factors to evaluate authentication strength according to the IAAA identity verification framework.</div>
-                    
-                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem; margin-bottom:1.15rem;">
-                        <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
-                            <input type="checkbox" id="mfa-know" checked onchange="calculateMFAStrength()"> Something You Know (Password/PIN)
+<div class="card" style="margin-top:1.5rem;">
+<h2>Interactive Academic Calculators (Live Security Models &amp; Policy Engines)</h2>
+<!-- Calculator 1: Bell-LaPadula & Biba MLS Simulator -->
+<div class="calc-card">
+<div class="calc-title">🧮 Section 4.2: Mandatory Access Control (MAC) — Bell-LaPadula &amp; Biba MLS Rule Simulator</div>
+<div class="calc-desc">Simulate Multi-Level Security (MLS) access decisions by comparing a Subject's clearance level against an Object's data classification label.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="mls-subject">Subject Clearance Level:</label>
+<select class="calc-input" id="mls-subject" onchange="calculateMLSDecision()">
+<option value="4">4 - Top Secret</option>
+<option selected="" value="3">3 - Secret</option>
+<option value="2">2 - Confidential</option>
+<option value="1">1 - Unclassified</option>
+</select>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="mls-object">Object Classification Label:</label>
+<select class="calc-input" id="mls-object" onchange="calculateMLSDecision()">
+<option value="4">4 - Top Secret</option>
+<option value="3">3 - Secret</option>
+<option selected="" value="2">2 - Confidential</option>
+<option value="1">1 - Unclassified</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Permitted Operations:</span>
+<span class="calc-result-val" id="mls-result-val">BLP: Read Allowed, Write Prohibited</span>
+</div>
+<div class="calc-math-steps" id="mls-math-steps">
+<strong>Multi-Level Security (MLS) Rule Evaluation:</strong><br/>
+<div class="step-line">• <strong>Bell-LaPadula Model (Confidentiality):</strong></div>
+<div class="step-line">  - <em>Simple Security Property (No Read Up):</em> Subject (Secret = 3) ≥ Object (Confidential = 2) → <span style="color:#16a34a; font-weight:700;">✓ READ ALLOWED</span></div>
+<div class="step-line">  - <em>*-Property (No Write Down):</em> Subject (Secret = 3) ≤ Object (Confidential = 2) → <span style="color:#dc2626; font-weight:700;">✗ WRITE DENIED</span> (Prevents declassifying secrets to lower tiers)</div>
+<div class="step-line">• <strong>Biba Model (Integrity):</strong></div>
+<div class="step-line">  - <em>Simple Integrity Property (No Read Down):</em> Subject (3) ≤ Object (2) → <span style="color:#dc2626; font-weight:700;">✗ READ DENIED</span> (Prevents ingesting untrusted/corrupted data)</div>
+<div class="step-line">  - <em>*-Integrity Property (No Write Up):</em> Subject (3) ≥ Object (2) → <span style="color:#16a34a; font-weight:700;">✓ WRITE ALLOWED</span></div>
+</div>
+</div>
+</div>
+<!-- Calculator 2: Password Entropy & Brute-Force Crack Time -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Section 2: Authentication — Password Information Entropy (E = L log₂ R) &amp; Brute-Force Crack Time</div>
+<div class="calc-desc">Calculate password information entropy E = L × log₂(R) bits and estimate brute-force cracking resistance against high-performance GPU hash cracking rigs.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="pass-len">Password Length (L):</label>
+<input class="calc-input" id="pass-len" max="64" min="1" oninput="calculatePasswordEntropy()" step="1" type="number" value="12"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="pass-pool">Character Pool (R):</label>
+<select class="calc-input" id="pass-pool" onchange="calculatePasswordEntropy()">
+<option value="10">Numbers Only (0-9) [R = 10]</option>
+<option value="26">Lowercase Letters Only (a-z) [R = 26]</option>
+<option value="52">Mixed Letters (a-z, A-Z) [R = 52]</option>
+<option value="62">Alphanumeric (a-z, A-Z, 0-9) [R = 62]</option>
+<option selected="" value="94">Full ASCII + Symbols (Letters, Digits, Symbols) [R = 94]</option>
+</select>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="pass-speed">Attacker Guess Speed:</label>
+<select class="calc-input" id="pass-speed" onchange="calculatePasswordEntropy()">
+<option selected="" value="10000000000">High-End GPU Array (10 Billion guesses / sec)</option>
+<option value="100000000000">Nation-State Supercomputer (100 Billion guesses / sec)</option>
+<option value="1000000">Online Rate-Limited (1 Million guesses / sec)</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Entropy &amp; Crack Resistance:</span>
+<span class="calc-result-val" id="pass-result-val">78.66 Bits → ~750,000 Years</span>
+</div>
+<div class="calc-math-steps" id="pass-math-steps">
+<strong>Cryptographic Entropy Breakdown:</strong><br/>
+<div class="step-line">• <strong>Total Keyspace:</strong> R<sup>L</sup> = 94¹² = <strong>4.76 × 10²³ possible combinations</strong></div>
+<div class="step-line">• <strong>Shannon Entropy Formula:</strong> E = L × log₂(94) = 12 × log₂(94) = 12 × 6.5546 = <strong>78.66 bits</strong></div>
+<div class="step-line">• <strong>Expected Average Crack Time:</strong> (Keyspace ÷ 2) ÷ Speed = (4.76 × 10²³ ÷ 2) ÷ 10¹⁰ guesses/sec = <strong>2.38 × 10¹³ seconds (~754,000 Years)</strong></div>
+<div class="step-line">• <strong>NIST Security Rating:</strong> <span style="color:#16a34a; font-weight:700;">VERY STRONG</span> (Exceeds minimum 64-bit entropy benchmark for online and offline authentication).</div>
+</div>
+</div>
+</div>
+<!-- Calculator 3: MFA Strength Calculator -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Section 2: Authentication (IAAA) — Multi-Factor Authentication (MFA) 5-Factor &amp; NIST Assurance Assessor</div>
+<div class="calc-desc">Select active authentication factors to evaluate authentication strength according to the IAAA identity verification framework.</div>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:0.85rem; margin-bottom:1.15rem;">
+<label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+<input checked="" id="mfa-know" onchange="calculateMFAStrength()" type="checkbox"/> Something You Know (Password/PIN)
                         </label>
-                        <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
-                            <input type="checkbox" id="mfa-have" checked onchange="calculateMFAStrength()"> Something You Have (Hardware Key/OTP)
+<label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+<input checked="" id="mfa-have" onchange="calculateMFAStrength()" type="checkbox"/> Something You Have (Hardware Key/OTP)
                         </label>
-                        <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
-                            <input type="checkbox" id="mfa-are" onchange="calculateMFAStrength()"> Something You Are (Biometrics)
+<label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+<input id="mfa-are" onchange="calculateMFAStrength()" type="checkbox"/> Something You Are (Biometrics)
                         </label>
-                        <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
-                            <input type="checkbox" id="mfa-where" onchange="calculateMFAStrength()"> Somewhere You Are (IP/Geofencing)
+<label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+<input id="mfa-where" onchange="calculateMFAStrength()" type="checkbox"/> Somewhere You Are (IP/Geofencing)
                         </label>
-                        <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
-                            <input type="checkbox" id="mfa-do" onchange="calculateMFAStrength()"> Something You Do (Keystroke Dynamics)
+<label style="display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; cursor:pointer;">
+<input id="mfa-do" onchange="calculateMFAStrength()" type="checkbox"/> Something You Do (Keystroke Dynamics)
                         </label>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Assessed Authentication Level:</span>
-                            <span class="calc-result-val" id="mfa-result-val">Two-Factor Authentication (2FA - High Security)</span>
-                        </div>
-                        <div class="calc-math-steps" id="mfa-math-steps">
-                            <strong>Authentication Rigor Analysis:</strong><br>
-                            <div class="step-line">• <strong>Active Factor Categories:</strong> 2 distinct categories enabled (Knowledge + Possession).</div>
-                            <div class="step-line">• <strong>Credential Attack Resistance:</strong> Defends against 99.9% of automated credential stuffing and dictionary attacks.</div>
-                            <div class="step-line">• <strong>Regulatory Status:</strong> Meets NIST SP 800-63B Authenticator Assurance Level 2 (AAL2) and PCI-DSS compliance requirements.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div></div>
-
-    <script>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Assessed Authentication Level:</span>
+<span class="calc-result-val" id="mfa-result-val">Two-Factor Authentication (2FA - High Security)</span>
+</div>
+<div class="calc-math-steps" id="mfa-math-steps">
+<strong>Authentication Rigor Analysis:</strong><br/>
+<div class="step-line">• <strong>Active Factor Categories:</strong> 2 distinct categories enabled (Knowledge + Possession).</div>
+<div class="step-line">• <strong>Credential Attack Resistance:</strong> Defends against 99.9% of automated credential stuffing and dictionary attacks.</div>
+<div class="step-line">• <strong>Regulatory Status:</strong> Meets NIST SP 800-63B Authenticator Assurance Level 2 (AAL2) and PCI-DSS compliance requirements.</div>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<script>
 
         // ==========================================
         // Interactive Access Control Calculators
@@ -1425,6 +1774,5 @@
 
         const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

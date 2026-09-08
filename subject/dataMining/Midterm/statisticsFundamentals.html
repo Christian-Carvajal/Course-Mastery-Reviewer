@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var isDark = savedTheme === 'dark' || (!savedTheme && prefersDark) || savedTheme === null;
+                if (isDark && savedTheme !== 'light') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch(e) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <title>Statistics Fundamentals | Data Mining &amp; Data Science</title>
+    <link href="../../../global.css" rel="stylesheet"/>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link href="../../../manifest.json" rel="manifest"/>
+    <meta content="#0d9488" name="theme-color"/>
+    <meta content="yes" name="mobile-web-app-capable"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%8A%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+</head>
+<body>
+    <header class="app-header">
+        <h1>Data Mining &amp; Data Science</h1>
+        <p>Statistics Fundamentals — From Descriptive Data to Statistical Inference (Midterm Term • Lecture Deck 3rd Year)</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a class="nav-btn-home" href="../../../index.html#midterm">← Return to Portal</a>
+            <button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+            <span class="nav-title">Statistics Fundamentals</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" id="nav-btn-quickref" onclick="openQuickRefTab('matrix')">Quick Reference</button>
+        </div>
+        <button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+    </nav>
+
+    <div class="container">
+        <!-- TAB 1: REVIEWER / STUDY GUIDE -->
+        <div class="tab-content active" id="reviewer">
+
+            <!-- MODULE HEADER CARD -->
+            <div class="card">
+                <div class="badge-container" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+                    <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">BSCS 3rd Year</span>
+                    <span class="badge" style="background:rgba(59,130,246,0.15); color:#2563eb; font-weight:700;">Data Mining Midterm</span>
+                    <span class="badge" style="background:rgba(147,51,234,0.15); color:#9333ea; font-weight:700;">Lecture Deck</span>
+                    <a href="../../Resources/dataMiningResources/midterm/resources.html" class="badge" style="background:rgba(245,158,11,0.18); color:#d97706; font-weight:700; text-decoration:none;" title="View Midterm Lecture PDF (statisticsFundamentals1.pdf)">📂 Lecture Slide PDF (statisticsFundamentals1.pdf)</a>
+                </div>
+                <h1 style="margin-top:0; font-size:1.85rem; color:var(--text-dark-color);">STATISTICS FUNDAMENTALS</h1>
+                <p style="font-size:1.05rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">
+                    From Descriptive Data to Statistical Inference — Populations &amp; Samples • Data Types • Visualization • Central Tendency &amp; Variability • Distributions • Central Limit Theorem • Estimators
+                </p>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <h3 style="margin:0 0 0.5rem 0; font-size:1.05rem; color:var(--text-dark-color);">🗺️ Where We Are Going</h3>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        <strong>Two parts, one goal:</strong> make sound, data-driven decisions.
+                    </p>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:0.75rem;">
+                        <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                            <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">PART 1: Descriptive Statistics</strong>
+                            <ul style="margin:0; padding-left:1.2rem; font-size:0.85rem; line-height:1.5;">
+                                <li>Populations vs. samples</li>
+                                <li>Types of data &amp; levels of measurement</li>
+                                <li>Graphs &amp; tables that fit each data type</li>
+                                <li>Mean, median, mode &amp; skewness</li>
+                                <li>Variance, standard deviation, CV</li>
+                                <li>Covariance &amp; correlation</li>
+                                <li>Case study: a real estate database</li>
+                            </ul>
+                        </div>
+                        <div style="padding:0.75rem; background:rgba(0,0,0,0.02); border:1px solid var(--border-color); border-radius:6px;">
+                            <strong style="color:#2563eb; display:block; margin-bottom:0.25rem;">PART 2: Inferential Statistics</strong>
+                            <ul style="margin:0; padding-left:1.2rem; font-size:0.85rem; line-height:1.5;">
+                                <li>What a distribution really is</li>
+                                <li>The normal distribution</li>
+                                <li>Standardization &amp; z-scores</li>
+                                <li>Sampling distributions</li>
+                                <li>The Central Limit Theorem</li>
+                                <li>Standard error</li>
+                                <li>Estimators &amp; point estimates</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 1: PART 1 OVERVIEW & POPULATION VS SAMPLE -->
+            <div class="card">
+                <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">PART 1</span>
+                <h2 id="descriptive-statistics-overview">Descriptive Statistics</h2>
+                <p style="font-size:1rem; color:var(--text-muted); font-style:italic; margin-top:-0.25rem;">
+                    Organizing, summarizing, and honestly describing the data in front of you.
+                </p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>Know your data:</strong> population or sample, type, and measurement level</li>
+                    <li><strong>Choose the right picture:</strong> tables, bars, pies, Pareto, histograms, scatter plots</li>
+                    <li><strong>Summarize with numbers:</strong> center, asymmetry, spread, and relationships</li>
+                </ul>
+
+                <h3 id="population-vs-sample">Population vs. Sample</h3>
+                <p>The first question of every analysis: <em>which one am I holding?</em></p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700; background:rgba(13,148,136,0.15); color:var(--primary-color); margin-bottom:0.5rem;">POPULATION (N)</span>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>All items of interest to the study</li>
+                            <li>Numbers computed from it are <strong>parameters</strong></li>
+                            <li>Hard to define, hard to observe, costly</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700; background:rgba(59,130,246,0.15); color:#2563eb; margin-bottom:0.5rem;">SAMPLE (n)</span>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>A subset drawn from the population</li>
+                            <li>Numbers computed from it are <strong>statistics</strong></li>
+                            <li>Faster and cheaper - what you will almost always use</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border-left:4px solid var(--border-color); border-radius:6px; margin:1rem 0;">
+                    <strong>A thought experiment: "all students."</strong><br>
+                    <p style="margin:0.25rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                        "All students of a university" includes students on campus, at home, abroad, on exchange, part-time, and even enrolled high schoolers and the list still misses someone. Populations are hard to pin down; statistical tests are designed for the incomplete data of samples.
+                    </p>
+                </div>
+
+                <h3 id="what-makes-sample-good">What Makes a Sample Good?</h3>
+                <p>Two conditions and a canteen that failed both.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.25); border-radius:8px;">
+                        <strong style="color:#059669; display:block; margin-bottom:0.25rem;">1. RANDOM</strong>
+                        <p style="margin:0; font-size:0.875rem; line-height:1.5;">
+                            Every member of the population is chosen strictly by chance — everyone has a shot at being selected.
+                        </p>
+                    </div>
+                    <div style="padding:1rem; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.25); border-radius:8px;">
+                        <strong style="color:#059669; display:block; margin-bottom:0.25rem;">2. REPRESENTATIVE</strong>
+                        <p style="margin:0; font-size:0.875rem; line-height:1.5;">
+                            The subset accurately reflects the members of the entire population — not just one convenient corner of it.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="padding:0.85rem 1rem; background:rgba(220,38,38,0.06); border-left:4px solid #dc2626; border-radius:6px; margin-top:1rem;">
+                    <strong style="color:#dc2626; display:block; margin-bottom:0.25rem;">Case: 50 students interviewed in the university canteen</strong>
+                    <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                        <li><strong>Not random:</strong> only students at lunch could be picked; most members never had a chance.</li>
+                        <li><strong>Not representative:</strong> it reflects "students who eat at the canteen," not all students of the university.</li>
+                        <li><strong>The fix:</strong> random selection from the full student database - which usually needs institutional access.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SECTION 2: TYPES OF DATA & LEVELS OF MEASUREMENT -->
+            <div class="card">
+                <h2 id="types-of-data">Types of Data</h2>
+                <p>Classify first the type of data decides which statistics and charts are even possible.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <h4 style="margin:0 0 0.5rem 0; color:var(--primary-color); font-size:1rem;">CATEGORICAL</h4>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>Describes categories or groups</li>
+                            <li>Car brands: Mercedes, BMW, Audi</li>
+                            <li>Yes / No answers ("Do you own a car?")</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <h4 style="margin:0 0 0.5rem 0; color:#2563eb; font-size:1rem;">NUMERICAL: DISCRETE</h4>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>Countable, finite you can list every value</li>
+                            <li>Number of children, scores, grades</li>
+                            <li>Pizza prices in pesos: you can pay 199.25, not 199.253 the smallest step is 1 centavo</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <h4 style="margin:0 0 0.5rem 0; color:#7c3aed; font-size:1rem;">NUMERICAL: CONTINUOUS</h4>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>Infinite, impossible to count</li>
+                            <li>Weight, height, area, distance, time</li>
+                            <li>A drop of sweat changes your true weight - the scale just can't see it</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 id="levels-of-measurement">Levels of Measurement</h3>
+                <p>Qualitative (nominal, ordinal) Quantitative (interval, ratio)</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:20%;">Level</th>
+                                <th style="width:18%;">Nature</th>
+                                <th>Characteristics &amp; Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>NOMINAL</strong></td>
+                                <td>Qualitative</td>
+                                <td>Categories with no order. Car brands; the four seasons.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ORDINAL</strong></td>
+                                <td>Qualitative</td>
+                                <td>Categories with strict order. Lunch ratings: disgusting &rarr; unappetizing &rarr; neutral &rarr; tasty &rarr; delicious.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>INTERVAL</strong></td>
+                                <td>Quantitative</td>
+                                <td>Numbers without a true zero. &deg;C and &deg;F - 0&deg; is an artificial, man-made point, so ratios are meaningless.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RATIO</strong></td>
+                                <td>Quantitative</td>
+                                <td>Numbers with a true zero. Counts, distance, time and Kelvin: 0 K is where atoms stop moving.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:rgba(234,179,8,0.08); border-left:4px solid #ca8a04; border-radius:6px; margin:1rem 0;">
+                    <strong style="color:#ca8a04;">Why temperature trips people up:</strong><br>
+                    <p style="margin:0.25rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                        10&deg;C vs. 5&deg;C looks "twice as warm" - but the same days are 50&deg;F vs. 41&deg;F. No true zero, no ratios. In Kelvin, ratios are real.
+                    </p>
+                </div>
+
+                <div style="margin-top:1.25rem; padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                    <h4 style="margin:0 0 0.5rem 0; color:var(--text-dark-color); font-size:1rem;">❓ Knowledge Check 1</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">Think first, then check answers below.</p>
+                    <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.75rem;">
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q1. You survey every 10th customer leaving a mall to study "shoppers in this city." Is this sample random? Is it representative?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Neither. It is not random because shoppers outside this specific mall never had a chance of selection; it is not representative because it reflects mall shoppers at one location/time, not all shoppers across the city.
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q2. SAT scores can only take specific listed values. Discrete or continuous? What about your exact height?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: SAT scores are Discrete (finite, countable increments like 10-point steps). Your exact height is Continuous (infinite decimal possibilities along a continuous continuum).
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q3. Classify: jersey numbers of a basketball team, and temperature in Kelvin type and level of measurement for each.</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Jersey numbers = Categorical, Nominal (numerical labels/names only; mean jersey number is meaningless). Temperature in Kelvin = Numerical Continuous, Ratio (absolute true zero where molecular motion stops).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: VISUALIZING CATEGORICAL DATA & PARETO -->
+            <div class="card">
+                <h2 id="visualizing-categorical-data">Visualizing Categorical Data</h2>
+                <p>Case: a shop selling German cars Audi, Mercedes, BMW (illustrative units sold).</p>
+
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>Frequency distribution table:</strong> Category + frequency. The starting point for every chart.</li>
+                    <li><strong>Bar chart:</strong> One bar per category. Fastest way to compare groups.</li>
+                    <li><strong>Pie chart:</strong> Built on relative frequency (shares sum to 100%). The classic market-share view.</li>
+                    <li><strong>Pareto diagram:</strong> Bars in descending order + a cumulative-frequency curve to 100%.</li>
+                </ul>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-radius:6px; font-family:monospace; margin:0.75rem 0; font-size:0.9rem;">
+                    <div>Audi: <strong>62</strong></div>
+                    <div>Mercedes: <strong>50</strong></div>
+                    <div>BMW: <strong>44</strong></div>
+                    <div style="color:var(--text-muted); margin-top:0.25rem;">Sorted by frequency one cumulative line away from a Pareto diagram.</div>
+                </div>
+
+                <h3 id="pareto-diagram">The Pareto Diagram &amp; the 80-20 Rule</h3>
+                <p>A bar chart, sorted - plus one powerful curve.</p>
+
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Order categories by descending frequency</li>
+                    <li>Add a cumulative frequency curve the running sum of relative frequencies, ending at 100%</li>
+                    <li>Read on a second axis (right side); each vertex shows the subtotal of everything to its left</li>
+                    <li>Combines the strengths of the bar chart (comparison) and the pie chart (share of total)</li>
+                    <li>Instantly answers: "What do the top 2 categories cover?"</li>
+                </ul>
+
+                <div style="padding:0.85rem 1.15rem; background:rgba(13,148,136,0.08); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">Vilfredo Pareto's principle</strong>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        <strong>80%</strong> of the effects come from <strong>20%</strong> of the causes.<br>
+                        <em>Example:</em> Microsoft reported that fixing 20% of software bugs eliminated 80% of the problems customers experienced.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 4: GROUPING DATA, HISTOGRAM & TWO VARIABLES -->
+            <div class="card">
+                <h2 id="grouping-numerical-data">Grouping Numerical Data into Intervals</h2>
+                <p>20 unique numbers = a useless 20-row table. Group first, then plot.</p>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:6px; text-align:center; font-size:1.1rem; margin:1rem 0;">
+                    <strong>interval width</strong> = (largest - smallest) &divide; (number of intervals)
+                </div>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Interval</th>
+                                <th>Frequency</th>
+                                <th>Relative freq.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1–21</td>
+                                <td>2</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td>21–41</td>
+                                <td>4</td>
+                                <td>20%</td>
+                            </tr>
+                            <tr>
+                                <td>41–61</td>
+                                <td>3</td>
+                                <td>15%</td>
+                            </tr>
+                            <tr>
+                                <td>61–81</td>
+                                <td>6</td>
+                                <td>30%</td>
+                            </tr>
+                            <tr>
+                                <td>81–101</td>
+                                <td>5</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr style="font-weight:700; background:rgba(0,0,0,0.03);">
+                                <td>Total</td>
+                                <td>20</td>
+                                <td>100%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Aim for 5-20 intervals, depending on data size</li>
+                    <li>Example: (100 - 1) &divide; 5 = 19.8 &rarr; round up to 20 for neatness</li>
+                    <li>A value joins an interval if it is &gt; lower bound and &le; upper bound</li>
+                    <li>Relative frequency = interval frequency &divide; total observations</li>
+                </ul>
+
+                <h3 id="the-histogram">The Histogram</h3>
+                <p>The most common graph for numerical data a bar chart's cousin, not its twin.</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Both axes are numerical: intervals on X, frequency on Y</li>
+                    <li><strong>Bars touch</strong> - each interval ends where the next begins</li>
+                    <li>Bar charts keep bars apart, because categories are separate things</li>
+                    <li>Can plot relative frequency (%) instead same shape, different message</li>
+                    <li>Unequal intervals exist (survey age brackets like 18-25 ... 60+), but stick to equal widths until you're experienced</li>
+                </ul>
+                <p>Near-zero gaps between bars signal continuity between intervals.</p>
+
+                <h3 id="two-variables-at-once">Two Variables at Once</h3>
+                <p>Cross tables for categories, scatter plots for numbers.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">Cross (contingency) table</strong>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>Two categorical variables: e.g., 3 investors &times; 3 asset classes (stocks, bonds, real estate)</li>
+                            <li>Always add row &amp; column totals rows give totals per asset class, columns give each investor's holdings</li>
+                            <li>Visualize with a side-by-side bar chart to compare within or across investors</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:#2563eb; display:block; margin-bottom:0.25rem;">Scatter plot</strong>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>Two numerical variables: 100 students' SAT reading (X) vs. writing (Y), each point one student</li>
+                            <li>Read the pattern, not the points: clear uptrend; a dense cluster near the 500-average middle; top students excel at both</li>
+                            <li>Jane: 550 reading, 300 writing an <strong>outlier</strong> that defies the data set's logic</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.25rem; padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                    <h4 style="margin:0 0 0.5rem 0; color:var(--text-dark-color); font-size:1rem;">❓ Knowledge Check 2</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">Think first, then check answers below.</p>
+                    <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.75rem;">
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q1. Your bar chart of ice-cream flavors has bars touching each other. What's wrong, and why does the convention exist?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Touching bars falsely imply a continuous numerical continuum between categories. Bar charts for categorical data must keep bars separated to signal distinct categories.
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q2. A dataset ranges from 4 to 92 and you want 8 intervals. What interval width would you use?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Width = (92 - 4) / 8 = 88 / 8 = 11. (You could round up to 11 or 12 for clean interval boundaries).
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q3. In a scatter plot of study hours vs. exam scores, one student studied 40 hours and scored 35%. What do we call this point and how should we treat it for now?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: An outlier. Investigate it first (check for data entry error or exceptional circumstances) before deciding whether to retain or remove it.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 5: CENTRAL TENDENCY & SKEWNESS -->
+            <div class="card">
+                <h2 id="central-tendency">Mean, Median, Mode</h2>
+                <p>One dataset, three answers NYC pizza prices, with one $66 posh outlier.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:var(--primary-color); font-size:1.15rem;">MEAN: $11</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.875rem; line-height:1.5;">
+                            Sum &divide; count. &mu; for a population, x̄ for a sample. Fragile: one $66 pizza doubled it.
+                        </p>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:#2563eb; font-size:1.15rem;">MEDIAN: $6</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.875rem; line-height:1.5;">
+                            Middle of the ordered list, position (n+1)&divide;2. With an even n, average the two middle values. Immune to the outlier.
+                        </p>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:#059669; font-size:1.15rem;">MODE: $3</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.875rem; line-height:1.5;">
+                            The most frequent value. Works for categories too. No repeats &rarr; no mode; 2-3 modes are tolerable, more is noise.
+                        </p>
+                    </div>
+                </div>
+                <p><em>There is no single "best" measure but relying on only one is definitely the worst.</em></p>
+
+                <h3 id="skewness">Skewness Which Way Does the Tail Point?</h3>
+                <p>The direction of the skew follows the <strong>TAIL (the outliers)</strong>, not the bulk of the data.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="color:#2563eb; font-weight:700;">Right (positive) skew</span>
+                        <div style="margin:0.35rem 0; font-family:monospace; font-weight:700;">mean &gt; median</div>
+                        <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">Tail &amp; outliers on the right.</p>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="color:#059669; font-weight:700;">Symmetrical (zero skew)</span>
+                        <div style="margin:0.35rem 0; font-family:monospace; font-weight:700;">mean = median = mode</div>
+                        <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">Perfectly centered on the mean.</p>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="color:#dc2626; font-weight:700;">Left (negative) skew</span>
+                        <div style="margin:0.35rem 0; font-family:monospace; font-weight:700;">mean &lt; median</div>
+                        <p style="margin:0; font-size:0.85rem; color:var(--text-muted);">Tail &amp; outliers on the left.</p>
+                    </div>
+                </div>
+                <p>The mode always marks the highest point. Skewness links central tendency to probability theory.</p>
+            </div>
+
+            <!-- SECTION 6: VARIABILITY & CORRELATION -->
+            <div class="card">
+                <h2 id="variance-and-variability">Variance - Dispersion Around the Mean</h2>
+                <p>Why we square, and why the sample formula divides by n - 1.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="color:var(--text-muted); font-size:0.8rem; font-weight:700; text-transform:uppercase;">Population Variance</span>
+                        <div style="font-family:monospace; font-size:1.15rem; font-weight:700; margin:0.35rem 0;">&sigma;&sup2; = &Sigma;(x - &mu;)&sup2; / N</div>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="color:var(--text-muted); font-size:0.8rem; font-weight:700; text-transform:uppercase;">Sample Variance</span>
+                        <div style="font-family:monospace; font-size:1.15rem; font-weight:700; margin:0.35rem 0;">s&sup2; = &Sigma;(x - x̄)&sup2; / (n - 1)</div>
+                    </div>
+                </div>
+
+                <p><strong>Why square the differences?</strong></p>
+                <ul style="margin:0.35rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Keeps results non-negative dispersion is distance, and distance can't be negative. Raw differences would cancel out to nothing.</li>
+                    <li>Amplifies big deviations: mean 0, observation 100 &rarr; squared spread of 10,000.</li>
+                </ul>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <strong>Worked example: {1, 2, 3, 4, 5}, mean = 3</strong>
+                    <ul style="margin:0.25rem 0 0 1.2rem; font-size:0.875rem; line-height:1.5;">
+                        <li>As a population: &sigma;&sup2; = 10 &divide; 5 = <strong>2.0</strong></li>
+                        <li>As a sample: s&sup2; = 10 &divide; 4 = <strong>2.5</strong></li>
+                        <li>The sample version corrects upward - the sample may come from a more spread-out population (e.g., one concentrated at 1s and 5s, with variance 2.96).</li>
+                    </ul>
+                </div>
+
+                <h3 id="standard-deviation-and-cv">Standard Deviation &amp; Coefficient of Variation</h3>
+                <p>Same pizzas, two currencies and why we need a unitless measure.</p>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:6px; margin:0.75rem 0;">
+                    <div><strong>Standard deviation</strong> = &radic;(variance)</div>
+                    <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">Back in the original units, so it's directly interpretable - "square dollars" mean nothing, even in statistics. The go-to measure of variability for a single dataset.</div>
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:6px; margin:0.75rem 0;">
+                    <div><strong>CV</strong> = standard deviation &divide; mean</div>
+                    <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;">"Relative standard deviation." Unitless which makes variability comparable across datasets and across units. Comparing raw standard deviations is meaningless.</div>
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border-left:4px solid #059669; border-radius:6px; margin:1rem 0;">
+                    <strong>Same 11 pizza prices, in dollars vs. Philippine pesos ($1 = ₱56):</strong>
+                    <ul style="margin:0.25rem 0 0 1.2rem; font-size:0.875rem; line-height:1.5;">
+                        <li>$3.27 std. dev. in dollars</li>
+                        <li>₱183.12 std. dev. in pesos</li>
+                        <li><strong>0.60 CV in dollars</strong></li>
+                        <li><strong>0.60 CV in pesos</strong></li>
+                    </ul>
+                    <span style="color:#059669; font-weight:700; font-size:0.85rem;">Identical variability, finally visible.</span>
+                </div>
+
+                <h3 id="covariance-and-correlation">Covariance &amp; Correlation</h3>
+                <p>Direction is easy. Strength needs standardizing.</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">Covariance - the direction</strong>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li><strong>&gt; 0:</strong> variables move together (house size &amp; price)</li>
+                            <li><strong>&lt; 0:</strong> they move in opposite directions</li>
+                            <li><strong>= 0:</strong> independent movements</li>
+                            <li><em>Problem:</em> no scale it can be 0.0023 or 30 million. Unreadable.</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:#2563eb; display:block; margin-bottom:0.25rem;">Correlation - the strength</strong>
+                        <div style="font-family:monospace; margin:0.25rem 0;">r = covariance &divide; (std-dev X &times; std-dev Y)</div>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li>Always between -1 and +1 no exceptions</li>
+                            <li>House size vs. price: r = 0.87 &rarr; strong positive</li>
+                            <li>Ice cream vs. umbrella sales: negative sun helps one, rain the other</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p><strong>Symmetry:</strong> corr(X, Y) = corr(Y, X). Size-and-price equals price-and-size the formula can't tell them apart.</p>
+                <p><strong>Correlation &ne; causation:</strong> Size causes price a house that gets pricier doesn't grow bigger. Regression analysis digs into causality later.</p>
+
+                <div style="margin-top:1.25rem; padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                    <h4 style="margin:0 0 0.5rem 0; color:var(--text-dark-color); font-size:1rem;">❓ Knowledge Check 3</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">Think first, then check answers below.</p>
+                    <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.75rem;">
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q1. A dataset of salaries has mean 45,000 and median 32,000. Which way is it skewed, and what likely causes it?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Right (positive) skew because mean &gt; median. High-earning executive outliers pull the mean to the right.
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q2. Sample {2, 4, 6}: compute the sample variance. Why divide by 2 and not 3?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Mean = 4. Squared diffs: (2-4)&sup2;=4, (4-4)&sup2;=0, (6-4)&sup2;=4 &rarr; sum = 8. Dividing by n - 1 = 2 gives sample variance = 4. We divide by n - 1 (Bessel's correction) to prevent systematically underestimating population variance.
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q3. Dataset A: mean 20, std. dev. 4. Dataset B: mean 400, std. dev. 40. Which is more variable, and which measure told you?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Dataset A is more variable! CV(A) = 4 / 20 = 0.20 (20%). CV(B) = 40 / 400 = 0.10 (10%). The Coefficient of Variation (CV) tells you relative variability regardless of raw scale.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 7: REAL ESTATE CASE STUDY -->
+            <div class="card">
+                <h2 id="real-estate-case-study">Case Study: A California Real Estate Database</h2>
+                <p>Step 1 classify every variable before touching a single chart.</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Type</th>
+                                <th>Level</th>
+                                <th>Why</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ID</strong></td>
+                                <td>Categorical</td>
+                                <td>Nominal</td>
+                                <td>A number used as a name the mean ID is meaningless</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Age</strong></td>
+                                <td>Numerical</td>
+                                <td>Ratio</td>
+                                <td>True zero at birth; discrete or continuous by task</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Age interval</strong></td>
+                                <td>Categorical</td>
+                                <td>Ordinal</td>
+                                <td>Same variable, new level ordered groups</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Price</strong></td>
+                                <td>Numerical</td>
+                                <td>Ratio</td>
+                                <td>Banks treat it as continuous; so do we</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Gender</strong></td>
+                                <td>Categorical</td>
+                                <td>Nominal</td>
+                                <td>Binary like a yes/no question</td>
+                            </tr>
+                            <tr>
+                                <td><strong>State</strong></td>
+                                <td>Categorical</td>
+                                <td>Nominal</td>
+                                <td>Labels; numbering states 1-50 changes nothing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <strong>Quick test for "numeric-looking" variables:</strong><br>
+                    <p style="margin:0.25rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                        Interpret the mean. Mean price = valuable. Mean ID = nonsense &rarr; the variable is categorical.
+                    </p>
+                </div>
+
+                <h3>What the Numbers Told Marketing</h3>
+                <p>Every descriptive tool from Part 1, working together on one business question.</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>68%</strong> of US sales come from California; CA + NV cover the top 75% of locations (Pareto)</li>
+                    <li><strong>71%</strong> of buyers were 26-55 years old; peak bracket 36-45 (histogram)</li>
+                    <li><strong>46 &plusmn; 13</strong> mean age &plusmn; std. dev.; median 45, mode 48 &rarr; mean &approx; median, slight right skew</li>
+                    <li><strong>-0.17</strong> correlation of age vs. price below the |0.2| bar, so age doesn't drive spending</li>
+                </ul>
+                <p style="font-size:0.875rem; color:var(--text-muted);">
+                    Gender looked male-heavy, but only contract signers are recorded (families buy together) - interesting, not decision-grade. 9% of sales were corporate clients.<br>
+                    Existing customers are technically a population; because we're predicting future buyers, we treat the data as a sample and use sample formulas.
+                </p>
+            </div>
+
+            <!-- SECTION 8: PART 2 INFERENTIAL STATISTICS -->
+            <div class="card">
+                <span class="badge" style="background:rgba(59,130,246,0.15); color:#2563eb; font-weight:700;">PART 2</span>
+                <h2 id="inferential-statistics-overview">Inferential Statistics</h2>
+                <p style="font-size:1rem; color:var(--text-muted); font-style:italic; margin-top:-0.25rem;">
+                    Using probability theory and distributions to predict population values from sample data.
+                </p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Distributions: what they are and the one that rules them all</li>
+                    <li>The normal distribution, standardization, and the Central Limit Theorem</li>
+                    <li>Standard error, estimators, and point estimates the road to confidence intervals</li>
+                </ul>
+
+                <h3 id="what-is-a-distribution">What Is a Distribution?</h3>
+                <p>A function showing every possible value of a variable and how often each occurs.</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>One fair die: each face has probability 1/6 (&approx; 0.17); a seven has probability 0</li>
+                    <li>A distribution covers ALL possible values complete when probabilities sum to 1 (100%)</li>
+                    <li>Equal chances for every outcome = the <strong>discrete uniform distribution</strong></li>
+                    <li>The graph is only a picture of the distribution the distribution IS the underlying probabilities</li>
+                    <li>Two dice: 36 combinations; guessing the sum is a game of unequal chances &rarr; Seven is king: 6/36 &approx; 0.17</li>
+                </ul>
+                <p>So far: discrete examples. Inference mostly runs on continuous distributions - starting with the normal.</p>
+
+                <h3 id="the-normal-distribution">The Normal (Gaussian) Distribution</h3>
+                <p>The bell curve the most common distribution in statistics, denoted <strong>N &sim; (&mu;, &sigma;&sup2;)</strong>.</p>
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-radius:6px; font-weight:700; text-align:center; margin:0.75rem 0;">
+                    mean = median = mode
+                </div>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Perfectly symmetrical, zero skew, centered on the mean</li>
+                    <li>Highest point at the mean which coincides with the mode</li>
+                    <li>Change the mean (fixed &sigma;): the curve slides left or right, shape intact</li>
+                    <li>Change &sigma; (fixed mean): the curve reshapes in place:
+                        <ul>
+                            <li>lower &sigma; &rarr; tall &amp; tight, thinner tails</li>
+                            <li>higher &sigma; &rarr; flat &amp; wide, fatter tails</li>
+                        </ul>
+                    </li>
+                    <li>Why we care: it approximates a huge range of variables, its statistics are elegant, and decisions built on it have a strong track record</li>
+                </ul>
+
+                <h3 id="standardization-and-z-scores">Standardization &amp; the Z-Score</h3>
+                <p>Any distribution can be rescaled to mean 0, standard deviation 1.</p>
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:6px; text-align:center; font-size:1.25rem; font-weight:700; margin:1rem 0;">
+                    z = (x - &mu;) &divide; &sigma;
+                </div>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Standardizing a normal distribution gives the standard normal, denoted <strong>Z</strong></li>
+                    <li><strong>Step 1:</strong> subtract &mu; from every point: the curve slides so its center is 0; shape (and &sigma;) unchanged</li>
+                    <li><strong>Step 2:</strong> divide every point by &sigma;: the curve reshapes so its spread is exactly 1</li>
+                    <li>Result: predictions and inference get dramatically easier</li>
+                </ul>
+
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border-left:4px solid #2563eb; border-radius:6px; margin:1rem 0;">
+                    <strong>Worked example: mean 3, &sigma; = 1.22</strong>
+                    <ul style="margin:0.25rem 0 0 1.2rem; font-size:0.875rem; line-height:1.5;">
+                        <li>Original: 1, 2, 2, 3, 3, 3, 4, 4, 5</li>
+                        <li>- mean (3): -2, -1, -1, 0, 0, 0, 1, 1, 2</li>
+                        <li>&divide; &sigma; (1.22): -1.63, -0.82, -0.82, 0, 0, 0, 0.82, 0.82, 1.63</li>
+                    </ul>
+                    <p style="margin:0.25rem 0 0 0; font-size:0.85rem; color:var(--text-muted);">
+                        New mean = 0, new &sigma; = 1 - and note: adding or subtracting a constant never changes the standard deviation.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 9: SAMPLING DISTRIBUTIONS, CLT & ESTIMATORS -->
+            <div class="card">
+                <h2 id="sampling-distributions">Sampling Distributions</h2>
+                <p>The used-car problem: every sample tells you a slightly different story.</p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem; margin:0.75rem 0;">
+                    <div style="padding:0.75rem; background:var(--card-elevated-bg); border-radius:6px; text-align:center;">
+                        Sample mean: <strong>$2,617</strong>
+                    </div>
+                    <div style="padding:0.75rem; background:var(--card-elevated-bg); border-radius:6px; text-align:center;">
+                        Sample mean: <strong>$3,201</strong>
+                    </div>
+                    <div style="padding:0.75rem; background:var(--card-elevated-bg); border-radius:6px; text-align:center;">
+                        Sample mean: <strong>$2,844</strong>
+                    </div>
+                </div>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>One sample mean is a single, shaky approximation of the population mean</li>
+                    <li>So draw many samples and collect their means into a new dataset</li>
+                    <li>That dataset's distribution is the <strong>sampling distribution of the mean</strong></li>
+                    <li>The means cluster around one value the population mean itself (&approx; $2,800 here)</li>
+                    <li>Averaging the sample means gives a very precise approximation of &mu;</li>
+                </ul>
+
+                <h3 id="central-limit-theorem">The Central Limit Theorem</h3>
+                <p><em>The discovery that revolutionized statistics.</em></p>
+                <div style="padding:0.85rem 1.15rem; background:rgba(13,148,136,0.08); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <strong>No matter the shape of the population</strong> skewed, uniform, exponential, anything <strong>the sampling distribution of the mean approximates a normal distribution</strong>.
+                </div>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>&mu;:</strong> the sampling distribution's mean equals the population mean</li>
+                    <li><strong>&sigma;&sup2; / n:</strong> its variance is the population variance over the sample size bigger samples, tighter results</li>
+                    <li><strong>n &ge; 30:</strong> the usual rule of thumb for the CLT to apply</li>
+                </ul>
+                <p><em>Why it matters:</em> we can run tests, build confidence intervals, and make inferences with the normal distribution even when the population itself is nothing like normal. The car prices were right-skewed; their sample means were normal anyway.</p>
+
+                <h3 id="standard-error">Standard Error</h3>
+                <p>The standard deviation of the sampling distribution variability of the sample means.</p>
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:6px; text-align:center; font-size:1.25rem; font-weight:700; margin:1rem 0;">
+                    SE = &sigma; &divide; &radic;n
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border-left:4px solid #2563eb; border-radius:6px; margin:1rem 0;">
+                    <strong>Feel it with numbers (&sigma; = 100):</strong>
+                    <ul style="margin:0.25rem 0 0 1.2rem; font-size:0.875rem; line-height:1.5;">
+                        <li>n = 25 &rarr; SE = 20</li>
+                        <li>n = 100 &rarr; SE = 10</li>
+                        <li>n = 400 &rarr; SE = 5</li>
+                    </ul>
+                </div>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Comes straight from the CLT: variance &sigma;&sup2;/n &rarr; take the square root</li>
+                    <li>Tells you how well your sample mean approximates the true mean</li>
+                    <li>Appears in almost every statistical test that's why it earned its own name</li>
+                    <li>Shrinks as n grows: bigger samples &rarr; better approximations of the population</li>
+                </ul>
+
+                <h3 id="estimators-and-point-estimates">Estimators &amp; Point Estimates</h3>
+                <p><em>"Estimators are like judges we want them unbiased and efficient."</em></p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">The vocabulary</strong>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li><strong>Estimator:</strong> a rule for approximating a population parameter from sample data alone</li>
+                            <li><strong>Point estimate:</strong> a single number (x̄ estimates &mu;; s&sup2; estimates &sigma;&sup2;)</li>
+                            <li>It sits exactly at the center of a confidence interval which carries more information</li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <strong style="color:#2563eb; display:block; margin-bottom:0.25rem;">The two properties</strong>
+                        <ul style="margin:0; padding-left:1.2rem; font-size:0.875rem; line-height:1.5;">
+                            <li><strong>Unbiased:</strong> expected value equals the true parameter</li>
+                            <li><strong>Efficient:</strong> among unbiased estimators, the one with the smallest variance</li>
+                            <li>"Statistic" is the broader term every point estimate is a statistic</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="padding:0.75rem 1rem; background:rgba(0,0,0,0.02); border-left:4px solid var(--border-color); border-radius:6px; margin:1rem 0;">
+                    <strong>The "plus one foot" estimator:</strong><br>
+                    <p style="margin:0.25rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                        "Estimate the average American height as the sample mean plus one foot." It is an estimator just a biased one, with a bias of exactly one foot. The sensible, unbiased estimator is the sample mean itself.
+                    </p>
+                </div>
+
+                <div style="margin-top:1.25rem; padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                    <h4 style="margin:0 0 0.5rem 0; color:var(--text-dark-color); font-size:1rem;">❓ Knowledge Check 4</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">Think first, then check answers below.</p>
+                    <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.75rem;">
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q1. A population of incomes is heavily right-skewed. You repeatedly draw samples of n = 50 and record each mean. What shape does the distribution of those means take, and why?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: Approximately Normal (bell-shaped). By the Central Limit Theorem (CLT), because n &ge; 30 (n = 50), the sampling distribution of the sample mean is normal regardless of the underlying population skew.
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q2. &sigma; = 60 and n = 36. Compute the standard error. What happens to it if n rises to 144?</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: SE = &sigma; / &radic;n = 60 / &radic;36 = 60 / 6 = 10. If n rises to 144, SE = 60 / &radic;144 = 60 / 12 = 5. Quadrupling sample size cuts the standard error in half!
+                            </p>
+                        </div>
+                        <div>
+                            <p style="margin:0; font-weight:600; font-size:0.9rem;">Q3. A classmate proposes estimating average commute time as "sample mean minus 10 minutes, to be safe." Evaluate this estimator using the two properties.</p>
+                            <p style="margin:0.25rem 0 0 0; font-size:0.85rem; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.5rem;">
+                                Answer: It is BIASED (expected value is &mu; - 10, not &mu;). While it may have the same variance as the sample mean, its bias makes it mathematically inferior to the unbiased sample mean x̄.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem; padding:1rem 1.25rem; background:rgba(13,148,136,0.08); border-left:4px solid var(--primary-color); border-radius:6px;">
+                    <h3 style="margin:0 0 0.5rem 0; font-size:1.1rem; color:var(--text-dark-color);">📌 Key Takeaways</h3>
+                    <p style="margin:0 0 0.5rem 0; font-size:0.9rem; font-style:italic; color:var(--text-muted);">If you remember six things from this unit, make it these.</p>
+                    <ul style="margin:0; padding-left:1.2rem; font-size:0.9rem; line-height:1.6;">
+                        <li><strong>Classify before you compute:</strong> population or sample, data type, measurement level. Everything downstream depends on it.</li>
+                        <li><strong>Match the chart to the data:</strong> bars/pies/Pareto for categories, histograms and scatter plots for numbers.</li>
+                        <li><strong>Mean, median, mode are a team:</strong> Outliers bend the mean; skew direction follows the tail.</li>
+                        <li><strong>Variance &rarr; standard deviation &rarr; CV:</strong> from squared units, to real units, to unit-free comparison.</li>
+                        <li><strong>The CLT lets sample means behave normally:</strong> even when the population doesn't with mean &mu; and standard error &sigma;/&radic;n.</li>
+                        <li><strong>Correlation caps at &plusmn; 1 and is symmetric:</strong> and it never, by itself, proves causation.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: QUICK REFERENCE & FOUR-PILLAR SUMMARY MATRIX -->
+        <div class="tab-content" id="formulas">
+            <!-- HEADER BAR -->
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+                    <div>
+                        <h2 style="margin:0; font-size:1.5rem;">Quick Reference &amp; Summary Matrix</h2>
+                        <p style="margin:0.25rem 0 0 0; color:var(--text-muted); font-size:0.9rem;">
+                            Statistics Fundamentals, Descriptive Measures, CLT &amp; Standard Error • Four-Pillar Exam-Ready Review Sheet
+                        </p>
+                    </div>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+            </div>
+
+            <!-- DUAL-SECTION SEGMENTED SWITCHER -->
+            <div class="qr-section-nav" role="tablist">
+                <button class="qr-section-btn active" id="btn-qr-matrix" onclick="switchQuickRefSection('matrix')" role="tab" aria-selected="true">
+                    <span class="qr-btn-icon">📋</span>
+                    <span class="qr-btn-text">
+                        <strong>Four-Pillar Exam Review Matrix</strong>
+                        <small>Pillars 1–4: Terminology, Formulas, Comparison Tables &amp; Pitfalls</small>
+                    </span>
+                </button>
+                <button class="qr-section-btn" id="btn-qr-calculators" onclick="switchQuickRefSection('calculators')" role="tab" aria-selected="false">
+                    <span class="qr-btn-icon">🧮</span>
+                    <span class="qr-btn-text">
+                        <strong>Interactive Academic Calculators</strong>
+                        <small>Dedicated Calculation Studio: Live Solvers &amp; Step-by-Step Math</small>
+                    </span>
+                </button>
+            </div>
+
+            <!-- SECTION 1: FOUR-PILLAR EXAM REVIEW MATRIX (CONTINUOUS & UNINTERRUPTED) -->
+            <div class="qr-section-pane active" id="qr-section-matrix">
+            <!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>🏛️ Pillar 1:</span> Core Terminology &amp; Keyword Recall Grid
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Core statistical terms, measurement levels, distribution metrics, and inferential rules.
+                </p>
+                <div class="table-container" style="overflow-x:auto; margin-top:1rem;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:22%;">Term / Acronym</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:48%;">Exact Domain Definition</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Classification</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Exam Keyword</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Population (N)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The complete collection of all individual items, units, or subjects of interest to a study.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Foundation</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">All Items (Parameters)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Sample (n)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A representative subset drawn from a population to perform empirical measurement and inferential estimation.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Foundation</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Subset (Statistics)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Random Sample</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A sampling design where every single member of the population has an equal, nonzero probability of selection strictly by chance.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Sampling Method</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strictly By Chance</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Representative Sample</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A sample whose internal demographic and feature proportions accurately reflect those of the entire parent population.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Sampling Quality</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Accurate Reflection</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Categorical Data</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Qualitative variables that place observations into descriptive categories or groups (e.g., car brands, yes/no).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Type</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Qualitative Groups</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Numerical Discrete</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Countable quantitative values separated by finite gaps with no intermediate possibilities (e.g., children, grades, centavos).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Type</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Countable Values</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Numerical Continuous</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Uncountable quantitative values spanning a continuous interval of real numbers (e.g., exact weight, height, time).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Type</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Infinite Possibilities</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Nominal Level</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Qualitative classification with distinct category names but no inherent logical ordering (e.g., car brands, states).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Measurement Level</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Names Only (No Order)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Ordinal Level</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Qualitative classification with a strict meaningful order or ranking, but intervals between steps are not quantifiable.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Measurement Level</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strict Order</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Interval Level</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Quantitative scale with equal, measurable distances between numbers but lacking a true natural zero (&deg;C, &deg;F). Ratios are invalid.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Measurement Level</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">No True Zero</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Ratio Level</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Quantitative scale possessing an absolute, meaningful zero point representing total absence (counts, distance, Kelvin). Ratios are valid.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Measurement Level</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Absolute Zero / Valid Ratios</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Pareto Diagram</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A sorted descending bar chart coupled with a cumulative relative frequency polygon on a secondary axis demonstrating the 80/20 rule.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Visualization</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">80-20 Cumulative Curve</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Histogram</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A graphical display of numerical data grouped into continuous intervals where touching contiguous bars signify quantitative continuity.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Visualization</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Touching Bars (Continuous)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Mean (x̄, &mu;)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The arithmetic average calculated by dividing the sum of all values by the count. Highly sensitive to extreme outliers.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Central Tendency</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Arithmetic Average</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Median</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The physical midpoint of an ordered dataset at position (n+1)/2. Resistant and robust against extreme outliers.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Central Tendency</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Outlier Immune Midpoint</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Mode</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The most frequently occurring value in a dataset; the only measure of central tendency applicable to nominal categorical data.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Central Tendency</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Most Frequent Value</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Skewness</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A measure of distributional asymmetry. The direction of skew strictly follows the elongated tail and outliers (mean &gt; median = positive/right).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Distribution Shape</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Follows the Tail</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Sample Variance (s&sup2;)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Sum of squared deviations from the sample mean divided by degrees of freedom (n - 1) to provide an unbiased estimator of &sigma;&sup2;.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dispersion</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Divided by (n - 1)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Standard Deviation (s, &sigma;)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The square root of variance, returning dispersion back into the original units of measurement for direct interpretability.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dispersion</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Original Units</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Coefficient of Variation (CV)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Relative standard deviation expressed as (s / x̄), yielding a unitless metric for comparing variability across different scales and currencies.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Relative Dispersion</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Unitless Comparison</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Correlation (r)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Standardized covariance bounded strictly between -1 and +1 measuring the strength and direction of linear relationship between two numerical variables.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Bivariate Metric</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">-1 to +1 (No Causation)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Normal Distribution</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Continuous symmetrical bell-shaped probability distribution N(&mu;, &sigma;&sup2;) where mean = median = mode and total area under curve equals 1.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Distribution</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Bell Curve</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Z-Score (Standardization)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The number of standard deviations an observation x lies above or below the mean &mu;: z = (x - &mu;) / &sigma;, transforming any normal distribution into Z &sim; N(0, 1).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Transformation</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Rescale Mean 0, Std 1</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Central Limit Theorem (CLT)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Fundamental statistical theorem stating that for any population distribution, the sampling distribution of the sample mean approaches a normal distribution as n &ge; 30.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Theorem</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Sample Means Become Normal (n &ge; 30)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Standard Error (SE)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The standard deviation of the sampling distribution of a statistic: SE = &sigma; / &radic;n, quantifying the expected sampling variation of x̄.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Inferential Metric</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">&sigma; / &radic;n</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Unbiased Estimator</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">An estimator whose mathematical expected value across repeated sampling equals the true population parameter being estimated (e.g., E[x̄] = &mu;).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Estimator Property</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Expected Value = True Parameter</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Efficient Estimator</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The unbiased estimator that exhibits the smallest possible variance among all competing unbiased estimators for that parameter.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Estimator Property</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Smallest Variance</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>📐 Pillar 2:</span> Formula &amp; Calculation Reference Cards
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Fundamental equations for descriptive grouping, dispersion, standardization, and sampling theory.
+                </p>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem;">
+                    
+                    <!-- CARD 1: INTERVAL WIDTH -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Histogram Interval Width</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Width = (Largest - Smallest) &divide; k
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>Largest:</strong> Maximum numerical observation in the raw dataset.</li>
+                                <li><strong>Smallest:</strong> Minimum numerical observation in the raw dataset.</li>
+                                <li><strong>k:</strong> Target number of class intervals (typically 5 to 20).</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Interval width equals the range between highest and lowest values divided by the number of desired bins, rounded up for clean boundaries."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> Range from 1 to 100 with 5 intervals &rarr; (100 - 1) / 5 = 19.8 &rarr; round up to 20.
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Interval width equals largest observation minus smallest observation all divided by the target number of intervals k."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: ARITHMETIC MEAN -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Sample Mean &amp; Population Mean</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            x̄ = (&Sigma; x_i) &divide; n &nbsp;|&nbsp; &mu; = (&Sigma; X_i) &divide; N
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>&Sigma; x_i:</strong> Sum of all individual observation values.</li>
+                                <li><strong>n:</strong> Sample size (total count of sample observations).</li>
+                                <li><strong>N:</strong> Population size (total count of all population members).</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Add up every value in the dataset and divide by the total number of observations to find the center of gravity."
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Sample mean x-bar equals summation of x sub-i divided by sample size n. Population mean mu equals summation of capital X sub-i divided by population size N."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: SAMPLE VARIANCE & STD DEV -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Sample Variance &amp; Standard Deviation</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            s&sup2; = &Sigma; (x_i - x̄)&sup2; &divide; (n - 1) &nbsp;|&nbsp; s = &radic;(s&sup2;)
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>(x_i - x̄)&sup2;:</strong> Squared deviation of each point from the sample mean.</li>
+                                <li><strong>(n - 1):</strong> Degrees of freedom (Bessel's correction for sample bias).</li>
+                                <li><strong>s:</strong> Sample standard deviation expressed in original units.</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Square each deviation from the mean, sum them, divide by sample size minus one for variance, and take the square root for standard deviation."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> {1, 2, 3, 4, 5}, mean 3 &rarr; sum of squares = 10 &rarr; s&sup2; = 10 / 4 = 2.5 &rarr; s = 1.58.
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Sample variance s squared equals summation of open parenthesis x sub-i minus x-bar close parenthesis squared divided by n minus one. Standard deviation s equals the square root of variance."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: COEFFICIENT OF VARIATION -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Coefficient of Variation (CV)</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            CV = s &divide; x̄ &nbsp;|&nbsp; CV% = (s &divide; x̄) &times; 100%
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>s:</strong> Standard deviation of the sample.</li>
+                                <li><strong>x̄:</strong> Arithmetic mean of the sample.</li>
+                                <li><strong>CV:</strong> Relative dispersion index (completely unitless).</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Divide standard deviation by the mean to get relative spread, enabling direct comparison across completely different units and scales."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> Pizza in USD: $3.27 / $11 = 0.60. Pizza in PHP: ₱183.12 / ₱616 = 0.60. Identical relative variability!
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Coefficient of variation CV equals standard deviation s divided by sample mean x-bar, multiplied by one hundred percent."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 5: PEARSON CORRELATION -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Pearson Correlation Coefficient</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            r = Cov(X, Y) &divide; (s_X &times; s_Y)
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>Cov(X, Y):</strong> Sample covariance indicating direction of linear co-movement.</li>
+                                <li><strong>s_X, s_Y:</strong> Standard deviations of variables X and Y.</li>
+                                <li><strong>r:</strong> Correlation coefficient strictly bounded in [-1, +1].</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Standardize covariance by dividing by the product of both standard deviations to obtain a dimensionless strength score from -1 to +1."
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Correlation coefficient r equals covariance of X and Y divided by the product of standard deviation of X and standard deviation of Y."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 6: Z-SCORE STANDARDIZATION -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Standard Score (Z-Score)</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            z = (x - &mu;) &divide; &sigma; &nbsp;|&nbsp; z = (x - x̄) &divide; s
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>x:</strong> Individual raw observation value.</li>
+                                <li><strong>&mu;, x̄:</strong> Population or sample mean.</li>
+                                <li><strong>&sigma;, s:</strong> Population or sample standard deviation.</li>
+                                <li><strong>z:</strong> Standard score indicating distances from the center in units of standard deviation.</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Subtract the mean from the raw score and divide by the standard deviation to convert the distribution to center zero and spread one."
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Z equals raw score x minus mean mu all divided by standard deviation sigma."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 7: CLT & STANDARD ERROR -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Standard Error of the Mean (SE)</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            SE = &sigma; &divide; &radic;n &nbsp;|&nbsp; Var(x̄) = &sigma;&sup2; &divide; n
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>&sigma;:</strong> Standard deviation of the parent population.</li>
+                                <li><strong>n:</strong> Sample size of drawn observations (n &ge; 30 for CLT).</li>
+                                <li><strong>SE:</strong> Standard error measuring the standard deviation of sample means.</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Standard error equals population standard deviation divided by square root of sample size; variance of the sample mean is population variance over n."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> &sigma; = 100, n = 100 &rarr; SE = 100 / &radic;100 = 10. If n = 400 &rarr; SE = 100 / 20 = 5.
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Standard error of the mean SE equals population standard deviation sigma divided by the square root of sample size n."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>📊 Pillar 3:</span> High-Yield Comparative Analysis Matrices
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Direct side-by-side breakdowns for high-frequency exam comparison questions.
+                </p>
+
+                <!-- MATRIX 1: LEVELS OF MEASUREMENT -->
+                <h3 style="margin-top:1.25rem; font-size:1.05rem;">1. The Four Levels of Measurement Comprehensive Matrix</h3>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Level</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Type</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Strict Order?</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Meaningful Distances?</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">True Natural Zero?</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Permissible Operations</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Domain Examples</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Nominal</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Qualitative</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">No</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">No</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">No</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Counting, Mode, Percentages</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Car brands, Gender, State, Jersey #</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Ordinal</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Qualitative</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Yes</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">No</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">No</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Ranking, Median, Mode</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Lunch ratings, Age brackets, Likert scale</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Interval</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Quantitative</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Yes</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Yes</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">No (Artificial zero)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Addition, Subtraction, Mean, Std Dev</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">&deg;C, &deg;F, Calendar years, SAT score</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Ratio</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Quantitative</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Yes</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Yes</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Yes (Absolute zero)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">All (+, -, &times;, &divide;, Ratios, Geometric mean)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Kelvin, Distance, Time, Pizza prices, Age</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- MATRIX 2: MEASURES UNDER SKEWNESS -->
+                <h3 style="margin-top:1.5rem; font-size:1.05rem;">2. Central Tendency Behavior Across Distribution Shapes</h3>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Distribution Shape</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Mathematical Relationship</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Tail &amp; Outliers Location</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Recommended Central Measure</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Typical Real-World Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Right (Positive) Skew</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:#2563eb;">Mean &gt; Median &gt; Mode</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Elongated tail to the right</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Median (Resistant to high outliers)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Household income, NYC pizza prices ($66 outlier)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Symmetrical (Zero Skew)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:#16a34a;">Mean = Median = Mode</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Balanced tails on both sides</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Mean (Unbiased &amp; fully efficient)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Adult heights, standardized exam scores, errors</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Left (Negative) Skew</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:#dc2626;">Mean &lt; Median &lt; Mode</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Elongated tail to the left</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Median (Resistant to low outliers)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Age of death in developed nations, easy test scores</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- MATRIX 3: POPULATION VS SAMPLE -->
+                <h3 style="margin-top:1.5rem; font-size:1.05rem;">3. Population Parameters vs. Sample Statistics Matrix</h3>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Measure</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Population Parameter</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Sample Statistic</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Sample Estimator Nature</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Size</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">N</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">n</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Count of observed elements</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Mean</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">&mu;</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">x̄</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Unbiased: E[x̄] = &mu;</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Variance</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">&sigma;&sup2; = &Sigma;(x-&mu;)&sup2; / N</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">s&sup2; = &Sigma;(x-x̄)&sup2; / (n - 1)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Unbiased due to Bessel's (n - 1)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Standard Deviation</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">&sigma;</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">s</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Square root of s&sup2;</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Sampling Variability</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">N/A (Fixed constant)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">SE = &sigma; / &radic;n</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Shrinks as sample size n grows</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:#dc2626; display:flex; align-items:center; gap:0.5rem;">
+                    <span>⚠️ Pillar 4:</span> Common Exam Pitfalls &amp; Fallacies
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Crucial distinctions, traps, and misconceptions frequently tested on Statistics Midterm exams.
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">1. The "10&deg;C is Twice as Warm as 5&deg;C" Ratio Fallacy</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Calculating ratios on Celsius or Fahrenheit temperatures.<br>
+                            <strong>The Reality:</strong> &deg;C and &deg;F are <strong>Interval</strong> scales with an arbitrary zero (freezing point of water). In Fahrenheit, 10&deg;C is 50&deg;F and 5&deg;C is 41&deg;F (50 is not 2 &times; 41). Only <strong>Kelvin</strong> has a true natural zero (0 K = absolute cessation of atomic motion) allowing valid ratios.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">2. Bar Chart vs. Histogram Visual Confusion</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Drawing bars that touch on a bar chart or leaving gaps on a histogram.<br>
+                            <strong>The Reality:</strong> Bar charts represent <strong>discrete categories</strong> and MUST have spaces between bars. Histograms represent <strong>continuous numerical intervals</strong> where bars MUST touch to signify continuity between adjacent class boundaries.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">3. The Skewness "Hump vs. Tail" Misconception</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Stating that a distribution is right-skewed because the "hump" (bulk of data) is on the right.<br>
+                            <strong>The Reality:</strong> Skewness follows the <strong>TAIL and the outliers</strong>, not the hump! A right-skewed distribution has its hump on the left and its long tail stretching to the right (mean &gt; median).
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">4. The Sample Variance Denominator Trap (Dividing by n)</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Computing sample variance by dividing sum of squared deviations by sample size n.<br>
+                            <strong>The Reality:</strong> You must divide by <strong>(n - 1)</strong> degrees of freedom (Bessel's correction). Dividing by n systematically underestimates the true population variance because sample observations cluster closer to their own sample mean x̄ than to the true population mean &mu;.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">5. Correlation Implies Causation Fallacy</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Claiming that a high correlation (e.g., r = 0.87) proves that variable X caused variable Y.<br>
+                            <strong>The Reality:</strong> Correlation is completely symmetric (corr(X, Y) = corr(Y, X)) and only proves linear association. It cannot distinguish which variable drove the other, nor can it rule out lurking third variables.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">6. Standard Deviation vs. Standard Error Confusion</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Using standard deviation when asked for the precision of an estimated mean.<br>
+                            <strong>The Reality:</strong> Standard deviation (&sigma;, s) quantifies the dispersion of <em>individual data points</em> around their mean. Standard error (SE = &sigma; / &radic;n) quantifies the dispersion of <em>sample means</em> across repeated experiments, shrinking as sample size increases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div> <!-- END #qr-section-matrix -->
+
+            <!-- SECTION 2: DEDICATED ACADEMIC CALCULATORS STUDIO -->
+            <div class="qr-section-pane" id="qr-section-calculators">
+                <div class="card" style="margin-top:1rem; margin-bottom:1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; background:linear-gradient(135deg, rgba(99,102,241,0.06), rgba(168,85,247,0.06)); border:1px solid rgba(99,102,241,0.2);">
+                    <div>
+                        <h2 style="margin:0; font-size:1.35rem; color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                            <span>🧮</span> Interactive Academic Calculators Studio
+                        </h2>
+                        <p style="margin:0.25rem 0 0 0; color:var(--text-muted-color); font-size:0.88rem;">
+                            Isolated interactive calculation workspace. All formulas update live with intermediate derivations and exam cues.
+                        </p>
+                    </div>
+                    <button type="button" onclick="switchQuickRefSection('matrix')" class="btn" style="background:var(--card-bg-color); border:1px solid var(--border-color); color:var(--text-color); padding:0.45rem 0.95rem; border-radius:6px; font-size:0.85rem; cursor:pointer; display:inline-flex; align-items:center; gap:0.35rem;">
+                        &larr; Return to Four-Pillar Review Matrix
+                    </button>
+                </div>
+
+                <!-- INTERACTIVE ACADEMIC CALCULATORS SECTION -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>🧮 Interactive Academic Calculators:</span> Live Math &amp; Application Engines
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Experiment with live formulas from the Statistics study guide. All values recalculate in real-time with comprehensive intermediate mathematical derivations, worked lecture examples, and exam usage cues.
+                </p>
+
+                <!-- CALCULATOR 1: HISTOGRAM INTERVAL WIDTH -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">
+                        <span>📊 Calculator 1: Histogram Class Interval Width (w)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Calculate the exact uniform width of class intervals (bins) for grouping continuous raw data into a frequency distribution or histogram: <strong>Width w = (Largest - Smallest) / k</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-w-max">Largest Observation (Max):</label>
+                            <input class="calc-input" id="calc-w-max" type="number" step="any" value="98" oninput="calculateClassWidth()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-w-min">Smallest Observation (Min):</label>
+                            <input class="calc-input" id="calc-w-min" type="number" step="any" value="12" oninput="calculateClassWidth()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-w-k">Number of Classes (k):</label>
+                            <div class="calc-slider-wrap">
+                                <input class="calc-input" id="calc-w-k" type="number" min="1" max="100" step="1" value="5" oninput="document.getElementById('calc-w-k-slider').value=this.value; calculateClassWidth();" />
+                                <input class="calc-range-slider" id="calc-w-k-slider" type="range" min="1" max="25" step="1" value="5" oninput="document.getElementById('calc-w-k').value=this.value; calculateClassWidth();" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Class Interval Width Result:</span>
+                            <span class="calc-result-val" id="calc-w-val">w = 17.200 (Use: 18)</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-w-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when constructing frequency distributions, grouped data tables, or histograms from raw continuous datasets. It establishes equal bin widths so no observation is excluded or double-counted.
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 2: ARITHMETIC MEAN -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>🎯 Calculator 2: Central Tendency — Sample Mean (x̄) &amp; Population Mean (μ)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Compute the arithmetic balance point of numerical observations: <strong>x̄ = (Σ xᵢ) / n</strong> or <strong>μ = (Σ Xᵢ) / N</strong>. Enter comma-separated values.
+                    </div>
+                    <div class="calc-grid" style="grid-template-columns: 1fr;">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-mean-data">Dataset Values (comma-separated):</label>
+                            <input class="calc-input" id="calc-mean-data" type="text" value="14, 18, 22, 26, 30" oninput="calculateMean()" placeholder="e.g. 14, 18, 22, 26, 30" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Arithmetic Mean Result:</span>
+                            <span class="calc-result-val" id="calc-mean-val">x̄ = 22.000</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-mean-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when identifying the arithmetic balance point of symmetric interval or ratio scale data. In symmetric distributions, Mean = Median = Mode. If extreme outliers exist, prefer the Median.
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 3: SAMPLE VARIANCE & STANDARD DEVIATION -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>📈 Calculator 3: Dispersion — Sample Variance (s²) &amp; Standard Deviation (s)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Measure the dispersion of sample observations around their mean using Bessel's unbiased correction (n - 1 degrees of freedom): <strong>s² = Σ(xᵢ - x̄)² / (n - 1)</strong> and <strong>s = √s²</strong>.
+                    </div>
+                    <div class="calc-grid" style="grid-template-columns: 1fr;">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-var-data">Sample Observations (comma-separated, min 2 values):</label>
+                            <input class="calc-input" id="calc-var-data" type="text" value="10, 12, 14, 15, 17, 18, 20" oninput="calculateSampleVariance()" placeholder="e.g. 10, 12, 14, 15, 17, 18, 20" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Variance &amp; Standard Deviation:</span>
+                            <span class="calc-result-val" id="calc-var-val">s² = 12.143 | s = 3.485</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-var-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when measuring the spread or variability of sample observations around their mean. Always divide by <strong>(n - 1)</strong> for sample data (Bessel's correction) to ensure an unbiased estimator of population variance σ².
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 4: COEFFICIENT OF VARIATION (CV) -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>⚖️ Calculator 4: Relative Dispersion — Coefficient of Variation (CV)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Quantify relative risk and compare variability across distributions with different units or drastically different means: <strong>CV = (s / x̄) × 100%</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-cv-s">Sample Standard Deviation (s):</label>
+                            <div class="calc-slider-wrap">
+                                <input class="calc-input" id="calc-cv-s" type="number" step="any" min="0.1" value="3.50" oninput="document.getElementById('calc-cv-s-slider').value=this.value; calculateCV();" />
+                                <input class="calc-range-slider" id="calc-cv-s-slider" type="range" min="0.5" max="25" step="0.5" value="3.5" oninput="document.getElementById('calc-cv-s').value=this.value; calculateCV();" />
+                            </div>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-cv-mean">Sample Mean (x̄):</label>
+                            <input class="calc-input" id="calc-cv-mean" type="number" step="any" value="22.00" oninput="calculateCV()" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Coefficient of Variation Result:</span>
+                            <span class="calc-result-val" id="calc-cv-val">CV = 15.91%</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-cv-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when comparing relative dispersion, risk, or consistency between two datasets measured in completely different units (e.g. stock price in dollars vs. sales volume in units) or with vastly different mean magnitudes.
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 5: COVARIANCE & CORRELATION -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>🔗 Calculator 5: Bivariate Relationship — Covariance &amp; Pearson Correlation (r)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Evaluate the direction and strength of linear association between two paired quantitative variables: <strong>Cov(x, y) = Σ[(x - x̄)(y - ȳ)] / (n - 1)</strong> and <strong>r = Cov(x, y) / (sₓ · sᵧ)</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-corr-x">Variable X Observations (comma-separated):</label>
+                            <input class="calc-input" id="calc-corr-x" type="text" value="1, 2, 3, 4, 5" oninput="calculateCorrelation()" placeholder="e.g. 1, 2, 3, 4, 5" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-corr-y">Variable Y Observations (comma-separated):</label>
+                            <input class="calc-input" id="calc-corr-y" type="text" value="2, 4, 5, 4, 5" oninput="calculateCorrelation()" placeholder="e.g. 2, 4, 5, 4, 5" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Covariance &amp; Correlation Result:</span>
+                            <span class="calc-result-val" id="calc-corr-val">Cov = 1.500 | r = +0.775</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-corr-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when quantifying the direction and strength of a linear relationship between two continuous variables on a scatter plot. r is unitless and strictly bounded in [-1, +1]. Remember: Correlation does not imply causation!
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 6: Z-SCORE STANDARDIZATION & EMPIRICAL RULE -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>📏 Calculator 6: Standardization — Z-Score &amp; Empirical Rule</span>
+                    </div>
+                    <div class="calc-desc">
+                        Convert raw observations into standardized deviation units from the mean: <strong>z = (x - μ) / σ</strong> (or <strong>z = (x - x̄) / s</strong>) and evaluate normality and outlier boundaries.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-z-x">Observed Value (x):</label>
+                            <input class="calc-input" id="calc-z-x" type="number" step="any" value="85" oninput="calculateZScore()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-z-mean">Distribution Mean (μ or x̄):</label>
+                            <input class="calc-input" id="calc-z-mean" type="number" step="any" value="70" oninput="calculateZScore()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-z-sd">Standard Deviation (σ or s):</label>
+                            <input class="calc-input" id="calc-z-sd" type="number" step="any" min="0.0001" value="10" oninput="calculateZScore()" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Standardized Z-Score Result:</span>
+                            <span class="calc-result-val" id="calc-z-val">z = +1.500 (Typical Range)</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-z-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when standardizing scores to compare relative standing across distributions with different means and spreads, looking up probabilities in standard normal tables (Z-tables), or screening for statistical outliers (|z| > 3).
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 7: STANDARD ERROR OF THE MEAN -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>🎲 Calculator 7: Sampling Distribution — Standard Error of the Mean (SE)</span>
+                    </div>
+                    <div class="calc-desc">
+                        Determine the standard deviation of the sampling distribution of sample means under the Central Limit Theorem: <strong>SE = σ / √n</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-se-sd">Population StdDev (σ) or Sample (s):</label>
+                            <input class="calc-input" id="calc-se-sd" type="number" step="any" min="0.0001" value="12.00" oninput="calculateStandardError()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-se-n">Sample Size (n):</label>
+                            <input class="calc-input" id="calc-se-n" type="number" min="1" step="1" value="36" oninput="calculateStandardError()" />
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Standard Error of the Mean:</span>
+                            <span class="calc-result-val" id="calc-se-val">SE = 2.000</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-se-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when analyzing sampling distributions, determining the standard error of an estimated mean, computing confidence intervals (x̄ ± z · SE), or testing hypotheses about a population mean.
+                    </div>
+                </div>
+
+            </div>
+            </div> <!-- END #qr-section-calculators -->
+
+        </div>
+    </div>
+
+<script>
+
+    // Section Switcher between Four-Pillar Matrix and Interactive Calculators
+    function switchQuickRefSection(sectionName) {
+        const matrixPane = document.getElementById('qr-section-matrix');
+        const calcPane = document.getElementById('qr-section-calculators');
+        const btnMatrix = document.getElementById('btn-qr-matrix');
+        const btnCalc = document.getElementById('btn-qr-calculators');
+        const navBtnQuickref = document.getElementById('nav-btn-quickref');
+        const navBtnCalc = document.getElementById('nav-btn-calculators');
+
+        if (!matrixPane || !calcPane) return;
+
+        if (sectionName === 'calculators') {
+            matrixPane.classList.remove('active');
+            calcPane.classList.add('active');
+            if (btnMatrix) {
+                btnMatrix.classList.remove('active');
+                btnMatrix.setAttribute('aria-selected', 'false');
+            }
+            if (btnCalc) {
+                btnCalc.classList.add('active');
+                btnCalc.setAttribute('aria-selected', 'true');
+            }
+            if (navBtnQuickref) navBtnQuickref.classList.remove('active');
+            if (navBtnCalc) navBtnCalc.classList.add('active');
+        } else {
+            calcPane.classList.remove('active');
+            matrixPane.classList.add('active');
+            if (btnCalc) {
+                btnCalc.classList.remove('active');
+                btnCalc.setAttribute('aria-selected', 'false');
+            }
+            if (btnMatrix) {
+                btnMatrix.classList.add('active');
+                btnMatrix.setAttribute('aria-selected', 'true');
+            }
+            if (navBtnCalc) navBtnCalc.classList.remove('active');
+            if (navBtnQuickref) navBtnQuickref.classList.add('active');
+        }
+    }
+
+    function openQuickRefTab(sectionName) {
+        if (window.switchTab) {
+            window.switchTab('formulas', false);
+        }
+        switchQuickRefSection(sectionName);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ==========================================================
+       REAL-TIME ACADEMIC CALCULATORS FOR STATISTICS FUNDAMENTALS
+       ========================================================== */
+
+    function parseNumList(inputStr) {
+        if (!inputStr) return [];
+        return inputStr.split(',')
+            .map(s => s.trim())
+            .filter(s => s.length > 0)
+            .map(s => Number(s))
+            .filter(n => !isNaN(n));
+    }
+
+    // Calculator 1: Histogram Class Interval Width
+    function calculateClassWidth() {
+        const maxInput = document.getElementById('calc-w-max');
+        const minInput = document.getElementById('calc-w-min');
+        const kInput = document.getElementById('calc-w-k');
+        const valBox = document.getElementById('calc-w-val');
+        const stepsBox = document.getElementById('calc-w-steps');
+        if (!maxInput || !minInput || !kInput || !valBox || !stepsBox) return;
+
+        const largest = parseFloat(maxInput.value);
+        const smallest = parseFloat(minInput.value);
+        const k = parseInt(kInput.value, 10);
+
+        if (isNaN(largest) || isNaN(smallest) || isNaN(k) || k <= 0) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Please enter valid numbers and ensure number of classes k &gt; 0.</div>';
+            return;
+        }
+
+        if (smallest > largest) {
+            valBox.textContent = 'Smallest > Largest';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Smallest observation cannot exceed largest observation.</div>';
+            return;
+        }
+
+        const range = largest - smallest;
+        const exactWidth = range / k;
+        const suggestedWidth = Math.ceil(exactWidth);
+
+        valBox.textContent = `w = ${exactWidth.toFixed(3)} (Use: ${suggestedWidth})`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Dataset Range (R):</strong> Largest - Smallest = ${largest} - ${smallest} = <strong>${range.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Exact Interval Width:</strong> w = R &divide; k = ${range.toFixed(3)} &divide; ${k} = <strong>${exactWidth.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Standard Academic Rounding Rule:</strong> In textbook practice, always round the exact width up to the next convenient integer or multiple of 5/10 (suggested: <strong>${suggestedWidth}</strong>) to guarantee all observations fall strictly inside classes without leaving extreme boundaries ambiguous.</div>
+        `;
+    }
+
+    // Calculator 2: Arithmetic Mean (Sample and Population)
+    function calculateMean() {
+        const dataInput = document.getElementById('calc-mean-data');
+        const valBox = document.getElementById('calc-mean-val');
+        const stepsBox = document.getElementById('calc-mean-steps');
+        if (!dataInput || !valBox || !stepsBox) return;
+
+        const vals = parseNumList(dataInput.value);
+        if (vals.length === 0) {
+            valBox.textContent = 'x̄ = --';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Please enter at least one numeric observation.</div>';
+            return;
+        }
+
+        const n = vals.length;
+        const sum = vals.reduce((acc, curr) => acc + curr, 0);
+        const mean = sum / n;
+
+        valBox.textContent = `x̄ = ${mean.toFixed(3)}`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Observation Count (n):</strong> Total sample size = <strong>${n}</strong> observations</div>
+            <div class="step-line">&bull; <strong>Summation (&Sigma; xᵢ):</strong> ${vals.slice(0, 8).join(' + ')}${vals.length > 8 ? ' + ...' : ''} = <strong>${sum.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Mean Calculation:</strong> x̄ = (&Sigma; xᵢ) &divide; n = ${sum.toFixed(3)} &divide; ${n} = <strong>${mean.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Sensitivity Note:</strong> The arithmetic mean represents the exact physical balance point where &Sigma;(xᵢ - x̄) = 0. Notice that extreme outliers pull the mean toward the heavy tail; if data is heavily skewed, report the Median alongside x̄.</div>
+        `;
+    }
+
+    // Calculator 3: Sample Variance & Standard Deviation
+    function calculateSampleVariance() {
+        const dataInput = document.getElementById('calc-var-data');
+        const valBox = document.getElementById('calc-var-val');
+        const stepsBox = document.getElementById('calc-var-steps');
+        if (!dataInput || !valBox || !stepsBox) return;
+
+        const vals = parseNumList(dataInput.value);
+        if (vals.length < 2) {
+            valBox.textContent = 's² = -- | s = --';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Sample variance requires at least 2 observations to compute (n - 1) degrees of freedom.</div>';
+            return;
+        }
+
+        const n = vals.length;
+        const df = n - 1;
+        const sum = vals.reduce((acc, curr) => acc + curr, 0);
+        const mean = sum / n;
+
+        const sqDiffs = vals.map(x => Math.pow(x - mean, 2));
+        const sumSqDiffs = sqDiffs.reduce((acc, curr) => acc + curr, 0);
+        const variance = sumSqDiffs / df;
+        const stdDev = Math.sqrt(variance);
+
+        valBox.textContent = `s² = ${variance.toFixed(3)} | s = ${stdDev.toFixed(3)}`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Sample Parameters:</strong> Sample size n = ${n}, Degrees of Freedom df = (n - 1) = <strong>${df}</strong>, Sample Mean x̄ = <strong>${mean.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Sum of Squared Deviations (&Sigma;(xᵢ - x̄)²):</strong> ${sqDiffs.slice(0, 5).map(v => v.toFixed(2)).join(' + ')}${sqDiffs.length > 5 ? ' + ...' : ''} = <strong>${sumSqDiffs.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Sample Variance (s²):</strong> s² = [&Sigma;(xᵢ - x̄)²] &divide; (n - 1) = ${sumSqDiffs.toFixed(3)} &divide; ${df} = <strong>${variance.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Sample Standard Deviation (s):</strong> s = &radic;s² = &radic;(${variance.toFixed(3)}) = <strong>${stdDev.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Bessel's Correction Rationale:</strong> Dividing by (n - 1) instead of N corrects for the sample mean's tendency to underestimate population dispersion, creating an unbiased estimator of &sigma;².</div>
+        `;
+    }
+
+    // Calculator 4: Coefficient of Variation (CV)
+    function calculateCV() {
+        const sInput = document.getElementById('calc-cv-s');
+        const meanInput = document.getElementById('calc-cv-mean');
+        const valBox = document.getElementById('calc-cv-val');
+        const stepsBox = document.getElementById('calc-cv-steps');
+        if (!sInput || !meanInput || !valBox || !stepsBox) return;
+
+        const s = parseFloat(sInput.value);
+        const mean = parseFloat(meanInput.value);
+
+        if (isNaN(s) || isNaN(mean) || s < 0) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Please enter valid numbers (s &ge; 0).</div>';
+            return;
+        }
+
+        if (mean === 0) {
+            valBox.textContent = 'Undefined (x̄ = 0)';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Division by zero: CV is undefined when the mean is exactly zero.</div>';
+            return;
+        }
+
+        const ratio = s / Math.abs(mean);
+        const cv = (s / mean) * 100;
+
+        valBox.textContent = `CV = ${cv.toFixed(2)}%`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Standard Deviation (s):</strong> ${s.toFixed(3)}</div>
+            <div class="step-line">&bull; <strong>Sample Mean (x̄):</strong> ${mean.toFixed(3)}</div>
+            <div class="step-line">&bull; <strong>Relative Dispersion Ratio:</strong> (s &divide; x̄) = ${s.toFixed(3)} &divide; ${mean.toFixed(3)} = <strong>${(s/mean).toFixed(5)}</strong></div>
+            <div class="step-line">&bull; <strong>Percentage Expression:</strong> CV = (${(s/mean).toFixed(5)}) &times; 100% = <strong>${cv.toFixed(2)}%</strong></div>
+            <div class="step-line">&bull; <strong>Analytical Interpretation:</strong> Dispersion is ${Math.abs(cv).toFixed(2)}% relative to the size of the mean. A lower CV indicates higher consistency and lower relative volatility.</div>
+        `;
+    }
+
+    // Calculator 5: Covariance & Pearson Correlation (r)
+    function calculateCorrelation() {
+        const xInput = document.getElementById('calc-corr-x');
+        const yInput = document.getElementById('calc-corr-y');
+        const valBox = document.getElementById('calc-corr-val');
+        const stepsBox = document.getElementById('calc-corr-steps');
+        if (!xInput || !yInput || !valBox || !stepsBox) return;
+
+        const xVals = parseNumList(xInput.value);
+        const yVals = parseNumList(yInput.value);
+
+        if (xVals.length < 2 || yVals.length < 2) {
+            valBox.textContent = 'Need &ge; 2 pairs';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Enter at least 2 pairs of values.</div>';
+            return;
+        }
+
+        if (xVals.length !== yVals.length) {
+            valBox.textContent = 'Mismatched Lengths';
+            stepsBox.innerHTML = `<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Variable X has ${xVals.length} values, but Variable Y has ${yVals.length} values. Both lists must have equal lengths.</div>`;
+            return;
+        }
+
+        const n = xVals.length;
+        const df = n - 1;
+        const meanX = xVals.reduce((a, b) => a + b, 0) / n;
+        const meanY = yVals.reduce((a, b) => a + b, 0) / n;
+
+        let sumCross = 0;
+        let sumSqX = 0;
+        let sumSqY = 0;
+
+        for (let i = 0; i < n; i++) {
+            const dx = xVals[i] - meanX;
+            const dy = yVals[i] - meanY;
+            sumCross += dx * dy;
+            sumSqX += dx * dx;
+            sumSqY += dy * dy;
+        }
+
+        const cov = sumCross / df;
+        const sx = Math.sqrt(sumSqX / df);
+        const sy = Math.sqrt(sumSqY / df);
+
+        let r = 0;
+        let rText = '0.000';
+        let desc = 'No Linear Correlation';
+
+        if (sx === 0 || sy === 0) {
+            rText = 'Undefined (0 variance in one variable)';
+            desc = 'One variable is constant; correlation undefined.';
+        } else {
+            r = cov / (sx * sy);
+            if (r > 1) r = 1;
+            if (r < -1) r = -1;
+            rText = (r >= 0 ? '+' : '') + r.toFixed(3);
+
+            const absR = Math.abs(r);
+            const dir = r >= 0 ? 'Positive' : 'Negative';
+            if (absR >= 0.8) desc = `Very Strong ${dir} Linear Correlation`;
+            else if (absR >= 0.6) desc = `Strong ${dir} Linear Correlation`;
+            else if (absR >= 0.4) desc = `Moderate ${dir} Linear Correlation`;
+            else if (absR >= 0.2) desc = `Weak ${dir} Linear Correlation`;
+            else desc = `Negligible / Very Weak Correlation`;
+        }
+
+        valBox.textContent = `Cov = ${cov.toFixed(3)} | r = ${rText}`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Sample Dimensions:</strong> n = ${n} paired coordinates, df = ${df}</div>
+            <div class="step-line">&bull; <strong>Means &amp; StdDevs:</strong> x̄ = ${meanX.toFixed(3)} (sₓ = ${sx.toFixed(3)}), ȳ = ${meanY.toFixed(3)} (sᵧ = ${sy.toFixed(3)})</div>
+            <div class="step-line">&bull; <strong>Sum of Cross-Products:</strong> &Sigma;[(xᵢ - x̄)(yᵢ - ȳ)] = <strong>${sumCross.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Sample Covariance:</strong> Cov(x, y) = ${sumCross.toFixed(3)} &divide; ${df} = <strong>${cov.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Pearson Correlation (r):</strong> r = Cov(x, y) &divide; (sₓ &times; sᵧ) = ${cov.toFixed(3)} &divide; (${sx.toFixed(3)} &times; ${sy.toFixed(3)}) = <strong>${rText}</strong></div>
+            <div class="step-line">&bull; <strong>Qualitative Classification:</strong> <em>${desc}</em>. Correlation is bounded strictly in [-1, +1] and measures linear association only, without implying causation.</div>
+        `;
+    }
+
+    // Calculator 6: Z-Score Standardization & Normality
+    function calculateZScore() {
+        const xInput = document.getElementById('calc-z-x');
+        const meanInput = document.getElementById('calc-z-mean');
+        const sdInput = document.getElementById('calc-z-sd');
+        const valBox = document.getElementById('calc-z-val');
+        const stepsBox = document.getElementById('calc-z-steps');
+        if (!xInput || !meanInput || !sdInput || !valBox || !stepsBox) return;
+
+        const x = parseFloat(xInput.value);
+        const mean = parseFloat(meanInput.value);
+        const sd = parseFloat(sdInput.value);
+
+        if (isNaN(x) || isNaN(mean) || isNaN(sd) || sd <= 0) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Please enter valid numbers and ensure standard deviation &gt; 0.</div>';
+            return;
+        }
+
+        const diff = x - mean;
+        const z = diff / sd;
+        const absZ = Math.abs(z);
+        const signStr = z >= 0 ? '+' : '';
+
+        let standing = '';
+        if (absZ <= 1.0) standing = 'Typical Range (&plusmn;1&sigma;, ~68% of data)';
+        else if (absZ <= 2.0) standing = 'Moderate Range (&plusmn;2&sigma;, ~95% of data)';
+        else if (absZ <= 3.0) standing = 'Unusual Tail Value (&plusmn;3&sigma;, ~99.7% of data)';
+        else standing = '&#9888; Extreme Statistical Outlier (|z| &gt; 3)';
+
+        valBox.textContent = `z = ${signStr}${z.toFixed(3)} (${standing.split('(')[0].trim()})`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Raw Deviation from Mean:</strong> (x - &mu;) = ${x} - ${mean} = <strong>${diff >= 0 ? '+' : ''}${diff.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Standardization:</strong> z = (x - &mu;) &divide; &sigma; = ${diff.toFixed(3)} &divide; ${sd} = <strong>${signStr}${z.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Empirical Rule Placement:</strong> ${standing}</div>
+            <div class="step-line">&bull; <strong>Outlier Evaluation:</strong> ${absZ > 3.0 ? 'This value is an extreme outlier (|z| &gt; 3.0).' : 'This value is within normal statistical thresholds (|z| &le; 3.0).'}</div>
+        `;
+    }
+
+    // Calculator 7: Standard Error of the Mean (SE)
+    function calculateStandardError() {
+        const sdInput = document.getElementById('calc-se-sd');
+        const nInput = document.getElementById('calc-se-n');
+        const valBox = document.getElementById('calc-se-val');
+        const stepsBox = document.getElementById('calc-se-steps');
+        if (!sdInput || !nInput || !valBox || !stepsBox) return;
+
+        const sd = parseFloat(sdInput.value);
+        const n = parseInt(nInput.value, 10);
+
+        if (isNaN(sd) || isNaN(n) || sd < 0 || n <= 0) {
+            valBox.textContent = 'Invalid Input';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Please enter valid numbers with sample size n &ge; 1 and standard deviation &ge; 0.</div>';
+            return;
+        }
+
+        const sqrtN = Math.sqrt(n);
+        const se = sd / sqrtN;
+
+        valBox.textContent = `SE = ${se.toFixed(3)}`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Population/Sample Dispersion (&sigma; or s):</strong> ${sd.toFixed(3)}</div>
+            <div class="step-line">&bull; <strong>Sample Size (n):</strong> ${n} &rarr; &radic;n = <strong>${sqrtN.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Standard Error Calculation:</strong> SE = &sigma; &divide; &radic;n = ${sd.toFixed(3)} &divide; ${sqrtN.toFixed(3)} = <strong>${se.toFixed(3)}</strong></div>
+            <div class="step-line">&bull; <strong>Central Limit Theorem Assessment:</strong> ${n >= 30 ? 'Sample size n &ge; 30 satisfies the Central Limit Theorem. The sampling distribution of x̄ is approximately normal regardless of original population shape.' : 'Sample size n &lt; 30: Normality of the sampling distribution requires the parent population to be normally distributed.'}</div>
+            <div class="step-line">&bull; <strong>Diminishing Returns Principle:</strong> Because SE is inversely proportional to &radic;n, cutting SE in half requires quadrupling sample size (e.g. from ${n} to ${n * 4}).</div>
+        `;
+    }
+
+    // Initialize all calculators on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        calculateClassWidth();
+        calculateMean();
+        calculateSampleVariance();
+        calculateCV();
+        calculateCorrelation();
+        calculateZScore();
+        calculateStandardError();
+    });
+
+    // Execute immediately in case DOM is already parsed
+    setTimeout(() => {
+        calculateClassWidth();
+        calculateMean();
+        calculateSampleVariance();
+        calculateCV();
+        calculateCorrelation();
+        calculateZScore();
+        calculateStandardError();
+    }, 100);
+</script>
+
+</body>
+</html>

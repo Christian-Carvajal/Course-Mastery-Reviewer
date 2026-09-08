@@ -37,7 +37,7 @@
                 <span class="brand-icon">🎓</span>
                 <div class="brand-text">
                     <h1 class="brand-title">Course Reviewer</h1>
-                    <span class="brand-badge">14 Modules • 1,140 Qs</span>
+                    <span class="brand-badge">21 Modules • 1,350 Qs</span>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@
                 <div class="hero-header-row">
                     <div class="hero-greeting">
                         <span class="hero-status-dot"></span>
-                        <span class="hero-status-text" id="hero-auth-status">Ready to study • 1,140 Questions Indexed</span>
+                        <span class="hero-status-text" id="hero-auth-status">Ready to study • 1,350 Questions Indexed across 5 Subjects</span>
                     </div>
                     <div class="hero-creator-badge">
                         ✨ Created by <strong>Christian Ezekiel</strong>
@@ -89,10 +89,20 @@
                     Comprehensive study guides, active distractor-balanced practice quizzes, high-definition display math worked examples, and multi-device cloud synchronization.
                 </p>
 
-                <div class="hero-actions-row" id="hero-auth-actions">
-                    <button class="btn btn-primary" onclick="window.openAuthModal('register')">✨ Create Account</button>
-                    <button class="btn btn-secondary" onclick="window.openAuthModal('signin')">🔑 Sign In</button>
-                    <a href="./whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                <div class="hero-bottom-bar">
+                    <div class="hero-actions-row" id="hero-auth-actions">
+                        <button class="btn btn-primary" onclick="window.openAuthModal('register')">✨ Create Account</button>
+                        <button class="btn btn-secondary" onclick="window.openAuthModal('signin')">🔑 Sign In</button>
+                        <a href="./whiteboard.html" target="_blank" class="btn btn-secondary">📝 Open Whiteboard</a>
+                    </div>
+                    <div class="hero-manila-clock" id="hero-manila-clock" title="Philippine Standard Time (PST / UTC+8)">
+                        <div class="clock-live-badge">
+                            <span class="clock-pulsing-dot"></span>
+                            <span class="clock-city">Manila, PH</span>
+                        </div>
+                        <div class="clock-time-text" id="manila-time-display">--:--:-- --</div>
+                        <div class="clock-date-text" id="manila-date-display">---, --- --, ----</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -100,16 +110,17 @@
         <!-- FAST TERM SELECTOR PILLS -->
         <div class="term-switcher-container">
             <div class="term-switcher-pills">
-                <button class="term-pill-btn active" onclick="switchPortalTerm('prelim')">
+                <button class="term-pill-btn active" data-term="prelim" onclick="switchPortalTerm('prelim', true, true)">
                     <span class="term-pill-dot"></span>
                     <span class="term-pill-text">Prelim Term</span>
-                    <span class="term-pill-count">14 Modules</span>
+                    <span class="term-pill-count">17 Modules</span>
                 </button>
-                <button class="term-pill-btn" onclick="switchPortalTerm('midterm')">
-                    <span class="term-pill-lock">🔒</span>
+                <button class="term-pill-btn" data-term="midterm" onclick="switchPortalTerm('midterm', true, true)">
+                    <span class="term-pill-dot"></span>
                     <span class="term-pill-text">Midterm Term</span>
+                    <span class="term-pill-count">4 Modules</span>
                 </button>
-                <button class="term-pill-btn" onclick="switchPortalTerm('finals')">
+                <button class="term-pill-btn" data-term="finals" onclick="switchPortalTerm('finals', true, true)">
                     <span class="term-pill-lock">🔒</span>
                     <span class="term-pill-text">Finals Term</span>
                 </button>
@@ -180,6 +191,19 @@
                                 </div>
                                 <div class="topic-bento-arrow">→</div>
                             </a>
+
+                            <!-- 📂 Resources -->
+                            <a href="subject/Resources/informationAssuranceAndSecurity/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Prelim Resources</span>
+                                        <span class="topic-qcount-pill">3 PDFs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources (Prelim)</h4>
+                                    <p class="topic-bento-desc">Instructor lecture slides and reference materials for IAS Prelim.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
                         </div>
                     </section>
 
@@ -235,6 +259,19 @@
                                     </div>
                                     <h4 class="topic-bento-title">OS Structures &amp; System Calls</h4>
                                     <p class="topic-bento-desc">Monolithic vs microkernels, system call execution paths, PCB, and POSIX standards.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- 📂 Resources -->
+                            <a href="subject/Resources/operatingSystemConfiguration/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Resources</span>
+                                        <span class="topic-qcount-pill">3 PDFs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources</h4>
+                                    <p class="topic-bento-desc">Instructor lecture slides and reference materials for OS Configuration.</p>
                                 </div>
                                 <div class="topic-bento-arrow">→</div>
                             </a>
@@ -296,6 +333,19 @@
                                 </div>
                                 <div class="topic-bento-arrow">→</div>
                             </a>
+
+                            <!-- 📂 Resources -->
+                            <a href="subject/Resources/automataTheory/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Resources</span>
+                                        <span class="topic-qcount-pill">3 PDFs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources</h4>
+                                    <p class="topic-bento-desc">Instructor lecture slides and reference materials for Automata Theory.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
                         </div>
                     </section>
 
@@ -310,7 +360,7 @@
                                 </div>
                             </div>
                             <div class="subject-header-right">
-                                <span class="subject-module-badge">5 Modules • 418 Qs</span>
+                                <span class="subject-module-badge">5 Modules • 417 Qs</span>
                                 <span class="accordion-chevron">▼</span>
                             </div>
                         </div>
@@ -392,18 +442,215 @@
                                 </div>
                                 <div class="topic-bento-arrow">→</div>
                             </a>
+
+                            <!-- 📂 Resources -->
+                            <a href="subject/Resources/dataMiningResources/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Prelim Resources</span>
+                                        <span class="topic-qcount-pill">5 PDFs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources (Prelim)</h4>
+                                    <p class="topic-bento-desc">Instructor lecture slides and reference materials for Data Mining Prelim.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
                         </div>
                     </section>
 
+                    <!-- SUBJECT 5: ENGLISH FOR THE PROFESSION -->
+                    <section class="bento-subject-card" data-subject="efp">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box efp-icon" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">✍️</div>
+                                <div>
+                                    <h3 class="subject-title">English for the Profession</h3>
+                                    <p class="subject-subtitle">Business communication, theoretical models, sentence mechanics, MEAL framework, and career documents</p>
+                                </div>
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">3 Modules • 210 Qs</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/englishForTheProfession/Prelim/englishForProfession1.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill efp-tag" style="background:rgba(13,148,136,0.15); color:var(--primary-color);">EFP Lesson 1</span>
+                                        <span class="topic-qcount-pill">70 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Intro to Business Communication &amp; The 8 Cs</h4>
+                                    <p class="topic-bento-desc">Workplace telemetry, McKinsey/Grammarly metrics, the 8 Cs framework, and professional tone.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 2 -->
+                            <a href="subject/englishForTheProfession/Prelim/modelsOfCommunication.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill efp-tag" style="background:rgba(2,132,199,0.15); color:#0284c7;">EFP Lesson 2</span>
+                                        <span class="topic-qcount-pill">70 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Models of Communication &amp; Writing Stages</h4>
+                                    <p class="topic-bento-desc">Shannon-Weaver, Osgood-Schramm, Barnlund transactional model, verbal/nonverbal cues, and MEAL architecture.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 3 -->
+                            <a href="subject/englishForTheProfession/Prelim/businessWriting.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill efp-tag" style="background:rgba(168,85,247,0.15); color:#a855f7;">EFP Lesson 3</span>
+                                        <span class="topic-qcount-pill">70 Qs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Business Writing, Sentence Construction &amp; MEAL</h4>
+                                    <p class="topic-bento-desc">The 5-stage writing process, diagnosing fragments/run-ons/comma splices, sentence variety, and cover letter mastery.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- 📂 Resources -->
+                            <a href="subject/Resources/englishForTheProfession/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Resources</span>
+                                        <span class="topic-qcount-pill">3 PDFs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources</h4>
+                                    <p class="topic-bento-desc">Instructor lecture slides and reference materials for English for the Profession.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+                        </div>
+                    </section>
+
+
                 </div>
 
-                <!-- MIDTERM TERM PLACEHOLDER -->
+                <!-- MIDTERM TERM PANEL -->
                 <div id="term-midterm" class="portal-term-content" style="display: none;">
-                    <div class="cute-placeholder">
-                        <span class="cute-placeholder-icon">📚✨</span>
-                        <div class="cute-placeholder-text">Midterm modules coming soon!</div>
-                        <div class="cute-placeholder-sub">Master your 14 Prelim modules first. Keep up the high focus! ✨</div>
-                    </div>
+                    
+                    <!-- SUBJECT 1: Information Assurance & Security -->
+                    <section class="bento-subject-card" data-subject="ias">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box ias-icon">🛡️</div>
+                                <div>
+                                    <h3 class="subject-title">Information Assurance &amp; Security</h3>
+                                    <p class="subject-subtitle">Cryptography, secret keys, password protection, AEAD, TLS 1.3 &amp; post-quantum standards</p>
+                                </div>
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">1 Module • Study Guide &amp; Quick Ref</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill ias-tag">IAS Midterm 1</span>
+                                        <span class="topic-qcount-pill">Study Guide &amp; Quick Ref</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Cryptography Fundamentals</h4>
+                                    <p class="topic-bento-desc">Keeping secrets, proving truth, and trusting data - from basics to today's frontier (Week 7).</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- 📂 Midterm Resources -->
+                            <a href="subject/Resources/informationAssuranceAndSecurity/midterm/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Midterm Resources</span>
+                                        <span class="topic-qcount-pill">1 PDF</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources (Midterm)</h4>
+                                    <p class="topic-bento-desc">Cryptography lecture slides (cryptography.pdf).</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+                        </div>
+                    </section>
+
+                    <!-- SUBJECT 2: Data Mining & Data Science -->
+                    <section class="bento-subject-card" data-subject="datamining">
+                        <div class="subject-card-header" onclick="toggleSubjectAccordion(this)">
+                            <div class="subject-header-left">
+                                <div class="subject-icon-box datamining-icon">📊</div>
+                                <div>
+                                    <h3 class="subject-title">Data Mining &amp; Data Science</h3>
+                                    <p class="subject-subtitle">Descriptive statistics, distribution properties, Central Limit Theorem &amp; point estimators</p>
+                                </div>
+                            </div>
+                            <div class="subject-header-right">
+                                <span class="subject-module-badge">3 Modules • Study Guide &amp; Quick Ref</span>
+                                <span class="accordion-chevron">▼</span>
+                            </div>
+                        </div>
+
+                        <div class="subject-topics-grid">
+                            <!-- Topic 1 -->
+                            <a href="subject/dataMining/Midterm/statisticsFundamentals.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining Midterm 1</span>
+                                        <span class="topic-qcount-pill">Study Guide &amp; Quick Ref</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Statistics Fundamentals</h4>
+                                    <p class="topic-bento-desc">From Descriptive Data to Statistical Inference — Populations, Data Types, CLT &amp; Estimators.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 2 -->
+                            <a href="subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining Midterm 2</span>
+                                        <span class="topic-qcount-pill">Study Guide &amp; Quick Ref</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Confidence Intervals &amp; Hypothesis Testing</h4>
+                                    <p class="topic-bento-desc">62-Slide Master Deck: Single/Two-Mean CIs, Z/t-Tests, p-Values &amp; Spark Fortress Pay Gap Case.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- Topic 3 -->
+                            <a href="subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill datamining-tag">Data Mining Midterm 3</span>
+                                        <span class="topic-qcount-pill">Work Examples &amp; Solver</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">CI &amp; Hypothesis Work Examples</h4>
+                                    <p class="topic-bento-desc">Rigorous 5-Part Problem Solvers (Sections A–D), Critical Value Tables &amp; Common Exam Pitfalls.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+
+                            <!-- 📂 Midterm Resources -->
+                            <a href="subject/Resources/dataMiningResources/midterm/resources.html" class="topic-bento-card">
+                                <div class="topic-bento-main">
+                                    <div class="topic-bento-top">
+                                        <span class="topic-tag-pill resource-tag">📂 Midterm Resources</span>
+                                        <span class="topic-qcount-pill">3 PDFs</span>
+                                    </div>
+                                    <h4 class="topic-bento-title">Course Resources (Midterm)</h4>
+                                    <p class="topic-bento-desc">Statistics Fundamentals, Confidence Intervals &amp; Hypothesis Testing, and Worked Problems PDFs.</p>
+                                </div>
+                                <div class="topic-bento-arrow">→</div>
+                            </a>
+                        </div>
+                    </section>
+
                 </div>
 
                 <!-- FINALS TERM PLACEHOLDER -->
@@ -424,7 +671,7 @@
                 <div class="rail-widget-card" id="rail-mastery-widget">
                     <div class="widget-header">
                         <h3 class="widget-title">Mastery Overview</h3>
-                        <span class="widget-badge" id="rail-mastery-badge">14 Modules</span>
+                        <span class="widget-badge" id="rail-mastery-badge">17 Quiz Modules</span>
                     </div>
 
                     <!-- Circular Progress Display -->
@@ -445,11 +692,11 @@
                             <span class="stat-lbl">Answered</span>
                         </div>
                         <div class="mastery-stat-item">
-                            <span class="stat-num" id="rail-total-count">1,140</span>
+                            <span class="stat-num" id="rail-total-count">1,350</span>
                             <span class="stat-lbl">Total Qs</span>
                         </div>
                         <div class="mastery-stat-item">
-                            <span class="stat-num" id="rail-completed-count">0/14</span>
+                            <span class="stat-num" id="rail-completed-count">0/17</span>
                             <span class="stat-lbl">Finished</span>
                         </div>
                     </div>
@@ -588,24 +835,142 @@
     <script src="global.js"></script>
     <script>
         // ==========================================
-        // 1. Portal Term Switching
+        // 1. Portal Term Switching & State Persistence
         // ==========================================
-        function switchPortalTerm(term) {
-            document.querySelectorAll('.term-pill-btn').forEach(btn => btn.classList.remove('active'));
+        function switchPortalTerm(term, updateHash = true, shouldScroll = false) {
+            if (!term) term = 'prelim';
+            term = term.toLowerCase().replace('#', '').replace('term-', '').trim();
+            if (!['prelim', 'midterm', 'finals'].includes(term)) term = 'prelim';
+
+            // 1. Update pill button states
+            document.querySelectorAll('.term-pill-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const onclickAttr = btn.getAttribute('onclick') || '';
+                const dataTerm = btn.getAttribute('data-term') || '';
+                if (onclickAttr.includes(term) || dataTerm === term || btn.innerText.toLowerCase().includes(term)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // 2. Toggle active term content pane with smooth CSS animation
             document.querySelectorAll('.portal-term-content').forEach(content => {
                 content.style.display = 'none';
                 content.classList.remove('active');
             });
 
-            const btn = Array.from(document.querySelectorAll('.term-pill-btn')).find(b => b.innerText.toLowerCase().includes(term));
-            if (btn) btn.classList.add('active');
+            const targetContent = document.getElementById(`term-${term}`);
+            if (targetContent) {
+                targetContent.style.display = 'block';
+                // Trigger CSS keyframe animation smoothly
+                void targetContent.offsetWidth;
+                targetContent.classList.add('active');
+            }
 
-            const content = document.getElementById(`term-${term}`);
-            if (content) {
-                content.style.display = 'block';
-                content.classList.add('active');
+            // 3. Persist active term in storage so returning from lessons preserves user location
+            try {
+                localStorage.setItem('active_portal_term', term);
+            } catch (e) {}
+
+            // 4. Update browser URL hash cleanly without causing jumpy native scrolling
+            if (updateHash && window.history && window.history.replaceState) {
+                window.history.replaceState(null, '', `#${term}`);
+            }
+
+            // 5. Optional smooth scroll into term switcher when explicitly clicked by user
+            if (shouldScroll) {
+                const switcher = document.querySelector('.term-switcher-container');
+                if (switcher) {
+                    const topPos = switcher.getBoundingClientRect().top + window.scrollY - 70;
+                    if (window.scrollY > topPos + 100) {
+                        window.scrollTo({ top: Math.max(0, topPos), behavior: 'smooth' });
+                    }
+                }
             }
         }
+
+        function initPortalTermState() {
+            let targetTerm = 'prelim';
+
+            // Priority 1: Check URL hash (e.g. index.html#midterm or #term-midterm)
+            if (window.location.hash) {
+                const hashTerm = window.location.hash.toLowerCase().replace('#', '').replace('term-', '').trim();
+                if (['prelim', 'midterm', 'finals'].includes(hashTerm)) {
+                    targetTerm = hashTerm;
+                }
+            } else {
+                // Priority 2: Check persistent localStorage from previous visit or lesson navigation
+                try {
+                    const savedTerm = localStorage.getItem('active_portal_term');
+                    if (savedTerm && ['prelim', 'midterm', 'finals'].includes(savedTerm)) {
+                        targetTerm = savedTerm;
+                    }
+                } catch (e) {}
+            }
+
+            // Switch to active term seamlessly
+            switchPortalTerm(targetTerm, false, false);
+
+            // Highlight and softly reveal the recently visited lesson
+            highlightRecentlyViewedLesson();
+        }
+
+        function highlightRecentlyViewedLesson() {
+            try {
+                const lastPath = localStorage.getItem('last_visited_lesson_path');
+                const lastTime = parseInt(localStorage.getItem('last_visited_lesson_time') || '0', 10);
+                if (!lastPath) return;
+
+                // Only show badge if lesson was visited within the past 4 hours
+                if (Date.now() - lastTime > 4 * 60 * 60 * 1000) return;
+
+                const filename = lastPath.split('/').pop().replace('.html', '');
+                const cards = document.querySelectorAll('.topic-bento-card');
+                let foundCard = null;
+
+                for (let card of cards) {
+                    const href = card.getAttribute('href') || '';
+                    if (href.includes(filename)) {
+                        foundCard = card;
+                        break;
+                    }
+                }
+
+                if (foundCard) {
+                    foundCard.classList.add('recently-viewed-card');
+                    if (!foundCard.querySelector('.recently-viewed-badge')) {
+                        const badge = document.createElement('span');
+                        badge.className = 'recently-viewed-badge';
+                        badge.innerHTML = '<span>📍</span> Pick up where you left off';
+                        foundCard.appendChild(badge);
+                    }
+
+                    // Smoothly scroll the card into view if returning from study session
+                    setTimeout(() => {
+                        const rect = foundCard.getBoundingClientRect();
+                        const isVisible = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+                        if (!isVisible) {
+                            foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }, 200);
+                }
+            } catch (e) {}
+        }
+
+        // Handle native browser Back / Forward history navigation
+        window.addEventListener('popstate', () => {
+            if (window.location.hash) {
+                const hashTerm = window.location.hash.toLowerCase().replace('#', '').replace('term-', '').trim();
+                if (['prelim', 'midterm', 'finals'].includes(hashTerm)) {
+                    switchPortalTerm(hashTerm, false, false);
+                }
+            } else {
+                initPortalTermState();
+            }
+        });
+
+        // Initialize immediately and on pageshow (handles back-forward cache)
+        document.addEventListener('DOMContentLoaded', initPortalTermState);
+        window.addEventListener('pageshow', initPortalTermState);
 
         // ==========================================
         // 2. Mobile Accordion Toggle for Subjects
@@ -792,7 +1157,73 @@
             { topic: "Traditional Data Techniques", title: "Clustering (Rows) vs Factor Analysis (Columns) & Time Series Rule", file: "subject/dataMining/prelim/traditionalDataTechniques.html", hash: "clustering-factor-timeseries" },
             { topic: "Traditional Data Techniques", title: "Machine Learning 4 Core Ingredients: Data, Model, Loss & Optimizer", file: "subject/dataMining/prelim/traditionalDataTechniques.html", hash: "ml-four-ingredients" },
             { topic: "Traditional Data Techniques", title: "Supervised vs Unsupervised vs Reinforcement Learning Paradigms", file: "subject/dataMining/prelim/traditionalDataTechniques.html", hash: "three-ml-paradigms" },
-            { topic: "Traditional Data Techniques", title: "Self-Supervised Learning, Masked Language Modeling & GPT Transformers", file: "subject/dataMining/prelim/traditionalDataTechniques.html", hash: "llm-self-supervised" }
+            { topic: "Traditional Data Techniques", title: "Self-Supervised Learning, Masked Language Modeling & GPT Transformers", file: "subject/dataMining/prelim/traditionalDataTechniques.html", hash: "llm-self-supervised" },
+
+            // IAS Midterm: Cryptography Fundamentals
+            { topic: "Cryptography Fundamentals", title: "Why Cryptography Matters & The CIA Triad", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "why-cryptography-matters" },
+            { topic: "Cryptography Fundamentals", title: "The Language of Cryptography & Kerckhoffs's Principle", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "the-language-of-cryptography" },
+            { topic: "Cryptography Fundamentals", title: "The Three Cryptographic Tools: Symmetric, Asymmetric & Hashing", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "the-three-cryptographic-tools" },
+            { topic: "Cryptography Fundamentals", title: "Storing Passwords Safely: Salting & Slow Hashing (Argon2id, bcrypt)", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "storing-passwords-safely" },
+            { topic: "Cryptography Fundamentals", title: "A Hands-On Look: The Caesar Cipher & Modular Arithmetic", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "a-hands-on-look-caesar-cipher" },
+            { topic: "Cryptography Fundamentals", title: "Cryptography in the Real World: AEAD, TLS 1.3 & Hybrid Encryption", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "cryptography-in-the-real-world" },
+            { topic: "Cryptography Fundamentals", title: "The Quantum Threat & Post-Quantum Cryptography (ML-KEM, ML-DSA)", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "quantum-threat-post-quantum" },
+            { topic: "Cryptography Fundamentals", title: "Cryptography Summary & Practice Review Questions", file: "subject/informationAssuranceAndSecurity/midterm/cryptographyFundamentals.html", hash: "summary-and-review-questions" },
+
+            // Data Mining Midterm: Statistics Fundamentals
+            { topic: "Statistics Fundamentals", title: "Descriptive Statistics: Populations, Parameters & Samples", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "population-vs-sample" },
+            { topic: "Statistics Fundamentals", title: "Types of Data & Levels of Measurement (Nominal, Ordinal, Interval, Ratio)", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "levels-of-measurement" },
+            { topic: "Statistics Fundamentals", title: "Visualizing Categorical Data & The Pareto 80-20 Rule", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "pareto-diagram" },
+            { topic: "Statistics Fundamentals", title: "Grouping Numerical Data & Frequency Histograms", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "the-histogram" },
+            { topic: "Statistics Fundamentals", title: "Measures of Central Tendency: Mean, Median, Mode", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "central-tendency" },
+            { topic: "Statistics Fundamentals", title: "Skewness: Right vs Left Skewed Distributions & Tails", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "skewness" },
+            { topic: "Statistics Fundamentals", title: "Measures of Variability: Sample Variance (n - 1) & Bessel's Correction", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "variance-and-variability" },
+            { topic: "Statistics Fundamentals", title: "Standard Deviation & Coefficient of Variation (Relative Risk)", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "standard-deviation-and-cv" },
+            { topic: "Statistics Fundamentals", title: "Covariance & Pearson Correlation Coefficient (-1 to +1)", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "covariance-and-correlation" },
+            { topic: "Statistics Fundamentals", title: "Inferential Statistics: Normal Gaussian Distribution & Empirical Rule", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "the-normal-distribution" },
+            { topic: "Statistics Fundamentals", title: "Standardization & Z-Scores (Mapping to Standard Normal N(0,1))", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "standardization-and-z-scores" },
+            { topic: "Statistics Fundamentals", title: "Sampling Distributions & The Central Limit Theorem (CLT n >= 30)", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "central-limit-theorem" },
+            { topic: "Statistics Fundamentals", title: "Standard Error of the Mean (SE = sigma / sqrt(n))", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "standard-error" },
+            { topic: "Statistics Fundamentals", title: "Estimators & Point Estimates: Unbiasedness and Efficiency", file: "subject/dataMining/Midterm/statisticsFundamentals.html", hash: "estimators-and-point-estimates" },
+
+            // Data Mining Midterm: Confidence Intervals & Hypothesis Testing
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Core Purpose: Parameter Estimation vs Decision Rules", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "purpose-inference" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Single Population Mean: Known Variance (Z-Distribution)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ci-single-mean-known" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Single Population Mean: Unknown Variance (Student's t-Distribution)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ci-single-mean-unknown" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Confidence Interval Width & Sample Size Determination", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ci-width-sample-size" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Two Independent Means: Known Variances", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ci-two-means-known" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Two Independent Means: Unknown Equal Variances & Pooled s_p^2", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ci-two-means-unknown-equal" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Dependent / Paired Samples: Difference Scores d_i", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ci-dependent-samples" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Hypothesis Testing Anatomy: Null (H0) vs Alternative (H1)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-anatomy" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Decision Errors: Type I (False Alarm α) vs Type II (Miss β)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-decision-errors" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Testing Single Mean: Known Variance (Z-Test)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-single-mean-known" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Testing Single Mean: Unknown Variance (t-Test)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-single-mean-unknown" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Testing Two Independent Means: Known Variances (Z-Test)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-two-means-known" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Testing Two Independent Means: Unknown Equal Variances (Pooled t)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-two-means-unknown-equal" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "Testing Two Dependent Samples (Paired t-Test)", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "ht-dependent-samples" },
+            { topic: "Confidence Intervals & Hypothesis Testing", title: "The p-Value Approach & Practical Significance", file: "subject/dataMining/Midterm/confidenceIntervalsAndHypothesisTesting.html", hash: "p-value-approach" },
+
+            // Data Mining Midterm: CI & Hypothesis Work Examples
+            { topic: "CI & Hypothesis Work Examples", title: "Section A: Single Mean CI Problems (Z vs t)", file: "subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html", hash: "section-a-single-ci" },
+            { topic: "CI & Hypothesis Work Examples", title: "Section B: Two-Sample Difference CI Problems (Independent & Paired)", file: "subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html", hash: "section-b-two-ci" },
+            { topic: "CI & Hypothesis Work Examples", title: "Section C: Practice Problems from Raw Data Computations", file: "subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html", hash: "section-c-raw-data" },
+            { topic: "CI & Hypothesis Work Examples", title: "Section D: Activity Problems & Non-Zero Hypothesized Differences", file: "subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html", hash: "section-d-activity" },
+            { topic: "CI & Hypothesis Work Examples", title: "Six Costliest Exam Mistakes & Trap Analysis", file: "subject/dataMining/Midterm/confidenceHypothesisWorkExamples.html", hash: "exam-traps" },
+            // English for the Profession (EFP)
+            { topic: "English for the Profession", title: "The 8 Cs of Effective Business Communication", file: "subject/englishForTheProfession/Prelim/englishForProfession1.html", hash: "card-efp1-8cs" },
+            { topic: "English for the Profession", title: "Workplace Telemetry: McKinsey & Grammarly Research Findings", file: "subject/englishForTheProfession/Prelim/englishForProfession1.html", hash: "card-efp1-telemetry" },
+            { topic: "English for the Profession", title: "Business Communication Foundations & Stakeholder Channels", file: "subject/englishForTheProfession/Prelim/englishForProfession1.html", hash: "card-efp1-definition" },
+            { topic: "English for the Profession", title: "Shannon-Weaver Linear Model (1949): One-Way Transmission & Channel Noise", file: "subject/englishForTheProfession/Prelim/modelsOfCommunication.html", hash: "card-shannon-weaver" },
+            { topic: "English for the Profession", title: "Osgood-Schramm Interactive Model (1954): Circular Feedback Loop", file: "subject/englishForTheProfession/Prelim/modelsOfCommunication.html", hash: "card-osgood-schramm" },
+            { topic: "English for the Profession", title: "Barnlund's Transactional Model (1970): Simultaneous Exchange & Cues", file: "subject/englishForTheProfession/Prelim/modelsOfCommunication.html", hash: "card-barnlund" },
+            { topic: "English for the Profession", title: "Types of Communication: Verbal, Nonverbal, Visual & Mixed Signals", file: "subject/englishForTheProfession/Prelim/modelsOfCommunication.html", hash: "card-efp2-types" },
+            { topic: "English for the Profession", title: "Active Voice Transformation & Eliminating Corporate Bloat", file: "subject/englishForTheProfession/Prelim/modelsOfCommunication.html", hash: "card-efp2-sentences" },
+            { topic: "English for the Profession", title: "The MEAL Framework for Cohesive Paragraphs (Main, Evidence, Analysis, Lead-Out)", file: "subject/englishForTheProfession/Prelim/modelsOfCommunication.html", hash: "card-efp2-meal" },
+            { topic: "English for the Profession", title: "The 5-Stage Professional Writing Pipeline (Prewrite -> Draft -> Revise -> Edit -> Publish)", file: "subject/englishForTheProfession/Prelim/businessWriting.html", hash: "card-efp3-pipeline" },
+            { topic: "English for the Profession", title: "Diagnosing Sentence Errors: Fragments, Run-Ons, and Comma Splices", file: "subject/englishForTheProfession/Prelim/businessWriting.html", hash: "card-efp3-errors" },
+            { topic: "English for the Profession", title: "Sentence Variety: Simple, Compound, and Complex Clause Architecture", file: "subject/englishForTheProfession/Prelim/businessWriting.html", hash: "card-efp3-variety" },
+            { topic: "English for the Profession", title: "Paragraph Development: Unity, Coherence, and Development", file: "subject/englishForTheProfession/Prelim/businessWriting.html", hash: "card-efp3-meal" },
+            { topic: "English for the Profession", title: "Academic Writing vs. Professional Business Writing", file: "subject/englishForTheProfession/Prelim/businessWriting.html", hash: "card-efp3-academic-vs-prof" },
+            { topic: "English for the Profession", title: "Cover Letter Architecture, Header, Personalized Salutation & Sign-Off", file: "subject/englishForTheProfession/Prelim/businessWriting.html", hash: "card-efp3-cover-letter" }
         ];
 
         function handleSearchBinding(inputId, resultsBoxId) {
@@ -856,7 +1287,10 @@
             { key: 'probabilities', title: 'Probabilities', total: 94 },
             { key: 'probabilityDistribution', title: 'Probability Distributions', total: 76 },
             { key: 'setsEventsBayesianInference', title: 'Sets, Events & Bayesian Inference', total: 75 },
-            { key: 'traditionalDataTechniques', title: 'Traditional Data Techniques', total: 91 }
+            { key: 'traditionalDataTechniques', title: 'Traditional Data Techniques', total: 91 },
+            { key: 'englishForProfession1', title: 'Intro to Business Communication & The 8 Cs', total: 70 },
+            { key: 'modelsOfCommunication', title: 'Models of Communication & Writing Stages', total: 70 },
+            { key: 'businessWriting', title: 'Business Writing & Paragraph Development', total: 70 }
         ];
 
         const legacyKeyMap = {
@@ -959,7 +1393,7 @@
             if (pctLabel) pctLabel.innerText = `${globalPct}%`;
             if (ansCountEl) ansCountEl.innerText = totalGlobalAnswered;
             if (totalCountEl) totalCountEl.innerText = totalGlobalQuestions;
-            if (compCountEl) compCountEl.innerText = `${totalModulesCompleted}/14`;
+            if (compCountEl) compCountEl.innerText = `${totalModulesCompleted}/${topics.length}`;
 
             // Sort topic stats: completed first, then highest %, then original order
             topicStats.sort((a, b) => {
@@ -1016,7 +1450,7 @@
             if (user && user.username) {
                 if (statusEl) statusEl.innerHTML = `<span style="color:#10b981;">🟢 Logged in as <strong>${user.username}</strong> • Cloud Sync Active</span>`;
                 if (title) title.innerHTML = `Welcome back, <strong>${user.username}</strong>!`;
-                if (desc) desc.innerText = 'Your 14 course modules, quiz scores, mistake vault records, and focus study hours are synchronizing seamlessly in real-time across your devices.';
+                if (desc) desc.innerText = 'Your 21 course modules, quiz scores, mistake vault records, and focus study hours are synchronizing seamlessly in real-time across your devices.';
                 if (actions) {
                     actions.innerHTML = `
                         <button class="btn btn-primary" onclick="window.openAuthModal('profile')">⚙️ Account &amp; Sync Settings</button>
@@ -1029,7 +1463,7 @@
                 const mobIcon = document.getElementById('mob-topbar-auth-icon');
                 if (mobIcon) mobIcon.innerText = '🟢';
             } else {
-                if (statusEl) statusEl.innerHTML = `Ready to study • 1,140 Questions Indexed across 4 Subjects`;
+                if (statusEl) statusEl.innerHTML = `Ready to study • 1,350 Questions Indexed across 5 Subjects`;
                 if (title) title.innerText = 'Personal Study & Mastery Dashboard';
                 if (desc) desc.innerText = 'Comprehensive study guides, active distractor-balanced practice quizzes, high-definition display math worked examples, and multi-device cloud synchronization.';
                 if (actions) {
@@ -1090,9 +1524,41 @@
         });
 
         setTimeout(silentCloudSyncAndUpdate, 150);
+
+        // Realtime Manila Date & Time Clock Engine
+        function initManilaClock() {
+            const timeEl = document.getElementById('manila-time-display');
+            const dateEl = document.getElementById('manila-date-display');
+            if (!timeEl || !dateEl) return;
+
+            const timeFormatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Manila',
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+
+            const dateFormatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: 'Asia/Manila',
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            function tick() {
+                const now = new Date();
+                timeEl.textContent = timeFormatter.format(now);
+                dateEl.textContent = dateFormatter.format(now);
+            }
+
+            tick();
+            setInterval(tick, 1000);
+        }
+        initManilaClock();
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="./heroCanvas.js"></script>
-    <script src="./calculator.js"></script>
 </body>
 </html>

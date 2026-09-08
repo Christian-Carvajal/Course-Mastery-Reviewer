@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,366 +18,753 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Automata, Computability & Complexity | Complete Reviewer & Quiz</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Automata, Computability &amp; Complexity | Complete Reviewer &amp; Quiz</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Automata Theory & Formal Languages</h1>
-        <p>Module 1: Automata, Computability & Complexity — 73-Question Academic Mastery Quiz</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Computability & Complexity</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-            <div class="card">
- <h2 id="learning-outcomes">1. Learning Outcomes</h2>
- <ul>
- <li>Know (some) limitations of computer science.</li>
- <li>Understand the concept of computable and non-computable functions.</li>
- <li>Introduce the concept of Turing machines.</li>
- <li>Present ideas about halting.</li>
- <li>Enumerate example of tractable and non-tractable problems.</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="limitations-of-cs">2. Limitations of Computer Science</h2>
- <p>Major reasons useful calculations cannot be done:</p>
- <ol>
- <li>
- <strong>Execution time of program is too long:</strong>
- <br>Problem can take years or centuries to finish.
+<header class="app-header">
+<h1>Automata Theory &amp; Formal Languages</h1>
+<p>Module 1: Automata, Computability &amp; Complexity — 73-Question Academic Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Computability &amp; Complexity</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2 id="learning-outcomes">1. Learning Outcomes</h2>
+<ul>
+<li>Know (some) limitations of computer science.</li>
+<li>Understand the concept of computable and non-computable functions.</li>
+<li>Introduce the concept of Turing machines.</li>
+<li>Present ideas about halting.</li>
+<li>Enumerate example of tractable and non-tractable problems.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="limitations-of-cs">2. Limitations of Computer Science</h2>
+<p>Major reasons useful calculations cannot be done:</p>
+<ol>
+<li>
+<strong>Execution time of program is too long:</strong>
+<br/>Problem can take years or centuries to finish.
  </li>
- <li>
- <strong>Problem is not computable:</strong>
- <br>No computer program can solve the problem.
+<li>
+<strong>Problem is not computable:</strong>
+<br/>No computer program can solve the problem.
  </li>
- <li>
- <strong>We do not know how to write a program to solve the problem:</strong>
- <br>Problems that can conceivably be solved; includes many problems in artificial intelligence and computer vision, such as understanding language, object recognition, tracking, prediction.
+<li>
+<strong>We do not know how to write a program to solve the problem:</strong>
+<br/>Problems that can conceivably be solved; includes many problems in artificial intelligence and computer vision, such as understanding language, object recognition, tracking, prediction.
  </li>
- </ol>
- </div>
-
- <div class="card">
- <h2 id="decision-problems">3. Decision Problems & Problem Reduction</h2>
- <p>What problems can be solved by computers?</p>
+</ol>
+</div>
+<div class="card">
+<h2 id="decision-problems">3. Decision Problems &amp; Problem Reduction</h2>
+<p>What problems can be solved by computers?</p>
+<ul>
+<li>Equivalent to: “What decision problems can be solved?”</li>
+<li><strong>Decision problem:</strong> Problem where the answer is always YES/NO.</li>
+<li>Arbitrary problem can always be reduced to a decision problem.</li>
+<li>There are decision problems for which algorithms do not exist:
  <ul>
- <li>Equivalent to: “What decision problems can be solved?”</li>
- <li><strong>Decision problem:</strong> Problem where the answer is always YES/NO.</li>
- <li>Arbitrary problem can always be reduced to a decision problem.</li>
- <li>There are decision problems for which algorithms do not exist:
- <ul>
- <li>There are more different decision problems than there are different programs.</li>
- <li>If there are more decision problems than programs, then it must be the case that some decision problems cannot be solved by programs.</li>
- </ul>
+<li>There are more different decision problems than there are different programs.</li>
+<li>If there are more decision problems than programs, then it must be the case that some decision problems cannot be solved by programs.</li>
+</ul>
+</li>
+</ul>
+<h3>Decision Problems vs. Particular Answers</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Decision Problem (YES/NO)</th>
+<th>Particular Answer Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Is 613,511 a prime number? (NO)</td>
+<td>What is the smallest prime factor of 613,511?</td>
+</tr>
+<tr>
+<td>Is my birthday on a Sunday next year? (NO / YES)</td>
+<td>On what day of the week is my birthday next year?</td>
+</tr>
+<tr>
+<td>Will I pass the Automata final exam?</td>
+<td>What grade will I get on the Automata final exam?</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>The process of answering questions where a particular answer is uniquely determined from the given information can be viewed as the evaluation of a function.</em></p>
+</div>
+<div class="card">
+<h2 id="functions-computability">4. Functions &amp; Computability</h2>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p>A <strong>function</strong> is a correspondence between a collection of possible input values and a collection of output values such that each possible input is assigned a unique output.</p>
+</div>
+<h3>Function Characteristics &amp; Examples</h3>
+<ul>
+<li><strong>Addition function example:</strong> Inputs are value pairs, outputs are values representing the sum of each input pair. Output is unique, exactly one value for each input pair.</li>
+<li><strong>Function evaluation:</strong> The process of determining output for given input is called computing or evaluating the function.</li>
+<li>The ability to evaluate functions gives us the ability to solve problems (e.g. to solve the addition problem we must evaluate the addition function).</li>
+<li><strong>Evaluation examples:</strong>
+<ul>
+<li>F(x) = x + 1 → F(2) = 3</li>
+<li>F(x,y) = x + y → F(2,3) = 5</li>
+</ul>
+</li>
+</ul>
+<h3>Computable vs. Noncomputable Functions</h3>
+<ul>
+<li><strong>Algorithms:</strong> The means by which we formally express the evaluation of a function.</li>
+<li><strong>Can we design algorithms to evaluate ALL functions?</strong> No!</li>
+<li><strong>Noncomputable functions:</strong> Functions so complex that there is no well-defined step-by-step process for determining their output based on their input values. The evaluation of these functions lies beyond the capabilities of any algorithmic system.</li>
+<li><strong>Computable functions:</strong> Functions whose output values can be determined algorithmically from their input values (functions having an algorithm that solves them).</li>
+</ul>
+<h3>Limitations of Machines &amp; Alien Life Question</h3>
+<ul>
+<li>Machines can only perform computations described by algorithms: the study of computable functions is the study of the ultimate capabilities of machines.</li>
+<li>If we can build a machine with the capabilities to evaluate the entire set of computable functions, then the machines we build are as powerful as we can make them.</li>
+<li>If we discover that the solution to a problem requires the evaluation of a noncomputable function, we know the solution to that problem lies beyond the capabilities of machines.</li>
+<li><strong>Q: Is it possible to write a Java program to answer: Does extraterrestrial life exist?</strong>
+<br/><strong>A: Yes!</strong> The question is answered either by a program that returns “yes” or by a program that returns “no”. We just don’t know which program is correct.
  </li>
- </ul>
-
- <h3>Decision Problems vs. Particular Answers</h3>
- <table>
- <thead>
- <tr>
- <th>Decision Problem (YES/NO)</th>
- <th>Particular Answer Required</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td>Is 613,511 a prime number? (NO)</td>
- <td>What is the smallest prime factor of 613,511?</td>
- </tr>
- <tr>
- <td>Is my birthday on a Sunday next year? (NO / YES)</td>
- <td>On what day of the week is my birthday next year?</td>
- </tr>
- <tr>
- <td>Will I pass the Automata final exam?</td>
- <td>What grade will I get on the Automata final exam?</td>
- </tr>
- </tbody>
- </table>
- <p><em>The process of answering questions where a particular answer is uniquely determined from the given information can be viewed as the evaluation of a function.</em></p>
- </div>
-
- <div class="card">
- <h2 id="functions-computability">4. Functions & Computability</h2>
- <div class="definition-card">
- <span class="def-badge">Definition</span>
- <p>A <strong>function</strong> is a correspondence between a collection of possible input values and a collection of output values such that each possible input is assigned a unique output.</p>
- </div>
-
- <h3>Function Characteristics & Examples</h3>
- <ul>
- <li><strong>Addition function example:</strong> Inputs are value pairs, outputs are values representing the sum of each input pair. Output is unique, exactly one value for each input pair.</li>
- <li><strong>Function evaluation:</strong> The process of determining output for given input is called computing or evaluating the function.</li>
- <li>The ability to evaluate functions gives us the ability to solve problems (e.g. to solve the addition problem we must evaluate the addition function).</li>
- <li><strong>Evaluation examples:</strong>
- <ul>
- <li>F(x) = x + 1 &rarr; F(2) = 3</li>
- <li>F(x,y) = x + y &rarr; F(2,3) = 5</li>
- </ul>
+<li><strong>Is a problem Computable?</strong> Suppose we create a list of all programs for evaluating computable problems. To ask whether a problem is computable is to ask if there is a program in the list to solve the problem. This is not the same as actually identifying the program in the list that solves the problem. There are many computable problems whose solutions have not yet been identified.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="turing-machines">5. Abstract Model of Computation &amp; Turing Machines</h2>
+<div class="definition-card">
+<span class="def-badge">Turing Machine (1936)</span>
+<p>The first abstract model of computation was defined by <strong>Alan Turing in 1936</strong>: <strong>The Turing Machine</strong>.</p>
+</div>
+<ul>
+<li>A Turing Machine is a purely theoretical device, developed well before technology was capable of providing the machines we know as “computers” today.</li>
+<li>Model to study the capabilities and limitations of computational processes and computing machinery.</li>
+<li>Provide a context in which solutions to all things computable can be expressed.</li>
+<li>Provide a standard to which the power of other computational systems can be compared.</li>
+</ul>
+<h3>Turing-Computable ⇔ Computable</h3>
+<ul>
+<li>A function is computable if it can be computed by a Turing machine;</li>
+<li>or, a function is computable if a program exists that can compute it;</li>
+<li>or, a function is computable if there is an effective algorithm for evaluating the function which, given any input values for which the function is defined, produces the correct result and halts in a finite amount of time.</li>
+<li><strong>Q: Is there anything a Turing Machine cannot do?</strong> <strong>A: Yes!</strong></li>
+<li><strong>Noncomputability:</strong> A function is noncomputable if there is no Turing machine that could compute it, or any function that cannot be computed by any program. There are many more functions than there are programs, so it is not possible to have a program for every function.</li>
+<li><strong>Noncomputable problem example:</strong> List all subroutines that input an integer and return an integer (e.g. <code>int sub1(int x) { return 1; }</code>, <code>int sub2(int x) { return 2; }</code>). Can make infinitely many such subroutines.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="halting-problem">6. Halting &amp; The Halting Problem</h2>
+<h3>Halting Behavior</h3>
+<ul>
+<li><strong>Programs that run forever do not halt:</strong> (e.g., <code>programA</code> with infinite loops).
+ <div class="code-box">int programA(int x) {<br/>  while(x == x)<br/>    x = x;<br/>  return x;<br/>}</div>
+</li>
+<li><strong>Programs may halt on some inputs but not on others:</strong> (e.g., <code>programB</code>).
+ <div class="code-box">int programB(int x) {<br/>  while(x &gt; 10)<br/>    x = x;<br/>  return x;<br/>}</div>
+</li>
+<li><strong>Programs with no loops always halt:</strong> Programs composed of assignment statements, if statements and the return statement.</li>
+</ul>
+<h3>Halt or Not? (Code Analysis)</h3>
+<ul>
+<li><strong>Loop 1:</strong>
+<div class="code-box">while(x &gt; 1) {<br/>  if(x &gt; 2)<br/>    x = x - 2;<br/>  else<br/>    x = x + 2;<br/>}</div>
+<em>If x = 8:</em> 8 → 6 → 4 → 2 → 4 → 2 (Infinite loop, does not terminate).
+ <br/><em>If x = 9:</em> 9 → 7 → 5 → 3 → 1 (Terminates when x = 1).
  </li>
- </ul>
-
- <h3>Computable vs. Noncomputable Functions</h3>
- <ul>
- <li><strong>Algorithms:</strong> The means by which we formally express the evaluation of a function.</li>
- <li><strong>Can we design algorithms to evaluate ALL functions?</strong> No!</li>
- <li><strong>Noncomputable functions:</strong> Functions so complex that there is no well-defined step-by-step process for determining their output based on their input values. The evaluation of these functions lies beyond the capabilities of any algorithmic system.</li>
- <li><strong>Computable functions:</strong> Functions whose output values can be determined algorithmically from their input values (functions having an algorithm that solves them).</li>
- </ul>
-
- <h3>Limitations of Machines & Alien Life Question</h3>
- <ul>
- <li>Machines can only perform computations described by algorithms: the study of computable functions is the study of the ultimate capabilities of machines.</li>
- <li>If we can build a machine with the capabilities to evaluate the entire set of computable functions, then the machines we build are as powerful as we can make them.</li>
- <li>If we discover that the solution to a problem requires the evaluation of a noncomputable function, we know the solution to that problem lies beyond the capabilities of machines.</li>
- <li><strong>Q: Is it possible to write a Java program to answer: Does extraterrestrial life exist?</strong>
- <br><strong>A: Yes!</strong> The question is answered either by a program that returns “yes” or by a program that returns “no”. We just don’t know which program is correct.
+<li><strong>Loop 2 (Collatz-like):</strong>
+<div class="code-box">while(x &gt; 1) {<br/>  if(x % 2 == 0)<br/>    x = x / 2;<br/>  else<br/>    x = 3*x + 1;<br/>}</div>
+<em>If x = 8:</em> 8 → 4 → 2 → 1 (Terminates).
+ <br/><em>If x = 7:</em> 7 → 22 → 11 → 34 → 17 → 52 → 26 → 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1 (Terminates).
  </li>
- <li><strong>Is a problem Computable?</strong> Suppose we create a list of all programs for evaluating computable problems. To ask whether a problem is computable is to ask if there is a program in the list to solve the problem. This is not the same as actually identifying the program in the list that solves the problem. There are many computable problems whose solutions have not yet been identified.</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="turing-machines">5. Abstract Model of Computation & Turing Machines</h2>
- <div class="definition-card">
- <span class="def-badge">Turing Machine (1936)</span>
- <p>The first abstract model of computation was defined by <strong>Alan Turing in 1936</strong>: <strong>The Turing Machine</strong>.</p>
- </div>
- <ul>
- <li>A Turing Machine is a purely theoretical device, developed well before technology was capable of providing the machines we know as “computers” today.</li>
- <li>Model to study the capabilities and limitations of computational processes and computing machinery.</li>
- <li>Provide a context in which solutions to all things computable can be expressed.</li>
- <li>Provide a standard to which the power of other computational systems can be compared.</li>
- </ul>
-
- <h3>Turing-Computable &hArr; Computable</h3>
- <ul>
- <li>A function is computable if it can be computed by a Turing machine;</li>
- <li>or, a function is computable if a program exists that can compute it;</li>
- <li>or, a function is computable if there is an effective algorithm for evaluating the function which, given any input values for which the function is defined, produces the correct result and halts in a finite amount of time.</li>
- <li><strong>Q: Is there anything a Turing Machine cannot do?</strong> <strong>A: Yes!</strong></li>
- <li><strong>Noncomputability:</strong> A function is noncomputable if there is no Turing machine that could compute it, or any function that cannot be computed by any program. There are many more functions than there are programs, so it is not possible to have a program for every function.</li>
- <li><strong>Noncomputable problem example:</strong> List all subroutines that input an integer and return an integer (e.g. <code>int sub1(int x) { return 1; }</code>, <code>int sub2(int x) { return 2; }</code>). Can make infinitely many such subroutines.</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="halting-problem">6. Halting & The Halting Problem</h2>
- 
- <h3>Halting Behavior</h3>
- <ul>
- <li><strong>Programs that run forever do not halt:</strong> (e.g., <code>programA</code> with infinite loops).
- <div class="code-box">int programA(int x) {<br>&nbsp;&nbsp;while(x == x)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x;<br>&nbsp;&nbsp;return x;<br>}</div>
- </li>
- <li><strong>Programs may halt on some inputs but not on others:</strong> (e.g., <code>programB</code>).
- <div class="code-box">int programB(int x) {<br>&nbsp;&nbsp;while(x > 10)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x;<br>&nbsp;&nbsp;return x;<br>}</div>
- </li>
- <li><strong>Programs with no loops always halt:</strong> Programs composed of assignment statements, if statements and the return statement.</li>
- </ul>
-
- <h3>Halt or Not? (Code Analysis)</h3>
- <ul>
- <li><strong>Loop 1:</strong>
- <div class="code-box">while(x > 1) {<br>&nbsp;&nbsp;if(x > 2)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x - 2;<br>&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x + 2;<br>}</div>
- <em>If x = 8:</em> 8 &rarr; 6 &rarr; 4 &rarr; 2 &rarr; 4 &rarr; 2 (Infinite loop, does not terminate).
- <br><em>If x = 9:</em> 9 &rarr; 7 &rarr; 5 &rarr; 3 &rarr; 1 (Terminates when x = 1).
- </li>
- <li><strong>Loop 2 (Collatz-like):</strong>
- <div class="code-box">while(x > 1) {<br>&nbsp;&nbsp;if(x % 2 == 0)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x / 2;<br>&nbsp;&nbsp;else<br>&nbsp;&nbsp;&nbsp;&nbsp;x = 3*x + 1;<br>}</div>
- <em>If x = 8:</em> 8 &rarr; 4 &rarr; 2 &rarr; 1 (Terminates).
- <br><em>If x = 7:</em> 7 &rarr; 22 &rarr; 11 &rarr; 34 &rarr; 17 &rarr; 52 &rarr; 26 &rarr; 13 &rarr; 40 &rarr; 20 &rarr; 10 &rarr; 5 &rarr; 16 &rarr; 8 &rarr; 4 &rarr; 2 &rarr; 1 (Terminates).
- </li>
- </ul>
-
- <h3>The Halting Problem & Proof of Noncomputability</h3>
- <ul>
- <li><strong>The Question:</strong> Is it possible to write a Java program to answer: <em>Does a given program halt on all inputs?</em></li>
- <li>It would be useful if we could write a program or compiler to test if a given source program contains an infinite loop, so we would never execute a program with an infinite loop.</li>
- <li><strong>The Halting Problem is noncomputable:</strong> There is no single finite program that will answer the halting question for all programs. No finite program can be written that will check other programs and halt in a finite time giving a solution to the halting problem.</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="tractable-intractable">7. Program Execution Time: Tractable vs. Intractable Problems</h2>
- <p><strong>Program Execution Time:</strong> How long a program takes to perform computations on large inputs. Computable problems are basically divided into two classes:</p>
-
- <table>
- <thead>
- <tr>
- <th>Class</th>
- <th>Definition & Complexity</th>
- <th>Examples</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td><strong>Tractable</strong></td>
- <td>Computations that can be completed in a reasonable time period. Running time on N inputs is <strong>logarithmic or polynomial in N</strong>.</td>
- <td>
- • Searching or sorting N inputs<br>
- • Computing the sum of positive integers of size N<br>
- • Finding the largest element in an N x M array<br>
+</ul>
+<h3>The Halting Problem &amp; Proof of Noncomputability</h3>
+<ul>
+<li><strong>The Question:</strong> Is it possible to write a Java program to answer: <em>Does a given program halt on all inputs?</em></li>
+<li>It would be useful if we could write a program or compiler to test if a given source program contains an infinite loop, so we would never execute a program with an infinite loop.</li>
+<li><strong>The Halting Problem is noncomputable:</strong> There is no single finite program that will answer the halting question for all programs. No finite program can be written that will check other programs and halt in a finite time giving a solution to the halting problem.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="tractable-intractable">7. Program Execution Time: Tractable vs. Intractable Problems</h2>
+<p><strong>Program Execution Time:</strong> How long a program takes to perform computations on large inputs. Computable problems are basically divided into two classes:</p>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Definition &amp; Complexity</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tractable</strong></td>
+<td>Computations that can be completed in a reasonable time period. Running time on N inputs is <strong>logarithmic or polynomial in N</strong>.</td>
+<td>
+ • Searching or sorting N inputs<br/>
+ • Computing the sum of positive integers of size N<br/>
+ • Finding the largest element in an N x M array<br/>
  • Counting the number of characters in a Java program
  </td>
- </tr>
- <tr>
- <td><strong>Intractable</strong></td>
- <td>Computations that cannot be realistically completed except for small examples. Running time on N inputs is <strong>exponential in N</strong>.</td>
- <td>
- • Computing all permutations of N inputs<br>
- • Towers of Hanoi<br>
- • Traveling Salesperson<br>
- • Bin Packing<br>
+</tr>
+<tr>
+<td><strong>Intractable</strong></td>
+<td>Computations that cannot be realistically completed except for small examples. Running time on N inputs is <strong>exponential in N</strong>.</td>
+<td>
+ • Computing all permutations of N inputs<br/>
+ • Towers of Hanoi<br/>
+ • Traveling Salesperson<br/>
+ • Bin Packing<br/>
  • Graph Coloring
  </td>
- </tr>
- </tbody>
- </table>
-
- <h3>Detailed Intractable Problem Descriptions</h3>
- <ul>
- <li><strong>Towers of Hanoi:</strong> How long to move n disks? (Impractical / exponential).</li>
- <li><strong>Traveling Salesperson Problem:</strong> A traveling salesperson must visit each of some number of cities before returning home; knows the distance between each of the cities; wants to minimize the total distance traveled while visiting all of the cities. (Requires trying all paths from every starting point).</li>
- <li><strong>Bin Packing:</strong> Pack a given set of items having different sizes into a minimum number of equal-sized bins. <em>Example:</em> Pack trucks with barrels using the smallest possible number of trucks.</li>
- <li><strong>Graph Coloring:</strong> Color the vertices of a graph such that no edge connects two identically colored vertices using the minimum number of colors.</li>
- </ul>
- </div>
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / 73</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-            <div id="quiz-container"></div>
-        </div>
-
-        <!-- TAB 3: QUICK REFERENCE & FORMULAS -->
-        <div id="formulas" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2>Quick Reference: Computability, Complexity & Halting Problem</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-
-                <table>
-                    <thead>
-                        <tr><th>Complexity Class</th><th>Deterministic Time</th><th>Key Characterization</th><th>Canonical Example</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Class P</strong></td><td>Polynomial O(n<sup>k</sup>)</td><td>Tractable / Efficiently Solvable</td><td>Shortest Path, Sorting, 2-SAT</td></tr>
-                        <tr><td><strong>Class NP</strong></td><td>Non-deterministic Poly Time</td><td>Verifiable in Polynomial Time</td><td>3-SAT, Traveling Salesperson, Clique</td></tr>
-                        <tr><td><strong>NP-Complete</strong></td><td>Hardest in NP</td><td>Every problem in NP reduces to it in Poly Time</td><td>SAT (Cook-Levin Theorem)</td></tr>
-                        <tr><td><strong>Decidable (R)</strong></td><td>Halts on all inputs</td><td>Turing Machine always halts with Accept/Reject</td><td>A_DFA, E_DFA, EQ_DFA</td></tr>
-                        <tr><td><strong>Turing-Recognizable (RE)</strong></td><td>Halts on 'yes', may loop on 'no'</td><td>Partially Decidable / Semi-Decidable</td><td>A_TM (Halting Problem)</td></tr>
-                        <tr><td><strong>Undecidable (Non-RE)</strong></td><td>No TM exists</td><td>Cannot be recognized or decided</td><td>Complement of A_TM, EQ_TM</td></tr>
-                    </tbody>
-                </table>
-
-                
-            <!-- Interactive Tool 1: Computational Complexity & Big-O Step Simulator -->
-            <div class="calc-card" style="margin-top:1.5rem;">
-                <div class="calc-title">🧮 Tool 1: Computational Complexity & Growth Rate Step Calculator</div>
-                <div class="calc-desc">Calculate the exact number of operations/steps required by algorithms across major complexity classes (P vs NP, Logarithmic to Exponential).</div>
-                
-                <div class="calc-grid">
-                    <div class="calc-field">
-                        <label class="calc-label" for="comp-n">Input Size (n):</label>
-                        <input type="number" id="comp-n" class="calc-input" value="10" min="1" max="1000" step="1" oninput="calculateComplexity()">
-                    </div>
-                    <div class="calc-field">
-                        <label class="calc-label" for="comp-speed">Processor Speed (Ops / Sec):</label>
-                        <input type="number" id="comp-speed" class="calc-input" value="1000000" min="1000" step="100000" oninput="calculateComplexity()">
-                    </div>
-                </div>
-
-                <div class="calc-result-box">
-                    <div class="calc-result-header">
-                        <span style="font-weight:700; font-size:0.95rem;">Operation Steps & Execution Time:</span>
-                        <span class="calc-result-val" id="comp-res-val">O(n²) = 100 steps (0.10 ms)</span>
-                    </div>
-                    <div class="calc-math-steps" id="comp-math-steps">
-                        <strong>Complexity Breakdown for Input n = 10:</strong><br>
-                        <div class="step-line">• <strong>O(log n) [Logarithmic]:</strong> 3.32 steps | ~0.000 ms</div>
-                        <div class="step-line">• <strong>O(n) [Linear]:</strong> 10 steps | ~0.010 ms</div>
-                        <div class="step-line">• <strong>O(n log n) [Linearithmic]:</strong> 33.22 steps | ~0.033 ms</div>
-                        <div class="step-line">• <strong>O(n²) [Polynomial - Class P]:</strong> 100 steps | ~0.100 ms</div>
-                        <div class="step-line">• <strong>O(2ⁿ) [Exponential - Intractable]:</strong> 1,024 steps | ~1.024 ms</div>
-                        <div class="step-line">• <strong>O(n!) [Factorial - Exhaustive Search]:</strong> 3,628,800 steps | ~3.63 sec</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Tool 2: Decidability & Halting Problem Classifier -->
-            <div class="calc-card" style="margin-top:1.5rem;">
-                <div class="calc-title">🧮 Tool 2: Decision Problem Decidability & Reduction Classifier</div>
-                <div class="calc-desc">Explore problem classification, decidability properties, and reduction paths across Turing machines.</div>
-                
-                <div class="calc-grid">
-                    <div class="calc-field">
-                        <label class="calc-label" for="prob-type">Select Problem / Language:</label>
-                        <select id="prob-type" class="calc-input" onchange="classifyProblem()">
-                            <option value="dfa_acceptance">A_DFA (DFA Acceptance - Does M accept w?)</option>
-                            <option value="dfa_emptiness">E_DFA (DFA Emptiness - Is L(M) empty?)</option>
-                            <option value="dfa_equivalence">EQ_DFA (DFA Equivalence - Is L(A) = L(B)?)</option>
-                            <option value="cfg_acceptance">A_CFG (CFG Acceptance - Does G generate w?)</option>
-                            <option value="cfg_emptiness">E_CFG (CFG Emptiness - Is L(G) empty?)</option>
-                            <option value="atm_halting">A_TM (Turing Machine Acceptance / Halting Problem)</option>
-                            <option value="tm_emptiness">E_TM (Turing Machine Emptiness)</option>
-                            <option value="tm_equivalence">EQ_TM (Turing Machine Equivalence)</option>
-                            <option value="pcp">Post Correspondence Problem (PCP)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="calc-result-box">
-                    <div class="calc-result-header">
-                        <span style="font-weight:700; font-size:0.95rem;">Decidability & Complexity Class:</span>
-                        <span class="calc-result-val" id="prob-res-val">Decidable (Solvable Algorithmically)</span>
-                    </div>
-                    <div class="calc-math-steps" id="prob-math-steps">
-                        <strong>Theoretical Classification:</strong><br>
-                        <div class="step-line">• <strong>Status:</strong> <span style="color:#16a34a; font-weight:700;">Decidable</span></div>
-                        <div class="step-line">• <strong>Algorithm / Proof:</strong> Simulate DFA M on input w. Since DFA transitions always halt after |w| steps, the decision procedure always halts and decides correctly.</div>
-                    </div>
-                </div>
-            </div>
-    
-            </div>
-        </div>
-
-    </div>
-
-    <script>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>Detailed Intractable Problem Descriptions</h3>
+<ul>
+<li><strong>Towers of Hanoi:</strong> How long to move n disks? (Impractical / exponential).</li>
+<li><strong>Traveling Salesperson Problem:</strong> A traveling salesperson must visit each of some number of cities before returning home; knows the distance between each of the cities; wants to minimize the total distance traveled while visiting all of the cities. (Requires trying all paths from every starting point).</li>
+<li><strong>Bin Packing:</strong> Pack a given set of items having different sizes into a minimum number of equal-sized bins. <em>Example:</em> Pack trucks with barrels using the smallest possible number of trucks.</li>
+<li><strong>Graph Coloring:</strong> Color the vertices of a graph such that no edge connects two identically colored vertices using the minimum number of colors.</li>
+</ul>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 73</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container"></div>
+</div>
+<!-- TAB 3: QUICK REFERENCE & FORMULAS -->
+<div class="tab-content" id="formulas">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem; gap:0.5rem;">
+<div>
+<h2 style="margin:0;">Quick Reference: Automata, Computability &amp; Complexity</h2>
+<p style="color:var(--text-muted-color); font-size:0.9rem; margin-top:0.25rem;">Four-Pillar Exam Mastery Reference: Core Terminology, Mathematical Laws, Comparative Matrices &amp; Trap Alerts</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ============================================================ -->
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID            -->
+<!-- ============================================================ -->
+<div style="margin-bottom: 2rem;">
+<h3 style="color:var(--primary-color); margin-bottom: 0.75rem; font-size: 1.15rem; display:flex; align-items:center; gap:0.5rem;">
+<span>🏛️ Pillar 1: Core Terminology &amp; High-Yield Keyword Recall Grid</span>
+</h3>
+<p style="font-size:0.88rem; color:var(--text-muted-color); margin-bottom:1rem;">Essential academic definitions and exact theoretical vocabulary required for exam question recall.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+<div class="definition-card">
+<span class="def-badge">Decision Problem</span>
+<p><strong>Decision Problem:</strong> A computational problem where the answer is strictly binary: <strong>YES or NO</strong> (e.g., <em>"Is 613,511 a prime number?"</em>). All arbitrary computation problems can be formally reduced to decision problems.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Function</span>
+<p><strong>Function:</strong> A unique mathematical correspondence between a collection of possible inputs and outputs such that each input value is assigned <strong>exactly one unique output</strong>.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Function Evaluation</span>
+<p><strong>Function Evaluation (Computing):</strong> The mechanical or algorithmic process of determining the output value corresponding to given input values (e.g., evaluating <em>F(x, y) = x + y → F(2, 3) = 5</em>).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Algorithm</span>
+<p><strong>Algorithm:</strong> A formal, finite step-by-step mechanical procedure that explicitly specifies how to evaluate a function and solve a problem in finite time.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Computable Function</span>
+<p><strong>Computable Function:</strong> A function whose output values can be determined algorithmically from its input values by an effective program halting in finite time.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Noncomputable Function</span>
+<p><strong>Noncomputable Function:</strong> A function so complex that no step-by-step algorithmic process exists to determine its outputs from its inputs; its evaluation lies strictly beyond machine capabilities.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Turing Machine (1936)</span>
+<p><strong>Turing Machine:</strong> An abstract mathematical model of computation formulated by <strong>Alan Turing (1936)</strong>. It provides the universal benchmark for computational power and formalizes what can and cannot be computed.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Turing-Computable</span>
+<p><strong>Turing-Computable:</strong> A function is Turing-computable ⇔ it can be computed by a Turing Machine ⇔ an effective algorithm exists that produces the correct result and halts in a finite amount of time.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">The Halting Problem</span>
+<p><strong>The Halting Problem:</strong> The decision problem of determining whether an arbitrary program will eventually halt or run forever on a given input. Proved <strong>noncomputable / undecidable</strong> by Alan Turing in 1936.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Decidable (Language Class R)</span>
+<p><strong>Decidable Problem (Recursive / Class R):</strong> A decision problem for which an algorithm exists that halts on <strong>ALL</strong> valid inputs with a definitive YES (Accept) or NO (Reject) answer.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Turing-Recognizable (RE)</span>
+<p><strong>Turing-Recognizable (Recursively Enumerable / Class RE):</strong> A problem for which a Turing machine will halt and accept all YES inputs, but may loop indefinitely on NO inputs (Semi-Decidable).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Tractable Problem</span>
+<p><strong>Tractable Problem:</strong> Computations that can be completed in a reasonable time period. Its worst-case running time on input size <em>N</em> is <strong>logarithmic O(log N) or polynomial O(N<sup>k</sup>)</strong> (e.g., sorting, array search).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Intractable Problem</span>
+<p><strong>Intractable Problem:</strong> Computable problems that cannot realistically be completed except for trivial input sizes. Its running time grows <strong>exponentially O(2<sup>N</sup>) or factorially O(N!)</strong> (e.g., TSP, Towers of Hanoi).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Class P</span>
+<p><strong>Class P:</strong> The class of all decision problems solvable by a deterministic sequential algorithm in <strong>Polynomial Time O(n<sup>k</sup>)</strong> (efficiently solvable).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Class NP</span>
+<p><strong>Class NP:</strong> The class of decision problems whose candidate solutions can be <strong>verified</strong> by a deterministic algorithm in polynomial time, or solved by a non-deterministic machine in polynomial time.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">NP-Complete</span>
+<p><strong>NP-Complete:</strong> The hardest problems in Class NP. If any single NP-Complete problem is solved in polynomial time, every problem in NP is in P (proving P = NP).</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Countable Infinity (ℵ₀)</span>
+<p><strong>Countable Set (ℵ₀):</strong> A set with the cardinality of natural numbers. The set of all possible computer programs and algorithms is countably infinite (ℵ₀) because each program is a finite string.</p>
+</div>
+<div class="definition-card">
+<span class="def-badge">Uncountable Infinity (2^ℵ₀)</span>
+<p><strong>Uncountable Set (2<sup>ℵ₀</sup> = ƒ):</strong> The set of all possible decision problems / mathematical functions is uncountably infinite (continuum). Because 2<sup>ℵ₀</sup> &gt; ℵ₀, noncomputable problems must exist.</p>
+</div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- PILLAR 2: FORMULA & QUANTITATIVE CALCULATION CARDS           -->
+<!-- ============================================================ -->
+<div style="margin-bottom: 2rem;">
+<h3 style="color:var(--primary-color); margin-bottom: 0.75rem; font-size: 1.15rem; display:flex; align-items:center; gap:0.5rem;">
+<span>📐 Pillar 2: Formula &amp; Quantitative Calculation Reference Cards</span>
+</h3>
+<p style="font-size:0.88rem; color:var(--text-muted-color); margin-bottom:1rem;">Mathematical formulations, complexity equations, and concrete exam-style numerical evaluations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+<!-- Card 1: Cardinality Inequality -->
+<div class="formula-card" style="border-left: 4px solid #0d9488;">
+<span class="formula-badge" style="background:#0d9488;">1. Uncomputability Cardinality Inequality</span>
+<div class="formula-text" style="font-size:1.15rem; color:#0d9488; margin: 0.4rem 0;">|Programs| = ℵ₀ &lt; |Decision Problems| = 2<sup>ℵ₀</sup></div>
+<p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use / Verbalization:</strong> Proving why uncomputable functions exist. Computer programs are finite strings (countably infinite ℵ₀), whereas decision problems map to the power set of inputs (uncountably infinite 2<sup>ℵ₀</sup>).</p>
+<p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Plain English Meaning:</strong> There are infinitely more problems than there are programs, so some problems mathematically cannot have any solving program.</p>
+<div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+<strong>💡 Exam Problem:</strong> Why must uncomputable decision problems exist in computer science?<br/>
+<strong>Mathematical Proof:</strong> Cardinality of all valid programs is ℵ₀; cardinality of characteristic functions is 2<sup>ℵ₀</sup>. By Cantor's Theorem, ℵ₀ &lt; 2<sup>ℵ₀</sup>, guaranteeing an uncountably infinite deficit of programs.
+                            </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The set of all computer programs is countably infinite (aleph-null), which is strictly smaller than the uncountably infinite set of decision problems (two to the power of aleph-null). Hence, uncomputable problems must exist."</strong>
+</div>
+</div></div>
+<!-- Card 2: Big-O Growth Hierarchy -->
+<div class="formula-card" style="border-left: 4px solid #6366f1;">
+<span class="formula-badge" style="background:#6366f1;">2. Big-O Growth Rate &amp; Tractability Boundary</span>
+<div class="formula-text" style="font-size:1.15rem; color:#6366f1; margin: 0.4rem 0;">O(1) ⊂ O(log n) ⊂ O(n) ⊂ O(n log n) ⊂ O(n<sup>k</sup>) ≪ O(2<sup>n</sup>) ⊂ O(n!)</div>
+<p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use / Verbalization:</strong> Categorizing algorithms as Tractable (Polynomial O(n<sup>k</sup>)) vs Intractable (Exponential O(2<sup>n</sup>) / Factorial O(n!)).</p>
+<p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Plain English Meaning:</strong> As input size n increases, polynomial algorithms scale sustainably, whereas exponential/factorial algorithms explode into trillions of years.</p>
+<div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+<strong>💡 Exam Problem:</strong> Given n = 50 items, compare O(n²) vs O(2ⁿ) execution steps.<br/>
+<strong>Solution:</strong> O(n²) = 50² = <strong>2,500 operations</strong> (~2.5 µs). O(2ⁿ) = 2⁵⁰ = <strong>1.125 × 10¹⁵ operations</strong> (~35.7 years at 1 GHz).
+                            </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Constant time O(1) is fastest, followed by logarithmic O(log n), linear O(n), linearithmic O(n log n), polynomial O(n^k) (the tractable boundary), exponential O(2^n), and factorial O(n!) (intractable)."</strong>
+</div>
+</div></div>
+<!-- Card 3: Towers of Hanoi Recurrence -->
+<div class="formula-card" style="border-left: 4px solid #8b5cf6;">
+<span class="formula-badge" style="background:#8b5cf6;">3. Towers of Hanoi Step Recurrence</span>
+<div class="formula-text" style="font-size:1.15rem; color:#8b5cf6; margin: 0.4rem 0;">T(n) = 2T(n - 1) + 1 &amp;implies T(n) = 2<sup>n</sup> - 1</div>
+<p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use / Verbalization:</strong> Calculating the minimal move count to transfer n disks across 3 pegs. Demonstrates why recursive exponential problems are intractable.</p>
+<p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Plain English Meaning:</strong> Doubling the problem size roughly doubles the already exponential execution time.</p>
+<div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+<strong>💡 Exam Problem:</strong> How many moves are required to solve the classic 64-disk Towers of Hanoi?<br/>
+<strong>Solution:</strong> T(64) = 2⁶⁴ - 1 = <strong>18,446,744,073,709,551,615 moves</strong>. At 1 move per second, this takes ~584.9 Billion years.
+                            </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The number of moves for n disks equals twice the moves for n minus one disks plus one, solving to two to the n-th power minus one moves."</strong>
+</div>
+</div></div>
+<!-- Card 4: Permutations & TSP Complexity -->
+<div class="formula-card" style="border-left: 4px solid #0284c7;">
+<span class="formula-badge" style="background:#0284c7;">4. Exhaustive Search &amp; Permutations</span>
+<div class="formula-text" style="font-size:1.15rem; color:#0284c7; margin: 0.4rem 0;">P(n) = n!  |  Tours<sub>TSP</sub> = (n - 1)! / 2</div>
+<p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use / Verbalization:</strong> Calculating the search space for arranging n distinct elements or finding optimal symmetric Traveling Salesperson routes.</p>
+<p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Plain English Meaning:</strong> Brute-force checking all combinations grows factorially, exceeding modern compute limits even for modest n.</p>
+<div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+<strong>💡 Exam Problem:</strong> How many unique round-trip tours must be evaluated to brute-force solve a 10-city symmetric TSP?<br/>
+<strong>Solution:</strong> (10 - 1)! / 2 = 9! / 2 = 362,880 / 2 = <strong>181,440 distinct tours</strong>.
+                            </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Total permutations of n items equals n factorial. For the Traveling Salesperson Problem, distinct undirected round-trip tours equal n minus one factorial divided by two."</strong>
+</div>
+</div></div>
+<!-- Card 5: Straight-Line Code Invariance -->
+<div class="formula-card" style="border-left: 4px solid #d97706;">
+<span class="formula-badge" style="background:#d97706;">5. Straight-Line Code Halting Invariance</span>
+<div class="formula-text" style="font-size:1.15rem; color:#d97706; margin: 0.4rem 0;">Loops = 0 &amp;implies Depth<sub>AST</sub> ≤ k &amp;implies Halts = TRUE</div>
+<p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use / Verbalization:</strong> Identifying whether a given code fragment halts. Any program containing only assignments, basic arithmetic, branch conditionals (if/else), and return statements is mathematically guaranteed to halt.</p>
+<p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Plain English Meaning:</strong> Without loops or recursion, a program has no mechanism to execute infinitely and must terminate in O(1) time.</p>
+<div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+<strong>💡 Exam Problem:</strong> Does a 500-line Java method with 50 nested if-else blocks and zero loops halt on input x = -999?<br/>
+<strong>Solution:</strong> <strong>YES</strong>, guaranteed. Because control flow is acyclic, execution completes in finite steps along any branch.
+                            </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"If a program has zero loops and zero recursion, its syntax execution tree is finite, guaranteeing the program will always halt."</strong>
+</div>
+</div></div>
+<!-- Card 6: Tractable Polynomial Bound -->
+<div class="formula-card" style="border-left: 4px solid #ec4899;">
+<span class="formula-badge" style="background:#ec4899;">6. Tractable Polynomial Upper Bound</span>
+<div class="formula-text" style="font-size:1.15rem; color:#ec4899; margin: 0.4rem 0;">T(n) ≤ c · n<sup>k</sup>  (for constants c &gt; 0, k ≥ 0)</div>
+<p style="font-size:0.88rem; margin-bottom:0.5rem;"><strong>When to Use / Verbalization:</strong> Formal definition of Class P tractability. A computation is tractable if its time complexity is bounded by a polynomial in input size n.</p>
+<p style="font-size:0.85rem; color:var(--text-muted-color); margin-bottom:0.4rem;"><strong>Plain English Meaning:</strong> Even high polynomials like O(n⁴) are technically tractable, whereas exponential rates like O(2ⁿ) are intractable.</p>
+<div style="background:var(--bg-color); padding:0.6rem; border-radius:6px; font-size:0.84rem; border:1px solid var(--border-color);">
+<strong>💡 Exam Problem:</strong> Is matrix multiplication of two n × n matrices (O(n³)) tractable or intractable?<br/>
+<strong>Solution:</strong> <strong>Tractable</strong>, because degree k = 3 is a fixed polynomial constant (Class P).
+                            </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"An algorithm is tractable if its execution time T of n is upper-bounded by a constant c times n to the power k for non-negative constants c and k."</strong>
+</div>
+</div></div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES                     -->
+<!-- ============================================================ -->
+<div style="margin-bottom: 2rem;">
+<h3 style="color:var(--primary-color); margin-bottom: 0.75rem; font-size: 1.15rem; display:flex; align-items:center; gap:0.5rem;">
+<span>📊 Pillar 3: Comparative Analysis &amp; Distinction Matrices</span>
+</h3>
+<p style="font-size:0.88rem; color:var(--text-muted-color); margin-bottom:1rem;">Side-by-side matrices contrasting problem classes, computability levels, and complexity benchmarks.</p>
+<!-- Matrix 1: Decision vs Function vs Optimization -->
+<h4 style="margin:1rem 0 0.5rem; color:var(--accent-color);">Matrix 1: Decision Problems vs Function Evaluation vs Optimization Problems</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Problem Dimension</th>
+<th>Decision Problem</th>
+<th>Function Evaluation</th>
+<th>Optimization Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Output Format</strong></td>
+<td>Strictly Binary: <code>YES</code> or <code>NO</code> (True / False)</td>
+<td>Unique specific value (integer, string, object)</td>
+<td>Best value satisfying constraints (min / max)</td>
+</tr>
+<tr>
+<td><strong>Mathematical Goal</strong></td>
+<td>Determine language membership: <code>w ∈ L?</code></td>
+<td>Compute mapping: <code>f(x) → y</code></td>
+<td>Find <code>x*</code> maximizing/minimizing <code>cost(x)</code></td>
+</tr>
+<tr>
+<td><strong>Study Guide Example 1</strong></td>
+<td><em>"Is 613,511 a prime number?"</em> (NO)</td>
+<td><em>"What is the smallest prime factor of 613,511?"</em></td>
+<td><em>"Find largest prime factor dividing 613,511"</em></td>
+</tr>
+<tr>
+<td><strong>Study Guide Example 2</strong></td>
+<td><em>"Is my birthday on a Sunday next year?"</em> (YES/NO)</td>
+<td><em>"On what day of the week is my birthday next year?"</em></td>
+<td><em>"Find the year with maximum birthday Sundays"</em></td>
+</tr>
+<tr>
+<td><strong>Study Guide Example 3</strong></td>
+<td><em>"Will I pass the Automata final exam?"</em> (YES/NO)</td>
+<td><em>"What numerical grade will I receive?"</em></td>
+<td><em>"Find study schedule maximizing final grade"</em></td>
+</tr>
+<tr>
+<td><strong>Reducibility Role</strong></td>
+<td>Foundational: All problems reduce to decision problems</td>
+<td>Evaluated algorithmically via subroutines</td>
+<td>Converted to decision form via budget threshold <code>cost ≤ K</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: Computable vs Intractable vs Noncomputable -->
+<h4 style="margin:1.5rem 0 0.5rem; color:var(--accent-color);">Matrix 2: Computable (Tractable) vs Intractable vs Noncomputable (Undecidable)</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Tractable (Class P)</th>
+<th>Intractable (NP-Hard / Exp)</th>
+<th>Noncomputable / Undecidable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Algorithm Existence</strong></td>
+<td>Algorithm exists &amp; runs efficiently</td>
+<td>Algorithm exists, but exponential/factorial time</td>
+<td><strong>No algorithm exists</strong> (mathematically impossible)</td>
+</tr>
+<tr>
+<td><strong>Time Complexity</strong></td>
+<td>Logarithmic O(log n) or Polynomial O(n<sup>k</sup>)</td>
+<td>Exponential O(2<sup>n</sup>) or Factorial O(n!)</td>
+<td>Undefined (No Turing Machine can decide it)</td>
+</tr>
+<tr>
+<td><strong>Halting Guarantee</strong></td>
+<td>Always halts in reasonable real-time</td>
+<td>Halts theoretically, but takes centuries for large n</td>
+<td>May loop forever; no decider halts on all inputs</td>
+</tr>
+<tr>
+<td><strong>Study Guide Examples</strong></td>
+<td>
+                                        • Searching / sorting N elements<br/>
+                                        • Sum of positive integers of size N<br/>
+                                        • Max element in N × M array<br/>
+                                        • Character counting in Java files
+                                    </td>
+<td>
+                                        • Towers of Hanoi (2<sup>n</sup> - 1)<br/>
+                                        • Traveling Salesperson Problem (TSP)<br/>
+                                        • All permutations of N inputs (N!)<br/>
+                                        • Bin Packing &amp; Graph Coloring
+                                    </td>
+<td>
+                                        • The Halting Problem (A<sub>TM</sub>)<br/>
+                                        • Post Correspondence Problem (PCP)<br/>
+                                        • Listing all integer-returning subroutines<br/>
+                                        • General Program Equivalence (EQ<sub>TM</sub>)
+                                    </td>
+</tr>
+<tr>
+<td><strong>Practical Solvability</strong></td>
+<td>Solvable for massive datasets (millions of inputs)</td>
+<td>Solvable only for small toy inputs (n ≤ 25)</td>
+<td><strong>Unsolvable for any general computer</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: Complexity & Decidability Class Hierarchy -->
+<h4 style="margin:1.5rem 0 0.5rem; color:var(--accent-color);">Matrix 3: Computational Complexity &amp; Decidability Hierarchy</h4>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Complexity Class</th>
+<th>Deterministic Time / Machine</th>
+<th>Core Theoretical Characterization</th>
+<th>Canonical Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Class P</strong></td>
+<td>Deterministic Poly Time O(n<sup>k</sup>)</td>
+<td>Tractable, efficiently solvable on sequential hardware</td>
+<td>Shortest Path (Dijkstra), Sorting, 2-SAT</td>
+</tr>
+<tr>
+<td><strong>Class NP</strong></td>
+<td>Non-deterministic Poly Time NTIME(n<sup>k</sup>)</td>
+<td>Verifiable in polynomial time given a certificate</td>
+<td>3-SAT, Traveling Salesperson, Hamiltonian Cycle</td>
+</tr>
+<tr>
+<td><strong>NP-Complete</strong></td>
+<td>Hardest problems in Class NP</td>
+<td>Every problem in NP reduces to it in polynomial time</td>
+<td>Boolean Satisfiability (SAT / Cook-Levin Theorem)</td>
+</tr>
+<tr>
+<td><strong>Decidable (Class R)</strong></td>
+<td>Halts on ALL inputs with Accept/Reject</td>
+<td>Algorithm exists that guarantees finite halting on every instance</td>
+<td>A<sub>DFA</sub>, E<sub>DFA</sub>, EQ<sub>DFA</sub>, A<sub>CFG</sub>, E<sub>CFG</sub></td>
+</tr>
+<tr>
+<td><strong>Turing-Recognizable (RE)</strong></td>
+<td>Halts on YES; may loop on NO</td>
+<td>Partially decidable / semi-decidable by a Turing Machine</td>
+<td>A<sub>TM</sub> (The Halting Problem language)</td>
+</tr>
+<tr>
+<td><strong>Undecidable (Non-RE)</strong></td>
+<td>No recognizing Turing Machine exists</td>
+<td>Cannot be recognized or decided; outside RE boundary</td>
+<td>Complement of Halting Problem (A<sub>TM</sub>), EQ<sub>TM</sub></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES                   -->
+<!-- ============================================================ -->
+<div style="margin-bottom: 2rem;">
+<h3 style="color:var(--primary-color); margin-bottom: 0.75rem; font-size: 1.15rem; display:flex; align-items:center; gap:0.5rem;">
+<span>⚠️ Pillar 4: Common Exam Pitfalls, Fallacies &amp; Trap Alerts</span>
+</h3>
+<p style="font-size:0.88rem; color:var(--text-muted-color); margin-bottom:1rem;">High-frequency student errors, counterintuitive theorems, and exam trick questions.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+<div class="definition-card" style="border-left: 4px solid #ef4444;">
+<span class="def-badge" style="background:#ef4444;">⚠️ The "Alien Life" Paradox Trap</span>
+<p><strong>Fallacy:</strong> <em>"Does extraterrestrial life exist?" is noncomputable because humanity does not know the answer.</em><br/>
+<strong>Truth:</strong> <strong>It IS computable!</strong> The question has a fixed constant answer. Either the 1-line program <code>return YES;</code> or <code>return NO;</code> is correct. A problem is computable if a solving program <em>exists</em>, regardless of whether humans currently know which program it is.</p>
+</div>
+<div class="definition-card" style="border-left: 4px solid #ef4444;">
+<span class="def-badge" style="background:#ef4444;">⚠️ Straight-Line Code Halting Theorem</span>
+<p><strong>Fallacy:</strong> <em>All programs might enter infinite loops and have halting uncertainty.</em><br/>
+<strong>Truth:</strong> <strong>Programs with NO loops ALWAYS halt!</strong> Any program composed exclusively of assignment statements, conditional <code>if/else</code> branches, and <code>return</code> statements has an acyclic execution graph and must terminate in O(1) time.</p>
+</div>
+<div class="definition-card" style="border-left: 4px solid #ef4444;">
+<span class="def-badge" style="background:#ef4444;">⚠️ Intractable ≠ Noncomputable</span>
+<p><strong>Fallacy:</strong> <em>Intractable problems cannot be solved by computers at all.</em><br/>
+<strong>Truth:</strong> <strong>Intractable problems ARE computable!</strong> Algorithms exist for TSP and Towers of Hanoi, but their exponential running time makes them impractical for large inputs. In contrast, <em>Noncomputable</em> problems (like the Halting Problem) have <strong>zero</strong> possible algorithms.</p>
+</div>
+<div class="definition-card" style="border-left: 4px solid #ef4444;">
+<span class="def-badge" style="background:#ef4444;">⚠️ Specific Halting ≠ Halting Problem Solution</span>
+<p><strong>Fallacy:</strong> <em>Tracing a loop for specific inputs (e.g. x = 8 or x = 9) solves the Halting Problem.</em><br/>
+<strong>Truth:</strong> Tracing individual inputs only determines behavior for that specific execution trace. Solving the Halting Problem requires a <strong>single general algorithm</strong> that decides halting for <strong>ALL</strong> possible programs on <strong>ALL</strong> possible inputs, which Turing proved impossible.</p>
+</div>
+<div class="definition-card" style="border-left: 4px solid #ef4444;">
+<span class="def-badge" style="background:#ef4444;">⚠️ P vs NP Containment Direction</span>
+<p><strong>Fallacy:</strong> <em>P and NP are mutually exclusive complexity classes.</em><br/>
+<strong>Truth:</strong> <strong>P ⊆ NP</strong> is mathematically proven! Every problem solvable in polynomial time is also verifiable in polynomial time. The open question is whether <strong>P = NP</strong> (whether efficient verification implies efficient solvability).</p>
+</div>
+<div class="definition-card" style="border-left: 4px solid #ef4444;">
+<span class="def-badge" style="background:#ef4444;">⚠️ Countability vs Uncountability Gap</span>
+<p><strong>Fallacy:</strong> <em>Because there are infinitely many programs, we can write a program for every possible function.</em><br/>
+<strong>Truth:</strong> The infinity of programs is <strong>Countable (ℵ₀)</strong>, while the infinity of functions/problems is <strong>Uncountable (2<sup>ℵ₀</sup>)</strong>. Cantor's diagonalization proves that uncomputable functions vastly outnumber computable ones.</p>
+</div>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- INTERACTIVE SIMULATORS & ACADEMIC CALCULATORS                -->
+<!-- ============================================================ -->
+<div style="margin-top: 2rem;">
+<h3 style="color:var(--primary-color); margin-bottom: 0.75rem; font-size: 1.15rem; display:flex; align-items:center; gap:0.5rem;">
+<span>🧮 Interactive Academic Calculators &amp; Simulation Engines</span>
+</h3>
+<p style="font-size:0.88rem; color:var(--text-muted-color); margin-bottom:1rem;">Live execution time projection and decision problem decidability classifiers.</p>
+</div>
+<!-- Interactive Tool 1: Computational Complexity & Big-O Step Simulator -->
+<div class="calc-card" style="margin-top:1rem;">
+<div class="calc-title">🧮 Tool 1: Computational Complexity &amp; Growth Rate Step Calculator</div>
+<div class="calc-desc">Calculate the exact number of operations/steps required by algorithms across major complexity classes (P vs NP, Logarithmic to Exponential).</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="comp-n">Input Size (n):</label>
+<input class="calc-input" id="comp-n" max="1000" min="1" oninput="calculateComplexity()" step="1" type="number" value="10"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="comp-speed">Processor Speed (Ops / Sec):</label>
+<input class="calc-input" id="comp-speed" min="1000" oninput="calculateComplexity()" step="100000" type="number" value="1000000"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Operation Steps &amp; Execution Time:</span>
+<span class="calc-result-val" id="comp-res-val">O(n²) = 100 steps (0.10 ms)</span>
+</div>
+<div class="calc-math-steps" id="comp-math-steps">
+<strong>Complexity Breakdown for Input n = 10:</strong><br/>
+<div class="step-line">• <strong>O(log n) [Logarithmic]:</strong> 3.32 steps | ~0.000 ms</div>
+<div class="step-line">• <strong>O(n) [Linear]:</strong> 10 steps | ~0.010 ms</div>
+<div class="step-line">• <strong>O(n log n) [Linearithmic]:</strong> 33.22 steps | ~0.033 ms</div>
+<div class="step-line">• <strong>O(n²) [Polynomial - Class P]:</strong> 100 steps | ~0.100 ms</div>
+<div class="step-line">• <strong>O(2ⁿ) [Exponential - Intractable]:</strong> 1,024 steps | ~1.024 ms</div>
+<div class="step-line">• <strong>O(n!) [Factorial - Exhaustive Search]:</strong> 3,628,800 steps | ~3.63 sec</div>
+</div>
+</div>
+</div>
+<!-- Interactive Tool 2: Decidability & Halting Problem Classifier -->
+<div class="calc-card" style="margin-top:1.5rem;">
+<div class="calc-title">🧮 Tool 2: Decision Problem Decidability &amp; Reduction Classifier</div>
+<div class="calc-desc">Explore problem classification, decidability properties, and reduction paths across Turing machines.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="prob-type">Select Problem / Language:</label>
+<select class="calc-input" id="prob-type" onchange="classifyProblem()">
+<option value="dfa_acceptance">A_DFA (DFA Acceptance - Does M accept w?)</option>
+<option value="dfa_emptiness">E_DFA (DFA Emptiness - Is L(M) empty?)</option>
+<option value="dfa_equivalence">EQ_DFA (DFA Equivalence - Is L(A) = L(B)?)</option>
+<option value="cfg_acceptance">A_CFG (CFG Acceptance - Does G generate w?)</option>
+<option value="cfg_emptiness">E_CFG (CFG Emptiness - Is L(G) empty?)</option>
+<option value="atm_halting">A_TM (Turing Machine Acceptance / Halting Problem)</option>
+<option value="tm_emptiness">E_TM (Turing Machine Emptiness)</option>
+<option value="tm_equivalence">EQ_TM (Turing Machine Equivalence)</option>
+<option value="pcp">Post Correspondence Problem (PCP)</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Decidability &amp; Complexity Class:</span>
+<span class="calc-result-val" id="prob-res-val">Decidable (Solvable Algorithmically)</span>
+</div>
+<div class="calc-math-steps" id="prob-math-steps">
+<strong>Theoretical Classification:</strong><br/>
+<div class="step-line">• <strong>Status:</strong> <span style="color:#16a34a; font-weight:700;">Decidable</span></div>
+<div class="step-line">• <strong>Algorithm / Proof:</strong> Simulate DFA M on input w. Since DFA transitions always halt after |w| steps, the decision procedure always halts and decides correctly.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
         const quizData = [
     {
         "q": "Which of the following is listed as a major reason useful calculations cannot be done?",
@@ -1314,6 +1702,5 @@
         }
     
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

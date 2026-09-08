@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,512 +18,877 @@
             }
         })();
     </script>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
- <title>Network Configuration in Windows OS | Master Reviewer & Quiz</title>
- <link rel="stylesheet" href="../../../global.css">
- <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Network Configuration in Windows OS | Master Reviewer &amp; Quiz</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
- <header class="app-header">
- <h1>Operating System Configuration</h1>
- <p>Network Configuration in Windows OS — TCP/IP, DHCP, Subnetting, CLI Diagnostics & 90-Question Mastery Quiz</p>
- </header>
-
- <nav class="sticky-nav">
- <div class="nav-left">
- <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
- <span class="nav-title">Network Configuration in Windows OS</span>
- </div>
- <div class="nav-tabs">
- <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
- <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
- <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
- </div>
- <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
- </nav>
-
- <div class="container">
-
- <!-- TAB 1: REVIEWER TEXT -->
- <div id="reviewer" class="tab-content active">
- <div class="card">
- <h2 id="sec-1-outcomes">1. Learning Outcomes</h2>
- <p>At the end of this lesson, students should be able to:</p>
+<header class="app-header">
+<h1>Operating System Configuration</h1>
+<p>Network Configuration in Windows OS — TCP/IP, DHCP, Subnetting, CLI Diagnostics &amp; 90-Question Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Network Configuration in Windows OS</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<div class="card">
+<h2 id="sec-1-outcomes">1. Learning Outcomes</h2>
+<p>At the end of this lesson, students should be able to:</p>
+<ul>
+<li>✔ Explain network configuration.</li>
+<li>✔ Identify basic networking components.</li>
+<li>✔ Configure IPv4 settings in Windows.</li>
+<li>✔ Differentiate Static and Dynamic IP addresses.</li>
+<li>✔ Use Windows networking tools.</li>
+<li>✔ Perform basic network troubleshooting.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-2-what-is-netconfig">2. What is Network Configuration?</h2>
+<div class="definition-card">
+<span class="def-badge">Definition</span>
+<p><strong>Network Configuration</strong> is the process of setting up a computer's network settings so it can communicate with other devices and access the Internet.</p>
+</div>
+<h3>It Includes:</h3>
+<ul>
+<li>IP Address</li>
+<li>Subnet Mask</li>
+<li>Default Gateway</li>
+<li>DNS Server</li>
+<li>Network Adapter Settings</li>
+</ul>
+<h3>Why is it Important?</h3>
+<ul>
+<li>✔ Internet Access</li>
+<li>✔ File Sharing</li>
+<li>✔ Printer Sharing</li>
+<li>✔ Remote Access</li>
+<li>✔ Network Security</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-3-data-flow">3. Basic Network Connection &amp; Data Flow</h2>
+<p><strong>Connection Chain:</strong> PC (Client) → Router (Gateway) → Internet</p>
+<ul>
+<li><strong>PC (Client):</strong> The PC generates data and sends it to the router.</li>
+<li><strong>Router (Gateway):</strong> The router receives the data, processes it, and forwards it to the Internet.</li>
+<li><strong>Internet:</strong> The data reaches the Internet and is delivered to the destination.</li>
+<li><strong>Data Flow:</strong> PC → Router → Internet</li>
+</ul>
+<h3>Network Topology (Office / Small Business Network Example)</h3>
+<ul>
+<li><strong>Topology Type:</strong> Star Topology (All devices connect to a central device: Switch / Router / AP)</li>
+<li><strong>Router Functions:</strong> Routing / NAT, Firewall / Security, Acts as Default Gateway, DHCP Server (192.168.1.1)</li>
+<li><strong>IP Addressing Scheme:</strong>
+<ul>
+<li>Network Address: 192.168.1.0</li>
+<li>Subnet Mask: 255.255.255.0</li>
+<li>Default Gateway: 192.168.1.1 (Router)</li>
+<li>DHCP Range: 192.168.1.100 192.168.1.200</li>
+<li>DNS Server: 8.8.8.8 (Google DNS) | 1.1.1.1 (Cloudflare DNS)</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-4-components">4. Basic Network Components</h2>
+<ul>
+<li><strong>IP Address:</strong> A unique address assigned to every device. <em>Example:</em> 192.168.1.100</li>
+<li><strong>Subnet Mask:</strong> Determines the network and host portions. <em>Example:</em> 255.255.255.0</li>
+<li><strong>Default Gateway:</strong> Allows communication outside the local network. <em>Example:</em> 192.168.1.1</li>
+<li><strong>DNS Server:</strong> Translates website names into IP addresses.
  <ul>
- <li>✔ Explain network configuration.</li>
- <li>✔ Identify basic networking components.</li>
- <li>✔ Configure IPv4 settings in Windows.</li>
- <li>✔ Differentiate Static and Dynamic IP addresses.</li>
- <li>✔ Use Windows networking tools.</li>
- <li>✔ Perform basic network troubleshooting.</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-2-what-is-netconfig">2. What is Network Configuration?</h2>
- <div class="definition-card">
- <span class="def-badge">Definition</span>
- <p><strong>Network Configuration</strong> is the process of setting up a computer's network settings so it can communicate with other devices and access the Internet.</p>
- </div>
-
- <h3>It Includes:</h3>
- <ul>
- <li>IP Address</li>
- <li>Subnet Mask</li>
- <li>Default Gateway</li>
- <li>DNS Server</li>
- <li>Network Adapter Settings</li>
- </ul>
-
- <h3>Why is it Important?</h3>
- <ul>
- <li>✔ Internet Access</li>
- <li>✔ File Sharing</li>
- <li>✔ Printer Sharing</li>
- <li>✔ Remote Access</li>
- <li>✔ Network Security</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-3-data-flow">3. Basic Network Connection & Data Flow</h2>
- <p><strong>Connection Chain:</strong> PC (Client) &rarr; Router (Gateway) &rarr; Internet</p>
- <ul>
- <li><strong>PC (Client):</strong> The PC generates data and sends it to the router.</li>
- <li><strong>Router (Gateway):</strong> The router receives the data, processes it, and forwards it to the Internet.</li>
- <li><strong>Internet:</strong> The data reaches the Internet and is delivered to the destination.</li>
- <li><strong>Data Flow:</strong> PC &rarr; Router &rarr; Internet</li>
- </ul>
-
- <h3>Network Topology (Office / Small Business Network Example)</h3>
- <ul>
- <li><strong>Topology Type:</strong> Star Topology (All devices connect to a central device: Switch / Router / AP)</li>
- <li><strong>Router Functions:</strong> Routing / NAT, Firewall / Security, Acts as Default Gateway, DHCP Server (192.168.1.1)</li>
- <li><strong>IP Addressing Scheme:</strong>
- <ul>
- <li>Network Address: 192.168.1.0</li>
- <li>Subnet Mask: 255.255.255.0</li>
- <li>Default Gateway: 192.168.1.1 (Router)</li>
- <li>DHCP Range: 192.168.1.100 192.168.1.200</li>
- <li>DNS Server: 8.8.8.8 (Google DNS) | 1.1.1.1 (Cloudflare DNS)</li>
- </ul>
+<li>Google DNS Example: 8.8.8.8</li>
+<li>Cloudflare DNS Example: 1.1.1.1</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-5-ip-dhcp">5. Static vs. Dynamic IP Address &amp; DHCP</h2>
+<h3>Static vs Dynamic IP Address</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Static IP</th>
+<th>Dynamic IP (DHCP)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Configuration</strong></td><td>Manual Configuration</td><td>Automatic Configuration</td></tr>
+<tr><td><strong>Address Type</strong></td><td>Permanent Address</td><td>Temporary Address</td></tr>
+<tr><td><strong>Used by</strong></td><td>Used by Servers</td><td>Used by Home PCs</td></tr>
+<tr><td><strong>Management</strong></td><td>Less Flexible</td><td>Easy to Manage</td></tr>
+</tbody>
+</table>
+</div>
+<h3>DHCP (Dynamic Host Configuration Protocol)</h3>
+<p>Automatically assigns:</p>
+<ul>
+<li>IP Address</li>
+<li>Subnet Mask</li>
+<li>Gateway</li>
+<li>DNS</li>
+</ul>
+<p><em>Interaction Flow:</em> DHCP Client requests "I need an IP Address" → Router / DHCP Server assigns "Here's your IP Address 192.168.1.100"</p>
+<h3>Configuration Notes</h3>
+<ul>
+<li><strong>Dynamic IP (DHCP):</strong> Automatically assigns network settings from a DHCP server. Recommended for most home and office users.</li>
+<li><strong>Static IP:</strong> Manually configured and commonly used for servers, printers, and network devices that require a fixed address.</li>
+<li><strong>DNS Server:</strong> Converts domain names (such as www.google.com) into IP addresses so users can access websites.</li>
+<li><strong>Static IP Warning:</strong> When configuring a static IP address, always ensure it belongs to the correct network and does not duplicate another device's IP address to avoid address conflicts.</li>
+</ul>
+</div>
+<div class="card">
+<h2 id="sec-6-connection-types">6. Types of Network Connections (Wired vs Wireless)</h2>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Feature / Aspect</th>
+<th>Ethernet (Wired)</th>
+<th>Wi-Fi (Wireless)</th>
+</tr>
+</thead>
+<tbody>
+<tr><td><strong>Media / Transmission</strong></td><td>🔌 Uses an Ethernet (RJ-45) cable</td><td>📶 Uses radio waves</td></tr>
+<tr><td><strong>Speed &amp; Transfer</strong></td><td>Faster data transfer</td><td>Convenient mobility</td></tr>
+<tr><td><strong>Stability</strong></td><td>More stable connection</td><td>Easy to connect multiple devices</td></tr>
+<tr><td><strong>Latency</strong></td><td>Lower latency</td><td>Signal strength depends on distance</td></tr>
+<tr><td><strong>Interference</strong></td><td>Less interference</td><td>Can be affected by walls and other devices</td></tr>
+<tr><td><strong>Ideal Use Cases</strong></td><td>Ideal for gaming, servers, and offices</td><td>Ideal for laptops, smartphones, and tablets</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card">
+<h2 id="sec-7-commands-ipconfig">7. Viewing Network Configuration &amp; Commands</h2>
+<h3>Command Prompt Tools</h3>
+<ul>
+<li>
+<strong><code>ipconfig</code></strong>
+<br/>Displays: IP Address, Gateway, Subnet Mask
  </li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-4-components">4. Basic Network Components</h2>
- <ul>
- <li><strong>IP Address:</strong> A unique address assigned to every device. <em>Example:</em> 192.168.1.100</li>
- <li><strong>Subnet Mask:</strong> Determines the network and host portions. <em>Example:</em> 255.255.255.0</li>
- <li><strong>Default Gateway:</strong> Allows communication outside the local network. <em>Example:</em> 192.168.1.1</li>
- <li><strong>DNS Server:</strong> Translates website names into IP addresses.
- <ul>
- <li>Google DNS Example: 8.8.8.8</li>
- <li>Cloudflare DNS Example: 1.1.1.1</li>
- </ul>
+<li>
+<strong><code>ipconfig /all</code></strong>
+<br/>Displays: MAC Address, DNS, DHCP, Host Name
  </li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-5-ip-dhcp">5. Static vs. Dynamic IP Address & DHCP</h2>
-
- <h3>Static vs Dynamic IP Address</h3>
- <table>
- <thead>
- <tr>
- <th>Feature</th>
- <th>Static IP</th>
- <th>Dynamic IP (DHCP)</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Configuration</strong></td><td>Manual Configuration</td><td>Automatic Configuration</td></tr>
- <tr><td><strong>Address Type</strong></td><td>Permanent Address</td><td>Temporary Address</td></tr>
- <tr><td><strong>Used by</strong></td><td>Used by Servers</td><td>Used by Home PCs</td></tr>
- <tr><td><strong>Management</strong></td><td>Less Flexible</td><td>Easy to Manage</td></tr>
- </tbody>
- </table>
-
- <h3>DHCP (Dynamic Host Configuration Protocol)</h3>
- <p>Automatically assigns:</p>
+</ul>
+<h3>Demonstration Steps</h3>
+<ol>
+<li>Press Windows + R.</li>
+<li>Type <code>cmd</code> and press Enter.</li>
+<li>In Command Prompt, type <code>ipconfig</code>.</li>
+<li>Point out the IPv4 Address, Subnet Mask, and Default Gateway in the output.</li>
+<li>Explain how these values help determine whether a computer is properly connected to the network.</li>
+</ol>
+</div>
+<div class="card">
+<h2 id="sec-8-ping-diagnostics">8. Network Diagnostic Commands: Ping</h2>
+<p>The <code>ping</code> command is one of the first tools used by IT professionals to verify network connectivity and troubleshoot communication problems.</p>
+<div class="code-box">ping 8.8.8.8<br/>ping google.com</div>
+<h3>Ping Output Breakdown</h3>
+<ul>
+<li><strong>Reply from:</strong> The destination device responded successfully.</li>
+<li><strong>bytes=32:</strong> Size of each packet sent.</li>
+<li><strong>time=18ms:</strong> Round-trip time; lower values indicate a faster connection.</li>
+<li><strong>TTL (Time To Live):</strong> Limits how many network devices (hops) a packet can pass through before being discarded.</li>
+<li><strong>Packets Sent/Received/Lost:</strong> Indicates whether the connection is reliable. A 0% loss means all packets reached the destination successfully.</li>
+</ul>
+<h3>Common Ping Results</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Result</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>✅ <strong>Reply from...</strong></td><td>Connection is successful.</td></tr>
+<tr><td>❌ <strong>Request timed out</strong></td><td>The destination did not respond.</td></tr>
+<tr><td>❌ <strong>Destination host unreachable</strong></td><td>The computer cannot reach the target network or device.</td></tr>
+<tr><td>❌ <strong>Ping request could not find host</strong></td><td>DNS could not resolve the hostname.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="card">
+<h2 id="sec-9-configure-ipv4">9. Configuring IPv4 Settings</h2>
+<h3>Method 1: Using Windows Settings (Windows 11)</h3>
+<ol>
+<li>Open Settings.</li>
+<li>Select Network &amp; Internet.</li>
+<li>Click Ethernet or Wi-Fi.</li>
+<li>Select your active network connection.</li>
+<li>Under IP Assignment, click Edit.</li>
+<li>Choose Manual and enable IPv4.</li>
+<li>Enter the network information, then click Save.</li>
+</ol>
+<h3>Setting Example Values</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr><th>Setting</th><th>Example Value</th></tr>
+</thead>
+<tbody>
+<tr><td>IP Address</td><td>192.168.1.100</td></tr>
+<tr><td>Subnet Mask</td><td>255.255.255.0</td></tr>
+<tr><td>Default Gateway</td><td>192.168.1.1</td></tr>
+<tr><td>Preferred DNS</td><td>8.8.8.8</td></tr>
+<tr><td>Alternate DNS</td><td>1.1.1.1</td></tr>
+</tbody>
+</table>
+</div>
+<h3>Legacy Method (Control Panel)</h3>
+<ol>
+<li>Open Control Panel.</li>
+<li>Go to Network and Sharing Center.</li>
+<li>Click Change adapter settings.</li>
+<li>Right-click the active network adapter and select Properties.</li>
+<li>Double-click Internet Protocol Version 4 (TCP/IPv4).</li>
+<li>Select either:
  <ul>
- <li>IP Address</li>
- <li>Subnet Mask</li>
- <li>Gateway</li>
- <li>DNS</li>
- </ul>
- <p><em>Interaction Flow:</em> DHCP Client requests "I need an IP Address" &rarr; Router / DHCP Server assigns "Here's your IP Address 192.168.1.100"</p>
-
- <h3>Configuration Notes</h3>
- <ul>
- <li><strong>Dynamic IP (DHCP):</strong> Automatically assigns network settings from a DHCP server. Recommended for most home and office users.</li>
- <li><strong>Static IP:</strong> Manually configured and commonly used for servers, printers, and network devices that require a fixed address.</li>
- <li><strong>DNS Server:</strong> Converts domain names (such as www.google.com) into IP addresses so users can access websites.</li>
- <li><strong>Static IP Warning:</strong> When configuring a static IP address, always ensure it belongs to the correct network and does not duplicate another device's IP address to avoid address conflicts.</li>
- </ul>
- </div>
-
- <div class="card">
- <h2 id="sec-6-connection-types">6. Types of Network Connections (Wired vs Wireless)</h2>
-
- <table>
- <thead>
- <tr>
- <th>Feature / Aspect</th>
- <th>Ethernet (Wired)</th>
- <th>Wi-Fi (Wireless)</th>
- </tr>
- </thead>
- <tbody>
- <tr><td><strong>Media / Transmission</strong></td><td>🔌 Uses an Ethernet (RJ-45) cable</td><td>📶 Uses radio waves</td></tr>
- <tr><td><strong>Speed & Transfer</strong></td><td>Faster data transfer</td><td>Convenient mobility</td></tr>
- <tr><td><strong>Stability</strong></td><td>More stable connection</td><td>Easy to connect multiple devices</td></tr>
- <tr><td><strong>Latency</strong></td><td>Lower latency</td><td>Signal strength depends on distance</td></tr>
- <tr><td><strong>Interference</strong></td><td>Less interference</td><td>Can be affected by walls and other devices</td></tr>
- <tr><td><strong>Ideal Use Cases</strong></td><td>Ideal for gaming, servers, and offices</td><td>Ideal for laptops, smartphones, and tablets</td></tr>
- </tbody>
- </table>
- </div>
-
- <div class="card">
- <h2 id="sec-7-commands-ipconfig">7. Viewing Network Configuration & Commands</h2>
- 
- <h3>Command Prompt Tools</h3>
- <ul>
- <li>
- <strong><code>ipconfig</code></strong>
- <br>Displays: IP Address, Gateway, Subnet Mask
- </li>
- <li>
- <strong><code>ipconfig /all</code></strong>
- <br>Displays: MAC Address, DNS, DHCP, Host Name
- </li>
- </ul>
-
- <h3>Demonstration Steps</h3>
- <ol>
- <li>Press Windows + R.</li>
- <li>Type <code>cmd</code> and press Enter.</li>
- <li>In Command Prompt, type <code>ipconfig</code>.</li>
- <li>Point out the IPv4 Address, Subnet Mask, and Default Gateway in the output.</li>
- <li>Explain how these values help determine whether a computer is properly connected to the network.</li>
- </ol>
- </div>
-
- <div class="card">
- <h2 id="sec-8-ping-diagnostics">8. Network Diagnostic Commands: Ping</h2>
- <p>The <code>ping</code> command is one of the first tools used by IT professionals to verify network connectivity and troubleshoot communication problems.</p>
- <div class="code-box">ping 8.8.8.8<br>ping google.com</div>
-
- <h3>Ping Output Breakdown</h3>
- <ul>
- <li><strong>Reply from:</strong> The destination device responded successfully.</li>
- <li><strong>bytes=32:</strong> Size of each packet sent.</li>
- <li><strong>time=18ms:</strong> Round-trip time; lower values indicate a faster connection.</li>
- <li><strong>TTL (Time To Live):</strong> Limits how many network devices (hops) a packet can pass through before being discarded.</li>
- <li><strong>Packets Sent/Received/Lost:</strong> Indicates whether the connection is reliable. A 0% loss means all packets reached the destination successfully.</li>
- </ul>
-
- <h3>Common Ping Results</h3>
- <table>
- <thead>
- <tr>
- <th>Result</th>
- <th>Meaning</th>
- </tr>
- </thead>
- <tbody>
- <tr><td>✅ <strong>Reply from...</strong></td><td>Connection is successful.</td></tr>
- <tr><td>❌ <strong>Request timed out</strong></td><td>The destination did not respond.</td></tr>
- <tr><td>❌ <strong>Destination host unreachable</strong></td><td>The computer cannot reach the target network or device.</td></tr>
- <tr><td>❌ <strong>Ping request could not find host</strong></td><td>DNS could not resolve the hostname.</td></tr>
- </tbody>
- </table>
- </div>
-
- <div class="card">
- <h2 id="sec-9-configure-ipv4">9. Configuring IPv4 Settings</h2>
-
- <h3>Method 1: Using Windows Settings (Windows 11)</h3>
- <ol>
- <li>Open Settings.</li>
- <li>Select Network & Internet.</li>
- <li>Click Ethernet or Wi-Fi.</li>
- <li>Select your active network connection.</li>
- <li>Under IP Assignment, click Edit.</li>
- <li>Choose Manual and enable IPv4.</li>
- <li>Enter the network information, then click Save.</li>
- </ol>
-
- <h3>Setting Example Values</h3>
- <table>
- <thead>
- <tr><th>Setting</th><th>Example Value</th></tr>
- </thead>
- <tbody>
- <tr><td>IP Address</td><td>192.168.1.100</td></tr>
- <tr><td>Subnet Mask</td><td>255.255.255.0</td></tr>
- <tr><td>Default Gateway</td><td>192.168.1.1</td></tr>
- <tr><td>Preferred DNS</td><td>8.8.8.8</td></tr>
- <tr><td>Alternate DNS</td><td>1.1.1.1</td></tr>
- </tbody>
- </table>
-
- <h3>Legacy Method (Control Panel)</h3>
- <ol>
- <li>Open Control Panel.</li>
- <li>Go to Network and Sharing Center.</li>
- <li>Click Change adapter settings.</li>
- <li>Right-click the active network adapter and select Properties.</li>
- <li>Double-click Internet Protocol Version 4 (TCP/IPv4).</li>
- <li>Select either:
- <ul>
- <li>1. Obtain an IP address automatically (DHCP), or</li>
- <li>2. Use the following IP address (Static IP).</li>
- </ul>
- </li>
- <li>Enter the required IP configuration and click OK.</li>
- </ol>
- </div>
-
- <div class="card">
- <h2 id="sec-10-troubleshooting">10. Common Network Problems & Troubleshooting</h2>
- 
- <h3>Common Network Problems</h3>
- <ul>
- <li>❌ No Internet</li>
- <li>❌ Wrong IP Address</li>
- <li>❌ Faulty Cable</li>
- <li>❌ Disabled Adapter</li>
- <li>❌ Incorrect DNS</li>
- <li>❌ Firewall Blocking Connection</li>
- </ul>
-
- <h3>Network Warning Icons</h3>
- <p>A computer displaying a network warning icon indicates that there is a problem with the network connection. The warning icon may appear as a <strong>yellow triangle with an exclamation mark</strong>, a <strong>globe icon</strong>, or a <strong>red X</strong> on the network symbol, depending on the Windows version.</p>
-
- <h3>Problem and Possible Cause Matrix</h3>
- <table>
- <thead>
- <tr>
- <th>Problem</th>
- <th>Possible Cause</th>
- </tr>
- </thead>
- <tbody>
- <tr><td>❌ <strong>No Internet Connection</strong></td><td>Router or modem is offline, ISP outage</td></tr>
- <tr><td>❌ <strong>Limited Connectivity</strong></td><td>Incorrect IP configuration or DHCP issue</td></tr>
- <tr><td>❌ <strong>IP Address Conflict</strong></td><td>Two devices are using the same IP address</td></tr>
- <tr><td>❌ <strong>Disabled Network Adapter</strong></td><td>Adapter is disabled in Windows</td></tr>
- <tr><td>❌ <strong>Network Cable Unplugged</strong></td><td>Ethernet cable is loose or disconnected</td></tr>
- <tr><td>❌ <strong>Incorrect DNS Settings</strong></td><td>Unable to resolve website names</td></tr>
- <tr><td>❌ <strong>Firewall Blocking Access</strong></td><td>Security settings prevent communication</td></tr>
- <tr><td>❌ <strong>Outdated Network Driver</strong></td><td>Driver is missing, corrupted, or incompatible</td></tr>
- </tbody>
- </table>
- </div>
- </div>
-
- <!-- TAB 2: INTERACTIVE QUIZ -->
- <div id="quiz" class="tab-content">
- <div class="quiz-header">
- <div class="score-display" id="score-display">Score: 0 / 90</div>
- <div class="btn-group">
- <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
- <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
- </div>
- </div>
-
- <div id="quiz-container">
- <!-- Quiz questions dynamically rendered here -->
- </div>
- </div>
-
-
- <!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
- <div id="formulas" class="tab-content">
- <div class="card">
- <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem; gap:0.5rem;">
- <h2 style="margin:0;">Quick Reference: Windows Network Configuration & Diagnostic Commands</h2>
- <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
- </div>
-
- <!-- 1. Windows Network Commands Reference Matrix -->
- <h3 style="color:var(--primary-color); margin-top:1rem;">1. Windows CLI Diagnostic & Configuration Command Matrix</h3>
- <table style="width:100%; border-collapse:collapse; margin-top:0.5rem;">
- <thead>
- <tr style="background:var(--primary-color); color:white;">
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Command Syntax</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Action & Purpose</th>
- <th style="padding:0.75rem; border:1px solid var(--border-color);">Output / Key Parameters</th>
- </tr>
- </thead>
- <tbody>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Displays quick summary of active network adapters.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">IPv4 Address, Subnet Mask, Default Gateway.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /all</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Displays exhaustive configuration for all physical & virtual adapters.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Physical MAC Address, DHCP Server, DNS Servers, Lease Obtained/Expires, Host Name.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /release</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Drops active DHCP lease and clears the current IP address.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">IPv4 set to 0.0.0.0; informs DHCP server that address is freed.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /renew</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Requests a fresh IP address and lease parameters from DHCP server.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Triggers DHCP Discover/Request; assigns new IP configuration.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ipconfig /flushdns</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Purges and resets the contents of the local DNS resolver cache.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Removes stale/outdated DNS IP records; forces new DNS lookups.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ping &lt;target&gt;</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Tests Layer 3 network reachability using ICMP Echo Requests.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Round-trip time (latency in ms), Packet loss %, TTL (Time To Live).</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">ping 127.0.0.1</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Tests local TCP/IP stack integrity (Loopback Test).</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Confirms network card and OS protocol stack are functioning without leaving PC.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">tracert &lt;target&gt;</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Traces the exact router hop path packets take to destination.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Lists intermediate router IPs and millisecond response times per hop.</td>
- </tr>
- <tr>
- <td style="padding:0.75rem; border:1px solid var(--border-color); font-family:monospace; font-weight:700; color:var(--primary-color);">nslookup &lt;domain&gt;</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Queries DNS name servers to resolve domain names to IP addresses.</td>
- <td style="padding:0.75rem; border:1px solid var(--border-color);">Server IP, Non-authoritative answer, resolved IPv4/IPv6 addresses.</td>
- </tr>
- </tbody>
- </table>
- </div>
-
- <!-- 2. IPv4 Classes & Subnetting Matrix -->
- <div class="card" style="margin-top:1.5rem;">
- <h2>2. IPv4 Address Classes & Special Purpose Addresses</h2>
- <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin-top:1rem;">
- 
- <div class="formula-card" style="border-left:4px solid #0284c7;">
- <span class="formula-badge" style="background:#0284c7;">Class A</span>
- <div class="formula-text" style="font-size:1.05rem; color:#0284c7;">1.0.0.0 – 126.255.255.255</div>
- <p style="font-size:0.85rem; margin:0.4rem 0;"><strong>Default Mask:</strong> 255.0.0.0 (/8)<br>
- <strong>Network / Host:</strong> 8 bits Net, 24 bits Host (16.7M hosts/net).<br>
- <strong>Private Range:</strong> 10.0.0.0 – 10.255.255.255 (Large Enterprise).</p>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #0d9488;">
- <span class="formula-badge" style="background:#0d9488;">Class B</span>
- <div class="formula-text" style="font-size:1.05rem; color:#0d9488;">128.0.0.0 – 191.255.255.255</div>
- <p style="font-size:0.85rem; margin:0.4rem 0;"><strong>Default Mask:</strong> 255.255.0.0 (/16)<br>
- <strong>Network / Host:</strong> 16 bits Net, 16 bits Host (65,534 hosts/net).<br>
- <strong>Private Range:</strong> 172.16.0.0 – 172.31.255.255 (Medium Enterprise).</p>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #f59e0b;">
- <span class="formula-badge" style="background:#f59e0b;">Class C</span>
- <div class="formula-text" style="font-size:1.05rem; color:#f59e0b;">192.0.0.0 – 223.255.255.255</div>
- <p style="font-size:0.85rem; margin:0.4rem 0;"><strong>Default Mask:</strong> 255.255.255.0 (/24)<br>
- <strong>Network / Host:</strong> 24 bits Net, 8 bits Host (254 hosts/net).<br>
- <strong>Private Range:</strong> 192.168.0.0 – 192.168.255.255 (Home & Small LAN).</p>
- </div>
-
- <div class="formula-card" style="border-left:4px solid #dc2626;">
- <span class="formula-badge" style="background:#dc2626;">Special & Reserved Addresses</span>
- <div class="formula-text" style="font-size:1.05rem; color:#dc2626;">Loopback & APIPA</div>
- <p style="font-size:0.85rem; margin:0.4rem 0;">
- <strong>127.0.0.1:</strong> Local Loopback (Internal TCP/IP test).<br>
- <strong>169.254.x.x:</strong> APIPA (Automatic Private IP when DHCP fails).<br>
- <strong>255.255.255.255:</strong> Limited Local Broadcast.<br>
- <strong>8.8.8.8 & 1.1.1.1:</strong> Public DNS (Google & Cloudflare).</p>
- </div>
-
- </div>
- </div>
-
- <!-- 3. Interactive Subnet Mask & Network ID Calculator -->
- <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid var(--primary-color);">
- <div class="calc-title">🖩 Live IPv4 Subnet, Network ID & Host Range Calculator</div>
- <div class="calc-desc">Enter any IPv4 host address and subnet mask to calculate Network ID, Broadcast Address, Usable Host Range, and binary bitwise AND breakdown in real time.</div>
- 
- <div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
- <div class="calc-field">
- <label class="calc-label" for="calc-ip">Host IPv4 Address:</label>
- <input type="text" id="calc-ip" class="calc-input" value="192.168.1.50" oninput="calculateSubnetLive()">
- </div>
- <div class="calc-field">
- <label class="calc-label" for="calc-mask">Subnet Mask (or CIDR):</label>
- <select id="calc-mask" class="calc-input" onchange="calculateSubnetLive()" style="font-weight:600;">
- <option value="255.255.255.0" selected>255.255.255.0 (/24) — Class C Standard</option>
- <option value="255.255.0.0">255.255.0.0 (/16) — Class B Standard</option>
- <option value="255.0.0.0">255.0.0.0 (/8) — Class A Standard</option>
- <option value="255.255.255.128">255.255.255.128 (/25) — 126 Hosts</option>
- <option value="255.255.255.192">255.255.255.192 (/26) — 62 Hosts</option>
- <option value="255.255.255.224">255.255.255.224 (/27) — 30 Hosts</option>
- <option value="255.255.255.240">255.255.255.240 (/28) — 14 Hosts</option>
- </select>
- </div>
- </div>
-
- <div class="calc-result-box" style="margin-top:1.25rem;">
- <div class="calc-result-header">
- <span style="font-weight:700; font-size:0.95rem;">Calculated Network ID:</span>
- <span class="calc-result-val" id="calc-net-id">192.168.1.0</span>
- </div>
- <div class="calc-math-steps" id="calc-subnet-steps">
- <!-- Populated dynamically -->
- </div>
- </div>
- </div>
-
- <!-- 4. Interactive Windows Diagnostic Simulator -->
- <div class="calc-card" style="margin-top:1.5rem; border-left:4px solid #0284c7;">
- <div class="calc-title">💻 Windows Network Command Prompt Terminal Simulator</div>
- <div class="calc-desc">Select any Windows networking command to simulate its execution output and inspect the underlying network protocol mechanics.</div>
- 
- <div class="calc-grid" style="grid-template-columns: 1fr;">
- <div class="calc-field">
- <label class="calc-label" for="sim-cmd-select">Select Command to Execute in CMD:</label>
- <select id="sim-cmd-select" class="calc-input" onchange="runCmdSimulator()" style="font-weight:600;">
- <option value="ipconfig" selected>ipconfig (Basic Network Overview)</option>
- <option value="ipconfig_all">ipconfig /all (Detailed Hardware & DHCP Parameters)</option>
- <option value="ipconfig_flushdns">ipconfig /flushdns (Purge DNS Cache)</option>
- <option value="ping_router">ping 192.168.1.1 (Gateway Reachability Test)</option>
- <option value="ping_public">ping 8.8.8.8 (Internet Connectivity Test)</option>
- <option value="ping_loopback">ping 127.0.0.1 (Local TCP/IP Stack Loopback Test)</option>
- <option value="tracert">tracert google.com (Route Hop Trace)</option>
- <option value="nslookup">nslookup google.com (DNS Record Lookup)</option>
- </select>
- </div>
- </div>
-
- <div style="background:#0f172a; color:#f8fafc; padding:1.2rem; border-radius:8px; font-family:Consolas, Monaco, monospace; font-size:0.88rem; line-height:1.5; margin-top:1rem; border:1px solid #334155; overflow-x:auto;" id="cmd-terminal-box">
- <!-- Populated dynamically -->
- </div>
- </div>
-
- </div>
-
-
- </div>
-
- <script>
+<li>1. Obtain an IP address automatically (DHCP), or</li>
+<li>2. Use the following IP address (Static IP).</li>
+</ul>
+</li>
+<li>Enter the required IP configuration and click OK.</li>
+</ol>
+</div>
+<div class="card">
+<h2 id="sec-10-troubleshooting">10. Common Network Problems &amp; Troubleshooting</h2>
+<h3>Common Network Problems</h3>
+<ul>
+<li>❌ No Internet</li>
+<li>❌ Wrong IP Address</li>
+<li>❌ Faulty Cable</li>
+<li>❌ Disabled Adapter</li>
+<li>❌ Incorrect DNS</li>
+<li>❌ Firewall Blocking Connection</li>
+</ul>
+<h3>Network Warning Icons</h3>
+<p>A computer displaying a network warning icon indicates that there is a problem with the network connection. The warning icon may appear as a <strong>yellow triangle with an exclamation mark</strong>, a <strong>globe icon</strong>, or a <strong>red X</strong> on the network symbol, depending on the Windows version.</p>
+<h3>Problem and Possible Cause Matrix</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Possible Cause</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>❌ <strong>No Internet Connection</strong></td><td>Router or modem is offline, ISP outage</td></tr>
+<tr><td>❌ <strong>Limited Connectivity</strong></td><td>Incorrect IP configuration or DHCP issue</td></tr>
+<tr><td>❌ <strong>IP Address Conflict</strong></td><td>Two devices are using the same IP address</td></tr>
+<tr><td>❌ <strong>Disabled Network Adapter</strong></td><td>Adapter is disabled in Windows</td></tr>
+<tr><td>❌ <strong>Network Cable Unplugged</strong></td><td>Ethernet cable is loose or disconnected</td></tr>
+<tr><td>❌ <strong>Incorrect DNS Settings</strong></td><td>Unable to resolve website names</td></tr>
+<tr><td>❌ <strong>Firewall Blocking Access</strong></td><td>Security settings prevent communication</td></tr>
+<tr><td>❌ <strong>Outdated Network Driver</strong></td><td>Driver is missing, corrupted, or incompatible</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 90</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Quiz questions dynamically rendered here -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE & SUMMARY MATRIX -->
+<div class="tab-content" id="formulas">
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1.5rem; gap:0.5rem; border-bottom:1px solid var(--border-color); padding-bottom:1rem;">
+<div>
+<h2 style="margin:0; font-size:1.6rem; color:var(--primary-color);">Quick Reference &amp; Exam Summary Architecture</h2>
+<p style="margin:0.25rem 0 0 0; font-size:0.9rem; opacity:0.85;">Four-Pillar High-Yield Review for Windows IPv4 Networking, Subnetting Math &amp; Diagnostic Tools</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID                          -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:1.5rem;">
+<span>🏛️</span> Pillar 1: Core Terminology &amp; Keyword Recall Grid
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Crucial networking terms, address types, and diagnostic protocols for rapid exam retrieval.</p>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Term / Concept</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Category</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:45%;">Exact Academic Definition</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Exam Trigger / High-Yield Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Network Configuration</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Networking</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The process of assigning IP addresses, subnet masks, default gateways, DNS servers, and adapter settings to enable communication across a computer network.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">IP, Mask, Gateway, DNS, Adapter setup</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">IPv4 Address</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Addressing</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A 32-bit logical numerical identifier represented as four 8-bit octets in dotted-decimal notation (0–255), uniquely identifying a device interface on an IP network.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">32 bits, 4 octets, Dotted-decimal, Logical address</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Subnet Mask</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Addressing</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A 32-bit bitmask that separates the Network ID portion of an IP address from the Host ID portion by setting all network bits to contiguous 1s and host bits to 0s.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Separates Network vs Host portion, Bitwise AND mask</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Default Gateway</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Routing</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">The local router interface IP address responsible for forwarding network packets destined for remote networks or the public Internet outside the local subnet.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Router interface, Exits local subnet, Required for Internet</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">DNS Server</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Name Resolution</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A dedicated server that resolves human-readable alphanumeric domain names (e.g. <code>google.com</code>) into machine-routable numerical IP addresses (e.g. <code>142.250.190.46</code>).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Domain-to-IP translator, Public DNS 8.8.8.8 &amp; 1.1.1.1</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">DHCP</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Dynamic Config</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Dynamic Host Configuration Protocol: a client-server protocol that automatically leases IP addresses, subnet masks, default gateways, and DNS servers to client devices on boot.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Automated IP leasing, DORA process, Prevents IP conflicts</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">MAC Address</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Hardware</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Media Access Control: a permanent 48-bit (6-byte) physical hardware address burned into the Network Interface Card (NIC) by the manufacturer, operating at Data Link Layer 2.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">48-bit hex identifier, Layer 2 physical address, Burned into NIC</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">APIPA</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Auto Config</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Automatic Private IP Addressing: Windows self-assignment mechanism allocating an address in the <code>169.254.0.1</code> – <code>169.254.255.254</code> range (/16) when the DHCP server fails to respond.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">169.254.x.x, DHCP failure indicator, Local-only connectivity</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Loopback Address (127.0.0.1)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Diagnostics</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Reserved IPv4 address (<code>127.0.0.1</code> to <code>127.255.255.254</code>) that routes traffic internally back to the local host to verify local TCP/IP stack driver integrity without touching the network wire.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">127.0.0.1, Tests local TCP/IP stack software, Never leaves host</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">ICMP &amp; Ping</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Diagnostics</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Internet Control Message Protocol diagnostic utility transmitting Echo Request packets and evaluating Echo Replies to calculate round-trip latency (ms) and packet loss percentage.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Echo Request/Reply, Tests Layer 3 reachability, Latency &amp; RTT</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Time To Live (TTL)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Packet Header</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">An 8-bit counter in the IPv4 packet header decremented by 1 at every intermediary router hop, terminating the packet when TTL reaches 0 to prevent infinite routing loops.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Hop counter, Prevents routing loops, Decremented by 1 per router</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Network Address Translation (NAT)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);"><span class="def-badge">Routing</span></td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">A router process that modifies IP packet headers in transit, mapping multiple private RFC 1918 internal IP addresses to a single public routable IP address for internet access.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Private-to-Public IP mapping, Conserves IPv4 addresses</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS                           -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>🧮</span> Pillar 2: Formula &amp; Calculation Reference Cards
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Subnetting equations, host capacity formulas, bitwise masks, and hop decrement math with plain English verbalizations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+<!-- Formula 1: Usable Hosts Formula -->
+<div class="formula-card" style="border-left:4px solid #0284c7;">
+<span class="formula-badge" style="background:#0284c7;">Subnet Host Capacity</span>
+<div class="formula-text" style="font-size:1.15rem; color:#0284c7;">
+						N<sub>usable_hosts</sub> = 2<sup>h</sup> − 2 = 2<sup>(32 − CIDR)</sup> − 2
+					</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>h</code>: Number of unmasked host bits (32 − CIDR prefix length).<br/>
+						• <code>− 2</code>: Subtracts Network ID (all 0s) and Broadcast Address (all 1s).<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The count of assignable host devices per subnet is two raised to the power of host bits minus two, because all-zero host bits designate the Network ID and all-one host bits designate the Broadcast Address."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Usable hosts per subnet equals two raised to the host bits minus two (subtracting network ID and broadcast address)."</strong>
+</div>
+</div></div>
+<!-- Formula 2: Subnet Bitwise AND Network ID -->
+<div class="formula-card" style="border-left:4px solid #0d9488;">
+<span class="formula-badge" style="background:#0d9488;">Bitwise Network ID</span>
+<div class="formula-text" style="font-size:1.15rem; color:#0d9488;">
+						Network ID = Host IPv4 Address &amp; Subnet Mask
+					</div>
+<div class="formula-explain">
+<strong>Bitwise Logic:</strong><br/>
+						• <code>1 &amp; 1 = 1</code> (Preserves network prefix bits).<br/>
+						• <code>x &amp; 0 = 0</code> (Forces all host bits to binary 0).<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"Performing a binary logical AND operation between any host IP address and its subnet mask extracts the base Network ID by filtering out the host portion."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The Network ID is computed by performing a bitwise AND between the IPv4 address and the subnet mask."</strong>
+</div>
+</div></div>
+<!-- Formula 3: Directed Broadcast Address -->
+<div class="formula-card" style="border-left:4px solid #f59e0b;">
+<span class="formula-badge" style="background:#f59e0b;">Broadcast Calculation</span>
+<div class="formula-text" style="font-size:1.15rem; color:#f59e0b;">
+						Broadcast Address = Network ID | ( ∼Subnet Mask )
+					</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>∼Subnet Mask</code>: The Wildcard Mask (inverted bits: 255.255.255.0 → 0.0.0.255).<br/>
+						• <code>|</code>: Bitwise OR operation setting all host bits to 1.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"Combining the Network ID with the inverted wildcard mask via logical OR sets every host bit to 1, producing the subnet's directed broadcast address."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The Broadcast Address is computed by setting all host bits to binary 1 (bitwise OR with the inverted mask)."</strong>
+</div>
+</div></div>
+<!-- Formula 4: Number of Created Subnets -->
+<div class="formula-card" style="border-left:4px solid #8b5cf6;">
+<span class="formula-badge" style="background:#8b5cf6;">Subnet Division</span>
+<div class="formula-text" style="font-size:1.15rem; color:#8b5cf6;">
+						N<sub>subnets</sub> = 2<sup>b</sup>
+</div>
+<div class="formula-explain">
+<strong>Variable Legend:</strong><br/>
+						• <code>b</code>: Number of bits borrowed from the default classful host portion.<br/>
+						• Example: Borrowing 3 bits from /24 → /27 yields 2<sup>3</sup> = 8 subnets.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"The total number of independent subnets created equals two raised to the power of borrowed network bits."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The number of created subnets equals two raised to the borrowed subnet bits b."</strong>
+</div>
+</div></div>
+<!-- Formula 5: Subnet Mask Octet Lookup Table -->
+<div class="formula-card" style="border-left:4px solid #ec4899;">
+<span class="formula-badge" style="background:#ec4899;">CIDR Mask Map</span>
+<div class="formula-text" style="font-size:1.0rem; color:#ec4899;">
+						/24=.0 | /25=.128 | /26=.192 | /27=.224 | /28=.240 | /29=.248 | /30=.252
+					</div>
+<div class="formula-explain">
+<strong>Bit Weight Derivation:</strong><br/>
+						• <code>1 bit = 128</code>, <code>2 bits = 192</code>, <code>3 bits = 224</code>, <code>4 bits = 240</code>, <code>5 bits = 248</code>, <code>6 bits = 252</code>.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"Every additional masked bit in the 4th octet adds descending powers of two (128, 64, 32, 16, 8, 4), reducing host capacity by half at each step."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Slash-24 has 256 addresses; /25 has 128; /26 has 64; /27 has 32; /28 has 16; /29 has 8; /30 has 4 (2 usable)."</strong>
+</div>
+</div></div>
+<!-- Formula 6: TTL Hop Decrement Calculation -->
+<div class="formula-card" style="border-left:4px solid #dc2626;">
+<span class="formula-badge" style="background:#dc2626;">Packet Lifespan</span>
+<div class="formula-text" style="font-size:1.15rem; color:#dc2626;">
+						Remaining TTL = Initial TTL − Total Router Hops
+					</div>
+<div class="formula-explain">
+<strong>Operational Rule:</strong><br/>
+						• Default initial TTL: Windows = 128, Linux/macOS = 64, Cisco IOS = 255.<br/>
+						• If Remaining TTL reaches 0 → Router drops packet and returns ICMP Type 11.<br/>
+<strong>Plain English Verbalization:</strong><br/>
+<em>"Each Layer 3 router decrements the TTL field by exactly 1; subtracting final ping TTL from default TTL reveals total traversed network hops."</em>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"The remaining Time To Live in an IP packet equals its initial TTL minus the total number of intermediate router hops traversed."</strong>
+</div>
+</div></div>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES                                   -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>📊</span> Pillar 3: Comparative Analysis Matrices
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Side-by-side matrices contrasting IPv4 classes, configuration modes, physical media, and troubleshooting root causes.</p>
+<!-- Matrix 1: IPv4 Classes A through E Master Classification Matrix -->
+<h4 style="color:var(--accent-color); margin-top:1.25rem; margin-bottom:0.5rem;">A. IPv4 Address Classes A through E Master Classification Matrix</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:10%;">Class</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:10%;">Leading Bits</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">1st Octet Range</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Default Mask (CIDR)</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Max Usable Hosts/Net</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">RFC 1918 Private Range</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:20%;">Primary Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#0284c7;">Class A</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">0...</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1 – 126</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">255.0.0.0 (/8)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">16,777,214 (2<sup>24</sup>−2)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">10.0.0.0 – 10.255.255.255</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Massive enterprise networks &amp; governments</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#0d9488;">Class B</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">10..</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">128 – 191</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">255.255.0.0 (/16)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">65,534 (2<sup>16</sup>−2)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">172.16.0.0 – 172.31.255.255</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Medium-to-large corporate LANs &amp; universities</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#f59e0b;">Class C</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">110.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">192 – 223</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">255.255.255.0 (/24)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">254 (2<sup>8</sup>−2)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace; font-size:0.85rem;">192.168.0.0 – 192.168.255.255</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Small businesses, home networks &amp; local labs</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#8b5cf6;">Class D</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">1110</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">224 – 239</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">N/A (No Subnet Mask)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">N/A</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">N/A</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Multicast group transmission (OSPF, IPTV)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#dc2626;">Class E</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">1111</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">240 – 255</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">N/A (Reserved)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">N/A</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">N/A</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-size:0.85rem;">Scientific research &amp; experimental protocols</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 2: Static IP vs Dynamic (DHCP) IP -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">B. Static IP vs. Dynamic (DHCP) IP Addressing</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Comparison Dimension</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Static IP Configuration</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Dynamic IP (DHCP) Configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Assignment Method</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Manually typed by network administrator in OS settings.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Automatically leased by a centralized DHCP server on the LAN.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Address Persistence</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:var(--primary-color);">Permanent (Never changes across reboots).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Temporary (Subject to DHCP lease renewals and changes).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Administrative Overhead</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">High (Requires tracking IP allocation spreadsheets manually).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Zero client overhead (Automated centralized pool).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Risk of IP Conflict</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#dc2626;">Higher (Accidental duplicate typing creates collisions).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#16a34a;">Virtually Zero (DHCP server manages unique allocations).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Target Device Types</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">DNS servers, Domain Controllers, Routers, Network Printers, NAS.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Client PCs, Laptops, Smartphones, Tablets, IoT peripherals.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 3: Wired (Ethernet RJ-45) vs Wireless (Wi-Fi) -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">C. Wired Ethernet (RJ-45) vs. Wireless (Wi-Fi 802.11)</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Feature / Dimension</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Wired Ethernet (Cat5e / Cat6 RJ-45)</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color);">Wireless (Wi-Fi 802.11ax / ac)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Transmission Medium</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Physical copper twisted-pair cable (RJ-45 connector).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Radio frequency (RF) waves (2.4 GHz, 5 GHz, 6 GHz).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Peak Throughput &amp; Reliability</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Maximum (1 Gbps – 10 Gbps dedicated full-duplex).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Shared half-duplex (Throughput degrades with distance/walls).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Latency &amp; Packet Jitter</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Ultra-Low (Sub-millisecond &lt; 1 ms local RTT).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Moderate-to-High (Varies with interference and channel load).</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Interference Vulnerability</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Impervious to radio noise / physical walls.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#dc2626;">Vulnerable to microwaves, thick walls, and overlapping SSIDs.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">Physical Mobility</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); color:#dc2626;">Stationary (Tethered by physical cable length).</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">High mobility within wireless Access Point coverage area.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Matrix 4: 8 Common Network Problems Diagnostic Matrix -->
+<h4 style="color:var(--accent-color); margin-top:1.5rem; margin-bottom:0.5rem;">D. 8-Failure Network Diagnostic &amp; Resolution Master Matrix</h4>
+<div class="table-container">
+<table style="width:100%; border-collapse:collapse;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Problem Symptom</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Warning Indicator</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:15%;">Primary CLI Tool</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:25%;">Root Cause</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); width:30%;">Actionable Fix Procedure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">1. No Internet Access</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Globe icon / Red X</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">ping 8.8.8.8</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Modem/Router offline or ISP outage.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Reboot router/modem; verify ISP WAN link status.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">2. Limited Connectivity</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Yellow triangle (!)</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">ipconfig /all</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">DHCP lease failed → APIPA 169.254.x.x assigned.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Run <code>ipconfig /release</code> followed by <code>ipconfig /renew</code>.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">3. IP Address Conflict</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Windows popup notification</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">arp -a / ipconfig</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Two devices share identical static/dynamic IP.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Change conflicting static IP or set adapter to DHCP automatic.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">4. Disabled Adapter</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Grayed out in ncpa.cpl</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">ncpa.cpl</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Network interface card disabled in Windows.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Right-click adapter in Network Connections → Select "Enable".</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">5. Cable Unplugged</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Red X over Ethernet icon</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">ipconfig</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Physical RJ-45 cable loose, disconnected, or damaged.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Reseat RJ-45 plug into NIC port; replace broken Ethernet patch cable.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">6. DNS Resolution Failure</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">"Server IP address could not be found"</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">nslookup / flushdns</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Invalid DNS IP or corrupted local DNS cache.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Run <code>ipconfig /flushdns</code>; set DNS to <code>8.8.8.8</code> and <code>1.1.1.1</code>.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">7. Firewall Blocking</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Connection refused / timeout</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">ping / tracert</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Windows Defender Firewall blocks port or ICMP.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Add inbound/outbound firewall rule for the specific port/app.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-weight:700;">8. Corrupted NIC Driver</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Yellow warning in devmgmt.msc</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color); font-family:monospace;">ping 127.0.0.1</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">NIC driver missing, outdated, or corrupted.</td>
+<td style="padding:0.65rem; border:1px solid var(--border-color);">Open Device Manager → Right-click NIC → "Update driver" or reinstall.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ========================================================================= -->
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES                                -->
+<!-- ========================================================================= -->
+<h3 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem; margin-top:2rem;">
+<span>⚠️</span> Pillar 4: Common Exam Pitfalls &amp; Fallacies
+			</h3>
+<p style="font-size:0.9rem; opacity:0.85; margin-bottom:1rem;">Crucial subnetting traps, APIPA misconceptions, DNS isolation diagnostics, and gateway subnet boundary rules.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem;">
+<div class="card" style="border-left:4px solid #ef4444; margin-bottom:0; background:rgba(239, 68, 68, 0.04);">
+<div style="font-weight:700; color:#ef4444; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 1: Forgetting the "-2" Host Subnetting Rule
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Calculating usable hosts as <code>2<sup>h</sup></code> instead of <code>2<sup>h</sup> − 2</code>.<br/>
+<strong>The Truth:</strong> In any IPv4 subnet, the first address (host bits all 0s) is strictly reserved for the <strong>Network ID</strong>, and the last address (host bits all 1s) is reserved for the <strong>Directed Broadcast Address</strong>. A /24 subnet has 256 total IP states, but only <strong>254 usable host interfaces</strong>.
+					</p>
+</div>
+<div class="card" style="border-left:4px solid #f59e0b; margin-bottom:0; background:rgba(245, 158, 11, 0.04);">
+<div style="font-weight:700; color:#f59e0b; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 2: APIPA 169.254.x.x Means DHCP Has Failed!
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Believing a computer with IP <code>169.254.45.100</code> is connected to the Internet.<br/>
+<strong>The Truth:</strong> Any IP starting with <code>169.254.</code> is an <strong>APIPA address</strong> automatically assigned by Windows when its DHCP request timed out without receiving a reply. It allows communication only with peers on the same physical switch wire; it <strong>cannot route to the Internet</strong> because there is no Default Gateway.
+					</p>
+</div>
+<div class="card" style="border-left:4px solid #3b82f6; margin-bottom:0; background:rgba(59, 130, 246, 0.04);">
+<div style="font-weight:700; color:#3b82f6; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 3: Default Gateway MUST Match the Host's Subnet
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Setting host IP to <code>192.168.1.50/24</code> and Default Gateway to <code>192.168.2.1</code>.<br/>
+<strong>The Truth:</strong> A host cannot forward packets to a gateway that resides in a different logical network. The Default Gateway <strong>must belong to the exact same IP subnet</strong> as the host's own IP address (e.g. Gateway <code>192.168.1.1</code> on <code>192.168.1.0/24</code>).
+					</p>
+</div>
+<div class="card" style="border-left:4px solid #8b5cf6; margin-bottom:0; background:rgba(139, 92, 246, 0.04);">
+<div style="font-weight:700; color:#8b5cf6; display:flex; align-items:center; gap:0.5rem;">
+<span>🚫</span> Pitfall 4: Isolating DNS vs IP Routing Failures
+					</div>
+<p style="font-size:0.88rem; margin:0.5rem 0 0 0; line-height:1.5;">
+<strong>The Trap:</strong> Assuming the Internet connection is broken when <code>ping google.com</code> fails.<br/>
+<strong>The Truth:</strong> Always test numerical IP ping first: if <code>ping 8.8.8.8</code> succeeds, your Layer 3 physical link, IP routing, and default gateway are <strong>100% operational</strong>. Failure of <code>ping google.com</code> isolates the problem strictly to <strong>DNS server name resolution</strong> (fix with <code>ipconfig /flushdns</code> or changing DNS server).
+					</p>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- INTERACTIVE ACADEMIC SIMULATORS: SUBNET CALCULATOR & CMD TERMINAL         -->
+<!-- ========================================================================= -->
+<div class="calc-card" style="margin-top:2rem; border-left:4px solid var(--primary-color);">
+<div class="calc-title">🖩 Live IPv4 Subnet, Network ID &amp; Host Range Calculator</div>
+<div class="calc-desc">Enter any IPv4 host address and subnet mask to calculate Network ID, Broadcast Address, Usable Host Range, and binary bitwise AND breakdown in real time.</div>
+<div class="calc-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+<div class="calc-field">
+<label class="calc-label" for="calc-ip">Host IPv4 Address:</label>
+<input class="calc-input" id="calc-ip" oninput="calculateSubnetLive()" type="text" value="192.168.1.50"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="calc-mask">Subnet Mask (or CIDR):</label>
+<select class="calc-input" id="calc-mask" onchange="calculateSubnetLive()" style="font-weight:600;">
+<option selected="" value="255.255.255.0">255.255.255.0 (/24) — Class C Standard</option>
+<option value="255.255.0.0">255.255.0.0 (/16) — Class B Standard</option>
+<option value="255.0.0.0">255.0.0.0 (/8) — Class A Standard</option>
+<option value="255.255.255.128">255.255.255.128 (/25) — 126 Hosts</option>
+<option value="255.255.255.192">255.255.255.192 (/26) — 62 Hosts</option>
+<option value="255.255.255.224">255.255.255.224 (/27) — 30 Hosts</option>
+<option value="255.255.255.240">255.255.255.240 (/28) — 14 Hosts</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box" style="margin-top:1.25rem;">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Calculated Network ID:</span>
+<span class="calc-result-val" id="calc-net-id">192.168.1.0</span>
+</div>
+<div class="calc-math-steps" id="calc-subnet-steps">
+<!-- Populated dynamically by calculateSubnetLive() -->
+</div>
+</div>
+</div>
+<div class="calc-card" style="margin-top:1.5rem; border-left:4px solid #0284c7;">
+<div class="calc-title">💻 Windows Network Command Prompt Terminal Simulator</div>
+<div class="calc-desc">Select any Windows networking command to simulate its execution output and inspect the underlying network protocol mechanics.</div>
+<div class="calc-grid" style="grid-template-columns: 1fr;">
+<div class="calc-field">
+<label class="calc-label" for="sim-cmd-select">Select Command to Execute in CMD:</label>
+<select class="calc-input" id="sim-cmd-select" onchange="runCmdSimulator()" style="font-weight:600;">
+<option selected="" value="ipconfig">ipconfig (Basic Network Overview)</option>
+<option value="ipconfig_all">ipconfig /all (Detailed Hardware &amp; DHCP Parameters)</option>
+<option value="ipconfig_flushdns">ipconfig /flushdns (Purge DNS Cache)</option>
+<option value="ping_router">ping 192.168.1.1 (Gateway Reachability Test)</option>
+<option value="ping_public">ping 8.8.8.8 (Internet Connectivity Test)</option>
+<option value="ping_loopback">ping 127.0.0.1 (Local TCP/IP Stack Loopback Test)</option>
+<option value="tracert">tracert google.com (Route Hop Trace)</option>
+<option value="nslookup">nslookup google.com (DNS Record Lookup)</option>
+</select>
+</div>
+</div>
+<div id="cmd-terminal-box" style="background:#0f172a; color:#f8fafc; padding:1.2rem; border-radius:8px; font-family:Consolas, Monaco, monospace; font-size:0.88rem; line-height:1.5; margin-top:1rem; border:1px solid #334155; overflow-x:auto;">
+<!-- Populated dynamically by runCmdSimulator() -->
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
  // ==========================================
  // Subnet & IP Calculator Logic
  // ==========================================
@@ -1816,6 +2182,5 @@ Addresses: 2607:f8b0:4004:c1b::64<br>
  runCmdSimulator();
  });
  </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>

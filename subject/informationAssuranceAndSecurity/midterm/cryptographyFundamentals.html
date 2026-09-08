@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var isDark = savedTheme === 'dark' || (!savedTheme && prefersDark) || savedTheme === null;
+                if (isDark && savedTheme !== 'light') {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            } catch(e) {
+                document.documentElement.classList.add('dark');
+            }
+        })();
+    </script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <title>Cryptography Fundamentals | Information Assurance &amp; Security</title>
+    <link href="../../../global.css" rel="stylesheet"/>
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../../supabaseClient.js"></script>
+    <script src="../../../global.js"></script>
+    <link href="../../../manifest.json" rel="manifest"/>
+    <meta content="#0d9488" name="theme-color"/>
+    <meta content="yes" name="mobile-web-app-capable"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+    <link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+    <link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%90%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
+</head>
+<body>
+    <header class="app-header">
+        <h1>Information Assurance &amp; Security (BSCS 3110)</h1>
+        <p>Cryptography Fundamentals — Keeping secrets, proving truth, and trusting data - from the basics to today's frontier (Week 7)</p>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-left">
+            <a class="nav-btn-home" href="../../../index.html#midterm">← Return to Portal</a>
+            <button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+            <span class="nav-title">Cryptography Fundamentals</span>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+            <button class="nav-btn" id="nav-btn-quickref" onclick="openQuickRefTab('matrix')">Quick Reference</button>
+        </div>
+        <button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+    </nav>
+
+    <div class="container">
+        <!-- TAB 1: REVIEWER / STUDY GUIDE -->
+        <div class="tab-content active" id="reviewer">
+            
+            <!-- MODULE HEADER CARD -->
+            <div class="card">
+                <div class="badge-container" style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:0.75rem;">
+                    <span class="badge" style="background:rgba(13,148,136,0.15); color:var(--primary-color); font-weight:700;">BSCS 3110</span>
+                    <span class="badge" style="background:rgba(59,130,246,0.15); color:#2563eb; font-weight:700;">Midterm Term • Week 7</span>
+                    <span class="badge" style="background:rgba(16,185,129,0.15); color:#059669; font-weight:700;">Lecture Module</span>
+                    <a href="../../Resources/informationAssuranceAndSecurity/midterm/resources.html" class="badge" style="background:rgba(245,158,11,0.18); color:#d97706; font-weight:700; text-decoration:none;" title="View Midterm Lecture PDF (cryptography.pdf)">📂 Lecture Slide PDF (cryptography.pdf)</a>
+                </div>
+                <h1 style="margin-top:0; font-size:1.85rem; color:var(--text-dark-color);">Cryptography Fundamentals</h1>
+                <p style="font-size:1.05rem; color:var(--text-muted); margin-top:-0.25rem; font-style:italic;">
+                    Keeping secrets, proving truth, and trusting data - from the basics to today's frontier.
+                </p>
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-left:4px solid var(--primary-color); border-radius:6px; margin:1rem 0;">
+                    <p style="margin:0; font-size:0.9rem; font-weight:600; color:var(--text-dark-color);">
+                        College of Computer Studies • University of Perpetual Help System DALTA
+                    </p>
+                    <p style="margin:0.25rem 0 0 0; font-size:0.85rem; color:var(--text-muted);">
+                        <strong>How to use this material:</strong> This module is written so you can study it on your own, before or after the lecture. Read it in order each idea builds on the last. Key terms are highlighted the first time they appear. Work through the review questions at the end to check your understanding.
+                    </p>
+                </div>
+
+                <h3 style="margin-top:1.25rem; margin-bottom:0.5rem;">🎯 Learning outcomes</h3>
+                <p style="margin-bottom:0.5rem;">By the end of this module, you should be able to:</p>
+                <ul style="margin-top:0.25rem; margin-bottom:1rem; padding-left:1.5rem; line-height:1.6;">
+                    <li>Explain the core goals of cryptography and how they support the CIA Triad.</li>
+                    <li>Differentiate between symmetric encryption, asymmetric encryption, and hashing, and say when each is used.</li>
+                    <li>Describe how passwords are stored safely using salting and slow hashing.</li>
+                    <li>Recognize modern cryptographic technologies AEAD, TLS 1.3, and post-quantum standards.</li>
+                </ul>
+
+                <h3 style="margin-top:1.25rem; margin-bottom:0.5rem;">📑 Contents</h3>
+                <ol style="margin-top:0.25rem; margin-bottom:0.5rem; padding-left:1.5rem; line-height:1.6;">
+                    <li><a href="#why-cryptography-matters" style="color:var(--primary-color); text-decoration:none;">Why Cryptography Matters</a></li>
+                    <li><a href="#the-language-of-cryptography" style="color:var(--primary-color); text-decoration:none;">The Language of Cryptography</a></li>
+                    <li><a href="#the-three-cryptographic-tools" style="color:var(--primary-color); text-decoration:none;">The Three Cryptographic Tools</a></li>
+                    <li><a href="#storing-passwords-safely" style="color:var(--primary-color); text-decoration:none;">Storing Passwords Safely: From Hashing to bcrypt</a></li>
+                    <li><a href="#a-hands-on-look-caesar-cipher" style="color:var(--primary-color); text-decoration:none;">A Hands-On Look: The Caesar Cipher</a></li>
+                    <li><a href="#cryptography-in-the-real-world" style="color:var(--primary-color); text-decoration:none;">Cryptography in the Real World Today</a></li>
+                    <li><a href="#quantum-threat-post-quantum" style="color:var(--primary-color); text-decoration:none;">The Quantum Threat and Post-Quantum Cryptography</a></li>
+                    <li><a href="#summary-and-review-questions" style="color:var(--primary-color); text-decoration:none;">Summary and Review Questions</a></li>
+                </ol>
+            </div>
+
+            <!-- SECTION 1 -->
+            <div class="card">
+                <h2 id="why-cryptography-matters">1 Why Cryptography Matters</h2>
+                <p>Every security control you have met so far quietly depends on one thing: mathematics that can scramble data, verify it, and prove who sent it. That mathematics is <strong>cryptography</strong>.</p>
+                <p>Think back to the CIA Triad Confidentiality, Integrity, and Availability. Without cryptography, those goals are only wishes. You cannot keep data confidential if you cannot scramble it so others cannot read it. You cannot trust a file's integrity if you cannot detect when a single character has been changed. And you cannot be sure who you are really talking to without a way to prove identity. Cryptography is the machinery that turns these goals from aspirations into something you can actually enforce.</p>
+                <p>Cryptography does three distinct jobs, and it helps to keep them separate in your mind from the start:</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:20%;">Job</th>
+                                <th style="width:25%;">What it provides</th>
+                                <th>In plain terms</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Confidentiality</strong></td>
+                                <td>Encryption</td>
+                                <td>Scrambles data so that only the right person, holding the right key, can read it.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Integrity</strong></td>
+                                <td>Hashing</td>
+                                <td>Proves that data has not been altered, even by a single character.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Authentication</strong></td>
+                                <td>Digital signatures</td>
+                                <td>Proves who really sent a message, and that it is genuine.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top:1rem; padding:0.85rem 1.15rem; background:rgba(13,148,136,0.08); border-left:4px solid var(--primary-color); border-radius:6px;">
+                    <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">💡 WORTH REMEMBERING</strong>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        Cryptography is not one tool but a small toolbox. Most real systems use all three jobs at once the trick is knowing which tool does which job.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 2 -->
+            <div class="card">
+                <h2 id="the-language-of-cryptography">2 The Language of Cryptography</h2>
+                <p>Before going further, you need four words. Get these straight and the rest of the topic falls into place.</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:22%;">Term</th>
+                                <th>Definition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Plaintext</strong></td>
+                                <td>The original, readable message the grades file, the email, the password. Anything before it has been protected.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ciphertext</strong></td>
+                                <td>The scrambled version. To anyone without the key, it looks like meaningless nonsense.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key</strong></td>
+                                <td>The secret that locks or unlocks the data. Security depends on protecting the key not on hiding the method.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cipher</strong></td>
+                                <td>The method, or recipe, for turning plaintext into ciphertext and back again.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>A principle that surprises people</h3>
+                <p>Here is something that catches many students off guard: in good cryptography, the method is public and only the key is secret. This is known as <strong>Kerckhoffs's principle</strong>. A strong cipher stays secure even when everyone knows exactly how it works all the secrecy lives in the key. That is precisely why the world's most trusted algorithms are published openly and studied by researchers everywhere.</p>
+
+                <div style="margin-top:1rem; padding:0.85rem 1.15rem; background:rgba(220,38,38,0.08); border-left:4px solid #dc2626; border-radius:6px;">
+                    <strong style="color:#dc2626; display:block; margin-bottom:0.25rem;">⚠️ THE TRAP TO AVOID</strong>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        <strong>Security through obscurity</strong> inventing your own secret cipher and hoping nobody figures it out - almost always fails. Home-made cryptography has never survived the years of public attack that real algorithms have. The rule professionals live by: <em>never roll your own crypto</em>. Use the algorithms the world already trusts.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 3 -->
+            <div class="card">
+                <h2 id="the-three-cryptographic-tools">3 The Three Cryptographic Tools</h2>
+                <p>Cryptography gives you three core tools. They are not interchangeable each answers a different security question.</p>
+
+                <h3>3.1 Symmetric Encryption</h3>
+                <p style="font-style:italic; color:var(--text-muted); margin-top:-0.25rem;">one shared key</p>
+                <p>In symmetric encryption, the same secret key both locks and unlocks the data. The sender and receiver must agree on that key ahead of time. Whoever holds it can encrypt and decrypt; whoever lacks it sees only ciphertext.</p>
+                <p>Its great strength is speed. Symmetric algorithms are fast and efficient, which makes them ideal for encrypting large amounts of data whole files, disks, or a stream of network traffic. The modern standard is <strong>AES (Advanced Encryption Standard)</strong>, the same idea you used in the CIA Triad lab when you locked a file with a password.</p>
+                <p>But symmetric encryption has one hard problem: <em>how do the two sides share the key safely in the first place?</em> If an attacker intercepts the key while it is being exchanged, the whole scheme falls apart. This single question is what the next tool was invented to solve.</p>
+
+                <h3>3.2 Asymmetric Encryption</h3>
+                <p style="font-style:italic; color:var(--text-muted); margin-top:-0.25rem;">a public and a private key</p>
+                <p>Asymmetric encryption uses a matched pair of keys instead of one shared secret. What one key locks, only its partner can unlock.</p>
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700; background:rgba(16,185,129,0.15); color:#059669; margin-bottom:0.5rem;">PUBLIC KEY • SHARE FREELY</span>
+                        <p style="margin:0; font-size:0.9rem; line-height:1.5;">
+                            Anyone may use it to encrypt a message to you, or to check your signature. You can publish it openly, like the slot on a mailbox.
+                        </p>
+                    </div>
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px;">
+                        <span style="display:inline-block; padding:2px 8px; border-radius:4px; font-size:0.75rem; font-weight:700; background:rgba(220,38,38,0.15); color:#dc2626; margin-bottom:0.5rem;">PRIVATE KEY • NEVER SHARED</span>
+                        <p style="margin:0; font-size:0.9rem; line-height:1.5;">
+                            Only you hold it. It decrypts messages sent to your public key and creates signatures that only you could have made.
+                        </p>
+                    </div>
+                </div>
+                <p>The cleverness is this: because the public key only needs to be shared, not protected, you can hand it to the whole world and no secret ever travels. That solves symmetric's key-sharing problem completely. Asymmetric encryption (using algorithms like <strong>RSA</strong> and <strong>ECC</strong>) is what secures the little padlock in your browser and lets it set up a secure connection with a website it has never met before.</p>
+
+                <h3>3.3 Choosing between them in practice, both</h3>
+                <p>You rarely pick just one. Real systems combine them, each covering the other's weakness: asymmetric encryption safely exchanges a key, then fast symmetric encryption protects the actual data.</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Symmetric</th>
+                                <th>Asymmetric</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Keys</strong></td>
+                                <td>One shared secret key</td>
+                                <td>A public + private pair</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Speed</strong></td>
+                                <td>Very fast good for large data</td>
+                                <td>Slower good for small data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key sharing</strong></td>
+                                <td>The hard part</td>
+                                <td>Solved by design</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Typical use</strong></td>
+                                <td>Encrypting the actual data</td>
+                                <td>Exchanging the symmetric key; signatures</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>3.4 Hashing</h3>
+                <p style="font-style:italic; color:var(--text-muted); margin-top:-0.25rem;">a one-way fingerprint</p>
+                <p>The third tool is different from the first two. Hashing is not encryption there is no key and no way to reverse it. A hash function takes any input and produces a fixed-length fingerprint of it. It does not hide data; it proves integrity.</p>
+                <p>Hashing has four properties worth memorizing:</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>It turns any input into a fixed-length fingerprint, no matter how large the input.</li>
+                    <li>The same input always produces the same hash.</li>
+                    <li>Change even one character, and the hash changes completely.</li>
+                    <li>You cannot work backwards from the hash to the original data.</li>
+                </ul>
+                <p>That third property is what makes hashing so useful for integrity. You saw it in the Integrity lab, where a keyed hash caught a tampered grades file. Here is the effect in miniature:</p>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-radius:6px; font-family:monospace; margin:0.75rem 0; font-size:0.9rem;">
+                    <div style="color:var(--text-muted); margin-bottom:0.25rem;"># SHA-256 (one character changes everything)</div>
+                    <div>"grade: 88" → <span style="color:#059669; font-weight:700;">a5f3...9c2e</span></div>
+                    <div>"grade: 89" → <span style="color:#dc2626; font-weight:700;">7b10...44af</span></div>
+                </div>
+
+                <p><strong>COMMON USES:</strong> Verifying downloaded files (checksums), detecting tampering, and as the next section explains storing passwords safely. Common hash functions today are <strong>SHA-256</strong> and <strong>SHA-3</strong>. The older MD5 and SHA-1 are broken and must not be used for security.</p>
+            </div>
+
+            <!-- SECTION 4 -->
+            <div class="card">
+                <h2 id="storing-passwords-safely">4 Storing Passwords Safely: From Hashing to bcrypt</h2>
+                <p>Hashing has one everyday job worth studying closely, because it is where beginners most often go wrong: storing passwords.</p>
+                <p>The right idea is simple: never store the password itself. Instead, store its hash, and at login, hash whatever the user typed and compare the two hashes. If they match, the password was correct and the real password was never kept anywhere. So far, so good.</p>
+
+                <h3>4.1 Why a plain hash is not enough</h3>
+                <p>The problem is that a plain, fast hash on its own does not stop a determined attacker who steals the hash file. Three weaknesses combine:</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>Fast is bad here:</strong> SHA-256 is designed to be fast. A modern graphics card can try billions of password guesses per second against a stolen hash.</li>
+                    <li><strong>Same password, same hash:</strong> Plain hashing gives identical passwords the identical hash a pattern an attacker can spot instantly, revealing which users share a password.</li>
+                    <li><strong>Rainbow tables:</strong> Attackers keep giant precomputed tables mapping common hashes back to their passwords. A bare hash is often just a table lookup away from being cracked.</li>
+                </ul>
+
+                <h3>4.2 Defense one: salting</h3>
+                <p>A <strong>salt</strong> is random data mixed into each password before it is hashed. Every password gets its own unique salt. The effect is powerful:</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li>Identical passwords now produce completely different hashes.</li>
+                    <li>Precomputed rainbow tables become useless they would need to be rebuilt for every possible salt.</li>
+                    <li>Attackers must crack each password individually instead of all at once.</li>
+                </ul>
+
+                <div style="padding:0.75rem 1rem; background:var(--card-elevated-bg); border-radius:6px; font-family:monospace; margin:0.75rem 0; font-size:0.9rem;">
+                    <div style="color:var(--text-muted); margin-bottom:0.25rem;"># the same password, two different salts</div>
+                    <div>"P@ss1" + salt_A → <span style="color:#2563eb;">9f2a...c1</span></div>
+                    <div>"P@ss1" + salt_B → <span style="color:#7c3aed;">3d7e...88</span></div>
+                </div>
+
+                <div style="margin-top:0.75rem; padding:0.75rem 1rem; background:rgba(59,130,246,0.08); border-left:4px solid #2563eb; border-radius:6px;">
+                    <strong style="color:#2563eb; display:block; margin-bottom:0.25rem;">🔍 A COMMON MYTH</strong>
+                    <p style="margin:0; font-size:0.9rem; line-height:1.5;">
+                        Salts do not need to be secret. They are stored right next to the hash. Their job is to be unique, not hidden - the password is still the only real secret.
+                    </p>
+                </div>
+
+                <h3>4.3 Defense two: slow, memory-hard hashing</h3>
+                <p>Salting stops the shortcuts, but the real defense is to make each guess expensive. This is the job of algorithms built to be deliberately slow:</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:22%;">Algorithm</th>
+                                <th style="width:28%;">Status</th>
+                                <th>What to know</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Argon2id</strong></td>
+                                <td>The current top pick</td>
+                                <td>Winner of the Password Hashing Competition and today's OWASP-recommended default. It is memory-hard, which resists cracking by graphics cards and custom chips.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>bcrypt</strong></td>
+                                <td>Still safe, widely used</td>
+                                <td>Based on the Blowfish cipher. A tunable work factor sets how slow it is raise it as hardware speeds up. A work factor of 10 or more is recommended.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PBKDF2/scrypt</strong></td>
+                                <td>The alternatives</td>
+                                <td>PBKDF2 is the FIPS-approved option (use a high iteration count). scrypt is memory-hard like Argon2. Good choices when the top pick is unavailable.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top:1rem; padding:0.85rem 1.15rem; background:rgba(13,148,136,0.08); border-left:4px solid var(--primary-color); border-radius:6px;">
+                    <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">🔑 THE KEY IDEA</strong>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        A delay you never notice at login a fraction of a second becomes years of computing time for an attacker trying to guess billions of passwords. That asymmetry is the whole point.
+                    </p>
+                </div>
+
+                <h3>4.4 Putting it together: how passwords should be stored today</h3>
+                <p>Combine the pieces, and a stolen password file becomes almost useless to an attacker:</p>
+                <ol style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>Take the password:</strong> held only for a moment in memory.</li>
+                    <li><strong>Add a unique salt:</strong> freshly generated for this user, stored beside the hash.</li>
+                    <li><strong>Run a slow hash:</strong> feed password + salt into Argon2id or bcrypt with a sensible work factor.</li>
+                    <li><strong>Store the result:</strong> save the salt and the slow hash, never the password. Check the same way at login.</li>
+                </ol>
+
+                <div style="margin-top:0.75rem; padding:0.75rem 1rem; background:rgba(16,185,129,0.08); border-left:4px solid #059669; border-radius:6px;">
+                    <strong style="color:#059669; display:block; margin-bottom:0.25rem;">🔗 CONNECTS TO YOUR LABS</strong>
+                    <p style="margin:0; font-size:0.9rem; line-height:1.5;">
+                        You saw the attacker's side of this when you cracked weak hashes and then re-protected them with salting and a slow hash. This is the defense that makes that cracking fail.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 5 -->
+            <div class="card">
+                <h2 id="a-hands-on-look-caesar-cipher">5 A Hands-On Look: The Caesar Cipher</h2>
+                <p>The oldest trick in the book is a good way to see plaintext, key, and ciphertext working together. In a Caesar cipher, you shift each letter forward by a fixed number the key. With a shift of 3, A becomes D, B becomes E, and so on.</p>
+
+                <div style="padding:1rem; background:var(--card-elevated-bg); border:1px solid var(--border-color); border-radius:8px; margin:1rem 0;">
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem;">
+                        <div>
+                            <span style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Plaintext:</span>
+                            <div style="font-family:monospace; font-size:1.25rem; font-weight:700; color:var(--text-dark-color);">HELLO</div>
+                        </div>
+                        <div>
+                            <span style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Key:</span>
+                            <div style="font-family:monospace; font-size:1.25rem; font-weight:700; color:var(--primary-color);">shift by 3</div>
+                        </div>
+                        <div>
+                            <span style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; font-weight:700;">Ciphertext:</span>
+                            <div style="font-family:monospace; font-size:1.25rem; font-weight:700; color:#dc2626;">KHOOR</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p><strong>WHAT IT SHOWS WELL:</strong> The same key both scrambles and unscrambles the message this is symmetric encryption in its simplest form. The key (the shift amount) is the whole secret.</p>
+                <p><strong>WHY IT IS NOT ENOUGH TODAY:</strong> There are only 25 possible shifts, so a computer breaks it instantly, and letter-frequency patterns give it away. Real ciphers like AES use enormous keys to make guessing hopeless.</p>
+            </div>
+
+            <!-- SECTION 6 -->
+            <div class="card">
+                <h2 id="cryptography-in-the-real-world">6 Cryptography in the Real World Today</h2>
+                <p>You have met the three tools. Here are the specific technologies that put them to work in the systems you use every day.</p>
+
+                <h3>6.1 The algorithms behind the padlock</h3>
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:25%;">Algorithm</th>
+                                <th style="width:20%;">Type</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>AES-256 (GCM)</strong></td>
+                                <td>Symmetric</td>
+                                <td>The workhorse. Encrypts most of the world's data at rest and in transit. GCM mode also checks integrity as it encrypts.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ChaCha20-Poly1305</strong></td>
+                                <td>Symmetric</td>
+                                <td>A fast alternative to AES, often preferred on phones and chips without AES acceleration.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RSA &amp; ECC (X25519)</strong></td>
+                                <td>Asymmetric</td>
+                                <td>ECC achieves the same security as RSA with much smaller keys. X25519 now powers most secure key exchange on the web.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SHA-256 / SHA-3</strong></td>
+                                <td>Hashing</td>
+                                <td>The current standard fingerprints. (SHA-1 and MD5 are broken and retired.)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>6.2 AEAD: encrypt and verify in one step</h3>
+                <p>Older systems encrypted data with one algorithm, then bolted on a separate integrity check two steps that were easy to get wrong. Modern ciphers use <strong>AEAD (Authenticated Encryption with Associated Data)</strong>, which does both jobs in a single, tested operation: it hides the data and guarantees it was not tampered with. Both <strong>AES-GCM</strong> and <strong>ChaCha20-Poly1305</strong> are AEAD ciphers. Combining the two jobs removes a whole class of mistakes which is why the modern web protocol, described next, allows only AEAD ciphers.</p>
+
+                <h3>6.3 TLS 1.3- all three tools working together</h3>
+                <p>Every time you load a secure website (the <code>https://</code> padlock), a handshake happens in milliseconds that uses all three cryptographic tools at once:</p>
+                <ol style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>Verify identity:</strong> the server proves who it is with a certificate and a digital signature (asymmetric).</li>
+                    <li><strong>Exchange a key:</strong> both sides agree on a shared secret using temporary keys, so no secret is ever sent (asymmetric key exchange).</li>
+                    <li><strong>Encrypt the traffic:</strong> the rest of the session is protected with a fast AEAD cipher (symmetric).</li>
+                </ol>
+
+                <div style="margin-top:1rem; padding:0.85rem 1.15rem; background:rgba(13,148,136,0.08); border-left:4px solid var(--primary-color); border-radius:6px;">
+                    <strong style="color:var(--primary-color); display:block; margin-bottom:0.25rem;">🛡️ FORWARD SECRECY</strong>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        Because each session uses fresh, temporary keys, stealing the server's private key later cannot decrypt traffic recorded earlier. TLS 1.3 makes this mandatory, and today it carries the majority of web traffic.
+                    </p>
+                </div>
+            </div>
+
+            <!-- SECTION 7 -->
+            <div class="card">
+                <h2 id="quantum-threat-post-quantum">7 The Quantum Threat and Post-Quantum Cryptography</h2>
+                <p>Cryptography is not finished evolving. A new kind of computer is changing what "secure" means.</p>
+                <p>A sufficiently large quantum computer could break RSA and ECC - the asymmetric cryptography securing almost all of today's internet because it could solve the underlying math problems far faster than any normal computer. Not everything is equally at risk:</p>
+
+                <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; margin:1rem 0;">
+                    <div style="padding:1rem; background:rgba(220,38,38,0.06); border:1px solid rgba(220,38,38,0.25); border-radius:8px;">
+                        <strong style="color:#dc2626; display:block; margin-bottom:0.35rem;">💥 WHAT BREAKS</strong>
+                        <p style="margin:0; font-size:0.9rem; line-height:1.5;">
+                            Asymmetric algorithms (RSA, ECC). Key exchange and digital signatures are the most exposed.
+                        </p>
+                    </div>
+                    <div style="padding:1rem; background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.25); border-radius:8px;">
+                        <strong style="color:#059669; display:block; margin-bottom:0.35rem;">🛡️ WHAT SURVIVES</strong>
+                        <p style="margin:0; font-size:0.9rem; line-height:1.5;">
+                            Symmetric encryption (AES) and hashing (SHA-256) are far more resistant mostly they just need larger keys.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="padding:0.85rem 1.15rem; background:rgba(234,179,8,0.08); border-left:4px solid #ca8a04; border-radius:6px; margin:1rem 0;">
+                    <strong style="color:#ca8a04; display:block; margin-bottom:0.25rem;">⏳ HARVEST NOW, DECRYPT LATER</strong>
+                    <p style="margin:0; font-size:0.925rem; line-height:1.5;">
+                        Attackers can record encrypted data today and simply wait for quantum computers to catch up. That makes protecting sensitive, long-lived data a problem for the present, not just the future.
+                    </p>
+                </div>
+
+                <h3>7.1 The response: post-quantum standards</h3>
+                <p>In 2024, the U.S. National Institute of Standards and Technology (NIST) finalized the first post-quantum cryptography standards algorithms designed to resist quantum attacks. They are ready to use now:</p>
+
+                <div class="table-container" style="overflow-x:auto; margin:1rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:18%;">Standard</th>
+                                <th style="width:18%;">Reference</th>
+                                <th style="width:22%;">Role</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ML-KEM</strong></td>
+                                <td>FIPS 203</td>
+                                <td>Key exchange</td>
+                                <td>Replaces RSA/ECC for sharing keys. Built on hard lattice-math problems.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ML-DSA</strong></td>
+                                <td>FIPS 204</td>
+                                <td>Digital signatures</td>
+                                <td>The primary new standard for signing and proving identity.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SLH-DSA</strong></td>
+                                <td>FIPS 205</td>
+                                <td>Backup signatures</td>
+                                <td>Hash-based, kept as a safety net relying on different math.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>Organizations worldwide have already begun migrating, with deadlines around 2030 to switch critical systems.</p>
+
+                <h3>7.2 The frontier: cryptography that does more than hide data</h3>
+                <p>Newer techniques let us compute on, and prove things about, data we never actually see:</p>
+                <ul style="margin:0.5rem 0 1rem 1.5rem; line-height:1.6;">
+                    <li><strong>Homomorphic encryption:</strong> compute directly on encrypted data without decrypting it, so a cloud service can process your data while never seeing it.</li>
+                    <li><strong>Zero-knowledge proofs:</strong> prove a statement is true without revealing why (for example, prove you are over 18 without showing your birthdate).</li>
+                    <li><strong>End-to-end encryption:</strong> only the sender and receiver hold the keys, so even the service carrying the message cannot read it.</li>
+                    <li><strong>Multi-party computation:</strong> several parties jointly compute a result from private inputs without any of them revealing their own data.</li>
+                </ul>
+            </div>
+
+            <!-- SECTION 8 -->
+            <div class="card">
+                <h2 id="summary-and-review-questions">8 Summary and Review Questions</h2>
+
+                <h3>📌 Key takeaways</h3>
+                <ul style="margin:0.5rem 0 1.5rem 1.5rem; line-height:1.6;">
+                    <li>Cryptography enforces the CIA Triad: it hides data, proves integrity, and confirms identity.</li>
+                    <li>Security lives in the key, never in hiding the method so never invent your own cipher.</li>
+                    <li>Symmetric = one shared key, fast, for the data itself.</li>
+                    <li>Asymmetric = public/private pair, solves key sharing and enables signatures.</li>
+                    <li>Hashing = one-way fingerprint, for integrity and password storage not encryption.</li>
+                    <li>Store passwords with a unique salt and a slow hash (Argon2id or bcrypt), never a plain fast hash.</li>
+                    <li>Modern systems use AEAD ciphers and TLS 1.3; post-quantum standards are already arriving.</li>
+                </ul>
+
+                <h3>📝 Review questions</h3>
+                <p style="font-style:italic; color:var(--text-muted); margin-bottom:1rem;">
+                    Answer in your own words. Suggested answers are shown in italics try each question before reading them.
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:1.25rem;">
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">1. Explain Kerckhoffs's principle in one sentence, and say why "security through obscurity" is discouraged.</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            A cipher should stay secure even if its method is public, because all secrecy rests in the key; obscurity fails because home-made secret methods never survive expert scrutiny.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">2. A company needs to encrypt a very large database quickly. Symmetric or asymmetric encryption and why?</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            Symmetric, because it is fast and efficient for large amounts of data; asymmetric would be too slow.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">3. Why is hashing, not encryption, the right tool for storing passwords?</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            Hashing is one-way, so the system never has to keep the actual password; it stores only the fingerprint and compares hashes at login.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">4. A developer hashes passwords with plain SHA-256 and no salt. Give two reasons this is unsafe.</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            SHA-256 is fast, so attackers can try billions of guesses per second; and without salts, identical passwords share a hash and rainbow tables can crack them by lookup.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">5. What does a salt achieve, and does it need to be kept secret?</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            It makes identical passwords hash differently and defeats rainbow tables; it needs to be unique, not secret, and is stored next to the hash.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">6. Name the OWASP-recommended password hashing algorithm today, and one acceptable alternative.</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            Argon2id is the recommended default; bcrypt (work factor 10+) or PBKDF2/scrypt are acceptable alternatives.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">7. When you load an https:// site, which cryptographic tool verifies the server's identity, and which encrypts the traffic?</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            A digital signature (asymmetric) verifies identity; a fast AEAD symmetric cipher encrypts the session traffic.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:var(--card-elevated-bg); border-radius:8px; border:1px solid var(--border-color);">
+                        <p style="margin:0 0 0.5rem 0; font-weight:700;">8. Why is "harvest now, decrypt later" a present-day concern rather than only a future one?</p>
+                        <p style="margin:0; font-style:italic; color:var(--text-dark-color); border-left:3px solid var(--primary-color); padding-left:0.75rem;">
+                            Attackers can record today's encrypted data now and decrypt it once quantum computers mature, so long-lived secrets are already at risk.
+                        </p>
+                    </div>
+                </div>
+
+                <p style="margin-top:2rem; font-size:0.85rem; color:var(--text-muted); text-align:center;">
+                    End of Week 7 module. Prepared for Information Assurance and Security (BSCS 3110), College of Computer Studies, University of Perpetual Help System DALTA.
+                </p>
+            </div>
+        </div>
+
+        <!-- TAB 2: QUICK REFERENCE & FOUR-PILLAR SUMMARY MATRIX -->
+        <div class="tab-content" id="formulas">
+            <!-- HEADER BAR -->
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+                    <div>
+                        <h2 style="margin:0; font-size:1.5rem;">Quick Reference &amp; Summary Matrix</h2>
+                        <p style="margin:0.25rem 0 0 0; color:var(--text-muted); font-size:0.9rem;">
+                            Cryptography Fundamentals, AEAD, TLS 1.3 &amp; NIST Post-Quantum Standards • Four-Pillar Exam-Ready Review Sheet
+                        </p>
+                    </div>
+                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+                </div>
+            </div>
+
+            <!-- DUAL-SECTION SEGMENTED SWITCHER -->
+            <div class="qr-section-nav" role="tablist">
+                <button class="qr-section-btn active" id="btn-qr-matrix" onclick="switchQuickRefSection('matrix')" role="tab" aria-selected="true">
+                    <span class="qr-btn-icon">📋</span>
+                    <span class="qr-btn-text">
+                        <strong>Four-Pillar Exam Review Matrix</strong>
+                        <small>Pillars 1–4: Terminology, Formulas, Comparison Tables &amp; Pitfalls</small>
+                    </span>
+                </button>
+                <button class="qr-section-btn" id="btn-qr-calculators" onclick="switchQuickRefSection('calculators')" role="tab" aria-selected="false">
+                    <span class="qr-btn-icon">🧮</span>
+                    <span class="qr-btn-text">
+                        <strong>Interactive Academic Calculators</strong>
+                        <small>Dedicated Calculation Studio: Live Solvers &amp; Step-by-Step Math</small>
+                    </span>
+                </button>
+            </div>
+
+            <!-- SECTION 1: FOUR-PILLAR EXAM REVIEW MATRIX (CONTINUOUS & UNINTERRUPTED) -->
+            <div class="qr-section-pane active" id="qr-section-matrix">
+            <!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>🏛️ Pillar 1:</span> Core Terminology &amp; Keyword Recall Grid
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Essential cryptographic terms, core principles, modern primitives, and security mechanisms.
+                </p>
+                <div class="table-container" style="overflow-x:auto; margin-top:1rem;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:22%;">Term / Acronym</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:48%;">Exact Domain Definition</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Classification</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Exam Keyword</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Cryptography</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The mathematical machinery and practice of scrambling data, verifying integrity, and proving authentication to enforce the CIA Triad.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Foundation</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Mathematical Machinery</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Plaintext</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The original unencrypted, readable data (files, passwords, messages) prior to applying any cryptographic protection.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data State</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Unprotected Original</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Ciphertext</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The scrambled, unreadable representation of data produced by an encryption algorithm, indistinguishable from random noise without the key.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data State</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Scrambled Data</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Key</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The secret parameter or sequence of bits that configures the cryptographic algorithm to lock or unlock data.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Secret Parameter</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">All Secrecy Lives Here</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Cipher</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The publicly defined mathematical recipe or algorithm for turning plaintext into ciphertext and back again.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Algorithm</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Public Recipe</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Kerckhoffs's Principle</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A core cryptographic design rule stating a cipher must remain completely secure even if its algorithm is public, provided only the key remains secret.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Core Principle</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Public Method, Secret Key</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Security through Obscurity</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The dangerous anti-pattern of attempting to secure systems by hiding or inventing secret proprietary algorithms, which inevitably fail public cryptanalysis.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Vulnerability Trap</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#dc2626;">Never Roll Your Own</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Symmetric Encryption</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Encryption scheme using a single identical shared secret key for both encryption and decryption (e.g., AES-256, ChaCha20). Characterized by high speed.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tool 1</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">One Shared Key (Fast)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Asymmetric Encryption</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Public-key cryptography using mathematically paired keys: a public key to encrypt/verify and a private key to decrypt/sign (e.g., RSA, ECC).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tool 2</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Public/Private Pair</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Cryptographic Hash Function</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A deterministic one-way mathematical function converting arbitrary-length input into a fixed-length output fingerprint without using keys (e.g., SHA-256, SHA-3).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tool 3</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">One-Way Fingerprint</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Salt</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A cryptographically random value concatenated with each user password before hashing to ensure identical passwords generate distinct hashes and invalidate rainbow tables.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Password Defense</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Unique, Not Secret</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Rainbow Table</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A massive precomputed lookup table mapping common plaintext passwords to hashes, rendered useless by per-password unique salting.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Cracking Technique</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Precomputed Table</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Argon2id</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The current OWASP gold standard password hashing algorithm. Designed to be deliberately slow and memory-hard, defeating GPU and ASIC attacks.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Password KDF</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">OWASP Recommended</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>bcrypt</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A mature, widely deployed slow password hashing algorithm based on Blowfish with an adjustable work factor (recommended cost &gt;= 10).</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Password KDF</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tunable Work Factor</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>AEAD</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Authenticated Encryption with Associated Data (e.g., AES-GCM, ChaCha20-Poly1305); simultaneously guarantees confidentiality and integrity in a single primitive.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Modern Cipher Mode</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#0284c7;">Encrypt + Verify In One</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>TLS 1.3</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The modern transport layer protocol powering HTTPS, combining asymmetric certificate authentication, ephemeral key exchange, and symmetric AEAD encryption.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Network Protocol</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">HTTPS Web Security</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Forward Secrecy (PFS)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A security property ensuring session keys generated with ephemeral Diffie-Hellman cannot be compromised even if the server's long-term private key is leaked later.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Guarantee</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Ephemeral Keys Mandatory</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Harvest Now, Decrypt Later (HNDL)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The intelligence practice where adversaries store encrypted traffic today, planning to decrypt it once cryptanalytically relevant quantum computers emerge.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Quantum Threat</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#ca8a04;">Present-Day Risk</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ML-KEM (FIPS 203)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">NIST primary post-quantum key encapsulation standard based on Module-Lattice Learning with Errors (MLWE), replacing classical RSA/ECC key exchange.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Post-Quantum Standard</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Lattice Key Exchange</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ML-DSA (FIPS 204)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">NIST primary post-quantum digital signature algorithm standard based on Module-Lattice math, providing quantum-resistant identity and authentication.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Post-Quantum Standard</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Lattice Signatures</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Homomorphic Encryption</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Advanced cryptographic scheme permitting arbitrary mathematical computations directly on ciphertext without decrypting the underlying plaintext data.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Frontier Crypto</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Compute on Ciphertext</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Zero-Knowledge Proofs (ZKP)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A protocol enabling a prover to mathematically demonstrate to a verifier that a statement is true without revealing any knowledge beyond the validity of the statement.</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Frontier Crypto</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Prove Without Revealing</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>📐 Pillar 2:</span> Formula &amp; Calculation Reference Cards
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Classical shift ciphers, key scaling equations, password derivation bounds, and keyspace entropy.
+                </p>
+                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem;">
+                    
+                    <!-- CARD 1: CAESAR CIPHER -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Caesar Shift Modular Arithmetic</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            C = (P + k) mod 26 &nbsp;|&nbsp; P = (C - k) mod 26
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>P:</strong> Plaintext letter index (A = 0, B = 1, ..., Z = 25).</li>
+                                <li><strong>k:</strong> Secret key shift integer (1 &le; k &le; 25).</li>
+                                <li><strong>C:</strong> Ciphertext letter index resulting from modular shift.</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Add the shift key k to the letter number and take remainder modulo 26 to get the ciphertext; subtract key modulo 26 to decrypt."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> Letter H (7) with k = 3 &rarr; (7 + 3) mod 26 = 10 (K). HELLO &rarr; KHOOR.
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Ciphertext letter C equals plaintext letter P plus shift key k modulo twenty-six. Decryption subtracts k modulo twenty-six."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: KEY GROWTH SCALING -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Network Key Distribution Complexity</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            K_sym = [n(n - 1)] / 2 &nbsp;|&nbsp; K_asym = 2n
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>n:</strong> Number of participating users or nodes in the secure network.</li>
+                                <li><strong>K_sym:</strong> Number of distinct shared secret keys required for symmetric pairwise communication.</li>
+                                <li><strong>K_asym:</strong> Number of total keys (n public + n private) required for asymmetric encryption.</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Symmetric keys grow quadratically with the square of participants, whereas asymmetric systems require only two keys per user."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> For n = 1,000 users, symmetric requires 499,500 keys. Asymmetric requires only 2,000 keys.
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Number of symmetric keys equals n multiplied by n minus one all divided by two. Asymmetric keys equal two times n."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: SALTED HASH DERIVATION -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Salted Password Hash Function</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            H = KDF(Password || Salt, Work_Factor)
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>Password:</strong> User-supplied secret plaintext credential held temporarily in memory.</li>
+                                <li><strong>Salt:</strong> Globally unique random bitstring generated per user.</li>
+                                <li><strong>||:</strong> Cryptographic concatenation operator.</li>
+                                <li><strong>Work_Factor:</strong> Iteration or memory-hardness parameter (e.g., bcrypt cost 10+).</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "Concatenate the password with a unique salt and process through an intentionally slow key derivation function."
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Stored hash H equals key derivation function of password concatenated with salt evaluated under work factor."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: KEYSPACE & BRUTE FORCE -->
+                    <div class="formula-card">
+                        <span class="formula-badge">Symmetric Keyspace &amp; Average Crack Effort</span>
+                        <div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Keyspace = 2^k &nbsp;|&nbsp; E(Guesses) = 2^(k - 1)
+                        </div>
+                        <div class="formula-explain">
+                            <strong>Parameter Definitions:</strong>
+                            <ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+                                <li><strong>k:</strong> Key length in bits (e.g., 128 or 256 for AES).</li>
+                                <li><strong>2^k:</strong> Total number of possible distinct key combinations.</li>
+                                <li><strong>2^(k - 1):</strong> Expected average number of attempts to find the correct key by brute force (50% of keyspace).</li>
+                            </ul>
+                            <strong>Plain English Reading:</strong> "A k-bit key provides two to the power of k combinations; on average, brute force requires testing half the keyspace."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+                                <strong>Worked Example:</strong> AES-128 keyspace = 3.4 &times; 10^38 combinations. At 1 trillion guesses/sec, takes 5.4 &times; 10^18 years to exhaust.
+                            </div>
+                        </div>
+                        <div class="prob-read-english-box" style="margin-top:10px;">
+                            <div class="prob-read-header">
+                                <span class="prob-read-badge">🗣️ How to Read in English</span>
+                            </div>
+                            <div class="prob-read-text">
+                                Read as: <strong>"Total keyspace equals two raised to key length k. Expected brute force attempts equal two raised to k minus one."</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>📊 Pillar 3:</span> High-Yield Comparative Analysis Matrices
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Direct side-by-side breakdowns for high-frequency exam comparison questions.
+                </p>
+
+                <!-- MATRIX 1: 3 TOOLS -->
+                <h3 style="margin-top:1.25rem; font-size:1.05rem;">1. The Three Cryptographic Tools Comparison</h3>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Criterion</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Symmetric Encryption</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Asymmetric Encryption</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Hashing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Core Goal</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Confidentiality (Bulk data)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Key Exchange &amp; Digital Signatures</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Integrity &amp; Password Storage</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Number of Keys</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">1 shared secret key</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">2 paired keys (Public &amp; Private)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">0 keys (Deterministic function)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Reversible?</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Yes, with the shared key</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Yes, with the private key</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">No, strictly one-way</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Computation Speed</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Extremely fast (Hardware accelerated)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">Slow (Complex modular math)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Fast (Digest) or Slow (Argon2id KDF)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Standard Examples</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">AES-256 (GCM), ChaCha20</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">RSA-2048, ECC (X25519)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">SHA-256, SHA-3, Argon2id, bcrypt</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- MATRIX 2: PASSWORD STORAGE -->
+                <h3 style="margin-top:1.5rem; font-size:1.05rem;">2. Password Storage Architecture Evolution</h3>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Storage Scheme</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Mechanism</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Rainbow Table Vulnerability</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">GPU Brute Force Speed</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Production Verdict</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Plaintext</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Raw string in database</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">N/A (Directly readable)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Instantaneous</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">❌ Catastrophic</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Plain Fast Hash</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">SHA-256(Password)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">High (Lookup crackable)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">Billions of guesses/sec</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">❌ Broken / Insecure</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Salted Fast Hash</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">SHA-256(Password + Salt)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">None (Tables invalidated)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626;">Still billions/sec on GPUs</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#d97706;">⚠️ Deprecated</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Slow KDF (Argon2id)</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Argon2id(Password, Salt, Time, Memory)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">None</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Extremely low (Memory-hard)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">✅ OWASP Gold Standard</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- MATRIX 3: POST QUANTUM -->
+                <h3 style="margin-top:1.5rem; font-size:1.05rem;">3. NIST Post-Quantum Standards Matrix (2024 Finalized)</h3>
+                <div class="table-container" style="overflow-x:auto;">
+                    <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+                        <thead>
+                            <tr style="background:var(--primary-color); color:white;">
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Standard Name</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">FIPS Specification</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Cryptographic Role</th>
+                                <th style="padding:0.75rem; border:1px solid var(--border-color);">Underlying Hard Mathematical Problem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ML-KEM</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">FIPS 203</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">General Key Encapsulation (Replaces RSA/DH)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Module-Lattice Learning with Errors (MLWE)</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ML-DSA</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">FIPS 204</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Primary Digital Signatures (Replaces ECDSA/RSA)</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Module-Lattice Math</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>SLH-DSA</strong></td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">FIPS 205</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Stateless Backup Digital Signatures</td>
+                                <td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">State-free Hash-Based Trees</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:#dc2626; display:flex; align-items:center; gap:0.5rem;">
+                    <span>⚠️ Pillar 4:</span> Common Exam Pitfalls &amp; Fallacies
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Crucial distinctions, traps, and misconceptions frequently tested on Midterm exams.
+                </p>
+
+                <div style="display:flex; flex-direction:column; gap:1rem; margin-top:1rem;">
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">1. The "Hashing is Encryption" Fallacy</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Saying that a password or file is "encrypted with SHA-256".<br>
+                            <strong>The Reality:</strong> Hashing is strictly <strong>one-way</strong> and has <strong>no key</strong>. Encryption is two-way and requires a key to decrypt. You cannot "decrypt" a hash.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">2. The "Secret Salt" Misconception</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Believing salts must be kept confidential like passwords.<br>
+                            <strong>The Reality:</strong> Salts do <strong>not</strong> need to be secret. They are stored in plaintext directly beside the hash. Their sole purpose is to be <strong>globally unique</strong>, preventing rainbow tables and forcing individualized cracking.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">3. Fast Hashing for Passwords Trap</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Assuming that because SHA-256 is modern and secure for file integrity, it is safe for passwords.<br>
+                            <strong>The Reality:</strong> SHA-256 was designed for speed. High speed enables attackers to compute billions of guesses per second on consumer GPUs. Passwords require deliberately <em>slow, memory-hard</em> functions like Argon2id or bcrypt.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">4. Asymmetric Encryption Roles Inversion</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Confusing which key is used for encryption versus signing.<br>
+                            <strong>The Reality:</strong> To send a private message to Alice, you encrypt with <em>Alice's Public Key</em> (only Alice's Private Key can decrypt). To prove a message came from Bob, Bob signs with <em>Bob's Private Key</em> (anyone verifies with Bob's Public Key).
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">5. The Quantum Vulnerability Scope Fallacy</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Thinking quantum computers break all encryption equally.<br>
+                            <strong>The Reality:</strong> Quantum computers running Shor's algorithm completely shatter <strong>asymmetric cryptography (RSA, ECC)</strong>. Symmetric ciphers (AES) and hashing (SHA-256) only suffer quadratic speedups (Grover's algorithm) and remain secure simply by using 256-bit keys.
+                        </p>
+                    </div>
+
+                    <div style="padding:1rem; background:rgba(220,38,38,0.05); border:1px solid rgba(220,38,38,0.2); border-radius:8px;">
+                        <strong style="color:#dc2626;">6. Kerckhoffs's Principle vs Security Through Obscurity</strong>
+                        <p style="margin:0.35rem 0 0 0; font-size:0.9rem; line-height:1.5;">
+                            <strong>The Trap:</strong> Believing a system is more secure if the encryption algorithm is kept secret.<br>
+                            <strong>The Reality:</strong> Kerckhoffs's principle proves that proprietary, hidden algorithms have fatal undiscovered flaws. True security relies 100% on the secrecy of the key, using publicly vetted algorithms (AES, Argon2id).
+                        </p>
+                    </div>
+                </div>
+            </div>
+            </div> <!-- END #qr-section-matrix -->
+
+            <!-- SECTION 2: DEDICATED ACADEMIC CALCULATORS STUDIO -->
+            <div class="qr-section-pane" id="qr-section-calculators">
+                <div class="card" style="margin-top:1rem; margin-bottom:1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem; background:linear-gradient(135deg, rgba(99,102,241,0.06), rgba(168,85,247,0.06)); border:1px solid rgba(99,102,241,0.2);">
+                    <div>
+                        <h2 style="margin:0; font-size:1.35rem; color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                            <span>🧮</span> Interactive Cryptosystem Calculators Studio
+                        </h2>
+                        <p style="margin:0.25rem 0 0 0; color:var(--text-muted-color); font-size:0.88rem;">
+                            Isolated interactive cryptosystem workspace. All formulas update live with intermediate derivations and exam cues.
+                        </p>
+                    </div>
+                    <button type="button" onclick="switchQuickRefSection('matrix')" class="btn" style="background:var(--card-bg-color); border:1px solid var(--border-color); color:var(--text-color); padding:0.45rem 0.95rem; border-radius:6px; font-size:0.85rem; cursor:pointer; display:inline-flex; align-items:center; gap:0.35rem;">
+                        &larr; Return to Four-Pillar Review Matrix
+                    </button>
+                </div>
+
+                <!-- INTERACTIVE ACADEMIC CALCULATORS SECTION -->
+            <div class="card" style="margin-top:1.5rem;">
+                <h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+                    <span>🧮 Interactive Academic Calculators:</span> Live Math &amp; Cryptosystem Engines
+                </h2>
+                <p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">
+                    Experiment with live formulas from the Cryptography study guide. All values recalculate in real-time with comprehensive intermediate mathematical derivations, worked lecture examples, and exam usage cues.
+                </p>
+
+                <!-- CALCULATOR 1: CAESAR SHIFT MODULAR ARITHMETIC -->
+                <div class="calc-card" style="margin-top:1.25rem;">
+                    <div class="calc-title">
+                        <span>🏛️ Calculator 1: Classical Monoalphabetic Cipher — Caesar Shift Modular Arithmetic</span>
+                    </div>
+                    <div class="calc-desc">
+                        Encrypt or decrypt messages using classical monoalphabetic modular shift arithmetic over the 26-letter English alphabet (&Zopf;₂₆): <strong>C &equiv; (P + k) mod 26</strong> and <strong>P &equiv; (C - k) mod 26</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field" style="grid-column: 1 / -1;">
+                            <label class="calc-label" for="calc-caesar-text">Input Text String:</label>
+                            <input class="calc-input" id="calc-caesar-text" type="text" value="HELLO WORLD" oninput="calculateCaesarCipher()" placeholder="e.g. HELLO WORLD" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-caesar-k">Shift Key (k, 0 to 25):</label>
+                            <div class="calc-slider-wrap">
+                                <input class="calc-input" id="calc-caesar-k" type="number" min="0" max="25" step="1" value="3" oninput="document.getElementById('calc-caesar-k-slider').value=this.value; calculateCaesarCipher();" />
+                                <input class="calc-range-slider" id="calc-caesar-k-slider" type="range" min="0" max="25" step="1" value="3" oninput="document.getElementById('calc-caesar-k').value=this.value; calculateCaesarCipher();" />
+                            </div>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-caesar-mode">Operation Mode:</label>
+                            <select class="calc-input" id="calc-caesar-mode" onchange="calculateCaesarCipher()">
+                                <option value="encrypt" selected>Encrypt: C &equiv; (P + k) mod 26</option>
+                                <option value="decrypt">Decrypt: P &equiv; (C - k) mod 26</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Transformed Ciphertext / Plaintext:</span>
+                            <span class="calc-result-val" id="calc-caesar-val">KHOOR ZRUOG</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-caesar-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when solving classical monoalphabetic substitution problems, computing modular shifts over English alphabet letters (&Zopf;₂₆), or explaining why Caesar ciphers violate Kerckhoffs's principle due to an infinitesimally small keyspace of only 25 non-trivial keys.
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 2: NETWORK KEY DISTRIBUTION SCALABILITY -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>🌐 Calculator 2: Key Management — Network Key Distribution Scalability</span>
+                    </div>
+                    <div class="calc-desc">
+                        Quantify the total number of secret cryptographic keys required for complete pairwise communication across an enterprise network: <strong>K_sym = [n(n - 1)] / 2</strong> versus <strong>K_asym = 2n</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-net-n">Number of Network Participants / Nodes (n):</label>
+                            <div class="calc-slider-wrap">
+                                <input class="calc-input" id="calc-net-n" type="number" min="2" max="10000000" step="1" value="100" oninput="document.getElementById('calc-net-n-slider').value=Math.min(500, this.value); calculateNetworkKeyScalability();" />
+                                <input class="calc-range-slider" id="calc-net-n-slider" type="range" min="2" max="500" step="1" value="100" oninput="document.getElementById('calc-net-n').value=this.value; calculateNetworkKeyScalability();" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Key Count Comparison:</span>
+                            <span class="calc-result-val" id="calc-net-val">Sym: 4,950 keys | Asym: 200 keys</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-net-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when comparing symmetric versus asymmetric key management scalability, calculating key storage overhead in network security architectures, or explaining why Diffie-Hellman and PKI certificates are mathematically necessary for Internet-scale communications.
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 3: PASSWORD SALTING, WORK FACTOR & SLOW KDF -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>🛡️ Calculator 3: Authentication Security — Password Entropy, Salting &amp; Slow KDF</span>
+                    </div>
+                    <div class="calc-desc">
+                        Model brute-force and dictionary attack resistance by calculating character set entropy, cryptographic salting impact, and Key Derivation Function (KDF) work factor multipliers: <strong>Keyspace S = Cᴸ</strong> and <strong>Attack Time T = (S &times; W) / R</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-pw-len">Password Length (L characters):</label>
+                            <input class="calc-input" id="calc-pw-len" type="number" min="4" max="32" step="1" value="8" oninput="calculatePasswordKDFSecurity()" />
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-pw-charset">Character Set Complexity (C):</label>
+                            <select class="calc-input" id="calc-pw-charset" onchange="calculatePasswordKDFSecurity()">
+                                <option value="10">Digits Only (0-9, C = 10)</option>
+                                <option value="26">Lowercase Letters Only (a-z, C = 26)</option>
+                                <option value="62" selected>Alphanumeric (a-z, A-Z, 0-9, C = 62)</option>
+                                <option value="95">Full Printable ASCII + Symbols (C = 95)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-pw-rate">Attacker Hash Rate (R):</label>
+                            <select class="calc-input" id="calc-pw-rate" onchange="calculatePasswordKDFSecurity()">
+                                <option value="10000000">Standard CPU (10 Million H/s = 10 MH/s)</option>
+                                <option value="1000000000" selected>High-End GPU Rig (1 Billion H/s = 1 GH/s)</option>
+                                <option value="100000000000">ASIC Farm (100 Billion H/s = 100 GH/s)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-pw-kdf">KDF Work Factor Multiplier (W):</label>
+                            <select class="calc-input" id="calc-pw-kdf" onchange="calculatePasswordKDFSecurity()">
+                                <option value="1">Fast Hash / No KDF (MD5, SHA-256: W = 1)</option>
+                                <option value="10000" selected>Standard KDF (PBKDF2/bcrypt: W = 10,000)</option>
+                                <option value="100000">High-Security KDF (Argon2id: W = 100,000)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-pw-salt">Cryptographic Salt Applied?</label>
+                            <select class="calc-input" id="calc-pw-salt" onchange="calculatePasswordKDFSecurity()">
+                                <option value="yes" selected>Yes: Unique 128-bit Salt Per User</option>
+                                <option value="no">No: Unsalted Raw Hash (Rainbow Table Vulnerable)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Cracking Time &amp; Security Evaluation:</span>
+                            <span class="calc-result-val" id="calc-pw-val">Fast: ~30.3 hours | KDF: ~34.6 years</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-pw-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when explaining the cryptographic defense of password salting against precomputed Rainbow Tables, evaluating password entropy policies, or justifying why intentionally slow key derivation functions (bcrypt, PBKDF2, Argon2) are required over fast general-purpose hashes (MD5, SHA-256).
+                    </div>
+                </div>
+
+                <!-- CALCULATOR 4: SYMMETRIC KEYSPACE & BRUTE-FORCE EXHAUSTION -->
+                <div class="calc-card" style="margin-top:1.5rem;">
+                    <div class="calc-title">
+                        <span>⚡ Calculator 4: Cryptanalysis — Symmetric Keyspace Exhaustion &amp; Brute Force</span>
+                    </div>
+                    <div class="calc-desc">
+                        Determine the exhaustive search complexity, expected cracking effort, and security duration for a symmetric key length (k bits): <strong>Keyspace = 2ᵏ</strong> and <strong>Expected Attempts = 2ᵏ⁻¹</strong>.
+                    </div>
+                    <div class="calc-grid">
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-bf-k">Symmetric Key Length (k bits):</label>
+                            <select class="calc-input" id="calc-bf-k" onchange="calculateKeyspaceBruteForce()">
+                                <option value="40">40 bits (Export-grade legacy, completely broken)</option>
+                                <option value="56" selected>56 bits (Single DES, historically broken)</option>
+                                <option value="64">64 bits (Obsolete block cipher standard)</option>
+                                <option value="112">112 bits (2-Key Triple DES, legacy compliant)</option>
+                                <option value="128">128 bits (AES-128, modern enterprise standard)</option>
+                                <option value="192">192 bits (AES-192, top secret standard)</option>
+                                <option value="256">256 bits (AES-256, quantum-resistant standard)</option>
+                            </select>
+                        </div>
+                        <div class="calc-field">
+                            <label class="calc-label" for="calc-bf-speed">Attacker Guess Rate (Trials / sec):</label>
+                            <select class="calc-input" id="calc-bf-speed" onchange="calculateKeyspaceBruteForce()">
+                                <option value="10000000">Standard CPU Core (10 Million trials/sec = 10⁷)</option>
+                                <option value="100000000000" selected>Distributed ASIC Rig (100 Billion trials/sec = 10¹¹)</option>
+                                <option value="100000000000000">Global Supercomputing Farm (100 Trillion trials/sec = 10¹⁴)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="calc-result-box">
+                        <div class="calc-result-header">
+                            <span style="font-weight:700; font-size:0.95rem;">Exhaustive Search Feasibility:</span>
+                            <span class="calc-result-val" id="calc-bf-val">2⁵⁶ keys | ~4.17 days</span>
+                        </div>
+                        <div class="calc-math-steps" id="calc-bf-steps">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                    <div class="calc-exam-note" style="margin-top:0.85rem; padding:0.65rem 0.9rem; background:rgba(99,102,241,0.07); border-left:3px solid var(--primary-color); border-radius:6px; font-size:0.85rem; line-height:1.45; color:var(--text-color);">
+                        <strong style="color:var(--primary-color); display:inline-flex; align-items:center; gap:0.35rem;">📌 When to Use This Formula in Exams:</strong>
+                        Use when calculating computational security boundaries, proving why 56-bit DES was broken by EFF Deep Crack in under 56 hours, or demonstrating how each additional bit of key length doubles adversary cracking effort (2ᵏ⁺¹ = 2 &times; 2ᵏ).
+                    </div>
+                </div>
+
+            </div>
+            </div> <!-- END #qr-section-calculators -->
+
+        </div>
+    </div>
+
+<script>
+
+    // Section Switcher between Four-Pillar Matrix and Interactive Calculators
+    function switchQuickRefSection(sectionName) {
+        const matrixPane = document.getElementById('qr-section-matrix');
+        const calcPane = document.getElementById('qr-section-calculators');
+        const btnMatrix = document.getElementById('btn-qr-matrix');
+        const btnCalc = document.getElementById('btn-qr-calculators');
+        const navBtnQuickref = document.getElementById('nav-btn-quickref');
+        const navBtnCalc = document.getElementById('nav-btn-calculators');
+
+        if (!matrixPane || !calcPane) return;
+
+        if (sectionName === 'calculators') {
+            matrixPane.classList.remove('active');
+            calcPane.classList.add('active');
+            if (btnMatrix) {
+                btnMatrix.classList.remove('active');
+                btnMatrix.setAttribute('aria-selected', 'false');
+            }
+            if (btnCalc) {
+                btnCalc.classList.add('active');
+                btnCalc.setAttribute('aria-selected', 'true');
+            }
+            if (navBtnQuickref) navBtnQuickref.classList.remove('active');
+            if (navBtnCalc) navBtnCalc.classList.add('active');
+        } else {
+            calcPane.classList.remove('active');
+            matrixPane.classList.add('active');
+            if (btnCalc) {
+                btnCalc.classList.remove('active');
+                btnCalc.setAttribute('aria-selected', 'false');
+            }
+            if (btnMatrix) {
+                btnMatrix.classList.add('active');
+                btnMatrix.setAttribute('aria-selected', 'true');
+            }
+            if (navBtnCalc) navBtnCalc.classList.remove('active');
+            if (navBtnQuickref) navBtnQuickref.classList.add('active');
+        }
+    }
+
+    function openQuickRefTab(sectionName) {
+        if (window.switchTab) {
+            window.switchTab('formulas', false);
+        }
+        switchQuickRefSection(sectionName);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ==========================================================
+       REAL-TIME ACADEMIC CALCULATORS FOR CRYPTOGRAPHY FUNDAMENTALS
+       ========================================================== */
+
+    function formatTimeDuration(seconds) {
+        if (!isFinite(seconds) || seconds < 0) return 'Infinite / Incomputable';
+        if (seconds < 1) return '< 1 second';
+        if (seconds < 60) return `${seconds.toFixed(1)} seconds`;
+        const minutes = seconds / 60;
+        if (minutes < 60) return `${minutes.toFixed(1)} minutes`;
+        const hours = minutes / 60;
+        if (hours < 24) return `${hours.toFixed(1)} hours`;
+        const days = hours / 24;
+        if (days < 365.25) return `${days.toFixed(1)} days`;
+        const years = days / 365.25;
+        if (years < 1000) return `${years.toFixed(1)} years`;
+        if (years < 1000000) return `${(years / 1000).toFixed(1)} thousand years`;
+        if (years < 1000000000) return `${(years / 1000000).toFixed(1)} million years`;
+        if (years < 1e12) return `${(years / 1e9).toFixed(1)} billion years`;
+        return `${years.toExponential(2)} years (longer than universe age)`;
+    }
+
+    // Calculator 1: Caesar Shift Modular Arithmetic
+    function calculateCaesarCipher() {
+        const textInput = document.getElementById('calc-caesar-text');
+        const kInput = document.getElementById('calc-caesar-k');
+        const modeInput = document.getElementById('calc-caesar-mode');
+        const valBox = document.getElementById('calc-caesar-val');
+        const stepsBox = document.getElementById('calc-caesar-steps');
+        if (!textInput || !kInput || !modeInput || !valBox || !stepsBox) return;
+
+        const rawText = textInput.value;
+        let k = parseInt(kInput.value, 10);
+        const mode = modeInput.value;
+
+        if (isNaN(k)) k = 3;
+        k = ((k % 26) + 26) % 26; // Normalize shift to [0, 25]
+
+        let output = '';
+        const derivations = [];
+
+        for (let i = 0; i < rawText.length; i++) {
+            const char = rawText[i];
+            const code = char.charCodeAt(0);
+
+            if (code >= 65 && code <= 90) { // Uppercase A-Z
+                const p = code - 65;
+                let c = 0;
+                if (mode === 'encrypt') {
+                    c = (p + k) % 26;
+                } else {
+                    c = ((p - k) % 26 + 26) % 26;
+                }
+                const newChar = String.fromCharCode(c + 65);
+                output += newChar;
+                if (derivations.length < 6) {
+                    derivations.push(`'${char}' (${p}) &rarr; (${p} ${mode === 'encrypt' ? '+' : '-'} ${k}) mod 26 = <strong>${c}</strong> &rarr; '${newChar}'`);
+                }
+            } else if (code >= 97 && code <= 122) { // Lowercase a-z
+                const p = code - 97;
+                let c = 0;
+                if (mode === 'encrypt') {
+                    c = (p + k) % 26;
+                } else {
+                    c = ((p - k) % 26 + 26) % 26;
+                }
+                const newChar = String.fromCharCode(c + 97);
+                output += newChar;
+                if (derivations.length < 6) {
+                    derivations.push(`'${char}' (${p}) &rarr; (${p} ${mode === 'encrypt' ? '+' : '-'} ${k}) mod 26 = <strong>${c}</strong> &rarr; '${newChar}'`);
+                }
+            } else {
+                output += char; // Non-alphabetic preserved
+            }
+        }
+
+        valBox.textContent = output || '(empty)';
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Modular Parameters:</strong> Modulus m = 26 letters (&Zopf;₂₆), Shift Key k = <strong>${k}</strong>, Mode = <strong>${mode === 'encrypt' ? 'Encryption: C &equiv; (P + k) mod 26' : 'Decryption: P &equiv; (C - k) mod 26'}</strong></div>
+            <div class="step-line">&bull; <strong>Sample Character Transformations:</strong><br/>${derivations.map(d => `<span style="display:inline-block; margin-right:1rem; margin-top:0.25rem;">${d}</span>`).join(' ')}</div>
+            <div class="step-line">&bull; <strong>Cryptanalytic Vulnerability Assessment:</strong> The Caesar shift keyspace is strictly limited to 26 possibilities (with k = 0 being identity/plaintext). Because only 25 valid non-trivial keys exist, an adversary can break this cipher in less than 1 millisecond using exhaustive brute-force search or English letter frequency analysis (e.g. 'E' appears ~12.7%, 'T' ~9.1%).</div>
+        `;
+    }
+
+    // Calculator 2: Network Key Distribution Scalability
+    function calculateNetworkKeyScalability() {
+        const nInput = document.getElementById('calc-net-n');
+        const valBox = document.getElementById('calc-net-val');
+        const stepsBox = document.getElementById('calc-net-steps');
+        if (!nInput || !valBox || !stepsBox) return;
+
+        const n = parseInt(nInput.value, 10);
+        if (isNaN(n) || n < 2) {
+            valBox.textContent = 'n &ge; 2 required';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Network communication requires at least 2 participants.</div>';
+            return;
+        }
+
+        const symKeys = (n * (n - 1)) / 2;
+        const asymKeys = 2 * n;
+        const ratio = symKeys / asymKeys;
+        const keysPerNodeSym = n - 1;
+
+        valBox.textContent = `Sym: ${symKeys.toLocaleString()} keys | Asym: ${asymKeys.toLocaleString()} keys`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Network Size (n):</strong> <strong>${n.toLocaleString()}</strong> distinct communicating entities / nodes</div>
+            <div class="step-line">&bull; <strong>Symmetric Pairwise Keys Required (K_sym):</strong> K_sym = [n(n - 1)] &divide; 2 = [${n.toLocaleString()} &times; ${(n - 1).toLocaleString()}] &divide; 2 = <strong>${symKeys.toLocaleString()} shared secret keys</strong> (Quadratic O(n&sup2;) growth)</div>
+            <div class="step-line">&bull; <strong>Key Storage Burden Per Node (Symmetric):</strong> Each individual participant must securely store <strong>${keysPerNodeSym.toLocaleString()} secret keys</strong>, creating massive endpoint vulnerability</div>
+            <div class="step-line">&bull; <strong>Asymmetric Public-Key Pairs Required (K_asym):</strong> K_asym = 2n = 2 &times; ${n.toLocaleString()} = <strong>${asymKeys.toLocaleString()} total keys</strong> (${n.toLocaleString()} public keys published to directory, ${n.toLocaleString()} private keys held individually; Linear O(n) growth)</div>
+            <div class="step-line">&bull; <strong>Scalability Ratio &amp; Security Impact:</strong> Symmetric encryption requires <strong>${ratio.toFixed(2)}&times; more keys</strong> than asymmetric (saving ${(symKeys - asymKeys).toLocaleString()} keys). Without Key Distribution Centers (KDC) or Asymmetric Key Exchange (Diffie-Hellman), large-scale symmetric key pre-sharing is physically impossible.</div>
+        `;
+    }
+
+    // Calculator 3: Password Salting, Work Factor & Slow KDF
+    function calculatePasswordKDFSecurity() {
+        const lenInput = document.getElementById('calc-pw-len');
+        const charsetInput = document.getElementById('calc-pw-charset');
+        const rateInput = document.getElementById('calc-pw-rate');
+        const kdfInput = document.getElementById('calc-pw-kdf');
+        const saltInput = document.getElementById('calc-pw-salt');
+        const valBox = document.getElementById('calc-pw-val');
+        const stepsBox = document.getElementById('calc-pw-steps');
+        if (!lenInput || !charsetInput || !rateInput || !kdfInput || !saltInput || !valBox || !stepsBox) return;
+
+        const L = parseInt(lenInput.value, 10);
+        const C = parseInt(charsetInput.value, 10);
+        const R = parseFloat(rateInput.value);
+        const W = parseFloat(kdfInput.value);
+        const isSalted = saltInput.value === 'yes';
+
+        if (isNaN(L) || L < 1) {
+            valBox.textContent = 'Invalid Length';
+            stepsBox.innerHTML = '<div class="step-line" style="color:var(--error-color, #ef4444);">&#9888; Password length must be at least 1.</div>';
+            return;
+        }
+
+        const totalCombinations = Math.pow(C, L);
+        const entropyBits = L * Math.log2(C);
+
+        // Fast hash cracking time (W = 1)
+        const totalFastSec = totalCombinations / R;
+        const avgFastSec = totalFastSec / 2;
+
+        // Hardened KDF cracking time
+        const effectiveRate = R / W;
+        const totalKdfSec = totalCombinations / effectiveRate;
+        const avgKdfSec = totalKdfSec / 2;
+
+        valBox.textContent = `Fast: ~${formatTimeDuration(avgFastSec)} | KDF: ~${formatTimeDuration(avgKdfSec)}`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Keyspace Combination Space (S):</strong> S = Cᴸ = ${C}<sup>${L}</sup> = <strong>${totalCombinations.toExponential(3)} combinations</strong> (Shannon Entropy = <strong>${entropyBits.toFixed(2)} bits</strong>)</div>
+            <div class="step-line">&bull; <strong>Fast Hash Cracking Time (MD5/SHA-256, W = 1 at ${(R / 1e9).toFixed(1)} GH/s):</strong> Total exhaustion = ${formatTimeDuration(totalFastSec)} | <strong>Expected 50% Crack Time: ~${formatTimeDuration(avgFastSec)}</strong></div>
+            <div class="step-line">&bull; <strong>Hardened KDF Work Factor Slowdown (W = ${W.toLocaleString()} iterations):</strong> Effective hash rate drops to ${(effectiveRate / 1e3).toFixed(1)} kH/s &rarr; Total exhaustion = ${formatTimeDuration(totalKdfSec)} | <strong>Expected 50% Crack Time: ~${formatTimeDuration(avgKdfSec)}</strong></div>
+            <div class="step-line">&bull; <strong>Cryptographic Salting Defense:</strong> ${isSalted ? '<span style="color:var(--success-color, #10b981);">&#10003; <strong>SALTED (Unique 128-bit Salt Per User):</strong> Completely destroys precomputed Rainbow Tables! An adversary cannot attack the entire userbase with one lookup table; they are forced to execute this full ~' + formatTimeDuration(avgKdfSec) + ' brute force independently for every single user.</span>' : '<span style="color:var(--error-color, #ef4444);">&#9888; <strong>UNSALTED (Critical Vulnerability):</strong> Vulnerable to instant O(1) dictionary lookups via precomputed Rainbow Tables, completely bypassing the computational difficulty above!</span>'}</div>
+        `;
+    }
+
+    // Calculator 4: Symmetric Keyspace & Brute Force
+    function calculateKeyspaceBruteForce() {
+        const kInput = document.getElementById('calc-bf-k');
+        const speedInput = document.getElementById('calc-bf-speed');
+        const valBox = document.getElementById('calc-bf-val');
+        const stepsBox = document.getElementById('calc-bf-steps');
+        if (!kInput || !speedInput || !valBox || !stepsBox) return;
+
+        const k = parseInt(kInput.value, 10);
+        const speed = parseFloat(speedInput.value);
+
+        if (isNaN(k) || isNaN(speed) || k <= 0 || speed <= 0) return;
+
+        const totalKeys = Math.pow(2, k);
+        const avgKeys = Math.pow(2, k - 1);
+        const avgSec = avgKeys / speed;
+
+        let verdict = '';
+        if (k <= 40) verdict = '&#9888; Dangerously Broken (Trivial to crack in seconds)';
+        else if (k <= 56) verdict = '&#9888; Obsolete &amp; Insecure (DES broken in 1998 in &lt;56 hours)';
+        else if (k <= 64) verdict = '&#9888; Weak Legacy (Vulnerable to modern distributed clusters)';
+        else if (k <= 112) verdict = 'Legacy Compliant (Triple-DES deprecated)';
+        else verdict = '&#10003; Computationally Secure (Exceeds lifespan of known universe)';
+
+        valBox.textContent = `2${toSuperscript(k)} keys | ~${formatTimeDuration(avgSec)}`;
+        stepsBox.innerHTML = `
+            <strong>Step-by-Step Mathematical Derivation:</strong><br/>
+            <div class="step-line">&bull; <strong>Symmetric Key Length (k):</strong> <strong>${k} bits</strong> &rarr; Total Exhaustive Keyspace = 2<sup>${k}</sup> = <strong>${totalKeys.toExponential(3)} keys</strong></div>
+            <div class="step-line">&bull; <strong>Expected Average Search Effort (50% Hit Probability):</strong> E(Guesses) = 2<sup>k - 1</sup> = 2<sup>${k - 1}</sup> = <strong>${avgKeys.toExponential(3)} keys</strong></div>
+            <div class="step-line">&bull; <strong>Estimated Cracking Time at ${(speed / 1e9).toFixed(1)} Billion Guesses/sec:</strong> Expected average duration = <strong>~${formatTimeDuration(avgSec)}</strong></div>
+            <div class="step-line">&bull; <strong>Exponential Scaling Principle:</strong> Adding just 1 bit doubles the keyspace (2<sup>k+1</sup> = 2 &times; 2<sup>k</sup>). Jumping from DES (56 bits) to AES-128 increases the keyspace by a factor of 2<sup>72</sup> &approx; <strong>4.72 &times; 10²¹ times</strong>, making AES-128 physically impossible to brute force under the laws of physics.</div>
+            <div class="step-line">&bull; <strong>Cryptographic Security Verdict:</strong> <strong>${verdict}</strong></div>
+        `;
+    }
+
+    function toSuperscript(num) {
+        const map = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' };
+        return String(num).split('').map(d => map[d] || d).join('');
+    }
+
+    // Initialize all calculators on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        calculateCaesarCipher();
+        calculateNetworkKeyScalability();
+        calculatePasswordKDFSecurity();
+        calculateKeyspaceBruteForce();
+    });
+
+    // Execute immediately in case DOM is already parsed
+    setTimeout(() => {
+        calculateCaesarCipher();
+        calculateNetworkKeyScalability();
+        calculatePasswordKDFSecurity();
+        calculateKeyspaceBruteForce();
+    }, 100);
+</script>
+
+</body>
+</html>

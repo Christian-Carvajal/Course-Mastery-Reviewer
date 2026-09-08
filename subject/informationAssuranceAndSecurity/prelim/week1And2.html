@@ -1,7 +1,8 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <script>
+<script>
         (function() {
             try {
                 var savedTheme = localStorage.getItem('theme');
@@ -17,421 +18,821 @@
             }
         })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Foundations & Threat Landscape | University Study Guide</title>
-    <link rel="stylesheet" href="../../../global.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script>
-    <script src="../../../supabaseClient.js"></script>
-    <script src="../../../global.js"></script>
-    <link rel="manifest" href="../../../manifest.json">
-    <meta name="theme-color" content="#0d9488">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="../../../icons/icon-192.png">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Foundations &amp; Threat Landscape | University Study Guide</title>
+<link href="../../../global.css" rel="stylesheet"/>
+<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../../supabaseClient.js"></script>
+<script src="../../../global.js"></script>
+<link href="../../../manifest.json" rel="manifest"/>
+<meta content="#0d9488" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../../icons/icon-192.png" rel="apple-touch-icon"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%93%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/>
 </head>
 <body>
-
-    <header class="app-header">
-        <h1>Information Assurance & Security</h1>
-        <p>Foundations & Threat Landscape — CIA Triad Principles, Threats, Vulnerabilities & 77-Question Mastery Quiz</p>
-    </header>
-
-    <nav class="sticky-nav">
-        <div class="nav-left">
-            <a href="../../../index.html" class="nav-btn-home">← Return to Portal</a>
-            <button class="auth-nav-pill" onclick="window.openAuthModal()" aria-label="Student Cloud Sync">👤 Cloud Sync</button>
-            <span class="nav-title">Foundations & Threat Landscape</span>
-        </div>
-        <div class="nav-tabs">
-            <button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
-            <button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
-            <button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
-        </div>
-        <button class="theme-toggle-btn" aria-label="Toggle Dark Mode"></button>
-    </nav>
-
-    <div class="container">
-
-        <!-- TAB 1: REVIEWER TEXT -->
-        <div id="reviewer" class="tab-content active">
-
-            <!-- PART 1: INFOSEC & CIA TRIAD -->
-            <div class="card">
-                <h2>PART 1: Foundations of Information Security & The CIA Triad</h2>
-
-                <h3>1.1 What is Information Security?</h3>
-                <p>Information security is the practice of protecting information and information systems from unauthorized access, use, disclosure, disruption, modification, or destruction. ISO/IEC 27001 defines it compactly as the preservation of <strong>confidentiality</strong>, <strong>integrity</strong>, and <strong>availability</strong> of information.</p>
-                <div class="definition-card">
-                    <span class="def-title">Three Core Principles of InfoSec</span>
-                    <ul>
-                        <li><strong>A Process, Not a Product:</strong> Security is an ongoing cycle of risk assessment, control implementation, and monitoring rather than a piece of software you buy once.</li>
-                        <li><strong>A Business Function:</strong> InfoSec enables business operations safely rather than serving as a hurdle or bottleneck to progress.</li>
-                        <li><strong>Shared Responsibility:</strong> Technology provides controls, but human choices, policies, and behavior determine actual security posture.</li>
-                    </ul>
-                </div>
-
-                <h3>1.2 Information Security vs Cybersecurity vs Information Assurance</h3>
-                <p>While often used interchangeably, these terms cover distinct scopes:</p>
-                <ul>
-                    <li><strong>Information Security (InfoSec):</strong> The overarching discipline protecting information in <em>all forms</em>—physical paper files, digital databases, spoken conversations, and hardware assets.</li>
-                    <li><strong>Cybersecurity:</strong> A specialized sub-discipline focused strictly on protecting digital assets, networks, cloud systems, and internet-connected infrastructure from digital threats.</li>
-                    <li><strong>Information Assurance (IA):</strong> The strategic management umbrella that ensures data is correct, available when needed, authentic, non-repudiated, and backed by robust risk management and business continuity plans.</li>
-                </ul>
-
-                <h3>1.3 The CIA Triad</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">The Fundamental Framework</span><br>
-                    <span class="formula-text">CONFIDENTIALITY &bull; INTEGRITY &bull; AVAILABILITY</span>
-                    <div class="formula-explain">
+<header class="app-header">
+<h1>Information Assurance &amp; Security</h1>
+<p>Foundations &amp; Threat Landscape — CIA Triad Principles, Threats, Vulnerabilities &amp; 77-Question Mastery Quiz</p>
+</header>
+<nav class="sticky-nav">
+<div class="nav-left">
+<a class="nav-btn-home" href="../../../index.html#prelim">← Return to Portal</a>
+<button aria-label="Student Cloud Sync" class="auth-nav-pill" onclick="window.openAuthModal()">👤 Cloud Sync</button>
+<span class="nav-title">Foundations &amp; Threat Landscape</span>
+</div>
+<div class="nav-tabs">
+<button class="nav-btn active" onclick="switchTab('reviewer')">Study Guide</button>
+<button class="nav-btn" onclick="switchTab('quiz')">Interactive Quiz</button>
+<button class="nav-btn" onclick="switchTab('formulas')">Quick Reference</button>
+</div>
+<button aria-label="Toggle Dark Mode" class="theme-toggle-btn"></button>
+</nav>
+<div class="container">
+<!-- TAB 1: REVIEWER TEXT -->
+<div class="tab-content active" id="reviewer">
+<!-- PART 1: INFOSEC & CIA TRIAD -->
+<div class="card">
+<h2>PART 1: Foundations of Information Security &amp; The CIA Triad</h2>
+<h3>1.1 What is Information Security?</h3>
+<p>Information security is the practice of protecting information and information systems from unauthorized access, use, disclosure, disruption, modification, or destruction. ISO/IEC 27001 defines it compactly as the preservation of <strong>confidentiality</strong>, <strong>integrity</strong>, and <strong>availability</strong> of information.</p>
+<div class="definition-card">
+<span class="def-title">Three Core Principles of InfoSec</span>
+<ul>
+<li><strong>A Process, Not a Product:</strong> Security is an ongoing cycle of risk assessment, control implementation, and monitoring rather than a piece of software you buy once.</li>
+<li><strong>A Business Function:</strong> InfoSec enables business operations safely rather than serving as a hurdle or bottleneck to progress.</li>
+<li><strong>Shared Responsibility:</strong> Technology provides controls, but human choices, policies, and behavior determine actual security posture.</li>
+</ul>
+</div>
+<h3>1.2 Information Security vs Cybersecurity vs Information Assurance</h3>
+<p>While often used interchangeably, these terms cover distinct scopes:</p>
+<ul>
+<li><strong>Information Security (InfoSec):</strong> The overarching discipline protecting information in <em>all forms</em>—physical paper files, digital databases, spoken conversations, and hardware assets.</li>
+<li><strong>Cybersecurity:</strong> A specialized sub-discipline focused strictly on protecting digital assets, networks, cloud systems, and internet-connected infrastructure from digital threats.</li>
+<li><strong>Information Assurance (IA):</strong> The strategic management umbrella that ensures data is correct, available when needed, authentic, non-repudiated, and backed by robust risk management and business continuity plans.</li>
+</ul>
+<h3>1.3 The CIA Triad</h3>
+<div class="formula-card">
+<span class="formula-badge">The Fundamental Framework</span><br/>
+<span class="formula-text">CONFIDENTIALITY • INTEGRITY • AVAILABILITY</span>
+<div class="formula-explain">
                         Every security control, policy, or incident response procedure is designed to protect one or more pillars of the CIA Triad.
                     </div>
-                </div>
-
-                <div class="definition-card">
-                    <span class="def-title">1. Confidentiality (Prevent Unauthorized Disclosure)</span>
-                    <p>Ensuring that sensitive information is accessible <strong>only to authorized individuals, entities, or processes</strong>.</p>
-                    <ul>
-                        <li><strong>Key Threats:</strong> Eavesdropping, shoulder surfing, packet sniffing, unauthorized file access, data exfiltration, social engineering.</li>
-                        <li><strong>Core Controls:</strong> AES encryption (at rest and in transit), Role-Based Access Control (RBAC), Multi-Factor Authentication (MFA), Data Loss Prevention (DLP) tools, non-disclosure agreements.</li>
-                        <li><strong>Real-World Breach Example:</strong> An unencrypted database containing customer credit card numbers is exposed to the public internet.</li>
-                    </ul>
-                </div>
-
-                <div class="definition-card">
-                    <span class="def-title">2. Integrity (Prevent Unauthorized Modification)</span>
-                    <p>Safeguarding the <strong>accuracy, completeness, and trustworthiness</strong> of data and systems throughout their entire lifecycle.</p>
-                    <ul>
-                        <li><strong>Key Threats:</strong> Unauthorized data tampering, man-in-the-middle (MitM) alterations, malware payload injection, unauthorized SQL updates, transmission corruption.</li>
-                        <li><strong>Core Controls:</strong> Cryptographic hashes (SHA-256), digital signatures, file integrity monitoring (FIM), database transaction logging, write-once backups.</li>
-                        <li><strong>Real-World Breach Example:</strong> An attacker alters bank account balance records or tampers with medical dosage records in a hospital database.</li>
-                    </ul>
-                </div>
-
-                <div class="definition-card">
-                    <span class="def-title">3. Availability (Prevent Unauthorized Disruption)</span>
-                    <p>Ensuring that authorized users have <strong>timely and reliable access</strong> to information, systems, and critical services when needed.</p>
-                    <ul>
-                        <li><strong>Key Threats:</strong> Distributed Denial of Service (DDoS) attacks, ransomware encryption of production systems, hardware failures, power outages, physical disasters.</li>
-                        <li><strong>Core Controls:</strong> Redundant server clusters, load balancers, automated failover systems, RAID storage arrays, offsite backups, Disaster Recovery Plans (DRP).</li>
-                        <li><strong>Real-World Breach Example:</strong> A SYN-flood DDoS attack knocks out an e-commerce storefront during peak holiday shopping hours.</li>
-                    </ul>
-                </div>
-
-                <h3>1.4 Extending the Triad: The Parkerian Hexad</h3>
-                <p>Donn Parker expanded the traditional CIA Triad to 6 security elements to address broader security requirements:</p>
-                <ol>
-                    <li><strong>Confidentiality:</strong> Secrecy and restricted access.</li>
-                    <li><strong>Integrity:</strong> Prevention of unauthorized data modification.</li>
-                    <li><strong>Availability:</strong> Timely access to systems and services.</li>
-                    <li><strong>Authenticity:</strong> Verification of the genuine identity of a user, message, or system source.</li>
-                    <li><strong>Possession / Control:</strong> Physical or logical control over data and physical media (e.g., a stolen encrypted laptop maintains confidentiality but loses physical possession).</li>
-                    <li><strong>Utility:</strong> The usefulness or usability of data (e.g., data encrypted with a lost key retains confidentiality but loses utility).</li>
-                </ol>
-            </div>
-
-            <!-- PART 2: THREAT LANDSCAPE & ATTACK VECTORS -->
-            <div class="card">
-                <h2>PART 2: Threat Landscape, Vulnerabilities & Attack Vectors</h2>
-
-                <h3>2.1 Core Security Vocabulary: Asset, Threat, Vulnerability, Risk</h3>
-                <div class="formula-card">
-                    <span class="formula-badge">Risk Formula</span><br>
-                    <span class="formula-text">RISK = THREAT &times; VULNERABILITY &times; IMPACT</span>
-                    <div class="formula-explain">
-                        • <strong>Asset:</strong> Anything of value to the organization (data, infrastructure, IP, reputation, personnel).<br>
-                        • <strong>Threat:</strong> Any potential cause of an unwanted incident that may result in harm to a system or asset.<br>
-                        • <strong>Vulnerability:</strong> A flaw, weakness, or gap in security procedures, design, or implementation that can be exploited.<br>
-                        • <strong>Risk:</strong> The potential for loss, damage, or destruction resulting from a threat exploiting a vulnerability.<br>
+</div>
+<div class="definition-card">
+<span class="def-title">1. Confidentiality (Prevent Unauthorized Disclosure)</span>
+<p>Ensuring that sensitive information is accessible <strong>only to authorized individuals, entities, or processes</strong>.</p>
+<ul>
+<li><strong>Key Threats:</strong> Eavesdropping, shoulder surfing, packet sniffing, unauthorized file access, data exfiltration, social engineering.</li>
+<li><strong>Core Controls:</strong> AES encryption (at rest and in transit), Role-Based Access Control (RBAC), Multi-Factor Authentication (MFA), Data Loss Prevention (DLP) tools, non-disclosure agreements.</li>
+<li><strong>Real-World Breach Example:</strong> An unencrypted database containing customer credit card numbers is exposed to the public internet.</li>
+</ul>
+</div>
+<div class="definition-card">
+<span class="def-title">2. Integrity (Prevent Unauthorized Modification)</span>
+<p>Safeguarding the <strong>accuracy, completeness, and trustworthiness</strong> of data and systems throughout their entire lifecycle.</p>
+<ul>
+<li><strong>Key Threats:</strong> Unauthorized data tampering, man-in-the-middle (MitM) alterations, malware payload injection, unauthorized SQL updates, transmission corruption.</li>
+<li><strong>Core Controls:</strong> Cryptographic hashes (SHA-256), digital signatures, file integrity monitoring (FIM), database transaction logging, write-once backups.</li>
+<li><strong>Real-World Breach Example:</strong> An attacker alters bank account balance records or tampers with medical dosage records in a hospital database.</li>
+</ul>
+</div>
+<div class="definition-card">
+<span class="def-title">3. Availability (Prevent Unauthorized Disruption)</span>
+<p>Ensuring that authorized users have <strong>timely and reliable access</strong> to information, systems, and critical services when needed.</p>
+<ul>
+<li><strong>Key Threats:</strong> Distributed Denial of Service (DDoS) attacks, ransomware encryption of production systems, hardware failures, power outages, physical disasters.</li>
+<li><strong>Core Controls:</strong> Redundant server clusters, load balancers, automated failover systems, RAID storage arrays, offsite backups, Disaster Recovery Plans (DRP).</li>
+<li><strong>Real-World Breach Example:</strong> A SYN-flood DDoS attack knocks out an e-commerce storefront during peak holiday shopping hours.</li>
+</ul>
+</div>
+<h3>1.4 Extending the Triad: The Parkerian Hexad</h3>
+<p>Donn Parker expanded the traditional CIA Triad to 6 security elements to address broader security requirements:</p>
+<ol>
+<li><strong>Confidentiality:</strong> Secrecy and restricted access.</li>
+<li><strong>Integrity:</strong> Prevention of unauthorized data modification.</li>
+<li><strong>Availability:</strong> Timely access to systems and services.</li>
+<li><strong>Authenticity:</strong> Verification of the genuine identity of a user, message, or system source.</li>
+<li><strong>Possession / Control:</strong> Physical or logical control over data and physical media (e.g., a stolen encrypted laptop maintains confidentiality but loses physical possession).</li>
+<li><strong>Utility:</strong> The usefulness or usability of data (e.g., data encrypted with a lost key retains confidentiality but loses utility).</li>
+</ol>
+</div>
+<!-- PART 2: THREAT LANDSCAPE & ATTACK VECTORS -->
+<div class="card">
+<h2>PART 2: Threat Landscape, Vulnerabilities &amp; Attack Vectors</h2>
+<h3>2.1 Core Security Vocabulary: Asset, Threat, Vulnerability, Risk</h3>
+<div class="formula-card">
+<span class="formula-badge">Risk Formula</span><br/>
+<span class="formula-text">RISK = THREAT × VULNERABILITY × IMPACT</span>
+<div class="formula-explain">
+                        • <strong>Asset:</strong> Anything of value to the organization (data, infrastructure, IP, reputation, personnel).<br/>
+                        • <strong>Threat:</strong> Any potential cause of an unwanted incident that may result in harm to a system or asset.<br/>
+                        • <strong>Vulnerability:</strong> A flaw, weakness, or gap in security procedures, design, or implementation that can be exploited.<br/>
+                        • <strong>Risk:</strong> The potential for loss, damage, or destruction resulting from a threat exploiting a vulnerability.<br/>
                         • <strong>Control (Safeguard):</strong> A measure put in place to mitigate vulnerability or reduce impact.
                     </div>
-                </div>
-
-                <h3>2.2 Threat Actor Categories</h3>
-                <p>Threat actors vary widely in intent, resources, technical capability, and motivation:</p>
-                <ul>
-                    <li><strong>Script Kiddies:</strong> Unskilled individuals who run pre-packaged automated scripts and exploits written by others, typically motivated by ego or curiosity.</li>
-                    <li><strong>Hacktivists:</strong> Individuals or groups motivated by political, ideological, or social causes (e.g., Anonymous, disabling government sites in protest).</li>
-                    <li><strong>Cybercriminals:</strong> Profit-driven individuals or organized syndicates conducting ransomware, financial fraud, identity theft, and extortion.</li>
-                    <li><strong>Insider Threats:</strong> Disgruntled employees, contractors, or careless staff members who misuse legitimate access to leak or destroy data.</li>
-                    <li><strong>Nation-State Actors (APTs):</strong> Highly sophisticated, well-funded state-backed threat groups (Advanced Persistent Threats) targeting critical infrastructure, intelligence, and intellectual property over long campaigns.</li>
-                </ul>
-
-                <h3>2.3 Common Attack Vectors</h3>
-                <div class="example-card">
-                    <span class="example-title">Attack Vector Taxonomy</span>
-                    <ul>
-                        <li><strong>Social Engineering & Phishing:</strong> Tricking human users into revealing credentials, executing malicious attachments, or transferring funds (Phishing, Spear Phishing, Whaling, Vishing, Smishing).</li>
-                        <li><strong>Malware & Ransomware:</strong> Malicious code (viruses, worms, trojans, ransomware, spyware, rootkits) designed to compromise or encrypt target systems.</li>
-                        <li><strong>Web Application Attacks:</strong> Exploiting application vulnerabilities like SQL Injection (SQLi), Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and Remote Code Execution (RCE).</li>
-                        <li><strong>Network & Denial of Service Attacks:</strong> Disrupting service availability through Man-in-the-Middle (MitM) eavesdropping, ARP spoofing, DNS poisoning, and DDoS amplification.</li>
-                        <li><strong>Supply Chain Attacks:</strong> Compromising trusted third-party vendor software updates or hardware components to breach downstream targets.</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- TAB 2: INTERACTIVE QUIZ -->
-        <div id="quiz" class="tab-content">
-            <div class="quiz-header">
-                <div class="score-display" id="score-display">Score: 0 / 77</div>
-                <div class="btn-group">
-                    <button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
-                </div>
-            </div>
-
-            <div id="quiz-container">
-                <!-- Dynamically rendered quiz questions -->
-            </div>
-        </div>
-
-        <!-- TAB 3: QUICK REFERENCE -->
-                <!-- TAB 3: QUICK REFERENCE -->
-        <div id="formulas" class="tab-content">
-            <div class="card">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; margin-bottom:1rem;">
-                    <h2 style="margin:0;">Quick Reference: CIA Triad & Core Security Principles</h2>
-                    <button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
-                </div>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Pillar / Principle</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Definition</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Key Threat Vectors</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Primary Defensive Controls</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Confidentiality</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensuring data is accessible ONLY to authorized entities.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Eavesdropping, Snooping, Data Exfiltration, Shoulder Surfing.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Encryption (AES-256), MFA, Access Control Lists (ACLs).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Integrity</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Safeguarding accuracy and completeness of data against unauthorized modification.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Unauthorized Tampering, Man-in-the-Middle (MitM), SQL Injection.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Cryptographic Hashes (SHA-256), Digital Signatures, Write-Once Storage.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Availability</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensuring systems and data are timely accessible to authorized users when needed.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Denial of Service (DoS/DDoS), Ransomware, Hardware Outages.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Redundancy, RAID, Load Balancing, Offsite Backups, Failover Clusters.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Non-Repudiation</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ensuring an action or transaction cannot be denied by the party who performed it.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Impersonation, Log Tampering.</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Digital Signatures, Asymmetric PKI, Immutable Audit Logs.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Threat Actor Profiles Matrix</h2>
-                <table style="width:100%; border-collapse:collapse; margin-top:1rem;">
-                    <thead>
-                        <tr style="background:var(--primary-color); color:white;">
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Threat Actor</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Motivation</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Resource Level</th>
-                            <th style="padding:0.75rem; border:1px solid var(--border-color);">Sophistication & Tactics</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Script Kiddie</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Thrill, bragging rights, ego</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#dc2626;">Low</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Uses pre-made automated tools and scripts without deep technical knowledge.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Hacktivist</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Political, social, or ideological causes</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Moderate</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Website defacement, DDoS, leaking confidential docs (doxxing).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Organized Cybercrime</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); font-weight:700;">Financial Gain</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">High</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Ransomware-as-a-Service (RaaS), credential harvesting, extortion.</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Nation-State (APT)</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Espionage, military advantage</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">Unlimited (State-Backed)</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Zero-day exploits, stealthy long-term persistence (Advanced Persistent Threat).</td>
-                        </tr>
-                        <tr>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);"><strong>Insider Threat</strong></td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Revenge, greed, carelessness</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Internal Privileges</td>
-                            <td style="padding:0.75rem; border:1px solid var(--border-color);">Abuses legitimate credentials to bypass perimeter defenses.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Quick Reference: Attack Vectors & Social Engineering Tactics</h2>
-                <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin-top:1rem;">
-                    <div class="definition-card">
-                        <span class="def-badge">Spear Phishing vs Whaling</span>
-                        <p><strong>Spear Phishing:</strong> Targeted email attack customized for a specific individual.<br><strong>Whaling:</strong> Spear phishing specifically targeting high-profile C-level executives.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">Vishing vs Smishing</span>
-                        <p><strong>Vishing:</strong> Social engineering via voice calls / phone scams.<br><strong>Smishing:</strong> Social engineering via SMS text messages.</p>
-                    </div>
-                    <div class="definition-card">
-                        <span class="def-badge">Tailgating vs Piggybacking</span>
-                        <p>Following authorized personnel into a secure building without scanning a badge.</p>
-                    </div>
-                </div>
-            </div>
-        
-            
-            <!-- ==========================================
+</div>
+<h3>2.2 Threat Actor Categories</h3>
+<p>Threat actors vary widely in intent, resources, technical capability, and motivation:</p>
+<ul>
+<li><strong>Script Kiddies:</strong> Unskilled individuals who run pre-packaged automated scripts and exploits written by others, typically motivated by ego or curiosity.</li>
+<li><strong>Hacktivists:</strong> Individuals or groups motivated by political, ideological, or social causes (e.g., Anonymous, disabling government sites in protest).</li>
+<li><strong>Cybercriminals:</strong> Profit-driven individuals or organized syndicates conducting ransomware, financial fraud, identity theft, and extortion.</li>
+<li><strong>Insider Threats:</strong> Disgruntled employees, contractors, or careless staff members who misuse legitimate access to leak or destroy data.</li>
+<li><strong>Nation-State Actors (APTs):</strong> Highly sophisticated, well-funded state-backed threat groups (Advanced Persistent Threats) targeting critical infrastructure, intelligence, and intellectual property over long campaigns.</li>
+</ul>
+<h3>2.3 Common Attack Vectors</h3>
+<div class="example-card">
+<span class="example-title">Attack Vector Taxonomy</span>
+<ul>
+<li><strong>Social Engineering &amp; Phishing:</strong> Tricking human users into revealing credentials, executing malicious attachments, or transferring funds (Phishing, Spear Phishing, Whaling, Vishing, Smishing).</li>
+<li><strong>Malware &amp; Ransomware:</strong> Malicious code (viruses, worms, trojans, ransomware, spyware, rootkits) designed to compromise or encrypt target systems.</li>
+<li><strong>Web Application Attacks:</strong> Exploiting application vulnerabilities like SQL Injection (SQLi), Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), and Remote Code Execution (RCE).</li>
+<li><strong>Network &amp; Denial of Service Attacks:</strong> Disrupting service availability through Man-in-the-Middle (MitM) eavesdropping, ARP spoofing, DNS poisoning, and DDoS amplification.</li>
+<li><strong>Supply Chain Attacks:</strong> Compromising trusted third-party vendor software updates or hardware components to breach downstream targets.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- TAB 2: INTERACTIVE QUIZ -->
+<div class="tab-content" id="quiz">
+<div class="quiz-header">
+<div class="score-display" id="score-display">Score: 0 / 77</div>
+<div class="btn-group">
+<button class="btn btn-success" onclick="submitQuiz()">Submit Quiz</button>
+<button class="btn btn-secondary" onclick="resetQuiz()">Reset</button>
+</div>
+</div>
+<div id="quiz-container">
+<!-- Dynamically rendered quiz questions -->
+</div>
+</div>
+<!-- TAB 3: QUICK REFERENCE -->
+<div class="tab-content" id="formulas">
+<!-- HEADER BAR -->
+<div class="card">
+<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+<div>
+<h2 style="margin:0; font-size:1.5rem;">Quick Reference &amp; Summary Matrix</h2>
+<p style="margin:0.25rem 0 0 0; color:var(--text-muted); font-size:0.9rem;">Foundations &amp; Threat Landscape • Four-Pillar Exam-Ready Review Sheet</p>
+</div>
+<button class="btn-print-ref" onclick="printQuickReference()">🖨️ Print / Export PDF</button>
+</div>
+</div>
+<!-- PILLAR 1: CORE TERMINOLOGY & KEYWORD RECALL GRID -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>🏛️ Pillar 1:</span> Core Terminology &amp; Keyword Recall Grid
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Exact definitions, standard acronyms, and high-yield keywords extracted directly from the ISO/IEC 27001 curriculum.</p>
+<div class="table-container" style="overflow-x:auto; margin-top:1rem;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:22%;">Term / Acronym</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:48%;">Exact Domain Definition</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Classification</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:15%;">Exam Keyword</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Information Security (InfoSec)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The practice and ongoing process of preserving the confidentiality, integrity, and availability of information across <em>all forms</em> (physical paper, digital, and spoken).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(20,184,166,0.15); color:var(--primary-color); padding:2px 6px; border-radius:4px;">Core Discipline</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">All Formats (Physical + Digital)</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Cybersecurity</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A specialized sub-discipline of InfoSec focused exclusively on protecting digital assets, networks, cloud systems, and internet-connected devices from electronic threats.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(59,130,246,0.15); color:#3b82f6; padding:2px 6px; border-radius:4px;">Digital Domain</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strictly Digital / Cyber</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Information Assurance (IA)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The strategic management umbrella ensuring data availability, integrity, authentication, and non-repudiation backed by governance, risk management, and business continuity.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><span class="badge" style="background:rgba(139,92,246,0.15); color:#8b5cf6; padding:2px 6px; border-radius:4px;">Strategic Umbrella</span></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Governance &amp; Resilience</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Confidentiality</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Ensuring that sensitive information is accessible <strong>only</strong> to authorized individuals, entities, or processes; preventing unauthorized disclosure.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">CIA Pillar 1</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">No Snooping</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Integrity</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Safeguarding the accuracy, completeness, and trustworthiness of data and systems across their entire lifecycle; preventing unauthorized modification or tampering.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">CIA Pillar 2</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">No Tampering</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Availability</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Ensuring that authorized users have timely, reliable, and uninterrupted access to information, systems, and critical services when needed.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">CIA Pillar 3</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:600;">No Disruption / Up-time</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Authenticity</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The verification that a user, system, message, or transaction genuinely originated from its stated identity and has not been forged (Parkerian Hexad Pillar 4).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Hexad Pillar 4</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Genuine Provenance</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Possession / Control</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Physical or logical holding of data/media. An encrypted stolen drive maintains confidentiality but physical possession is lost (Parkerian Hexad Pillar 5).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Hexad Pillar 5</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Physical / Logical Custody</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Utility</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The usefulness or operational fitness of data. Data encrypted with a lost decryption key retains confidentiality and possession but loses all utility (Parkerian Hexad Pillar 6).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Hexad Pillar 6</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Usability / Value</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Asset</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Anything of tangible or intangible value to the organization requiring protection (databases, intellectual property, infrastructure, human capital, brand reputation).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Risk Component</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Item of Value</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Threat</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Any circumstance, event, or threat actor with the potential to cause harm to an asset by exploiting a weakness.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Risk Component</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Potential Danger</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Vulnerability</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A flaw, weakness, bug, or gap in security procedures, design, implementation, or internal controls that can be exploited by a threat.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Risk Component</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Flaw / Weakness</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Risk</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The potential for loss, damage, or destruction resulting from a threat exploiting an existing vulnerability against an organizational asset.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Risk Component</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Probability × Impact</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Control (Safeguard)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">An administrative, technical, or physical defensive measure implemented to neutralize a threat, eliminate a vulnerability, or reduce risk impact.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Defense</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Mitigation Countermeasure</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Non-Repudiation</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">The assurance that an individual or system cannot deny the authenticity of a signature, message, or action they previously executed.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Security Property</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Cannot Deny Action</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Advanced Persistent Threat (APT)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">A sophisticated, well-funded, state-sponsored cyber espionage group that maintains stealthy, continuous, long-term access to compromised target networks.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Threat Actor</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Nation-State / Stealth</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- PILLAR 2: FORMULA & CALCULATION REFERENCE CARDS -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>📐 Pillar 2:</span> Formula &amp; Calculation Reference Cards
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Exact mathematical equations, parameter definitions, step-by-step worked calculations, and plain English verbalizations.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem; margin-top:1rem;">
+<!-- CARD 1: RISK EQUATION -->
+<div class="formula-card">
+<span class="formula-badge">ISO 27005 Composite Risk Equation</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Risk Score = Threat Likelihood × Vulnerability Severity × Asset Criticality
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>Threat Likelihood (1–5):</strong> Probability and frequency of threat actor exploitation.</li>
+<li><strong>Vulnerability Severity (1–5):</strong> Ease of exploitability and exposure breadth.</li>
+<li><strong>Asset Criticality (1–5):</strong> Financial, operational, and reputational value of target asset.</li>
+</ul>
+<strong>Plain English Reading:</strong> "Risk is the product of how likely a threat will strike, how severe the system's weakness is, and how valuable the target asset is to the business."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid var(--primary-color); border-radius:4px; font-size:0.825rem;">
+<strong>Worked Example:</strong> Core DB (Asset = 5), Ransomware bot (Threat = 4), Unpatched RCE (Vuln = 4) → <span style="font-weight:700; color:#dc2626;">5 × 4 × 4 = 80 / 125 (CRITICAL RISK → 24h SLA)</span>.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Composite risk equals threat likelihood multiplied by vulnerability severity multiplied by asset criticality value."</strong>
+</div>
+</div></div>
+<!-- CARD 2: RESIDUAL RISK -->
+<div class="formula-card">
+<span class="formula-badge">Residual Risk Reduction Equation</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Residual Risk = Inherent Risk - Impact of Safeguards
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>Inherent Risk:</strong> Raw risk exposure existing before any security controls are deployed.</li>
+<li><strong>Impact of Safeguards:</strong> Total risk reduction provided by administrative, technical, and physical controls.</li>
+<li><strong>Residual Risk:</strong> Net remaining risk that the organization must formally accept, transfer, or mitigate.</li>
+</ul>
+<strong>Plain English Reading:</strong> "The risk remaining after all security controls are installed equals the original unmitigated risk minus the protection provided by those controls."
+                            <div style="margin-top:0.5rem; padding:0.4rem 0.6rem; background:var(--card-elevated-bg); border-left:3px solid #16a34a; border-radius:4px; font-size:0.825rem;">
+<strong>Governance Rule:</strong> If <span style="font-weight:700;">Residual Risk ≤ Risk Tolerance</span>, the risk can be accepted by the named Risk Owner.
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Residual risk is the remaining danger after subtracting the mitigating impact of applied security safeguards from inherent risk."</strong>
+</div>
+</div></div>
+<!-- CARD 3: HIGH AVAILABILITY SLA -->
+<div class="formula-card">
+<span class="formula-badge">High Availability (The 'Nines') &amp; Downtime Loss</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Permitted Downtime = Total Time × (1 - Availability SLA)
+                        </div>
+<div class="formula-explain">
+<strong>Standard Annual Base:</strong> 365.25 days × 24 hrs = <strong>8,766 Hours / year</strong>.
+                            <div class="table-container" style="overflow-x:auto; margin-top:0.5rem;">
+<table style="width:100%; border-collapse:collapse; font-size:0.8rem;">
+<thead>
+<tr style="background:var(--border-color); color:var(--text-color);">
+<th style="padding:3px 6px; border:1px solid var(--border-color);">SLA Tier</th>
+<th style="padding:3px 6px; border:1px solid var(--border-color);">Allowed Downtime / Year</th>
+<th style="padding:3px 6px; border:1px solid var(--border-color);">Allowed Downtime / Month</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:3px 6px; border:1px solid var(--border-color);"><strong>99.0% (Two Nines)</strong></td>
+<td style="padding:3px 6px; border:1px solid var(--border-color); color:#dc2626;">87.66 Hours / yr</td>
+<td style="padding:3px 6px; border:1px solid var(--border-color);">7.31 Hours / mo</td>
+</tr>
+<tr>
+<td style="padding:3px 6px; border:1px solid var(--border-color);"><strong>99.9% (Three Nines)</strong></td>
+<td style="padding:3px 6px; border:1px solid var(--border-color);">8.77 Hours / yr</td>
+<td style="padding:3px 6px; border:1px solid var(--border-color);">43.83 Minutes / mo</td>
+</tr>
+<tr>
+<td style="padding:3px 6px; border:1px solid var(--border-color);"><strong>99.99% (Four Nines)</strong></td>
+<td style="padding:3px 6px; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">52.60 Minutes / yr</td>
+<td style="padding:3px 6px; border:1px solid var(--border-color);">4.38 Minutes / mo</td>
+</tr>
+<tr>
+<td style="padding:3px 6px; border:1px solid var(--border-color);"><strong>99.999% (Five Nines)</strong></td>
+<td style="padding:3px 6px; border:1px solid var(--border-color); color:#16a34a; font-weight:700;">5.26 Minutes / yr</td>
+<td style="padding:3px 6px; border:1px solid var(--border-color);">26.30 Seconds / mo</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="margin-top:0.4rem; font-size:0.825rem;">
+<strong>Plain English Reading:</strong> "To calculate allowable outage time, multiply total operating hours by the unreliability percentage (one minus the uptime target)."
+                            </div>
+</div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Allowed annual downtime equals total operating time (8,760 hours) multiplied by one minus the availability SLA percentage."</strong>
+</div>
+</div></div>
+<!-- CARD 4: PHISHING EXPOSURE MODEL -->
+<div class="formula-card">
+<span class="formula-badge">Social Engineering Exposure &amp; Training ROI</span>
+<div class="formula-text" style="font-size:1.15rem; margin:0.6rem 0;">
+                            Annual Exposure = Headcount × Click Rate × Exploit Frequency × Breach Cost
+                        </div>
+<div class="formula-explain">
+<strong>Parameter Definitions:</strong>
+<ul style="margin:0.35rem 0 0.5rem 1rem; padding:0; font-size:0.85rem;">
+<li><strong>Headcount:</strong> Total number of corporate staff receiving email communications.</li>
+<li><strong>Click Rate (%):</strong> Percentage of employees failing phishing simulation tests.</li>
+<li><strong>Exploit Frequency:</strong> Estimated annual successful intrusions originating from credential compromises.</li>
+<li><strong>Breach Cost ($):</strong> Average remediation, forensic, and regulatory penalty cost per incident.</li>
+</ul>
+<strong>Plain English Reading:</strong> "Total annual social engineering loss equals the volume of vulnerable employees multiplied by intrusion probability and the dollar cost per breach."
+                        </div>
+<div class="prob-read-english-box" style="margin-top:10px;">
+<div class="prob-read-header">
+<span class="prob-read-badge">🗣️ How to Read in English</span>
+</div>
+<div class="prob-read-text">
+        Read as: <strong>"Annual phishing risk equals employee headcount times click rate times exploit success rate times average breach impact cost."</strong>
+</div>
+</div></div>
+</div>
+</div>
+<!-- PILLAR 3: COMPARATIVE ANALYSIS MATRICES -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:var(--primary-color); display:flex; align-items:center; gap:0.5rem;">
+<span>📊 Pillar 3:</span> Comparative Analysis Matrices
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">High-yield side-by-side matrices contrasting core security boundaries, models, and threat vectors.</p>
+<!-- MATRIX 1: INFOSEC VS CYBERSECURITY VS IA -->
+<h3 style="margin-top:1.25rem; font-size:1.05rem;">1. InfoSec vs. Cybersecurity vs. Information Assurance (IA)</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Dimension</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Information Security (InfoSec)</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Cybersecurity</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Information Assurance (IA)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Primary Scope</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">All information assets (paper records, digital servers, spoken conversations, physical media).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strictly digital/electronic systems, networks, endpoints, cloud, and internet infrastructure.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strategic governance, risk management, data trust, compliance, and business continuity.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Domain Medium</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Physical + Digital + Human</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Strictly Digital / Cyberspace</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Executive / Policy / Operational Architecture</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Core Objective</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Preserve Confidentiality, Integrity, and Availability across all media.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Defend cyberspace assets against electronic intrusions, malware, and network attacks.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Ensure operational correctness, authenticity, non-repudiation, and organizational resilience.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Example Activities</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Clean desk policy, document shredding, building locks, data classification.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Firewalls, SIEM intrusion detection, penetration testing, EDR agents.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Disaster Recovery Planning (DRP), ISO 27001 ISMS audits, compliance sign-offs.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 2: CIA TRIAD VS PARKERIAN HEXAD -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">2. The CIA Triad vs. The Parkerian Hexad (6 Pillars)</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:18%;">Hexad Pillar</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:28%;">Core Scope &amp; Rule</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:27%;">Defensive Mechanism</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left; width:27%;">Breach / Violation Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>1. Confidentiality</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Prevent unauthorized observation or disclosure of information.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">AES-256 Encryption, RBAC, Least Privilege, MFA, DLP.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Unencrypted SQL database exposed to the public internet; eavesdropping.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>2. Integrity</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Safeguard accuracy and completeness against unauthorized modification.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">SHA-256 Cryptographic Hashes, Digital Signatures, FIM.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Attacker silently alters bank account balances or medical dosage records.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>3. Availability</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Provide timely and reliable access to systems for authorized users.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Redundancy, RAID arrays, Load Balancers, DDoS scrubbing.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Volumetric SYN Flood DDoS crashes e-commerce checkout servers.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>4. Authenticity</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Verify the genuine source and valid identity of a user or message.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">PKI Certificates, Asymmetric Digital Signatures, MFA.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">CEO fraud email spoofed via unauthenticated SMTP headers.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>5. Possession / Control</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Maintain physical/logical custody of media and data storage.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Physical security, asset tracking, remote wipe, BitLocker.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Stolen encrypted laptop: Confidentiality intact, but physical possession lost.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>6. Utility</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Preserve the usefulness and usable state of data for business operations.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Key management systems (KMS), format converters, offsite backups.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Database encrypted with lost key: Confidentiality &amp; possession intact, utility zero.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 3: THREAT ACTORS COMPARISON MATRIX -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">3. Threat Actor Profiles &amp; Capabilities Matrix</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Threat Actor</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Primary Motivation</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Resource Level</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Sophistication</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Signature Tactics &amp; Targets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Script Kiddie</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Ego, curiosity, peer recognition, thrill</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); color:#dc2626; font-weight:700;">Low / Free</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Low (No coding skills)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Pre-packaged automated exploit tools (LOIC, Metasploit scripts) targeting random unpatched IPs.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Hacktivist</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Political, social, environmental causes</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Low to Moderate</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Moderate</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Website defacement, DDoS protests, doxxing, leaking embarrassing corporate documents.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Organized Cybercrime</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">Direct Financial Gain</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#16a34a;">High / Funded</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">High</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Ransomware-as-a-Service (RaaS), double extortion, banking trojans, credit card credential dumps.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Nation-State (APT)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Geopolitical espionage, sabotage, military</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700; color:#8b5cf6;">Unlimited (State-Backed)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color); font-weight:700;">Highest / Expert</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Custom zero-day exploits, supply chain backdoors, multi-year stealth persistence in critical infrastructure.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Insider Threat</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Revenge, financial payoff, carelessness</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Authorized Access</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Variable (Low to High)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Bypasses perimeter firewalls via legitimate authorized credentials; unauthorized USB exfiltration.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- MATRIX 4: WEB APP VS NETWORK ATTACKS -->
+<h3 style="margin-top:1.5rem; font-size:1.05rem;">4. Web Application Attacks vs. Network Layer Attacks</h3>
+<div class="table-container" style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+<thead>
+<tr style="background:var(--primary-color); color:white;">
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Attack Vector</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Target / OSI Layer</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Exploitation Mechanism</th>
+<th style="padding:0.75rem; border:1px solid var(--border-color); text-align:left;">Primary Defensive Countermeasure</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>SQL Injection (SQLi)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Application / DB (Layer 7)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Injecting malicious SQL syntax into unsanitized user inputs to execute arbitrary DB queries.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Parameterized Queries / Prepared Statements, ORM, Input Validation.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Cross-Site Scripting (XSS)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Application / Client (Layer 7)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Injecting malicious JavaScript executed inside a victim's browser session (Stored, Reflected, DOM).</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Context-aware Output Encoding, Content Security Policy (CSP), HttpOnly cookies.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Cross-Site Request Forgery (CSRF)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Application / Auth (Layer 7)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Tricking an authenticated browser into submitting unauthorized requests to a trusted site.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Anti-CSRF synchronizer tokens, SameSite=Strict cookie attribute, Re-authentication.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>Man-in-the-Middle (MitM)</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Network / Transport (Layers 2–4)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Interception, reading, or tampering with active communication packets between two endpoints.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">TLS 1.3 encryption, Mutual TLS (mTLS), Certificate Pinning, VPNs.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>ARP Spoofing / Poisoning</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Data Link (Layer 2)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Sending forged ARP replies across local LAN to map the attacker's MAC to the default gateway's IP.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Dynamic ARP Inspection (DAI), Static ARP tables, 802.1X Port Security.</td>
+</tr>
+<tr>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);"><strong>DNS Poisoning / Hijacking</strong></td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Network / Application (Layers 4–7)</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">Injecting false DNS records into a caching resolver to redirect users to a malicious fake server.</td>
+<td style="padding:0.65rem 0.75rem; border:1px solid var(--border-color);">DNSSEC (DNS Security Extensions), DNS-over-HTTPS (DoH), Secure Resolvers.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- PILLAR 4: COMMON EXAM PITFALLS & FALLACIES -->
+<div class="card" style="margin-top:1.5rem;">
+<h2 style="color:#dc2626; display:flex; align-items:center; gap:0.5rem;">
+<span>⚠️ Pillar 4:</span> Common Exam Pitfalls &amp; Fallacies
+                </h2>
+<p style="color:var(--text-muted); font-size:0.9rem; margin-top:-0.25rem;">Critical conceptual distinctions and instructor test traps that frequently cause lost exam points.</p>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:1rem; margin-top:1rem;">
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 1: Possession vs. Utility (Hexad)</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Assuming a lost or encrypted laptop breaches confidentiality.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Stolen Encrypted Laptop:</strong> Maintains Confidentiality (ciphertext protected), but loses <strong>Possession / Control</strong>.</li>
+<li><strong>Ransomware Encrypted File (Lost Key):</strong> Maintains Confidentiality &amp; Possession, but loses <strong>Utility</strong> (data is unreadable).</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 2: Tailgating vs. Piggybacking</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Treating tailgating and piggybacking as exact synonyms.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Tailgating:</strong> Attacker follows an authorized employee through a secure doorway <em>without their consent or awareness</em>.</li>
+<li><strong>Piggybacking:</strong> Authorized employee <em>knowingly</em> holds the door open for the unauthorized individual out of misplaced politeness.</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 3: Spear Phishing vs. Whaling</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Confusing the target profile of targeted phishing attacks.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Spear Phishing:</strong> Highly customized email targeting <em>any specific individual or role</em> (e.g., HR clerk, engineer).</li>
+<li><strong>Whaling:</strong> Specialized spear phishing targeting <em>exclusively C-suite / high-profile executives</em> (CEO, CFO, Board members).</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 4: Confidentiality vs. Integrity Breaches</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Misclassifying unauthorized reading as an integrity violation.<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Unauthorized Reading / Snooping:</strong> Violates <strong>Confidentiality</strong> (data remains intact and unmodified).</li>
+<li><strong>Unauthorized Modifying / Overwriting:</strong> Violates <strong>Integrity</strong> (data accuracy and completeness is corrupted).</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 5: Vulnerability vs. Threat vs. Risk</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Stating "Ransomware is a vulnerability" or "A missing patch is a threat."<br/>
+<strong>The Reality:</strong>
+<ul style="margin:0.25rem 0 0 1rem; padding:0; font-size:0.825rem;">
+<li><strong>Missing Software Patch:</strong> The <em>Vulnerability</em> (internal system flaw).</li>
+<li><strong>Cybercrime Syndicate / Malware:</strong> The <em>Threat</em> (external danger/actor).</li>
+<li><strong>Expected Financial Downtime ($):</strong> The resulting <em>Risk</em>.</li>
+</ul>
+</p>
+</div>
+<div class="definition-card" style="border-left:4px solid #dc2626;">
+<span class="def-badge" style="background:#dc2626; color:white;">Pitfall 6: Security is a Process, Not a Product</span>
+<p style="margin-top:0.5rem; font-size:0.875rem;">
+<strong>The Trap:</strong> Believing purchasing an expensive firewall or EDR tool makes an organization "secure".<br/>
+<strong>The Reality:</strong> Security is an ongoing cycle of risk assessment, policy enforcement, user training, and continuous monitoring. Technology is only one layer of a holistic defense-in-depth posture.
+                        </p>
+</div>
+</div>
+</div>
+<!-- ==========================================
                  Interactive Academic Calculators Section
                  ========================================== -->
-            <div class="card" style="margin-top:1.5rem;">
-                <h2>Interactive Academic Calculators (Live Risk & Threat Engines)</h2>
-                
-                <!-- Calculator 1: Threat Likelihood & Risk Matrix Engine -->
-                <div class="calc-card">
-                    <div class="calc-title">🧮 Part 2 (2.1): Core Security Vocabulary — Security Equation (Asset × Threat × Vulnerability = Risk Score)</div>
-                    <div class="calc-desc">Calculate composite risk score Risk = Asset Criticality × Threat Likelihood × Vulnerability Severity to establish remediation SLAs and defensive prioritization.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-asset">Asset Criticality (1-5):</label>
-                            <select id="risk-asset" class="calc-input" onchange="calculateSecurityRiskScore()">
-                                <option value="5" selected>5 - Mission Critical (Core DB, Financial Systems)</option>
-                                <option value="4">4 - High (Customer Portals, Employee Records)</option>
-                                <option value="3">3 - Moderate (Internal Wiki, Department Files)</option>
-                                <option value="2">2 - Low (Public Marketing Site)</option>
-                                <option value="1">1 - Minimal (Test Lab Workstations)</option>
-                            </select>
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-threat">Threat Likelihood (1-5):</label>
-                            <select id="risk-threat" class="calc-input" onchange="calculateSecurityRiskScore()">
-                                <option value="5">5 - Frequent / Active (Nation-State / Ransomware Gangs)</option>
-                                <option value="4" selected>4 - Likely (Organized Cybercriminals, Automated Bots)</option>
-                                <option value="3">3 - Moderate (Opportunistic Script Kiddies)</option>
-                                <option value="2">2 - Unlikely (Disgruntled Insiders)</option>
-                                <option value="1">1 - Rare (Isolated Physical Sabotage)</option>
-                            </select>
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="risk-vuln">Vulnerability Severity (1-5):</label>
-                            <select id="risk-vuln" class="calc-input" onchange="calculateSecurityRiskScore()">
-                                <option value="5">5 - Critical (Zero-Day RCE, Unauthenticated Admin)</option>
-                                <option value="4" selected>4 - High (Public Exploit Available, Weak Auth)</option>
-                                <option value="3">3 - Medium (Missing Patch, Local Privilege Escalation)</option>
-                                <option value="2">2 - Low (Information Disclosure, Weak Cipher)</option>
-                                <option value="1">1 - Informational (Banner Grabbing)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Composite Risk Score & Remediation SLA:</span>
-                            <span class="calc-result-val" id="risk-result-val">Risk Score: 80 / 125 (CRITICAL)</span>
-                        </div>
-                        <div class="calc-math-steps" id="risk-math-steps">
-                            <strong>ISO 27005 Threat Analysis Breakdown:</strong><br>
-                            <div class="step-line">• <strong>Score Formula:</strong> 5 (Asset) × 4 (Threat) × 4 (Vulnerability) = <strong>80 / 125</strong></div>
-                            <div class="step-line">• <strong>Severity Tier:</strong> <span style="color:#dc2626; font-weight:700;">CRITICAL RISK</span> (Immediate Executive Escalation)</div>
-                            <div class="step-line">• <strong>Remediation SLA:</strong> Emergency containment within <strong>24 Hours</strong>. Primary control: Network isolation, virtual patching, and MFA enforcement.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 2: High Availability Nines -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 1 (1.3): The CIA Triad (Availability) — High Availability SLA (The 'Nines') & Downtime Loss</div>
-                    <div class="calc-desc">Calculate permitted downtime allowances per year, month, and day for enterprise High Availability service levels (99.0% to 99.9999%).</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="avail-sla">Target Availability SLA:</label>
-                            <select id="avail-sla" class="calc-input" onchange="calculateAvailabilityDowntime()">
-                                <option value="0.99">99.0% ('Two Nines' - Basic Web Hosting)</option>
-                                <option value="0.999" selected>99.9% ('Three Nines' - Standard Cloud Service)</option>
-                                <option value="0.9999">99.99% ('Four Nines' - Enterprise Production Tier)</option>
-                                <option value="0.99999">99.999% ('Five Nines' - Mission Critical / Telecom)</option>
-                                <option value="0.999999">99.9999% ('Six Nines' - Military / Financial Core)</option>
-                            </select>
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="avail-cost">Hourly Outage Impact ($ / hr):</label>
-                            <input type="number" id="avail-cost" class="calc-input" value="45000" step="5000" min="0" oninput="calculateAvailabilityDowntime()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Permitted Annual Downtime & Financial Loss:</span>
-                            <span class="calc-result-val" id="avail-result-val">8.76 Hours / yr ($394,200.00 / yr)</span>
-                        </div>
-                        <div class="calc-math-steps" id="avail-math-steps">
-                            <strong>High Availability Analysis:</strong><br>
-                            <div class="step-line">• <strong>Annual Allowed Downtime:</strong> 365.25 days × 24 hrs × (1 - 0.999) = <strong>8.766 Hours / year (525.96 minutes)</strong></div>
-                            <div class="step-line">• <strong>Monthly Allowed Downtime:</strong> <strong>43.83 Minutes / month</strong> | Daily: <strong>1.44 Minutes / day</strong></div>
-                            <div class="step-line">• <strong>Maximum Financial Exposure:</strong> 8.766 hrs × $45,000 / hr = <strong>$394,470.00 / year</strong></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Calculator 3: Phishing Exposure Estimator -->
-                <div class="calc-card" style="margin-top:1.25rem;">
-                    <div class="calc-title">🧮 Part 2 (2.3): Common Attack Vectors — Social Engineering & Phishing Exposure Model (Training ROI)</div>
-                    <div class="calc-desc">Model annual corporate breach risk from social engineering tactics (Spear Phishing, Smishing, Vishing) based on organizational employee headcount.</div>
-                    
-                    <div class="calc-grid">
-                        <div class="calc-field">
-                            <label class="calc-label" for="phish-emp">Total Employees:</label>
-                            <input type="number" id="phish-emp" class="calc-input" value="250" step="25" min="1" oninput="calculatePhishingExposure()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="phish-rate">Click / Failure Rate (%):</label>
-                            <input type="number" id="phish-rate" class="calc-input" value="8" step="1" min="0" max="100" oninput="calculatePhishingExposure()">
-                        </div>
-                        <div class="calc-field">
-                            <label class="calc-label" for="phish-cost">Avg Breach Cost ($):</label>
-                            <input type="number" id="phish-cost" class="calc-input" value="120000" step="10000" min="1000" oninput="calculatePhishingExposure()">
-                        </div>
-                    </div>
-
-                    <div class="calc-result-box">
-                        <div class="calc-result-header">
-                            <span style="font-weight:700; font-size:0.95rem;">Annual Social Engineering Exposure:</span>
-                            <span class="calc-result-val" id="phish-result-val">Expected Exposure: $240,000.00 / yr</span>
-                        </div>
-                        <div class="calc-math-steps" id="phish-math-steps">
-                            <strong>Exposure & Training ROI Calculation:</strong><br>
-                            <div class="step-line">• <strong>Susceptible Staff:</strong> 250 employees × 8% failure rate = <strong>20 vulnerable users / month</strong></div>
-                            <div class="step-line">• <strong>Annual Threat Probability:</strong> Estimated 2.0 successful initial access intrusions / year</div>
-                            <div class="step-line">• <strong>Expected Annual Loss:</strong> 2.0 × $120,000 = <strong>$240,000.00 / year</strong></div>
-                            <div class="step-line">• <strong>Mitigation ROI:</strong> Implementing monthly Simulated Phishing Training reduces click rate to &lt; 2%, saving an estimated <strong>$180,000.00 annually</strong>.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div></div>
-
-    <script>
+<div class="card" style="margin-top:1.5rem;">
+<h2>Interactive Academic Calculators (Live Risk &amp; Threat Engines)</h2>
+<!-- Calculator 1: Threat Likelihood & Risk Matrix Engine -->
+<div class="calc-card">
+<div class="calc-title">🧮 Part 2 (2.1): Core Security Vocabulary — Security Equation (Asset × Threat × Vulnerability = Risk Score)</div>
+<div class="calc-desc">Calculate composite risk score Risk = Asset Criticality × Threat Likelihood × Vulnerability Severity to establish remediation SLAs and defensive prioritization.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="risk-asset">Asset Criticality (1-5):</label>
+<select class="calc-input" id="risk-asset" onchange="calculateSecurityRiskScore()">
+<option selected="" value="5">5 - Mission Critical (Core DB, Financial Systems)</option>
+<option value="4">4 - High (Customer Portals, Employee Records)</option>
+<option value="3">3 - Moderate (Internal Wiki, Department Files)</option>
+<option value="2">2 - Low (Public Marketing Site)</option>
+<option value="1">1 - Minimal (Test Lab Workstations)</option>
+</select>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-threat">Threat Likelihood (1-5):</label>
+<select class="calc-input" id="risk-threat" onchange="calculateSecurityRiskScore()">
+<option value="5">5 - Frequent / Active (Nation-State / Ransomware Gangs)</option>
+<option selected="" value="4">4 - Likely (Organized Cybercriminals, Automated Bots)</option>
+<option value="3">3 - Moderate (Opportunistic Script Kiddies)</option>
+<option value="2">2 - Unlikely (Disgruntled Insiders)</option>
+<option value="1">1 - Rare (Isolated Physical Sabotage)</option>
+</select>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="risk-vuln">Vulnerability Severity (1-5):</label>
+<select class="calc-input" id="risk-vuln" onchange="calculateSecurityRiskScore()">
+<option value="5">5 - Critical (Zero-Day RCE, Unauthenticated Admin)</option>
+<option selected="" value="4">4 - High (Public Exploit Available, Weak Auth)</option>
+<option value="3">3 - Medium (Missing Patch, Local Privilege Escalation)</option>
+<option value="2">2 - Low (Information Disclosure, Weak Cipher)</option>
+<option value="1">1 - Informational (Banner Grabbing)</option>
+</select>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Composite Risk Score &amp; Remediation SLA:</span>
+<span class="calc-result-val" id="risk-result-val">Risk Score: 80 / 125 (CRITICAL)</span>
+</div>
+<div class="calc-math-steps" id="risk-math-steps">
+<strong>ISO 27005 Threat Analysis Breakdown:</strong><br/>
+<div class="step-line">• <strong>Score Formula:</strong> 5 (Asset) × 4 (Threat) × 4 (Vulnerability) = <strong>80 / 125</strong></div>
+<div class="step-line">• <strong>Severity Tier:</strong> <span style="color:#dc2626; font-weight:700;">CRITICAL RISK</span> (Immediate Executive Escalation)</div>
+<div class="step-line">• <strong>Remediation SLA:</strong> Emergency containment within <strong>24 Hours</strong>. Primary control: Network isolation, virtual patching, and MFA enforcement.</div>
+</div>
+</div>
+</div>
+<!-- Calculator 2: High Availability Nines -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 1 (1.3): The CIA Triad (Availability) — High Availability SLA (The 'Nines') &amp; Downtime Loss</div>
+<div class="calc-desc">Calculate permitted downtime allowances per year, month, and day for enterprise High Availability service levels (99.0% to 99.9999%).</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="avail-sla">Target Availability SLA:</label>
+<select class="calc-input" id="avail-sla" onchange="calculateAvailabilityDowntime()">
+<option value="0.99">99.0% ('Two Nines' - Basic Web Hosting)</option>
+<option selected="" value="0.999">99.9% ('Three Nines' - Standard Cloud Service)</option>
+<option value="0.9999">99.99% ('Four Nines' - Enterprise Production Tier)</option>
+<option value="0.99999">99.999% ('Five Nines' - Mission Critical / Telecom)</option>
+<option value="0.999999">99.9999% ('Six Nines' - Military / Financial Core)</option>
+</select>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="avail-cost">Hourly Outage Impact ($ / hr):</label>
+<input class="calc-input" id="avail-cost" min="0" oninput="calculateAvailabilityDowntime()" step="5000" type="number" value="45000"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Permitted Annual Downtime &amp; Financial Loss:</span>
+<span class="calc-result-val" id="avail-result-val">8.76 Hours / yr ($394,200.00 / yr)</span>
+</div>
+<div class="calc-math-steps" id="avail-math-steps">
+<strong>High Availability Analysis:</strong><br/>
+<div class="step-line">• <strong>Annual Allowed Downtime:</strong> 365.25 days × 24 hrs × (1 - 0.999) = <strong>8.766 Hours / year (525.96 minutes)</strong></div>
+<div class="step-line">• <strong>Monthly Allowed Downtime:</strong> <strong>43.83 Minutes / month</strong> | Daily: <strong>1.44 Minutes / day</strong></div>
+<div class="step-line">• <strong>Maximum Financial Exposure:</strong> 8.766 hrs × $45,000 / hr = <strong>$394,470.00 / year</strong></div>
+</div>
+</div>
+</div>
+<!-- Calculator 3: Phishing Exposure Estimator -->
+<div class="calc-card" style="margin-top:1.25rem;">
+<div class="calc-title">🧮 Part 2 (2.3): Common Attack Vectors — Social Engineering &amp; Phishing Exposure Model (Training ROI)</div>
+<div class="calc-desc">Model annual corporate breach risk from social engineering tactics (Spear Phishing, Smishing, Vishing) based on organizational employee headcount.</div>
+<div class="calc-grid">
+<div class="calc-field">
+<label class="calc-label" for="phish-emp">Total Employees:</label>
+<input class="calc-input" id="phish-emp" min="1" oninput="calculatePhishingExposure()" step="25" type="number" value="250"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="phish-rate">Click / Failure Rate (%):</label>
+<input class="calc-input" id="phish-rate" max="100" min="0" oninput="calculatePhishingExposure()" step="1" type="number" value="8"/>
+</div>
+<div class="calc-field">
+<label class="calc-label" for="phish-cost">Avg Breach Cost ($):</label>
+<input class="calc-input" id="phish-cost" min="1000" oninput="calculatePhishingExposure()" step="10000" type="number" value="120000"/>
+</div>
+</div>
+<div class="calc-result-box">
+<div class="calc-result-header">
+<span style="font-weight:700; font-size:0.95rem;">Annual Social Engineering Exposure:</span>
+<span class="calc-result-val" id="phish-result-val">Expected Exposure: $240,000.00 / yr</span>
+</div>
+<div class="calc-math-steps" id="phish-math-steps">
+<strong>Exposure &amp; Training ROI Calculation:</strong><br/>
+<div class="step-line">• <strong>Susceptible Staff:</strong> 250 employees × 8% failure rate = <strong>20 vulnerable users / month</strong></div>
+<div class="step-line">• <strong>Annual Threat Probability:</strong> Estimated 2.0 successful initial access intrusions / year</div>
+<div class="step-line">• <strong>Expected Annual Loss:</strong> 2.0 × $120,000 = <strong>$240,000.00 / year</strong></div>
+<div class="step-line">• <strong>Mitigation ROI:</strong> Implementing monthly Simulated Phishing Training reduces click rate to &lt; 2%, saving an estimated <strong>$180,000.00 annually</strong>.</div>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<script>
 
         // ==========================================
         // Interactive Security Risk Calculators
@@ -473,7 +874,7 @@
             }
 
             if (resVal) {
-                resVal.innerHTML = `<span style="color:</strong>{color}; font-weight:800;">Score: ${score} / 125 (${tier})</span>`;
+                resVal.innerHTML = `<span style="color:${color}; font-weight:800;">Score: ${score} / 125 (${tier})</span>`;
             }
 
             if (resSteps) {
@@ -1483,6 +1884,5 @@
 
         const quiz = new QuizManager(quizData, 'quiz-container', 'score-display');
     </script>
-    <script src="../../../calculator.js"></script>
 </body>
 </html>
